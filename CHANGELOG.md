@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.1.0-alpha.2 — typing practice, 20 October 2026
+
+Working on feat/typing-engine, based on the unmerged foundation branch; not a tagged or deployed release.
+
+- Added a clock-injected typing engine: exact correction, attempts/accuracy, WPM/progress, novel-position streaks/nitro, countdown, pause/resume, finish freeze and opt-in timeout.
+- Added strict DOM input validation, replacement/paste handling and once-only composition commits with explicit practice-only eligibility; rules version increased to 2.
+- Added three original passages and a responsive practice screen with session-preserving navigation, frozen results and coaching. No results/rewards are saved.
+- Added validated shared-place ordering for later CPU integration, 28 new unit tests and 21 new browser checks. Full local check passes: 48 unit and 39 browser tests.
+- Documented implementation, reproduction and focused physical input retest. TT-305 remains open for Samsung verification; iPhone/tablet physical coverage remains a release gate.
+
 ## 0.1.0-alpha.1 — foundation, 20 October 2026
 
 Working on feat/app-foundation; not a tagged or deployed game release.

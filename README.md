@@ -2,18 +2,18 @@
 
 An immersive typing racer: race computer opponents, improve accuracy and speed, and advance through Easy, Medium, and Hard campaigns with 100 levels each.
 
-**Status:** Phase 2 foundation complete on `feat/app-foundation`, with available ASUS/Samsung user checks recorded. Word-completion handling is tracked for Phase 3; unavailable iPhone/tablet testing remains a release gate. This is a working preview, not a playable race or deployed release. See TESTING.md through the documentation links below. Source repository: [sahilshah2904/TurboType](https://github.com/sahilshah2904/TurboType).
+**Status:** Phase 3 typing engine and practice preview implemented on `feat/typing-engine`. Local checks pass: 48 unit tests and 39 Chromium browser tests. The new strict adapter still requires Samsung keyboard verification (TT-305); physical iPhone/tablet coverage remains a release gate. Four-CPU racing and public deployment are future work. See TESTING.md through the documentation links below. Source repository: [sahilshah2904/TurboType](https://github.com/sahilshah2904/TurboType).
 
 ## Run the preview
 
-Use Node 24.13.0 and npm 11. From the foundation branch:
+Use Node 24.13.0 and npm 11. From `feat/typing-engine`:
 
 ```powershell
 npm ci
 npm run dev
 ```
 
-Open **http://127.0.0.1:5173/TurboType/**. The hub includes an animated Phaser track, a free-editing keyboard check and saved display preferences. Campaign cards are explicitly marked as previews. No race, rewards, cloud account or multiplayer service is available yet.
+Open **http://127.0.0.1:5173/TurboType/**. Select **Practice** for three passages, a three-second countdown, correction-required typing, live metrics, pause/resume and frozen results. Choose untimed completion or a 60-second trial. The hub also includes an animated Phaser track, a free-editing keyboard check and saved preferences. Campaign cards remain previews; rewards, accounts, cloud saves and multiplayer are not available.
 
 To validate the production build:
 
@@ -24,7 +24,7 @@ npm run check
 
 See [setup instructions](docs/SETUP.md) and [test evidence](docs/TESTING.md) for reproduction, actual coverage and limitations.
 
-![Actual foundation preview, captured with reduced motion](docs/images/foundation-desktop.png)
+![Actual typing practice preview, captured with reduced motion](docs/images/typing-practice.png)
 
 ## Planned experience
 
@@ -38,7 +38,8 @@ See [setup instructions](docs/SETUP.md) and [test evidence](docs/TESTING.md) for
 
 - [Project status and phases](PROJECT_STATUS.md) — persistent progress tracker, completed work, remaining work, and evidence requirements.
 - [Future work backlog](BACKLOG.md) — phase-by-phase task checklist, deferred work, dependencies and optional ideas.
-- [Setup](docs/SETUP.md), [architecture](docs/ARCHITECTURE.md), [test evidence](docs/TESTING.md), and [asset register](docs/ASSETS.md) — implemented foundation details and verification.
+- [Setup](docs/SETUP.md), [architecture](docs/ARCHITECTURE.md), [test evidence](docs/TESTING.md), and [asset register](docs/ASSETS.md) — implemented app details and verification.
+- [Implemented typing rules](docs/GAME_RULES.md) and [Phase 3 phone retest](docs/PHASE3_INPUT_TESTS.md) — actual correction, clock, metrics and assistance policy.
 - [Game design and delivery plan](GAME_DESIGN_PLAN.md) — authoritative proposed behavior and milestone gates.
 - [Rules and storage baseline](docs/RULES_AND_STORAGE_BASELINE.md) — planning audit, exact initial reward/cooldown defaults, and local-save/database boundaries.
 - [Responsive and online architecture](docs/RESPONSIVE_AND_ONLINE_ARCHITECTURE.md) — phones/tablets/laptops, account-backed progress, data synchronization, and multiplayer foundations.

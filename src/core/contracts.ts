@@ -6,7 +6,13 @@ export type RaceId = string & { readonly __raceId: unique symbol };
 export type PlayerId = string & { readonly __playerId: unique symbol };
 export type InputProfile = "touch" | "hardware" | "unspecified";
 export type RaceStatus =
-  "ready" | "countdown" | "racing" | "paused" | "finished" | "abandoned";
+  | "ready"
+  | "countdown"
+  | "racing"
+  | "paused"
+  | "finished"
+  | "timed-out"
+  | "abandoned";
 
 export interface RaceSnapshot {
   raceId: RaceId;

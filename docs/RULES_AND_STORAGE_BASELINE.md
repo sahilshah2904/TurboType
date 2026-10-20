@@ -4,6 +4,8 @@ Status: design baseline, 20 October 2026. These are explicit starting defaults f
 
 Scope update: [responsive and online architecture](./RESPONSIVE_AND_ONLINE_ARCHITECTURE.md) supersedes the former local-only public launch decision. The local snapshot rules below now describe guest saves/cache; optional permanent-account cloud sync is required before the public single-player launch. Shared race-room infrastructure still follows in multiplayer.
 
+Implementation update: [GAME_RULES.md](GAME_RULES.md) is the current typing rulebook (rules version 2). It defines actual countdown/timeouts, correction/metrics and practice-only treatment of committed composition or attempted assistance. Planned rewards and storage below are not implemented by the practice screen.
+
 ## Coverage audit
 
 | Concern | Baseline decision | Implementation evidence required |

@@ -6,6 +6,11 @@ import {
 } from "../storage/settings";
 import { parseRoute } from "./router";
 import { mountTrackPreview } from "../game/track-preview";
+import {
+  createPracticeSession,
+  practiceScreen,
+  connectTypingPractice,
+} from "./typing-practice";
 
 const SAMPLE = "Every great run starts with a single keystroke.";
 const ARROW = '<span aria-hidden="true">↗</span>';
@@ -18,6 +23,7 @@ export function mountApp(root: HTMLElement): () => void {
   let unmountPreview: (() => void) | undefined;
   let clearScreen: (() => void) | undefined;
   let generation = 0;
+  const practiceSession = createPracticeSession();
   const reducedMotion = () =>
     settings.motion === "reduced" ||
     (settings.motion === "system" && systemMotion.matches);
@@ -26,11 +32,11 @@ export function mountApp(root: HTMLElement): () => void {
     <div class="app-shell">
       <header class="topbar">
         <a class="wordmark" href="#/hub" aria-label="TurboType home"><img src="${import.meta.env.BASE_URL}assets/brand-mark.svg" width="34" height="34" alt="" />TURBO<span>TYPE</span></a>
-        <nav aria-label="Main navigation"><a href="#/hub" data-route="hub">The hub</a><a href="#/keyboard" data-route="keyboard">Keyboard check</a><a href="#/settings" data-route="settings">Settings</a></nav>
+        <nav aria-label="Main navigation"><a href="#/hub" data-route="hub">The hub</a><a href="#/practice" data-route="practice">Practice</a><a href="#/keyboard" data-route="keyboard">Keyboard check</a><a href="#/settings" data-route="settings">Settings</a></nav>
         <span class="guest"><span class="status-dot"></span> GUEST DRIVER</span>
       </header>
       <main id="main" tabindex="-1"></main>
-      <footer class="footer"><span><b>TURBOTYPE</b> / BUILT FOR THE LONG RUN</span><span>Foundation preview · ${APP_VERSION}</span><a href="https://github.com/sahilshah2904/TurboType" target="_blank" rel="noopener noreferrer">Follow development ${ARROW}</a></footer>
+      <footer class="footer"><span><b>TURBOTYPE</b> / BUILT FOR THE LONG RUN</span><span>Typing engine preview · ${APP_VERSION}</span><a href="https://github.com/sahilshah2904/TurboType" target="_blank" rel="noopener noreferrer">Follow development ${ARROW}</a></footer>
     </div>`;
   const main = root.querySelector<HTMLElement>("main")!;
 
@@ -57,13 +63,15 @@ export function mountApp(root: HTMLElement): () => void {
         link.setAttribute("aria-current", "page");
       else link.removeAttribute("aria-current");
     });
-    document.title = `TurboType — ${route === "hub" ? "Your words. Full throttle." : route === "keyboard" ? "Keyboard check" : "Settings"}`;
+    document.title = `TurboType — ${route === "hub" ? "Your words. Full throttle." : route === "practice" ? "Typing practice" : route === "keyboard" ? "Keyboard check" : "Settings"}`;
     main.innerHTML =
       route === "hub"
         ? hubScreen()
-        : route === "keyboard"
-          ? keyboardScreen()
-          : settingsScreen(settings);
+        : route === "practice"
+          ? practiceScreen()
+          : route === "keyboard"
+            ? keyboardScreen()
+            : settingsScreen(settings);
     scope = createScope({ root: main }).add(() => {
       if (!reducedMotion())
         animate(".reveal", {
@@ -117,6 +125,8 @@ export function mountApp(root: HTMLElement): () => void {
       });
     }
     if (route === "keyboard") clearScreen = connectKeyboard(main);
+    if (route === "practice")
+      clearScreen = connectTypingPractice(main, practiceSession);
     if (route === "settings") {
       main.querySelector("form")!.addEventListener("change", () => {
         const form = new FormData(main.querySelector("form")!);
@@ -141,7 +151,10 @@ export function mountApp(root: HTMLElement): () => void {
     window.scrollTo(0, 0);
   };
   const onMotion = () => {
-    if (settings.motion === "system") render();
+    if (settings.motion === "system") {
+      if (parseRoute(location.hash) === "hub") render();
+      else applyPreferences();
+    }
   };
   window.addEventListener("hashchange", onNavigate);
   systemMotion.addEventListener("change", onMotion);
@@ -168,7 +181,7 @@ export function mountApp(root: HTMLElement): () => void {
 function hubScreen(): string {
   return `
     <section class="hero reveal" aria-labelledby="hero-title">
-      <div><p class="eyebrow"><span class="status-dot"></span> FIND YOUR RHYTHM. OWN THE ROAD.</p><h1 id="hero-title">YOUR WORDS.<br /><span>FULL THROTTLE.</span></h1><p class="hero-copy">Turn every keystroke into momentum.<br />A new kind of typing practice is taking shape.</p><a class="button button--primary" href="#/keyboard">Check your keyboard ${ARROW}</a></div>
+      <div><p class="eyebrow"><span class="status-dot"></span> FIND YOUR RHYTHM. OWN THE ROAD.</p><h1 id="hero-title">YOUR WORDS.<br /><span>FULL THROTTLE.</span></h1><p class="hero-copy">Turn every keystroke into momentum.<br />Find your rhythm in the new typing practice.</p><a class="button button--primary" href="#/practice">Start typing practice ${ARROW}</a></div>
       <aside class="hero-note"><span class="outline-number">01</span><p>THE ROAD STARTS HERE</p><span>Single-player racing is up next.<br />For now, meet your machine.</span></aside>
     </section>
     <section class="track-card reveal" aria-label="Animated track preview">
@@ -206,12 +219,12 @@ function hubScreen(): string {
         )
         .join("")}
     </div></section>
-    <div class="development-note reveal"><span class="note-icon" aria-hidden="true">↳</span><p><strong>A strong start, built one lap at a time.</strong> This is an early foundation preview. Races, level progression, rewards, and cloud saves are still being built.</p><a href="#/keyboard">Try the input check →</a></div>`;
+    <div class="development-note reveal"><span class="note-icon" aria-hidden="true">↳</span><p><strong>A strong start, built one lap at a time.</strong> Try a typing sprint today. Computer races, level progression, rewards, and cloud saves are still being built.</p><a href="#/keyboard">Try the input check →</a></div>`;
 }
 
 function keyboardScreen(): string {
-  return `<section class="page-heading reveal"><a class="back-link" href="#/hub">← Back to the hub</a><p class="eyebrow">GET COMFORTABLE AT THE KEYS</p><h1>Check your <span>connection.</span></h1><p>Make sure typing feels right before the race engine arrives.</p></section>
-    <section class="input-panel reveal"><div class="section-top"><h2>Keyboard check</h2><span class="pill">NO TIMER · NO SCORE</span></div><p id="sample-label" class="micro">TYPE THIS SENTENCE</p><p id="sample" class="sample">${SAMPLE}</p><label for="keyboard-input">Your text</label><textarea id="keyboard-input" rows="2" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" aria-describedby="input-help input-status" placeholder="Tap here or start typing…"></textarea><div class="input-meta"><p id="input-status" role="status">Ready when you are.</p><button id="reset-input" class="text-button">Clear text</button></div><p id="input-help" class="help">Use your phone keyboard or a physical keyboard. Backspace works normally. This check accepts editing and paste; race correction rules arrive with the typing engine.</p><div class="keyboard-visual" aria-hidden="true">${["qwertyuiop", "asdfghjkl", "zxcvbnm"].map((row) => `<div>${[...row].map((key) => `<span data-key="${key}">${key.toUpperCase()}</span>`).join("")}</div>`).join("")}</div><details class="diagnostics"><summary>Input diagnostics</summary><p>For checking keyboard and viewport behavior. Nothing here is uploaded.</p><dl><div><dt>Last input</dt><dd id="event-type">None</dd></div><div><dt>Composition</dt><dd id="composition">Idle</dd></div><div><dt>Visible viewport</dt><dd id="viewport-size">Checking…</dd></div></dl></details></section>`;
+  return `<section class="page-heading reveal"><a class="back-link" href="#/hub">← Back to the hub</a><p class="eyebrow">GET COMFORTABLE AT THE KEYS</p><h1>Check your <span>connection.</span></h1><p>Check how your keyboard enters and edits text.</p></section>
+    <section class="input-panel reveal"><div class="section-top"><h2>Keyboard check</h2><span class="pill">NO TIMER · NO SCORE</span></div><p id="sample-label" class="micro">TYPE THIS SENTENCE</p><p id="sample" class="sample">${SAMPLE}</p><label for="keyboard-input">Your text</label><textarea id="keyboard-input" rows="2" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" aria-describedby="input-help input-status" placeholder="Tap here or start typing…"></textarea><div class="input-meta"><p id="input-status" role="status">Ready when you are.</p><button id="reset-input" class="text-button">Clear text</button></div><p id="input-help" class="help">Use your phone keyboard or a physical keyboard. Backspace works normally. This check accepts editing and paste; choose Practice for correction-required typing.</p><div class="keyboard-visual" aria-hidden="true">${["qwertyuiop", "asdfghjkl", "zxcvbnm"].map((row) => `<div>${[...row].map((key) => `<span data-key="${key}">${key.toUpperCase()}</span>`).join("")}</div>`).join("")}</div><details class="diagnostics"><summary>Input diagnostics</summary><p>For checking keyboard and viewport behavior. Nothing here is uploaded.</p><dl><div><dt>Last input</dt><dd id="event-type">None</dd></div><div><dt>Composition</dt><dd id="composition">Idle</dd></div><div><dt>Visible viewport</dt><dd id="viewport-size">Checking…</dd></div></dl></details></section>`;
 }
 
 function connectKeyboard(main: HTMLElement): () => void {
@@ -294,5 +307,5 @@ function settingsScreen(settings: UserSettings): string {
     )
     .join(
       "",
-    )}</select></div><div class="setting-row"><div><label for="effects">Track effects</label><p>Use fewer particles for a lighter ride.</p></div><select name="effects" id="effects"><option value="high" ${settings.effects === "high" ? "selected" : ""}>High</option><option value="low" ${settings.effects === "low" ? "selected" : ""}>Low</option></select></div><div class="setting-row"><div><label for="large-text">Larger typing text</label><p>Give the keyboard check a little more room.</p></div><input type="checkbox" name="largeText" id="large-text" ${settings.largeText ? "checked" : ""} /></div></form><p id="save-status" class="help" role="status">Preferences are stored on this browser. Cloud saves and game audio are not available in this preview.</p></section>`;
+    )}</select></div><div class="setting-row"><div><label for="effects">Track effects</label><p>Use fewer particles for a lighter ride.</p></div><select name="effects" id="effects"><option value="high" ${settings.effects === "high" ? "selected" : ""}>High</option><option value="low" ${settings.effects === "low" ? "selected" : ""}>Low</option></select></div><div class="setting-row"><div><label for="large-text">Larger typing text</label><p>Make passages and typing easier to read.</p></div><input type="checkbox" name="largeText" id="large-text" ${settings.largeText ? "checked" : ""} /></div></form><p id="save-status" class="help" role="status">Preferences are stored on this browser. Cloud saves and game audio are not available in this preview.</p></section>`;
 }

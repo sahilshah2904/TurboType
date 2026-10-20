@@ -1,4 +1,4 @@
-export const ROUTES = ["hub", "keyboard", "settings"] as const;
+export const ROUTES = ["hub", "practice", "keyboard", "settings"] as const;
 export type Route = (typeof ROUTES)[number];
 
 export function parseRoute(hash: string): Route {

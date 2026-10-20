@@ -1,6 +1,6 @@
-# Run the TurboType foundation
+# Run TurboType locally
 
-Phase 2 provides a real app preview, not the completed game. The hub, decorative Phaser track, free-editing keyboard check and browser-local display preferences work. Races, progression, audio and cloud accounts are later tasks.
+The app now includes a Phase 3 typing-practice screen with countdown, strict correction, metrics, pause/resume and session results, plus the Phase 2 hub/track, free-editing keyboard check and local preferences. Four-CPU racing, progression, audio and cloud accounts are later tasks.
 
 ## Reproducible prerequisites
 
@@ -15,15 +15,15 @@ git clone https://github.com/sahilshah2904/TurboType.git
 cd TurboType
 ```
 
-While Phase 2 is under review, switch to its branch before installation:
+While the implementation branches are under review, switch to the typing branch before installation:
 
 ```powershell
-git switch feat/app-foundation
+git switch feat/typing-engine
 npm ci
 npx playwright install chromium
 ```
 
-After its pull request is merged, main becomes the normal starting branch. No `.env` file, cloud credentials, or API services are required for this preview. On Linux CI, `npx playwright install --with-deps chromium` also installs required system libraries.
+The typing branch is based on the unmerged foundation branch; its PR targets that branch so the Phase 3 diff stays reviewable. After both are merged, main becomes the normal starting branch. No `.env` file, cloud credentials, or API services are required for this preview. On Linux CI, `npx playwright install --with-deps chromium` also installs required system libraries.
 
 ## Develop and preview
 
@@ -32,6 +32,8 @@ npm run dev
 ```
 
 Open **http://127.0.0.1:5173/TurboType/**. The dev server watches source changes. Stop it with Ctrl+C. Ports are strict: if 5173 is occupied, stop the conflicting process or explicitly choose another port; Vite will not silently move the preview.
+
+Choose **Practice** or open `#/practice` for the implemented engine. **Keyboard check** remains the earlier free-editing diagnostic and intentionally behaves differently. Do not test word-completion blocking in the wrong screen. Practice sessions are in-memory, not saved; HMR/reload ends them. Physical retest instructions are in PHASE3_INPUT_TESTS.md.
 
 For the exact static production artifact:
 

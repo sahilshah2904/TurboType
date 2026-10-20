@@ -630,6 +630,226 @@ textarea::placeholder {
 :root[data-text-size="large"] textarea {
   font-size: 25px;
 }
+.button--secondary {
+  border: 1px solid #425447;
+  background: #18241f;
+  color: #d4eac6;
+}
+button:disabled {
+  opacity: 0.45;
+  cursor: default;
+  transform: none;
+}
+.practice-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.practice-options select {
+  width: 100%;
+  min-height: 44px;
+  border: 1px solid #3b4a55;
+  border-radius: 5px;
+  background: #19232d;
+  color: #dae4de;
+  padding: 10px;
+  margin-top: 10px;
+  font-size: 13px;
+}
+.run-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  border-bottom: 1px solid var(--line);
+  padding: 24px 0;
+}
+.run-banner .eyebrow {
+  margin-bottom: 8px;
+  color: var(--accent);
+}
+#run-instruction {
+  margin: 0;
+  font-size: 13px;
+  color: #b6c5c9;
+  line-height: 1.7;
+}
+.countdown {
+  font:
+    italic 64px/0.9 "Barlow Condensed",
+    sans-serif;
+  color: var(--accent);
+  min-width: 70px;
+  text-align: right;
+}
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin: 24px 0 30px;
+}
+.metrics-grid > div {
+  background: #0c131b;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 16px;
+}
+.metrics-grid strong {
+  display: block;
+  font:
+    600 34px/1.2 "Barlow Condensed",
+    sans-serif;
+  margin-top: 8px;
+}
+.race-passage {
+  font: 20px/1.9 monospace;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  color: #c4cfd6;
+  padding: 8px 0 12px;
+}
+.character--correct {
+  color: #93b88a;
+}
+.character--current {
+  border-left: 2px solid var(--accent);
+  background: #263624;
+}
+.character--error {
+  color: #ffd1c8;
+  background: #6c2932;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+}
+textarea[aria-invalid="true"] {
+  border-color: #f18989;
+}
+.practice-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 20px 0 14px;
+}
+.practice-actions .button {
+  border: 1px solid transparent;
+  gap: 20px;
+}
+.practice-actions .button--secondary {
+  border-color: #425447;
+}
+.run-progress {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font: 12px monospace;
+  color: var(--accent);
+}
+.run-progress progress {
+  flex: 1;
+  width: 0;
+  height: 7px;
+  accent-color: var(--accent);
+}
+.run-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  font-size: 11px;
+  line-height: 1.8;
+  color: #9caeb7;
+  padding: 18px 0;
+  border-top: 1px solid var(--line);
+}
+.run-results {
+  border: 1px solid #54723e;
+  border-radius: 6px;
+  background: #18251c;
+  padding: 22px;
+  margin-top: 18px;
+}
+.run-results p {
+  font-size: 13px;
+  line-height: 1.9;
+}
+.run-results .eyebrow {
+  font-size: 10px;
+}
+.practice-panel--nitro #nitro-status {
+  color: var(--accent);
+  font-weight: 700;
+}
+.practice-active .page-heading,
+.practice-active .practice-options {
+  display: none;
+}
+.practice-active .practice-panel {
+  margin-top: 24px;
+}
+.practice-active .run-banner {
+  padding: 14px 0;
+}
+.practice-active .metrics-grid {
+  margin: 14px 0;
+}
+@media (max-width: 650px) {
+  .practice-active .metrics-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 6px;
+  }
+  .practice-active .metrics-grid > div {
+    padding: 8px;
+  }
+  .practice-active .metrics-grid .micro {
+    font-size: 8px;
+    letter-spacing: 0;
+  }
+  .practice-active .metrics-grid strong {
+    font-size: 22px;
+    overflow-wrap: anywhere;
+  }
+  .practice-active .run-banner #run-instruction {
+    font-size: 11px;
+  }
+  .practice-active .countdown {
+    font-size: 38px;
+  }
+}
+:root[data-text-size="large"] .race-passage {
+  font-size: 25px;
+}
+@media (max-width: 650px) {
+  nav {
+    gap: 16px;
+  }
+  .practice-options {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .metrics-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin: 20px 0;
+  }
+  .metrics-grid > div {
+    padding: 12px;
+  }
+  .metrics-grid strong {
+    font-size: 28px;
+  }
+  .race-passage {
+    font-size: 18px;
+    line-height: 1.8;
+  }
+  .run-banner {
+    padding: 20px 0;
+  }
+  .countdown {
+    font-size: 48px;
+    min-width: 55px;
+  }
+  .run-results {
+    padding: 16px;
+  }
+}
 :root[data-motion="reduced"] *,
 :root[data-motion="reduced"] *::before,
 :root[data-motion="reduced"] *::after {
