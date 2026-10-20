@@ -2,7 +2,7 @@
 
 An immersive typing racer: race computer opponents, improve accuracy and speed, and advance through Easy, Medium, and Hard campaigns with 100 levels each.
 
-**Status:** Phase 2 foundation implemented on `feat/app-foundation`; physical-device input verification is still pending. This is a working app preview, not a playable race or deployed release. Source repository: [sahilshah2904/TurboType](https://github.com/sahilshah2904/TurboType).
+**Status:** Phase 2 foundation complete on `feat/app-foundation`, with available ASUS/Samsung user checks recorded. Word-completion handling is tracked for Phase 3; unavailable iPhone/tablet testing remains a release gate. This is a working preview, not a playable race or deployed release. See TESTING.md through the documentation links below. Source repository: [sahilshah2904/TurboType](https://github.com/sahilshah2904/TurboType).
 
 ## Run the preview
 

@@ -6,7 +6,7 @@ Last reviewed: 20 October 2026. This file is the persistent status source for fu
 
 ## Current position
 
-**Phase 1: design baseline complete. Phase 2: in progress — runnable foundation implemented; physical-device input verification remains open.** The branch feat/app-foundation includes the responsive hub, decorative Phaser track, keyboard check, local display preferences, data contracts, tests and CI configuration. Campaign gameplay/content, progress/cloud saves, music and public deployment remain unimplemented. See docs/SETUP.md and docs/TESTING.md.
+**Phase 1: design baseline complete. Phase 2: foundation complete with documented verification exceptions. Phase 3: ready to start, not implemented.** The available Samsung S25 Ultra and ASUS checks passed by user report; the word-completion finding is tracked as required Phase 3 task TT-305. The user has no iPhone/tablet; their physical coverage and missing environment metadata explicitly move to release-gate TT-1008, not a claim of passed tests. The foundation branch is unmerged; gameplay, cloud saves, music and public deployment remain unimplemented. See docs/TESTING.md.
 
 “Design baseline complete” means all major systems have defined behavior and a delivery/verification plan. It does not mean every passage is authored, balancing is playtested, every technical detail is fixed, or any feature is implemented. Defaults may change through documented decisions when implementation exposes evidence.
 
@@ -17,7 +17,7 @@ Latest scope update: phones/tablets/laptops are first-release targets. Design ac
 | Phase | Scope | Status | Evidence / completion requirement |
 | --- | --- | --- | --- |
 | 1 | Finalize design | Baseline complete | Game plan, research, reference analysis, engineering conventions, and RULES_AND_STORAGE_BASELINE.md; tuning and production work explicitly separated |
-| 2 | Set up application | In progress | App, pinned stack, responsive shell/input spike and contracts implemented; local checks plus hosted Linux CI pass for implementation commit 5534591. Only TT-204 physical-device input verification remains open |
+| 2 | Set up application | Foundation complete, with exceptions | Code/local/CI checks and available ASUS/Samsung checks recorded. TT-204 closed with word-completion work moved to TT-305 and unavailable iOS/tablet verification to TT-1008; not blanket device certification |
 | 3 | Build typing engine | Not started | Correction/scoring/timing/pausing/streak state with behavioral tests |
 | 4 | Complete playable race | Not started | Four CPUs, countdown, passage, positions, finish/results/retry working end to end |
 | 5 | Polish racing experience | Not started | Detailed cars, effects, scenery and audio profiled in an actual race |
@@ -41,8 +41,8 @@ Phases 2–10 may overlap where dependencies require it: for example, save setti
 - Added naming/versioning/change-management conventions, formatting settings and ignore rules. Reference media remain local.
 - Audited rule/storage gaps and selected explicit implementation defaults; see the baseline document.
 - Implemented the Phase 2 foundation with a clean lockfile install, passing formatting/types/build, 20 unit tests and 18 Chromium profile tests; visually caught/fixed SVG texture sizing. Setup, architecture, ADRs, assets and test evidence are documented. Physical device coverage is not claimed.
-- Pushed implementation commit 5534591 (`Build the responsive app foundation`) and opened pull request #1; hosted Linux checks passed in run 39404088628. The branch is not merged and Pages is not deployed. One Phase 2 gate remains: physical Android/iOS/tablet keyboard verification (TT-204).
-- Received Samsung S25 Ultra physical-phone evidence for loading/input/focus, Backspace/retyping, rotation and keyboard reopening; user also confirms Clear text and next-key highlighting on phone/laptop. Hub/Settings navigation resets the transient exercise as implemented. Remaining: browser/OS details, saved preferences, browser-tab return and keyboard-assistance/composition checks, plus separate iPhone/tablet coverage. TT-204 stays open; see docs/TESTING.md.
+- Pushed implementation commit 5534591 (`Build the responsive app foundation`) and opened pull request #1; hosted Linux checks passed in run 39404088628. The branch is not merged and Pages is not deployed.
+- Recorded Samsung S25 Ultra/ASUS user checks: input/editing, phone rotation and keyboard reopening, Clear text/next-key highlighting, settings persistence and browser-tab return. Word completion remains possible; TT-305 covers the actual race adapter and eligibility. With no iPhone/tablet available, TT-1008 carries unverified coverage/metadata forward as a release gate. Phase 2 foundation is complete with those explicit exceptions; Phase 3 has not started.
 
 ## Remaining design and production work
 
