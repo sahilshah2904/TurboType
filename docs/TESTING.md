@@ -14,7 +14,7 @@ The first profiling attempt addressed source modules under the project URL, whil
 
 Final audiovisual review initializes future voice gains quietly before scheduling, preventing canceled future envelopes from starting at a default gain during pause. After the final refinements, formatting, all 83 unit cases, strict types/build and all 12 focused polish browser cases passed again (36.2 seconds for the focused browser run). Finish projection aligns the front of the car with the gate at completion; the countdown lights follow core states.
 
-The format commands now cover authored asset/profiling scripts as well as app/tests/config. No runtime dependency was added. Hosted checks for this feature branch are not yet recorded here; later sections retain historical evidence for earlier phases.
+The format commands now cover authored asset/profiling scripts as well as app/tests/config. No runtime dependency was added. Implementation commit `cdd8e4a` (`Add modern cars, racing effects and original audio`) is pushed in [PR #4](https://github.com/sahilshah2904/TurboType/pull/4) against main. Hosted Linux [run 39451394088](https://github.com/sahilshah2904/TurboType/actions/runs/39451394088) completed successfully for that exact implementation commit, including clean installation and the full check command. A later documentation-only evidence commit does not change that tested implementation; its own CI status must be checked separately. Later sections retain historical evidence for earlier phases.
 
 ## Phase 4 — four-CPU Quick Race, 20 October 2026
 
