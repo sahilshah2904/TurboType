@@ -33,7 +33,7 @@ Fonts are self-hosted Latin subsets; their notices are included in public/assets
 
 ## Hosted CI
 
-A checks-only GitHub Actions workflow is committed, pinned to verified action commits. It uses the recorded Node version, npm ci, Chromium/system dependencies and npm run check. Hosted execution is pending the first branch push; update this section with the actual run outcome rather than assuming it passes. It does not configure Pages deployment or branch protection.
+A checks-only GitHub Actions workflow is committed, pinned to verified action commits. It uses the recorded Node version, npm ci, Chromium/system dependencies and npm run check. [The first hosted Linux run passed](https://github.com/sahilshah2904/TurboType/actions/runs/39404088628) for implementation commit `5534591`, confirming the clean checkout/install and full check outside the Windows workstation. Later documentation-only commits may have their own runs; inspect their actual status separately. CI does not configure Pages deployment or branch protection.
 
 ## Open gates and honest limitations
 

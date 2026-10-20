@@ -17,7 +17,7 @@ Latest scope update: phones/tablets/laptops are first-release targets. Design ac
 | Phase | Scope | Status | Evidence / completion requirement |
 | --- | --- | --- | --- |
 | 1 | Finalize design | Baseline complete | Game plan, research, reference analysis, engineering conventions, and RULES_AND_STORAGE_BASELINE.md; tuning and production work explicitly separated |
-| 2 | Set up application | In progress | App, pinned stack, responsive shell/input spike, contracts and local checks implemented; real-device input tests and hosted CI evidence still pending |
+| 2 | Set up application | In progress | App, pinned stack, responsive shell/input spike and contracts implemented; local checks plus hosted Linux CI pass for implementation commit 5534591. Only TT-204 physical-device input verification remains open |
 | 3 | Build typing engine | Not started | Correction/scoring/timing/pausing/streak state with behavioral tests |
 | 4 | Complete playable race | Not started | Four CPUs, countdown, passage, positions, finish/results/retry working end to end |
 | 5 | Polish racing experience | Not started | Detailed cars, effects, scenery and audio profiled in an actual race |
@@ -41,6 +41,7 @@ Phases 2–10 may overlap where dependencies require it: for example, save setti
 - Added naming/versioning/change-management conventions, formatting settings and ignore rules. Reference media remain local.
 - Audited rule/storage gaps and selected explicit implementation defaults; see the baseline document.
 - Implemented the Phase 2 foundation with a clean lockfile install, passing formatting/types/build, 20 unit tests and 18 Chromium profile tests; visually caught/fixed SVG texture sizing. Setup, architecture, ADRs, assets and test evidence are documented. Physical device coverage is not claimed.
+- Pushed implementation commit 5534591 (`Build the responsive app foundation`) and opened pull request #1; hosted Linux checks passed in run 39404088628. The branch is not merged and Pages is not deployed. One Phase 2 gate remains: physical Android/iOS/tablet keyboard verification (TT-204).
 
 ## Remaining design and production work
 

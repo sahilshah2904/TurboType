@@ -17,7 +17,7 @@ Last reviewed: 20 October 2026. All unchecked items are future work, not impleme
 - [x] TT-203: Build the responsive shell, screen navigation and minimal boot/error recovery flow for phones, tablets and laptops. Evidence: hub/keyboard/settings routes, image retry and storage-failure checks, responsive captures; actual device coverage remains TT-204/TT-1001.
 - [ ] TT-204: Prototype real mobile input: software keyboard, correction/composition, focus, safe areas, portrait/landscape and changing visible viewport without accidental pausing. Input spike, viewport diagnostics and emulated checks implemented; physical Android/iOS/tablet keyboard verification still required. See docs/TESTING.md.
 - [x] TT-205: Define stable player/race/content IDs, versioned contracts and pure core/local-storage/sync/network boundaries. Evidence: src/core/contracts.ts, src/core/ids.ts, architecture docs and ID tests. Cloud/race adapters are not implemented.
-- [ ] TT-206: Add relevant automated checks, formatting/type checking and a CI workflow using actual working scripts; document supported tools and troubleshooting. Local npm run check passes (20 unit + 18 browser tests); hosted CI outcome pending first push.
+- [x] TT-206: Add relevant automated checks, formatting/type checking and a CI workflow using actual working scripts; document supported tools and troubleshooting. Evidence: local npm run check (20 unit + 18 browser tests) and hosted Linux run 39404088628 passed for implementation commit 5534591; see docs/TESTING.md.
 
 ## Phase 3 — typing engine
 
