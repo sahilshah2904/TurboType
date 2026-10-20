@@ -1,0 +1,25 @@
+# Dependencies and reproducible build outputs
+node_modules/
+dist/
+coverage/
+playwright-report/
+test-results/
+.vite/
+
+# Local configuration and credentials; commit sanitized examples explicitly
+.env
+.env.*
+!.env.example
+*.log
+
+# Editor/OS state
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# User-supplied reference screenshots stay local; authored game assets are tracked
+/WhatsApp Image *.jpeg
+/Reference_Images/
