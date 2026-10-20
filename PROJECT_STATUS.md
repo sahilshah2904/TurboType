@@ -1,6 +1,6 @@
 # TurboType project status
 
-Last reviewed: 20 October 2026. This file is the persistent status source for future progress questions. Update it with each meaningful implementation change and verify claims against the actual repository, checks, and deployment. Do not rely on chat memory alone.
+Last reviewed: 21 October 2026. This file is the persistent status source for future progress questions. Update it with each meaningful implementation change and verify claims against the actual repository, checks, and deployment. Do not rely on chat memory alone.
 
 [BACKLOG.md](BACKLOG.md) is the persistent future-work checklist with stable task IDs, phase grouping, dependencies and optional ideas. Read it before starting a phase and update it when deferring or completing work.
 
@@ -59,6 +59,8 @@ Phases 2–10 may overlap where dependencies require it: for example, save setti
 
 - Merged Phase 4 PR #3 into main `c4127c7` after its accepted device checks and successful head CI; created `feat/race-polish`.
 - Implemented original vehicle generator/three SVG silhouettes, Neon Harbor art bible, layered camera/road/exhaust/nitro/speed/finish effects, compact metrics and scrolling text, reduced/low variants, authored synth music/cues and isolated saved audio controls. App 0.1.0-alpha.4, rules remain 3, save/content remain 1. Local full check: 83 unit and 66 browser tests pass; software-renderer profile is in docs/PERFORMANCE.md. Implementation `cdd8e4a` is published in PR #4; hosted Linux run 39451394088 passed for that commit. Actual ASUS/Samsung sound/performance acceptance remains TT-505/506.
+
+- Rewrote the public README as a player/developer guide on 21 October 2026: overview, actual preview image, current-versus-planned features, reproducible setup/phone instructions, controls, stack, source tree, checks, roadmap, storage/hosting boundaries and contribution guidance. Published on main in `3e9ae7f` and brought that documentation into the Phase 5 branch without merging Phase 5 gameplay. README local links, screenshot path, section anchors and documented npm commands were checked. Phase 5 device gates remain open.
 
 ## Remaining design and production work
 
