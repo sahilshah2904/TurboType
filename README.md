@@ -17,6 +17,7 @@ An immersive typing racer: race computer opponents, improve accuracy and speed, 
 - [Game design and delivery plan](GAME_DESIGN_PLAN.md) — authoritative proposed behavior and milestone gates.
 - [Implementation research](IMPLEMENTATION_RESEARCH.md) — library comparisons, sources, animation and deployment research.
 - [Engineering conventions](docs/ENGINEERING_CONVENTIONS.md) — naming, Git workflow, versions, stable IDs, and module boundaries.
+- [Reference recording analysis](docs/REFERENCE_VIDEO_ANALYSIS.md) — timestamped visual observations and the proposed original soundtrack direction.
 - [GitHub workflow](docs/GITHUB_WORKFLOW.md) — linking the local folder, committing, pushing, and future deployment.
 
 The repository currently contains planning documents and formatting/ignore configuration. There is no package manifest or runnable application yet; install/build/test instructions will be added and verified with the first implementation milestone. User reference screenshots stay local and are excluded from Git history.

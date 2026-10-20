@@ -187,9 +187,13 @@ The core loop is race → understand one improvement → short targeted practice
 
 Use a coherent art direction across loading panels, hub, garage, track, HUD, and results. Proposed direction: illustrated neon motorsport with warm highlights and cyan nitro, expressive vehicles, atmospheric scenery, and original music. Create an art bible covering palette, typography, vehicle proportions, layers, icon style, and export sizes before producing many assets.
 
+The supplied reel recording has now been visually reviewed through timestamped frames. [Reference video analysis](./docs/REFERENCE_VIDEO_ANALYSIS.md) records the visible launch, layered burst effects, passage scrolling, player-relative framing, approaching finish gate, and victory card, with evidence limits. Use these observations to refine the race prototype while preserving this plan's explicit typing/scoring rules.
+
 Start with one city environment polished end to end. Introduce dusk/night weather variants through stage progression, then additional scenery after performance testing. Prioritize readable silhouettes, separate rotating wheels, suspension motion, shadows, parallax, exhaust, sparks, and purposeful lighting over permanent heavy blur.
 
 Audio layers include menu ambience, countdown cues, pace-responsive engine sound, streak accents, overtake cues, and finish music. Use separate master/music/effects controls and remember mute. Missing audio never blocks play. Keep mistake feedback gentle.
+
+Add an original or appropriately licensed instrumental electronic/synthwave racing soundtrack, with a calmer garage loop, optional intensity stems during a race, and a short finish cue. Crossfade layers rather than changing tempo on every keypress. Ignore the recording's song entirely. Track provenance, redistribution rights, editable inputs where available, loop/export settings, and attribution in the asset register; preload short cues and defer larger music files. See the reference analysis for the detailed audio brief. No music has been composed, downloaded, or licensed yet.
 
 Anime.js owns interface choreography; Phaser owns world motion and effects. One owner per property. Gameplay state owns race start/finish and rewards. Cinematic playback can be skipped without changing results. Decorative effects never cover the passage or important controls.
 
