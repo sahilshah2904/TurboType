@@ -34,7 +34,7 @@ git pull --ff-only
 git switch -c feat/campaign-map
 ```
 
-Implement the feature, update its documentation, and run relevant checks. No app build/test scripts exist during planning; use actual documented package scripts once implementation introduces them. Then inspect changes:
+Implement the feature, update its documentation, and run relevant checks. Phase 2 adds executable scripts documented in SETUP.md and TESTING.md. Then inspect changes:
 
 ```powershell
 git status --short
@@ -48,7 +48,7 @@ Stage specific files deliberately, inspect the staged diff, and commit. Example 
 git add -- src/ui/campaign-map.ts docs/CAMPAIGN_MAP.md
 git diff --cached
 git diff --cached --check
-git commit -m "feat(campaign): add horizontal level map"
+git commit -m "Add the horizontal campaign map"
 git push -u origin feat/campaign-map
 ```
 
@@ -62,7 +62,7 @@ When the user asks this project's agent to implement a change and publish it to 
 
 The game will be deployed in a later milestone through a reviewed GitHub Actions Pages workflow. The intended project path is `/TurboType/`. Once that workflow exists, an eligible push/merge triggers installation, checks, build, and deployment; verify the workflow result and live game before reporting a release.
 
-No Pages workflow, live game, branch protection, or recurring sync service is configured during this planning setup. CI and protection are future implementation tasks and must be verified before being reported as active.
+Phase 2 adds a checks-only GitHub Actions workflow. It verifies formatting, types, tests and a production build; it does not deploy the app. Pages, a live hosted game, branch protection and recurring sync remain unconfigured. Report actual CI run results separately from the existence of the workflow.
 
 If a push is rejected, fetch and inspect the remote changes; do not force-push. If pulling would overwrite local edits, preserve the edits and resolve deliberately. Undo shared mistakes with revert commits rather than rewriting history. Version and migrate browser saves explicitly; reverting a deployment does not revert a player's saved data.
 

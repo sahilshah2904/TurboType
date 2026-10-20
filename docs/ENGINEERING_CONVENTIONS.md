@@ -1,13 +1,13 @@
 # TurboType engineering conventions
 
-Status: project rules established during planning, 20 October 2026. Local Git and the public GitHub remote are configured. Application code, CI, and release tags do not exist yet. Commands and checks for them must be added and verified during implementation.
+Status: foundation implementation underway, 20 October 2026. Local Git and the public remote are configured. The Phase 2 app, tests and CI workflow now exist; actual check results are in TESTING.md. Release tags and Pages deployment do not exist yet.
 
 ## Git and change management
 
 - Repository name: `TurboType`. Application/package slug: `turbotype`. Primary branch: `main`.
 - Initialize Git before implementation; track planning, conventions, and project configuration. Keep user reference screenshots locally and outside the initial history. Track authored game assets and their editable sources intentionally.
 - Use short-lived branches: `feat/campaign-map`, `fix/correction-input`, `docs/setup-guide`, or `chore/dependencies`. Branch from current `main`. Do not use numbered filenames as backups or duplicate folders such as `final-v2`.
-- Make focused commits using `type(scope): description`, for example `feat(campaign): unlock next level after clear`, `fix(input): preserve accuracy after correction`, or `docs(plan): define 300-level campaign`. Types: feat, fix, docs, refactor, test, perf, build, ci, chore.
+- Use short, meaningful plain-English commit messages, as requested by the user: `Build the responsive app foundation`, `Fix correction accuracy`, or `Add the campaign map`. Do not use prefixes such as `docs(architecture):` or `feat(campaign):`. Older planning commits retain their historical messages; do not rewrite shared history.
 - Keep code, relevant tests, schema/content updates, and documentation in the same reviewable change. Review staged diffs before committing. Do not bundle unrelated refactors into feature work.
 - Feature branches receive the relevant checks before merge. Once hosted on GitHub, use PRs for material implementation work and document validation. Configure CI and main-branch protection where the account/repository supports it. Never claim these remote settings exist before verifying them.
 - Do not overwrite others' changes or force-push shared history. Use revert commits to undo published changes. Never invent Git author identity, embed credentials in remotes, or commit tokens. Use the user's configured identity; report a missing identity if it prevents a commit.

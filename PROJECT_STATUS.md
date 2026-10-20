@@ -6,7 +6,7 @@ Last reviewed: 20 October 2026. This file is the persistent status source for fu
 
 ## Current position
 
-**Phase 1: design baseline complete. Phase 2: application development not started.** GitHub setup is complete. The application, tests, campaign content, database/save implementation, artwork, music, CI, and live deployment do not yet exist.
+**Phase 1: design baseline complete. Phase 2: in progress — runnable foundation implemented; physical-device input verification remains open.** The branch feat/app-foundation includes the responsive hub, decorative Phaser track, keyboard check, local display preferences, data contracts, tests and CI configuration. Campaign gameplay/content, progress/cloud saves, music and public deployment remain unimplemented. See docs/SETUP.md and docs/TESTING.md.
 
 “Design baseline complete” means all major systems have defined behavior and a delivery/verification plan. It does not mean every passage is authored, balancing is playtested, every technical detail is fixed, or any feature is implemented. Defaults may change through documented decisions when implementation exposes evidence.
 
@@ -17,7 +17,7 @@ Latest scope update: phones/tablets/laptops are first-release targets. Design ac
 | Phase | Scope | Status | Evidence / completion requirement |
 | --- | --- | --- | --- |
 | 1 | Finalize design | Baseline complete | Game plan, research, reference analysis, engineering conventions, and RULES_AND_STORAGE_BASELINE.md; tuning and production work explicitly separated |
-| 2 | Set up application | Not started | Responsive TypeScript/Vite shell, pinned Phaser/Anime.js, real-device keyboard spike, data/auth/storage interfaces, clean build and project-base asset test |
+| 2 | Set up application | In progress | App, pinned stack, responsive shell/input spike, contracts and local checks implemented; real-device input tests and hosted CI evidence still pending |
 | 3 | Build typing engine | Not started | Correction/scoring/timing/pausing/streak state with behavioral tests |
 | 4 | Complete playable race | Not started | Four CPUs, countdown, passage, positions, finish/results/retry working end to end |
 | 5 | Polish racing experience | Not started | Detailed cars, effects, scenery and audio profiled in an actual race |
@@ -40,6 +40,7 @@ Phases 2–10 may overlap where dependencies require it: for example, save setti
 - Set the repository-local Git author to the user's supplied name Sahilshah; committed and pushed planning documentation.
 - Added naming/versioning/change-management conventions, formatting settings and ignore rules. Reference media remain local.
 - Audited rule/storage gaps and selected explicit implementation defaults; see the baseline document.
+- Implemented the Phase 2 foundation with a clean lockfile install, passing formatting/types/build, 20 unit tests and 18 Chromium profile tests; visually caught/fixed SVG texture sizing. Setup, architecture, ADRs, assets and test evidence are documented. Physical device coverage is not claimed.
 
 ## Remaining design and production work
 
@@ -51,7 +52,7 @@ These are tracked future tasks, not missing claims of implemented functionality.
 
 Report: current phase and subtask; what changed since the last update; what works versus what is only designed; checks actually run; relevant commit/branch; blockers or uncertainties; and the next concrete deliverable. Keep this file and the changelog/milestone notes synchronized with the code.
 
-Do not give an overall percentage by dividing completed phases: phases differ substantially in size. Currently the core design baseline and repository setup are complete; implementation progress is zero. Introduce a percentage only when a stable scoped task checklist exists, label its denominator, and avoid implying it measures time or effort remaining.
+Do not give an overall percentage by dividing completed phases: phases differ substantially in size. The foundation is now implemented, while playable racing and later systems remain future work. Introduce a percentage only when a stable scoped task checklist exists, label its denominator, and avoid implying it measures time or effort remaining.
 
 Useful supporting documents: [game plan](GAME_DESIGN_PLAN.md), [rule/storage baseline](docs/RULES_AND_STORAGE_BASELINE.md), [research](IMPLEMENTATION_RESEARCH.md), [engineering conventions](docs/ENGINEERING_CONVENTIONS.md), [GitHub workflow](docs/GITHUB_WORKFLOW.md).
 

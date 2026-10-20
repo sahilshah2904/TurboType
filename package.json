@@ -1,0 +1,35 @@
+{
+  "name": "turbotype",
+  "private": true,
+  "version": "0.1.0-alpha.1",
+  "type": "module",
+  "engines": {
+    "node": ">=24.13.0 <25",
+    "npm": ">=11 <12"
+  },
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "npm run typecheck && vite build",
+    "preview": "vite preview --host 127.0.0.1",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:browser": "playwright test",
+    "format": "prettier --write src tests index.html vite.config.ts playwright.config.ts tsconfig.json package.json .github/workflows/checks.yml",
+    "format:check": "prettier --check src tests index.html vite.config.ts playwright.config.ts tsconfig.json package.json .github/workflows/checks.yml",
+    "check": "npm run format:check && npm run typecheck && npm test && npm run build && npm run test:browser"
+  },
+  "dependencies": {
+    "@fontsource/barlow-condensed": "5.3.0",
+    "@fontsource/dm-sans": "5.3.0",
+    "animejs": "4.5.0",
+    "phaser": "4.2.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.64.1",
+    "@types/node": "24.19.2",
+    "prettier": "3.9.10",
+    "typescript": "7.0.2",
+    "vite": "8.3.4",
+    "vitest": "5.0.5"
+  }
+}

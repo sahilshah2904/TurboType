@@ -2,7 +2,29 @@
 
 An immersive typing racer: race computer opponents, improve accuracy and speed, and advance through Easy, Medium, and Hard campaigns with 100 levels each.
 
-**Status:** design and repository setup. The game is not implemented or deployed yet. Source repository: [sahilshah2904/TurboType](https://github.com/sahilshah2904/TurboType).
+**Status:** Phase 2 foundation implemented on `feat/app-foundation`; physical-device input verification is still pending. This is a working app preview, not a playable race or deployed release. Source repository: [sahilshah2904/TurboType](https://github.com/sahilshah2904/TurboType).
+
+## Run the preview
+
+Use Node 24.13.0 and npm 11. From the foundation branch:
+
+```powershell
+npm ci
+npm run dev
+```
+
+Open **http://127.0.0.1:5173/TurboType/**. The hub includes an animated Phaser track, a free-editing keyboard check and saved display preferences. Campaign cards are explicitly marked as previews. No race, rewards, cloud account or multiplayer service is available yet.
+
+To validate the production build:
+
+```powershell
+npx playwright install chromium
+npm run check
+```
+
+See [setup instructions](docs/SETUP.md) and [test evidence](docs/TESTING.md) for reproduction, actual coverage and limitations.
+
+![Actual foundation preview, captured with reduced motion](docs/images/foundation-desktop.png)
 
 ## Planned experience
 
@@ -16,6 +38,7 @@ An immersive typing racer: race computer opponents, improve accuracy and speed, 
 
 - [Project status and phases](PROJECT_STATUS.md) — persistent progress tracker, completed work, remaining work, and evidence requirements.
 - [Future work backlog](BACKLOG.md) — phase-by-phase task checklist, deferred work, dependencies and optional ideas.
+- [Setup](docs/SETUP.md), [architecture](docs/ARCHITECTURE.md), [test evidence](docs/TESTING.md), and [asset register](docs/ASSETS.md) — implemented foundation details and verification.
 - [Game design and delivery plan](GAME_DESIGN_PLAN.md) — authoritative proposed behavior and milestone gates.
 - [Rules and storage baseline](docs/RULES_AND_STORAGE_BASELINE.md) — planning audit, exact initial reward/cooldown defaults, and local-save/database boundaries.
 - [Responsive and online architecture](docs/RESPONSIVE_AND_ONLINE_ARCHITECTURE.md) — phones/tablets/laptops, account-backed progress, data synchronization, and multiplayer foundations.
@@ -24,7 +47,7 @@ An immersive typing racer: race computer opponents, improve accuracy and speed, 
 - [Reference recording analysis](docs/REFERENCE_VIDEO_ANALYSIS.md) — timestamped visual observations and the proposed original soundtrack direction.
 - [GitHub workflow](docs/GITHUB_WORKFLOW.md) — linking the local folder, committing, pushing, and future deployment.
 
-The repository currently contains planning documents and formatting/ignore configuration. There is no package manifest or runnable application yet; install/build/test instructions will be added and verified with the first implementation milestone. User reference screenshots stay local and are excluded from Git history.
+The repository now contains the app, pinned dependency lockfile, unit/browser tests, a checks-only CI workflow and implementation documentation. User reference screenshots/video remain local and excluded from Git history. Pages deployment is not configured yet.
 
 ## How changes reach GitHub
 

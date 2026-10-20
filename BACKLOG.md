@@ -12,12 +12,12 @@ Last reviewed: 20 October 2026. All unchecked items are future work, not impleme
 
 ## Next: phase 2 — application foundation
 
-- [ ] TT-201: Create the TypeScript/Vite application, actual scripts, runtime version record, lockfile and clean-clone setup instructions.
-- [ ] TT-202: Verify and pin compatible Phaser/Anime.js releases; test particles, filters, UI timelines, cleanup, resize and `/TurboType/` asset loading; record architecture decisions.
-- [ ] TT-203: Build the responsive shell, screen navigation and minimal boot/error recovery flow for phones, tablets and laptops.
-- [ ] TT-204: Prototype real mobile input: software keyboard, correction/composition, focus, safe areas, portrait/landscape and changing visible viewport without accidental pausing.
-- [ ] TT-205: Define stable player/race/content IDs, versioned contracts and pure core/local-storage/sync/network boundaries.
-- [ ] TT-206: Add relevant automated checks, formatting/type checking and a CI workflow using actual working scripts; document supported tools and troubleshooting.
+- [x] TT-201: Create the TypeScript/Vite application, actual scripts, runtime version record, lockfile and clean-clone setup instructions. Evidence: docs/SETUP.md and docs/TESTING.md, clean npm ci and production build on feat/app-foundation.
+- [x] TT-202: Verify and pin compatible Phaser/Anime.js releases; test particles, filters, UI timelines, cleanup, resize and `/TurboType/` asset loading; record architecture decisions. Evidence: running scene and 18 browser tests, visual SVG fix, ADR 0001/0002.
+- [x] TT-203: Build the responsive shell, screen navigation and minimal boot/error recovery flow for phones, tablets and laptops. Evidence: hub/keyboard/settings routes, image retry and storage-failure checks, responsive captures; actual device coverage remains TT-204/TT-1001.
+- [ ] TT-204: Prototype real mobile input: software keyboard, correction/composition, focus, safe areas, portrait/landscape and changing visible viewport without accidental pausing. Input spike, viewport diagnostics and emulated checks implemented; physical Android/iOS/tablet keyboard verification still required. See docs/TESTING.md.
+- [x] TT-205: Define stable player/race/content IDs, versioned contracts and pure core/local-storage/sync/network boundaries. Evidence: src/core/contracts.ts, src/core/ids.ts, architecture docs and ID tests. Cloud/race adapters are not implemented.
+- [ ] TT-206: Add relevant automated checks, formatting/type checking and a CI workflow using actual working scripts; document supported tools and troubleshooting. Local npm run check passes (20 unit + 18 browser tests); hosted CI outcome pending first push.
 
 ## Phase 3 — typing engine
 
