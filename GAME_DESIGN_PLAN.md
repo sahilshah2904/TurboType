@@ -1,6 +1,6 @@
 # TurboType — game design and engineering delivery plan
 
-Status: design baseline established; Phase 2 foundation complete with recorded exceptions and Phase 3 typing practice complete for agreed scope, with ASUS/Samsung checks accepted by user report. Four-CPU racing is not implemented yet. Read PROJECT_STATUS.md and docs/TESTING.md for actual evidence; docs/GAME_RULES.md describes implemented rules version 2 and takes precedence for current typing behavior.
+Status: design baseline established; Phase 2 foundation complete with recorded exceptions and Phase 3 typing practice complete for agreed scope, with ASUS/Samsung checks accepted by user report. Phase 4 four-CPU Quick Race is implemented with available-device acceptance pending; docs/QUICK_RACE.md defines actual CPU/result semantics. Read PROJECT_STATUS.md and docs/TESTING.md for actual evidence; docs/GAME_RULES.md describes implemented rules version 3 and takes precedence for current typing behavior.
 Updated: 20 October 2026.
 Technology research and source links: [IMPLEMENTATION_RESEARCH.md](./IMPLEMENTATION_RESEARCH.md).
 
@@ -189,7 +189,7 @@ The core loop is race → understand one improvement → short targeted practice
 
 ## 7. Immersion, art, audio, and accessibility
 
-Use a coherent art direction across loading panels, hub, garage, track, HUD, and results. Proposed direction: illustrated neon motorsport with warm highlights and cyan nitro, expressive vehicles, atmospheric scenery, and original music. Create an art bible covering palette, typography, vehicle proportions, layers, icon style, and export sizes before producing many assets.
+Use a coherent art direction across loading panels, hub, garage, track, HUD, and results. Proposed direction: illustrated neon motorsport with warm highlights and cyan nitro, expressive modern sports cars, atmospheric scenery, and original music. The current retro coupe and boxed foundation screens are prototypes; the user requested a wider immersive composition with coordinated cinematic interface motion and purposeful side scenery/information, while phones stay compact. Create an art bible covering palette, typography, vehicle proportions, layers, icon style, and export sizes before producing many assets.
 
 The supplied reel recording has now been visually reviewed through timestamped frames. [Reference video analysis](./docs/REFERENCE_VIDEO_ANALYSIS.md) records the visible launch, layered burst effects, passage scrolling, player-relative framing, approaching finish gate, and victory card, with evidence limits. Use these observations to refine the race prototype while preserving this plan's explicit typing/scoring rules.
 

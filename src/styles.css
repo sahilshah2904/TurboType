@@ -1050,3 +1050,228 @@ textarea[aria-invalid="true"] {
     animation: none !important;
   }
 }
+
+/* Quick Race: world motion stays inside Phaser; passage and controls stay native. */
+.race-visual {
+  margin-top: 24px;
+  border: 1px solid var(--border, #2b3943);
+  border-radius: 12px;
+  overflow: hidden;
+}
+#race-track {
+  position: relative;
+  aspect-ratio: 1000 / 460;
+  width: 100%;
+  background: #142731;
+}
+#race-track canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+.race-setup input {
+  width: 100%;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid #34434f;
+  border-radius: 5px;
+  background: #19232c;
+  color: #edf1e6;
+  font: inherit;
+}
+.race-setup input:invalid {
+  border-color: #ff8277;
+}
+.quick-race-active .page-heading,
+.quick-race-active .race-setup {
+  display: none;
+}
+.quick-race-active .quick-race {
+  margin-top: 20px;
+}
+.quick-race .run-banner {
+  padding: 12px 0;
+}
+.quick-race .metrics-grid {
+  margin: 12px 0;
+}
+.quick-race .race-passage {
+  margin: 16px 0;
+  padding: 8px 0;
+}
+.quick-race .track-bottom {
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.live-standings {
+  margin-top: 20px;
+  padding-top: 14px;
+  border-top: 1px solid #2b3943;
+}
+.live-standings summary {
+  cursor: pointer;
+  padding: 8px 0;
+}
+.live-standings ol {
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+  gap: 8px;
+  font-size: 12px;
+  color: #b2c3cc;
+}
+.live-standings li {
+  padding: 9px;
+  border: 1px solid #2b3943;
+  border-radius: 5px;
+}
+.live-standings [data-racer="player"] {
+  color: #b7f36b;
+  border-color: #718e4c;
+}
+.race-table-wrap {
+  overflow-x: auto;
+}
+.race-table-wrap table {
+  border-collapse: collapse;
+  width: 100%;
+  text-align: left;
+  font-size: 13px;
+}
+.race-table-wrap caption {
+  text-align: left;
+  padding: 12px 0;
+  color: #b2c3cc;
+  line-height: 1.6;
+}
+.race-table-wrap th,
+.race-table-wrap td {
+  padding: 12px 8px;
+  border-bottom: 1px solid #344837;
+}
+.race-table-wrap [data-racer="player"] {
+  color: #b7f36b;
+}
+@media (max-width: 650px) {
+  nav {
+    flex-wrap: wrap;
+    column-gap: 14px;
+    row-gap: 0;
+  }
+  .quick-race .race-hud {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 5px;
+  }
+  .quick-race .race-hud > div {
+    padding: 8px 5px;
+  }
+  .quick-race .race-hud .micro {
+    font-size: 8px;
+    letter-spacing: 0;
+  }
+  .quick-race .race-hud strong {
+    font-size: 23px;
+    overflow-wrap: anywhere;
+  }
+  .quick-race .run-banner #race-instruction {
+    font-size: 11px;
+  }
+  .quick-race .countdown {
+    font-size: 35px;
+  }
+  .quick-race .track-bottom {
+    padding: 8px;
+    font-size: 10px;
+  }
+  .quick-race .practice-actions {
+    flex-wrap: wrap;
+  }
+  .quick-race .race-table-wrap table {
+    font-size: 11px;
+  }
+  .quick-race .race-table-wrap th,
+  .quick-race .race-table-wrap td {
+    padding: 8px 4px;
+    overflow-wrap: anywhere;
+  }
+}
+
+/* Keep the active course and typing within reach; restore the full setup at results. */
+.quick-race-active .quick-race > .section-top {
+  display: none;
+}
+.quick-race-active .race-visual {
+  max-width: 760px;
+  margin: 0 auto;
+}
+.quick-race-active
+  .race-visual:has(#race-track[data-ready="true"])
+  .track-bottom {
+  display: none;
+}
+.quick-race #race-instruction {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.quick-race-active .race-hud > div {
+  padding: 10px;
+}
+.quick-race-active .quick-race .race-passage {
+  margin: 8px 0;
+}
+@media (max-width: 650px) {
+  .app-shell:has(.quick-race-active) .topbar {
+    min-height: 48px;
+    padding-top: 0;
+  }
+  .app-shell:has(.quick-race-active) .wordmark,
+  .app-shell:has(.quick-race-active) nav [data-route="keyboard"] {
+    display: none;
+  }
+  .app-shell:has(.quick-race-active) nav {
+    min-height: 44px;
+  }
+  .app-shell:has(.quick-race-active) nav a {
+    min-height: 44px;
+  }
+  .quick-race-active .quick-race {
+    margin-top: 10px;
+    padding: 12px;
+  }
+  .quick-race-active .run-banner {
+    padding: 4px 0;
+  }
+  .quick-race-active #race-instruction {
+    display: none;
+  }
+  .quick-race-active .race-hud {
+    margin: 5px 0;
+  }
+  .quick-race-active .race-hud > div {
+    padding: 5px;
+  }
+  .quick-race-active .race-hud strong {
+    font-size: 21px;
+    margin-top: 3px;
+  }
+  .quick-race-active #race-passage-label {
+    font-size: 8px;
+  }
+  .quick-race-active .race-passage {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  .quick-race-active #race-input {
+    min-height: 72px;
+    margin-top: 5px;
+    padding: 8px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  :root[data-text-size="large"] .quick-race-active .race-passage,
+  :root[data-text-size="large"] .quick-race-active #race-input {
+    font-size: 23px;
+  }
+}

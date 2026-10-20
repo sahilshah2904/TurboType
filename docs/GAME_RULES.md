@@ -1,6 +1,6 @@
-# Implemented typing rules — version 2
+# Implemented rules — version 3
 
-Implemented in the Phase 3 typing practice, app 0.1.0-alpha.2. Planned campaign/rewards remain in GAME_DESIGN_PLAN.md and RULES_AND_STORAGE_BASELINE.md. The current practice screen saves no results, rewards or progress and has no opponents.
+Typing was implemented in Phase 3; Phase 4 adds four-CPU Quick Race in app 0.1.0-alpha.3, rules version 3. Practice still has no opponents. Both modes save no results, rewards or progress. Planned campaign/rewards remain in GAME_DESIGN_PLAN.md and RULES_AND_STORAGE_BASELINE.md.
 
 ## Start, timing and finish
 
@@ -30,7 +30,7 @@ Example: expected `cat`; enter `c`, `x`, Backspace, `a`, `t`. The result has 4 c
 - Clean streak grows only at newly reached furthest passage positions. Repeated deletion/retyping cannot farm streaks. Errors reset it; longest streak remains recorded for that run.
 - Every twentieth clean-character milestone can trigger a visual nitro event for 800 ms, at least two active seconds after the previous burst started. Milestones during cooldown do not queue. Nitro never adds progress or changes finish eligibility. The Phase 3 UI shows a status accent; the race effects arrive later.
 
-The core also implements validated standing ordering for later CPU integration: finish time first, then unfinished progress; exact ties share competition places (1,1,3). IDs only break display-order ties using deterministic lexical ordering. The practice UI does not invent a placement without opponents.
+The core also implements validated standing ordering used by Quick Race: finish time first, then unfinished progress; exact ties share competition places (1,1,3). IDs only break display-order ties using deterministic lexical ordering. The practice UI does not invent a placement without opponents.
 
 ## Keyboard assistance and composition
 
@@ -44,7 +44,15 @@ The input requests autocorrection/capitalization/spellcheck/autocomplete off, bu
 
 The engine reports reasons such as paused, blocked assistance and composed input. “Eligible” means only that this local finished run had no recorded disqualifying condition; it is not server verification. No practice-screen metrics are published or awarded as records.
 
-This policy is rules version 2, clarifying assistance/composition and timed states before any progress data ships. Save schema version remains 1 because only foundation display preferences are persisted. A later provider must snapshot rules/content/input-profile conditions with every stored result.
+This policy originated in rules version 2 and remains unchanged in version 3, clarifying assistance/composition and timed states before any progress data ships. Save schema version remains 1 because only foundation display preferences are persisted. A later provider must snapshot rules/content/input-profile conditions with every stored result.
+
+## Quick Race and CPU results (version 3)
+
+Quick Race reuses all typing/correction/assistance rules above. Four named CPUs use immutable seeded per-character schedules, fixed before GO, with declared target pace, reaction, hesitation and correction delays. Their progress uses the same active elapsed clock as the player. Pausing freezes everyone; neither render frequency nor player rank changes the schedules. The quick tiers are independent of future campaign categories.
+
+CPUs finishing first never stop an untimed learner. A player finish freezes live state and derives remaining CPU outcomes, explicitly labeled simulated in results. Future CPU finishes within a timed deadline are simulated; future CPUs beyond the deadline are simulated DNFs. On actual time expiry, unfinished entries are DNF with no invented finish times. Abandonment stops remaining lanes at observed progress. Exact ties share places; display-rounded times are never used for ordering. Retry same race resets player state with identical schedules; New seed deliberately changes the opponent schedule seed.
+
+The graphics must load before Start is enabled, with explicit text-standings fallback after failure. Missing graphics/context loss during racing pauses the shared clock. Results, rewards, account data and campaign unlocks are not persisted. [QUICK_RACE.md](QUICK_RACE.md) specifies generator ranges, reproducible setup, cutoff semantics and cleanup in detail. Rules version 3 adds these race semantics; the existing typing policy is unchanged.
 
 ## Verification and remaining gate
 

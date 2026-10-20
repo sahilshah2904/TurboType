@@ -58,9 +58,9 @@ For an authorized small change directly on `main`, review, validate, stage the i
 
 When the user asks this project's agent to implement a change and publish it to the linked repository, complete the validation/documentation and commit-and-push steps as part of the task. Report the branch and commit. If the user asks for a local-only edit, leave it local. Do not run a background file watcher that commits arbitrary files on save.
 
-## Current stacked implementation
+## Implementation integration
 
-`feat/app-foundation` is under review in PR #1 against main. Phase 3 `feat/typing-engine` builds on that unmerged branch, so its PR targets `feat/app-foundation`. This preserves a focused typing diff. Neither PR is automatically merged; after the foundation merges, retarget the typing PR to main and verify the resulting checks/diff before merging. The local checkout serves the typing preview regardless of PR merge status.
+Phase 2 PR #1 and Phase 3 PR #2 were merged in order on 20 October 2026 after their head checks passed. PR #2 was retargeted from the foundation branch to main after PR #1 merged; merge commits preserve the shared history. Main baseline is 08cddb4. Phase 4 feat/solo-race starts from that main and uses a normal PR against main. The local checkout serves the current feature preview even before its PR merges. No source merge deploys a website because Pages is not configured.
 
 ## Publishing and recovery
 

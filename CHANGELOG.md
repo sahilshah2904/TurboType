@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.1.0-alpha.3 — four-CPU Quick Race, 20 October 2026
+
+Working on feat/solo-race from merged main baseline 08cddb4; not a tagged or deployed release.
+
+- Merged the verified Phase 2/3 PRs in order before branching; preserved shared commit history.
+- Added four immutable seeded per-character CPU schedules with declared tiers, reaction/hesitation/correction delays and frame-independent progress.
+- Added a five-lane Phaser race driven by the shared typing clock, exact live standings, frozen final results, explicitly simulated later CPU outcomes, timed DNFs, same-seed retry and new-seed selection. Rules version is 3; existing typing rules are unchanged.
+- Added loading/context-loss recovery, a 12-second watchdog and explicit text racing, plus navigation cleanup and compact active desktop/mobile layouts. Original prototype art remains until Phase 5. No rewards/results are saved.
+- Added 21 unit cases and 15 browser profile cases; the full local check passes (69 unit and 54 browser tests). Available-device race checks accepted by ASUS/Samsung user report (TT-404).
+- Moved race status/metrics above the track at the user's request, so the course leads directly into passage and input; corrected intrinsic canvas sizing after compaction. Short verification passages remain unchanged. Exact verification evidence is in docs/TESTING.md.
+
 ## 0.1.0-alpha.2 — typing practice, 20 October 2026
 
 Working on feat/typing-engine, based on the unmerged foundation branch; not a tagged or deployed release.

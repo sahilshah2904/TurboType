@@ -2,7 +2,7 @@
 
 Research date: 20 October 2026. First-release scope confirmed by the user: computer opponents, hosted entirely on GitHub Pages.
 
-**Planning update:** [GAME_DESIGN_PLAN.md](./GAME_DESIGN_PLAN.md) is the authoritative product, rules, onboarding, progression, documentation, and phased-delivery specification. This research document retains technology comparisons and sources; newer plan decisions take precedence. Phase 3 now has a working typing-practice preview; CPU racing and public deployment remain future work. See PROJECT_STATUS.md and docs/TESTING.md for implemented behavior and evidence.
+**Planning update:** [GAME_DESIGN_PLAN.md](./GAME_DESIGN_PLAN.md) is the authoritative product, rules, onboarding, progression, documentation, and phased-delivery specification. This research document retains technology comparisons and sources; newer plan decisions take precedence. Phase 4 now has a playable four-CPU Quick Race preview; modern art/audio, campaigns and public deployment remain future work. See PROJECT_STATUS.md and docs/TESTING.md for implemented behavior and evidence.
 
 **Latest hosting/data update:** [responsive and online architecture](./docs/RESPONSIVE_AND_ONLINE_ARCHITECTURE.md) replaces the initial desktop-first/local-only public launch assumption. The frontend stays on GitHub Pages, with responsive phones/tablets/laptops and optional account-backed cloud progress before single-player launch. A separate live race service follows immediately afterward. The earlier GitHub-only/local-save design remains useful for the prototype and guest mode, not the full public launch scope.
 

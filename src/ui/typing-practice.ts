@@ -51,7 +51,7 @@ export function practiceScreen(): string {
     <div class="practice-actions"><button id="start-run" class="button button--primary">Start run <span aria-hidden="true">→</span></button><button id="pause-run" class="button button--secondary" disabled>Pause</button><button id="restart-run" class="text-button">Restart</button></div>
     <p id="race-help" class="help">One mistake stops progress. Backspace removes it. Esc pauses. Leaving this screen pauses and preserves your run for this visit. Pauses or assisted input make a run practice-only. Refresh starts a fresh session.</p>
     <div class="run-details"><span id="error-summary">0 errors · 0 corrected</span><span id="run-eligibility">Session only · not saved</span><span id="nitro-status">20 clean characters → nitro</span></div>
-    <section id="run-results" class="run-results" aria-labelledby="result-title" hidden><p class="eyebrow">YOUR SESSION RESULT</p><h2 id="result-title">Run complete.</h2><p id="result-summary"></p><p id="result-coaching"></p><p class="help">No XP, credits, campaign progress or personal records are saved by this practice screen. Computer opponents arrive in the next phase.</p></section>
+    <section id="run-results" class="run-results" aria-labelledby="result-title" hidden><p class="eyebrow">YOUR SESSION RESULT</p><h2 id="result-title">Run complete.</h2><p id="result-summary"></p><p id="result-coaching"></p><p class="help">No XP, credits, campaign progress or personal records are saved by this practice screen. Choose Race to compete with four computer opponents.</p></section>
   </section>`;
 }
 

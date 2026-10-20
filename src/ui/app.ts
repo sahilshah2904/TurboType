@@ -11,6 +11,11 @@ import {
   practiceScreen,
   connectTypingPractice,
 } from "./typing-practice";
+import {
+  createQuickRaceSession,
+  quickRaceScreen,
+  connectQuickRace,
+} from "./quick-race";
 
 const SAMPLE = "Every great run starts with a single keystroke.";
 const ARROW = '<span aria-hidden="true">↗</span>';
@@ -24,6 +29,7 @@ export function mountApp(root: HTMLElement): () => void {
   let clearScreen: (() => void) | undefined;
   let generation = 0;
   const practiceSession = createPracticeSession();
+  const quickRaceSession = createQuickRaceSession();
   const reducedMotion = () =>
     settings.motion === "reduced" ||
     (settings.motion === "system" && systemMotion.matches);
@@ -32,11 +38,11 @@ export function mountApp(root: HTMLElement): () => void {
     <div class="app-shell">
       <header class="topbar">
         <a class="wordmark" href="#/hub" aria-label="TurboType home"><img src="${import.meta.env.BASE_URL}assets/brand-mark.svg" width="34" height="34" alt="" />TURBO<span>TYPE</span></a>
-        <nav aria-label="Main navigation"><a href="#/hub" data-route="hub">The hub</a><a href="#/practice" data-route="practice">Practice</a><a href="#/keyboard" data-route="keyboard">Keyboard check</a><a href="#/settings" data-route="settings">Settings</a></nav>
+        <nav aria-label="Main navigation"><a href="#/hub" data-route="hub">The hub</a><a href="#/race" data-route="race">Race</a><a href="#/practice" data-route="practice">Practice</a><a href="#/keyboard" data-route="keyboard">Keyboard check</a><a href="#/settings" data-route="settings">Settings</a></nav>
         <span class="guest"><span class="status-dot"></span> GUEST DRIVER</span>
       </header>
       <main id="main" tabindex="-1"></main>
-      <footer class="footer"><span><b>TURBOTYPE</b> / BUILT FOR THE LONG RUN</span><span>Typing engine preview · ${APP_VERSION}</span><a href="https://github.com/sahilshah2904/TurboType" target="_blank" rel="noopener noreferrer">Follow development ${ARROW}</a></footer>
+      <footer class="footer"><span><b>TURBOTYPE</b> / BUILT FOR THE LONG RUN</span><span>Single-player race preview · ${APP_VERSION}</span><a href="https://github.com/sahilshah2904/TurboType" target="_blank" rel="noopener noreferrer">Follow development ${ARROW}</a></footer>
     </div>`;
   const main = root.querySelector<HTMLElement>("main")!;
 
@@ -63,15 +69,17 @@ export function mountApp(root: HTMLElement): () => void {
         link.setAttribute("aria-current", "page");
       else link.removeAttribute("aria-current");
     });
-    document.title = `TurboType — ${route === "hub" ? "Your words. Full throttle." : route === "practice" ? "Typing practice" : route === "keyboard" ? "Keyboard check" : "Settings"}`;
+    document.title = `TurboType — ${route === "hub" ? "Your words. Full throttle." : route === "race" ? "Quick Race" : route === "practice" ? "Typing practice" : route === "keyboard" ? "Keyboard check" : "Settings"}`;
     main.innerHTML =
       route === "hub"
         ? hubScreen()
-        : route === "practice"
-          ? practiceScreen()
-          : route === "keyboard"
-            ? keyboardScreen()
-            : settingsScreen(settings);
+        : route === "race"
+          ? quickRaceScreen()
+          : route === "practice"
+            ? practiceScreen()
+            : route === "keyboard"
+              ? keyboardScreen()
+              : settingsScreen(settings);
     scope = createScope({ root: main }).add(() => {
       if (!reducedMotion())
         animate(".reveal", {
@@ -127,6 +135,8 @@ export function mountApp(root: HTMLElement): () => void {
     if (route === "keyboard") clearScreen = connectKeyboard(main);
     if (route === "practice")
       clearScreen = connectTypingPractice(main, practiceSession);
+    if (route === "race")
+      clearScreen = connectQuickRace(main, quickRaceSession, reducedMotion);
     if (route === "settings") {
       main.querySelector("form")!.addEventListener("change", () => {
         const form = new FormData(main.querySelector("form")!);
@@ -181,8 +191,8 @@ export function mountApp(root: HTMLElement): () => void {
 function hubScreen(): string {
   return `
     <section class="hero reveal" aria-labelledby="hero-title">
-      <div><p class="eyebrow"><span class="status-dot"></span> FIND YOUR RHYTHM. OWN THE ROAD.</p><h1 id="hero-title">YOUR WORDS.<br /><span>FULL THROTTLE.</span></h1><p class="hero-copy">Turn every keystroke into momentum.<br />Find your rhythm in the new typing practice.</p><a class="button button--primary" href="#/practice">Start typing practice ${ARROW}</a></div>
-      <aside class="hero-note"><span class="outline-number">01</span><p>THE ROAD STARTS HERE</p><span>Single-player racing is up next.<br />For now, meet your machine.</span></aside>
+      <div><p class="eyebrow"><span class="status-dot"></span> FIND YOUR RHYTHM. OWN THE ROAD.</p><h1 id="hero-title">YOUR WORDS.<br /><span>FULL THROTTLE.</span></h1><p class="hero-copy">Turn every keystroke into momentum.<br />Take on four CPUs. Build clean speed.</p><a class="button button--primary" href="#/race">Start a race ${ARROW}</a></div>
+      <aside class="hero-note"><span class="outline-number">01</span><p>THE ROAD STARTS HERE</p><span>Four opponents. One passage.<br />Your pace sets your progress.</span></aside>
     </section>
     <section class="track-card reveal" aria-label="Animated track preview">
       <div class="section-top"><span class="eyebrow"><span class="status-dot"></span> TRACK PREVIEW</span><span class="micro">CITY CIRCUIT <span class="divider">/</span> NIGHT RUN</span></div>
@@ -219,7 +229,7 @@ function hubScreen(): string {
         )
         .join("")}
     </div></section>
-    <div class="development-note reveal"><span class="note-icon" aria-hidden="true">↳</span><p><strong>A strong start, built one lap at a time.</strong> Try a typing sprint today. Computer races, level progression, rewards, and cloud saves are still being built.</p><a href="#/keyboard">Try the input check →</a></div>`;
+    <div class="development-note reveal"><span class="note-icon" aria-hidden="true">↳</span><p><strong>A strong start, built one lap at a time.</strong> Quick Race is ready. Campaign progression, rewards, cloud saves and visual polish are still being built.</p><a href="#/keyboard">Try the input check →</a></div>`;
 }
 
 function keyboardScreen(): string {
