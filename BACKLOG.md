@@ -10,7 +10,7 @@ Last reviewed: 20 October 2026. All unchecked items are future work, not impleme
 - Keep optional ideas separate from launch commitments. Cancellation or scope changes require an explicit dated note and rationale; do not silently delete tasks.
 - Do not treat the number of checked boxes as a time/effort estimate. This is a living work breakdown, not a promise that every item has equal size.
 
-## Next: phase 2 — application foundation
+## Phase 2 — application foundation (complete with recorded exceptions)
 
 - [x] TT-201: Create the TypeScript/Vite application, actual scripts, runtime version record, lockfile and clean-clone setup instructions. Evidence: docs/SETUP.md and docs/TESTING.md, clean npm ci and production build on feat/app-foundation.
 - [x] TT-202: Verify and pin compatible Phaser/Anime.js releases; test particles, filters, UI timelines, cleanup, resize and `/TurboType/` asset loading; record architecture decisions. Evidence: running scene and 18 browser tests, visual SVG fix, ADR 0001/0002.
@@ -21,11 +21,15 @@ Last reviewed: 20 October 2026. All unchecked items are future work, not impleme
 
 ## Phase 3 — typing engine
 
-- [ ] TT-301: Implement exact-character append-only typing and correction rules, blocked input/paste handling, composition support and expected error/correction counts.
-- [ ] TT-302: Implement WPM, accuracy, progress, novel-position streaks and recent pace, including zero-time and threshold boundaries.
-- [ ] TT-303: Implement ready/countdown/racing/pause/finish states, monotonic timing, eligibility, restart and opt-in timed-event expiry.
-- [ ] TT-304: Verify behavioral edge cases, no deletion/retyping reward exploits, shared places, finish timestamps and animation-independent outcomes; write implemented rules documentation.
-- [ ] TT-305: Address Samsung word-completion finding in the race input adapter: request assistance off, handle identifiable replacements/paste and ambiguous multi-character input, preserve legitimate composition, validate resulting values and prevent inflated/unfair metrics under explicit eligibility rules. Do not claim all OS assistance can be detected or disabled. Retest the implemented adapter on the available phone; document actual behavior. Required before Phase 3 input integration is accepted.
+- [x] TT-301: Implement exact-character append-only typing and correction rules, blocked input/paste handling, composition support and expected error/correction counts.
+- [x] TT-302: Implement WPM, accuracy, progress, novel-position streaks and recent pace, including zero-time and threshold boundaries.
+- [x] TT-303: Implement ready/countdown/racing/pause/finish states, monotonic timing, eligibility, restart and opt-in timed-event expiry.
+- [x] TT-304: Verify behavioral edge cases, no deletion/retyping reward exploits, shared places, finish timestamps and animation-independent outcomes; write implemented rules documentation.
+Completion evidence for TT-301–304: `src/core/typing-engine.ts`, `standings.ts`, `src/ui/race-input.ts`, practice UI, 48 unit tests and 39 Chromium browser checks passing on `feat/typing-engine`; implemented rules and ADR 0003; implementation commit `0e19dcf`, PR #2. This verifies automated behavior, not native Samsung input.
+
+- [x] TT-305: Address Samsung word-completion finding in the race input adapter: request assistance off, handle identifiable replacements/paste and ambiguous multi-character input, preserve legitimate composition, validate resulting values and prevent inflated/unfair metrics under explicit eligibility rules. Do not claim all OS assistance can be detected or disabled. Retest the implemented adapter on the available phone; document actual behavior. Implemented and covered automatically; on 20 October 2026 the user reported all requested strict-input cases working on ASUS and Samsung S25 Ultra, with laptop screenshots showing correction, pause, completion and timeout. Accepted on that available-device report; exact prediction event/label behavior and browser/OS/keyboard versions were not supplied. Broader verification remains TT-1008. See docs/TESTING.md and docs/PHASE3_INPUT_TESTS.md.
+
+- [x] TT-306: Correct stale input notices across countdown, resume and final states, identified in the user's timeout screenshot. Transition messages now match the engine state; the existing timed browser scenario checks pause→countdown→GO→expiry notices across all three profiles.
 
 ## Phase 4 — complete playable race
 

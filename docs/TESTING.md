@@ -1,4 +1,20 @@
-# Foundation verification
+# Verification evidence
+
+## Phase 3 — typing practice, 20 October 2026
+
+Branch: `feat/typing-engine`, based on `feat/app-foundation`. App 0.1.0-alpha.2, rules version 2. Current Windows local `npm run check` completed with exit code 0: formatting, strict types, 48 unit tests, production build and 39 Chromium browser checks (13 behaviors across desktop, phone and tablet profiles). Hosted Linux [run 39418022536](https://github.com/sahilshah2904/TurboType/actions/runs/39418022536) also passed for implementation commit `0e19dcf`, including clean npm ci, browser installation and the full check command.
+
+New unit coverage exercises exact correction/error history, zero/backwards/late clocks, pause/resume/countdown cancellation, finish freeze, timed expiry boundaries, practice eligibility, retyping/nitro thresholds, invalid configuration and shared competition places. New browser coverage exercises strict input, fallback replacement validation, multi-character composition with trailing input, pause/navigation preservation, focus loss, timeout, unsupported selection edits and canceled composition.
+
+A behavioral browser test caught HUD updates resetting native selection; sync now writes only changed values. Six simultaneous WebGL test workers caused a renderer startup timeout; concurrency is explicitly bounded at three workers. The final complete run passes. Existing local shell AutoRun diagnostics and Phaser chunk warning remain as described below; neither failed the checks.
+
+Visually inspected active practice at desktop and 390px phone sizes; 320px, 390px and 1440px captures report document width equal to viewport width. This is layout evidence, not a real software keyboard or performance measurement. The hub track is still decorative; no four-CPU race, campaign, database, rewards or music exists. Practice text/results survive route navigation within this visit, but not reload/HMR.
+
+**TT-305 accepted by user report:** on 20 October 2026, after receiving the focused seven-step checklist, the user said all test cases work on the laptop and similar tests work on the phone. Devices previously identified as ASUS laptop and Samsung S25 Ultra. Five supplied laptop screenshots show a finished 40.5 WPM / 92.2% / 13.9s run, error/correction counts, a paused unresolved error, preserved longer-passage text, and timeout at 60.0s / 87% completion. These support the visible states; mobile behavior and the other checklist cases are user-reported rather than independently observed. The report does not specify whether predictive completion was blocked or composed/practice-only, nor supply native event traces or browser/OS/keyboard versions. Do not invent those details or claim universal OS assistance detection. The available-device acceptance closes the Phase 3 gate; physical iOS/tablet coverage and missing environment metadata remain TT-1008.
+
+The user also observed that the textarea can be dragged larger and reported no issue. This is the native resize control and remains available. The timeout screenshot exposed a stale “Paused” input notice after the result froze; TT-306 fixes state-transition notices. The existing timed browser scenario now checks paused, resumed countdown, GO and final timeout notices. After this notice fix, the full local check was rerun successfully: formatting/types/build, 48 unit and 39 browser tests passed with exit code 0. Screenshots remain in the conversation rather than publishing private clipboard files. See [implemented rules](GAME_RULES.md) and [ADR 0003](adr/0003-typing-clock-and-input-policy.md) for policy and limits.
+
+## Phase 2 foundation verification (historical)
 
 Date: 20 October 2026. Branch: feat/app-foundation. This records observed evidence, not a promise of untested device support.
 
@@ -54,7 +70,7 @@ The user also confirmed that navigating to the Hub or Settings clears the keyboa
 - **TT-204 foundation verification closed with documented exceptions:** available-device checks on Samsung S25 Ultra/ASUS passed by user report, and word completion was identified for TT-305. The user has no iPhone or tablet available. On 20 October 2026, unavailable physical iOS/tablet coverage and missing environment metadata were explicitly carried to TT-1008 as release-gate work, rather than claimed as passed or allowed to block pure engine development. Phase 2 is complete for the foundation scope; broad device support remains unverified. Required future composition/race-input tests are TT-305.
 - Firefox, Safari/WebKit and actual hardware GPU coverage are not established. Chromium tests use software rendering flags to make WebGL available in headless mode; they do not establish 60 fps on players' devices.
 - The keyboard check intentionally accepts paste/editing. It is not the Phase 3 typing/race engine, with scoring/correction-required input.
-- No gameplay, campaign saves, cloud synchronization, accounts, music or multiplayer is implemented. Stable contracts are integration boundaries only.
+- At this Phase 2 snapshot, no gameplay, campaign saves, cloud synchronization, accounts, music or multiplayer was implemented. Phase 3 adds typing practice as recorded above; stable provider contracts are still integration boundaries only.
 - No live GitHub Pages site or release tag exists. Local preview success is not deployment evidence.
 
 ### Race-input follow-up and browser limits

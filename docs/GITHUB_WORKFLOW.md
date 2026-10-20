@@ -58,6 +58,10 @@ For an authorized small change directly on `main`, review, validate, stage the i
 
 When the user asks this project's agent to implement a change and publish it to the linked repository, complete the validation/documentation and commit-and-push steps as part of the task. Report the branch and commit. If the user asks for a local-only edit, leave it local. Do not run a background file watcher that commits arbitrary files on save.
 
+## Current stacked implementation
+
+`feat/app-foundation` is under review in PR #1 against main. Phase 3 `feat/typing-engine` builds on that unmerged branch, so its PR targets `feat/app-foundation`. This preserves a focused typing diff. Neither PR is automatically merged; after the foundation merges, retarget the typing PR to main and verify the resulting checks/diff before merging. The local checkout serves the typing preview regardless of PR merge status.
+
 ## Publishing and recovery
 
 The game will be deployed in a later milestone through a reviewed GitHub Actions Pages workflow. The intended project path is `/TurboType/`. Once that workflow exists, an eligible push/merge triggers installation, checks, build, and deployment; verify the workflow result and live game before reporting a release.

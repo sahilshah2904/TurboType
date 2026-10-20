@@ -6,7 +6,7 @@ Last reviewed: 20 October 2026. This file is the persistent status source for fu
 
 ## Current position
 
-**Phase 1: design baseline complete. Phase 2: foundation complete with documented verification exceptions. Phase 3: ready to start, not implemented.** The available Samsung S25 Ultra and ASUS checks passed by user report; the word-completion finding is tracked as required Phase 3 task TT-305. The user has no iPhone/tablet; their physical coverage and missing environment metadata explicitly move to release-gate TT-1008, not a claim of passed tests. The foundation branch is unmerged; gameplay, cloud saves, music and public deployment remain unimplemented. See docs/TESTING.md.
+**Phase 1: design baseline complete. Phase 2: foundation complete with documented verification exceptions. Phase 3: complete for the agreed typing-engine scope; Phase 4 ready to start.** Branch `feat/typing-engine` adds a real practice sprint and pure engine, with 48 unit tests and 39 Chromium profile checks. The user reports all requested strict-input cases working on the ASUS laptop and Samsung S25 Ultra, closing TT-305 on 20 October 2026; laptop screenshots show completion, correction, pause and timed results. No native input event trace or exact browser/OS/keyboard versions were supplied, so the report does not prove universal prediction detection. Physical iPhone/tablet coverage and missing environment metadata remain release-gate TT-1008. The foundation and typing branches are unmerged; four-CPU racing, cloud saves, music and public deployment remain future work. See docs/TESTING.md.
 
 “Design baseline complete” means all major systems have defined behavior and a delivery/verification plan. It does not mean every passage is authored, balancing is playtested, every technical detail is fixed, or any feature is implemented. Defaults may change through documented decisions when implementation exposes evidence.
 
@@ -18,7 +18,7 @@ Latest scope update: phones/tablets/laptops are first-release targets. Design ac
 | --- | --- | --- | --- |
 | 1 | Finalize design | Baseline complete | Game plan, research, reference analysis, engineering conventions, and RULES_AND_STORAGE_BASELINE.md; tuning and production work explicitly separated |
 | 2 | Set up application | Foundation complete, with exceptions | Code/local/CI checks and available ASUS/Samsung checks recorded. TT-204 closed with word-completion work moved to TT-305 and unavailable iOS/tablet verification to TT-1008; not blanket device certification |
-| 3 | Build typing engine | Not started | Correction/scoring/timing/pausing/streak state with behavioral tests |
+| 3 | Build typing engine | Complete for agreed scope | TT-301–305 implemented/verified, 48 unit/39 browser checks and user-reported ASUS/Samsung strict-input acceptance; broader device evidence remains TT-1008 |
 | 4 | Complete playable race | Not started | Four CPUs, countdown, passage, positions, finish/results/retry working end to end |
 | 5 | Polish racing experience | Not started | Detailed cars, effects, scenery and audio profiled in an actual race |
 | 6 | Opening and onboarding | Not started | Entrance/loading, rules, interactive tutorial/calibration and hub verified on first and returning visits |
@@ -42,7 +42,13 @@ Phases 2–10 may overlap where dependencies require it: for example, save setti
 - Audited rule/storage gaps and selected explicit implementation defaults; see the baseline document.
 - Implemented the Phase 2 foundation with a clean lockfile install, passing formatting/types/build, 20 unit tests and 18 Chromium profile tests; visually caught/fixed SVG texture sizing. Setup, architecture, ADRs, assets and test evidence are documented. Physical device coverage is not claimed.
 - Pushed implementation commit 5534591 (`Build the responsive app foundation`) and opened pull request #1; hosted Linux checks passed in run 39404088628. The branch is not merged and Pages is not deployed.
-- Recorded Samsung S25 Ultra/ASUS user checks: input/editing, phone rotation and keyboard reopening, Clear text/next-key highlighting, settings persistence and browser-tab return. Word completion remains possible; TT-305 covers the actual race adapter and eligibility. With no iPhone/tablet available, TT-1008 carries unverified coverage/metadata forward as a release gate. Phase 2 foundation is complete with those explicit exceptions; Phase 3 has not started.
+- Recorded Samsung S25 Ultra/ASUS user checks: input/editing, phone rotation and keyboard reopening, Clear text/next-key highlighting, settings persistence and browser-tab return. Word completion remains possible; TT-305 covers the actual race adapter and eligibility. With no iPhone/tablet available, TT-1008 carries unverified coverage/metadata forward as a release gate. Phase 2 foundation is complete with those explicit exceptions; Phase 3 subsequently implemented the strict practice adapter; its physical retest was subsequently accepted by user report (TT-305).
+
+- Implemented Phase 3 pure typing/timing/metrics, validated shared standings, strict DOM input adapter and practice sprint with countdown, correction, pause/navigation preservation, timed expiry and frozen results. Rules version is 2; app is 0.1.0-alpha.2. No rewards/results are persisted. Local formatting/types/build, 48 unit and 39 browser checks pass. The available-device strict-input checklist was subsequently accepted by user report (TT-305); detailed native prediction traces remain unavailable.
+
+- Pushed typing implementation commit `0e19dcf` (`Build the typing engine and practice sprint`) and opened [PR #2](https://github.com/sahilshah2904/TurboType/pull/2) against `feat/app-foundation`. Hosted Linux checks passed in [run 39418022536](https://github.com/sahilshah2904/TurboType/actions/runs/39418022536). It is intentionally stacked on foundation PR #1; neither is merged or deployed.
+
+- User accepted Phase 3 after reporting all requested laptop/phone tests working and supplying five laptop screenshots. TT-305 is complete by this available-device report. Normal textarea resizing was observed and retained. Fixed the stale paused notice visible after timed expiry; transition messages now match countdown/racing/final states, with regression coverage (TT-306). Phase 4 implementation has not started.
 
 ## Remaining design and production work
 

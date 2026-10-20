@@ -1,6 +1,6 @@
 # TurboType — game design and engineering delivery plan
 
-Status: design baseline established; Phase 2 foundation implementation is in progress. The preview is not a playable game. Read PROJECT_STATUS.md and docs/TESTING.md for actual evidence.
+Status: design baseline established; Phase 2 foundation complete with recorded exceptions and Phase 3 typing practice complete for agreed scope, with ASUS/Samsung checks accepted by user report. Four-CPU racing is not implemented yet. Read PROJECT_STATUS.md and docs/TESTING.md for actual evidence; docs/GAME_RULES.md describes implemented rules version 2 and takes precedence for current typing behavior.
 Updated: 20 October 2026.
 Technology research and source links: [IMPLEMENTATION_RESEARCH.md](./IMPLEMENTATION_RESEARCH.md).
 
