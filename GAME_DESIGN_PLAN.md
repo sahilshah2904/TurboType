@@ -1,6 +1,6 @@
 # TurboType — game design and engineering delivery plan
 
-Status: proposed design, ready for review; implementation has not started.
+Status: design baseline established; Phase 2 foundation implementation is in progress. The preview is not a playable game. Read PROJECT_STATUS.md and docs/TESTING.md for actual evidence.
 Updated: 20 October 2026.
 Technology research and source links: [IMPLEMENTATION_RESEARCH.md](./IMPLEMENTATION_RESEARCH.md).
 

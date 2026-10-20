@@ -12,12 +12,12 @@ Last reviewed: 20 October 2026. All unchecked items are future work, not impleme
 
 ## Next: phase 2 — application foundation
 
-- [ ] TT-201: Create the TypeScript/Vite application, actual scripts, runtime version record, lockfile and clean-clone setup instructions.
-- [ ] TT-202: Verify and pin compatible Phaser/Anime.js releases; test particles, filters, UI timelines, cleanup, resize and `/TurboType/` asset loading; record architecture decisions.
-- [ ] TT-203: Build the responsive shell, screen navigation and minimal boot/error recovery flow for phones, tablets and laptops.
-- [ ] TT-204: Prototype real mobile input: software keyboard, correction/composition, focus, safe areas, portrait/landscape and changing visible viewport without accidental pausing.
-- [ ] TT-205: Define stable player/race/content IDs, versioned contracts and pure core/local-storage/sync/network boundaries.
-- [ ] TT-206: Add relevant automated checks, formatting/type checking and a CI workflow using actual working scripts; document supported tools and troubleshooting.
+- [x] TT-201: Create the TypeScript/Vite application, actual scripts, runtime version record, lockfile and clean-clone setup instructions. Evidence: docs/SETUP.md and docs/TESTING.md, clean npm ci and production build on feat/app-foundation.
+- [x] TT-202: Verify and pin compatible Phaser/Anime.js releases; test particles, filters, UI timelines, cleanup, resize and `/TurboType/` asset loading; record architecture decisions. Evidence: running scene and 18 browser tests, visual SVG fix, ADR 0001/0002.
+- [x] TT-203: Build the responsive shell, screen navigation and minimal boot/error recovery flow for phones, tablets and laptops. Evidence: hub/keyboard/settings routes, image retry and storage-failure checks, responsive captures; actual device coverage remains TT-204/TT-1001.
+- [x] TT-204: Foundation input spike and available-device verification completed with recorded exceptions on 20 October 2026. Samsung S25 Ultra/ASUS reports confirm editing, phone rotation/keyboard reopening, Clear text/highlighting, settings persistence and browser-tab return. Word completion remains possible: follow-up TT-305. User has no iPhone/tablet; physical coverage and missing browser/OS metadata explicitly transferred to release-gate TT-1008, not marked passed. Composition/race input belongs to TT-305. Evidence: docs/TESTING.md and user reports recorded in this branch's history.
+- [x] TT-205: Define stable player/race/content IDs, versioned contracts and pure core/local-storage/sync/network boundaries. Evidence: src/core/contracts.ts, src/core/ids.ts, architecture docs and ID tests. Cloud/race adapters are not implemented.
+- [x] TT-206: Add relevant automated checks, formatting/type checking and a CI workflow using actual working scripts; document supported tools and troubleshooting. Evidence: local npm run check (20 unit + 18 browser tests) and hosted Linux run 39404088628 passed for implementation commit 5534591; see docs/TESTING.md.
 
 ## Phase 3 — typing engine
 
@@ -25,6 +25,7 @@ Last reviewed: 20 October 2026. All unchecked items are future work, not impleme
 - [ ] TT-302: Implement WPM, accuracy, progress, novel-position streaks and recent pace, including zero-time and threshold boundaries.
 - [ ] TT-303: Implement ready/countdown/racing/pause/finish states, monotonic timing, eligibility, restart and opt-in timed-event expiry.
 - [ ] TT-304: Verify behavioral edge cases, no deletion/retyping reward exploits, shared places, finish timestamps and animation-independent outcomes; write implemented rules documentation.
+- [ ] TT-305: Address Samsung word-completion finding in the race input adapter: request assistance off, handle identifiable replacements/paste and ambiguous multi-character input, preserve legitimate composition, validate resulting values and prevent inflated/unfair metrics under explicit eligibility rules. Do not claim all OS assistance can be detected or disabled. Retest the implemented adapter on the available phone; document actual behavior. Required before Phase 3 input integration is accepted.
 
 ## Phase 4 — complete playable race
 
@@ -86,6 +87,7 @@ TT-906/907 may start earlier once contracts stabilize; cloud progress remains a 
 - [ ] TT-1005: Verify account/cloud sync, outages and data policies; make game-data export/deletion and local-save limitations clear.
 - [ ] TT-1006: Reproduce clean-clone setup, complete docs/assets registry/release notes, tag a tested release and document deployment rollback plus save compatibility.
 - [ ] TT-1007: Verify the actual public game link with a complete race, replay, level unlock and saved progress before calling the launch complete.
+- [ ] TT-1008: Deferred from TT-204 on 20 October 2026 because the user has no iPhone/tablet: obtain representative physical iPhone/Safari and tablet/iPad keyboard/viewport/orientation coverage before claiming broad mobile release support. Record browser/OS/model/keyboard versions for available ASUS/Samsung tests, fill missing composition/safe-area cases, and publish actual coverage/remaining limits. Device access is an external dependency; emulation alone cannot close this task. Coordinate with TT-1001 rather than duplicating its tests.
 
 ## Phase 11 — friends multiplayer, immediately after solo launch
 
