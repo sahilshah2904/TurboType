@@ -1,6 +1,6 @@
 # Phase 5 visual, sound and device check
 
-Pending user acceptance. Run the current `feat/race-polish` preview; footer should show 0.1.0-alpha.4. Earlier Phase 4 acceptance did not test these new assets/effects/audio. No iPhone/tablet is required from the user for this round; their coverage remains a release task.
+**Initial visual result rejected on 21 October 2026.** This checklist covers the existing implementation; revise it after [required race redesign](RACE_REDESIGN.md) TT-507–513, then repeat acceptance. It cannot close Phase 5 in its current form. Run the current `feat/race-polish` preview; footer should show 0.1.0-alpha.4. Earlier Phase 4 acceptance did not test these new assets/effects/audio. No iPhone/tablet is required from the user for this round; their coverage remains a release task.
 
 1. On ASUS and Samsung, start Race and compare the modern sports car silhouettes and Neon Harbor skyline with the old prototype. Metrics must stay above the track, followed by the sentence and typing field. With the phone keyboard open, check that the active character stays readable; Larger typing text should restore wrapped text.
 2. Type steadily with Full motion/High effects. Look for the relative camera, layered city, wheels/exhaust, clean-streak nitro and lane-edge CPU indicators. Make a mistake and correct it. Pause: racing motion/timing should stop together. Finish: inspect the short finish card/confetti, then frozen results. Retry should not leave old particles or repeated finish effects.

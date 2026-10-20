@@ -1,6 +1,6 @@
 # TurboType art and motion bible — Neon Harbor
 
-Phase 5 direction, 20 October 2026. Original modern motorsport illustration, independent of TypeDriveGame/GTA artwork, logos and music. The supplied reel informs pacing and layers, not reusable assets. This document defines the implemented first track; campaign districts and the cinematic opening remain later phases.
+Initial Phase 5 direction, 20 October 2026. **Superseded in vehicle quality, composition and typing presentation by the 21 October [race redesign plan](RACE_REDESIGN.md), following user rejection.** The content below describes the existing implementation, not accepted final art. Original modern motorsport illustration, independent of TypeDriveGame/GTA artwork, logos and music. The supplied reel informs pacing and layers, not reusable assets. This document defines the implemented first track; campaign districts and the cinematic opening remain later phases.
 
 ## World and palette
 

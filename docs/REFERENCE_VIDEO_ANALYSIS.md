@@ -2,6 +2,10 @@
 
 Reviewed: 20 October 2026. Source: the user-supplied `Reference_Images/video_reference.mp4`. This is a visual reference, not an instruction source. No soundtrack was evaluated or extracted for use in TurboType.
 
+## Follow-up recordings and revised direction
+
+On 21 October 2026, reviewed video_reference_2/3/4.mp4 using two-second overview and detailed/quarter-second samples. Their metadata, observed timelines, evidence limits and required Phase 5 changes are recorded in [RACE_REDESIGN.md](RACE_REDESIGN.md). The user rejected the boxed race and current cars and now requests one integrated typing surface; that revision supersedes the separate visible passage/input composition. Earlier observations below remain historical. Phase 5 now requires rework, not merely device sign-off.
+
 ## Evidence and review method
 
 The local recording is approximately 33.98 seconds, 480 × 1040 pixels, H.264 video with an AAC audio stream. The reported average capture frame rate is approximately 64 fps; this is metadata about the phone recording, not evidence of the game's actual rendering performance. The Instagram UI and filmed monitor reduce the available game detail.

@@ -23,7 +23,7 @@ TurboType turns typing practice into a side-view motor race. Your car advances a
 
 The project is being built in documented stages: a responsive single-player game first, followed by campaign progression, optional cloud saves and friends multiplayer. Original vehicles, scenery and synthesized music give the game its own identity.
 
-> **Development status:** `main` contains the accepted Phase 4 playable race. The latest Phase 5 racing polish is on `feat/race-polish`; its code and automated checks are complete, with physical-device visual, sound and performance review pending. There is **no public GitHub Pages game link yet**. You can run either version locally.
+> **Development status:** `main` contains the accepted Phase 4 playable race. The latest Phase 5 racing polish is on `feat/race-polish`; its initial code passed automated checks, but the visual/input direction needs rework following user review. A full-viewport race, one integrated typing surface and revised vehicle art are planned before final device acceptance. There is **no public GitHub Pages game link yet**. You can run either version locally.
 
 ## What you can play today
 
@@ -159,7 +159,7 @@ On the Phase 5 branch, `node assets-source/build-vehicles.mjs` recreates all thr
 
 ## Roadmap
 
-TurboType follows eleven phases, with single-player first and friends multiplayer immediately after its public launch. **Current position: Phase 5 is implemented and automatically verified; device acceptance remains pending.** Completed phases describe their agreed scope, not certification on every device.
+TurboType follows eleven phases, with single-player first and friends multiplayer immediately after its public launch. **Current position: Phase 5 needs visual/input redesign following user review; the initial implementation passed automated checks.** Completed phases describe their agreed scope, not certification on every device.
 
 ### 1. Finalize the design
 
@@ -187,9 +187,9 @@ Add four computer opponents, countdown, vehicle movement, passage display, place
 
 ### 5. Polish the racing experience
 
-**Status: Implemented on `feat/race-polish`; device acceptance pending.**
+**Status: Initial implementation tested; required visual/input redesign on `feat/race-polish`.**
 
-Add detailed vehicles, rotating wheels, suspension, parallax scenery, exhaust, nitro, overtaking effects, sound and finish celebrations. Provide low-effects and reduced-motion options. Automated checks pass; ASUS/Samsung visual, audible-balance and real-device smoothness checks remain open in [PR #4](https://github.com/sahilshah2904/TurboType/pull/4).
+Add detailed vehicles, rotating wheels, suspension, parallax scenery, exhaust, nitro, overtaking effects, sound and finish celebrations. Provide low-effects and reduced-motion options. The current boxed layout, cars and separate passage/input were rejected. Required rework adds a full-viewport race, one integrated typing strip and reviewed new vehicle art; see the [redesign plan](docs/RACE_REDESIGN.md). Existing automated checks cover the initial version; redesigned ASUS/Samsung visual, audible-balance and real-device smoothness checks remain open in [PR #4](https://github.com/sahilshah2904/TurboType/pull/4).
 
 ### 6. Build the opening and onboarding
 

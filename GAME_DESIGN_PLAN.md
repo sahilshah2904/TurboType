@@ -1,12 +1,14 @@
 # TurboType — game design and engineering delivery plan
 
-Status: design baseline established; Phase 2 foundation complete with recorded exceptions and Phase 3 typing practice complete for agreed scope, with ASUS/Samsung checks accepted by user report. Phase 4 four-CPU Quick Race is accepted; Phase 5 art/effects/audio are implemented with physical sound/performance acceptance pending; docs/QUICK_RACE.md defines actual CPU/result semantics. Read PROJECT_STATUS.md and docs/TESTING.md for actual evidence; docs/GAME_RULES.md describes implemented rules version 3 and takes precedence for current typing behavior.
-Updated: 20 October 2026.
+Status: design baseline established; Phase 2 foundation complete with recorded exceptions and Phase 3 typing practice complete for agreed scope, with ASUS/Samsung checks accepted by user report. Phase 4 four-CPU Quick Race is accepted; Phase 5 has an automatically tested initial implementation, but its visual/input direction was rejected on 21 October and requires the redesign in docs/RACE_REDESIGN.md; docs/QUICK_RACE.md defines actual CPU/result semantics. Read PROJECT_STATUS.md and docs/TESTING.md for actual evidence; docs/GAME_RULES.md describes implemented rules version 3 and takes precedence for current typing behavior.
+Updated: 21 October 2026.
 Technology research and source links: [IMPLEMENTATION_RESEARCH.md](./IMPLEMENTATION_RESEARCH.md).
 
 Phase 1 design coverage has been audited. [PROJECT_STATUS.md](./PROJECT_STATUS.md) tracks the eleven user-facing phases. [Rules and storage baseline](./docs/RULES_AND_STORAGE_BASELINE.md) supplies exact initial rewards, timing/cooldown defaults, save boundaries, backup/recovery policy, and database scope; its clarifications supersede earlier broad suggestions here. Baseline design completion is not implementation or playtest completion.
 
 Latest scope revision: [responsive and online architecture](./docs/RESPONSIVE_AND_ONLINE_ARCHITECTURE.md) supersedes the earlier desktop-first/local-only public release assumption. Design data/auth/network contracts from phase 2, add optional account-backed cloud progress before public single-player launch, and follow with friends multiplayer in phase 11. Phones, tablets and laptops are first-release targets.
+
+Latest visual revision: [Phase 5 race redesign](docs/RACE_REDESIGN.md) supersedes the earlier boxed race and separate visible passage/input composition. Target a full-viewport racing scene, compact upper HUD, one integrated native-input-backed typing strip and a reviewed new vehicle-art direction. This is required Phase 5 work before Phase 6 onboarding; core typing/CPU rules remain intact.
 
 ## 1. Product brief and scope
 
