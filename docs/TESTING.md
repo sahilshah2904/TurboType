@@ -43,7 +43,9 @@ On 20 October 2026 the user opened the LAN preview on a physical phone, reported
 
 The initial ERR_SSL_PROTOCOL_ERROR was resolved by opening the HTTP LAN URL rather than HTTPS; a local server request returned HTTP 200 and the server was listening on all interfaces. This was local preview access, not a public Pages deployment.
 
-The screenshot remains a user-supplied local attachment; it has not been added to the public repository. Remaining confirmations for this phone: Backspace/correction, unexpected autocorrection/capitalization, rotate without losing text, keyboard dismiss/reopen, Clear text/navigation, and preferences after refresh. Separate iPhone/Safari and tablet coverage remains unverified.
+The screenshot remains a user-supplied local attachment; it has not been added to the public repository. In a follow-up, the user explicitly confirmed these three physical-phone checks passed: deleting characters with Backspace and retyping, rotating without losing entered text, and dismissing/reopening the software keyboard. These are user-reported results, not automated observations.
+
+Remaining confirmations for this phone: device/model/OS/browser details, unexpected autocorrection/capitalization/composition, Clear text/navigation, and preferences after refresh. Separate iPhone/Safari and tablet coverage remains unverified. Do not extend the user's confirmation of the three listed checks to these other behaviors.
 
 - **TT-204 remains open with partial physical-phone evidence:** finish the checks above and cover the other required device/browser types, including composition, safe areas, keyboard-open viewport and rotation. Emulation and synthetic composition events cannot verify all those behaviors.
 - Firefox, Safari/WebKit and actual hardware GPU coverage are not established. Chromium tests use software rendering flags to make WebGL available in headless mode; they do not establish 60 fps on players' devices.
