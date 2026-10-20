@@ -46,6 +46,8 @@ Phases 2–10 may overlap where dependencies require it: for example, save setti
 
 - Implemented Phase 3 pure typing/timing/metrics, validated shared standings, strict DOM input adapter and practice sprint with countdown, correction, pause/navigation preservation, timed expiry and frozen results. Rules version is 2; app is 0.1.0-alpha.2. No rewards/results are persisted. Local formatting/types/build, 48 unit and 39 browser checks pass. Native Samsung word-completion/composition behavior remains TT-305.
 
+- Pushed typing implementation commit `0e19dcf` (`Build the typing engine and practice sprint`) and opened [PR #2](https://github.com/sahilshah2904/TurboType/pull/2) against `feat/app-foundation`. Hosted Linux checks passed in [run 39418022536](https://github.com/sahilshah2904/TurboType/actions/runs/39418022536). It is intentionally stacked on foundation PR #1; neither is merged or deployed.
+
 ## Remaining design and production work
 
 Implementation must determine tested package versions/API compatibility and detailed module interfaces. Author and review all 300 levels in phase 8. Produce original art/music and verify asset provenance. Playtest bot speeds, pacing, progression, reward balance and animation intensity. Measure performance on named hardware/browsers rather than assuming targets are met. Validate/select the cloud persistence provider before integration, implement optional accounts/sync by phase 9 and test before single-player launch. Select/deploy the live race service in phase 11. No cloud project or database exists now.

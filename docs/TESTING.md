@@ -2,7 +2,7 @@
 
 ## Phase 3 — typing practice, 20 October 2026
 
-Branch: `feat/typing-engine`, based on `feat/app-foundation`. App 0.1.0-alpha.2, rules version 2. Current Windows local `npm run check` completed with exit code 0: formatting, strict types, 48 unit tests, production build and 39 Chromium browser checks (13 behaviors across desktop, phone and tablet profiles). Hosted CI for this branch is not yet recorded here.
+Branch: `feat/typing-engine`, based on `feat/app-foundation`. App 0.1.0-alpha.2, rules version 2. Current Windows local `npm run check` completed with exit code 0: formatting, strict types, 48 unit tests, production build and 39 Chromium browser checks (13 behaviors across desktop, phone and tablet profiles). Hosted Linux [run 39418022536](https://github.com/sahilshah2904/TurboType/actions/runs/39418022536) also passed for implementation commit `0e19dcf`, including clean npm ci, browser installation and the full check command.
 
 New unit coverage exercises exact correction/error history, zero/backwards/late clocks, pause/resume/countdown cancellation, finish freeze, timed expiry boundaries, practice eligibility, retyping/nitro thresholds, invalid configuration and shared competition places. New browser coverage exercises strict input, fallback replacement validation, multi-character composition with trailing input, pause/navigation preservation, focus loss, timeout, unsupported selection edits and canceled composition.
 

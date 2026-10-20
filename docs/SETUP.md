@@ -59,7 +59,7 @@ Open the printed Network URL ending in `/TurboType/` on the device. Loopback (`1
 | `npm run format` | Apply formatting to source, tests and configuration |
 | `npm run format:check` | Verify formatting without modifying files |
 | `npm run typecheck` | Strict TypeScript checks |
-| `npm test` | Unit tests for IDs, routing and safe settings persistence |
+| `npm test` | Unit tests for typing/timing/standings, IDs, routing and safe settings persistence |
 | `npm run build` | Typecheck and generate the production artifact |
 | `npm run test:browser` | Test the previously built artifact in three Chromium layout profiles |
 | `npm run check` | Full formatting/type/unit/build/browser sequence |
