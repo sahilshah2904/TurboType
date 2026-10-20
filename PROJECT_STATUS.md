@@ -2,6 +2,8 @@
 
 Last reviewed: 20 October 2026. This file is the persistent status source for future progress questions. Update it with each meaningful implementation change and verify claims against the actual repository, checks, and deployment. Do not rely on chat memory alone.
 
+[BACKLOG.md](BACKLOG.md) is the persistent future-work checklist with stable task IDs, phase grouping, dependencies and optional ideas. Read it before starting a phase and update it when deferring or completing work.
+
 ## Current position
 
 **Phase 1: design baseline complete. Phase 2: application development not started.** GitHub setup is complete. The application, tests, campaign content, database/save implementation, artwork, music, CI, and live deployment do not yet exist.
