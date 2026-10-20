@@ -47,7 +47,6 @@ export function quickRaceScreen(): string {
       <div><label for="race-seed">Race seed</label><input id="race-seed" type="number" min="0" max="4294967295" step="1" inputmode="numeric" required aria-describedby="setup-help" /></div>
     </div>
     <p id="setup-help" class="help race-setup">Targets are before reaction, hesitation and correction delays. This is Quick Race, not campaign levels. The same passage, pace and seed replay the same CPU schedules. Pauses or assisted input make a run practice-only. No rewards or results are saved yet.</p>
-    <div class="race-visual"><div id="race-track" role="img" aria-label="Five-lane race track; exact positions are listed below"></div><div class="track-bottom"><span id="race-track-status" role="status">Loading race track…</span><button id="retry-race-track" class="text-button" hidden>Retry artwork</button><button id="text-race" class="text-button" hidden>Race with text standings</button></div></div>
     <div class="run-banner"><div><p id="race-state" class="eyebrow" role="status">Ready</p><p id="race-instruction">Wait for the track, then start the countdown.</p></div><span id="race-countdown" class="countdown" aria-hidden="true">—</span></div>
     <div class="race-hud metrics-grid">${[
       ["place", "POSITION"],
@@ -60,6 +59,7 @@ export function quickRaceScreen(): string {
           `<div><span class="micro">${label}</span><strong id="race-${id}">—</strong></div>`,
       )
       .join("")}</div>
+    <div class="race-visual"><div id="race-track" role="img" aria-label="Five-lane race track; exact positions are listed below"></div><div class="track-bottom"><span id="race-track-status" role="status">Loading race track…</span><button id="retry-race-track" class="text-button" hidden>Retry artwork</button><button id="text-race" class="text-button" hidden>Race with text standings</button></div></div>
     <label id="race-passage-label" class="micro">MATCH CASE, SPACES AND PUNCTUATION</label><p id="race-passage" class="race-passage" aria-labelledby="race-passage-label"></p>
     <label for="race-input">Your typing</label><textarea id="race-input" rows="2" readonly autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" aria-describedby="race-notice race-controls-help" placeholder="Start the race, then type after GO…"></textarea>
     <p id="race-notice" class="help" role="status">One mistake stops progress. Backspace corrects it.</p>

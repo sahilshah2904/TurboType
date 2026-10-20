@@ -1059,11 +1059,14 @@ textarea[aria-invalid="true"] {
   overflow: hidden;
 }
 #race-track {
+  position: relative;
   aspect-ratio: 1000 / 460;
   width: 100%;
   background: #142731;
 }
 #race-track canvas {
+  position: absolute;
+  inset: 0;
   display: block;
 }
 .race-setup input {

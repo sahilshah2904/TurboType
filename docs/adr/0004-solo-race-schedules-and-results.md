@@ -1,6 +1,6 @@
 # 0004 — One active clock and seeded CPU schedules
 
-Date: 20 October 2026. Status: implemented; available-device race acceptance remains TT-404.
+Date: 20 October 2026. Status: implemented; available-device race checks accepted by ASUS/Samsung user report (TT-404).
 
 ## Context
 

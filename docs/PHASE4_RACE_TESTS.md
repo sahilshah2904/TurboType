@@ -1,6 +1,6 @@
 # Phase 4 available-device race check
 
-Pending user verification (TT-404). Use the ASUS laptop and Samsung S25 Ultra; unavailable iPhone/tablet tests remain release work. Do not repeat every Phase 3 typing test: this round checks the new race integration and actual keyboard space.
+Accepted by user report on 20 October 2026 (TT-404): all five requested race checks worked on ASUS/Samsung, with a supplied laptop paused-race screenshot. Exact environment versions remain unspecified. Keep this checklist for future regression checks. Use the ASUS laptop and Samsung S25 Ultra; unavailable iPhone/tablet tests remain release work. Do not repeat every Phase 3 typing test: this round checks the new race integration and actual keyboard space.
 
 1. Open `/TurboType/#/race` in the current preview (footer 0.1.0-alpha.3). On Samsung use the printed **http** Network URL and the same Wi-Fi. Wait for the track to load. Start with easy, First keystroke, untimed, seed 42.
 2. Start the race. Before GO, typing should not count. After GO, correct typing should move your car and update the live list. Enter one wrong letter: your progress should stop until Backspace correction while the CPUs continue. There should be four explicitly labeled CPU opponents.

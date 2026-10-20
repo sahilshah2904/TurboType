@@ -2,7 +2,7 @@
 
 An immersive typing racer: race computer opponents, improve accuracy and speed, and advance through Easy, Medium, and Hard campaigns with 100 levels each.
 
-**Status:** Phase 4 Quick Race implemented on `feat/solo-race`: four seeded CPUs, live track/standings, finish/results and retry. Phase 2/3 are merged into main. Local formatting/types/build, 69 unit tests and 54 browser tests pass. Phase 4 available-device acceptance remains TT-404. Broader physical iPhone/tablet coverage remains a release gate. Campaigns, modern art/audio, persistent rewards and public deployment are future work. See TESTING.md through the documentation links below. Source repository: [sahilshah2904/TurboType](https://github.com/sahilshah2904/TurboType).
+**Status:** Phase 4 Quick Race implemented on `feat/solo-race`: four seeded CPUs, live track/standings, finish/results and retry. Phase 2/3 are merged into main. Local formatting/types/build, 69 unit tests and 54 browser tests pass. Phase 4 available-device checks passed by ASUS/Samsung user report (TT-404). Broader physical iPhone/tablet coverage remains a release gate. Campaigns, modern art/audio, persistent rewards and public deployment are future work. See TESTING.md through the documentation links below. Source repository: [sahilshah2904/TurboType](https://github.com/sahilshah2904/TurboType).
 
 ## Run the preview
 
