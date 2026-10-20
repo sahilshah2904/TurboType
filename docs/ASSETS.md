@@ -1,6 +1,6 @@
 # Asset register — current preview
 
-Only the following assets are shipped in this phase. The reel, screenshots, extracted frames, local video-analysis helper binaries and generated QA images remain under ignored local directories and are not bundled.
+Only the following assets are shipped in this phase. The reel, screenshots, extracted frames, local video-analysis helper binaries and working QA captures remain under ignored local directories and are not bundled. Selected screenshots in docs/images are versioned documentation, excluded from the built game.
 
 | Asset | Origin and editable source | Usage / license |
 | --- | --- | --- |

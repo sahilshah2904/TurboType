@@ -37,7 +37,7 @@ Completion evidence for TT-301–304: `src/core/typing-engine.ts`, `standings.ts
 - [x] TT-402: Connect passage/input, vehicles, progress/ranks, countdown and finish to the pure core.
 - [x] TT-403: Implement honest results, eligibility, CPU result handling, pause/restart/retry and error paths; verify a complete race/retry flow.
 
-Evidence for TT-401–403: `src/core/cpu-schedule.ts`, `solo-race.ts`, `src/ui/quick-race.ts`, `src/game/race-track.ts`, documented rules/recreation and ADR 0004; local `npm run check` passes with 69 unit tests and 54 Chromium profile checks on `feat/solo-race`. User acceptance of the new race is separately TT-404.
+Evidence for TT-401–403: `src/core/cpu-schedule.ts`, `solo-race.ts`, `src/ui/quick-race.ts`, `src/game/race-track.ts`, documented rules/recreation and ADR 0004; local `npm run check` passes with 69 unit tests and 54 Chromium profile checks on `feat/solo-race`. Implementation commit `e4e664d`, PR #3. User acceptance of the new race is separately TT-404.
 
 - [ ] TT-404: Verify the implemented Quick Race on the available ASUS laptop/Samsung S25 Ultra: start/actual vehicle progress, correction while CPUs continue, all-lane pause/navigation preservation, keyboard space/rotation, frozen results/simulation labels and retry. Follow docs/PHASE4_RACE_TESTS.md. Required for Phase 4 user acceptance; physical iOS/tablet and broader performance remain TT-1008/Phase 10.
 

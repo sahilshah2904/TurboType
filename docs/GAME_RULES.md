@@ -30,7 +30,7 @@ Example: expected `cat`; enter `c`, `x`, Backspace, `a`, `t`. The result has 4 c
 - Clean streak grows only at newly reached furthest passage positions. Repeated deletion/retyping cannot farm streaks. Errors reset it; longest streak remains recorded for that run.
 - Every twentieth clean-character milestone can trigger a visual nitro event for 800 ms, at least two active seconds after the previous burst started. Milestones during cooldown do not queue. Nitro never adds progress or changes finish eligibility. The Phase 3 UI shows a status accent; the race effects arrive later.
 
-The core also implements validated standing ordering for later CPU integration: finish time first, then unfinished progress; exact ties share competition places (1,1,3). IDs only break display-order ties using deterministic lexical ordering. The practice UI does not invent a placement without opponents.
+The core also implements validated standing ordering used by Quick Race: finish time first, then unfinished progress; exact ties share competition places (1,1,3). IDs only break display-order ties using deterministic lexical ordering. The practice UI does not invent a placement without opponents.
 
 ## Keyboard assistance and composition
 
@@ -44,7 +44,7 @@ The input requests autocorrection/capitalization/spellcheck/autocomplete off, bu
 
 The engine reports reasons such as paused, blocked assistance and composed input. “Eligible” means only that this local finished run had no recorded disqualifying condition; it is not server verification. No practice-screen metrics are published or awarded as records.
 
-This policy is rules version 2, clarifying assistance/composition and timed states before any progress data ships. Save schema version remains 1 because only foundation display preferences are persisted. A later provider must snapshot rules/content/input-profile conditions with every stored result.
+This policy originated in rules version 2 and remains unchanged in version 3, clarifying assistance/composition and timed states before any progress data ships. Save schema version remains 1 because only foundation display preferences are persisted. A later provider must snapshot rules/content/input-profile conditions with every stored result.
 
 ## Quick Race and CPU results (version 3)
 
