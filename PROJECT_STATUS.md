@@ -42,6 +42,7 @@ Phases 2–10 may overlap where dependencies require it: for example, save setti
 - Audited rule/storage gaps and selected explicit implementation defaults; see the baseline document.
 - Implemented the Phase 2 foundation with a clean lockfile install, passing formatting/types/build, 20 unit tests and 18 Chromium profile tests; visually caught/fixed SVG texture sizing. Setup, architecture, ADRs, assets and test evidence are documented. Physical device coverage is not claimed.
 - Pushed implementation commit 5534591 (`Build the responsive app foundation`) and opened pull request #1; hosted Linux checks passed in run 39404088628. The branch is not merged and Pages is not deployed. One Phase 2 gate remains: physical Android/iOS/tablet keyboard verification (TT-204).
+- Received partial physical-phone evidence: the user's portrait screenshot confirms the LAN page loads, the software keyboard opens and the complete sample text is visible in a focused input. Record the remaining editing/rotation/preferences checks and device/browser details before closing TT-204; iPhone/tablet coverage is still unverified.
 
 ## Remaining design and production work
 

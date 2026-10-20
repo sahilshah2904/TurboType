@@ -37,7 +37,15 @@ A checks-only GitHub Actions workflow is committed, pinned to verified action co
 
 ## Open gates and honest limitations
 
-- **TT-204 remains open:** physically test Android/iOS keyboards and tablet input, including autocorrection settings, composition, focus, safe areas, keyboard-open viewport and rotation. Emulation and synthetic composition events cannot verify those behaviors.
+### User-supplied physical-phone evidence
+
+On 20 October 2026 the user opened the LAN preview on a physical phone, reported that it works, and supplied a portrait screenshot. It shows the keyboard-check page, an open software keyboard, a focused textarea with the full matching sample sentence, and readable sample/input text above the keyboard. This confirms real-phone page loading, focus/keyboard opening and visible entered text for that captured state. It does not establish how the text was entered, the input-event sequence, or continued behavior outside that screenshot. Device model, OS version and browser/version have not been provided.
+
+The initial ERR_SSL_PROTOCOL_ERROR was resolved by opening the HTTP LAN URL rather than HTTPS; a local server request returned HTTP 200 and the server was listening on all interfaces. This was local preview access, not a public Pages deployment.
+
+The screenshot remains a user-supplied local attachment; it has not been added to the public repository. Remaining confirmations for this phone: Backspace/correction, unexpected autocorrection/capitalization, rotate without losing text, keyboard dismiss/reopen, Clear text/navigation, and preferences after refresh. Separate iPhone/Safari and tablet coverage remains unverified.
+
+- **TT-204 remains open with partial physical-phone evidence:** finish the checks above and cover the other required device/browser types, including composition, safe areas, keyboard-open viewport and rotation. Emulation and synthetic composition events cannot verify all those behaviors.
 - Firefox, Safari/WebKit and actual hardware GPU coverage are not established. Chromium tests use software rendering flags to make WebGL available in headless mode; they do not establish 60 fps on players' devices.
 - The keyboard check intentionally accepts paste/editing. It is not the Phase 3 typing/race engine, with scoring/correction-required input.
 - No gameplay, campaign saves, cloud synchronization, accounts, music or multiplayer is implemented. Stable contracts are integration boundaries only.
