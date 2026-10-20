@@ -1,6 +1,6 @@
 # Immersive kart race — review prototype
 
-Created 21 October 2026 for TT-507 (Phase 5 visual direction). **Review artifact, not the replacement production race.** The normal Race route and its previous Phaser art remain unchanged. The user has not accepted this concept yet.
+Created 21 October 2026 for TT-507 (Phase 5 visual direction). **Review artifact, not the replacement production race.** The normal Race route and its previous Phaser art remain unchanged. The user approved this car/full-window design on 21 October 2026. This accepts TT-507 direction; production integration and physical-device acceptance remain pending.
 
 ## Open and review
 
@@ -18,7 +18,7 @@ Desktop and phone captures are [desktop-preview.png](desktop-preview.png) and [p
 - Reuses src/core/solo-race.ts and src/ui/race-input.ts: one player, four seeded easy CPUs, shared countdown/clock, correction, metrics, pause and final outcomes. Seed 42, one original 145-character review passage; no records/rewards/progress saved.
 - HTML/CSS scenery and DOM vehicle placement are a lightweight direction study, not the final Phaser renderer. Horizontal gaps use a monotonic compressed projection; labels show exact CPU percent and the standings dialog shows authoritative rank/progress. It is not a physical-distance scale. No rubber-banding changes CPU schedules.
 - The new lime kart is one AI-generated raster concept. Other lanes reuse hue-shifted copies to test size/composition. They are **not** a completed distinct fleet. Wheels are baked into this concept; separate rotating wheel/body exports are future production work.
-- CSS skyline/track and simple exhaust demonstrate placement. Final camera, detailed scenery, finish line staging, low/reduced effects settings, polished audio and production integration remain TT-508–513. The prototype does not declare those complete.
+- CSS skyline/track demonstrate placement. Exhaust now uses per-car progress to show orange flickering flames only while advancing, with larger blue player nitro. Flames stop on stall/error/pause/finish and are hidden for system reduced motion; five fixed effect nodes avoid accumulating particles. Final camera, detailed scenery, finish line staging, low/reduced effects settings, polished audio and production integration remain TT-508–513. The prototype does not declare those complete.
 - Uses installed font packages through Vite. Source imports, CSS font paths and review files require the development server. This directory is outside public/ and is not shipped by the current production entry/build.
 - Keyboard layout capture is simulated, browser events are scripted, and observed WPM is synthetic. No physical keyboard, audio mix, fullscreen-browser support or real-device frame-rate certification is claimed. Actual Samsung viewport/panning behavior remains to be tested.
 
@@ -41,4 +41,8 @@ Public game music remains the existing original synth score. Any future bundled 
 - Synthetic in-memory WAV selected through the real file input: blob playback succeeded after Start, pause stopped audio, Escape from the settings dialog returned to the paused menu, and there were zero non-GET requests. The synthetic test recording was not saved or committed. Actual Misirlou audio was not tested.
 - Prettier formatted HTML/CSS/JS. Production app code/dependencies/rules were not modified, so prior 83-unit/66-browser evidence remains historical for that app snapshot; it is not a full new prototype test-suite run.
 
-Next: review the car at actual size and both compositions, then implement the accepted direction in the production Phaser race, build a distinct fleet, refresh formal regression coverage and test on actual devices. TT-507 remains open until review; Phase 5 is not complete.
+Next: review the car at actual size and both compositions, then implement the accepted direction in the production Phaser race, build a distinct fleet, refresh formal regression coverage and test on actual devices. TT-507 direction review is complete by user approval; Phase 5 is not complete.
+
+## Exhaust follow-up verification
+
+Scripted Chromium checks passed for pre-GO suppression, movement-triggered animation, stalled/error shutoff, shared pause shutoff and reduced-motion suppression; desktop/phone captures refreshed. Five fixed flame nodes remain after play. No page errors or phone horizontal overflow were observed. Flames do not change progress, CPU pace or results. This verifies the prototype, not final Phaser effects or actual-device performance.

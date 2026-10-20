@@ -56,7 +56,7 @@ Initial implementation evidence for TT-501–504 (not final visual acceptance; T
 
 Required redesign added after review of recordings 2–4 and user rejection of current visuals/input, 21 October 2026. [Detailed evidence and proposal](docs/RACE_REDESIGN.md). These are future tasks, not shipped features.
 
-- [ ] TT-507: A playable full-window desktop/phone review artifact and one AI-generated kart concept now exist in docs/design/race-direction (prompt, screenshots and validation documented). User visual acceptance is pending; normal Race is unchanged. Review a concrete full-viewport desktop mockup, phone-with-keyboard mockup and one new car concept at actual race size before producing the replacement fleet/layout.
+- [x] TT-507: User approved the full-window kart design on 21 October ("yes this design is very good"). Playable desktop/phone review artifact, car concept, prompt/provenance and captures are in docs/design/race-direction. Requested moving exhaust is implemented/checked in the prototype. This is direction approval only: normal Race integration, distinct fleet and physical-device acceptance remain TT-508–513/505/506.
 - [ ] TT-508: Implement edge-to-edge active racing without outer card, fixed width cap, page gutters or large navigation/footer. Move setup/secondary controls to pre-race/pause screens, use a compact upper HUD, and support optional user-initiated fullscreen with harmless refusal.
 - [ ] TT-509: Replace separate passage/answer box with one visible integrated typing strip backed by a real accessible native input. Preserve correction, prediction/composition policy, focus, pause, timing, larger text and Samsung keyboard behavior; verify before expanding effects.
 - [ ] TT-510: Produce and review a distinctly improved original/appropriately licensed vehicle fleet with consistent proportions, depth/shading, glass, wheels/lights/shadows and editable source/export/anchor/provenance records. Prefer a prerendered 2.5D pipeline after concept review; no final assets/pipeline selected yet.
@@ -71,6 +71,8 @@ Required redesign added after review of recordings 2–4 and user rejection of c
 - [ ] TT-601: Build original cinematic loading panels, real asset status, optional skip/replay, returning-user shortcut and failed-load recovery.
 - [ ] TT-602: Build welcome/rules, interactive correction/streak tutorial, optional calibration and animated hub.
 - [ ] TT-603: Complete responsive setup/briefing/settings/results navigation with touch, keyboard and accessibility support; test first and returning visits. Present passage/pace/mode naturally for Quick Race, use level-defined campaign setup, and move seed into Advanced/Replay settings for the final player flow.
+
+- [ ] TT-604: Apply the accepted immersive visual language across existing hub, practice, keyboard check, settings and pre-race navigation: full-window background, no enclosing page card/unused gutters, readable responsive content and accessible focus/zoom/reduced-motion. Hub becomes a garage/city scene; practice keeps one visible typing surface; settings use a clear overlay/dedicated full-window view. These routes have not yet been revamped. Maps are TT-701–704, race/results TT-508–513, and final garage/progress views belong to Phase 9.
 
 ## Phase 7 — campaign maps
 

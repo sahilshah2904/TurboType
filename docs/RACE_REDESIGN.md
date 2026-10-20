@@ -1,6 +1,6 @@
 # Phase 5 race redesign — viewport, typing and vehicle direction
 
-Recorded: 21 October 2026. Status: required rework in progress after user rejection of the current visual result. A separate playable review prototype and one kart concept are available in [design/race-direction](design/race-direction/README.md); the production race has not been replaced or visually accepted. This revises the earlier Phase 5 composition, not the eleven-phase numbering. PR #4 remains open. Existing core rule/test evidence remains valid for its tested snapshot, but is not visual acceptance or verification of this proposed replacement.
+Recorded: 21 October 2026. Status: required rework in progress after user rejection of the current visual result. A separate playable review prototype and one kart concept are available in [design/race-direction](design/race-direction/README.md); the user accepted the prototype visual direction on 21 October, while the production replacement and physical-device acceptance remain outstanding. This revises the earlier Phase 5 composition, not the eleven-phase numbering. PR #4 remains open. Existing core rule/test evidence remains valid for its tested snapshot, but is not visual acceptance or verification of this proposed replacement.
 
 ## Why the current screen needs another pass
 
@@ -42,7 +42,7 @@ User steering: arcade-kart proportions inspired by Mario Kart, with original sil
 
 The existing three SVGs are a functional first pass and are not visually accepted. Create larger, clearly different original silhouettes: a low supercar, a winged track coupe and an aggressive performance hatch/coupe. Specify body proportion, glass, wheel alignment, layered shading, reflective highlights, headlights, rim/caliper detail, tire contact shadows and restrained suspension movement. Changing paint alone is insufficient.
 
-Recommend prerendered 2.5D vehicle sprites for the first redesign: original authored models or appropriately licensed original artwork, with separately aligned wheels, shadows, lights and exhaust. A model/render pipeline can provide consistent angles and lighting without adding a realtime 3D engine to this side-view game. Review one car at actual race size before creating the fleet. Record editable source, rights, export dimensions, wheel anchors and texture/memory budgets. Final asset pipeline and visual direction need a concrete mockup before production; no asset is selected or commissioned yet.
+Recommend prerendered 2.5D vehicle sprites for the first redesign: original authored models or appropriately licensed original artwork, with separately aligned wheels, shadows, lights and exhaust. A model/render pipeline can provide consistent angles and lighting without adding a realtime 3D engine to this side-view game. Review one car at actual race size before creating the fleet. Record editable source, rights, export dimensions, wheel anchors and texture/memory budgets. The first raster kart concept and composition have now been reviewed and approved (TT-507); the production asset pipeline, separate wheel exports and distinct fleet still need implementation.
 
 ### D. Improve race staging and motion
 
@@ -76,6 +76,22 @@ Existing Phase 5 work is retained where useful. No wholesale rewrite of the typi
 - Pure rules remain independent of rendering; shared pause, exact completion, CPU schedules and results survive integration checks.
 - Frame/typing responsiveness, source cleanup, texture budgets, sound balance and retries are verified with actual evidence. Existing 83/66 checks certify their old snapshot only; new checks/results must be recorded after redesign.
 - Final visuals are explicitly accepted before Phase 5 is closed and PR #4 merged. Passing automated tests alone cannot close a rejected design.
+
+## Other pages: coherent full-window direction
+
+These are planned changes, not revamped production pages. The standalone prototype does not change the existing hub, practice, keyboard check or settings.
+
+| Screen | Intended treatment | Phase/task |
+| --- | --- | --- |
+| Active race, pause and results | Edge-to-edge race, compact HUD, one typing strip; integrated pause/finish overlays | Phase 5, TT-508–513 |
+| Opening, welcome, rules and tutorial | Full-window cinematic identity and clear guided interactions | Phase 6, TT-601–604 |
+| Main hub | Animated garage/city environment with navigable activities and Continue | Phase 6, TT-602/604 |
+| Practice / keyboard check | Full-window setting, focused readable input area; practice reuses the integrated strip | Phase 6, TT-604 |
+| Settings / setup | Coherent game background with clearly grouped controls and accessible overlay/full-window navigation | Phase 6, TT-603/604 |
+| Campaign maps | Full-window horizontal landscapes with winding circular stages and no enclosing page card | Phase 7, TT-701–704 |
+| Garage / progress | Matching garage world, vehicle customization and readable learning/progress views | Phase 9 |
+
+Full-window does not mean filling every screen with text or removing useful form boundaries. Keep content readable, distinct control focus, zoom, reduced motion and compact phone layouts. Persistent world/background composition replaces the outer website-card structure. User approval of the race concept is the visual anchor, not proof these other pages are already implemented.
 
 ## Personal music steering
 

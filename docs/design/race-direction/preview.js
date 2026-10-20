@@ -15,6 +15,7 @@ let raf,
   disposed = false,
   ready = false,
   lastHudAt = -Infinity;
+const movement = new Map();
 const input = $("input"),
   music = $("music"),
   menu = $("menu"),
@@ -38,6 +39,8 @@ for (const [i, id] of ids.entries()) {
   label.className = "label";
   const flame = document.createElement("span");
   flame.className = "flame";
+  flame.style.animationDelay = `${-i * 37}ms`;
+  flame.setAttribute("aria-hidden", "true");
   const img = document.createElement("img");
   img.src = "./volt-kart-concept.png";
   img.alt = "";
@@ -64,6 +67,7 @@ function createRace() {
       return span;
     }),
   );
+  movement.clear();
   previousState = "";
   lastBurst = 0;
   ready = true;
@@ -128,6 +132,18 @@ function update() {
       (0.43 + Math.sign(gap) * 0.43 * (1 - Math.exp(-Math.abs(gap) * 7)));
     const car = $(`car-${id}`);
     car.style.left = `${Math.max(55, Math.min(width - 55, x))}px`;
+    const previous = movement.get(id);
+    const movedAt =
+      previous && row.progress > previous.progress
+        ? s.elapsedMs
+        : (previous?.movedAt ?? -Infinity);
+    movement.set(id, { progress: row.progress, movedAt });
+    car.dataset.moving = String(
+      s.state === "racing" &&
+        row.progress < 1 &&
+        s.elapsedMs - movedAt < 200 &&
+        (id !== "player" || s.errorCharacter === null),
+    );
     car.querySelector(".label").textContent =
       id === "player"
         ? `YOU · #${row.place}`
