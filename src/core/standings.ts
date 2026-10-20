@@ -5,9 +5,9 @@ export interface Standing {
 }
 
 /** Competition ranking (1,1,3); ids break display ties, never competitive places. */
-export function rankStandings(
-  entries: readonly Standing[],
-): (Standing & { place: number })[] {
+export function rankStandings<T extends Standing>(
+  entries: readonly T[],
+): (T & { place: number })[] {
   const ids = new Set<string>();
   for (const entry of entries) {
     if (

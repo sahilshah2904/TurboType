@@ -33,14 +33,18 @@ Completion evidence for TT-301–304: `src/core/typing-engine.ts`, `standings.ts
 
 ## Phase 4 — complete playable race
 
-- [ ] TT-401: Implement four seeded CPU schedules with fixed difficulty, reaction, hesitation and corrections; verify repeatability across frame rates.
-- [ ] TT-402: Connect passage/input, vehicles, progress/ranks, countdown and finish to the pure core.
-- [ ] TT-403: Implement honest results, eligibility, CPU result handling, pause/restart/retry and error paths; verify a complete race/retry flow.
+- [x] TT-401: Implement four seeded CPU schedules with fixed difficulty, reaction, hesitation and corrections; verify repeatability across frame rates.
+- [x] TT-402: Connect passage/input, vehicles, progress/ranks, countdown and finish to the pure core.
+- [x] TT-403: Implement honest results, eligibility, CPU result handling, pause/restart/retry and error paths; verify a complete race/retry flow.
+
+Evidence for TT-401–403: `src/core/cpu-schedule.ts`, `solo-race.ts`, `src/ui/quick-race.ts`, `src/game/race-track.ts`, documented rules/recreation and ADR 0004; local `npm run check` passes with 69 unit tests and 54 Chromium profile checks on `feat/solo-race`. User acceptance of the new race is separately TT-404.
+
+- [ ] TT-404: Verify the implemented Quick Race on the available ASUS laptop/Samsung S25 Ultra: start/actual vehicle progress, correction while CPUs continue, all-lane pause/navigation preservation, keyboard space/rotation, frozen results/simulation labels and retry. Follow docs/PHASE4_RACE_TESTS.md. Required for Phase 4 user acceptance; physical iOS/tablet and broader performance remain TT-1008/Phase 10.
 
 ## Phase 5 — racing polish
 
-- [ ] TT-501: Produce an original art bible and detailed vehicle parts/wheels/shadows/suspension/exhaust, keeping editable sources and provenance.
-- [ ] TT-502: Build the polished city track, layered parallax, relative camera framing, offscreen indicators and approaching finish gate.
+- [ ] TT-501: Produce an original art bible with modern sports cars (replace the temporary retro coupe) and detailed vehicle parts/wheels/shadows/suspension/exhaust, keeping editable sources and provenance.
+- [ ] TT-502: Build the polished city track, layered parallax, relative camera framing, offscreen indicators and approaching finish gate. Capture the user's visual direction: an immersive wider composition with useful side scenery/information and coordinated cinematic motion, replacing the current boxed foundation layout; responsive phones remain compact.
 - [ ] TT-503: Add bounded nitro, streaks, overtaking callouts, speed trails, finish celebration and reduced-motion/quality variants; keep passage readable.
 - [ ] TT-504: Create or license menu/race music, optional intensity stems, engine/UI effects and finish cues; record rights, sources, loop points and export settings.
 - [ ] TT-505: Implement remembered audio controls, gesture unlock, smooth transitions, pause/retry cleanup and graceful audio failure; profile effects on lower-powered devices.

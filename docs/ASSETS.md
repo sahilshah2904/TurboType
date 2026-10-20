@@ -1,12 +1,12 @@
-# Asset register — foundation preview
+# Asset register — current preview
 
 Only the following assets are shipped in this phase. The reel, screenshots, extracted frames, local video-analysis helper binaries and generated QA images remain under ignored local directories and are not bundled.
 
 | Asset | Origin and editable source | Usage / license |
 | --- | --- | --- |
 | TurboType mark | Original project-authored vector in public/assets/brand-mark.svg | Favicon and wordmark; not derived from the reference game's branding |
-| Starter coupe body | Original project-authored vector in public/assets/starter-coupe.svg | Phaser SVG raster at 680×220; scene owns wheel/shadow layers separately |
-| Road, skyline, wheels, shadow, particles | Original procedural drawings in src/game/track-preview.ts | No downloaded raster artwork |
+| Starter coupe body | Original project-authored vector in public/assets/starter-coupe.svg | Phaser SVG raster at 680×220; hub and five-lane race own wheel/shadow layers separately; temporary prototype body, replaced by modern cars in Phase 5 |
+| Road, skyline, wheels, shadow, particles | Original procedural drawings in src/game/track-preview.ts and src/game/race-track.ts | No downloaded raster artwork |
 | Barlow Condensed | Fontsource package 5.3.0; upstream font authors and OFL license included in package | Self-hosted Latin weights 600/700; retain accompanying OFL notice |
 | DM Sans | Fontsource package 5.3.0; upstream font authors and OFL license included in package | Self-hosted Latin weights 400/500/700; retain accompanying OFL notice |
 

@@ -1,5 +1,19 @@
 # Verification evidence
 
+## Phase 4 — four-CPU Quick Race, 20 October 2026
+
+Branch: `feat/solo-race`, from main baseline `08cddb4` after ordered merge of PRs #1 and #2. App 0.1.0-alpha.3 / rules 3. The final local `npm run check` completed with exit code 0: formatting, strict types, **69 unit tests**, production build and **54 Chromium browser tests** (18 behaviors in each desktop/phone/tablet profile). New coverage is 21 unit cases and five browser scenarios across all three profiles. Hosted CI for this branch is not recorded yet.
+
+Core tests verify frozen seeded schedules, independent lanes/seed boundaries, exact validated-character/finish thresholds, sparse versus frequent progress queries, CPU tiers/delays, one pause/countdown clock, continuation after all CPUs finish, observed/projected final ordering, future deadline DNFs, actual timed/abandoned outcomes, immutable setup and fresh retries. The existing generic standings helper retains its exact-tie tests and now preserves row metadata. An initial type check caught that its old return type discarded extra row metadata; a generic return type fixed that contract, with the complete check rerun successfully.
+
+New browser flows complete and retry an actual five-lane race, verify pre-GO input and correction while CPUs move, freeze results, preserve text/CPU positions across pause/navigation, handle synthetic WebGL context loss with explicit text continuation, continue after CPUs finish first, expire at 60 seconds with DNF, recover from aborted artwork, clean up/remount one canvas, reject invalid seeds, change seed, honor reduced motion and preserve text during narrow rotation. These synthetic events verify application handling; they are not a claim that real hardware GPU recovery was tested.
+
+Visually inspected ready/active desktop and active phone captures from the actual dev app. Initial active layout put typing too far below the course; active controls/headings were compacted and desktop track width capped. At 1440×1000, input starts near 799px; at 390×844 near 448px. Document width matches those viewports, and automated narrow checking covers 320px. Actual software-keyboard occlusion/rotation still needs TT-404. Prototype car/scenery are deliberately retained for Phase 5; current canvas labels are supplemented by readable DOM standings. No actual fps, input latency, WebKit/Safari, iPhone or physical tablet coverage is claimed.
+
+**Pending TT-404:** [available-device race checks](PHASE4_RACE_TESTS.md) on ASUS/Samsung. Earlier Phase 3 acceptance did not test this new scene. Broader hardware/browser/performance requirements remain TT-1008/Phase 10. No rewards/results are stored, no cloud or multiplayer exists and no Pages site was deployed. See [Quick Race recreation](QUICK_RACE.md) and [ADR 0004](adr/0004-solo-race-schedules-and-results.md).
+
+The existing Windows shell AutoRun diagnostic still appears in nested scripts; all recorded final commands exit 0. The separately lazy Phaser chunk remains about 1.37 MB minified / 357 kB gzip; the app chunk is about 83 kB / 29 kB gzip. This is build size evidence, not a hardware performance claim.
+
 ## Phase 3 — typing practice, 20 October 2026
 
 Branch: `feat/typing-engine`, based on `feat/app-foundation`. App 0.1.0-alpha.2, rules version 2. Current Windows local `npm run check` completed with exit code 0: formatting, strict types, 48 unit tests, production build and 39 Chromium browser checks (13 behaviors across desktop, phone and tablet profiles). Hosted Linux [run 39418022536](https://github.com/sahilshah2904/TurboType/actions/runs/39418022536) also passed for implementation commit `0e19dcf`, including clean npm ci, browser installation and the full check command.

@@ -1,6 +1,6 @@
 # Application architecture
 
-This describes implemented foundation and Phase 3 typing code. Four-CPU racing and cloud services remain future work.
+This describes the implemented foundation, typing engine and Phase 4 four-CPU Quick Race. Cloud services and progression remain future work.
 
 ## Ownership and flow
 
@@ -8,6 +8,7 @@ This describes implemented foundation and Phase 3 typing code. Four-CPU racing a
 index.html → main.ts → mountApp
   ├─ hash router → hub / keyboard check / settings
   ├─ practice screen → strict DOM adapter → deterministic TypingEngine
+  ├─ Quick Race → SoloRace (TypingEngine + seeded CPU schedules) → race-track canvas
   ├─ Anime.js scope → HTML entrance animations
   ├─ LocalSettingsRepository → validated browser-local preferences
   └─ lazy Phaser import → isolated track-preview canvas
@@ -20,7 +21,7 @@ index.html → main.ts → mountApp
 - `src/storage/settings.ts` injects its Storage boundary for tests. It validates version/values, preserves unreadable existing data, returns defaults on failure and reports failed writes. It stores no progress/rewards/history yet.
 - `src/core/contracts.ts` defines vendor/framework-free race, auth, sync and settings interfaces for later adapters. They are TypeScript contracts, not implemented backend services. Durations explicitly use milliseconds; raw counts remain separate from final metrics.
 - `src/core/ids.ts` enforces category-qualified 001–100 IDs and provides secure UUID creators for future race/player identity. UUID creation requires the browser's secure-context crypto API (localhost/HTTPS); it is not invoked by the Phase 2 guest preview.
-- `src/config/versions.ts` separates app/rules/save/content versions. App version is currently 0.1.0-alpha.2; rules version is 2. No release tag exists.
+- `src/config/versions.ts` separates app/rules/save/content versions. App version is currently 0.1.0-alpha.3; rules version is 3. No release tag exists.
 
 ## Cleanup and asynchronous work
 
@@ -44,8 +45,16 @@ Keep the pure rule engine out of UI/Phaser. Implement solo/network RaceProvider 
 
 `src/ui/race-input.ts` is the DOM boundary: canonical engine text, append-only edits, fallback value validation, assistance rejection and once-only composition commit. `typing-practice.ts` renders the practice state, uses a 100 ms HUD interval, and wires pause/visibility/controls. A PracticeSession in mountApp retains its engine across routes; cleanup pauses it and removes listeners/intervals. Preference changes do not silently rebuild an active practice screen. Text/race state does not survive full reload/HMR, and no cloud/result save is implemented.
 
-Active practice compacts the heading/options and mobile HUD to prioritize passage/input space. Result states restore the complete layout and reveal frozen metrics. Reduced motion still applies. The hub track remains decorative and independent of the engine until Phase 4 connects CPU racing.
+Active practice compacts the heading/options and mobile HUD to prioritize passage/input space. Result states restore the complete layout and reveal frozen metrics. Reduced motion still applies. The hub track remains decorative; Quick Race has its own separate engine-connected canvas.
 
 The framework-free contracts remain integration boundaries; the live practice engine does not yet implement the full RaceProvider/network/persistence stack. See [implemented rules](GAME_RULES.md) and [ADR 0003](adr/0003-typing-clock-and-input-policy.md).
+
+## Phase 4 race ownership
+
+`cpu-schedule.ts` creates four frozen seeded timestamp arrays. `solo-race.ts` composes the existing typing clock with binary-searched CPU progress and exact-time standings; final rows distinguish observed finishes, later simulated outcomes, timed DNFs and stopped runs. No frame-integrated bot clock or renderer callback determines a place. The shared standings helper now preserves row metadata through its generic type.
+
+`quick-race.ts` owns a separate in-memory session, canonical input adapter, 100 ms HUD, setup/seed/retry, pause triggers and track readiness/fallback. `race-track.ts` only renders snapshots in five lanes. It lazily imports Phaser, cleans up on navigation and reports asset/context failures. A 12-second watchdog exposes explicit text racing if loading stalls. Pause/resume, callbacks and pending mounts are guarded independently of animation. Reduced motion keeps essential position changes without decorative scrolling/wheels.
+
+The current SoloRace composition is synchronous and framework-free; it does not pretend to implement the earlier asynchronous network RaceProvider contract, persistent RaceResult IDs or account submission. Those integration contracts will be reconciled when implementing storage/network services. See [Quick Race recreation](QUICK_RACE.md) and [ADR 0004](adr/0004-solo-race-schedules-and-results.md).
 
 See [ADR 0001](adr/0001-foundation-stack.md), [ADR 0002](adr/0002-lifecycle-and-data-boundaries.md), [SETUP.md](SETUP.md), and [TESTING.md](TESTING.md).

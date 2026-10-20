@@ -1,6 +1,6 @@
 # Run TurboType locally
 
-The app now includes a Phase 3 typing-practice screen with countdown, strict correction, metrics, pause/resume and session results, plus the Phase 2 hub/track, free-editing keyboard check and local preferences. Four-CPU racing, progression, audio and cloud accounts are later tasks.
+The app includes Phase 4 Quick Race against four CPUs with real progress/standings/results, plus typing practice, the hub preview, free-editing keyboard check and local preferences. Progression, detailed modern car art, audio and cloud accounts are later tasks.
 
 ## Reproducible prerequisites
 
@@ -15,15 +15,15 @@ git clone https://github.com/sahilshah2904/TurboType.git
 cd TurboType
 ```
 
-While the implementation branches are under review, switch to the typing branch before installation:
+While the implementation branches are under review, switch to the solo-race branch before installation:
 
 ```powershell
-git switch feat/typing-engine
+git switch feat/solo-race
 npm ci
 npx playwright install chromium
 ```
 
-The typing branch is based on the unmerged foundation branch; its PR targets that branch so the Phase 3 diff stays reviewable. After both are merged, main becomes the normal starting branch. No `.env` file, cloud credentials, or API services are required for this preview. On Linux CI, `npx playwright install --with-deps chromium` also installs required system libraries.
+Phase 2/3 PRs are merged into main. The Phase 4 branch starts from that baseline and targets main; after it merges, main is the normal starting branch. No `.env` file, cloud credentials, or API services are required for this preview. On Linux CI, `npx playwright install --with-deps chromium` also installs required system libraries.
 
 ## Develop and preview
 
@@ -33,7 +33,7 @@ npm run dev
 
 Open **http://127.0.0.1:5173/TurboType/**. The dev server watches source changes. Stop it with Ctrl+C. Ports are strict: if 5173 is occupied, stop the conflicting process or explicitly choose another port; Vite will not silently move the preview.
 
-Choose **Practice** or open `#/practice` for the implemented engine. **Keyboard check** remains the earlier free-editing diagnostic and intentionally behaves differently. Do not test word-completion blocking in the wrong screen. Practice sessions are in-memory, not saved; HMR/reload ends them. Physical retest instructions are in PHASE3_INPUT_TESTS.md.
+Choose **Race** or open `#/race` for four-CPU racing; see QUICK_RACE.md for exact reproduction with seed 42 and PHASE4_RACE_TESTS.md for available-device checks. Choose **Practice** or open `#/practice` for the engine without opponents. **Keyboard check** remains the earlier free-editing diagnostic and intentionally behaves differently. Do not test word-completion blocking in the wrong screen. Practice sessions are in-memory, not saved; HMR/reload ends them. Physical retest instructions are in PHASE3_INPUT_TESTS.md.
 
 For the exact static production artifact:
 
@@ -59,7 +59,7 @@ Open the printed Network URL ending in `/TurboType/` on the device. Loopback (`1
 | `npm run format` | Apply formatting to source, tests and configuration |
 | `npm run format:check` | Verify formatting without modifying files |
 | `npm run typecheck` | Strict TypeScript checks |
-| `npm test` | Unit tests for typing/timing/standings, IDs, routing and safe settings persistence |
+| `npm test` | Unit tests for seeded CPUs/solo outcomes, typing/timing/standings, IDs, routing and safe settings persistence |
 | `npm run build` | Typecheck and generate the production artifact |
 | `npm run test:browser` | Test the previously built artifact in three Chromium layout profiles |
 | `npm run check` | Full formatting/type/unit/build/browser sequence |
