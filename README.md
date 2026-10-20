@@ -159,20 +159,75 @@ On the Phase 5 branch, `node assets-source/build-vehicles.mjs` recreates all thr
 
 ## Roadmap
 
-| Phase | Deliverable | Current status |
-| --- | --- | --- |
-| 1–4 | Design, app foundation, typing engine and playable four-CPU race | Complete for the agreed scopes; broader release coverage remains tracked. |
-| 5 | Racing art, animation, original audio and performance work | Implemented on the preview branch; device acceptance pending. |
-| 6 | Cinematic opening, loading flow, rules and interactive onboarding | Planned. |
-| 7 | Easy, Medium and Hard campaign maps with numbered circular nodes | Planned. |
-| 8 | 100 levels per category: **300 main levels**, plus chapter/bonus challenges | Planned. |
-| 9 | Rewards, garage, learning feedback, guest saves and optional account-backed cloud progress | Planned before public single-player launch. |
-| 10 | Cross-device verification and public single-player launch on GitHub Pages | Planned. |
-| 11 | Friends multiplayer with shareable invites, lobbies and synchronized racing | Planned immediately after single-player launch. |
+TurboType follows eleven phases, with single-player first and friends multiplayer immediately after its public launch. **Current position: Phase 5 is implemented and automatically verified; device acceptance remains pending.** Completed phases describe their agreed scope, not certification on every device.
 
-Campaign maps will progress horizontally, with locked stages opening as you clear each level. Planned rewards, bonus events and learning feedback are defined in the design documents; they are not active in the preview.
+### 1. Finalize the design
 
-[Project status](https://github.com/sahilshah2904/TurboType/blob/feat/race-polish/PROJECT_STATUS.md) tracks the latest phase evidence. The [backlog](https://github.com/sahilshah2904/TurboType/blob/feat/race-polish/BACKLOG.md) preserves future tasks so deferred work is not lost.
+**Status: Design baseline complete.**
+
+Confirm the screen flow, typing rules, progression, visual style and rewards. The plan covers responsive single-player first and multiplayer later. Production content and balance will continue to be refined through playtesting.
+
+### 2. Set up the application
+
+**Status: Foundation complete, with documented device-coverage exceptions.**
+
+Create the TypeScript/Vite project, integrate Phaser and Anime.js, and establish the folder structure, configuration, version control and automated checks. Define storage, account and network boundaries early so later features fit the same architecture.
+
+### 3. Build the typing engine
+
+**Status: Complete for the agreed scope.**
+
+Implement character validation, Backspace correction, accuracy, WPM, streaks, timing, pauses and finishing. Test these rules independently of animation, then verify input behavior on available laptop and phone hardware.
+
+### 4. Create one complete playable race
+
+**Status: Complete for the agreed scope; merged into `main`.**
+
+Add four computer opponents, countdown, vehicle movement, passage display, placement, results and retry. This proves the core game works before expanding it. Keep race metrics above the course and the passage/input below it.
+
+### 5. Polish the racing experience
+
+**Status: Implemented on `feat/race-polish`; device acceptance pending.**
+
+Add detailed vehicles, rotating wheels, suspension, parallax scenery, exhaust, nitro, overtaking effects, sound and finish celebrations. Provide low-effects and reduced-motion options. Automated checks pass; ASUS/Samsung visual, audible-balance and real-device smoothness checks remain open in [PR #4](https://github.com/sahilshah2904/TurboType/pull/4).
+
+### 6. Build the opening and onboarding
+
+**Status: Planned; not started.**
+
+Create the cinematic loading sequence, welcome screen, rules, interactive tutorial, optional calibration and animated main hub. Support both first-time and returning players.
+
+### 7. Build the campaign maps
+
+**Status: Planned; not started.**
+
+Create separate Easy, Medium and Hard maps with 100 numbered levels each, rightward scrolling, circular locked nodes, chapter markers and saved progress. Unlock the next stage as the player clears each level.
+
+### 8. Develop all 300 levels
+
+**Status: Planned; not started.**
+
+Author and validate passages, learning objectives, CPU difficulty, star targets and gradual difficulty increases. Add chapter showcases and optional bonus challenges alongside the 300 main levels.
+
+### 9. Add progression and learning tools
+
+**Status: Planned; not started.**
+
+Implement cosmetic rewards, Driver Rank, garage customization, personal records, progress charts, coaching and targeted practice drills. Add guest saves and optional account-backed cloud progress, including synchronization, migrations and recovery, before the public single-player launch.
+
+### 10. Test and launch single-player
+
+**Status: Planned; not started.**
+
+Check performance, accessibility, browser compatibility, saves, recovery and repeated retries across phones, tablets and laptops. Verify cloud synchronization and data access controls. Configure GitHub Pages and test the live game before calling it launched.
+
+### 11. Add friends multiplayer later
+
+**Status: Planned immediately after single-player launch.**
+
+Reuse the account/database foundation and introduce a realtime race backend, private rooms, invitation links, ready checks, synchronized races, reconnection handling and rematches. The frontend stays on GitHub Pages.
+
+[Project status](https://github.com/sahilshah2904/TurboType/blob/feat/race-polish/PROJECT_STATUS.md) records phase evidence and acceptance gates. The [backlog](https://github.com/sahilshah2904/TurboType/blob/feat/race-polish/BACKLOG.md) preserves detailed task IDs and deferred work. These phases vary in size; the phase number is not an overall completion percentage.
 
 ## Saves, hosting and multiplayer
 

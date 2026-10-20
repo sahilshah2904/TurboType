@@ -62,6 +62,8 @@ Phases 2–10 may overlap where dependencies require it: for example, save setti
 
 - Rewrote the public README as a player/developer guide on 21 October 2026: overview, actual preview image, current-versus-planned features, reproducible setup/phone instructions, controls, stack, source tree, checks, roadmap, storage/hosting boundaries and contribution guidance. Published on main in `3e9ae7f` and brought that documentation into the Phase 5 branch without merging Phase 5 gameplay. README local links, screenshot path, section anchors and documented npm commands were checked. Phase 5 device gates remain open.
 
+- Expanded the README roadmap into all eleven numbered phases with scope descriptions and explicit current statuses, including Phase 5 acceptance, Phase 9 cloud saves and multiplayer after launch. Published on main in `1a38ef3` and synchronized into the preview branch. Verified all eleven headings, local links and section anchors; no gameplay changed.
+
 ## Remaining design and production work
 
 Package versions and implemented module boundaries are pinned/documented; future schema/provider interfaces still need their integration checks. Author and review all 300 levels in phase 8. Extend the original art/music library for later chapters and continue recording asset provenance. Playtest bot speeds, pacing, progression, reward balance and animation intensity. Measure performance on named hardware/browsers rather than assuming targets are met. Validate/select the cloud persistence provider before integration, implement optional accounts/sync by phase 9 and test before single-player launch. Select/deploy the live race service in phase 11. No cloud project or database exists now.
