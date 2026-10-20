@@ -6,11 +6,13 @@ Technology research and source links: [IMPLEMENTATION_RESEARCH.md](./IMPLEMENTAT
 
 Phase 1 design coverage has been audited. [PROJECT_STATUS.md](./PROJECT_STATUS.md) tracks the eleven user-facing phases. [Rules and storage baseline](./docs/RULES_AND_STORAGE_BASELINE.md) supplies exact initial rewards, timing/cooldown defaults, save boundaries, backup/recovery policy, and database scope; its clarifications supersede earlier broad suggestions here. Baseline design completion is not implementation or playtest completion.
 
+Latest scope revision: [responsive and online architecture](./docs/RESPONSIVE_AND_ONLINE_ARCHITECTURE.md) supersedes the earlier desktop-first/local-only public release assumption. Design data/auth/network contracts from phase 2, add optional account-backed cloud progress before public single-player launch, and follow with friends multiplayer in phase 11. Phones, tablets and laptops are first-release targets.
+
 ## 1. Product brief and scope
 
 Create an immersive typing racing game that makes repeated practice enjoyable and makes improvement visible. The racing spectacle should reward accurate, sustained typing while leaving the passage easy to read. Build original TurboType branding, vehicles, loading artwork, music, and environments.
 
-**Release 1:** one human against four explicitly identified computer opponents, entirely playable from a GitHub Pages link, with local saves. Include onboarding, rules, a guided tutorial, campaign progression, quick races, practice, a garage, settings, and useful results. No account or install is required for this release.
+**Release 1:** one human against four explicitly identified computer opponents, playable from a GitHub Pages link on phones, tablets and laptops. Local guest play requires no account/install; optional permanent sign-in provides cloud progress across devices through an external service. Include onboarding, rules, tutorial, campaign, quick races, practice, garage, settings and results.
 
 **Release 2:** friends open the same GitHub Pages game link, create or join an invitation room, ready up, and race together. This requires a separately hosted realtime backend; sharing the static URL alone does not connect players. Preserve the same typing rules and visual identity across releases.
 
@@ -199,7 +201,7 @@ Add an original or appropriately licensed instrumental electronic/synthwave raci
 
 Anime.js owns interface choreography; Phaser owns world motion and effects. One owner per property. Gameplay state owns race start/finish and rewards. Cinematic playback can be skipped without changing results. Decorative effects never cover the passage or important controls.
 
-Provide reduced motion, adjustable effects, readable text size, visible focus, non-color error indicators, and keyboard navigation throughout. Desktop hardware keyboards are the primary target. Mobile support must explicitly test virtual keyboard behavior and screen layout; report any limitations rather than claiming device parity without testing.
+Provide reduced motion, adjustable effects, readable text size, visible focus, non-color error indicators, touch and keyboard navigation throughout. Phones, tablets and laptops are first-release targets, in portrait and landscape where appropriate. Test real software keyboards, safe areas and changing visual viewports; keep the passage/input visible and preserve race state across layout changes. Publish tested browser/device support rather than promising every historic device. Segment comparable personal records by explicit input profile.
 
 ## 8. Multiplayer evolution and shared-link journey
 
@@ -217,7 +219,7 @@ Design now for later reuse:
 - Pause policy changes explicitly online: one player's pause cannot stop everyone. Online timers continue; disconnect grace and DNF rules must be documented before multiplayer release.
 - Keep local solo records separate from server-validated online results. Validate impossible inputs and score claims without claiming browser automation can be eliminated.
 
-Release 1 ships no network service or online dependency. Its architecture should support the migration without attempting to solve multiplayer infrastructure prematurely.
+Release 1 includes optional account/cloud progress while retaining local guest play. Only live race-room infrastructure is deferred to release 2; storage/auth/data contracts begin in the foundation. Supabase Auth/Postgres is the recommended persistence candidate, not a provisioned service; validate selection/configuration before integration. Build friends multiplayer next after single-player launch using the established account/persistence contracts.
 
 ## 9. Documentation contract
 
@@ -237,6 +239,7 @@ Documentation is part of every milestone's completion, updated in the same chang
 | `docs/SAVES.md` | Versioned schemas, namespaced keys, migration, recovery, export/import if implemented, reset behavior and browser-local limitations |
 | `PROJECT_STATUS.md` | Persistent eleven-phase tracker: actual completion, evidence, remaining work, and next deliverable |
 | `docs/RULES_AND_STORAGE_BASELINE.md` | Initial rule/reward/save audit decisions; transition these into implemented rulebook and save documentation |
+| `docs/RESPONSIVE_AND_ONLINE_ARCHITECTURE.md` | Responsive behavior, phone-keyboard handling, guest/cloud saves, identity, data model, sync and multiplayer service boundaries |
 | `docs/TESTING.md` | Automated checks, deterministic cases, manual browser/device checklist, performance method, actual measured results and known limits |
 | `docs/DEPLOYMENT.md` | Repository ownership, Pages setup, base path, asset paths, workflow permissions, exact deployment verification and rollback procedure |
 | `docs/adr/` | Short decision records: context, chosen option, alternatives, consequences, date; initially engine version, Anime.js ownership, strict correction, pause policy, storage, Pages routing |
@@ -251,14 +254,14 @@ For every milestone record: objective, files/systems changed, setup/run instruct
 | Milestone | Deliverable | Gate before calling it complete |
 | --- | --- | --- |
 | M0 — Specification | This plan, research, rule examples, screen flow, documentation contract, local Git foundation and engineering conventions | Internal consistency review; planning files tracked; unresolved assumptions listed |
-| M1 — Foundation | Vite/TypeScript project, pinned Phaser/Anime.js smoke test, routing, minimal loader, settings defaults | Clean install/build works; game assets load under `/TurboType/`; setup and engine ADR documented |
+| M1 — Foundation | Responsive Vite/TypeScript shell, pinned Phaser/Anime.js spike, touch input/keyboard spike, routing, loader, settings, stable data/auth/storage interfaces | Clean install/build and `/TurboType/` assets work; phone/tablet/laptop layouts tested; setup and architecture ADR documented |
 | M2 — Rules and bots | Pure typing/scoring/state engine and deterministic CPU providers with simple playable race | Correction, timing, ties, pause eligibility, timeout, and finish tests pass; rules and architecture documented |
 | M3 — Complete experience slice | Original entrance/loading sequence, rules, tutorial, hub, setup, city race, finish, results, retry | A new player can learn and finish a race; returning players skip onboarding; browser-reviewed animation and input remain smooth |
-| M4 — Learning and progression | Three 100-level campaigns, horizontal maps, chapters, optional bonuses, practice drills, cosmetic garage, local history/rewards, validated save export/import and recovery | All 300 main definitions valid/playable; each category's first/last/chapter-boundary unlocks, single-award rewards, map navigation/accessibility, coaching evidence, migrations, backup/recovery and records verified; content/map/save docs complete |
+| M4 — Learning and progression | Three 100-level campaigns, maps/bonuses, drills, garage, local saves plus optional account/cloud progress, sync, export/import and recovery | All 300 levels validated; unlocks/rewards, responsive map, records, cloud access controls/conflicts/idempotence, cross-device sync, migrations and recovery verified; corresponding docs complete |
 | M5 — Polish and launch | Finished art/audio, quality presets, recovery screens, accessibility, GitHub deployment | Device/browser checks recorded, performance measured, published build tested, clean-clone and rollback procedures reproduced |
 | M6 — Friends multiplayer, later | Join links, private lobby, ready checks, realtime race, reconnect policy, rematch | Backend and frontend deployment docs, synchronized-result tests, multiple-client verification, no regression in solo mode |
 
-Each milestone may contain small reviewable commits. Do not call a milestone complete merely because its screens exist; controls, errors, cleanup, persistence, and documentation must work too. M6 is deferred until the single-player experience is complete and stable.
+Each milestone may contain small reviewable commits. Do not call a milestone complete merely because its screens exist; controls, errors, cleanup, persistence, and documentation must work too. M6 begins immediately after the single-player launch gate passes, reusing the account/cloud foundation rather than introducing storage for the first time.
 
 ## 11. Verification and reproduction checklist
 

@@ -2,6 +2,8 @@
 
 Status: design baseline, 20 October 2026. These are explicit starting defaults for implementation and testing, not implemented features or playtested balance. This document resolves omissions/ambiguities in the broader game plan; update both documents when a decision changes. Future implementation rulebook and save documentation must describe the actual shipped behavior.
 
+Scope update: [responsive and online architecture](./RESPONSIVE_AND_ONLINE_ARCHITECTURE.md) supersedes the former local-only public launch decision. The local snapshot rules below now describe guest saves/cache; optional permanent-account cloud sync is required before the public single-player launch. Shared race-room infrastructure still follows in multiplayer.
+
 ## Coverage audit
 
 | Concern | Baseline decision | Implementation evidence required |
@@ -18,7 +20,7 @@ Status: design baseline, 20 October 2026. These are explicit starting defaults f
 | Campaign | 100 levels per category; all category level-1 entries open; clear unlocks next in same category | All manifests valid; boundaries and cross-category isolation |
 | Bonuses/rewards | Deterministic, cosmetic, receipt-protected; exact defaults below | Receipt/idempotence and threshold-crossing tests |
 | Results/learning | Race metrics, chart, eligibility, rewards, one evidence-based practice suggestion | Results derived from real inputs; no fabricated history |
-| Storage/database | Release 1 uses browser-local versioned saves; future shared storage belongs to multiplayer | Migration, recovery, quota failure and persistence checks |
+| Storage/database | Prototype uses local versioned saves; public release adds optional account/cloud progress alongside local guest play | Migration, recovery, ownership, cross-device sync, conflict and retry/idempotence checks |
 | Intro/audio/accessibility | Real loading status, skippable decoration, mute, motion preferences and readable text | First/returning visit and failure-path review |
 
 ## Concrete race defaults
@@ -67,7 +69,7 @@ Driver Rank follows cumulative XP `100 × (R−1)²`; derive rank from cumulativ
 
 ## Storage architecture: what “store everything” means
 
-**Release 1 deliberately has no shared cloud database.** Keep essential progress in a namespaced, versioned browser-local save, consistent with GitHub-only static hosting. A player's saved progress does not live in GitHub commits and is not uploaded to the repository. It persists in that browser/origin, can be cleared or edited, and does not automatically follow them to another device. The UI must explain this.
+**Local prototype and guest mode:** keep essential progress in a namespaced, versioned browser-local save. A player's progress does not live in GitHub commits and is not uploaded to the repository. Guest data persists only in that browser/origin, can be cleared or edited, and does not follow them to another device. Before public single-player launch, add optional permanent-account cloud progress through an external service, with local caching, explicit save/sync states and server-side validation. See the responsive/online architecture for the proposed provider and data contracts.
 
 Persist these logical data groups:
 
@@ -89,7 +91,7 @@ Keep the serialized primary snapshot below a proposed 1 MiB application budget b
 
 Add user-triggered JSON export/import in release 1: validate the entire file before applying it, require explicit confirmation to replace current progress, explain that backups replace rather than merge saves, and never rerun reward logic on import. Corrupt/untrusted imports are rejected with an explanation. A second tab must not silently overwrite active progress: detect another active writer where supported and offer read-only/reload behavior. Specify and test the detailed ownership mechanism during storage implementation.
 
-**Release 2** adds a separately hosted authoritative multiplayer service and shared database for room membership, match results, online profile/progress if included, and validated rewards. Choose schema/provider/identity/reconnection policies during that phase. Keep solo saves and online records distinct; do not trust imported local balances as verified online currency. The frontend can remain on GitHub Pages. Until then there is no cross-device sync, shared leaderboard, or account-backed database.
+**Public release 1** adds optional account-backed cross-device sync before launch, while **release 2** adds an authoritative multiplayer service and match data using that identity/persistence foundation. Plan schemas/interfaces now, choose and validate the persistence provider before cloud integration, and finalize room/reconnection policies during multiplayer development. Keep client-run solo results and verified online records distinct; do not trust imported local balances as verified online currency. The frontend remains on GitHub Pages. Neither service exists yet.
 
 ## Baseline completion and remaining work
 

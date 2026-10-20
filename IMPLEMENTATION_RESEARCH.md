@@ -4,6 +4,8 @@ Research date: 20 October 2026. First-release scope confirmed by the user: compu
 
 **Planning update:** [GAME_DESIGN_PLAN.md](./GAME_DESIGN_PLAN.md) is the authoritative product, rules, onboarding, progression, documentation, and phased-delivery specification. Read it before implementation. This research document retains the technology comparisons and sources; where earlier scope suggestions differ, the game design plan takes precedence. Current status: planning only; no game has been implemented or deployed.
 
+**Latest hosting/data update:** [responsive and online architecture](./docs/RESPONSIVE_AND_ONLINE_ARCHITECTURE.md) replaces the initial desktop-first/local-only public launch assumption. The frontend stays on GitHub Pages, with responsive phones/tablets/laptops and optional account-backed cloud progress before single-player launch. A separate live race service follows immediately afterward. The earlier GitHub-only/local-save design remains useful for the prototype and guest mode, not the full public launch scope.
+
 ## Recommendation
 
 Build an original, browser-based, five-lane typing racer using TypeScript, Vite, Phaser, and an HTML/CSS interface. Deploy the compiled static files from a GitHub repository named `TurboType` through GitHub Actions to GitHub Pages. Start with four computer opponents, local progression, a cosmetic garage, and polished race animation. Keep the race logic independent of the renderer so multiplayer can be added later.
@@ -123,7 +125,7 @@ These are engineering goals to measure, not achieved results:
 - Pool particles, cap live effects, reuse textures, and cap device pixel ratio. Avoid per-frame DOM rebuilds and save writes.
 - Update text feedback on input; throttle nonessential numeric HUD refreshes to about 10 Hz.
 - Aim for under 5 MB compressed initial transfer. Lazy-load extra tracks and music.
-- Support desktop first; test mobile text focus and viewport changes with the soft keyboard open.
+- Support phones, tablets and laptops from the foundation; test real mobile text entry, portrait/landscape, safe areas and viewport changes with the soft keyboard open.
 - Provide visible focus, keyboard-operable menus, adequate contrast, text error markers beyond color, and concise result announcements.
 - Honor reduced-motion preferences and expose independent toggles for shake, flashes, and particles. Reduced motion preserves race information. [Reduced-motion preference](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion).
 
