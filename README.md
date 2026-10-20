@@ -2,7 +2,7 @@
 
 An immersive typing racer: race computer opponents, improve accuracy and speed, and advance through Easy, Medium, and Hard campaigns with 100 levels each.
 
-**Status:** Phase 3 typing engine and practice preview implemented on `feat/typing-engine`. Local checks pass: 48 unit tests and 39 Chromium browser tests. The new strict adapter still requires Samsung keyboard verification (TT-305); physical iPhone/tablet coverage remains a release gate. Four-CPU racing and public deployment are future work. See TESTING.md through the documentation links below. Source repository: [sahilshah2904/TurboType](https://github.com/sahilshah2904/TurboType).
+**Status:** Phase 3 typing engine and practice preview implemented on `feat/typing-engine`. Local checks pass: 48 unit tests and 39 Chromium browser tests. Phase 3 is accepted after the user reported the requested checks working on ASUS and Samsung S25 Ultra (TT-305); physical iPhone/tablet coverage and exact environment metadata remain a release gate. Four-CPU racing and public deployment are future work. See TESTING.md through the documentation links below. Source repository: [sahilshah2904/TurboType](https://github.com/sahilshah2904/TurboType).
 
 ## Run the preview
 

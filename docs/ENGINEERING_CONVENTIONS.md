@@ -1,6 +1,6 @@
 # TurboType engineering conventions
 
-Status: foundation complete with recorded exceptions; typing implementation verified locally with native retest pending, 20 October 2026. Local Git and the public remote are configured. The Phase 2 app, tests and CI workflow now exist; actual check results are in TESTING.md. Release tags and Pages deployment do not exist yet.
+Status: foundation complete with recorded exceptions; typing implementation verified with available-device acceptance, 20 October 2026. Local Git and the public remote are configured. The Phase 2 app, tests and CI workflow now exist; actual check results are in TESTING.md. Release tags and Pages deployment do not exist yet.
 
 ## Git and change management
 

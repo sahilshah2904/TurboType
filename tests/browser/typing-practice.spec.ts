@@ -168,8 +168,19 @@ test("a declared time trial expires at 60 seconds while normal practice is untim
   await page
     .getByRole("textbox", { name: "Your typing" })
     .pressSequentially("E");
+  await page.getByRole("button", { name: "Pause", exact: true }).click();
+  await expect(page.locator("#race-notice")).toContainText("Paused.");
+  await page.getByRole("button", { name: "Resume run" }).click();
+  await expect(page.locator("#race-notice")).toHaveText(
+    "Get ready. Type after GO.",
+  );
+  await page.clock.fastForward(3000);
+  await expect(page.locator("#race-notice")).toContainText("GO.");
   await page.clock.fastForward(60000);
   await expect(page.locator("#run-state")).toHaveText("Time limit reached");
+  await expect(page.locator("#race-notice")).toContainText(
+    "Time limit reached. Your result is frozen",
+  );
   await expect(page.locator("#metric-elapsed")).toHaveText("60.0s");
   await expect(page.getByRole("textbox")).toHaveValue("E");
 });

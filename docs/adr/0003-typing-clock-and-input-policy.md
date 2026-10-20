@@ -1,6 +1,6 @@
 # 0003 — Deterministic typing clock and explicit assistance eligibility
 
-Date: 20 October 2026. Status: implemented core/adapter; native Samsung verification pending TT-305.
+Date: 20 October 2026. Status: implemented; TT-305 accepted by ASUS/Samsung user report on 20 October 2026, with evidence limits recorded in TESTING.md.
 
 ## Context
 
@@ -16,6 +16,6 @@ Preserve the practice engine across in-app screen navigation and pause on leavin
 
 ## Consequences
 
-Rules version becomes 2; app version becomes 0.1.0-alpha.2. Display preference save schema stays 1. No campaign/reward record migration is needed because none ship yet. Some keyboard assistance cannot be distinguished from normal inserts; no trusted online score or anti-cheat claim follows from local eligibility. Physical retest remains required, with browser/keyboard details, before TT-305 closes.
+Rules version becomes 2; app version becomes 0.1.0-alpha.2. Display preference save schema stays 1. No campaign/reward record migration is needed because none ship yet. Some keyboard assistance cannot be distinguished from normal inserts; no trusted online score or anti-cheat claim follows from local eligibility. The focused available-device retest was accepted by user report; exact browser/keyboard versions and native prediction traces remain unavailable. Broader physical coverage and missing environment metadata remain TT-1008.
 
 Sources checked: [beforeinput caveats](https://developer.mozilla.org/en-US/docs/Web/API/Element/beforeinput_event), [isComposing](https://developer.mozilla.org/en-US/docs/Web/API/InputEvent/isComposing), [visibilitychange](https://developer.mozilla.org/en-US/docs/Web/API/Document/visibilitychange_event). See GAME_RULES.md, PHASE3_INPUT_TESTS.md and TESTING.md for implemented semantics and evidence.

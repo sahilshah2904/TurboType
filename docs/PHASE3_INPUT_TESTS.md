@@ -1,6 +1,6 @@
 # Phase 3 physical input retest
 
-The pure engine and automated adapter tests do not establish how a real Samsung keyboard emits replacement/composition events. TT-305 therefore remains open until this implemented practice screen is retested. Do not repeat all Phase 2 checks unnecessarily.
+Acceptance record, 20 October 2026: the user reported the requested cases working on ASUS laptop and Samsung S25 Ultra and supplied five laptop screenshots. TT-305 is closed on that available-device report. The checklist below remains the repeatable procedure for future input changes. Browser/OS/keyboard versions and precise predictive input event/label behavior were not supplied; do not treat this acceptance as universal keyboard certification. Physical iOS/tablet coverage and missing environment metadata remain TT-1008.
 
 ## Open the current app
 

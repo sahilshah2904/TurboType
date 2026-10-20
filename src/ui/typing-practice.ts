@@ -189,8 +189,22 @@ export function connectTypingPractice(
     adapter?.sync();
     if (stateChanged && s.state === "paused")
       notice("Paused. Resume when ready; this run is now practice-only.");
-    if (stateChanged && ending)
+    if (stateChanged && s.state === "countdown")
+      notice("Get ready. Type after GO.");
+    if (stateChanged && s.state === "racing")
+      notice(
+        s.errorCharacter === null
+          ? "GO. Match the passage and keep your rhythm."
+          : "Backspace to correct the highlighted mistake.",
+      );
+    if (stateChanged && ending) {
+      notice(
+        s.state === "timed-out"
+          ? "Time limit reached. Your result is frozen; restart to try again."
+          : "This run has ended. Your result is frozen; restart to try again.",
+      );
       main.querySelector("#run-results")!.scrollIntoView({ block: "nearest" });
+    }
     lastState = s.state;
   }
 
