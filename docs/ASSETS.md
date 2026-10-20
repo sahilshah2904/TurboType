@@ -14,3 +14,7 @@ Only the following assets are shipped in this phase. The reel, screenshots, extr
 Font license text is copied verbatim to public/assets/licenses/ during authoring and tracked, so production output includes it. The package lockfile records exact distribution versions. Original source-authored music/effects are now included; no mascot, third-party car images, external audio samples or AI-generated raster art has been added. This asset register does not imply a repository-wide license grant; no overall project license has been chosen.
 
 Future assets must add creator/source/license, modifications, export settings and an editable source or recreation instruction. Never use the reel's music or game assets as shipped TurboType content.
+
+## Phase 5 kart direction review (not shipped by the production entry)
+
+`docs/design/race-direction/volt-kart-concept.png`: original AI-generated transparent raster concept, built-in image_gen, 1774×887 RGBA, approximately 1.69 MB. Editable generation prompt/provenance are in [PROMPT.md](design/race-direction/PROMPT.md); this is not a 3D source model or separated production sprite set. HTML/CSS review scenery is project-authored; desktop/phone captures come from that prototype. CPU copies are temporary hue variations. Mario Kart was user-requested broad inspiration; no Nintendo media is shipped. No Misirlou recording is included: the prototype can play a user-selected local file without upload/persistence. See [prototype notes](design/race-direction/README.md).

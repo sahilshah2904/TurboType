@@ -8,6 +8,8 @@ Neon Harbor is an after-dark waterfront circuit: distant indigo mountains, a haz
 
 ## Vehicles and source
 
+21 October follow-up: the user now prefers a Mario Kart-inspired arcade direction. Review the [original kart concept and full-window prototype](design/race-direction/README.md) before final production. The sedan/coupe SVGs below describe the current unaccepted production implementation; they are not the proposed final fleet.
+
 Replace the retro sedan with three original low-roof sports silhouettes: Neon GT (fastback), Apex R (winged track coupe), Volt X (electric wedge). Use integrated light strips, dark glass, sculpted side intakes, carbon sills, restrained panel lines and bright brake calipers. Wheels/shadows/underglow/exhaust are separate runtime layers. The player is lime/cyan; CPU colors are amber, blue, violet and coral. CPU labels remain explicit and color is never the only identifier.
 
 Editable generator: `assets-source/build-vehicles.mjs`. Run `node assets-source/build-vehicles.mjs` to deterministically recreate `public/assets/cars/*.svg`. Each SVG uses a 760×240 viewBox, wheel centers (192,175)/(585,175) and no embedded wheel raster. Phaser rasterizes at the explicit source dimensions. These are original project-authored vectors, with no external downloads, brands or traced reel assets. The SVGs remain editable directly; use the generator as the source of truth to avoid divergent copies.

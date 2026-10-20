@@ -1,6 +1,6 @@
 # Phase 5 race redesign — viewport, typing and vehicle direction
 
-Recorded: 21 October 2026. Status: required rework proposed after user rejection of the current visual result; no redesign code or replacement art is implemented by this document. This revises the earlier Phase 5 composition, not the eleven-phase numbering. PR #4 remains open. Existing core rule/test evidence remains valid for its tested snapshot, but is not visual acceptance or verification of this proposed replacement.
+Recorded: 21 October 2026. Status: required rework in progress after user rejection of the current visual result. A separate playable review prototype and one kart concept are available in [design/race-direction](design/race-direction/README.md); the production race has not been replaced or visually accepted. This revises the earlier Phase 5 composition, not the eleven-phase numbering. PR #4 remains open. Existing core rule/test evidence remains valid for its tested snapshot, but is not visual acceptance or verification of this proposed replacement.
 
 ## Why the current screen needs another pass
 
@@ -38,6 +38,8 @@ Keep a real, labeled browser input associated with this strip so mobile keyboard
 
 ### C. Replace the vehicle art direction
 
+User steering: arcade-kart proportions inspired by Mario Kart, with original silhouettes/materials rather than the previous sedan-like bodies. First lime/teal kart concept is AI-generated; recolored copies in the review prototype are not a finished fleet. See the [concept prompt and provenance](design/race-direction/PROMPT.md). The earlier supercar/coupe examples below remain optional alternatives; the kart is the current direction for review.
+
 The existing three SVGs are a functional first pass and are not visually accepted. Create larger, clearly different original silhouettes: a low supercar, a winged track coupe and an aggressive performance hatch/coupe. Specify body proportion, glass, wheel alignment, layered shading, reflective highlights, headlights, rim/caliper detail, tire contact shadows and restrained suspension movement. Changing paint alone is insufficient.
 
 Recommend prerendered 2.5D vehicle sprites for the first redesign: original authored models or appropriately licensed original artwork, with separately aligned wheels, shadows, lights and exhaust. A model/render pipeline can provide consistent angles and lighting without adding a realtime 3D engine to this side-view game. Review one car at actual race size before creating the fleet. Record editable source, rights, export dimensions, wheel anchors and texture/memory budgets. Final asset pipeline and visual direction need a concrete mockup before production; no asset is selected or commissioned yet.
@@ -74,6 +76,10 @@ Existing Phase 5 work is retained where useful. No wholesale rewrite of the typi
 - Pure rules remain independent of rendering; shared pause, exact completion, CPU schedules and results survive integration checks.
 - Frame/typing responsiveness, source cleanup, texture budgets, sound balance and retries are verified with actual evidence. Existing 83/66 checks certify their old snapshot only; new checks/results must be recorded after redesign.
 - Final visuals are explicitly accepted before Phase 5 is closed and PR #4 merged. Passing automated tests alone cannot close a rejected design.
+
+## Personal music steering
+
+The user confirmed Misirlou for personal use. The review prototype lets them select a local recording; it is an in-memory blob, with no upload or committed song. No original recording is currently available to test. This is not public soundtrack licensing approval or an automatic change to the production synth score. Track production local-file integration in TT-514.
 
 ## Technical references
 

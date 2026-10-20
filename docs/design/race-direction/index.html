@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,viewport-fit=cover"
+    />
+    <title>TurboType — immersive race direction</title>
+    <link rel="stylesheet" href="./preview.css" />
+  </head>
+  <body>
+    <main id="race" aria-label="TurboType racing design prototype">
+      <div class="sky" aria-hidden="true">
+        <div class="sun"></div>
+        <div class="mountains"></div>
+        <div class="city city--far"></div>
+        <div class="city"></div>
+        <div class="barrier"></div>
+      </div>
+      <header class="hud">
+        <a class="brand" href="../../../index.html"
+          >T<span> / TURBOTYPE</span></a
+        >
+        <div class="readouts">
+          <div><span>POSITION</span><strong id="place">— / 5</strong></div>
+          <div><span>WPM</span><strong id="wpm">0</strong></div>
+          <div><span>ACCURACY</span><strong id="accuracy">—</strong></div>
+        </div>
+        <div class="hud-right">
+          <span id="timer">00:00.0</span
+          ><button id="pause" aria-label="Pause race">Ⅱ</button
+          ><button id="settings" aria-label="Sound and preview settings">
+            ♫
+          </button>
+        </div>
+      </header>
+      <p class="preview-label">DESIGN PROTOTYPE · ORIGINAL KART CONCEPT</p>
+      <div
+        class="track"
+        id="track"
+        role="img"
+        aria-label="Five racing lanes. Exact positions are available in the standings dialog."
+      ></div>
+      <div class="course-note" aria-hidden="true">
+        <span>NEON HARBOR</span><span>01 / NIGHT CIRCUIT</span>
+      </div>
+      <div class="progress" aria-hidden="true"><i id="progress"></i></div>
+      <section class="typing" aria-label="Integrated typing strip">
+        <div class="typing-top">
+          <span id="hint" role="status"
+            >Start the preview, then type directly here.</span
+          ><span id="streak">CLEAN STREAK 0</span>
+        </div>
+        <div class="typing-surface">
+          <div id="passage" aria-hidden="true"></div>
+          <label for="input" class="sr-only"
+            >Type the displayed passage. Backspace corrects the last
+            character.</label
+          >
+          <p class="sr-only" id="accessible-passage"></p>
+          <textarea
+            id="input"
+            rows="1"
+            autocapitalize="off"
+            autocomplete="off"
+            autocorrect="off"
+            spellcheck="false"
+            readonly
+            aria-describedby="accessible-passage hint"
+          ></textarea>
+        </div>
+      </section>
+      <div id="countdown" aria-hidden="true" hidden></div>
+      <div id="toast" hidden aria-hidden="true">CLEAN STREAK <b>NITRO</b></div>
+      <dialog id="menu">
+        <p class="eyebrow">TURBOTYPE / DIRECTION STUDY 01</p>
+        <h1 id="menu-title">Find your <em>rhythm.</em></h1>
+        <p id="menu-copy">
+          One continuous race. One typing strip. Four CPU rivals.
+        </p>
+        <p class="prototype-note">
+          Playable design prototype using the existing race rules. This is not
+          the final fleet, production renderer or saved campaign.
+        </p>
+        <div id="summary" hidden></div>
+        <button class="primary" id="start">Start preview →</button
+        ><button class="secondary" id="retry" hidden>Retry the same race</button
+        ><button class="secondary" id="standings">View exact standings</button>
+        <p class="tip">
+          Match capitals, spaces and punctuation. Backspace corrects mistakes.
+          Esc pauses.
+        </p>
+      </dialog>
+      <dialog id="sound">
+        <p class="eyebrow">PERSONAL MUSIC</p>
+        <h2>Your race. Your soundtrack.</h2>
+        <p>
+          Select your own local Misirlou recording or another audio file. This
+          preview does not upload it, save it or include it in GitHub.
+        </p>
+        <label class="file-label" for="music-file"
+          >Choose a local audio file<input
+            id="music-file"
+            type="file"
+            accept="audio/*"
+        /></label>
+        <p id="file-status" role="status">No recording selected.</p>
+        <audio id="music" controls loop preload="none"></audio
+        ><button class="secondary" id="fullscreen">
+          Toggle browser fullscreen</button
+        ><button class="primary" id="close-sound">Back to preview</button>
+        <p class="tip">
+          Opening this panel pauses the race. Resume with a fresh countdown.
+          Local music remains optional.
+        </p>
+      </dialog>
+    </main>
+    <div id="mock-keyboard" aria-hidden="true">
+      <small>SIMULATED KEYBOARD · LAYOUT REVIEW ONLY</small>
+      <div>q w e r t y u i o p</div>
+      <div>a s d f g h j k l</div>
+      <div>⇧ z x c v b n m ⌫</div>
+      <div>123　　space　　↵</div>
+    </div>
+    <script type="module" src="./preview.js"></script>
+  </body>
+</html>

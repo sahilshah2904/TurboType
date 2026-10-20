@@ -56,13 +56,15 @@ Initial implementation evidence for TT-501–504 (not final visual acceptance; T
 
 Required redesign added after review of recordings 2–4 and user rejection of current visuals/input, 21 October 2026. [Detailed evidence and proposal](docs/RACE_REDESIGN.md). These are future tasks, not shipped features.
 
-- [ ] TT-507: Review a concrete full-viewport desktop mockup, phone-with-keyboard mockup and one new car concept at actual race size before producing the replacement fleet/layout.
+- [ ] TT-507: A playable full-window desktop/phone review artifact and one AI-generated kart concept now exist in docs/design/race-direction (prompt, screenshots and validation documented). User visual acceptance is pending; normal Race is unchanged. Review a concrete full-viewport desktop mockup, phone-with-keyboard mockup and one new car concept at actual race size before producing the replacement fleet/layout.
 - [ ] TT-508: Implement edge-to-edge active racing without outer card, fixed width cap, page gutters or large navigation/footer. Move setup/secondary controls to pre-race/pause screens, use a compact upper HUD, and support optional user-initiated fullscreen with harmless refusal.
 - [ ] TT-509: Replace separate passage/answer box with one visible integrated typing strip backed by a real accessible native input. Preserve correction, prediction/composition policy, focus, pause, timing, larger text and Samsung keyboard behavior; verify before expanding effects.
 - [ ] TT-510: Produce and review a distinctly improved original/appropriately licensed vehicle fleet with consistent proportions, depth/shading, glass, wheels/lights/shadows and editable source/export/anchor/provenance records. Prefer a prerendered 2.5D pipeline after concept review; no final assets/pipeline selected yet.
 - [ ] TT-511: Recompose responsive lanes/scenery and relative camera framing so nearby CPUs remain readable and distant indicators/overview remain truthful. Test desktop, ultrawide, phone portrait, keyboard-open, rotation, safe areas and zoom without stretched cars or hidden text.
 - [ ] TT-512: Refine speed/streak/overtaking/exhaust/audio/finish choreography around the accepted composition; preserve reduced-motion/low-effects and independent engine outcomes. Validate texture/source cleanup and actual-device responsiveness.
 - [ ] TT-513: Refresh regression checks, physical-device checklist, measured evidence, screenshots and public README after redesign. Obtain explicit visual/device acceptance before closing Phase 5/merging PR #4; previous 83/66 tests do not verify the replacement.
+
+- [ ] TT-514: Personal local-file music: review prototype supports File API/blob/native audio playback without upload or persistence; synthetic-file lifecycle checks pass. User requested Misirlou for personal use but no recording was provided or tested. Integrate an accepted local music option into the production audio lifecycle after visual review; do not silently bundle an unprovided recording or claim licensing clearance. Public-game music remains original unless a separately cleared asset is selected.
 
 ## Phase 6 — entrance and onboarding
 
