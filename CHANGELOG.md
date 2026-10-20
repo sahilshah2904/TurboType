@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.1.0-alpha.4 — Neon Harbor polish, 20 October 2026
+
+Working on feat/race-polish from merged main c4127c7; not a tagged or deployed release.
+
+- Merged accepted Phase 4 PR #3, then authored a Neon Harbor art bible and reproducible generator for three original modern sports-car SVGs; replaced the legacy sedan in hub/race and removed its unused current asset.
+- Added city parallax, player-relative camera/approaching finish, edge indicators, wheel/suspension/exhaust, bounded nitro/speed effects, short HTML callouts and finish/confetti treatment. Reduced motion uses a stable whole-course view; low reduces effect budgets.
+- Kept metrics above the course, reduced panel boxing and added a caret-following text strip; Larger typing text retains wrapping.
+- Added original Harbor Circuit menu/race synth score, engine/countdown/error/nitro/overtake/finish cues, opt-in audio, saved master/music/effects/mute controls, bounded scheduler and graceful pause/navigation/failure cleanup. No extra runtime package, audio download, microphone or reference song.
+- Local full check passes 83 unit and 66 browser tests. Isolated headless renderer measurements and reproducible scripts are documented. Rules remain 3; existing save/content versions remain 1 and audio has a separate preference key.
+- Physical ASUS/Samsung sound/visual/performance acceptance remains TT-505/506. Cinematic opening/onboarding remains Phase 6; no cloud progression or Pages release.
+
 ## 0.1.0-alpha.3 — four-CPU Quick Race, 20 October 2026
 
 Working on feat/solo-race from merged main baseline 08cddb4; not a tagged or deployed release.

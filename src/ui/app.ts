@@ -1,4 +1,6 @@
 import { animate, createScope } from "animejs";
+import { RaceAudio } from "../audio/race-audio";
+import { audioControls, connectAudioControls } from "./audio-controls";
 import { APP_VERSION } from "../config/versions";
 import {
   LocalSettingsRepository,
@@ -23,6 +25,7 @@ const ARROW = '<span aria-hidden="true">↗</span>';
 export function mountApp(root: HTMLElement): () => void {
   const repository = new LocalSettingsRepository(() => localStorage);
   let settings = repository.load();
+  const audio = new RaceAudio();
   const systemMotion = matchMedia("(prefers-reduced-motion: reduce)");
   let scope: ReturnType<typeof createScope> | undefined;
   let unmountPreview: (() => void) | undefined;
@@ -63,6 +66,7 @@ export function mountApp(root: HTMLElement): () => void {
     unmountPreview?.();
     unmountPreview = undefined;
     const route = parseRoute(location.hash);
+    audio.setScene(route === "hub" || route === "settings" ? "menu" : "silent");
     applyPreferences();
     root.querySelectorAll<HTMLElement>("[data-route]").forEach((link) => {
       if (link.dataset.route === route)
@@ -136,8 +140,15 @@ export function mountApp(root: HTMLElement): () => void {
     if (route === "practice")
       clearScreen = connectTypingPractice(main, practiceSession);
     if (route === "race")
-      clearScreen = connectQuickRace(main, quickRaceSession, reducedMotion);
+      clearScreen = connectQuickRace(
+        main,
+        quickRaceSession,
+        reducedMotion,
+        () => settings.effects,
+        audio,
+      );
     if (route === "settings") {
+      clearScreen = connectAudioControls(main, audio);
       main.querySelector("form")!.addEventListener("change", () => {
         const form = new FormData(main.querySelector("form")!);
         settings = {
@@ -167,6 +178,12 @@ export function mountApp(root: HTMLElement): () => void {
     }
   };
   window.addEventListener("hashchange", onNavigate);
+  const audioBlur = () => audio.setVisible(false);
+  const audioFocus = () => audio.setVisible(!document.hidden);
+  const audioVisibility = () => audio.setVisible(!document.hidden);
+  window.addEventListener("blur", audioBlur);
+  window.addEventListener("focus", audioFocus);
+  document.addEventListener("visibilitychange", audioVisibility);
   systemMotion.addEventListener("change", onMotion);
   const skipLink = document.querySelector<HTMLAnchorElement>(".skip-link");
   const skip = (event: Event) => {
@@ -181,6 +198,10 @@ export function mountApp(root: HTMLElement): () => void {
     clearScreen?.();
     scope?.revert();
     unmountPreview?.();
+    audio.dispose();
+    window.removeEventListener("blur", audioBlur);
+    window.removeEventListener("focus", audioFocus);
+    document.removeEventListener("visibilitychange", audioVisibility);
     window.removeEventListener("hashchange", onNavigate);
     systemMotion.removeEventListener("change", onMotion);
     skipLink?.removeEventListener("click", skip);
@@ -317,5 +338,5 @@ function settingsScreen(settings: UserSettings): string {
     )
     .join(
       "",
-    )}</select></div><div class="setting-row"><div><label for="effects">Track effects</label><p>Use fewer particles for a lighter ride.</p></div><select name="effects" id="effects"><option value="high" ${settings.effects === "high" ? "selected" : ""}>High</option><option value="low" ${settings.effects === "low" ? "selected" : ""}>Low</option></select></div><div class="setting-row"><div><label for="large-text">Larger typing text</label><p>Make passages and typing easier to read.</p></div><input type="checkbox" name="largeText" id="large-text" ${settings.largeText ? "checked" : ""} /></div></form><p id="save-status" class="help" role="status">Preferences are stored on this browser. Cloud saves and game audio are not available in this preview.</p></section>`;
+    )}</select></div><div class="setting-row"><div><label for="effects">Track effects</label><p>Use fewer particles for a lighter ride.</p></div><select name="effects" id="effects"><option value="high" ${settings.effects === "high" ? "selected" : ""}>High</option><option value="low" ${settings.effects === "low" ? "selected" : ""}>Low</option></select></div><div class="setting-row"><div><label for="large-text">Larger typing text</label><p>Make passages and typing easier to read.</p></div><input type="checkbox" name="largeText" id="large-text" ${settings.largeText ? "checked" : ""} /></div></form><p id="save-status" class="help" role="status">Preferences are stored on this browser. Cloud saves are not available in this preview.</p>${audioControls()}</section>`;
 }

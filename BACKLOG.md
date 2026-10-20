@@ -45,17 +45,20 @@ Evidence for TT-401–403: `src/core/cpu-schedule.ts`, `solo-race.ts`, `src/ui/q
 
 ## Phase 5 — racing polish
 
-- [ ] TT-501: Produce an original art bible with modern sports cars (replace the temporary retro coupe) and detailed vehicle parts/wheels/shadows/suspension/exhaust, keeping editable sources and provenance.
-- [ ] TT-502: Build the polished city track, layered parallax, relative camera framing, offscreen indicators and approaching finish gate. Capture the user's visual direction: an immersive wider composition with useful side scenery/information and coordinated cinematic motion, replacing the current boxed foundation layout; responsive phones remain compact.
-- [ ] TT-503: Add bounded nitro, streaks, overtaking callouts, speed trails, finish celebration and reduced-motion/quality variants; keep passage readable.
-- [ ] TT-504: Create or license menu/race music, optional intensity stems, engine/UI effects and finish cues; record rights, sources, loop points and export settings.
-- [ ] TT-505: Implement remembered audio controls, gesture unlock, smooth transitions, pause/retry cleanup and graceful audio failure; profile effects on lower-powered devices.
+- [x] TT-501: Produce an original art bible with modern sports cars (replace the temporary retro coupe) and detailed vehicle parts/wheels/shadows/suspension/exhaust, keeping editable sources and provenance.
+- [x] TT-502: Build the polished city track, layered parallax, relative camera framing, offscreen indicators and approaching finish gate. Capture the user's visual direction: an immersive wider composition with useful side scenery/information and coordinated cinematic motion, replacing the current boxed foundation layout; responsive phones remain compact.
+- [x] TT-503: Add bounded nitro, streaks, overtaking callouts, speed trails, finish celebration and reduced-motion/quality variants; keep passage readable.
+- [x] TT-504: Create or license menu/race music, optional intensity stems, engine/UI effects and finish cues; record rights, sources, loop points and export settings.
+Completion evidence for TT-501–504: editable vehicle generator and three original SVGs; src/game/race-track.ts/race-view.ts; source-authored Harbor Circuit menu/race score and cues; ART_BIBLE.md/AUDIO.md/ADR 0005; 83 unit and 66 browser checks plus inspected desktop/phone/reduced captures. Optional intensity stems are not required or implemented.
+
+- [ ] TT-505: Remembered audio controls, gesture unlock, short source/gain fades, pause/retry cleanup and graceful failure are implemented/tested. Isolated software-renderer profiling including 4× CPU throttle is recorded in docs/PERFORMANCE.md. Remaining: actual lower-powered-device/ASUS/Samsung sound and performance evidence coordinated with TT-506. Do not close from emulation alone.
+- [ ] TT-506: Available-device Phase 5 acceptance: review modern car/art direction, full/low/reduced effects, active-caret/keyboard space, audible menu/race/cues/volume and pause/tab/retry cleanup on ASUS/Samsung. Record model/browser/OS/settings and real smoothness/frame evidence where possible. Use docs/PHASE5_POLISH_TESTS.md. New effects/audio were not covered by Phase 4 user acceptance; broad iOS/tablet/performance remains release work.
 
 ## Phase 6 — entrance and onboarding
 
 - [ ] TT-601: Build original cinematic loading panels, real asset status, optional skip/replay, returning-user shortcut and failed-load recovery.
 - [ ] TT-602: Build welcome/rules, interactive correction/streak tutorial, optional calibration and animated hub.
-- [ ] TT-603: Complete responsive setup/briefing/settings/results navigation with touch, keyboard and accessibility support; test first and returning visits.
+- [ ] TT-603: Complete responsive setup/briefing/settings/results navigation with touch, keyboard and accessibility support; test first and returning visits. Present passage/pace/mode naturally for Quick Race, use level-defined campaign setup, and move seed into Advanced/Replay settings for the final player flow.
 
 ## Phase 7 — campaign maps
 

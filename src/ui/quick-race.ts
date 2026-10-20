@@ -1,3 +1,7 @@
+import { animate } from "animejs";
+import { RaceFeedback } from "../game/race-view";
+import type { RaceAudio } from "../audio/race-audio";
+import { audioControls, connectAudioControls } from "./audio-controls";
 import { SoloRace } from "../core/solo-race";
 import { CPU_TIERS, type CpuTier } from "../core/cpu-schedule";
 import { PRACTICE_PASSAGES } from "../content/practice-passages";
@@ -47,7 +51,7 @@ export function quickRaceScreen(): string {
       <div><label for="race-seed">Race seed</label><input id="race-seed" type="number" min="0" max="4294967295" step="1" inputmode="numeric" required aria-describedby="setup-help" /></div>
     </div>
     <p id="setup-help" class="help race-setup">Targets are before reaction, hesitation and correction delays. This is Quick Race, not campaign levels. The same passage, pace and seed replay the same CPU schedules. Pauses or assisted input make a run practice-only. No rewards or results are saved yet.</p>
-    <div class="run-banner"><div><p id="race-state" class="eyebrow" role="status">Ready</p><p id="race-instruction">Wait for the track, then start the countdown.</p></div><span id="race-countdown" class="countdown" aria-hidden="true">—</span></div>
+    <div class="run-banner"><div><p id="race-state" class="eyebrow" role="status">Ready</p><p id="race-instruction">Wait for the track, then start the countdown.</p></div><span id="race-lights" class="race-lights" aria-hidden="true"><i></i><i></i><i></i></span><span id="race-countdown" class="countdown" aria-hidden="true">—</span></div>
     <div class="race-hud metrics-grid">${[
       ["place", "POSITION"],
       ["wpm", "WPM"],
@@ -59,15 +63,16 @@ export function quickRaceScreen(): string {
           `<div><span class="micro">${label}</span><strong id="race-${id}">—</strong></div>`,
       )
       .join("")}</div>
-    <div class="race-visual"><div id="race-track" role="img" aria-label="Five-lane race track; exact positions are listed below"></div><div class="track-bottom"><span id="race-track-status" role="status">Loading race track…</span><button id="retry-race-track" class="text-button" hidden>Retry artwork</button><button id="text-race" class="text-button" hidden>Race with text standings</button></div></div>
+    <div class="race-visual"><p id="race-callout" class="race-callout" role="status" hidden></p><div id="race-track" role="img" aria-label="Five-lane race track; exact positions are listed below"></div><div class="track-bottom"><span id="race-track-status" role="status">Loading race track…</span><button id="retry-race-track" class="text-button" hidden>Retry artwork</button><button id="text-race" class="text-button" hidden>Race with text standings</button></div></div>
     <label id="race-passage-label" class="micro">MATCH CASE, SPACES AND PUNCTUATION</label><p id="race-passage" class="race-passage" aria-labelledby="race-passage-label"></p>
     <label for="race-input">Your typing</label><textarea id="race-input" rows="2" readonly autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" aria-describedby="race-notice race-controls-help" placeholder="Start the race, then type after GO…"></textarea>
     <p id="race-notice" class="help" role="status">One mistake stops progress. Backspace corrects it.</p>
     <div class="practice-actions"><button id="start-race" class="button button--primary" disabled>Start race →</button><button id="pause-race" class="button button--secondary" disabled>Pause</button><button id="retry-race" class="text-button">Retry same race</button><button id="new-race" class="text-button">New seed</button></div>
+    ${audioControls()}
     <p id="race-controls-help" class="help">Esc or leaving this screen pauses everyone. Resume has a fresh countdown. Retry resets the run; refresh discards this unsaved session.</p>
     <div class="run-details"><span id="race-errors">0 errors · 0 corrected</span><span id="race-eligibility">Session only · not saved</span><span id="race-streak">0 clean streak</span></div>
     <details class="live-standings" open><summary>Live standings · all opponents are CPUs</summary><ol id="race-standings"></ol></details>
-    <section id="race-results" class="run-results" aria-labelledby="race-result-title" hidden><p class="eyebrow">RACE RESULT · SESSION ONLY</p><h2 id="race-result-title"></h2><p id="race-result-summary"></p><p id="race-coaching"></p><div class="race-table-wrap"><table><caption>Final standings. Later CPU outcomes are simulated from fixed schedules; they are not live players.</caption><thead><tr><th scope="col">Place</th><th scope="col">Driver</th><th scope="col">Time</th><th scope="col">Status</th></tr></thead><tbody id="race-result-rows"></tbody></table></div><p class="help">No XP, credits, stars, unlocks or personal records are saved. Modern cars, scenery, effects and audio are planned for the polish phase.</p></section>
+    <section id="race-results" class="run-results" aria-labelledby="race-result-title" hidden><p class="eyebrow">RACE RESULT · SESSION ONLY</p><h2 id="race-result-title"></h2><p id="race-result-summary"></p><p id="race-coaching"></p><div class="race-table-wrap"><table><caption>Final standings. Later CPU outcomes are simulated from fixed schedules; they are not live players.</caption><thead><tr><th scope="col">Place</th><th scope="col">Driver</th><th scope="col">Time</th><th scope="col">Status</th></tr></thead><tbody id="race-result-rows"></tbody></table></div><p class="help">No XP, credits, stars, unlocks or personal records are saved. Original Neon Harbor art and sound. Campaign progression arrives in later phases.</p></section>
   </section>`;
 }
 
@@ -75,6 +80,8 @@ export function connectQuickRace(
   main: HTMLElement,
   session: QuickRaceSession,
   reducedMotion: () => boolean,
+  effects: () => "high" | "low",
+  audio: RaceAudio,
 ): () => void {
   const abort = new AbortController();
   const eventOptions = { signal: abort.signal };
@@ -88,6 +95,11 @@ export function connectQuickRace(
   const mode = find<HTMLSelectElement>("#race-mode");
   const seed = find<HTMLInputElement>("#race-seed");
   const track = find("#race-track");
+  const feedback = new RaceFeedback();
+  const clearAudio = connectAudioControls(main, audio);
+  let calloutAnimation: ReturnType<typeof animate> | undefined;
+  let calloutUntil = 0;
+  let revealResults: number | undefined;
   let adapter: RaceInputController;
   let disposeTrack: (() => void) | undefined;
   let generation = 0;
@@ -102,7 +114,31 @@ export function connectQuickRace(
   const notice = (message: string) => text("#race-notice", message);
 
   function update(): void {
-    const { player: s, standings, results } = session.race.snapshot();
+    const snapshot = session.race.snapshot();
+    const { player: s, standings, results } = snapshot;
+    audio.updateRace(s);
+    find("#race-lights").dataset.state = s.state;
+    find("#race-lights").dataset.countdown = String(s.countdown ?? 0);
+    const message = feedback.update(snapshot);
+    const callout = find("#race-callout");
+    if (message) {
+      calloutAnimation?.revert();
+      callout.hidden = false;
+      callout.textContent = message;
+      calloutUntil = s.elapsedMs + 1600;
+      if (!message.startsWith("CLEAN")) audio.cue("overtake");
+      if (!reducedMotion())
+        calloutAnimation = animate(callout, {
+          opacity: [0, 1, 1, 0],
+          y: [6, 0, 0, -5],
+          duration: 1600,
+          ease: "out(3)",
+        });
+    }
+    if (s.elapsedMs >= calloutUntil || s.state !== "racing") {
+      calloutAnimation?.revert();
+      callout.hidden = true;
+    }
     const active = ["countdown", "racing", "paused"].includes(s.state);
     main.classList.toggle("quick-race-active", active);
     input.readOnly = !["countdown", "racing"].includes(s.state);
@@ -175,6 +211,18 @@ export function connectQuickRace(
                 : "character--error"
               : "";
       });
+    const passageView = find("#race-passage");
+    if (document.documentElement.dataset.textSize !== "large") {
+      const caret =
+        passageView.querySelector<HTMLElement>(
+          ".character--current,.character--error",
+        ) ?? (passageView.lastElementChild as HTMLElement | null);
+      if (caret)
+        passageView.scrollLeft = Math.max(
+          0,
+          caret.offsetLeft - passageView.clientWidth * 0.3,
+        );
+    } else passageView.scrollLeft = 0;
     // Fixed-size list, canonical text only; no per-keystroke reconstruction of the input.
     text("#race-standings", "");
     for (const row of standings) {
@@ -248,7 +296,16 @@ export function connectQuickRace(
                 ? "Race ended. Your result is frozen; retry when ready."
                 : "One mistake stops progress. Backspace corrects it.",
       );
-      if (results) find("#race-results").scrollIntoView({ block: "nearest" });
+      if (results) {
+        window.clearTimeout(revealResults);
+        revealResults = window.setTimeout(
+          () => {
+            if (!disposed)
+              find("#race-results").scrollIntoView({ block: "nearest" });
+          },
+          reducedMotion() ? 0 : 1000,
+        );
+      }
     }
     lastState = s.state;
   }
@@ -265,6 +322,8 @@ export function connectQuickRace(
     update();
   }
   function reset(newSeed = false): void {
+    window.clearTimeout(revealResults);
+    calloutAnimation?.revert();
     session.race.abandon();
     if (newSeed) session.seed = (session.seed + 1) >>> 0;
     seed.value = String(session.seed);
@@ -305,6 +364,7 @@ export function connectQuickRace(
     mountRaceTrack(track, {
       read: () => session.race.snapshot(),
       reducedMotion,
+      effects,
       onReady: () => {
         if (token !== generation || disposed) return;
         window.clearTimeout(loadTimeout);
@@ -350,6 +410,7 @@ export function connectQuickRace(
     "click",
     () => {
       if (!trackReady || !seed.reportValidity()) return;
+      void audio.unlock();
       session.race.start();
       update();
       input.focus();
@@ -407,6 +468,10 @@ export function connectQuickRace(
   const interval = window.setInterval(update, 100);
   return () => {
     disposed = true;
+    window.clearTimeout(revealResults);
+    calloutAnimation?.revert();
+    clearAudio();
+    audio.setScene("silent");
     generation++;
     window.clearTimeout(loadTimeout);
     session.race.pause();

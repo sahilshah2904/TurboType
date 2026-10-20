@@ -1275,3 +1275,167 @@ textarea[aria-invalid="true"] {
     font-size: 23px;
   }
 }
+
+/* Neon Harbor: a compact instrument strip above an uninterrupted racing view. */
+.app-shell:has(.quick-race) {
+  max-width: 1600px;
+}
+.quick-race {
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+.quick-race-active .quick-race {
+  padding: 0;
+}
+.quick-race .race-hud {
+  border-top: 1px solid #2a4655;
+  border-bottom: 1px solid #2a4655;
+  gap: 0;
+  background: linear-gradient(100deg, #122b35bb, #121c2c99);
+}
+.quick-race .race-hud > div {
+  background: transparent;
+  border: 0;
+  border-right: 1px solid #27414e;
+  border-radius: 0;
+  padding: 12px 20px;
+}
+.quick-race .race-hud > div:last-child {
+  border-right: 0;
+}
+.quick-race .race-hud strong {
+  margin-top: 3px;
+  color: #e3f5fa;
+  font-size: 29px;
+}
+.quick-race .race-hud > div:first-child strong {
+  color: #b7f36b;
+}
+.quick-race .race-visual {
+  position: relative;
+  border-color: #315563;
+  background: #07121f;
+  box-shadow:
+    0 12px 44px #03111f88,
+    0 0 35px #3cced008;
+}
+.quick-race-active .race-visual {
+  max-width: 960px;
+}
+#race-track {
+  aspect-ratio: 1000 / 450;
+  background: #07121f;
+}
+.race-callout {
+  position: absolute;
+  top: 13%;
+  left: 25%;
+  right: 25%;
+  z-index: 2;
+  pointer-events: none;
+  padding: 10px 16px;
+  margin: 0;
+  border: 1px solid #61e4e766;
+  border-radius: 30px;
+  background: #092630eb;
+  color: #bffbfa;
+  text-align: center;
+  font:
+    700 15px/1.2 "Barlow Condensed",
+    sans-serif;
+  letter-spacing: 1px;
+  box-shadow: 0 0 20px #4edde322;
+}
+.audio-controls {
+  padding: 10px 0;
+  border-bottom: 1px solid #263c47;
+  margin: 12px 0;
+}
+.audio-controls summary {
+  padding: 8px 0;
+  color: #a4d3de;
+  cursor: pointer;
+  min-height: 40px;
+}
+.audio-controls__body {
+  display: grid;
+  grid-template-columns: auto repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  align-items: center;
+  padding: 12px 0;
+}
+.audio-controls label {
+  font-size: 12px;
+  text-transform: capitalize;
+}
+.audio-controls input {
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+  accent-color: #63e7f2;
+  min-height: 28px;
+}
+.audio-controls #audio-status {
+  grid-column: 1 / -1;
+  margin: 0;
+}
+@media (max-width: 650px) {
+  .quick-race .race-hud > div {
+    padding: 7px 8px;
+  }
+  .quick-race .race-hud strong {
+    font-size: 23px;
+  }
+  .race-callout {
+    left: 8%;
+    right: 8%;
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+  .audio-controls__body {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .audio-controls__body button {
+    grid-column: 1 / -1;
+  }
+  .quick-race-active .race-hud > div {
+    padding: 5px 8px;
+  }
+}
+
+.quick-race .race-passage {
+  position: relative;
+  white-space: pre;
+  overflow-x: hidden;
+  min-height: 48px;
+}
+:root[data-text-size="large"] .quick-race .race-passage {
+  white-space: pre-wrap;
+  overflow-x: visible;
+}
+
+.race-lights {
+  display: inline-flex;
+  gap: 8px;
+  padding: 9px;
+  border: 1px solid #2d4e5a;
+  border-radius: 24px;
+  background: #081822;
+}
+.race-lights i {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #243b43;
+}
+.race-lights[data-state="countdown"][data-countdown="3"] i:first-child,
+.race-lights[data-state="countdown"][data-countdown="2"] i:nth-child(-n + 2),
+.race-lights[data-state="countdown"][data-countdown="1"] i {
+  background: #ff9568;
+}
+.race-lights[data-state="racing"] i {
+  background: #b7f36b;
+  box-shadow: 0 0 8px #b7f36b44;
+}

@@ -142,7 +142,7 @@ test("art failure allows explicit text racing, retry recovery and cleanup after 
   page,
 }) => {
   await page.clock.install();
-  await page.route("**/assets/starter-coupe.svg", (route) => route.abort());
+  await page.route("**/assets/cars/neon-gt.svg", (route) => route.abort());
   await page.goto("./#/race");
   await expect(
     page.getByRole("button", { name: "Race with text standings" }),
@@ -154,7 +154,7 @@ test("art failure allows explicit text racing, retry recovery and cleanup after 
     .getByRole("textbox", { name: "Your typing" })
     .pressSequentially(SAMPLE);
   await expect(page.locator("#race-state")).toHaveText("Finished");
-  await page.unroute("**/assets/starter-coupe.svg");
+  await page.unroute("**/assets/cars/neon-gt.svg");
   await page.getByRole("button", { name: "Retry artwork" }).click();
   await expect(page.locator("#race-track")).toHaveAttribute(
     "data-ready",

@@ -25,8 +25,8 @@ export async function mountTrackPreview(
     preload(): void {
       this.load.svg(
         "coupe",
-        `${import.meta.env.BASE_URL}assets/starter-coupe.svg`,
-        { width: 680, height: 220 },
+        `${import.meta.env.BASE_URL}assets/cars/neon-gt.svg`,
+        { width: 760, height: 240 },
       );
       this.load.on("loaderror", () =>
         options.onError(
@@ -60,13 +60,14 @@ export async function mountTrackPreview(
         const body = this.add.image(0, 0, "coupe").setDisplaySize(230, 75);
         if (i === 1) body.setTint(0xffa590);
         if (i === 2) body.setTint(0x8abfe8);
-        const wheels = [-63, 77].map((x) => {
+        if (i === 0) body.setTint(0xb7f36b);
+        const wheels = [-57, 62].map((x) => {
           const wheel = this.add
             .circle(0, 0, 15, 0x11161d)
             .setStrokeStyle(4, 0x5b6872);
           const spokes = this.add.graphics().lineStyle(2, 0xb9c8d0);
           spokes.lineBetween(-9, 0, 9, 0).lineBetween(0, -9, 0, 9);
-          const assembly = this.add.container(x, 20, [wheel, spokes]);
+          const assembly = this.add.container(x, 17, [wheel, spokes]);
           car.add(assembly);
           return assembly;
         });

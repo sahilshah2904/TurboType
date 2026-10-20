@@ -1,0 +1,11 @@
+# Phase 5 visual, sound and device check
+
+Pending user acceptance. Run the current `feat/race-polish` preview; footer should show 0.1.0-alpha.4. Earlier Phase 4 acceptance did not test these new assets/effects/audio. No iPhone/tablet is required from the user for this round; their coverage remains a release task.
+
+1. On ASUS and Samsung, start Race and compare the modern sports car silhouettes and Neon Harbor skyline with the old prototype. Metrics must stay above the track, followed by the sentence and typing field. With the phone keyboard open, check that the active character stays readable; Larger typing text should restore wrapped text.
+2. Type steadily with Full motion/High effects. Look for the relative camera, layered city, wheels/exhaust, clean-streak nitro and lane-edge CPU indicators. Make a mistake and correct it. Pause: racing motion/timing should stop together. Finish: inspect the short finish card/confetti, then frozen results. Retry should not leave old particles or repeated finish effects.
+3. In Sound & music, select Enable sound and adjust master/music/effects separately. Check countdown, race loop, engine and finish volume. Pause/switch tabs: no racing audio should continue. Visit Practice: it should be silent. The hub/settings may play the calmer menu arrangement while sound is enabled. Mute and refresh: mute/slider choices should remain.
+4. Select Low effects, then Reduced motion in Settings and return to Race. Low should feel lighter; Reduced should use the stable full-course view without decorative particles/parallax/animated callouts. Essential progress and results must remain accurate. Check again with Larger typing text.
+5. Report actual perceived smoothness and any delay while typing on Samsung. If willing, capture browser Performance/frame-time evidence with the model/browser/effects setting and test duration. The headless profile is an isolated software-renderer measurement, not a proof of 60 fps on your phone or laptop GPU.
+
+Please distinguish visual preference (car shape/colors/intensity) from a bug (lost input, incorrect results, stuck sound, hidden passage or stutter). Report browser/OS/keyboard details where available. No game rewards/progress are persisted yet. Phase 6 will implement cinematic opening/onboarding; this phase polishes the racing experience.

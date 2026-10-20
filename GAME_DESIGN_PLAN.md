@@ -1,6 +1,6 @@
 # TurboType — game design and engineering delivery plan
 
-Status: design baseline established; Phase 2 foundation complete with recorded exceptions and Phase 3 typing practice complete for agreed scope, with ASUS/Samsung checks accepted by user report. Phase 4 four-CPU Quick Race is implemented with available-device acceptance pending; docs/QUICK_RACE.md defines actual CPU/result semantics. Read PROJECT_STATUS.md and docs/TESTING.md for actual evidence; docs/GAME_RULES.md describes implemented rules version 3 and takes precedence for current typing behavior.
+Status: design baseline established; Phase 2 foundation complete with recorded exceptions and Phase 3 typing practice complete for agreed scope, with ASUS/Samsung checks accepted by user report. Phase 4 four-CPU Quick Race is accepted; Phase 5 art/effects/audio are implemented with physical sound/performance acceptance pending; docs/QUICK_RACE.md defines actual CPU/result semantics. Read PROJECT_STATUS.md and docs/TESTING.md for actual evidence; docs/GAME_RULES.md describes implemented rules version 3 and takes precedence for current typing behavior.
 Updated: 20 October 2026.
 Technology research and source links: [IMPLEMENTATION_RESEARCH.md](./IMPLEMENTATION_RESEARCH.md).
 
@@ -197,7 +197,7 @@ Start with one city environment polished end to end. Introduce dusk/night weathe
 
 Audio layers include menu ambience, countdown cues, pace-responsive engine sound, streak accents, overtake cues, and finish music. Use separate master/music/effects controls and remember mute. Missing audio never blocks play. Keep mistake feedback gentle.
 
-Add an original or appropriately licensed instrumental electronic/synthwave racing soundtrack, with a calmer garage loop, optional intensity stems during a race, and a short finish cue. Crossfade layers rather than changing tempo on every keypress. Ignore the recording's song entirely. Track provenance, redistribution rights, editable inputs where available, loop/export settings, and attribution in the asset register; preload short cues and defer larger music files. See the reference analysis for the detailed audio brief. No music has been composed, downloaded, or licensed yet.
+Add an original or appropriately licensed instrumental electronic/synthwave racing soundtrack, with a calmer garage loop, optional intensity stems during a race, and a short finish cue. Crossfade layers rather than changing tempo on every keypress. Ignore the recording's song entirely. Track provenance, redistribution rights, editable inputs where available, loop/export settings, and attribution in the asset register; preload short cues and defer larger music files. See the reference analysis for the detailed audio brief. Phase 5 now implements original source-authored menu/race synth music and effects; see docs/AUDIO.md. No reference song, downloaded sample or externally licensed track is used. Audible mix and physical device review remain pending.
 
 Anime.js owns interface choreography; Phaser owns world motion and effects. One owner per property. Gameplay state owns race start/finish and rewards. Cinematic playback can be skipped without changing results. Decorative effects never cover the passage or important controls.
 

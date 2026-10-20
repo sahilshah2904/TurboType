@@ -1,6 +1,6 @@
 # TurboType engineering conventions
 
-Status: foundation/typing merged into main; Phase 4 race implementation and verification underway, 20 October 2026. Local Git and the public remote are configured. The Phase 2 app, tests and CI workflow now exist; actual check results are in TESTING.md. Release tags and Pages deployment do not exist yet.
+Status: Phases 2–4 merged into main; Phase 5 implementation/automated verification complete with physical acceptance pending, 20 October 2026. Local Git and the public remote are configured. The Phase 2 app, tests and CI workflow now exist; actual check results are in TESTING.md. Release tags and Pages deployment do not exist yet.
 
 ## Git and change management
 

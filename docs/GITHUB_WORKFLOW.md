@@ -60,7 +60,7 @@ When the user asks this project's agent to implement a change and publish it to 
 
 ## Implementation integration
 
-Phase 2 PR #1 and Phase 3 PR #2 were merged in order on 20 October 2026 after their head checks passed. PR #2 was retargeted from the foundation branch to main after PR #1 merged; merge commits preserve the shared history. Main baseline is 08cddb4. Phase 4 feat/solo-race starts from that main and uses a normal PR against main. The local checkout serves the current feature preview even before its PR merges. No source merge deploys a website because Pages is not configured.
+Phase 2 PR #1 and Phase 3 PR #2 were merged in order on 20 October 2026 after their head checks passed. PR #2 was retargeted from the foundation branch to main after PR #1 merged; merge commits preserve the shared history. Main baseline is 08cddb4. Phase 4 PR #3 subsequently merged to main c4127c7 after successful head checks and user acceptance. Phase 5 feat/race-polish starts from that main and uses a normal PR against main. The local checkout serves the current feature preview even before its PR merges. No source merge deploys a website because Pages is not configured.
 
 ## Publishing and recovery
 

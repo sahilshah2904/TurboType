@@ -54,6 +54,12 @@ CPUs finishing first never stop an untimed learner. A player finish freezes live
 
 The graphics must load before Start is enabled, with explicit text-standings fallback after failure. Missing graphics/context loss during racing pauses the shared clock. Results, rewards, account data and campaign unlocks are not persisted. [QUICK_RACE.md](QUICK_RACE.md) specifies generator ranges, reproducible setup, cutoff semantics and cleanup in detail. Rules version 3 adds these race semantics; the existing typing policy is unchanged.
 
+## Phase 5 audiovisual presentation
+
+Phase 5 changes presentation and optional sound, not these rules: rules version remains 3. Modern car positions/camera interpolate snapshots; results still finalize on the exact accepted character/deadline. Overtake callouts require a real place improvement with a two-active-second cooldown. Nitro remains visual-only and bounded by the existing core event. High/low effects bound particles; Reduced motion uses a stable whole-course view without decorative parallax/particles. The normal passage strip follows the caret; Larger typing text remains wrapped.
+
+The original menu/race score and cues are optional and initially muted, with separate saved master/music/effects controls. Audio startup/failure cannot block countdown, typing or finish. Pausing stops race voices as well as the core; scores are never driven by sound or animation. See ART_BIBLE.md, AUDIO.md and PERFORMANCE.md for implemented presentation, sources and evidence limits. Physical audiovisual acceptance remains TT-505/506.
+
 ## Verification and remaining gate
 
 Pure tests cover correction, zero time, blocked errors, monotonic timing, pause/resume, timeout boundaries, finish freeze, retyping, nitro, invalid content and shared places. Browser tests exercise the adapter/state/UI under desktop/phone/tablet Chromium profiles, including replacements without beforeinput and composition with a trailing final input. These are not physical keyboard event traces.

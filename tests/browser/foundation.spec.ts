@@ -93,7 +93,7 @@ test("unknown hash recovers and narrow landscape resize preserves text", async (
 test("failed artwork offers retry while other screens remain usable", async ({
   page,
 }) => {
-  await page.route("**/assets/starter-coupe.svg", (route) => route.abort());
+  await page.route("**/assets/cars/neon-gt.svg", (route) => route.abort());
   await page.goto("./");
   await expect(page.locator("#track-status")).toContainText(
     "artwork could not load",
@@ -101,7 +101,7 @@ test("failed artwork offers retry while other screens remain usable", async ({
   await expect(
     page.getByRole("button", { name: "Retry preview" }),
   ).toBeVisible();
-  await page.unroute("**/assets/starter-coupe.svg");
+  await page.unroute("**/assets/cars/neon-gt.svg");
   await page.getByRole("button", { name: "Retry preview" }).click();
   await expect(page.locator("#track-preview")).toHaveAttribute(
     "data-ready",
