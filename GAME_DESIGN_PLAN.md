@@ -4,6 +4,8 @@ Status: proposed design, ready for review; implementation has not started.
 Updated: 20 October 2026.
 Technology research and source links: [IMPLEMENTATION_RESEARCH.md](./IMPLEMENTATION_RESEARCH.md).
 
+Phase 1 design coverage has been audited. [PROJECT_STATUS.md](./PROJECT_STATUS.md) tracks the eleven user-facing phases. [Rules and storage baseline](./docs/RULES_AND_STORAGE_BASELINE.md) supplies exact initial rewards, timing/cooldown defaults, save boundaries, backup/recovery policy, and database scope; its clarifications supersede earlier broad suggestions here. Baseline design completion is not implementation or playtest completion.
+
 ## 1. Product brief and scope
 
 Create an immersive typing racing game that makes repeated practice enjoyable and makes improvement visible. The racing spectacle should reward accurate, sustained typing while leaving the passage easy to read. Build original TurboType branding, vehicles, loading artwork, music, and environments.
@@ -91,7 +93,7 @@ Worked example: expected `cat`; typing `c`, `x` yields one validated character, 
 - A paused event can be completed for practice and base participation rewards, but cannot earn a personal record or campaign stars. State this before starting and on the pause/results screens. Practice drills allow unrestricted pausing.
 - Restart abandons the active run and awards nothing. Refresh/closing the page abandons it; keep previously earned progress.
 - CPU opponents finishing first does not stop the player's learning opportunity. Continue until the player finishes, leaves, or the visible event time limit expires.
-- Give timed events an explicit limit in their setup. Untimed practice has none. For a timed campaign race, expiry produces DNF with actual progress; never invent a finish time.
+- Give opt-in timed practice/time-trial events an explicit limit in setup; expiry produces DNF with actual progress, never an invented finish time. Main campaign levels and default Quick Race are untimed exact-passage races.
 - After the player finishes, finish ordering for remaining bots may be derived from their deterministic schedules and labeled as simulated CPU results. A bot beyond the event deadline is DNF. The user need not watch every remaining bot finish before retrying.
 
 ### Nitro and controls
@@ -149,7 +151,7 @@ Bots use seeded per-character schedules, bounded pace changes, reaction time, he
 
 Call XP progression **Driver Rank**, distinct from Easy/Medium/Hard level numbers. Proposed cumulative XP to reach rank R is `100 × (R−1)²`. Keep the formula and reward tables versioned. Never show an ambiguous “Level 12” without category or rank context.
 
-Ordinary completed-race rewards remain proposed at 50 base XP plus up to 50 accuracy XP and a small placement bonus; 10 base credits plus up to 10 accuracy credits. Specify exact rounding and bonuses in the implemented rulebook before code depends on them. Paused completions receive base rewards only; abandoned/DNF runs show feedback without completion rewards. Campaign-specific first-clear bonuses are separate from ordinary race rewards.
+Ordinary completed-race reward defaults are 50 base XP plus `floor(50 × accuracyRatio)` XP and placement XP of 25/15/10 for first/second/third (zero otherwise); credits are `10 + floor(10 × accuracyRatio)`. Paused completions receive base rewards only; abandoned/DNF runs show feedback without completion rewards. Campaign-specific first-clear and other fixed awards are defined in the rules/storage baseline; tutorial/calibration/drills do not award ordinary race currency. Record final implemented behavior in the rulebook before release.
 
 | Bonus | Trigger | Reward and progression behavior |
 | --- | --- | --- |
@@ -233,6 +235,8 @@ Documentation is part of every milestone's completion, updated in the same chang
 | `docs/ANIMATION_AND_ART.md` | Motion presets, timelines, reduced-motion equivalents, art bible, asset authoring/export instructions, animation-library ownership |
 | `docs/ASSETS.md` | Each shipped asset's source, creator, license/attribution, modifications, and editable source location; include generated-art provenance if used |
 | `docs/SAVES.md` | Versioned schemas, namespaced keys, migration, recovery, export/import if implemented, reset behavior and browser-local limitations |
+| `PROJECT_STATUS.md` | Persistent eleven-phase tracker: actual completion, evidence, remaining work, and next deliverable |
+| `docs/RULES_AND_STORAGE_BASELINE.md` | Initial rule/reward/save audit decisions; transition these into implemented rulebook and save documentation |
 | `docs/TESTING.md` | Automated checks, deterministic cases, manual browser/device checklist, performance method, actual measured results and known limits |
 | `docs/DEPLOYMENT.md` | Repository ownership, Pages setup, base path, asset paths, workflow permissions, exact deployment verification and rollback procedure |
 | `docs/adr/` | Short decision records: context, chosen option, alternatives, consequences, date; initially engine version, Anime.js ownership, strict correction, pause policy, storage, Pages routing |
@@ -250,7 +254,7 @@ For every milestone record: objective, files/systems changed, setup/run instruct
 | M1 — Foundation | Vite/TypeScript project, pinned Phaser/Anime.js smoke test, routing, minimal loader, settings defaults | Clean install/build works; game assets load under `/TurboType/`; setup and engine ADR documented |
 | M2 — Rules and bots | Pure typing/scoring/state engine and deterministic CPU providers with simple playable race | Correction, timing, ties, pause eligibility, timeout, and finish tests pass; rules and architecture documented |
 | M3 — Complete experience slice | Original entrance/loading sequence, rules, tutorial, hub, setup, city race, finish, results, retry | A new player can learn and finish a race; returning players skip onboarding; browser-reviewed animation and input remain smooth |
-| M4 — Learning and progression | Three 100-level campaigns, horizontal maps, chapters, optional bonuses, practice drills, cosmetic garage, local history and rewards | All 300 main definitions valid/playable; each category's first/last/chapter-boundary unlocks, single-award rewards, map navigation/accessibility, coaching evidence, migrations and records verified; content/map/save docs complete |
+| M4 — Learning and progression | Three 100-level campaigns, horizontal maps, chapters, optional bonuses, practice drills, cosmetic garage, local history/rewards, validated save export/import and recovery | All 300 main definitions valid/playable; each category's first/last/chapter-boundary unlocks, single-award rewards, map navigation/accessibility, coaching evidence, migrations, backup/recovery and records verified; content/map/save docs complete |
 | M5 — Polish and launch | Finished art/audio, quality presets, recovery screens, accessibility, GitHub deployment | Device/browser checks recorded, performance measured, published build tested, clean-clone and rollback procedures reproduced |
 | M6 — Friends multiplayer, later | Join links, private lobby, ready checks, realtime race, reconnect policy, rematch | Backend and frontend deployment docs, synchronized-result tests, multiple-client verification, no regression in solo mode |
 
