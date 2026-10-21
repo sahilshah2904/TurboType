@@ -1,5 +1,11 @@
 # Verification evidence
 
+## Documentation handoff — 21 October 2026
+
+README refreshed to actual alpha.13 race/hub/selector/Settings captures, with a documentation-only default-branch publication separate from unfinished game integration. AGENTS.md is a concise operating entry point; docs/SESSION_HANDOFF.md records current decisions, completed/pending work, source map and resume procedure. No application code/dependency/version changed, so no new full gameplay suite is claimed for this documentation task. Validate file/image links, staged diffs and exact new hosted checks separately.
+
+Hosted run [39582296673](https://github.com/sahilshah2904/TurboType/actions/runs/39582296673) was verified successful for pre-handoff documentation source 717c76e; implementation b76392b separately passed run 39581833203. Both are historical evidence for those exact revisions, not blanket success for a later handoff commit. Phase 5 art/hardware gates remain open.
+
 ## Alpha.13 — car lock, shared fullscreen, readability and CI correction
 
 The user reported the rest of the alpha.12 laptop checks good and changed the car rule: exactly one chosen model for the whole race, including pause. Alpha.13 enforces choice only in ready, guards synthetic events using actual state and reopens selection on retry/new race. A shared 44px top-right fullscreen/restore icon follows every route with actual state/accessible labels and browser-refusal feedback. Main prose and controls are at least 16px; compact labels/metadata 14px, with brighter secondary text and laptop navigation layout adjustments.

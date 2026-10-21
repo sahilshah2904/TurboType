@@ -1,85 +1,43 @@
 # TurboType project continuity
 
+## Read first in a new chat
 
-## Current checkpoint — alpha.13, 21 October 2026
+1. Read [PROJECT_STATUS.md](PROJECT_STATUS.md), [docs/SESSION_HANDOFF.md](docs/SESSION_HANDOFF.md) and [BACKLOG.md](BACKLOG.md) before reporting progress or starting work. The detailed handoff records accepted decisions, source paths, checks, CI history, limitations and exact next steps; the previous chat is not required.
+2. Inspect actual Git status/branch/log/remotes, PR #4 and exact-source hosted checks. Preserve intervening edits. Update status/backlog/docs after meaningful work; never infer success from an older run.
+3. The user asked to save the handoff and continue later. Do not start another implementation phase, merge or deploy merely because this handoff exists.
 
-The user reported the other laptop tests good, requested one car per race (no paused switching), a visible fullscreen symbol on every page and larger readable copy. Alpha.13 locks selection whenever state is not ready, hides it in pause and rejects synthetic mid-race changes; retry/new race reopens it. Shared app-owned 44px fullscreen/restore corner control replaces Race-only text. Main prose/controls are 16px+, compact metadata 14px, with brighter secondary copy and laptop layout adjustments.
+## Current checkpoint — 21 October 2026
 
-CI investigation found real failures: runs 39578553613 (push/722ee85) and 39579044713 (PR/8e28d2a) timed out in the 30-second all-in-one garage browser scenario; their counterpart runs passed. Earlier passing-PR reports did not imply all copies passed. Alpha.13 splits that scenario into focused tests without raising the global timeout or removing assertions, keeps feature checks on PR updates/main checks on push/manual, and cancels superseded runs. Do not mute notifications or claim a hosted pass until checking the exact new source. See docs/TESTING.md and docs/GITHUB_WORKFLOW.md.
+- App **0.1.0-alpha.13**, rules **3**, save/content **1**. Latest implementation b76392b; verified documentation checkpoint 717c76e. This handoff creates newer documentation commits; inspect actual HEAD.
+- Workspace: S:/AI_Engineer_Journey/Projects/TurboType. Account: sahilshah2904; repository: TurboType; local author: **Sahilshah**. Current branch: **feat/race-polish**; open/unmerged [PR #4](https://github.com/sahilshah2904/TurboType/pull/4).
+- Main code is the accepted Phase 4 baseline. Publishing the README/screenshots on main does not merge the preview or deploy a game.
+- Phases **1–4 complete for agreed scope**. **Phase 5 remains open** for separate body/wheel art and measured hardware performance/tuning/final integration (TT-501/510, TT-505/506/511–513/522). Main visible features are implemented/tested. Do not mark complete just because tests pass.
+- Existing-page Phase 6 visuals are partial; cinematic loading/welcome/rules/tutorial/calibration are not implemented.
+- Local checks: formatting/types/build, **93 unit / 35 desktop browser cases**, 12 repeated garage executions and final three fullscreen/readability cases passed. Hosted run **39581833203** passed for b76392b; **39582296673** passed for 717c76e. Handoff changes have their own CI. Evidence: docs/TESTING.md and docs/images/alpha13.
+- No Pages game, database, account provider, cloud saves or multiplayer deployed. Only preferences persist; race/results are in memory. Three short exercise passages are not the 300 campaign levels.
 
-Phase 5 stays open for separate wheel/body art and measured hardware performance/tuning. Record the user's “rest every testing looks good” as available-laptop acceptance of the previous checklist, not presented-frame-rate/latency certification. No repeat approval of accepted art/music is needed. Latest car lock/fullscreen/type changes require their own regression/layout evidence. Future ten-car rewards remain TT-911 (Phases 8/9), not implemented or a Phase 5 blocker. Eleven phases, laptop-only scope, rules 3 and save/content 1 remain; no merge/Pages/backend deployment.
+## Authoritative product decisions
 
-Local final full check: formatting/types/build, 93 unit and 35 browser cases pass; garage cases passed three repeats each (12 executions). Fresh 1024/1440 captures and focused final fullscreen/readability validation are in docs/TESTING.md and docs/images/alpha13. Hosted PR run 39581833203 passed for exact implementation `b76392b`, with one PR event and no duplicate feature-push execution. The later documentation-only checkpoint has its own CI state; preserve that distinction.
+- **Laptop/desktop physical-keyboard typing only.** Phone/tablet compatibility/testing and mobile keyboard/rotation work were explicitly canceled. Retain laptop resizing (960 CSS px minimum; verify 1024/1366/1440/1920), accessibility and hardware IME composition. Historical mobile requirements are superseded.
+- Solo against **four seeded CPUs** first. Plan **100 levels each in Easy/Medium/Hard**, rightward maps with numbered circular locked/unlocked stages, chapters/bonuses. Design auth/storage/network boundaries early; optional account-backed cloud progress before public solo launch; friends multiplayer immediately afterward. Supabase is a candidate, not provisioned infrastructure.
+- Preserve the eleven phase numbers. Distinguish designed, implemented, tested, accepted and deployed. Never estimate completion by counting phases.
+- Accepted appearance: full-window kart racing/open city pages, restored **graphite/crimson/cyan** palette, five distinct original starter silhouettes, one native-backed visible typing strip, Live WPM gauge and exhaust flames. Old boxes/retro cars and the red/gold variation were rejected. Do not restart palette experimentation.
+- Choose a starter **only before countdown**. It stays locked through the whole race, including pauses/navigation; retry/new race reopens selection. Alpha.12 paused switching is superseded. Remember the cosmetic choice and show it in hub/preview; CPUs use other models. Cars never change gameplay performance.
+- **Sound controls only in Settings.** No hub radio section, Race audio controls or personal-music chooser. Accepted original **Ignition** browsing and **Overdrive** racing masters; separate countdown/FX. Do not restore Nightforge, the old oscillator loop, Misirlou or uploads.
+- Shared **44px top-right fullscreen/restore icon on all routes**; important prose/controls 16px+, compact metadata 14px, brighter secondary text. Keep Low effects, Reduced motion and Larger typing text.
+- The user accepted the cars/music/palette and reported the other laptop tests good. Do not repeat those approvals. That report is not physical presented-frame-rate/keyboard-latency certification; latest alpha.13 controls/fonts have automated/layout evidence.
+- **Ten additional** increasingly sporty locked reward cars are future Phase 8/9 scope (TT-911), not implemented or a Phase 5 blocker. Unlock at **10/25/50/75/100/140/180/220/260/300 unique eligible main-level clears**. No replay/bonus/Practice inflation. See docs/GARAGE_PROGRESSION.md for stable IDs, art briefs, ownership/save/cloud rules.
 
-## Historical alpha.12 checkpoint
+## Engineering, documents and Git
 
+- Product decisions: GAME_DESIGN_PLAN.md; designed defaults: docs/RULES_AND_STORAGE_BASELINE.md; implemented semantics: docs/GAME_RULES.md, docs/QUICK_RACE.md and source. Research/reference observations: IMPLEMENTATION_RESEARCH.md and docs/REFERENCE_VIDEO_ANALYSIS.md. Latest explicit user decisions override older prose, including outdated mobile statements.
+- Follow docs/ENGINEERING_CONVENTIONS.md and docs/GITHUB_WORKFLOW.md for naming, versions, checks and commit/push. Keep docs/tests/backlog with behavior changes. Preserve stable task IDs; separate required from optional; mark complete only with evidence.
+- Short plain-English commits, **no conventional prefixes**. Never rewrite shared commits or force-push. Do not invent author identity or expose credentials. Existing Windows GCM authentication is available; never print its password/token.
+- Reuse the current feature checkout for unfinished Phase 5. No automatic commit/watchers. Source pushes are not deployments. A documented main README/screenshot-only update must not import unfinished app code.
+- Node 24.13.0 / npm 11, pinned lockfile; npm run check is the full check. Playwright preview uses 4173, two SwiftShader workers. Do not kill the existing user-owned Vite server on 5173 blindly. Do not run browser suites/captures/profiling concurrently on the limited-memory workstation.
+- CI emails were real: combined garage tests exceeded 30 seconds in duplicate push/PR runs. Alpha.13 splits cases without raising timeouts, runs feature checks on PR updates/main on push/manual, and cancels superseded runs. Do not mute notifications, disable checks or claim all copies passed from one successful run. Inspect current head/event/conclusion.
+- Keep reference media/analysis tools ignored under Reference_Images/. Ship only original/appropriately licensed assets/audio and record provenance. Raster masters/prompts are not editable 3D meshes. Current baked wheels plus rotating highlights are unfinished part work.
 
+## Resume order
 
-The user accepted the four distinct CPU cars (“these cars looks very nice”), requested player choice, ten future locked reward cars and sound controls only in Settings. Alpha.12 implements a five-starter car selector before a race or while paused, updates the existing renderer without resetting typing/timing/CPUs, remembers the cosmetic choice in a separate validated browser preference, and shows it in the hub hero/preview. CPUs use the other four models. Sound controls and the hub radio section were removed from Hub/Race; enable/mute/volumes live only in Settings. Current colors and both music masters remain accepted.
-
-[docs/GARAGE_PROGRESSION.md](docs/GARAGE_PROGRESSION.md) defines the ten required future reward cars: milestones 10/25/50/75/100/140/180/220/260/300 unique eligible main-level clears across the three campaigns, progressively sportier designs and cosmetic-only performance. This is planned Phase 8/9 work (TT-911), not current unlock/save behavior. Five starters are selectable now; no fake locked assets or completed reward system are claimed. Selected-car preference is not an ownership entitlement.
-
-Phase 5 remains open on `feat/race-polish` / PR #4 for separate body/wheel art and actual laptop performance/tuning (TT-501/510, TT-505/506/511–513/522). Current fleet silhouettes, palette and music are user-accepted; do not repeat those approval requests. Native laptop input, rules 3 and save/content 1 remain. No new campaign, backend or Pages deployment. Eleven phases and laptop-only scope are preserved. Local full check passed formatting/types/build, 93 unit and 30 browser cases; final preview-anchor/CSS cleanup passed build and all four affected garage/audio cases (21.0 seconds). Captures are in docs/images/alpha12. Current evidence is in docs/TESTING.md; alpha.11 performance data is historical, not a new alpha.12 benchmark.
-
-## Historical alpha.11 checkpoint
-
-
-
-The user said “yes everything is good. lets go ahead” after the restored alpha.10 palette and Ignition review. Record those colors/menu music as accepted, alongside previously accepted Overdrive, typing/dial and pause/resume/retry. Do not ask them to repeat that acceptance. Current scope remains laptop/desktop physical keyboards only; the historical phone/tablet requirements below are superseded.
-
-Phase 5 continues on `feat/race-polish`, open PR #4. Alpha.11 adds four original distinct CPU models, shared race/hub anchors, 800×400 WebP exports (267,580 bytes total), tracked PNG masters/prompts and export script. Player kart, accepted colors and both soundtrack WAVs are unchanged. Standings nodes are retained rather than rebuilt. See docs/KART_FLEET.md and docs/PERFORMANCE_ALPHA11.md for source/verification/measurement limits.
-
-Still open in Phase 5: separately authored body/wheel assets and final fleet review (TT-501/510); physical laptop frame/input-latency evidence, low-end tuning and final acceptance/integration (TT-505/506/511–513, TT-522). Full-app software-renderer measurements show long-tail frame callbacks; they do not certify 60 fps. Current art includes baked wheels plus rotating highlights. No Phase 6 onboarding, campaign, database/backend or Pages deployment was added. Rules 3, save/content 1. Preserve the eleven phases; do not merge or mark Phase 5 complete solely from these automated checks.
-
-Final local `npm run check` passed formatting/types/build, 87 unit and 28 desktop browser cases. Current evidence/captures: docs/TESTING.md, docs/images/alpha11 and docs/performance/alpha11-full-app.json. Implementation `96b8f96` is pushed; hosted Linux run 39576297805 passed for that exact source. This subsequent documentation checkpoint has a separate CI state; earlier runs do not certify newer implementation.
-
-Earlier checkpoints below describe earlier source versions, not current pending color/music acceptance.
-
-
-**Latest palette decision — 0.1.0-alpha.10:** Alpha.10 restores the previous alpha.8 graphite/crimson/cyan palette at the user's request, replacing the rejected alpha.9 red/gold armor panels. Laptop-only scope, Ignition browsing music, the accepted Overdrive racing master, typing rules and mobile-removal changes stay in place.
-
-- Read `PROJECT_STATUS.md` before reporting progress or starting a new implementation phase. Check the actual repository and validation evidence; update the tracker after meaningful work.
-- Read and maintain `BACKLOG.md` for future/deferred tasks. Preserve stable task IDs, capture new follow-ups in the same change, and mark tasks complete only with implementation/verification/documentation evidence. Keep required scope separate from optional ideas.
-- Preserve the eleven user-facing phases and their numbering. Distinguish designed, implemented, tested, and deployed behavior. Do not estimate overall completion by counting phases.
-- Product decisions live in `GAME_DESIGN_PLAN.md`. `docs/RULES_AND_STORAGE_BASELINE.md` clarifies the initial rule/reward/storage defaults. Research and visual observations are in `IMPLEMENTATION_RESEARCH.md` and `docs/REFERENCE_VIDEO_ANALYSIS.md`.
-- Follow `docs/ENGINEERING_CONVENTIONS.md` and `docs/GITHUB_WORKFLOW.md` for naming, versions, documentation, meaningful checks, and commit/push workflow. Keep documentation in the same change as the behavior it describes.
-- Use short plain-English commit messages without conventional-commit prefixes, per the user's Phase 2 instruction. Do not rewrite older shared commits.
-- Scope: laptop/desktop physical-keyboard typing improvement only, four CPUs, 100 levels each in Easy/Medium/Hard and rightward maps. Phone/tablet support and mobile testing were explicitly canceled by the user on 21 October. Plan storage/auth/network boundaries, optional cloud progress before public solo launch and friends multiplayer immediately afterward. Current scope overrides historical multi-device assumptions in older checkpoints.
-- Keep user reference media and analysis tools local under ignored `Reference_Images/`. Do not ship the reel's assets or soundtrack. Use original or appropriately licensed game assets/audio and record provenance.
-
-## Latest alpha.9 scope and acceptance update
-
-**Current scope override — 21 October 2026:** the user explicitly narrowed TurboType to laptop/desktop browsers with a physical keyboard. Phone/tablet compatibility, software-keyboard layout, rotation and mobile acceptance are canceled requirements. Earlier multi-device statements are historical. Keep laptop window responsiveness (960 CSS px minimum; verify 1024/1366/1440/1920 widths), accessibility, hardware-keyboard IME composition, cloud saves before solo launch and multiplayer afterward. Do not restore mobile work without a new user request.
-
-The user accepted alpha.8 race music (Overdrive), typing/speedometer checks and pause/resume/retry (points 5/6). They rejected the cyan-dominant palette and sad Nightforge menu score. Alpha.9 makes metallic red/gold dominant with small cyan light details; replaces Nightforge with upbeat major-key Ignition (124 BPM); preserves Overdrive byte-for-byte; removes VisualViewport/software-keyboard handling, small-screen CSS and phone/tablet Playwright projects. Hardware IME composition/correction stays unchanged. The reported Samsung word-at-a-time caret symptom is out of current scope, not claimed fixed. Laptop review/performance and distinct fleet remain open.
-
-## Historical resume checkpoint — 21 October 2026
-
-The following alpha.8 snapshot is historical; the scope update above supersedes its phone/tablet and menu/theme requirements.
-
-The user asked to stop after documenting progress and continue later. Resume from the current checkout; do not start a new phase, merge or deploy merely because this handoff exists.
-
-- Current app: **0.1.0-alpha.8**; rules **3**, save/content **1**. Branch **feat/race-polish**, latest implementation **0b4eef6** (Create separate racing music and a graphite theme), open [PR #4](https://github.com/sahilshah2904/TurboType/pull/4). The documentation checkpoint follows that commit. Main retains the accepted Phase 4 baseline plus README changes; PR #4 is not merged and Pages/backend are not deployed.
-- Verification: final local npm run check passed formatting/types/build, **87 unit and 78 Chromium profile cases**. [Hosted run 39524238316](https://github.com/sahilshah2904/TurboType/actions/runs/39524238316) passed for exact source 0b4eef6; this later documentation checkpoint has its own CI status. Recheck newer source rather than carrying that pass forward. Device profiles/screenshots do not certify actual phone keyboards, listening quality or physical fps.
-
-### Work already delivered
-
-1. Phase 1 design/research: screenshots and four local video references reviewed, eleven delivery phases retained, typing/correction/reward/storage rules and responsive/account/network boundaries documented. Plan three independent rightward Easy/Medium/Hard campaigns with 100 levels each, circular locks/chapter/bonus branches. Runtime campaign/reward systems do not exist yet.
-2. Phase 2 foundation: TypeScript/Vite, Phaser, Anime.js, routes/layout/preferences, naming/version conventions, reproducible setup, Git/GitHub workflow, automated checks and source/asset documentation. Available ASUS/Samsung foundation checks accepted; no iPhone/tablet available.
-3. Phase 3 typing: strict native input/Backspace correction, accurate timing/WPM/accuracy/streaks, pauses, countdown, timed expiry and frozen results, tested independently of graphics. Available-device earlier checks accepted.
-4. Phase 4 single-player slice: four seeded CPUs, shared active clock, standings, same-seed retry, timeout/DNF and graphics recovery. Earlier user ASUS/Samsung acceptance recorded; merged to main.
-5. Current Phase 5/6 integration: full-window kart racing and full-width hub preview, one visible native-backed typing strip in Race/Practice, Live WPM dial, exhaust/nitro/spoke/suspension/parallax/bounded effects and reduced/low modes. Hub, Practice, Keyboard check and Settings are visually revamped. Screenshots and recreation: [IMMERSIVE_APP.md](docs/IMMERSIVE_APP.md), docs/images/alpha8.
-6. Latest visual decision: **graphite/steel, localized metallic crimson, cyan lighting and restrained gold**, using the user's Iron Man screenshot as a palette reference only. Uniform burgundy/pink wash was rejected. No Marvel character, logo or reference screenshot is shipped. One original AI-generated kart with palette variants is integrated; a distinct fleet remains unfinished.
-7. Latest audio decision: **Nightforge** (96 BPM / 20s) for browsing all tabs and race setup/results; **Overdrive** (150 BPM / 25.6s) for racing; separate 3–2–1/GO and game FX. Original WAVs are recreated with node assets-source/build-soundtracks.mjs; hashes/mix metadata are tracked. Real decoded-source switching, loading failure/retry, mute/pause/visibility/disposal are tested. [AUDIO.md](docs/AUDIO.md).
-8. Personal music was explicitly canceled: chooser, loader and associated tests were removed in alpha.8. **Do not reintroduce file uploads, Misirlou or the rejected Harbor Circuit loop.** Historical alpha.7/prototype documentation is not the current product decision. Reference media stay ignored; shipped music/art is original or appropriately licensed.
-
-### What remains and where to resume
-
-- **First: finish Phase 5 acceptance**, not campaign implementation: user review/listening of the latest theme and both tracks, ASUS/Samsung native keyboard/rotation/caret/dial, sound/loop joins/volume/interruptions and actual performance/decode/memory/transfer evidence. TT-505/506/508/509/511/512/513/515/518/519; use [PHASE5_POLISH_TESTS.md](docs/PHASE5_POLISH_TESTS.md). Previous Phase 4 device acceptance does not accept alpha.8.
-- **Distinct fleet:** original separate vehicle bodies/wheels with consistent anchors/provenance, TT-501/510. Current palette variants do not close it. Keep visual review and lifecycle/performance checks before final PR #4 integration.
-- **Phase 6:** cinematic loading/welcome/rules/tutorial/calibration and final first/returning-player flow, TT-601–604. Existing-page visual work is partial Phase 6, not completion.
-- **Phases 7–8:** three rightward 100-node maps, locks/chapters/bonus nodes and saved location; author/review/validate/balance all 300 passages and level definitions, TT-701–704 and TT-801–806. Current short passages and hub map cards are functional previews.
-- **Phase 9:** rewards/stars/unlocks/rank/garage/records/coaching/drills, robust guest saves/migrations/import/export and optional account-backed cloud progress before public solo launch, TT-901–910. Supabase is a candidate; no service has been provisioned. Current storage remembers preferences only; race text/results are in-memory.
-- **Phase 10:** broader browser/device/accessibility/performance/recovery checks, cloud isolation/sync, Pages deployment and actual public-link validation, TT-1001–1008. User has ASUS laptop/Samsung S25 Ultra; physical iPhone/tablet coverage is explicitly unavailable, not passed.
-- **Phase 11 immediately after solo launch:** backend/private rooms/invites/ready/synchronized races/reconnection/rematches, TT-1101–1107. GitHub Pages hosts the frontend; realtime/database services are separate.
-- On resuming: read this checkpoint, PROJECT_STATUS.md, BACKLOG.md and docs/TESTING.md; inspect Git status/branch/PR/CI; preserve any intervening edits. Confirm the latest user feedback, complete the open Phase 5 gates, and then continue the numbered roadmap. Use short plain-English commits, document the same change, and never equate push with deployment.
+Read the detailed handoff; audit current Git/CI; finish the remaining Phase 5 art/performance gates and reconcile backlog; verify/review/integrate PR #4 when appropriate. Then Phase 6 opening/tutorial, Phase 7 maps, Phase 8 curriculum, Phase 9 rewards/learning/guest and optional cloud saves, Phase 10 release/Pages, Phase 11 friends. Do not implement more during this stop-and-save request.

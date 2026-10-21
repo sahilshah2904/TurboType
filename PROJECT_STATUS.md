@@ -1,5 +1,15 @@
 # TurboType project status
 
+## Saved handoff — 21 October 2026
+
+The user asked to stop and continue in a new project chat. Read the refreshed [AGENTS.md](AGENTS.md) and [detailed session handoff](docs/SESSION_HANDOFF.md) before resuming; the old chat is not required. No new implementation, merge or deployment is requested in this handoff task.
+
+The README now describes alpha.13 and shows actual current race/hub/car-selector/Settings screenshots. Its default-branch publication is documentation-only: main game code remains the accepted Phase 4 baseline, while the latest preview stays on feat/race-polish / open PR #4. Documentation links deliberately target the preview branch. The local checkout must return to feat/race-polish after publishing the main README.
+
+**Phase 5 is not fully closed.** Main features and 93 unit / 35 browser checks are complete; remaining developer gates are separate body/wheel art (TT-501/510), measured hardware performance/tuning and final integration (TT-505/506/511–513/522). User-accepted silhouettes/colors/music and reported functional checks are recorded, not reopened. Ten future reward cars remain TT-911, not a Phase 5 blocker. Then Phase 6 cinematic loading/onboarding, followed by the preserved eleven-phase roadmap.
+
+Verified pre-handoff hosted run 39582296673 passed for 717c76e, separately from implementation b76392b / run 39581833203. This documentation handoff has newer commits/checks; do not attribute an old pass to a new head. See docs/TESTING.md for evidence and docs/SESSION_HANDOFF.md for exact source/commands/limitations.
+
 
 ## Current checkpoint — alpha.13, 21 October 2026
 
