@@ -9,7 +9,7 @@ CI investigation found real failures: runs 39578553613 (push/722ee85) and 395790
 
 Phase 5 stays open for separate wheel/body art and measured hardware performance/tuning. Record the user's “rest every testing looks good” as available-laptop acceptance of the previous checklist, not presented-frame-rate/latency certification. No repeat approval of accepted art/music is needed. Latest car lock/fullscreen/type changes require their own regression/layout evidence. Future ten-car rewards remain TT-911 (Phases 8/9), not implemented or a Phase 5 blocker. Eleven phases, laptop-only scope, rules 3 and save/content 1 remain; no merge/Pages/backend deployment.
 
-Local final full check: formatting/types/build, 93 unit and 35 browser cases pass; garage cases passed three repeats each (12 executions). Fresh 1024/1440 captures and focused final fullscreen/readability validation are in docs/TESTING.md and docs/images/alpha13. Check exact new hosted source before claiming CI recovery.
+Local final full check: formatting/types/build, 93 unit and 35 browser cases pass; garage cases passed three repeats each (12 executions). Fresh 1024/1440 captures and focused final fullscreen/readability validation are in docs/TESTING.md and docs/images/alpha13. Hosted PR run 39581833203 passed for exact implementation `b76392b`, with one PR event and no duplicate feature-push execution. The later documentation-only checkpoint has its own CI state; preserve that distinction.
 
 ## Historical alpha.12 checkpoint
 

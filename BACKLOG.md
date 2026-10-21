@@ -94,7 +94,7 @@ Alpha.5 integration evidence: source `2a2c11b`, PR #4, full local check 83 unit 
 Completion evidence for TT-525–527: src/ui/fullscreen.ts, app-owned control lifecycle, ready-state guard and native fieldset lock, 93 unit / 35 browser checks plus actual enter/exit/refusal and readable-size assertions; docs/TESTING.md and reviewed 1024/1440 captures. No hardware fps claim.
 
 - [x] TT-527: Laptop readability pass: important prose/controls 16px+, compact labels 14px, contrast and spacing, scrollable setup and 1024/1440 layout captures. Retain Larger typing text and reduced motion.
-- [ ] TT-528: Fix the known hosted garage timeout: split overlong end-to-end test, preserve coverage, remove duplicate push/PR workflow executions, check exact new hosted result. Earlier opposite-result copies are not blanket CI success.
+- [x] TT-528: Fix the known hosted garage timeout: split overlong end-to-end test, preserve coverage, remove duplicate push/PR workflow executions, check exact new hosted result. Earlier opposite-result copies are not blanket CI success. Evidence: full local 93/35 check, 12 repeated garage executions and hosted PR run 39581833203 successful for b76392b, with only one PR execution. See docs/TESTING.md.
 
 ## Phase 6 — entrance and onboarding
 
