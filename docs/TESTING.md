@@ -1,5 +1,21 @@
 # Verification evidence
 
+## Alpha.13 — car lock, shared fullscreen, readability and CI correction
+
+The user reported the rest of the alpha.12 laptop checks good and changed the car rule: exactly one chosen model for the whole race, including pause. Alpha.13 enforces choice only in ready, guards synthetic events using actual state and reopens selection on retry/new race. A shared 44px top-right fullscreen/restore icon follows every route with actual state/accessible labels and browser-refusal feedback. Main prose and controls are at least 16px; compact labels/metadata 14px, with brighter secondary text and laptop navigation layout adjustments.
+
+Final local `npm run check` passed formatting/types/build, **93 unit and 35 browser cases (1.5 minutes)**. The former long garage scenario is split into three independent cases; it now checks mid-race/paused change rejection and fresh-race selection. New browser cases cover real fullscreen enter/exit across navigation, rejected fullscreen, readable computed sizes and 44px target/overflow at 1024/1440 widths. The four garage scenarios also passed three sequential repetitions each (12 executions, 38.0 seconds), keeping the 30-second per-case budget. Final navigation spacing was corrected after screenshot review so the fullscreen icon does not cover Settings on a 1024px race header; the affected fullscreen/readability checks were rerun.
+
+The first local attempt found a matcher issue: Playwright treated a disabled fieldset itself as enabled; the test now checks its native disabled attribute and the handler's synthetic-change guard. No production unlock workaround was used.
+
+### Why GitHub sent failure emails
+
+The emails corresponded to real failures. [Push run 39578553613](https://github.com/sahilshah2904/TurboType/actions/runs/39578553613) for `722ee85` and [PR run 39579044713](https://github.com/sahilshah2904/TurboType/actions/runs/39579044713) for documentation commit `8e28d2a` exceeded the **30-second total test timeout** in the all-in-one garage scenario, at late hub navigation/reload/assertion steps, including retries. Each finished with 29 other cases passed. Their counterpart push/PR runs passed, so the earlier passing-PR report was not evidence that all executions succeeded. These were check failures, not a Pages deployment failure; no deployment workflow exists.
+
+The fix splits the workload while retaining selection/persistence/cleanup coverage and the default timeout. The workflow now validates feature PR updates, main pushes and manual dispatch, with concurrency cancellation of superseded runs. It no longer launches duplicate feature-push and PR copies. Account notification settings and retry policy are unchanged. The exact new hosted result must be checked after pushing; local success alone is not a claim that hosted CI is fixed.
+
+Phase 5 remains open for separate wheel parts and measured hardware performance. The user's accepted subjective laptop checks are recorded separately from presented-frame-rate/physical latency certification. New fullscreen/readability changes have their own focused checklist. Rules 3/save-content 1; no backend/Pages/merge.
+
 ## Alpha.12 — remembered car selection and Settings-only sound, 21 October 2026
 
 Local full `npm run check` passed formatting/types/build, **93 unit cases and 30 desktop Chromium browser cases (1.6 minutes)**. Six new storage cases cover separate preference records, malformed/unsupported/unknown-car recovery and denied storage. Two browser scenarios cover every selectable model, unique CPU model assignment, retained canvas identity, preserved paused typing/time/standings, resume/retry, hub choice, reload persistence, storage failure and exclusive audio controls on Settings. Existing real decoded music switching, single-context ownership, volume restoration and unsupported audio tests now access the Settings controls. No tracks or audio preferences changed.

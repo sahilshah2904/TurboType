@@ -71,3 +71,9 @@ Phase 2 adds a checks-only GitHub Actions workflow. It verifies formatting, type
 If a push is rejected, fetch and inspect the remote changes; do not force-push. If pulling would overwrite local edits, preserve the edits and resolve deliberately. Undo shared mistakes with revert commits rather than rewriting history. Version and migrate browser saves explicitly; reverting a deployment does not revert a player's saved data.
 
 Reference screenshots, dependencies, build output, local credentials, and logs are excluded by `.gitignore`. Authored source assets, lockfiles, documentation, tests, and workflow definitions are intentionally versioned when created.
+
+## Alpha.13 check triggers and failure investigation
+
+Feature branches run the checks workflow on pull-request creation/update; main runs on push, and manual dispatch remains available. Open a PR for hosted feature validation. Concurrency groups by PR number or ref and cancels superseded runs. This avoids duplicate push+PR copies without disabling checks or changing account email preferences.
+
+Two former copies failed while counterparts passed: runs 39578553613 and 39579044713 exceeded the 30-second total timeout in the all-in-one garage scenario (late navigation/reload/assertion steps). The scenario is split into independently isolated selection, locked-session and persistence cases. The default timeout stays 30 seconds and CI retry policy is unchanged. A prior successful copy does not certify a later failed one; inspect exact source, event, failed steps and logs before reporting hosted success. Documentation-only updates still receive normal PR validation.

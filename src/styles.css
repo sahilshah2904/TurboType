@@ -101,7 +101,7 @@ nav {
   gap: 32px;
   align-self: stretch;
   align-items: stretch;
-  font-size: 13px;
+  font-size: 16px;
 }
 nav a {
   display: flex;
@@ -145,7 +145,7 @@ nav a[aria-current] {
 .micro {
   font-family: monospace;
   letter-spacing: 1.5px;
-  font-size: 10px;
+  font-size: 16px;
   font-weight: 500;
 }
 .eyebrow {
@@ -171,7 +171,7 @@ h1 > span {
   font-style: italic;
 }
 .hero-copy {
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.8;
   color: #a2a8ad;
   margin: 22px 0 26px;
@@ -185,7 +185,7 @@ h1 > span {
   min-height: 52px;
   border-radius: 5px;
   font-weight: 700;
-  font-size: 13px;
+  font-size: 16px;
   transition:
     background-color 0.2s,
     transform 0.2s;
@@ -226,7 +226,7 @@ h1 > span {
 }
 .hero-note > span:last-child {
   color: var(--muted);
-  font-size: 12px;
+  font-size: 16px;
   line-height: 1.7;
 }
 .track-card {
@@ -270,7 +270,7 @@ h1 > span {
   flex-wrap: wrap;
   gap: 8px 16px;
   padding: 12px 22px;
-  font-size: 10px;
+  font-size: 16px;
   color: #a4aaaf;
   border-top: 1px solid var(--line);
 }
@@ -351,11 +351,11 @@ h3 {
 .card-subtitle {
   margin: 4px 0 10px;
   color: var(--card-accent);
-  font-size: 12px;
+  font-size: 16px;
 }
 .card-copy {
   color: var(--muted);
-  font-size: 12px;
+  font-size: 16px;
   line-height: 1.8;
   min-height: 43px;
   margin-bottom: 22px;
@@ -391,7 +391,7 @@ h3 {
   gap: 8px;
   border-top: 1px solid var(--line);
   padding: 16px 0;
-  font-size: 10px;
+  font-size: 16px;
   color: #8f959a;
 }
 .card-bottom > span:last-child {
@@ -412,7 +412,7 @@ h3 {
 }
 .development-note p {
   color: #979da2;
-  font-size: 11px;
+  font-size: 16px;
   line-height: 1.8;
   margin: 0;
   flex: 1;
@@ -424,7 +424,7 @@ h3 {
 }
 .development-note a {
   color: #bec4c9;
-  font-size: 11px;
+  font-size: 16px;
   white-space: nowrap;
 }
 .footer {
@@ -455,12 +455,12 @@ h3 {
 }
 .page-heading p:last-child {
   color: var(--muted);
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.7;
 }
 .back-link {
   color: #acb2b7;
-  font-size: 12px;
+  font-size: 16px;
   padding: 10px 0;
   display: inline-block;
 }
@@ -487,7 +487,7 @@ h3 {
 }
 label {
   display: block;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
 }
 textarea {
@@ -514,7 +514,7 @@ textarea::placeholder {
   gap: 12px;
 }
 #input-status {
-  font-size: 12px;
+  font-size: 16px;
   color: #cad0d5;
 }
 .text-button {
@@ -523,11 +523,11 @@ textarea::placeholder {
   color: var(--accent);
   min-height: 44px;
   padding: 8px 10px;
-  font-size: 12px;
+  font-size: 16px;
 }
 .help {
   color: #979da2;
-  font-size: 12px;
+  font-size: 16px;
   line-height: 1.9;
 }
 .keyboard-visual {
@@ -559,7 +559,7 @@ textarea::placeholder {
   border-top: 1px solid var(--line);
   margin-top: 24px;
   padding-top: 18px;
-  font-size: 12px;
+  font-size: 16px;
   color: var(--muted);
 }
 .diagnostics summary {
@@ -584,7 +584,7 @@ textarea::placeholder {
   border-bottom: 1px solid var(--line);
 }
 .setting-row p {
-  font-size: 12px;
+  font-size: 16px;
   color: var(--muted);
   line-height: 1.7;
 }
@@ -596,7 +596,7 @@ textarea::placeholder {
   min-height: 46px;
   padding: 10px 14px;
   min-width: 180px;
-  font-size: 13px;
+  font-size: 16px;
 }
 .setting-row input {
   width: 25px;
@@ -654,7 +654,7 @@ button:disabled {
   color: #dce2e7;
   padding: 10px;
   margin-top: 10px;
-  font-size: 13px;
+  font-size: 16px;
 }
 .run-banner {
   display: flex;
@@ -670,7 +670,7 @@ button:disabled {
 }
 #run-instruction {
   margin: 0;
-  font-size: 13px;
+  font-size: 16px;
   color: #bdc3c8;
   line-height: 1.7;
 }
@@ -754,7 +754,7 @@ textarea[aria-invalid="true"] {
   display: flex;
   flex-wrap: wrap;
   gap: 12px 24px;
-  font-size: 11px;
+  font-size: 16px;
   line-height: 1.8;
   color: #a6acb1;
   padding: 18px 0;
@@ -768,11 +768,11 @@ textarea[aria-invalid="true"] {
   margin-top: 18px;
 }
 .run-results p {
-  font-size: 13px;
+  font-size: 16px;
   line-height: 1.9;
 }
 .run-results .eyebrow {
-  font-size: 10px;
+  font-size: 16px;
 }
 .practice-panel--nitro #nitro-status {
   color: var(--accent);
@@ -884,7 +884,7 @@ textarea[aria-invalid="true"] {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
   gap: 8px;
-  font-size: 12px;
+  font-size: 16px;
   color: #bbc1c6;
 }
 .live-standings li {
@@ -903,7 +903,7 @@ textarea[aria-invalid="true"] {
   border-collapse: collapse;
   width: 100%;
   text-align: left;
-  font-size: 13px;
+  font-size: 16px;
 }
 .race-table-wrap caption {
   text-align: left;
@@ -935,7 +935,7 @@ textarea[aria-invalid="true"] {
 }
 .quick-race #race-instruction {
   margin: 0;
-  font-size: 13px;
+  font-size: 16px;
   line-height: 1.5;
 }
 .quick-race-active .race-hud > div {
@@ -1035,7 +1035,7 @@ textarea[aria-invalid="true"] {
   padding: 12px 0;
 }
 .audio-controls label {
-  font-size: 12px;
+  font-size: 16px;
   text-transform: capitalize;
 }
 .audio-controls input {

@@ -1,14 +1,9 @@
-# Alpha.12 final laptop checks
+# Alpha.13 focused laptop review
 
-Current target: laptop/desktop with a physical keyboard. The user accepted the starter silhouettes, restored graphite/crimson/cyan palette, Ignition/Overdrive music, typing/dial and pause/resume/retry. Do not ask for repeat aesthetic approval or phone testing. These checks cover the latest selector/control changes and physical performance.
+The user reported the other alpha.12 laptop checks good. Do not repeat car/music/palette approval or the already reported checklist. Alpha.13 changes only the car lock, fullscreen placement, readability and CI reliability.
 
-1. Refresh and confirm footer `0.1.0-alpha.12`. Choose a different starter in Race, visit the hub, then refresh: the selected car should remain. The hub must have no sound controls.
-2. Start, type part of the passage, pause and choose another car. Text, elapsed time and standings must remain frozen. Resume, then retry: retry clears the run while retaining the chosen car.
-3. In Settings, enable/mute sound and adjust volumes. Return to the hub and race: the preferences must apply; sound controls appear only in Settings.
-4. Play for about five minutes with repeated retries. Compare High, Low and Reduced motion, resize the laptop window and check at normal zoom. Report delayed letters, visible judder, hidden text, audio interruptions or worsening behavior over time. Include browser/version and Windows version with the known ASUS laptop model.
+1. Refresh to alpha.13. Choose a car, start and pause: car selection must be unavailable. Resume keeps that car; retry/new race permits another selection.
+2. Try the top-right expand/restore symbol on Hub, Race, Practice, Keyboard check and Settings. It should enter/exit fullscreen, remain visible and show feedback if the browser refuses.
+3. At normal laptop zoom, read the hub descriptions, setup/help, Settings and result text. Resize the window and check that important copy and buttons remain readable/reachable. Prose/controls target 16px+, compact metadata 14px.
 
-Automated evidence: 93 unit / 30 browser cases; final preview-exhaust/CSS cleanup passed build and four affected garage/audio cases. Hosted PR run 39578558652 passed for implementation 722ee85. These checks cover selection, storage failure, input, results, scene cleanup and supported widths; they do not certify physical keyboard-to-paint latency or presented frame rate.
-
-Developer work remains: TT-501/510 separate body/wheel parts and actual rotation (current wheels have baked artwork plus rotating highlights); TT-505/506/511–513/522 hardware performance tracing/tuning, final evidence and PR #4 integration after acceptance. Current software-renderer callback tails remain documented in PERFORMANCE_ALPHA11.md. Do not close Phase 5 from CI alone.
-
-After these gates: Phase 6 cinematic loading, welcome/rules, interactive tutorial and optional calibration. Ten campaign reward cars (TT-911) stay future Phase 8/9 scope, not a Phase 5 prerequisite.
+Developer work: exact-source local/hosted regression checks, laptop captures, separate body/wheel parts and measured hardware performance tracing/tuning. User acceptance of smoothness is separate from presented-frame-rate/input-latency certification. TT-522 stays open; do not close Phase 5 from CI alone. Existing phases and future ten-car rewards remain unchanged.

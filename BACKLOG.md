@@ -89,6 +89,13 @@ Alpha.5 integration evidence: source `2a2c11b`, PR #4, full local check 83 unit 
 - [x] TT-523: Alpha.12 player car choice among all five starter models, before a race or while paused; immediate in-place model/anchor updates, unique CPU model assignment, same simulation/progress, remembered cosmetic choice and hub hero/preview. Browser coverage verifies all five models, pause/resume/retry/navigation/reload and denied storage; recreation in docs/GARAGE_PROGRESSION.md.
 - [x] TT-524: Put sound enable/mute/volume controls only in Settings and remove the hub radio section. Existing original music continues under saved preferences and gesture/lifecycle rules. Route-exclusivity, real decoded-source switching, saved volume, failure and one-context tests cover this change.
 
+- [x] TT-525: Alpha.13 one-car-per-race rule: choice only in ready; lock countdown/racing/pause/final states, reject synthetic changes, reopen on retry/new race. Verify navigation/reload semantics and preserve pure simulation; supersedes TT-523 paused-switch behavior.
+- [x] TT-526: Shared accessible fullscreen/restore corner icon on every page; real enter/exit/state/navigation and failure recovery, 44px target and keyboard focus. Replaces small Race-only text action.
+Completion evidence for TT-525–527: src/ui/fullscreen.ts, app-owned control lifecycle, ready-state guard and native fieldset lock, 93 unit / 35 browser checks plus actual enter/exit/refusal and readable-size assertions; docs/TESTING.md and reviewed 1024/1440 captures. No hardware fps claim.
+
+- [x] TT-527: Laptop readability pass: important prose/controls 16px+, compact labels 14px, contrast and spacing, scrollable setup and 1024/1440 layout captures. Retain Larger typing text and reduced motion.
+- [ ] TT-528: Fix the known hosted garage timeout: split overlong end-to-end test, preserve coverage, remove duplicate push/PR workflow executions, check exact new hosted result. Earlier opposite-result copies are not blanket CI success.
+
 ## Phase 6 — entrance and onboarding
 
 - [ ] TT-601: Build original cinematic loading panels, real asset status, optional skip/replay, returning-user shortcut and failed-load recovery.

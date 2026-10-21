@@ -2,9 +2,9 @@
 
 Product decision: 21 October 2026. The user accepted the distinct alpha.11 cars, requested player choice, ten later locked vehicles with increasingly sporty styling, and sound controls only in Settings. This extends Phases 5/8/9 without renumbering the eleven phases.
 
-## Available now — alpha.12
+## Available now — alpha.13
 
-Quick Race has five starter cars, all available: Volt Kart, Neon Fox, Apex Nova, Comet and Volt Electric. Choose using the illustrated native radio group before starting or while paused. Countdown/racing disables selection and hides setup. Choosing in pause updates the existing scene; it does not restart the race, change CPU schedules, clear typing, advance the clock or alter eligibility. Retry keeps your chosen car. Changing a cosmetic while paused does not undo the existing practice-only pause policy.
+Quick Race has five starter cars, all available: Volt Kart, Neon Fox, Apex Nova, Comet and Volt Electric. Choose using the illustrated native radio group before starting a new race. Starting the countdown locks the chosen car for the entire run, including pauses and navigation away/back. Pause does not offer car selection. Retry/new race clears the run and reopens selection, defaulting to the remembered choice. Changing the starter model before countdown updates the existing scene without changing CPU schedules or race rules. Refresh discards the unsaved run under the existing policy.
 
 All cars have identical gameplay performance. Progress comes from correct typing. Increasingly advanced cars are visual rewards, not speed/accuracy/nitro advantages; this keeps later friends multiplayer fair.
 
@@ -37,6 +37,6 @@ Count the set of **distinct eligible main-level IDs** across Easy/Medium/Hard (1
 - Show locked garage entries with a silhouette, required milestone and progress such as “18 / 25 unique levels”; no purchase or usable selection until earned. Unlock notifications need reduced-motion and accessible text variants. Keep the hub focused on play; detailed collection management belongs in Garage.
 - Derive ownership from versioned campaign clear receipts, not a user-editable selected-car preference or credit balance. Award once per stable reward ID, recover unlocks after interrupted writes and support save migration/import. Legacy players retain valid starter selections; unavailable or not-owned selections fall back safely.
 - Optional account/cloud progress must merge cleared-level sets without double-counting repeats across devices. Server policies validate ownership where online features depend on it. Friends multiplayer shares appearance only after authoritative entitlement checks; car choice never modifies race simulation.
-- Verify threshold−1/threshold/threshold+1 for every reward, replay/bonus exclusion, interrupted/repeated awards, save recovery, offline/cloud merge conflicts and multiplayer entitlement handling. These tests belong with the implemented reward system; alpha.12 does not pretend it exists.
+- Verify threshold−1/threshold/threshold+1 for every reward, replay/bonus exclusion, interrupted/repeated awards, save recovery, offline/cloud merge conflicts and multiplayer entitlement handling. These tests belong with the implemented reward system; the current preview does not pretend it exists.
 
 Tracked as TT-911 in [BACKLOG.md](../BACKLOG.md), alongside campaign completion/progression tasks. Current selector and Settings-only audio are TT-523/524.

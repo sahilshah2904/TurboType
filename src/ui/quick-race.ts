@@ -48,7 +48,7 @@ export function quickRaceScreen(selectedKart: KartId = "volt-kart"): string {
           `<div><span class="micro">${label}</span><strong id="race-${id}">—</strong></div>`,
       )
       .join("")}</div>
-<button id="pause-race" class="race-pause button button--secondary" disabled>Pause</button><button id="race-fullscreen" class="race-fullscreen text-button">Full screen</button>    <div class="run-banner"><div><p id="race-state" class="eyebrow" role="status">Ready</p><p id="race-instruction">Wait for the track, then start the countdown.</p></div><span id="race-lights" class="race-lights" aria-hidden="true"><i></i><i></i><i></i></span><span id="race-countdown" class="countdown" aria-hidden="true">—</span></div>
+<button id="pause-race" class="race-pause button button--secondary" disabled>Pause</button>    <div class="run-banner"><div><p id="race-state" class="eyebrow" role="status">Ready</p><p id="race-instruction">Wait for the track, then start the countdown.</p></div><span id="race-lights" class="race-lights" aria-hidden="true"><i></i><i></i><i></i></span><span id="race-countdown" class="countdown" aria-hidden="true">—</span></div>
 <div class="race-console">${speedometer()}
     <label id="race-passage-label" class="sr-only">MATCH CASE, SPACES AND PUNCTUATION</label><div class="typing-surface"><p id="race-passage" class="race-passage" aria-labelledby="race-passage-label"></p>
     <label class="sr-only" for="race-input">Your typing</label><textarea id="race-input" rows="2" readonly autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" aria-describedby="race-passage race-notice race-controls-help" placeholder="Start the race, then type after GO…"></textarea></div>
@@ -68,7 +68,7 @@ export function quickRaceScreen(selectedKart: KartId = "volt-kart"): string {
       <div><label for="race-seed">Race seed</label><input id="race-seed" type="number" min="0" max="4294967295" step="1" inputmode="numeric" required aria-describedby="setup-help" /></div>
     </div>
     <p id="setup-help" class="help race-setup">Targets are before reaction, hesitation and correction delays. This is Quick Race, not campaign levels. The same passage, pace and seed replay the same CPU schedules. Pauses or assisted input make a run practice-only. No rewards or results are saved yet.</p>
-    <fieldset id="kart-picker" class="kart-picker"><legend>Choose your car</legend><div class="kart-picker__grid">${STARTER_KARTS.map((kart) => `<label class="kart-choice"><input type="radio" name="player-kart" value="${kart.id}" ${kart.id === selectedKart ? "checked" : ""} /><img class="${kart.id === "volt-kart" ? "kart-art--starter" : ""}" src="${import.meta.env.BASE_URL}assets/karts/${kart.file}" alt="" width="200" height="100" /><strong>${kart.name}</strong><span>${kart.style}</span></label>`).join("")}</div><p id="kart-save-status" class="help" role="status">Five starter cars. Choose before starting or while paused. All have the same performance.</p></fieldset>
+    <fieldset id="kart-picker" class="kart-picker"><legend>Choose your car</legend><div class="kart-picker__grid">${STARTER_KARTS.map((kart) => `<label class="kart-choice"><input type="radio" name="player-kart" value="${kart.id}" ${kart.id === selectedKart ? "checked" : ""} /><img class="${kart.id === "volt-kart" ? "kart-art--starter" : ""}" src="${import.meta.env.BASE_URL}assets/karts/${kart.file}" alt="" width="200" height="100" /><strong>${kart.name}</strong><span>${kart.style}</span></label>`).join("")}</div><p id="kart-save-status" class="help" role="status">Choose before starting. Your car stays locked through pauses until retry. All cars have the same performance.</p></fieldset>
     <div class="practice-actions"><button id="start-race" class="button button--primary" disabled>Start race →</button><button id="retry-race" class="text-button">Retry same race</button><button id="new-race" class="text-button">New seed</button></div>
     <p id="race-controls-help" class="help">Esc or leaving this screen pauses everyone. Resume has a fresh countdown. Retry resets the run; refresh discards this unsaved session.</p>
     <div class="run-details"><span id="race-errors">0 errors · 0 corrected</span><span id="race-eligibility">Session only · not saved</span><span id="race-streak">0 clean streak</span></div>
@@ -144,7 +144,7 @@ export function connectQuickRace(
     find(".immersive-race").dataset.state = s.state;
     updateSpeedometer(main, s.recentWpm);
     const active = ["countdown", "racing", "paused"].includes(s.state);
-    kartPicker.disabled = ["countdown", "racing"].includes(s.state);
+    kartPicker.disabled = s.state !== "ready";
     main.classList.toggle("quick-race-active", active);
     input.readOnly = !["countdown", "racing"].includes(s.state);
     input.setAttribute("aria-invalid", String(s.errorCharacter !== null));
@@ -437,7 +437,7 @@ export function connectQuickRace(
       if (
         !(target instanceof HTMLInputElement) ||
         !isKartId(target.value) ||
-        kartPicker.disabled
+        session.race.snapshot().player.state !== "ready"
       )
         return;
       const saved = garage.choose(target.value);
@@ -458,20 +458,6 @@ export function connectQuickRace(
       update();
       input.focus();
       input.scrollIntoView({ block: "nearest" });
-    },
-    eventOptions,
-  );
-  find("#race-fullscreen").addEventListener(
-    "click",
-    async () => {
-      try {
-        if (document.fullscreenElement) await document.exitFullscreen();
-        else await document.documentElement.requestFullscreen();
-      } catch {
-        notice(
-          "Fullscreen unavailable. The race still fills the browser window.",
-        );
-      }
     },
     eventOptions,
   );

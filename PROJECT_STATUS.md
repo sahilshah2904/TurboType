@@ -1,7 +1,19 @@
 # TurboType project status
 
 
-## Current checkpoint — alpha.12, 21 October 2026
+## Current checkpoint — alpha.13, 21 October 2026
+
+The user reported the other laptop tests good, requested one car per race (no paused switching), a visible fullscreen symbol on every page and larger readable copy. Alpha.13 locks selection whenever state is not ready, hides it in pause and rejects synthetic mid-race changes; retry/new race reopens it. Shared app-owned 44px fullscreen/restore corner control replaces Race-only text. Main prose/controls are 16px+, compact metadata 14px, with brighter secondary copy and laptop layout adjustments.
+
+CI investigation found real failures: runs 39578553613 (push/722ee85) and 39579044713 (PR/8e28d2a) timed out in the 30-second all-in-one garage browser scenario; their counterpart runs passed. Earlier passing-PR reports did not imply all copies passed. Alpha.13 splits that scenario into focused tests without raising the global timeout or removing assertions, keeps feature checks on PR updates/main checks on push/manual, and cancels superseded runs. Do not mute notifications or claim a hosted pass until checking the exact new source. See docs/TESTING.md and docs/GITHUB_WORKFLOW.md.
+
+Phase 5 stays open for separate wheel/body art and measured hardware performance/tuning. Record the user's “rest every testing looks good” as available-laptop acceptance of the previous checklist, not presented-frame-rate/latency certification. No repeat approval of accepted art/music is needed. Latest car lock/fullscreen/type changes require their own regression/layout evidence. Future ten-car rewards remain TT-911 (Phases 8/9), not implemented or a Phase 5 blocker. Eleven phases, laptop-only scope, rules 3 and save/content 1 remain; no merge/Pages/backend deployment.
+
+Local final full check: formatting/types/build, 93 unit and 35 browser cases pass; garage cases passed three repeats each (12 executions). Fresh 1024/1440 captures and focused final fullscreen/readability validation are in docs/TESTING.md and docs/images/alpha13. Check exact new hosted source before claiming CI recovery.
+
+## Historical alpha.12 checkpoint
+
+
 
 The user accepted the four distinct CPU cars (“these cars looks very nice”), requested player choice, ten future locked reward cars and sound controls only in Settings. Alpha.12 implements a five-starter car selector before a race or while paused, updates the existing renderer without resetting typing/timing/CPUs, remembers the cosmetic choice in a separate validated browser preference, and shows it in the hub hero/preview. CPUs use the other four models. Sound controls and the hub radio section were removed from Hub/Race; enable/mute/volumes live only in Settings. Current colors and both music masters remain accepted.
 

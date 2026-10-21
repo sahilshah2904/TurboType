@@ -115,12 +115,12 @@ html[data-route] .app-shell {
   gap: clamp(14px, 2vw, 32px);
 }
 .topbar nav a {
-  font-size: 12px;
+  font-size: 16px;
 }
 .topbar .guest {
   background: transparent;
   border: 0;
-  font-size: 10px;
+  font-size: 16px;
 }
 .footer {
   border-color: #bfc5ca22;
@@ -254,16 +254,16 @@ html[data-route] .app-shell {
   object-fit: contain;
 }
 .kart-choice strong {
-  font-size: 11px;
+  font-size: 16px;
 }
 .kart-choice span {
-  font-size: 9px;
+  font-size: 16px;
   text-align: center;
   color: #b6bcc1;
 }
 .kart-picker > .help {
   margin: 10px 0 0;
-  font-size: 10px;
+  font-size: 16px;
 }
 .kart-picker:disabled .kart-choice {
   cursor: default;
@@ -281,14 +281,14 @@ html[data-route] .app-shell {
   position: absolute;
   top: -18px;
   left: 8%;
-  font-size: 9px;
+  font-size: 16px;
   letter-spacing: 2px;
   color: #cad0d5;
 }
 .hero-note > span:last-child {
   display: block;
   text-align: center;
-  font-size: 11px;
+  font-size: 16px;
   color: #bdc3c8;
 }
 .track-card {
@@ -539,7 +539,7 @@ select {
   left: 0;
   right: 0;
   bottom: 0;
-  font-size: 8px;
+  font-size: 16px;
   letter-spacing: 2px;
   color: #c3c9ce;
 }
@@ -632,7 +632,7 @@ html[data-route="race"] .topbar .guest {
   min-width: 0;
 }
 .immersive-race .race-hud .micro {
-  font-size: 9px;
+  font-size: 16px;
   white-space: nowrap;
   letter-spacing: 1px;
 }
@@ -650,13 +650,7 @@ html[data-route="race"] .topbar .guest {
   background: #111c258c;
   border-color: #aab0b544;
 }
-.immersive-race .race-fullscreen {
-  position: absolute;
-  right: 3vw;
-  top: 125px;
-  z-index: 4;
-  font-size: 10px;
-}
+
 .immersive-race .speedometer {
   position: absolute;
   bottom: 12px;
@@ -678,7 +672,7 @@ html[data-route="race"] .topbar .guest {
   border-top: 1px solid #bec4c93b;
 }
 .immersive-race .race-console > .help {
-  font-size: 10px;
+  font-size: 16px;
   margin: 7px 0 0;
   min-height: 15px;
 }
@@ -687,7 +681,7 @@ html[data-route="race"] .topbar .guest {
   bottom: 0;
   right: 15px;
   left: 190px;
-  font-size: 9px;
+  font-size: 16px;
   padding: 5px 0;
   z-index: 4;
   background: transparent;
@@ -702,7 +696,7 @@ html[data-route="race"] .topbar .guest {
   border: 0;
   background: transparent;
   text-shadow: 0 1px 8px #0c1218;
-  font-size: 13px;
+  font-size: 16px;
   letter-spacing: 2px;
 }
 .immersive-race .run-banner {
@@ -766,16 +760,16 @@ html[data-route="race"] .topbar .guest {
   gap: 12px;
 }
 .race-deck .practice-options label {
-  font-size: 12px;
+  font-size: 16px;
 }
 .race-deck select,
 .race-deck input {
   width: 100%;
   padding: 10px;
-  font-size: 12px;
+  font-size: 16px;
 }
 .race-deck #setup-help {
-  font-size: 10px;
+  font-size: 16px;
   line-height: 1.6;
 }
 .race-deck .practice-actions {
@@ -789,7 +783,7 @@ html[data-route="race"] .topbar .guest {
 }
 .race-deck .run-details,
 .race-deck #race-controls-help {
-  font-size: 10px;
+  font-size: 16px;
 }
 .race-deck .run-results {
   background: transparent;
@@ -802,10 +796,10 @@ html[data-route="race"] .topbar .guest {
 }
 .race-deck .run-results p,
 .race-deck table {
-  font-size: 12px;
+  font-size: 16px;
 }
 .race-deck .run-results .help {
-  font-size: 10px;
+  font-size: 16px;
 }
 .immersive-race:is(
     [data-state="finished"],
@@ -895,7 +889,7 @@ html[data-route="race"] .topbar .guest {
 .immersive-race .race-deck .track-bottom {
   position: static;
   padding: 0 0 12px;
-  font-size: 10px;
+  font-size: 16px;
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
@@ -979,4 +973,91 @@ html[data-route="race"] .topbar .guest {
 }
 .topbar nav a[aria-current] {
   border-color: var(--energy);
+}
+
+/* Laptop readability: prose/controls 16px+, compact metadata 14px. */
+:root {
+  font-size: 16px;
+  --muted: #c3cbd2;
+}
+.app-shell p {
+  line-height: 1.65;
+}
+.eyebrow,
+.micro,
+.topbar .guest,
+.footer,
+.garage-label,
+.card-bottom {
+  font-size: 14px;
+}
+.immersive-race .race-hud .micro {
+  font-size: 14px;
+  letter-spacing: 0.5px;
+}
+.kart-choice strong,
+.kart-choice span,
+.speedometer > span {
+  font-size: 14px;
+}
+.kart-choice {
+  gap: 4px;
+}
+.help,
+.card-copy,
+.card-bottom,
+.card-bottom > span:last-child,
+.setting-row p,
+.development-note p {
+  color: #c3cbd2;
+}
+.topbar {
+  padding-right: 56px;
+}
+html[data-route="race"] .topbar {
+  padding-right: 80px;
+}
+.fullscreen-control {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 50;
+  width: 44px;
+  height: 44px;
+  padding: 10px;
+  display: grid;
+  place-items: center;
+  color: #f1f6fa;
+  background: #111c25f5;
+  border: 1px solid #9aabb977;
+  border-radius: 7px;
+  cursor: pointer;
+  box-shadow: 0 3px 12px #0005;
+}
+.fullscreen-control:hover {
+  background: #293c4a;
+  border-color: #63e7f2;
+}
+.fullscreen-feedback {
+  position: fixed;
+  top: 66px;
+  right: 16px;
+  z-index: 51;
+  max-width: 350px;
+  padding: 12px 16px;
+  border: 1px solid #9aabb977;
+  background: #111c25;
+  color: #f1f6fa;
+  font-size: 16px;
+}
+.immersive-race[data-state="paused"] .kart-picker {
+  display: none;
+}
+@media (max-width: 1200px) {
+  .topbar .guest {
+    display: none;
+  }
+  .topbar nav {
+    gap: 18px;
+  }
 }

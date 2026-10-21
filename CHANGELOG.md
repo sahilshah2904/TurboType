@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-alpha.13 — 21 October 2026
+
+- Lock each chosen car from countdown through finish, including pause/navigation. Retry or a new race opens selection again; guard synthetic change events by actual race state.
+- Add one accessible top-right fullscreen/restore icon on every route, with a 44px target, state updates and refusal feedback. Remove the small Race-only text control.
+- Raise prose/controls to at least 16px and compact metadata to 14px, improve muted text contrast and preserve laptop navigation/scrolling.
+- Fix CI test composition: split the 30-second all-in-one garage scenario into focused cases, retaining the same assertions plus the new lock rule. Run feature checks on PR updates, main on push and manual dispatch; cancel superseded runs instead of running duplicate push/PR suites.
+- Record user acceptance of the other laptop checks. Separate wheel parts and measured hardware performance remain open. Rules/save/content versions unchanged.
+
 ## 0.1.0-alpha.12 — 21 October 2026
 
 - Add an illustrated five-starter car selector before starting or while paused. Remember the validated cosmetic preference; update the current race in place and show the chosen model in the hub/preview. CPUs use the other four models; typing rules, timing, speed and results are unchanged.

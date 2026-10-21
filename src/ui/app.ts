@@ -2,6 +2,7 @@ import { animate, createScope } from "animejs";
 import { RaceAudio } from "../audio/race-audio";
 import { audioControls, connectAudioControls } from "./audio-controls";
 import { APP_VERSION } from "../config/versions";
+import { connectFullscreen, fullscreenControl } from "./fullscreen";
 import { STARTER_KARTS, type KartId } from "../content/kart-catalog";
 import { LocalGarageRepository } from "../storage/garage";
 import {
@@ -42,7 +43,7 @@ export function mountApp(root: HTMLElement): () => void {
     (settings.motion === "system" && systemMotion.matches);
 
   root.innerHTML = `
-    <div class="world-backdrop" aria-hidden="true"><div class="world-moon"></div><div class="world-mountains"></div><div class="world-city"></div><div class="world-grid"></div></div><div class="app-shell">
+    <div class="world-backdrop" aria-hidden="true"><div class="world-moon"></div><div class="world-mountains"></div><div class="world-city"></div><div class="world-grid"></div></div>${fullscreenControl()}<div class="app-shell">
       <header class="topbar">
         <a class="wordmark" href="#/hub" aria-label="TurboType home"><img src="${import.meta.env.BASE_URL}assets/brand-mark.svg" width="34" height="34" alt="" />TURBO<span>TYPE</span></a>
         <nav aria-label="Main navigation"><a href="#/hub" data-route="hub">The hub</a><a href="#/race" data-route="race">Race</a><a href="#/practice" data-route="practice">Practice</a><a href="#/keyboard" data-route="keyboard">Keyboard check</a><a href="#/settings" data-route="settings">Settings</a></nav>
@@ -52,6 +53,7 @@ export function mountApp(root: HTMLElement): () => void {
       <footer class="footer"><span><b>TURBOTYPE</b> / BUILT FOR THE LONG RUN</span><span>Single-player race preview · ${APP_VERSION}</span><a href="https://github.com/sahilshah2904/TurboType" target="_blank" rel="noopener noreferrer">Follow development ${ARROW}</a></footer>
     </div>`;
   const main = root.querySelector<HTMLElement>("main")!;
+  const clearFullscreen = connectFullscreen(root);
 
   function applyPreferences(): void {
     document.documentElement.dataset.motion = reducedMotion()
@@ -213,6 +215,7 @@ export function mountApp(root: HTMLElement): () => void {
     scope?.revert();
     unmountPreview?.();
     audio.dispose();
+    clearFullscreen();
     delete document.documentElement.dataset.route;
     window.removeEventListener("blur", audioBlur);
     window.removeEventListener("focus", audioFocus);

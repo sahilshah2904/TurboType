@@ -13,15 +13,15 @@ Race four computer opponents while improving physical-keyboard speed, accuracy a
 
 </div>
 
-![TurboType graphite and crimson kart race with cyan accents and live WPM](docs/images/alpha12/comet-race.png)
+![TurboType graphite and crimson kart race with cyan accents and live WPM](docs/images/alpha13/active-race-1440.png)
 
-*Actual alpha.12 player-selected Comet in the graphite/crimson/cyan race from `feat/race-polish`. The five starter silhouettes are user-accepted; further parts/performance work is tracked in [PR #4](https://github.com/sahilshah2904/TurboType/pull/4).*
+*Actual alpha.13 race with larger copy and the shared fullscreen corner icon from `feat/race-polish`. The five starter silhouettes are user-accepted; further parts/performance work is tracked in [PR #4](https://github.com/sahilshah2904/TurboType/pull/4).*
 
 ## Current focus — laptop typing
 
 TurboType now targets **laptop/desktop browsers and physical keyboards only**. Phone/tablet support was explicitly removed from the scope. Layouts adapt to laptop window sizes (960 CSS px minimum), with checks at 1024–1920 widths. Mobile keyboard/rotation handling and phone/tablet test profiles are removed. Cloud progress and friends multiplayer remain planned. Earlier mobile test reports below are historical.
 
-Current preview **0.1.0-alpha.12** adds an illustrated five-car selector before racing or while paused. Your choice is remembered and appears on the hub; sound controls now live only in Settings. The user accepted the restored graphite/crimson/cyan colors and upbeat Ignition browsing music. **Ignition**, a brighter 124 BPM major-key browsing track, replaces Nightforge. The user-approved **Overdrive** racing track is unchanged.
+Current preview **0.1.0-alpha.13** locks your chosen starter for the entire race, including pauses, adds a fullscreen icon on every page and increases important text sizes. Your choice is remembered and appears on the hub; sound controls now live only in Settings. The user accepted the restored graphite/crimson/cyan colors and upbeat Ignition browsing music. **Ignition**, a brighter 124 BPM major-key browsing track, replaces Nightforge. The user-approved **Overdrive** racing track is unchanged.
 
 ## What is TurboType?
 
@@ -47,13 +47,13 @@ Open **Sound & music** to enable the original soundtrack: **Ignition** while bro
 
 ## Progress checkpoint and next session
 
-Current preview is **0.1.0-alpha.12** on **feat/race-polish**, in open [PR #4](https://github.com/sahilshah2904/TurboType/pull/4). **Phases 1–4 are complete for their agreed scope; Phase 5 remains in progress.** Existing-page Phase 6 visuals are implemented, but onboarding is not. No Pages game, backend or database is deployed.
+Current preview is **0.1.0-alpha.13** on **feat/race-polish**, in open [PR #4](https://github.com/sahilshah2904/TurboType/pull/4). **Phases 1–4 are complete for their agreed scope; Phase 5 remains in progress.** Existing-page Phase 6 visuals are implemented, but onboarding is not. No Pages game, backend or database is deployed.
 
 Delivered: planning/rules and repository foundation; strict typing engine; four seeded CPU races; countdown, WPM/accuracy/streaks, pause/results/retry/recovery; full-window kart racing and one visible typing surface; live speedometer, exhaust/nitro/parallax/finish effects; full-width hub preview; revamped existing pages; independent original browsing/racing music and countdown; saved preferences and reproducible checks/docs.
 
 Latest user feedback: restored colors and Ignition accepted (“everything is good”); racing music and checks 5/6 (typing/speedometer/mistakes/correction and pause/resume/retry) work. **Overdrive is unchanged.** Ignition replaces the rejected sad menu track; the earlier graphite/crimson/cyan palette is restored. Phone/tablet compatibility was explicitly canceled. Hardware IME input and accessibility remain supported; the reported phone word-at-a-time caret issue is out of scope, not fixed.
 
-Validation: local formatting/types/build, **93 unit cases and 30 desktop Chromium browser cases pass**. Phone/tablet profiles were removed, so the former 78 executions (26 × 3) are historical; alpha.11 adds rival-failure and four-width fleet checks. Current laptop screenshots are in [docs/images/alpha12](docs/images/alpha12); [test evidence](docs/TESTING.md) distinguishes each source and hosted CI. Earlier ASUS/Samsung reports do not imply current mobile support.
+Validation: local formatting/types/build, **93 unit cases and 35 desktop Chromium browser cases pass**. Phone/tablet profiles were removed, so the former 78 executions (26 × 3) are historical; alpha.11 adds rival-failure and four-width fleet checks. Current laptop screenshots are in [docs/images/alpha12](docs/images/alpha12); [test evidence](docs/TESTING.md) distinguishes each source and hosted CI. Earlier ASUS/Samsung reports do not imply current mobile support.
 
 | Next phase | Pending work |
 | --- | --- |
@@ -286,3 +286,11 @@ Created by **Sahilshah**. Vehicle artwork and synthesized music in the Phase 5 p
 ### Planned car rewards
 
 The five current starter cars are selectable now. Later, ten additional cars will unlock at **10, 25, 50, 75, 100, 140, 180, 220, 260 and 300 unique campaign levels cleared**, with increasingly sporty silhouettes. Replays do not inflate progress and cars never give a typing-speed advantage. The [garage plan](docs/GARAGE_PROGRESSION.md) records the exact future rules, art briefs and save/ownership work (TT-911); these unlocks are not implemented yet.
+
+### Fullscreen and readable controls
+
+Use the expand/restore icon at the upper-right corner on any page. It stays available across navigation and reports browser refusal without blocking play. Important descriptions, notices and controls now use at least 16px text; compact labels use 14px. Choose a car before countdown: it stays locked through pause/resume until retry or a new race.
+
+### GitHub check emails
+
+Two alpha.12-era runs genuinely failed when the combined garage browser test exceeded its 30-second budget; their duplicate counterparts passed. Alpha.13 splits the test into focused cases and runs feature validation once per PR update (main on push), retaining coverage and timeouts. [Verification evidence](docs/TESTING.md) distinguishes local, failing historical and exact hosted results. GitHub notifications remain enabled.

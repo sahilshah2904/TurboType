@@ -1,3 +1,5 @@
+> Alpha.13 supersedes the earlier paused-switch rule: choose only before countdown; the model stays locked through pause/resume until a new race. Shared corner fullscreen/restore is available on all pages, and laptop prose/controls are larger. Sound controls remain Settings-only. See GARAGE_PROGRESSION.md and TESTING.md for current behavior/evidence.
+
 > Alpha.12: the user accepted the five starter silhouettes. Race setup/pause now lets the player choose and remember any starter; the hub reflects that model. Sound controls are only in Settings, and the hub radio section is removed. [Current behavior and ten future car rewards](GARAGE_PROGRESSION.md) supersede older fixed-player and sound-control placement descriptions below.
 
 # Original TurboType soundtrack
