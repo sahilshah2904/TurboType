@@ -1,6 +1,12 @@
 # Immersive application integration
 
-21 October 2026. App 0.1.0-alpha.6, rules 3 unchanged. This implements the user-approved kart direction in the actual hash-routed app, rather than only the earlier docs/design review prototype. Formal verification results belong in TESTING.md; available-device acceptance remains open.
+21 October 2026. App 0.1.0-alpha.7, rules 3 unchanged. This implements the user-approved kart direction in the actual hash-routed app, rather than only the earlier docs/design review prototype. Formal verification results belong in TESTING.md; available-device acceptance remains open.
+
+## Alpha.7 preview and audio follow-up
+
+The hub preview now uses Phaser RESIZE rather than fitting a fixed 1200×420 canvas inside a capped-height container. A 420-unit-high world scales uniformly with container height; scenery is redrawn to the corresponding full logical width, car positions follow width fractions, and road dashes extend through both edges. This removes the empty side columns without stretching artwork. ResizeObserver updates both canvas dimensions and scene layout; navigation destroys the scene/observer. See src/game/track-preview.ts. Verified captures: [1920px preview](images/alpha7/wide-preview.png), [390px preview](images/alpha7/phone-preview.png), [desktop audio controls](images/alpha7/wide-audio.png) and [phone audio controls](images/alpha7/phone-audio.png).
+
+The hub exposes Pit lane radio. Original menu percussion is more energetic, Race setup/results have background music, and a separate countdown score accompanies 3/2/1. A visit-only personal file can replace menu/race music, including the user's own Misirlou copy. No recording was downloaded or bundled. See [audio lifecycle and reproduction](AUDIO.md). Original audio paragraphs further below describe the alpha.5 baseline; this section and AUDIO.md supersede the previously prototype-only local-file limitation.
 
 ## Red-and-black theme (alpha.6)
 
@@ -50,7 +56,7 @@ Exhaust uses authoritative progress activity with a 200ms presentation tail. Ora
 
 Run the pinned Node/npm setup and normal Vite server, then open /TurboType/#/race, /#/practice, /#/keyboard, /#/settings or the hub. Build/preview uses the same /TurboType/ base with hash routes. No new package, API key, storage migration or backend is introduced. Optional browser fullscreen is user-initiated and failure reports a useful message while retaining browser-window play.
 
-Original RaceAudio ownership, gesture unlock, saved controls and mute/focus/navigation behavior remain. Personal local-file audio is still demonstrated in the review prototype; production integration remains TT-514. The original soundtrack is the public app default. The user requested personal Misirlou playback, but no recording has been supplied or shipped.
+Original RaceAudio ownership, gesture unlock, saved controls and mute/focus/navigation behavior remain. Personal local-file audio is now integrated into the production app; actual recording/device acceptance remains TT-514. The original soundtrack is the public app default. The user requested personal Misirlou playback, but no recording has been supplied or shipped.
 
 Run npm run check after installing the pinned dependencies and Playwright Chromium. New browser regressions cover the open shell across all existing routes, full-width racing, dial separation from the track, rolling pace, needle-only clamping, pause/idle/retry behavior. Existing suites verify input, seeded CPU timing, failure fallback, preferences, audio and repeated navigation. Actual device acceptance and release coverage remain separate requirements.
 

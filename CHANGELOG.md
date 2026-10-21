@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.0-alpha.7 — 21 October 2026
+
+- Fill the hub track preview across its container by resizing/redrawing scenery with uniform kart scaling; remove grey side columns.
+- Add energetic menu percussion, hub sound controls and music during Race setup/results. Use a separate pulse score and rising cues during the existing 3–2–1 countdown.
+- Integrate visit-only personal audio-file playback with mute/volume/navigation/pause/countdown behavior, blocked-file fallback and object-URL cleanup. No Misirlou recording is supplied or bundled.
+- Preserve rules 3 and save/content 1; actual-device audible/visual acceptance remains open.
+
 ## 0.1.0-alpha.6 — 21 October 2026
 
 - Apply a red-and-black visual theme across Hub, Race, Practice, Keyboard check and Settings: charcoal surfaces, crimson controls, red horizon, HUD and Live WPM dial.

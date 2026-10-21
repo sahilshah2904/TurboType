@@ -22,3 +22,5 @@ Future assets must add creator/source/license, modifications, export settings an
 ## Alpha.5 production kart integration
 
 `public/assets/karts/volt-kart.png` is an exact copy of the accepted generated concept from docs/design/race-direction, retaining its recorded prompt/provenance. Race and hub now request this PNG. The race bakes palette variants at runtime; these are not new distinct vehicle designs. Original full-resolution art is about 1.69 MB; optimize/measure before release. Native SVG speedometer and CSS world are authored in source. Earlier SVG cars remain historical development assets. No Nintendo media or Misirlou recording is included.
+
+Alpha.7 audio: menu/race/countdown music remains project-authored synthesis (src/audio/score.ts and race-audio.ts). Personal files use visit-only browser object URLs and are not tracked or redistributed assets. No Misirlou recording is bundled; see AUDIO.md for provenance and the separate user-file workflow.

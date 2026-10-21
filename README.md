@@ -23,7 +23,7 @@ TurboType turns typing practice into a side-view motor race. Your car advances a
 
 The project is being built in documented stages: a responsive single-player game first, followed by campaign progression, optional cloud saves and friends multiplayer. Original vehicles, scenery and synthesized music give the game its own identity.
 
-> **Development status:** `main` contains the accepted Phase 4 playable race. The latest Phase 5/6 visual integration is on `feat/race-polish`: the approved full-window kart race, one visible typing surface, Live WPM dial and revamped existing pages are implemented in alpha.6 with a red-and-black theme. Alpha.6 formatting/types/build and 18 focused browser checks pass (alpha.5 full-suite baseline: 83 unit / 72 browser); actual-device acceptance remains open; the distinct fleet and cinematic onboarding are still pending. There is **no public GitHub Pages game link yet**. You can run either version locally.
+> **Development status:** `main` contains the accepted Phase 4 playable race. The latest Phase 5/6 visual integration is on `feat/race-polish`: the approved full-window kart race, one visible typing surface, Live WPM dial and revamped existing pages are implemented with a red-and-black theme; alpha.7 adds a full-width hub preview, energetic menu/countdown audio and personal-file music. Alpha.7 checks are recorded in [verification evidence](docs/TESTING.md); actual-device acceptance remains open; the distinct fleet and cinematic onboarding are still pending. There is **no public GitHub Pages game link yet**. You can run either version locally.
 
 ## What you can play today
 
@@ -32,10 +32,12 @@ The project is being built in documented stages: a responsive single-player game
 | **Quick Race** | Four seeded CPU opponents, selectable pace, countdown, live standings, passage completion or a 60-second time trial, and frozen results. |
 | **Typing Practice** | The same typing engine without opponents, with WPM, accuracy, active time and clean-streak feedback. |
 | **Keyboard Check** | A free-editing screen for checking your physical or phone keyboard before racing. |
-| **Preferences** | Saved motion, effects and text-size choices, including a reduced-motion option. |
+| **Preferences** | Saved motion, effects, text size and audio volumes; optional visit-only personal soundtrack selection. |
 | **Integrated kart preview** | Edge-to-edge Phaser racing, one visible typing strip, recent-WPM speedometer, moving exhaust, bounded effects, and original optional music. Existing hub, practice, keyboard and settings pages share the new open world layout. The distinct vehicle fleet remains in development. |
 
 The current passages are short exercises for validating the game. Campaign levels, stars, rewards, a garage, accounts, cloud progress and multiplayer are planned features. Campaign cards in the hub are previews.
+
+For personal music, open **Sound & music** on the hub, Race or Settings, choose **Personal music file**, and select your own audio recording. It stays on your device for the visit; refresh clears the selection. The game includes original menu/race music and a separate 3–2–1 score. Misirlou is not bundled. [Audio details](docs/AUDIO.md).
 
 ## Get started
 

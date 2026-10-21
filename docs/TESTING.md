@@ -1,5 +1,14 @@
 # Verification evidence
 
+## Alpha.7 — full-width preview and music lifecycle, 21 October 2026
+
+The focused preview/audio/immersive/polish run passed 24 Chromium profile cases in 1.1 minutes. New six cases cover full-width canvas fitting at 1920/390/1440 widths, preview disposal, real generated-WAV playback, mute/routes/countdown/pause, invalid-file preservation, clear and visit-only reload. Four initial additional unit tests cover local URL ownership, interrupted/blocked playback and countdown/music scene transitions; menu score expectations now require percussion. No commercial recording or downloaded sample is used in tests.
+
+The full npm run check passed with exit 0: formatting, strict types, 87 unit cases, production build and all 78 Chromium cases (3.1 minutes for browser tests). A subsequent first-gesture countdown refinement has its own regression: all 88 unit cases and formatting pass; the rebuilt final source then passed all 18 preview/audio/polish browser cases in 54 seconds. The initial full-check attempt stopped at formatting of the new browser file; formatting was corrected before this successful run. Final sequential screenshots show a 1920px canvas in a 1920px preview and a 390px canvas in a 390px preview, with no page errors or horizontal overflow. Captures are in docs/images/alpha7 and wait for DOM reveals and the Phaser camera fade to finish; these are emulated layouts, not physical-device proof.
+
+Physical ASUS/Samsung mix/contrast/native keyboard and actual Misirlou-file acceptance remain unverified. No deployment or phase completion is implied.
+
+
 ## Alpha.6 — red-and-black theme, 21 October 2026
 
 On feat/race-polish, npm run format:check, strict typechecking and production build pass. The targeted command npx playwright test tests/browser/immersive.spec.ts tests/browser/race-polish.spec.ts passed **18 cases in 1.3 minutes** across desktop/phone/tablet Chromium with two workers. It verifies all route shells, full-width racing, the live dial, native input retention on compact resize, art loading, audio/failure behavior and bounded/reduced effects. No new tests mirror color constants. Existing rules and settings schemas are unchanged.

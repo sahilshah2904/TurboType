@@ -1,3 +1,4 @@
+import { PersonalMusic } from "./personal-music";
 import type { TypingSnapshot } from "../core/typing-engine";
 import {
   LocalAudioRepository,
@@ -5,7 +6,7 @@ import {
   validAudio,
 } from "../storage/audio-settings";
 import { midiHz, scoreStep, SCORE_STEP_SECONDS } from "./score";
-type Scene = "silent" | "menu" | "race";
+type Scene = "silent" | "menu" | "countdown" | "race";
 type Source = AudioScheduledSourceNode;
 type Cue =
   "countdown" | "go" | "mistake" | "nitro" | "overtake" | "finish" | "timeout";
@@ -13,6 +14,7 @@ type Cue =
 /** One app-owned optional context. No network, microphone, autoplay or gameplay dependency. */
 export class RaceAudio {
   private prefs: AudioPreferences;
+  private personal = new PersonalMusic(() => this.publish());
   private context: AudioContext | undefined;
   private master: GainNode | undefined;
   private music: GainNode | undefined;
@@ -29,6 +31,7 @@ export class RaceAudio {
   private step = 0;
   private lastState = "";
   private lastCountdown: number | null = null;
+  private soundedCountdown: number | null = null;
   private errors = 0;
   private bursts = 0;
   private lastErrorAt = -Infinity;
@@ -53,6 +56,28 @@ export class RaceAudio {
         : this.context?.state === "running"
           ? "running"
           : "locked";
+  }
+  get personalTrack() {
+    return { name: this.personal.name, failed: this.personal.failed };
+  }
+  selectMusic(file: File): void {
+    this.stopSources();
+    this.personal.select(file);
+    this.syncPersonal();
+    this.publish();
+  }
+  clearMusic(): void {
+    this.personal.clear();
+    this.publish();
+  }
+  private syncPersonal(): void {
+    this.personal.sync(
+      !this.disposed &&
+        !this.prefs.muted &&
+        this.visible &&
+        (this.scene === "menu" || this.scene === "race"),
+      this.prefs.master * this.prefs.music,
+    );
   }
   get diagnostics() {
     return {
@@ -91,12 +116,15 @@ export class RaceAudio {
       this.timer = undefined;
     }
     this.volumes();
+    this.syncPersonal();
     this.publish();
     return saved;
   }
   /** Must be called synchronously from Start/Enable sound's real click handler. */
   async unlock(): Promise<boolean> {
     if (this.disposed || this.prefs.muted) return false;
+    this.personal.retry();
+    this.syncPersonal();
     const token = ++this.generation;
     try {
       if (!this.context || this.context.state === "closed") {
@@ -138,6 +166,7 @@ export class RaceAudio {
           25,
         );
       this.unavailable = false;
+      this.playCountdown();
       this.nextAt = this.context.currentTime + 0.03;
       this.volumes();
       this.publish();
@@ -173,11 +202,14 @@ export class RaceAudio {
     this.visible = visible;
     if (!visible) this.stopSources();
     this.volumes();
+    this.syncPersonal();
   }
   setScene(scene: Scene): void {
     if (scene === this.scene) return;
     this.stopSources();
     this.scene = scene;
+    if (scene === "countdown") this.soundedCountdown = null;
+    this.syncPersonal();
     this.step = 0;
     this.nextAt = (this.context?.currentTime ?? 0) + 0.03;
   }
@@ -246,11 +278,27 @@ export class RaceAudio {
     );
   }
   private schedule(): void {
-    if (!this.allowed() || this.scene === "silent") return;
+    if (!this.allowed() || this.scene === "silent" || this.personal.active)
+      return;
     const ctx = this.context!;
     if (ctx.currentTime - this.nextAt > 0.25)
       this.nextAt = ctx.currentTime + 0.02; // Never burst missed background beats.
     while (this.nextAt < ctx.currentTime + 0.12) {
+      if (this.scene === "countdown") {
+        const tick = this.step++ % 16;
+        this.tone(
+          55 + tick * 5,
+          0.09,
+          0.07,
+          "triangle",
+          this.nextAt,
+          this.music!,
+        );
+        if (tick % 2 === 0)
+          this.noiseHit(0.04, 0.035, this.nextAt, this.music!);
+        this.nextAt += 0.125;
+        continue;
+      }
       const part = scoreStep(this.step++, this.scene === "race");
       for (const note of part.notes)
         this.tone(
@@ -290,7 +338,7 @@ export class RaceAudio {
         kind === "go"
           ? 880
           : kind === "countdown"
-            ? 440
+            ? 440 + (3 - (this.lastCountdown ?? 3)) * 110
             : kind === "mistake"
               ? 180
               : 660,
@@ -300,6 +348,17 @@ export class RaceAudio {
         at,
         bus,
       );
+  }
+  private playCountdown(): void {
+    if (
+      this.scene === "countdown" &&
+      this.allowed() &&
+      this.lastCountdown !== null &&
+      this.soundedCountdown !== this.lastCountdown
+    ) {
+      this.soundedCountdown = this.lastCountdown;
+      this.cue("countdown");
+    }
   }
   updateRace(s: TypingSnapshot): void {
     this.guard(() => this.updateSnapshot(s));
@@ -311,12 +370,22 @@ export class RaceAudio {
       this.lastCountdown = null;
       this.lastState = "ready";
       this.lastErrorAt = -Infinity;
-      this.setScene("silent");
+      this.setScene("menu");
       return;
     }
-    this.setScene(s.state === "racing" ? "race" : "silent");
-    if (s.state === "countdown" && s.countdown !== this.lastCountdown)
-      this.cue("countdown");
+    this.setScene(
+      s.state === "racing"
+        ? "race"
+        : s.state === "countdown"
+          ? "countdown"
+          : s.state === "finished" || s.state === "timed-out"
+            ? "menu"
+            : "silent",
+    );
+    if (s.state === "countdown") {
+      this.lastCountdown = s.countdown;
+      this.playCountdown();
+    }
     if (s.state === "racing" && this.lastState === "countdown") this.cue("go");
     if (
       s.state === "racing" &&
@@ -376,6 +445,7 @@ export class RaceAudio {
   }
   dispose(): void {
     this.disposed = true;
+    this.personal.clear();
     this.generation++;
     window.clearInterval(this.timer);
     this.stopSources();

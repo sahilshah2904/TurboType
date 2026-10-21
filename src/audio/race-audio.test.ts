@@ -182,7 +182,7 @@ it("keeps runtime audio graph failures from escaping into typing updates", async
   expect(audio.status).toBe("unavailable");
   audio.dispose();
 });
-it("repeats the authored eight-bar score with bounded note envelopes and a calmer menu", () => {
+it("repeats the authored eight-bar score with bounded note envelopes and energetic menu percussion", () => {
   for (let i = 0; i < 128; i++) {
     const step = scoreStep(i, true);
     expect(step).toEqual(scoreStep(i + 128, true));
@@ -196,7 +196,69 @@ it("repeats the authored eight-bar score with bounded note envelopes and a calme
       ),
     ).toBe(true);
   }
-  expect(scoreStep(0, false).kick).toBe(false);
+  expect(scoreStep(0, false).kick).toBe(true);
+  expect(scoreStep(4, false).snare).toBe(true);
   expect(scoreStep(0, true).kick).toBe(true);
   expect(128 * SCORE_STEP_SECONDS).toBeCloseTo(16.55, 1);
+});
+
+it("separates countdown music, freezes on pause and returns to menu music on results", async () => {
+  const { audio, context } = fixture();
+  audio.setPreferences({ ...DEFAULT_AUDIO, muted: false });
+  await audio.unlock();
+  const s = new SoloRace({
+    passage: "cat",
+    tier: "easy",
+    seed: 1,
+    now: () => 0,
+  }).snapshot().player;
+  audio.updateRace(s);
+  expect(audio.diagnostics.scene).toBe("menu");
+  s.state = "countdown";
+  s.countdown = 3;
+  audio.updateRace(s);
+  expect(audio.diagnostics.scene).toBe("countdown");
+  vi.advanceTimersByTime(150);
+  const voices = context.sources.length;
+  s.countdown = 2;
+  audio.updateRace(s);
+  expect(context.sources.length).toBeGreaterThan(voices);
+  s.state = "paused";
+  audio.updateRace(s);
+  const stopped = context.sources.length;
+  vi.advanceTimersByTime(500);
+  expect(context.sources.length).toBe(stopped);
+  s.state = "finished";
+  audio.updateRace(s);
+  expect(audio.diagnostics.scene).toBe("menu");
+  audio.dispose();
+});
+
+it("plays the current number once when a first-gesture resume resolves during countdown", async () => {
+  const { audio, context } = fixture();
+  let resume!: () => void;
+  context.resume = () =>
+    new Promise<void>((resolve) => {
+      resume = resolve;
+    });
+  audio.setPreferences({ ...DEFAULT_AUDIO, muted: false });
+  const unlocking = audio.unlock();
+  const s = new SoloRace({
+    passage: "cat",
+    tier: "easy",
+    seed: 1,
+    now: () => 0,
+  }).snapshot().player;
+  s.state = "countdown";
+  s.countdown = 3;
+  audio.updateRace(s);
+  expect(context.sources.length).toBe(0);
+  context.state = "running";
+  resume();
+  await unlocking;
+  expect(context.sources.length).toBe(1);
+  expect(context.sources[0].frequency.value).toBe(440);
+  audio.updateRace(s);
+  expect(context.sources.length).toBe(1);
+  audio.dispose();
 });

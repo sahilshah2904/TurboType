@@ -21,6 +21,10 @@ export async function mountTrackPreview(
     private marks!: Phaser.GameObjects.Graphics;
     private flame!: Phaser.GameObjects.Particles.ParticleEmitter;
     private elapsedMs = 0;
+    private world!: Phaser.GameObjects.Container;
+    private art!: Phaser.GameObjects.Graphics;
+    private label!: Phaser.GameObjects.Text;
+    private courseWidth = 1200;
 
     preload(): void {
       this.load.image(
@@ -47,22 +51,7 @@ export async function mountTrackPreview(
         context.drawImage(source, 0, 0, 640, 320);
         redKart.refresh();
       }
-      const art = this.add.graphics();
-      art.fillStyle(0x140c12).fillRect(0, 0, 1200, 130);
-      art.fillStyle(0x3e1725).fillCircle(940, 30, 100);
-      for (let i = 0; i < 26; i++) {
-        const height = 25 + ((i * 37) % 73);
-        art
-          .fillStyle(i % 2 ? 0x281820 : 0x21141c)
-          .fillRect(i * 49, 130 - height, 36, height);
-        for (let j = 0; j < 4; j++)
-          art
-            .fillStyle(0xd995a1, 0.35)
-            .fillRect(i * 49 + 8, 130 - height + 9 + j * 13, 3, 4);
-      }
-      art.fillStyle(0xff5364).fillRect(0, 128, 1200, 3);
-      art.fillStyle(0x201c21).fillRect(0, 132, 1200, 288);
-      art.lineStyle(1, 0x342a31).lineBetween(0, 414, 1200, 414);
+      this.art = this.add.graphics();
       this.marks = this.add.graphics();
       for (let i = 0; i < 3; i++) {
         const car = this.add.container([540, 330, 160][i], 166 + i * 89);
@@ -116,7 +105,7 @@ export async function mountTrackPreview(
         color: "#bfb1b8",
         letterSpacing: 2,
       });
-      this.add.text(1090, 22, "01", {
+      this.add.text(300, 22, "01", {
         fontFamily: "monospace",
         fontSize: "20px",
         color: "#d9cdd3",
@@ -129,6 +118,7 @@ export async function mountTrackPreview(
         padding: { x: 12, y: 6 },
       });
       label.setDepth(2);
+      this.label = label;
       if (!options.reducedMotion) {
         this.tweens.add({
           targets: label,
@@ -139,8 +129,35 @@ export async function mountTrackPreview(
         });
         this.cameras.main.fadeIn(250);
       }
+      const children = [...this.children.list];
+      this.world = this.add.container(0, 0, children);
+      this.layout();
+      this.scale.on("resize", this.layout, this);
       parent.dataset.ready = "true";
       options.onReady("Track preview ready");
+    }
+
+    private layout(): void {
+      const scale = Math.max(1, this.scale.height) / 420;
+      this.courseWidth = Math.max(1, this.scale.width) / scale;
+      this.world.setScale(scale);
+      const w = this.courseWidth;
+      this.art.clear().fillStyle(0x140c12).fillRect(0, 0, w, 130);
+      this.art.fillStyle(0x3e1725).fillCircle(w * 0.8, 30, 100);
+      for (let i = 0; i < Math.ceil(w / 49); i++) {
+        const height = 25 + ((i * 37) % 73);
+        this.art
+          .fillStyle(i % 2 ? 0x281820 : 0x21141c)
+          .fillRect(i * 49, 130 - height, 36, height);
+        for (let j = 0; j < 4; j++)
+          this.art
+            .fillStyle(0xd995a1, 0.35)
+            .fillRect(i * 49 + 8, 139 - height + j * 13, 3, 4);
+      }
+      this.art.fillStyle(0xff5364).fillRect(0, 128, w, 3);
+      this.art.fillStyle(0x201c21).fillRect(0, 132, w, 288);
+      this.cars.forEach((car, i) => (car.x = w * [0.56, 0.4, 0.24][i]));
+      this.label.x = this.cars[0].x - 35;
     }
 
     update(_time: number, delta: number): void {
@@ -149,7 +166,7 @@ export async function mountTrackPreview(
       const offset = (this.elapsedMs * 0.17) % 100;
       this.marks.clear().lineStyle(2, 0x6a5b63, 0.45);
       for (const y of [220, 309, 398])
-        for (let x = -100; x < 1300; x += 100)
+        for (let x = -100; x < this.courseWidth + 100; x += 100)
           this.marks.lineBetween(x - offset, y, x + 38 - offset, y);
       this.cars.forEach((car, i) => {
         car.y =
@@ -169,15 +186,20 @@ export async function mountTrackPreview(
   const game = new Phaser.Game({
     type: Phaser.AUTO,
     parent,
-    width: 1200,
-    height: 420,
+    width: Math.max(1, parent.clientWidth),
+    height: Math.max(1, parent.clientHeight),
     backgroundColor: "#140c12",
     banner: false,
     audio: { noAudio: true },
-    scale: { mode: Phaser.Scale.FIT, autoCenter: Phaser.Scale.CENTER_BOTH },
+    scale: { mode: Phaser.Scale.RESIZE },
     scene: TrackPreview,
   });
-  const observer = new ResizeObserver(() => game.scale.refresh());
+  const observer = new ResizeObserver(() =>
+    game.scale.resize(
+      Math.max(1, parent.clientWidth),
+      Math.max(1, parent.clientHeight),
+    ),
+  );
   observer.observe(parent);
   return () => {
     observer.disconnect();

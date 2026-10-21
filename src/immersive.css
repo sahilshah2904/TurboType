@@ -1204,3 +1204,21 @@ html[data-compact-viewport="true"] .race-deck #race-controls-help {
     font-size: 9px;
   }
 }
+
+.hub-audio {
+  padding: 12px 0 30px;
+}
+.audio-controls input[type="file"] {
+  display: block;
+  max-width: 100%;
+  margin-top: 10px;
+}
+
+.audio-controls__body > .help,
+.audio-controls__body > label[for="personal-music"],
+.audio-controls__body > #clear-personal-music {
+  grid-column: 1 / -1;
+}
+.audio-controls__body > #clear-personal-music {
+  justify-self: start;
+}

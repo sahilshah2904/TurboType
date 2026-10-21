@@ -23,7 +23,7 @@ export function scoreStep(
     notes.push({
       midi: root,
       duration: 0.34,
-      level: race ? 0.11 : 0.065,
+      level: race ? 0.11 : 0.085,
       wave: "triangle",
     });
   if (tick === 0)
@@ -34,18 +34,18 @@ export function scoreStep(
         level: 0.022,
         wave: "sine",
       });
-  if (tick % (race ? 2 : 4) === 0)
+  if (tick % 2 === 0)
     notes.push({
       midi: root + motif[(tick + bar * 3) % 16],
       duration: race ? 0.16 : 0.32,
-      level: race ? 0.045 : 0.025,
-      wave: "sine",
+      level: race ? 0.045 : 0.035,
+      wave: "triangle",
     });
   return {
     notes,
-    kick: race && tick % 4 === 0,
-    hat: race && tick % 2 === 0,
-    snare: race && tick % 8 === 4,
+    kick: tick % 4 === 0,
+    hat: tick % 2 === 0,
+    snare: tick % 8 === 4,
   };
 }
 export const midiHz = (midi: number) => 440 * Math.pow(2, (midi - 69) / 12);
