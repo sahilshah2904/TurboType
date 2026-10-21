@@ -1,14 +1,17 @@
 import type { UserSettings } from "../storage/settings";
+import { kartLineup, type KartId } from "../content/kart-catalog";
 import {
   addKart,
   bakePlayerPalette,
   fleetReady,
+  KART_FLEET,
   preloadFleet,
 } from "./kart-fleet";
 
 export interface PreviewOptions {
   reducedMotion: boolean;
   effects: UserSettings["effects"];
+  playerKart?: KartId;
   onReady: (message: string) => void;
   onError: (message: string) => void;
 }
@@ -20,6 +23,7 @@ export async function mountTrackPreview(
 ): Promise<() => void> {
   const { default: Phaser } = await import("phaser");
   if (!parent.isConnected) return () => {};
+  const lineup = kartLineup(options.playerKart ?? "volt-kart").slice(0, 3);
 
   class TrackPreview extends Phaser.Scene {
     private cars: Phaser.GameObjects.Container[] = [];
@@ -33,7 +37,7 @@ export async function mountTrackPreview(
     private courseWidth = 1200;
 
     preload(): void {
-      preloadFleet(this, [0, 1, 2]);
+      preloadFleet(this, [...new Set([0, ...lineup])]);
       this.load.on("loaderror", () =>
         options.onError(
           "Track artwork could not load. Check your connection and retry.",
@@ -42,12 +46,12 @@ export async function mountTrackPreview(
     }
 
     create(): void {
-      if (!fleetReady(this, [0, 1, 2])) return;
+      if (!fleetReady(this, [...new Set([0, ...lineup])])) return;
       bakePlayerPalette(this);
       this.art = this.add.graphics();
       this.marks = this.add.graphics();
       for (let i = 0; i < 3; i++) {
-        const { root, spokes } = addKart(this, i);
+        const { root, spokes } = addKart(this, lineup[i]);
         root.setPosition([540, 330, 160][i], 166 + i * 89);
         this.cars.push(root);
         this.wheelPairs.push(spokes);
@@ -156,7 +160,11 @@ export async function mountTrackPreview(
           (wheel) => (wheel.rotation = this.elapsedMs / 85),
         );
       });
-      this.flame?.setPosition(this.cars[0].x - 118, this.cars[0].y + 21);
+      const [exhaustX, exhaustY] = KART_FLEET[lineup[0]].exhaust;
+      this.flame?.setPosition(
+        this.cars[0].x + exhaustX,
+        this.cars[0].y + exhaustY,
+      );
     }
   }
 

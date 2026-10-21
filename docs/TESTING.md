@@ -1,5 +1,15 @@
 # Verification evidence
 
+## Alpha.12 — remembered car selection and Settings-only sound, 21 October 2026
+
+Local full `npm run check` passed formatting/types/build, **93 unit cases and 30 desktop Chromium browser cases (1.6 minutes)**. Six new storage cases cover separate preference records, malformed/unsupported/unknown-car recovery and denied storage. Two browser scenarios cover every selectable model, unique CPU model assignment, retained canvas identity, preserved paused typing/time/standings, resume/retry, hub choice, reload persistence, storage failure and exclusive audio controls on Settings. Existing real decoded music switching, single-context ownership, volume restoration and unsupported audio tests now access the Settings controls. No tracks or audio preferences changed.
+
+After the small final preview-exhaust attachment/CSS cleanup, production build and the four affected garage/preview-audio browser cases were rerun; all four passed (21.0 seconds), with final formatting verification also passing. The renderer now aligns preview flame output with the selected model's exhaust anchor. No simulation or rule changes.
+
+1440×900 selector/Comet race/clean hub and 1024×768 paused-selector captures were inspected in docs/images/alpha12. No page errors or 1024px horizontal overflow were observed. Model changes redraw existing body/wheel-highlight objects, keeping the same canvas. This is functional/layout evidence, not a new physical GPU/latency benchmark; alpha.11 timings remain historical and TT-522 stays open.
+
+The user accepted the alpha.11 car silhouettes. Five starters are available now, with a validated local cosmetic preference. Ten future milestone reward cars, ownership/receipt/cloud rules and remaining art are planned only in [GARAGE_PROGRESSION.md](GARAGE_PROGRESSION.md), tracked TT-911. No unlock system, campaign progress or backend is claimed. App alpha.12; rules 3, save/content 1. Hosted CI is separate from local results; PR #4 remains open and no Pages deployment occurred.
+
 ## Alpha.11 — distinct rivals and full-app evidence, 21 October 2026
 
 Final local `npm run check` passed formatting, strict types, production build, **87 unit cases and 28 desktop Chromium browser cases (1.3 minutes)**. The two added browser executions cover failed Comet artwork recovery/text standings and the full fleet at 1024/1366/1440/1920 laptop windows. Existing core behavior, native composition, frozen results/retry, audio lifecycle, reduced effects, scene failure and cleanup remain covered. The art-load case checks all five texture responses and retained standings-node identity.

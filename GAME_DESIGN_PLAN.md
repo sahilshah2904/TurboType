@@ -2,6 +2,8 @@
 
 # TurboType — game design and engineering delivery plan
 
+**21 October garage/audio decision:** five existing starter cars are selectable before racing or while paused. The user accepted their distinct visuals. Add ten progressively sportier locked reward cars later, at the unique campaign-clear milestones in [GARAGE_PROGRESSION.md](docs/GARAGE_PROGRESSION.md). All vehicles are cosmetic. Enable/mute/volume controls belong only in Settings; keep the hub clean. This supersedes earlier enter/hub sound-control placement.
+
 Status: design baseline established; Phase 2 foundation complete with recorded exceptions and Phase 3 typing practice complete for agreed scope, with ASUS/Samsung checks accepted by user report. Phase 4 four-CPU Quick Race is accepted; Phase 5 initial visuals were rejected, then the user approved the kart direction; alpha.5 integrates it and revamps existing pages with a Live WPM dial. Final verification, distinct fleet and device acceptance remain; docs/IMMERSIVE_APP.md describes implementation and docs/RACE_REDESIGN.md retains the redesign plan; docs/QUICK_RACE.md defines actual CPU/result semantics. Read PROJECT_STATUS.md and docs/TESTING.md for actual evidence; docs/GAME_RULES.md describes implemented rules version 3 and takes precedence for current typing behavior.
 Updated: 21 October 2026.
 Technology research and source links: [IMPLEMENTATION_RESEARCH.md](./IMPLEMENTATION_RESEARCH.md).
@@ -29,7 +31,7 @@ Use hash-based screen navigation so direct links and refreshes work on the GitHu
 | Screen | Purpose and interaction | Completion / exit |
 | --- | --- | --- |
 | Lightweight boot | Show TurboType identity immediately while checking saved settings and essential resources | Continue to entrance; show recovery actions if resources fail |
-| Enter TurboType | A clear Enter button enables sound after a user gesture; mute and motion controls are accessible immediately | User enters; audio failure does not block progress |
+| Enter TurboType | A clear Enter button enters the game; sound preferences are managed only in Settings and follow browser gesture rules | User enters; audio failure does not block progress |
 | Cinematic loading | Original illustrated racing panels, slow depth motion, logo treatment, real asset status, short driving/typing tips | Continue as soon as essential assets are ready; skip optional montage |
 | First-time welcome | Explain “your typing drives the car” and offer a guided start | Tutorial or Skip to hub; help remains available |
 | How to Play | Short cards covering controls, corrections, progress, nitro, opponents, scoring, and local saves | Start guided tutorial or return |

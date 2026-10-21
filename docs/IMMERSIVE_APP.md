@@ -1,3 +1,5 @@
+> Alpha.12: the user accepted the five starter silhouettes. Race setup/pause now lets the player choose and remember any starter; the hub reflects that model. Sound controls are only in Settings, and the hub radio section is removed. [Current behavior and ten future car rewards](GARAGE_PROGRESSION.md) supersede older fixed-player and sound-control placement descriptions below.
+
 > Current alpha.11: four distinct original CPU models replace palette copies; the accepted player, restored graphite/crimson/cyan palette and Ignition/Overdrive masters are preserved. See [fleet sources and remaining wheel work](KART_FLEET.md) and [full-app evidence](PERFORMANCE_ALPHA11.md). Earlier version-specific sections below are historical.
 
 # Immersive application integration

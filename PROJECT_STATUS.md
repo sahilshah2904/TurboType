@@ -1,7 +1,17 @@
 # TurboType project status
 
 
-## Current checkpoint — alpha.11, 21 October 2026
+## Current checkpoint — alpha.12, 21 October 2026
+
+The user accepted the four distinct CPU cars (“these cars looks very nice”), requested player choice, ten future locked reward cars and sound controls only in Settings. Alpha.12 implements a five-starter car selector before a race or while paused, updates the existing renderer without resetting typing/timing/CPUs, remembers the cosmetic choice in a separate validated browser preference, and shows it in the hub hero/preview. CPUs use the other four models. Sound controls and the hub radio section were removed from Hub/Race; enable/mute/volumes live only in Settings. Current colors and both music masters remain accepted.
+
+[docs/GARAGE_PROGRESSION.md](docs/GARAGE_PROGRESSION.md) defines the ten required future reward cars: milestones 10/25/50/75/100/140/180/220/260/300 unique eligible main-level clears across the three campaigns, progressively sportier designs and cosmetic-only performance. This is planned Phase 8/9 work (TT-911), not current unlock/save behavior. Five starters are selectable now; no fake locked assets or completed reward system are claimed. Selected-car preference is not an ownership entitlement.
+
+Phase 5 remains open on `feat/race-polish` / PR #4 for separate body/wheel art and actual laptop performance/tuning (TT-501/510, TT-505/506/511–513/522). Current fleet silhouettes, palette and music are user-accepted; do not repeat those approval requests. Native laptop input, rules 3 and save/content 1 remain. No new campaign, backend or Pages deployment. Eleven phases and laptop-only scope are preserved. Local full check passed formatting/types/build, 93 unit and 30 browser cases; final preview-anchor/CSS cleanup passed build and all four affected garage/audio cases (21.0 seconds). Captures are in docs/images/alpha12. Current evidence is in docs/TESTING.md; alpha.11 performance data is historical, not a new alpha.12 benchmark.
+
+## Historical alpha.11 checkpoint
+
+
 
 The user said “yes everything is good. lets go ahead” after the restored alpha.10 palette and Ignition review. Record those colors/menu music as accepted, alongside previously accepted Overdrive, typing/dial and pause/resume/retry. Do not ask them to repeat that acceptance. Current scope remains laptop/desktop physical keyboards only; the historical phone/tablet requirements below are superseded.
 

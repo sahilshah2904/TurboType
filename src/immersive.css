@@ -199,8 +199,83 @@ html[data-route] .app-shell {
   width: 100%;
   max-height: 380px;
   object-fit: contain;
-  filter: hue-rotate(285deg) drop-shadow(0 24px 10px #0005);
+  filter: drop-shadow(0 24px 10px #0005);
   animation: garage-float 4s ease-in-out infinite;
+}
+.kart-art--starter,
+.garage-kart.kart-art--starter {
+  filter: hue-rotate(285deg) drop-shadow(0 24px 10px #0005);
+}
+.kart-picker {
+  min-width: 0;
+  border: 0;
+  border-top: 1px solid #8e949933;
+  padding: 16px 0 0;
+  margin: 14px 0;
+}
+.kart-picker legend {
+  padding: 0 12px 0 0;
+  font-weight: 700;
+}
+.kart-picker__grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+}
+.kart-choice {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 4px;
+  border: 1px solid #8e949944;
+  cursor: pointer;
+  border-radius: 6px;
+}
+.kart-choice:has(input:checked) {
+  border-color: #ff5964;
+  background: #ff596414;
+}
+.kart-choice:focus-within {
+  outline: 2px solid #63e7f2;
+  outline-offset: 3px;
+}
+.race-deck .kart-choice input {
+  width: 14px;
+  height: 14px;
+  margin: 0;
+  padding: 0;
+  accent-color: #ff5964;
+  align-self: flex-start;
+}
+.kart-choice img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+.kart-choice strong {
+  font-size: 11px;
+}
+.kart-choice span {
+  font-size: 9px;
+  text-align: center;
+  color: #b6bcc1;
+}
+.kart-picker > .help {
+  margin: 10px 0 0;
+  font-size: 10px;
+}
+.kart-picker:disabled .kart-choice {
+  cursor: default;
+  opacity: 0.65;
+}
+.immersive-race:is(
+    [data-state="finished"],
+    [data-state="timed-out"],
+    [data-state="abandoned"]
+  )
+  .kart-picker {
+  display: none;
 }
 .garage-label {
   position: absolute;
@@ -827,10 +902,6 @@ html[data-route="race"] .topbar .guest {
 }
 .immersive-race .race-deck .track-bottom > span {
   display: block;
-}
-
-.hub-audio {
-  padding: 12px 0 30px;
 }
 
 /* Graphite armor, localized crimson and cyan illumination from the approved reference. */

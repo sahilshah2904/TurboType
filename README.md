@@ -13,15 +13,15 @@ Race four computer opponents while improving physical-keyboard speed, accuracy a
 
 </div>
 
-![TurboType graphite and crimson kart race with cyan accents and live WPM](docs/images/alpha11/laptop-race.png)
+![TurboType graphite and crimson kart race with cyan accents and live WPM](docs/images/alpha12/comet-race.png)
 
-*Actual alpha.11 distinct-fleet graphite/crimson/cyan development preview from `feat/race-polish`. The latest fleet is awaiting final review in [PR #4](https://github.com/sahilshah2904/TurboType/pull/4).*
+*Actual alpha.12 player-selected Comet in the graphite/crimson/cyan race from `feat/race-polish`. The five starter silhouettes are user-accepted; further parts/performance work is tracked in [PR #4](https://github.com/sahilshah2904/TurboType/pull/4).*
 
 ## Current focus — laptop typing
 
 TurboType now targets **laptop/desktop browsers and physical keyboards only**. Phone/tablet support was explicitly removed from the scope. Layouts adapt to laptop window sizes (960 CSS px minimum), with checks at 1024–1920 widths. Mobile keyboard/rotation handling and phone/tablet test profiles are removed. Cloud progress and friends multiplayer remain planned. Earlier mobile test reports below are historical.
 
-Current preview **0.1.0-alpha.11** adds four original rival kart designs. The user accepted the restored graphite/crimson/cyan colors and upbeat Ignition browsing music. **Ignition**, a brighter 124 BPM major-key browsing track, replaces Nightforge. The user-approved **Overdrive** racing track is unchanged.
+Current preview **0.1.0-alpha.12** adds an illustrated five-car selector before racing or while paused. Your choice is remembered and appears on the hub; sound controls now live only in Settings. The user accepted the restored graphite/crimson/cyan colors and upbeat Ignition browsing music. **Ignition**, a brighter 124 BPM major-key browsing track, replaces Nightforge. The user-approved **Overdrive** racing track is unchanged.
 
 ## What is TurboType?
 
@@ -38,8 +38,8 @@ The project is being built in documented stages: a responsive single-player game
 | **Quick Race** | Four seeded CPU opponents, selectable pace, countdown, live standings, passage completion or a 60-second time trial, and frozen results. |
 | **Typing Practice** | The same typing engine without opponents, with WPM, accuracy, active time and clean-streak feedback. |
 | **Keyboard Check** | A free-editing screen for checking your physical keyboard before racing. |
-| **Preferences** | Saved motion, effects, text size and audio volumes; separate original menu/race music. |
-| **Integrated kart preview** | Edge-to-edge Phaser racing, one visible typing strip, recent-WPM speedometer, moving exhaust, bounded effects, and original optional music. Existing hub, practice, keyboard and settings pages share the new open world layout. Four CPU silhouettes now have individual models; separate wheel art and final review remain. |
+| **Preferences** | Saved motion, effects and text size; all sound enable/mute/volume controls are in Settings. Separate original menu/race music. |
+| **Integrated kart preview** | Edge-to-edge Phaser racing, one visible typing strip, recent-WPM speedometer, moving exhaust, bounded effects, and original optional music. Existing hub, practice, keyboard and settings pages share the new open world layout. Choose any of the five starter models; your choice is remembered. The hub reflects your car and has no sound controls. Separate wheel art remains. |
 
 The current passages are short exercises for validating the game. Campaign levels, stars, rewards, a garage, accounts, cloud progress and multiplayer are planned features. Campaign cards in the hub are previews.
 
@@ -47,17 +47,17 @@ Open **Sound & music** to enable the original soundtrack: **Ignition** while bro
 
 ## Progress checkpoint and next session
 
-Current preview is **0.1.0-alpha.11** on **feat/race-polish**, in open [PR #4](https://github.com/sahilshah2904/TurboType/pull/4). **Phases 1–4 are complete for their agreed scope; Phase 5 remains in progress.** Existing-page Phase 6 visuals are implemented, but onboarding is not. No Pages game, backend or database is deployed.
+Current preview is **0.1.0-alpha.12** on **feat/race-polish**, in open [PR #4](https://github.com/sahilshah2904/TurboType/pull/4). **Phases 1–4 are complete for their agreed scope; Phase 5 remains in progress.** Existing-page Phase 6 visuals are implemented, but onboarding is not. No Pages game, backend or database is deployed.
 
 Delivered: planning/rules and repository foundation; strict typing engine; four seeded CPU races; countdown, WPM/accuracy/streaks, pause/results/retry/recovery; full-window kart racing and one visible typing surface; live speedometer, exhaust/nitro/parallax/finish effects; full-width hub preview; revamped existing pages; independent original browsing/racing music and countdown; saved preferences and reproducible checks/docs.
 
 Latest user feedback: restored colors and Ignition accepted (“everything is good”); racing music and checks 5/6 (typing/speedometer/mistakes/correction and pause/resume/retry) work. **Overdrive is unchanged.** Ignition replaces the rejected sad menu track; the earlier graphite/crimson/cyan palette is restored. Phone/tablet compatibility was explicitly canceled. Hardware IME input and accessibility remain supported; the reported phone word-at-a-time caret issue is out of scope, not fixed.
 
-Validation: local formatting/types/build, **87 unit cases and 28 desktop Chromium browser cases pass**. Phone/tablet profiles were removed, so the former 78 executions (26 × 3) are historical; alpha.11 adds rival-failure and four-width fleet checks. Current laptop screenshots are in [docs/images/alpha11](docs/images/alpha11); [test evidence](docs/TESTING.md) distinguishes each source and hosted CI. Earlier ASUS/Samsung reports do not imply current mobile support.
+Validation: local formatting/types/build, **93 unit cases and 30 desktop Chromium browser cases pass**. Phone/tablet profiles were removed, so the former 78 executions (26 × 3) are historical; alpha.11 adds rival-failure and four-width fleet checks. Current laptop screenshots are in [docs/images/alpha12](docs/images/alpha12); [test evidence](docs/TESTING.md) distinguishes each source and hosted CI. Earlier ASUS/Samsung reports do not imply current mobile support.
 
 | Next phase | Pending work |
 | --- | --- |
-| **5** | Final review of the new fleet; separate body/wheel art; physical laptop frame/input-latency checks and full-app performance follow-up; final PR integration after acceptance. TT-505/506/508–513/515/518–520/522. |
+| **5** | Accepted starter silhouettes; separate body/wheel art; physical laptop frame/input-latency checks and full-app performance follow-up; final PR integration after acceptance. TT-505/506/508–513/515/518–520/522. |
 | **6** | Cinematic opening/loading, rules/welcome/tutorial/calibration and final laptop flow. |
 | **7–8** | Three rightward 100-node maps with locks/chapters/bonuses; author, validate and balance all 300 levels. |
 | **9** | Rewards/rank/garage/records/coaching, robust guest saves and optional account-backed cloud progress before public solo launch. |
@@ -282,3 +282,7 @@ Created by **Sahilshah**. Vehicle artwork and synthesized music in the Phase 5 p
 ### Recreate the current fleet and measurements
 
 [Vehicle masters, prompts, exports and anchors](docs/KART_FLEET.md) explain the art pipeline and its remaining wheel-part work. [Full-app measurements](docs/PERFORMANCE_ALPHA11.md) cover HUD, decoded music, synthetic input and repeated navigation, with clear limits on software-renderer and JS-heap evidence. Original art sources are excluded from the published game.
+
+### Planned car rewards
+
+The five current starter cars are selectable now. Later, ten additional cars will unlock at **10, 25, 50, 75, 100, 140, 180, 220, 260 and 300 unique campaign levels cleared**, with increasingly sporty silhouettes. Replays do not inflate progress and cars never give a typing-speed advantage. The [garage plan](docs/GARAGE_PROGRESSION.md) records the exact future rules, art briefs and save/ownership work (TT-911); these unlocks are not implemented yet.

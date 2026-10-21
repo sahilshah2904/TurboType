@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.0-alpha.12 — 21 October 2026
+
+- Add an illustrated five-starter car selector before starting or while paused. Remember the validated cosmetic preference; update the current race in place and show the chosen model in the hub/preview. CPUs use the other four models; typing rules, timing, speed and results are unchanged.
+- Move enable/mute/volume controls exclusively to Settings; remove Pit lane radio from the hub. Preserve the accepted original music and its loading/gesture/cleanup behavior.
+- Record acceptance of the distinct fleet and plan ten increasingly sporty locked cars for unique campaign-clear milestones, with ownership/save/cloud requirements explicitly deferred to Phases 8/9.
+- Add selection/pause/restore/storage-failure and Settings-only audio regression evidence. App version changes only; rules 3, save/content 1 remain.
+
 ## 0.1.0-alpha.11 — 21 October 2026
 
 - Replace four recolored CPUs with original amber rally, blue aero, pearl/magenta streamliner and violet electric karts, sharing anchors between race and hub. Preserve the accepted player, palette and both music masters.

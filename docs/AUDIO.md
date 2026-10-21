@@ -1,3 +1,5 @@
+> Alpha.12: the user accepted the five starter silhouettes. Race setup/pause now lets the player choose and remember any starter; the hub reflects that model. Sound controls are only in Settings, and the hub radio section is removed. [Current behavior and ten future car rewards](GARAGE_PROGRESSION.md) supersede older fixed-player and sound-control placement descriptions below.
+
 # Original TurboType soundtrack
 
 Alpha.9, 21 October 2026. Browsing music was revised after the user found Nightforge sad; the user accepted racing music, so Overdrive is byte-identical to alpha.8. The user rejected the earlier Harbor Circuit oscillator loop and explicitly requested removal of personal music. The normal app now ships two different original rendered instrumental masters. No upload/chooser, object URL, personal file loader, downloaded sample, Misirlou recording or external music service is used.

@@ -1,3 +1,5 @@
+> Alpha.12: the user accepted the five starter silhouettes. Race setup/pause now lets the player choose and remember any starter; the hub reflects that model. Sound controls are only in Settings, and the hub radio section is removed. [Current behavior and ten future car rewards](GARAGE_PROGRESSION.md) supersede older fixed-player and sound-control placement descriptions below.
+
 # Original rival fleet — alpha.11
 
 Phase 5 replaces the four palette-copy CPUs with four independently generated silhouettes. The accepted player remains the original Volt kart with the same runtime coral palette. The hub previews the player, Neon Fox and Apex Nova; the race uses all five. Race rules, CPU IDs/schedules and input eligibility are unchanged.

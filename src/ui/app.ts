@@ -2,6 +2,8 @@ import { animate, createScope } from "animejs";
 import { RaceAudio } from "../audio/race-audio";
 import { audioControls, connectAudioControls } from "./audio-controls";
 import { APP_VERSION } from "../config/versions";
+import { STARTER_KARTS, type KartId } from "../content/kart-catalog";
+import { LocalGarageRepository } from "../storage/garage";
 import {
   LocalSettingsRepository,
   type UserSettings,
@@ -25,6 +27,8 @@ const ARROW = '<span aria-hidden="true">↗</span>';
 export function mountApp(root: HTMLElement): () => void {
   const repository = new LocalSettingsRepository(() => localStorage);
   let settings = repository.load();
+  const garage = new LocalGarageRepository(() => localStorage);
+  let selectedKart = garage.load();
   const audio = new RaceAudio();
   const systemMotion = matchMedia("(prefers-reduced-motion: reduce)");
   let scope: ReturnType<typeof createScope> | undefined;
@@ -78,9 +82,9 @@ export function mountApp(root: HTMLElement): () => void {
     document.title = `TurboType — ${route === "hub" ? "Your words. Full throttle." : route === "race" ? "Quick Race" : route === "practice" ? "Typing practice" : route === "keyboard" ? "Keyboard check" : "Settings"}`;
     main.innerHTML =
       route === "hub"
-        ? hubScreen()
+        ? hubScreen(selectedKart)
         : route === "race"
-          ? quickRaceScreen()
+          ? quickRaceScreen(selectedKart)
           : route === "practice"
             ? practiceScreen()
             : route === "keyboard"
@@ -106,6 +110,7 @@ export function mountApp(root: HTMLElement): () => void {
         mountTrackPreview(track, {
           reducedMotion: reducedMotion(),
           effects: settings.effects,
+          playerKart: selectedKart,
           onReady: (text) => {
             if (currentGeneration === generation) {
               message.textContent = text;
@@ -138,7 +143,6 @@ export function mountApp(root: HTMLElement): () => void {
         mount();
       });
     }
-    if (route === "hub") clearScreen = connectAudioControls(main, audio);
     if (route === "keyboard") clearScreen = connectKeyboard(main);
     if (route === "practice")
       clearScreen = connectTypingPractice(main, practiceSession);
@@ -149,6 +153,13 @@ export function mountApp(root: HTMLElement): () => void {
         reducedMotion,
         () => settings.effects,
         audio,
+        {
+          read: () => selectedKart,
+          choose: (id) => {
+            selectedKart = id;
+            return garage.save(id);
+          },
+        },
       );
     if (route === "settings") {
       clearScreen = connectAudioControls(main, audio);
@@ -213,16 +224,16 @@ export function mountApp(root: HTMLElement): () => void {
   };
 }
 
-function hubScreen(): string {
+function hubScreen(selectedKart: KartId): string {
+  const kart = STARTER_KARTS.find((kart) => kart.id === selectedKart)!;
   return `
     <section class="hero reveal" aria-labelledby="hero-title">
       <div><p class="eyebrow"><span class="status-dot"></span> FIND YOUR RHYTHM. OWN THE ROAD.</p><h1 id="hero-title">YOUR WORDS.<br /><span>FULL THROTTLE.</span></h1><p class="hero-copy">Turn every keystroke into momentum.<br />Take on four CPUs. Build clean speed.</p><a class="button button--primary" href="#/race">Start a race ${ARROW}</a></div>
-      <aside class="hero-note"><span class="garage-label">VOLT KART / YOUR STARTING LINE</span><img class="garage-kart" src="${import.meta.env.BASE_URL}assets/karts/volt-kart.png" alt="Original coral-red arcade racing kart" /><span>Four opponents. One passage.<br />Your pace sets your progress.</span></aside>
+      <aside class="hero-note"><span class="garage-label">${kart.name.toUpperCase()} / YOUR STARTING LINE</span><img class="garage-kart ${kart.id === "volt-kart" ? "kart-art--starter" : ""}" src="${import.meta.env.BASE_URL}assets/karts/${kart.file}" alt="${kart.name} — ${kart.style}" /><span>Four opponents. One passage.<br />Your pace sets your progress.</span></aside>
     </section>
-    <section class="hub-audio reveal" aria-label="Menu soundtrack"><h2>Pit lane radio</h2><p class="help">Ignition while you browse. Overdrive when you race.</p>${audioControls()}</section>
     <section class="track-card reveal" aria-label="Animated track preview">
       <div class="section-top"><span class="eyebrow"><span class="status-dot"></span> TRACK PREVIEW</span><span class="micro">CITY CIRCUIT <span class="divider">/</span> NIGHT RUN</span></div>
-      <div id="track-preview" class="track-preview" role="img" aria-label="A red arcade kart on an illustrated city road, with two decorative rival karts"></div>
+      <div id="track-preview" class="track-preview" role="img" aria-label="Your selected kart on an illustrated city road, with two decorative rival karts"></div>
       <div class="track-bottom"><span id="track-status" role="status">Loading track preview…</span><span>Scene preview · no race in progress</span><button id="retry-preview" class="text-button" hidden>Retry preview</button></div>
     </section>
     <section class="campaign-section reveal" aria-labelledby="campaign-heading"><div class="section-heading"><div><p class="eyebrow">THREE GEARS. ONE JOURNEY.</p><h2 id="campaign-heading">Find your starting line.</h2></div><span class="pill">CAMPAIGNS IN DEVELOPMENT</span></div><div class="campaign-grid">

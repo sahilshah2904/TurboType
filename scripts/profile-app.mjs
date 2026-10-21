@@ -3,9 +3,13 @@ import { chromium } from "@playwright/test";
 import { mkdirSync, writeFileSync, statSync, readFileSync } from "node:fs";
 import { createHash } from "node:crypto";
 const base = process.argv[2] ?? "http://127.0.0.1:5173/TurboType/";
-const output = "Reference_Images/analysis/alpha11";
+const version = JSON.parse(readFileSync("package.json", "utf8")).version;
+const captureTag = version.includes("-alpha.")
+  ? "alpha" + version.split("alpha.")[1]
+  : "v" + version;
+const output = `Reference_Images/analysis/${captureTag}`;
 mkdirSync(output, { recursive: true });
-mkdirSync("docs/images/alpha11", { recursive: true });
+mkdirSync(`docs/images/${captureTag}`, { recursive: true });
 const browser = await chromium.launch({
   args: ["--use-angle=swiftshader", "--enable-unsafe-swiftshader"],
 });
@@ -81,11 +85,14 @@ try {
       .locator('#race-track[data-ready="true"]')
       .waitFor({ timeout: 20000 });
     const trackReadyMs = Date.now() - start;
+    await page.getByRole("link", { name: "Settings", exact: true }).click();
     await page.getByText("Sound & music", { exact: true }).click();
     await page
       .getByRole("button", { name: "Enable sound", exact: true })
       .click();
     await page.waitForFunction(() => window.audioProbe.decodes.length === 2);
+    await page.getByRole("link", { name: "Race", exact: true }).click();
+    await page.locator('#race-track[data-ready="true"]').waitFor();
     await cdp.send("HeapProfiler.collectGarbage");
     const heapBefore = await cdp.send("Runtime.getHeapUsage");
     await page.locator("#race-passage-select").selectOption("1");
@@ -145,7 +152,9 @@ try {
       };
     });
     if (profile.name === "high")
-      await page.screenshot({ path: "docs/images/alpha11/laptop-race.png" });
+      await page.screenshot({
+        path: `docs/images/${captureTag}/laptop-race.png`,
+      });
     await page.locator("#pause-race").click();
     await page.locator("#retry-race").click();
     const cycles = [];
@@ -208,7 +217,7 @@ try {
       await page.locator('#track-preview[data-ready="true"]').waitFor();
       await page.waitForTimeout(700);
       await page.screenshot({
-        path: "docs/images/alpha11/laptop-hub.png",
+        path: `docs/images/${captureTag}/laptop-hub.png`,
         fullPage: true,
       });
     }
@@ -233,7 +242,7 @@ try {
     JSON.stringify(
       {
         browser: browser.version(),
-        version: "0.1.0-alpha.11",
+        version,
         renderer: "Headless Chromium / SwiftShader; local Vite HTTP; 1440×900",
         scope:
           "Full app HUD, synthetic DOM input, renderer and decoded music; requestAnimationFrame callback cadence and CDP JS heap, not physical presentation fps, GPU memory or physical-key latency. Four route cycles; one sample per quality.",

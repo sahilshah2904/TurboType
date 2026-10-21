@@ -99,8 +99,30 @@ export function addKart(scene: Phaser.Scene, index: number) {
   const body = scene.add.image(0, kart.bodyY, key).setDisplaySize(200, 100);
   root.add([shadow, flame, body]);
   // These are rotating highlights over baked wheel art, not separate wheel sprites.
-  const spokes = kart.wheels.map(([x, y, radius]) => {
-    const wheel = scene.add.graphics().lineStyle(1, 0xe6f2f5, 0.42);
+  const spokes = kart.wheels.map(() => scene.add.graphics());
+  root.add(spokes);
+  const assembly = { root, flame, spokes, body };
+  setKartModel(scene, assembly, index);
+  return assembly;
+}
+
+/** Change appearance in place; never replace the scene or reset a paused race. */
+export function setKartModel(
+  scene: Phaser.Scene,
+  assembly: ReturnType<typeof addKart>,
+  index: number,
+): void {
+  const kart = KART_FLEET[index];
+  const key =
+    index === 0 && scene.textures.exists("player-kart")
+      ? "player-kart"
+      : kart.id;
+  assembly.body
+    .setTexture(key)
+    .setPosition(0, kart.bodyY)
+    .setDisplaySize(200, 100);
+  kart.wheels.forEach(([x, y, radius], i) => {
+    const wheel = assembly.spokes[i].clear().lineStyle(1, 0xe6f2f5, 0.42);
     for (let n = 0; n < 5; n++) {
       const a = (n * Math.PI) / 2.5;
       wheel.lineBetween(
@@ -111,8 +133,6 @@ export function addKart(scene: Phaser.Scene, index: number) {
       );
     }
     wheel.setPosition(x, y);
-    root.add(wheel);
-    return wheel;
+    wheel.rotation = 0;
   });
-  return { root, flame, spokes };
 }

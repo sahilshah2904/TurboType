@@ -64,6 +64,8 @@ test("distinct original scores follow menu, countdown and race without file cont
   });
   await page.goto("./#/hub");
   await expect(page.locator('input[type="file"]')).toHaveCount(0);
+  await expect(page.locator(".audio-controls")).toHaveCount(0);
+  await page.getByRole("link", { name: "Settings", exact: true }).click();
   await page.getByText("Sound & music", { exact: true }).click();
   await page.getByRole("button", { name: "Enable sound", exact: true }).click();
   const music = () =>
@@ -84,6 +86,7 @@ test("distinct original scores follow menu, countdown and race without file cont
   }
   await expect(page.locator('input[type="file"]')).toHaveCount(0);
   await page.getByRole("link", { name: "Race", exact: true }).click();
+  await expect(page.locator(".audio-controls")).toHaveCount(0);
   await expect(page.locator("#race-track")).toHaveAttribute(
     "data-ready",
     "true",

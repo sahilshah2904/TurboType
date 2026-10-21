@@ -1,15 +1,18 @@
 import type { SoloRace } from "../core/solo-race";
+import { kartLineup, type KartId } from "../content/kart-catalog";
 import {
   addKart,
   bakePlayerPalette,
   fleetReady,
   KART_FLEET,
   preloadFleet,
+  setKartModel,
 } from "./kart-fleet";
 interface TrackOptions {
   read: () => ReturnType<SoloRace["snapshot"]>;
   reducedMotion: () => boolean;
   effects: () => "high" | "low";
+  playerKart?: () => KartId;
   onReady: () => void;
   onError: () => void;
 }
@@ -48,6 +51,9 @@ export async function mountRaceTrack(
     private burst = 0;
     private ended = false;
     private qualityAt = 0;
+    private models = kartLineup("volt-kart");
+    private assemblies: ReturnType<typeof addKart>[] = [];
+    private selectedKart: KartId = "volt-kart";
     preload(): void {
       preloadFleet(this);
       this.load.on("loaderror", options.onError);
@@ -74,7 +80,9 @@ export async function mountRaceTrack(
         "COMET · CPU",
         "VOLT · CPU",
       ].forEach((name, i) => {
-        const { root, flame, spokes } = addKart(this, i);
+        const assembly = addKart(this, i);
+        this.assemblies.push(assembly);
+        const { root, flame, spokes } = assembly;
         this.spokes.push(spokes);
         const label = this.add
           .text(0, -53, name, {
@@ -101,7 +109,27 @@ export async function mountRaceTrack(
       this.scale.on("resize", this.layout, this);
       parent.dataset.ready = "true";
       parent.dataset.fleet = KART_FLEET.map((kart) => kart.id).join(",");
+      this.syncModels();
       options.onReady();
+    }
+    private syncModels(): void {
+      const selected = options.playerKart?.() ?? "volt-kart";
+      if (
+        selected === this.selectedKart &&
+        parent.dataset.playerKart === selected
+      )
+        return;
+      if (selected !== this.selectedKart) {
+        this.selectedKart = selected;
+        this.models = kartLineup(selected);
+        this.assemblies.forEach((assembly, i) =>
+          setKartModel(this, assembly, this.models[i]),
+        );
+      }
+      parent.dataset.playerKart = selected;
+      parent.dataset.lineup = this.models
+        .map((index) => KART_FLEET[index].id)
+        .join(",");
     }
     private layout(): void {
       if (!this.backdrop) return;
@@ -176,6 +204,7 @@ export async function mountRaceTrack(
       }
     }
     update(_time: number, delta: number): void {
+      this.syncModels();
       if (!this.road) return;
       const snapshot = options.read(),
         s = snapshot.player,
@@ -276,7 +305,7 @@ export async function mountRaceTrack(
             size =
               (nitro ? 100 : 48) *
               (0.83 + Math.sin(s.elapsedMs / 37 + i) * 0.17);
-          const [exhaustX, exhaustY] = KART_FLEET[i].exhaust;
+          const [exhaustX, exhaustY] = KART_FLEET[this.models[i]].exhaust;
           flame
             .fillStyle(nitro ? 0x53dcf5 : 0xff8d28, 0.9)
             .fillTriangle(

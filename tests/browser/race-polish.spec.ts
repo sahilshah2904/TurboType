@@ -154,6 +154,7 @@ test("audio is opt-in, persists controls and reuses one context without race eff
         ).audioProbe,
     );
   expect((await probe()).contexts).toBe(0);
+  await page.getByRole("link", { name: "Settings", exact: true }).click();
   await page.getByText("Sound & music", { exact: true }).click();
   await page.getByRole("button", { name: "Enable sound", exact: true }).click();
   await expect(page.locator("#audio-status")).toHaveAttribute(
@@ -165,11 +166,7 @@ test("audio is opt-in, persists controls and reuses one context without race eff
     el.dispatchEvent(new Event("input", { bubbles: true }));
   });
   await page.reload();
-  await expect(page.locator("#race-track")).toHaveAttribute(
-    "data-ready",
-    "true",
-    { timeout: 12000 },
-  );
+  await expect(page.locator("html")).toHaveAttribute("data-route", "settings");
   expect((await probe()).contexts).toBe(0);
   await page.getByText("Sound & music", { exact: true }).click();
   await expect(page.getByLabel("Music volume", { exact: true })).toHaveValue(
@@ -179,6 +176,12 @@ test("audio is opt-in, persists controls and reuses one context without race eff
   await expect(page.locator("#audio-status")).toHaveAttribute(
     "data-state",
     "running",
+  );
+  await page.getByRole("link", { name: "Race", exact: true }).click();
+  await expect(page.locator("#race-track")).toHaveAttribute(
+    "data-ready",
+    "true",
+    { timeout: 12000 },
   );
   await go(page);
   await typePrefix(page, "Every");
@@ -215,11 +218,18 @@ test("unsupported audio cannot prevent a complete race or retry", async ({
     });
   });
   await openRace(page);
+  await page.getByRole("link", { name: "Settings", exact: true }).click();
   await page.getByText("Sound & music", { exact: true }).click();
   await page.getByRole("button", { name: "Enable sound", exact: true }).click();
   await expect(page.locator("#audio-status")).toHaveAttribute(
     "data-state",
     "unavailable",
+  );
+  await page.getByRole("link", { name: "Race", exact: true }).click();
+  await expect(page.locator("#race-track")).toHaveAttribute(
+    "data-ready",
+    "true",
+    { timeout: 12000 },
   );
   await go(page);
   await typePrefix(page, SAMPLE);
