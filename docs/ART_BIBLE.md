@@ -1,3 +1,5 @@
+> Alpha.6 palette update (21 October 2026): the user requested red/black. The current application uses near-black #100b10 / charcoal #201c21, crimson #ff5364, warm white #f3edf0 and muted text #beb8bb. Burgundy skyline depth replaces teal. The player kart is red; named CPUs retain different palettes. Typing mistakes use amber #ffcc84 plus an underline, rather than sharing decorative red. Earlier lime/cyan specifications below are historical. No new artwork or external assets were added.
+
 > Alpha.5: the user approved the kart direction. The normal app now integrates it; see [IMMERSIVE_APP.md](IMMERSIVE_APP.md). Older sedan/composition text below is historical, not the current renderer. Distinct vehicle bodies and final device acceptance remain open.
 
 # TurboType art and motion bible — Neon Harbor

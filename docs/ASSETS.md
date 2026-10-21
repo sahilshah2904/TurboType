@@ -4,7 +4,7 @@ Only the following assets are shipped in this phase. The reel, screenshots, extr
 
 | Asset | Origin and editable source | Usage / license |
 | --- | --- | --- |
-| TurboType mark | Original project-authored vector in public/assets/brand-mark.svg | Favicon and wordmark; not derived from the reference game's branding |
+| TurboType mark | Original project-authored vector in public/assets/brand-mark.svg | Favicon and wordmark; alpha.6 uses a crimson/warm-white palette; not derived from the reference game's branding |
 | Neon GT, Apex R, Volt X bodies | Original editable generator assets-source/build-vehicles.mjs → public/assets/cars/*.svg | Explicit 760×240 SVG raster; no brand/traced references; runtime wheels/shadows/lighting remain separate. Legacy sedan removed from current build, retained in Git history |
 | Harbor Circuit music and cues | Original authored score in src/audio/score.ts and synthesis/envelopes in race-audio.ts | Native runtime synthesis; 116 BPM eight-bar loop, menu/race arrangements, no borrowed samples/song/audio download. See AUDIO.md |
 | Road, skyline, wheels, shadow, particles | Original procedural drawings in src/game/track-preview.ts and src/game/race-track.ts | No downloaded raster artwork |

@@ -58,7 +58,7 @@ export async function mountRaceTrack(
         const texture = this.textures.createCanvas(`kart-${i}`, 640, 320);
         if (texture) {
           const context = texture.getContext();
-          context.filter = `hue-rotate(${i * 72}deg)`;
+          context.filter = `hue-rotate(${[0, 285, 72, 144, 216][i]}deg)`;
           context.drawImage(source, 0, 0, 640, 320);
           texture.refresh();
         }
@@ -71,7 +71,7 @@ export async function mountRaceTrack(
         .text(0, 0, "NEON HARBOR", {
           fontFamily: "monospace",
           fontSize: "24px",
-          color: "#a3c2c1",
+          color: "#c6b9bd",
           letterSpacing: 5,
         })
         .setAlpha(0.65);
@@ -85,11 +85,13 @@ export async function mountRaceTrack(
         const root = this.add.container(0, 0),
           flame = this.add.graphics();
         const shadow = this.add.ellipse(0, 43, 175, 12, 0x000000, 0.4);
+        const paletteKey =
+          i === 0 ? "kart-1" : i === 1 ? "volt-kart" : `kart-${i}`;
         const body = this.add
           .image(
             0,
             0,
-            i && this.textures.exists(`kart-${i}`) ? `kart-${i}` : "volt-kart",
+            this.textures.exists(paletteKey) ? paletteKey : "volt-kart",
           )
           .setDisplaySize(200, 100);
         root.add([shadow, flame, body]);
@@ -117,7 +119,7 @@ export async function mountRaceTrack(
           .text(0, -53, name, {
             fontFamily: "monospace",
             fontSize: "10px",
-            color: i ? "#cee3e4" : "#c2ff69",
+            color: i ? "#e5dfe1" : "#ff5364",
           })
           .setOrigin(0.5);
         root.add(label);
@@ -128,8 +130,8 @@ export async function mountRaceTrack(
           this.add.text(0, 0, "", {
             fontFamily: "monospace",
             fontSize: "10px",
-            color: "#b9d5d9",
-            backgroundColor: "#102630",
+            color: "#d8cbd0",
+            backgroundColor: "#21141b",
           }),
         );
       });
@@ -149,17 +151,17 @@ export async function mountRaceTrack(
         this.backdrop
           .fillStyle(
             Phaser.Display.Color.GetColor(
-              10 + (y / horizon) * 10,
-              27 + (y / horizon) * 34,
-              39 + (y / horizon) * 34,
+              16 + (y / horizon) * 36,
+              11 + (y / horizon) * 8,
+              16 + (y / horizon) * 14,
             ),
           )
           .fillRect(0, y, w, 6);
       this.backdrop
-        .fillStyle(0xe4d1a5, 0.65)
+        .fillStyle(0xefb3b7, 0.65)
         .fillCircle(w * 0.81, horizon * 0.27, Math.min(w * 0.045, 55));
       this.backdrop
-        .fillStyle(0x193e48)
+        .fillStyle(0x211018)
         .fillTriangle(-100, horizon, w * 0.28, horizon * 0.4, w * 0.65, horizon)
         .fillTriangle(
           w * 0.35,
@@ -174,13 +176,13 @@ export async function mountRaceTrack(
         const x = i * 58,
           height = 24 + ((i * 37) % Math.max(25, Math.floor(horizon * 0.48)));
         this.city
-          .fillStyle(i % 2 ? 0x1c3945 : 0x21434c)
+          .fillStyle(i % 2 ? 0x24141c : 0x2b1921)
           .fillRect(x, horizon - height, 45, height);
         for (let y = 10; y < height; y += 18)
           for (let k = 0; k < 3; k++)
             if ((i + y + k) % 3)
               this.city
-                .fillStyle(0x83c4c5, 0.19)
+                .fillStyle(0xffadb6, 0.19)
                 .fillRect(x + 7 + k * 12, horizon - height + y, 3, 5);
       }
       this.title
@@ -206,7 +208,7 @@ export async function mountRaceTrack(
             : Math.sin(angle) * 35,
           age: 0,
           life: confetti ? 1500 : 450,
-          color: [0x63e7f2, 0xffa165, 0xb7f36b, 0xf6d46b][i % 4],
+          color: [0xff5364, 0xffa165, 0xf2dce0, 0xf6d46b][i % 4],
           confetti,
         });
       }
@@ -231,10 +233,10 @@ export async function mountRaceTrack(
       this.city.x = reduced ? 0 : -(s.progress * w * 0.6) % (w * 0.5);
       this.road
         .clear()
-        .fillStyle(0x203b46)
+        .fillStyle(0x201c21)
         .fillRect(0, horizon, w, h - horizon);
-      this.road.fillStyle(0xaaff6b).fillRect(0, horizon, w, 3);
-      this.road.lineStyle(1, 0xa2bdc1, 0.3);
+      this.road.fillStyle(0xff5364).fillRect(0, horizon, w, 3);
+      this.road.lineStyle(1, 0xbcb0b7, 0.3);
       const offset = reduced ? 0 : (s.elapsedMs * 0.15) % 100;
       for (let i = 1; i <= 5; i++)
         for (let x = -100; x < w + 100; x += 100)
@@ -245,7 +247,7 @@ export async function mountRaceTrack(
             horizon + laneHeight * i,
           );
       if (decorative && high && s.recentWpm > 25) {
-        this.road.lineStyle(1, 0x70d6df, 0.15);
+        this.road.lineStyle(1, 0xff7d8b, 0.15);
         for (let i = 0; i < 9; i++) {
           const x = (((i * 157 - s.elapsedMs * 0.3) % w) + w) % w;
           const y = horizon + 15 + ((i * 43) % (h - horizon - 15));
@@ -263,8 +265,8 @@ export async function mountRaceTrack(
             this.gate
               .fillStyle(
                 (Math.floor((y - horizon - 4) / 12) + x / 12) % 2
-                  ? 0xe4f5ef
-                  : 0x0a202a,
+                  ? 0xf5eaee
+                  : 0x120b10,
               )
               .fillRect(finishX + x, y, 12, 12);
       const ids = ["player", "cpu-1", "cpu-2", "cpu-3", "cpu-4"],
@@ -313,7 +315,7 @@ export async function mountRaceTrack(
               (nitro ? 100 : 48) *
               (0.83 + Math.sin(s.elapsedMs / 37 + i) * 0.17);
           flame
-            .fillStyle(nitro ? 0x3ddcfa : 0xff8d28, 0.9)
+            .fillStyle(nitro ? 0xff405c : 0xff8d28, 0.9)
             .fillTriangle(-91, -13, -91, 0, -91 - size, -7)
             .fillStyle(0xfff2b0)
             .fillTriangle(-91, -11, -91, -2, -91 - size * 0.6, -7);
@@ -371,7 +373,7 @@ export async function mountRaceTrack(
     parent,
     width: Math.max(1, parent.clientWidth),
     height: Math.max(1, parent.clientHeight),
-    backgroundColor: "#102731",
+    backgroundColor: "#160d13",
     banner: false,
     audio: { noAudio: true },
     scale: { mode: Phaser.Scale.RESIZE },

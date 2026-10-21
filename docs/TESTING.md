@@ -1,5 +1,12 @@
 # Verification evidence
 
+## Alpha.6 — red-and-black theme, 21 October 2026
+
+On feat/race-polish, npm run format:check, strict typechecking and production build pass. The targeted command npx playwright test tests/browser/immersive.spec.ts tests/browser/race-polish.spec.ts passed **18 cases in 1.3 minutes** across desktop/phone/tablet Chromium with two workers. It verifies all route shells, full-width racing, the live dial, native input retention on compact resize, art loading, audio/failure behavior and bounded/reduced effects. No new tests mirror color constants. Existing rules and settings schemas are unchanged.
+
+This targeted run is distinct from alpha.5's previous 83-unit/72-browser full check and CI evidence below. Alpha.6 hosted CI is pending until its pushed source is verified. Scripted screenshots are recorded in docs/images/alpha6; native Samsung keyboard, perceived contrast/smoothness and final user acceptance remain open. Earlier software-renderer measurements do not constitute new alpha.6 profiling.
+
+
 ## Alpha.5 — integrated full-window pages and Live WPM, 21 October 2026
 
 The final local `npm run check` completed with exit 0 on feat/race-polish: formatting, strict types, **83 unit tests**, production build and **72 browser checks** across the existing desktop/phone/tablet Chromium profiles. Browser run completed in 1.9 minutes with two software-rendered workers. No dependency or core typing/CPU rule changed; app alpha.5, rules 3, save/content 1. Implementation commit `2a2c11b` (`Revamp the app and add live WPM gauges`) is pushed in PR #4. Hosted Linux [run 39519820938](https://github.com/sahilshah2904/TurboType/actions/runs/39519820938) passed for that exact implementation, including clean installation and the full check. A following documentation-only evidence commit has its own CI status.

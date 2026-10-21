@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.0-alpha.6 — 21 October 2026
+
+- Apply a red-and-black visual theme across Hub, Race, Practice, Keyboard check and Settings: charcoal surfaces, crimson controls, red horizon, HUD and Live WPM dial.
+- Reuse the original kart with a red player palette, warm exhaust and red/white nitro accents. CPU colors and explicit names preserve identification.
+- Keep completed typing muted and mistakes amber with an underline, distinct from decorative red. Rules 3 and save/content 1 stay compatible; device acceptance remains open.
+
 ## 0.1.0-alpha.5 — 21 October 2026
 
 - Integrate the approved full-window Phaser kart race, moving exhaust, responsive lanes and native single typing surface into the normal app.

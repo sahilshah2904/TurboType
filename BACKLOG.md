@@ -68,6 +68,8 @@ Required redesign added after review of recordings 2–4 and user rejection of c
 
 - [ ] TT-515: Live WPM speedometer implemented in Race/Practice (existing rolling three-active-second pace; average WPM remains separate; 0–160 needle with uncapped numeric reading, pause/result freeze and retry reset). Record new browser evidence and ASUS/Samsung readability/performance acceptance before closing.
 
+- [x] TT-516: Apply the user-requested red-and-black theme across existing app pages, Phaser race/preview, player kart and Live WPM dial. Alpha.6 reuses original art with one-time palette baking; amber underlined errors remain distinct. Formatting/types/build and 18 focused Chromium cases pass; recreation and scripted desktop/phone captures are in docs/IMMERSIVE_APP.md. Actual-device visual acceptance remains TT-506/513, not certified by this task.
+
 Alpha.5 integration evidence: source `2a2c11b`, PR #4, full local check 83 unit / 72 browser passed, hosted Linux [run 39519820938](https://github.com/sahilshah2904/TurboType/actions/runs/39519820938) passed, all existing routes captured and isolated renderer profile recorded in docs/PERFORMANCE_ALPHA5.md. TT-508/509/511/512/515 and TT-604 implementations are automatically verified; their remaining physical-device/visual gates are not closed by that evidence.
 
 ## Phase 6 — entrance and onboarding

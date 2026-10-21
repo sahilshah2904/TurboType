@@ -36,30 +36,42 @@ export async function mountTrackPreview(
 
     create(): void {
       if (!this.textures.exists("coupe")) return;
+      // Reuse the original artwork; bake the red player palette once, not per frame.
+      const source = this.textures
+        .get("coupe")
+        .getSourceImage() as HTMLImageElement;
+      const redKart = this.textures.createCanvas("red-kart", 640, 320);
+      if (redKart) {
+        const context = redKart.getContext();
+        context.filter = "hue-rotate(285deg)";
+        context.drawImage(source, 0, 0, 640, 320);
+        redKart.refresh();
+      }
       const art = this.add.graphics();
-      art.fillStyle(0x121f2b).fillRect(0, 0, 1200, 130);
-      art.fillStyle(0x1c303b).fillCircle(940, 30, 100);
+      art.fillStyle(0x140c12).fillRect(0, 0, 1200, 130);
+      art.fillStyle(0x3e1725).fillCircle(940, 30, 100);
       for (let i = 0; i < 26; i++) {
         const height = 25 + ((i * 37) % 73);
         art
-          .fillStyle(i % 2 ? 0x253f48 : 0x20333e)
+          .fillStyle(i % 2 ? 0x281820 : 0x21141c)
           .fillRect(i * 49, 130 - height, 36, height);
         for (let j = 0; j < 4; j++)
           art
-            .fillStyle(0x8aa795, 0.35)
+            .fillStyle(0xd995a1, 0.35)
             .fillRect(i * 49 + 8, 130 - height + 9 + j * 13, 3, 4);
       }
-      art.fillStyle(0x90bd69).fillRect(0, 128, 1200, 3);
-      art.fillStyle(0x1a222c).fillRect(0, 132, 1200, 288);
-      art.lineStyle(1, 0x293541).lineBetween(0, 414, 1200, 414);
+      art.fillStyle(0xff5364).fillRect(0, 128, 1200, 3);
+      art.fillStyle(0x201c21).fillRect(0, 132, 1200, 288);
+      art.lineStyle(1, 0x342a31).lineBetween(0, 414, 1200, 414);
       this.marks = this.add.graphics();
       for (let i = 0; i < 3; i++) {
         const car = this.add.container([540, 330, 160][i], 166 + i * 89);
         const shadow = this.add.ellipse(8, 32, 236, 16, 0x000000, 0.3);
-        const body = this.add.image(0, 0, "coupe").setDisplaySize(200, 100);
+        const body = this.add
+          .image(0, 0, i === 0 && redKart ? "red-kart" : "coupe")
+          .setDisplaySize(200, 100);
         if (i === 1) body.setTint(0xffa590);
         if (i === 2) body.setTint(0x8abfe8);
-        if (i === 0) body.setTint(0xb7f36b);
         const wheels = [-71, 42].map((x) => {
           const wheel = this.add
             .circle(0, 0, 15, 0x11161d, 0)
@@ -86,7 +98,7 @@ export async function mountTrackPreview(
         lifespan: 420,
         scale: { start: 1.1, end: 0 },
         alpha: { start: 0.8, end: 0 },
-        tint: [0xffb767, 0xff8356, 0xc9f48b],
+        tint: [0xffb767, 0xff8356, 0xffe0d4],
         frequency: options.effects === "low" ? 85 : 30,
         emitting: !options.reducedMotion,
       });
@@ -101,19 +113,19 @@ export async function mountTrackPreview(
       this.add.text(36, 22, "NIGHT RUN / CITY CIRCUIT", {
         fontFamily: "monospace",
         fontSize: "13px",
-        color: "#9db0bb",
+        color: "#bfb1b8",
         letterSpacing: 2,
       });
       this.add.text(1090, 22, "01", {
         fontFamily: "monospace",
         fontSize: "20px",
-        color: "#c1d1d7",
+        color: "#d9cdd3",
       });
       const label = this.add.text(505, 111, "YOUR RIDE", {
         fontFamily: "monospace",
         fontSize: "11px",
-        color: "#b7f36b",
-        backgroundColor: "#182b25",
+        color: "#ff5364",
+        backgroundColor: "#2b141c",
         padding: { x: 12, y: 6 },
       });
       label.setDepth(2);
@@ -135,7 +147,7 @@ export async function mountTrackPreview(
       if (!this.marks) return;
       if (!options.reducedMotion) this.elapsedMs += Math.min(delta, 50);
       const offset = (this.elapsedMs * 0.17) % 100;
-      this.marks.clear().lineStyle(2, 0x52606d, 0.45);
+      this.marks.clear().lineStyle(2, 0x6a5b63, 0.45);
       for (const y of [220, 309, 398])
         for (let x = -100; x < 1300; x += 100)
           this.marks.lineBetween(x - offset, y, x + 38 - offset, y);
@@ -159,7 +171,7 @@ export async function mountTrackPreview(
     parent,
     width: 1200,
     height: 420,
-    backgroundColor: "#121f2b",
+    backgroundColor: "#140c12",
     banner: false,
     audio: { noAudio: true },
     scale: { mode: Phaser.Scale.FIT, autoCenter: Phaser.Scale.CENTER_BOTH },

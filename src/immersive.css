@@ -1,8 +1,8 @@
 /* Shared full-window world. Readable forms retain local grouping; no enclosing page card. */
 :root {
-  --accent: #c2ff69;
-  --muted: #a4c1c6;
-  background: #0c202a;
+  --accent: #ff5364;
+  --muted: #beb8bb;
+  background: #1f191c;
 }
 .world-backdrop {
   position: fixed;
@@ -10,8 +10,8 @@
   z-index: -1;
   overflow: hidden;
   background:
-    radial-gradient(ellipse at 80% 15%, #45666b66, transparent 45%),
-    linear-gradient(#0a1b28, #193e49 70%, #102932);
+    radial-gradient(ellipse at 80% 15%, #8c263d66, transparent 45%),
+    linear-gradient(#100b10, #34131e 70%, #140d12);
 }
 .world-moon {
   position: absolute;
@@ -20,13 +20,13 @@
   width: 110px;
   aspect-ratio: 1;
   border-radius: 50%;
-  background: #e0cfac99;
-  box-shadow: 0 0 130px #dec19422;
+  background: #efb3b799;
+  box-shadow: 0 0 130px #ff536422;
 }
 .world-mountains {
   position: absolute;
   inset: 25% -10% 0;
-  background: #193b48;
+  background: #211018;
   clip-path: polygon(
     0 70%,
     20% 15%,
@@ -46,11 +46,11 @@
     repeating-linear-gradient(
       90deg,
       transparent 0 45px,
-      #b8eeee18 46px 49px,
+      #ffadb618 46px 49px,
       transparent 50px 70px
     ),
-    repeating-linear-gradient(0deg, transparent 0 25px, #b8eeee0c 26px 28px),
-    #15313c;
+    repeating-linear-gradient(0deg, transparent 0 25px, #ffadb60c 26px 28px),
+    #180e14;
   clip-path: polygon(
     0 30%,
     6% 30%,
@@ -86,8 +86,8 @@
   position: absolute;
   inset: 66% 0 0;
   background:
-    linear-gradient(#0b202999, #0b2029cc),
-    repeating-linear-gradient(0deg, transparent 0 64px, #96cedb26 65px 66px);
+    linear-gradient(#120c1199, #120c11cc),
+    repeating-linear-gradient(0deg, transparent 0 64px, #d5919b26 65px 66px);
 }
 html[data-route] .app-shell {
   max-width: none;
@@ -114,7 +114,7 @@ html[data-route] .app-shell {
   font-size: 10px;
 }
 .footer {
-  border-color: #aecbc322;
+  border-color: #c7c1c422;
   background: transparent;
 }
 #main {
@@ -133,10 +133,10 @@ html[data-route] .app-shell {
   line-height: 1.03;
 }
 .page-heading p {
-  color: #b2ced1;
+  color: #cbc5c8;
 }
 .eyebrow {
-  color: #a9c4c6;
+  color: #c1bbbe;
 }
 .input-panel,
 .settings-panel,
@@ -154,12 +154,12 @@ html[data-route] .app-shell {
   padding: 24px 0;
 }
 .section-top {
-  border-color: #9bc1c62b;
+  border-color: #bcb6b92b;
 }
 .help,
 .card-copy,
 .card-bottom {
-  color: #a4c1c6;
+  color: #beb8bb;
 }
 .hero {
   min-height: 65vh;
@@ -175,7 +175,7 @@ html[data-route] .app-shell {
   line-height: 0.98;
 }
 .hero .hero-copy {
-  color: #bdd6d7;
+  color: #d4ced1;
 }
 .hero-note {
   align-self: center;
@@ -190,7 +190,7 @@ html[data-route] .app-shell {
   width: 100%;
   max-height: 380px;
   object-fit: contain;
-  filter: drop-shadow(0 24px 10px #0005);
+  filter: hue-rotate(285deg) drop-shadow(0 24px 10px #0005);
   animation: garage-float 4s ease-in-out infinite;
 }
 .garage-label {
@@ -199,13 +199,13 @@ html[data-route] .app-shell {
   left: 8%;
   font-size: 9px;
   letter-spacing: 2px;
-  color: #bdd4d5;
+  color: #d2cccf;
 }
 .hero-note > span:last-child {
   display: block;
   text-align: center;
   font-size: 11px;
-  color: #adc8ca;
+  color: #c5bfc2;
 }
 .track-card {
   margin: 0 calc(-1 * clamp(16px, 3vw, 56px));
@@ -228,7 +228,7 @@ html[data-route] .app-shell {
 }
 .campaign-card {
   border: 0;
-  border-top: 1px solid #9bbeb950;
+  border-top: 1px solid #b9b3b650;
   border-radius: 0;
   background: transparent;
   padding: 25px 0;
@@ -237,11 +237,11 @@ html[data-route] .app-shell {
   display: none;
 }
 .development-note {
-  border-top: 1px solid #9bbeb930;
+  border-top: 1px solid #b9b3b630;
 }
 .keyboard-visual [data-key] {
-  background: #102c3666;
-  border-color: #71989a44;
+  background: #2a242766;
+  border-color: #938d9044;
 }
 .settings-panel {
   max-width: none;
@@ -250,17 +250,17 @@ html[data-route] .app-shell {
 }
 .setting-row {
   background: transparent;
-  border-color: #b2d3d033;
+  border-color: #cfc9cc33;
   padding: 22px 0;
 }
 .setting-row p {
-  color: #a4c1c6;
+  color: #beb8bb;
 }
 textarea,
 input,
 select {
-  background: #0a202abf;
-  border-color: #63888e66;
+  background: #1f191cbf;
+  border-color: #847e8166;
 }
 #sample {
   font-size: clamp(24px, 3vw, 40px);
@@ -270,14 +270,14 @@ select {
   margin: 0 auto;
 }
 .diagnostics {
-  border-color: #97c6c633;
+  border-color: #bfb9bc33;
 }
 .audio-controls {
   background: transparent;
-  border-color: #a4c4c33a;
+  border-color: #c0babd3a;
 }
 .audio-controls__body {
-  background: #0d2530a6;
+  background: #241e21a6;
 }
 .practice-panel {
   position: relative;
@@ -286,7 +286,7 @@ select {
 .practice-panel .metrics-grid > div {
   background: transparent;
   border: 0;
-  border-left: 1px solid #9cc7cb44;
+  border-left: 1px solid #c1bbbe44;
   border-radius: 0;
 }
 .practice-panel .practice-typing {
@@ -301,7 +301,7 @@ select {
   top: 220px;
 }
 .practice-panel .run-results {
-  background: #173a3499;
+  background: #352f3299;
   border-radius: 0;
 }
 .practice-panel .practice-options {
@@ -332,7 +332,7 @@ select {
   min-height: 52px;
 }
 .typing-surface:focus-within {
-  box-shadow: 0 2px #c2ff6966;
+  box-shadow: 0 2px #ff536466;
 }
 .typing-surface #race-passage {
   position: relative;
@@ -346,7 +346,7 @@ select {
     clamp(22px, 2.2vw, 34px)/1.35 ui-monospace,
     monospace;
   letter-spacing: 0;
-  color: #e9f1ee;
+  color: #f2ecef;
   text-align: left;
 }
 .typing-surface #race-passage span {
@@ -379,15 +379,15 @@ select {
   background: transparent;
 }
 .typing-surface .character--correct {
-  color: #668d9a;
+  color: #a69b9e;
 }
 .typing-surface .character--current {
-  border-left: 2px solid #c2ff69;
-  background: #c2ff6914;
+  border-left: 2px solid #ff5364;
+  background: #ff536414;
 }
 .typing-surface .character--error {
-  background: #f3616a4d;
-  border-bottom: 2px solid #ff8c96;
+  background: #ffbb634d;
+  border-bottom: 2px solid #ffcc84;
 }
 :root[data-text-size="large"] .typing-surface #race-passage {
   white-space: pre-wrap;
@@ -406,7 +406,7 @@ select {
 .speedometer {
   width: 175px;
   height: 160px;
-  color: #d5e5e5;
+  color: #e5dfe2;
   position: relative;
   text-align: center;
   pointer-events: none;
@@ -420,26 +420,26 @@ select {
   font:
     8px ui-monospace,
     monospace;
-  fill: #a4c6cc;
+  fill: #c2bcbf;
 }
 .dial-track {
   fill: none;
-  stroke: #6e959c66;
+  stroke: #908a8d66;
   stroke-width: 4;
 }
 .dial-accent {
   fill: none;
-  stroke: #bfff70;
+  stroke: #ff5364;
   stroke-width: 3;
 }
 .dial-needle {
   transform: rotate(var(--needle, -140deg));
   transform-origin: 90px 90px;
   transition: transform 150ms linear;
-  fill: #c2ff69;
+  fill: #ff5364;
 }
 .dial-needle circle {
-  fill: #d6e7e8;
+  fill: #e6e0e3;
 }
 .speedometer .dial-value {
   position: absolute;
@@ -457,7 +457,7 @@ select {
   bottom: 0;
   font-size: 8px;
   letter-spacing: 2px;
-  color: #b1cecf;
+  color: #cbc5c8;
 }
 /* Race owns the available visual viewport; world and sprites resize independently. */
 html[data-route="race"] .world-backdrop,
@@ -485,7 +485,7 @@ html[data-route="race"] .topbar {
   right: 0;
   padding: 12px 3vw;
   min-height: 68px;
-  background: linear-gradient(#091a25cf, transparent);
+  background: linear-gradient(#1a1417cf, transparent);
 }
 html[data-route="race"] .topbar .wordmark {
   font-size: 22px;
@@ -563,8 +563,8 @@ html[data-route="race"] .topbar .guest {
   top: 82px;
   z-index: 4;
   padding: 9px 16px;
-  background: #0c25358c;
-  border-color: #91b7be44;
+  background: #241e218c;
+  border-color: #b2acaf44;
 }
 .immersive-race .race-fullscreen {
   position: absolute;
@@ -590,8 +590,8 @@ html[data-route="race"] .topbar .guest {
   z-index: 4;
   padding: 18px max(22px, env(safe-area-inset-right)) 12px
     max(22px, env(safe-area-inset-left));
-  background: linear-gradient(#102a34f5, #0a1c26);
-  border-top: 1px solid #adc9c53b;
+  background: linear-gradient(#282225f5, #1c1619);
+  border-top: 1px solid #c6c0c33b;
 }
 .immersive-race .race-console > .help {
   font-size: 10px;
@@ -617,7 +617,7 @@ html[data-route="race"] .topbar .guest {
   transform: translateX(-50%);
   border: 0;
   background: transparent;
-  text-shadow: 0 1px 8px #0b202b;
+  text-shadow: 0 1px 8px #1f191c;
   font-size: 13px;
   letter-spacing: 2px;
 }
@@ -657,8 +657,8 @@ html[data-route="race"] .topbar .guest {
   max-height: calc(var(--visible-height, 100dvh) - 210px);
   overflow: auto;
   padding: 26px 30px;
-  background: #0c2535f5;
-  border: 1px solid #729c9b33;
+  background: #241e21f5;
+  border: 1px solid #96909333;
   box-shadow: 0 15px 130px #0007;
   scrollbar-width: thin;
 }
@@ -674,7 +674,7 @@ html[data-route="race"] .topbar .guest {
   margin: 0 0 22px;
 }
 .race-deck-title span {
-  color: #c2ff69;
+  color: #ff5364;
 }
 .race-deck .practice-options {
   display: grid;
@@ -808,7 +808,7 @@ html[data-route="race"] .topbar .guest {
     padding: 5px 0;
   }
   .topbar nav a[aria-current] {
-    border-bottom-color: #c2ff69;
+    border-bottom-color: #ff5364;
   }
   .hero {
     grid-template-columns: 1fr;

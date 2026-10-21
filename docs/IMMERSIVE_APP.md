@@ -1,6 +1,14 @@
 # Immersive application integration
 
-21 October 2026. App 0.1.0-alpha.5, rules 3 unchanged. This implements the user-approved kart direction in the actual hash-routed app, rather than only the earlier docs/design review prototype. Formal verification results belong in TESTING.md; available-device acceptance remains open.
+21 October 2026. App 0.1.0-alpha.6, rules 3 unchanged. This implements the user-approved kart direction in the actual hash-routed app, rather than only the earlier docs/design review prototype. Formal verification results belong in TESTING.md; available-device acceptance remains open.
+
+## Red-and-black theme (alpha.6)
+
+The current theme applies to all five normal routes, not the historical standalone review prototype. src/styles.css supplies shared control/focus/diagnostic colors; src/immersive.css supplies the world, HUD, typing strip and SVG speedometer. The accent is #ff5364 with dark button text; near-black and charcoal surfaces use warm-white/muted text. Mistakes retain a visible amber underline/background and textual correction feedback; completed text is muted. Focus and the active caret remain crimson.
+
+Recreate the palette by following those two CSS files and the scene color constants in src/game/race-track.ts and src/game/track-preview.ts. The approved PNG stays byte-for-byte unchanged. CSS hue-rotate(285deg) colors the hub hero; Phaser bakes the same rotation into a 640×320 player texture once per scene. Race still uses four baked variants total, with CPU 1 using the original asset. The decorative hub adds one 640×320 red texture (about 0.8 MB RGBA), disposed with its scene. No per-frame bitmap filtering, additional dependency, rules or storage changes are introduced. Distinct vehicle models remain TT-510.
+
+Current red/black captures: [desktop race](images/alpha6/desktop-racing.png), [hub](images/alpha6/desktop-hub.png), [phone race](images/alpha6/phone-racing.png) and [phone settings](images/alpha6/phone-settings.png). Alpha.5 captures below preserve earlier composition evidence and the previous palette. Real ASUS/Samsung contrast and native-keyboard acceptance remain pending.
 
 ## Existing pages revamped
 
@@ -36,7 +44,7 @@ public/assets/karts/volt-kart.png is an exact copy of the accepted original AI-g
 
 The original PNG is 1774×887, about 1.69 MB; the original RGBA texture is roughly 6.3 MB and four 640×320 palette textures add roughly 3.3 MB before other scene resources. Palette variants are downsampled once at creation; cars render at at most 220px width. Download, decode, GPU memory and actual phone behavior need measurement before launch; the previous smaller-SVG profile cannot certify this renderer. No downloaded Nintendo art or Misirlou recording is included.
 
-Exhaust uses authoritative progress activity with a 200ms presentation tail. Orange triangles/core flicker while moving; player nitro produces a longer blue burst. Stalls/errors, pause/finish and reduced motion suppress movement effects. A small suspension offset and spoke movement are presentation-only. Sparks/confetti retain fixed high/low limits, clear on ready/retry/reduced motion, and age using bounded presentation deltas. Outcomes freeze independently of effects.
+Exhaust uses authoritative progress activity with a 200ms presentation tail. Orange triangles/core flicker while moving; player nitro produces a longer crimson burst with a pale core. Stalls/errors, pause/finish and reduced motion suppress movement effects. A small suspension offset and spoke movement are presentation-only. Sparks/confetti retain fixed high/low limits, clear on ready/retry/reduced motion, and age using bounded presentation deltas. Outcomes freeze independently of effects.
 
 ## Integration boundaries and recreation
 

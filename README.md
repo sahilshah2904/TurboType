@@ -13,9 +13,9 @@ Race four computer opponents while practicing speed, accuracy and clean correcti
 
 </div>
 
-![TurboType Neon Harbor race: modern sports car, night skyline, live metrics and typing passage](docs/images/neon-harbor.png)
+![TurboType red-and-black kart race with live WPM speedometer and one typing strip](docs/images/alpha6/desktop-racing.png)
 
-*Actual alpha.5 development preview from `feat/race-polish`. The integrated full-window kart design is awaiting device acceptance in [PR #4](https://github.com/sahilshah2904/TurboType/pull/4).*
+*Actual alpha.6 red-and-black development preview from `feat/race-polish`. The integrated full-window kart design is awaiting device acceptance in [PR #4](https://github.com/sahilshah2904/TurboType/pull/4).*
 
 ## What is TurboType?
 
@@ -23,7 +23,7 @@ TurboType turns typing practice into a side-view motor race. Your car advances a
 
 The project is being built in documented stages: a responsive single-player game first, followed by campaign progression, optional cloud saves and friends multiplayer. Original vehicles, scenery and synthesized music give the game its own identity.
 
-> **Development status:** `main` contains the accepted Phase 4 playable race. The latest Phase 5/6 visual integration is on `feat/race-polish`: the approved full-window kart race, one visible typing surface, Live WPM dial and revamped existing pages are implemented in alpha.5. Local checks pass with 83 unit and 72 browser cases; actual-device acceptance remains open; the distinct fleet and cinematic onboarding are still pending. There is **no public GitHub Pages game link yet**. You can run either version locally.
+> **Development status:** `main` contains the accepted Phase 4 playable race. The latest Phase 5/6 visual integration is on `feat/race-polish`: the approved full-window kart race, one visible typing surface, Live WPM dial and revamped existing pages are implemented in alpha.6 with a red-and-black theme. Alpha.6 formatting/types/build and 18 focused browser checks pass (alpha.5 full-suite baseline: 83 unit / 72 browser); actual-device acceptance remains open; the distinct fleet and cinematic onboarding are still pending. There is **no public GitHub Pages game link yet**. You can run either version locally.
 
 ## What you can play today
 

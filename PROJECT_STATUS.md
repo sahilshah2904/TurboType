@@ -6,6 +6,8 @@ Last reviewed: 21 October 2026. This file is the persistent status source for fu
 
 ## Current position
 
+**Latest visual update: 0.1.0-alpha.6 applies the requested red-and-black theme to all existing routes, both Phaser scenes, the player kart and Live WPM dial.** Formatting, strict types and production build pass; 18 focused browser cases pass across desktop/phone/tablet Chromium. Scripted screenshots and palette recreation details are in docs/IMMERSIVE_APP.md. This is a Phase 5/6 visual refinement, not completion of the remaining fleet, onboarding or device gates. Alpha.5 full-suite/CI evidence below remains historical; new hosted CI must be checked separately.
+
 **Phases 1–4 remain complete for their agreed scopes. Phase 5 redesign is integrated into the normal application as 0.1.0-alpha.5; the full local check passed with 83 unit and 72 browser cases; new physical-device acceptance remains open. Phase 6 existing-page visual work is also implemented, but cinematic opening/tutorial/calibration remain unstarted.** The user approved the TT-507 kart direction and then explicitly requested a realtime speedometer and revamp of all existing pages. The actual Race route now has a responsive full-window Phaser kart scene, one visible typing surface, moving exhaust, setup/pause/results controls and a recent-WPM dial. Hub, Practice, Keyboard check and Settings share the open full-window world. Rules remain 3; save/content remain 1. Distinct fleet art and final device/performance acceptance are still pending. [Implementation guide](docs/IMMERSIVE_APP.md).
 
 Current branch is `feat/race-polish`, in [PR #4](https://github.com/sahilshah2904/TurboType/pull/4). Earlier cdd8e4a/e62ea47 CI/test results certify the prior implementation only. Implementation `2a2c11b` is pushed; new local verification is 83 unit / 72 browser (exit 0), and hosted Linux [run 39519820938](https://github.com/sahilshah2904/TurboType/actions/runs/39519820938) passed for that exact source. See docs/TESTING.md; old 83/66 evidence remains historical. PR #4 is not merged, Pages/backend are not deployed, and no Misirlou recording is bundled. The review prototype's local-file player remains separate from the production original synth score (TT-514).
@@ -35,6 +37,8 @@ Latest scope update: phones/tablets/laptops are first-release targets. Design ac
 Phases 2–10 may overlap where dependencies require it: for example, save settings belong in the foundation before full progression. Never count a whole phase complete because a shared prerequisite exists. The game plan's engineering milestones M0–M6 group this work differently: M0 = phase 1, M1 = phase 2, M2 = phases 3–4, M3 = phases 5–6 and the complete slice, M4 = phases 7–9, M5 = phase 10, M6 = phase 11. This table is the user-facing phase numbering.
 
 ## Completed work
+
+- Implemented the user-requested red/black palette in alpha.6, with charcoal/burgundy worlds, crimson controls/caret/gauge, a runtime red kart palette and amber underlined mistake feedback. Existing rules/preferences remain compatible. Local focused checks pass; ASUS/Samsung visual acceptance and final PR #4 merge remain pending.
 
 - Reviewed screenshots and researched rendering, UI animation, GitHub Pages hosting, and later multiplayer options.
 - Reviewed timestamp samples from the supplied reel recording; documented observations separately from inferred mechanics.
