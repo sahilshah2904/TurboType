@@ -1,5 +1,7 @@
 # TurboType project status
 
+**Latest palette decision — 0.1.0-alpha.10:** Alpha.10 restores the previous alpha.8 graphite/crimson/cyan palette at the user's request, replacing the rejected alpha.9 red/gold armor panels. Laptop-only scope, Ignition browsing music, the accepted Overdrive racing master, typing rules and mobile-removal changes stay in place.
+
 Last reviewed: 21 October 2026. This file is the persistent status source for future progress questions. Update it with each meaningful implementation change and verify claims against the actual repository, checks, and deployment. Do not rely on chat memory alone.
 
 [BACKLOG.md](BACKLOG.md) is the persistent future-work checklist with stable task IDs, phase grouping, dependencies and optional ideas. Read it before starting a phase and update it when deferring or completing work.

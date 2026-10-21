@@ -84,6 +84,8 @@ Alpha.5 integration evidence: source `2a2c11b`, PR #4, full local check 83 unit 
 
 - [ ] TT-520: Alpha.9 laptop-only scope and red/gold/bright-menu update implemented; verify 1024–1920 laptop windows and latest color/music on ASUS. Overdrive is byte-identical to the user-accepted alpha.8 track. Mobile cursor/composition symptom reported by user is retired with phone support, not claimed fixed. Typing and pause/resume/retry checks accepted by user report; final performance/art gates remain.
 
+- [x] TT-521: Restore the previous alpha.8 graphite/crimson/cyan palette in alpha.10 at the user's request. Keep laptop-only layouts and current music; alpha.9 red/gold styling is rejected. Relevant checks/captures are in docs/TESTING.md.
+
 ## Phase 6 — entrance and onboarding
 
 - [ ] TT-601: Build original cinematic loading panels, real asset status, optional skip/replay, returning-user shortcut and failed-load recovery.

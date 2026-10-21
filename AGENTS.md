@@ -1,5 +1,7 @@
 # TurboType project continuity
 
+**Latest palette decision — 0.1.0-alpha.10:** Alpha.10 restores the previous alpha.8 graphite/crimson/cyan palette at the user's request, replacing the rejected alpha.9 red/gold armor panels. Laptop-only scope, Ignition browsing music, the accepted Overdrive racing master, typing rules and mobile-removal changes stay in place.
+
 - Read `PROJECT_STATUS.md` before reporting progress or starting a new implementation phase. Check the actual repository and validation evidence; update the tracker after meaningful work.
 - Read and maintain `BACKLOG.md` for future/deferred tasks. Preserve stable task IDs, capture new follow-ups in the same change, and mark tasks complete only with implementation/verification/documentation evidence. Keep required scope separate from optional ideas.
 - Preserve the eleven user-facing phases and their numbering. Distinguish designed, implemented, tested, and deployed behavior. Do not estimate overall completion by counting phases.

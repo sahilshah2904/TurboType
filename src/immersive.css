@@ -2,7 +2,7 @@
 :root {
   --accent: #ff5964;
   --muted: #b6bcc1;
-  background: #100e10;
+  background: #0c1218;
 }
 .world-backdrop {
   position: fixed;
@@ -11,7 +11,7 @@
   overflow: hidden;
   background:
     radial-gradient(ellipse at 80% 15%, #28768a66, transparent 45%),
-    linear-gradient(#100d0f, #152b34 70%, #110c0f);
+    linear-gradient(#080d12, #152b34 70%, #090f15);
 }
 .world-moon {
   position: absolute;
@@ -35,7 +35,7 @@
 .world-mountains {
   position: absolute;
   inset: 25% -10% 0;
-  background: #24171b;
+  background: #101d25;
   clip-path: polygon(
     0 70%,
     20% 15%,
@@ -55,11 +55,11 @@
     repeating-linear-gradient(
       90deg,
       transparent 0 45px,
-      #dfbb7718 46px 49px,
+      #77dcea18 46px 49px,
       transparent 50px 70px
     ),
-    repeating-linear-gradient(0deg, transparent 0 25px, #dfbb770c 26px 28px),
-    #1b1215;
+    repeating-linear-gradient(0deg, transparent 0 25px, #77dcea0c 26px 28px),
+    #0c161e;
   clip-path: polygon(
     0 30%,
     6% 30%,
@@ -95,8 +95,8 @@
   position: absolute;
   inset: 66% 0 0;
   background:
-    linear-gradient(#110e1099, #110e10cc),
-    repeating-linear-gradient(0deg, transparent 0 64px, #ba945c26 65px 66px);
+    linear-gradient(#080f1599, #080f15cc),
+    repeating-linear-gradient(0deg, transparent 0 64px, #78b5c626 65px 66px);
 }
 html[data-route] .app-shell {
   max-width: none;
@@ -268,7 +268,7 @@ html[data-route] .app-shell {
 textarea,
 input,
 select {
-  background: #100e10bf;
+  background: #0c1218bf;
   border-color: #7c828766;
 }
 #sample {
@@ -286,7 +286,7 @@ select {
   border-color: #b8bec33a;
 }
 .audio-controls__body {
-  background: #191417a6;
+  background: #111c25a6;
 }
 .practice-panel {
   position: relative;
@@ -572,7 +572,7 @@ html[data-route="race"] .topbar .guest {
   top: 82px;
   z-index: 4;
   padding: 9px 16px;
-  background: #1914178c;
+  background: #111c258c;
   border-color: #aab0b544;
 }
 .immersive-race .race-fullscreen {
@@ -626,7 +626,7 @@ html[data-route="race"] .topbar .guest {
   transform: translateX(-50%);
   border: 0;
   background: transparent;
-  text-shadow: 0 1px 8px #100e10;
+  text-shadow: 0 1px 8px #0c1218;
   font-size: 13px;
   letter-spacing: 2px;
 }
@@ -666,7 +666,7 @@ html[data-route="race"] .topbar .guest {
   max-height: calc(100dvh - 210px);
   overflow: auto;
   padding: 26px 30px;
-  background: #191417f5;
+  background: #111c25f5;
   border: 1px solid #8e949933;
   box-shadow: 0 15px 130px #0007;
   scrollbar-width: thin;
@@ -833,91 +833,79 @@ html[data-route="race"] .topbar .guest {
   padding: 12px 0 30px;
 }
 
-/* Metallic red nanotech-inspired armor: gold seams, dark joints, small cyan lights. */
+/* Graphite armor, localized crimson and cyan illumination from the approved reference. */
 :root {
-  --energy: #e7bf74;
+  --energy: #63e7f2;
 }
 .world-backdrop {
-  background: #100d0f;
+  background:
+    radial-gradient(ellipse at 78% 33%, #25515e55, transparent 52%),
+    radial-gradient(ellipse at 12% 70%, #7c1e281c, transparent 34%), #080e14;
 }
 .world-backdrop::before {
   content: "";
   position: absolute;
-  left: 38%;
-  top: -10%;
-  width: 72%;
-  height: 120%;
-  clip-path: polygon(27% 0, 100% 0, 100% 100%, 0 100%, 13% 69%, 4% 52%);
-  background: linear-gradient(
-    115deg,
-    #240c12 0%,
-    #751725 26%,
-    #ac2737 42%,
-    #5c111e 43%,
-    #871c2b 62%,
-    #3b0d16 80%,
-    #110c10 100%
+  right: -8%;
+  top: -12%;
+  width: min(90vw, 1100px);
+  aspect-ratio: 1;
+  border: 1px solid #6cdaeb25;
+  border-radius: 50%;
+  box-shadow:
+    inset 0 0 60px #4ab7cd0c,
+    0 0 60px #4ab7cd0c;
+  background: repeating-radial-gradient(
+    circle,
+    transparent 0 19%,
+    #63d9ec0b 19.1% 19.3%,
+    transparent 19.4% 23%
   );
-  border-left: 2px solid #d5ad68;
 }
 .world-backdrop::after {
   content: "";
   position: absolute;
   inset: 0;
-  background:
-    linear-gradient(
-      126deg,
-      transparent 44%,
-      #e9c78655 44.05% 44.15%,
-      transparent 44.2%
-    ),
-    linear-gradient(
-      67deg,
-      transparent 74%,
-      #f6d99822 74.05% 74.2%,
-      transparent 74.25%
-    ),
-    linear-gradient(110deg, #0b090de6 3%, #100c1177 42%, transparent 75%);
+  background: linear-gradient(
+    125deg,
+    transparent 25%,
+    #a3c5d307 25.1% 40%,
+    transparent 40.1% 67%,
+    #06101855 67.1%
+  );
 }
 .world-moon {
-  width: 66px;
-  top: 15%;
-  right: 13%;
-  box-shadow: 0 0 35px #a7edff25;
+  width: 180px;
 }
 .eyebrow {
-  color: #d3b47d;
+  color: #b9b0a0;
 }
 .button--primary {
-  color: #fff4dd;
-  background: linear-gradient(135deg, #bb2f3d, #7e1826);
-  border: 1px solid #d8ac65aa;
+  color: #fff3ec;
+  background: linear-gradient(135deg, #ad2634, #701723);
+  border: 1px solid #ec687155;
   box-shadow:
-    inset 0 1px #ffe0aa66,
-    0 5px 20px #07030677;
+    inset 0 1px #ffd4bd25,
+    0 5px 20px #02070a55;
 }
 .button--primary:hover {
-  background: linear-gradient(135deg, #d23b49, #9b2332);
+  background: linear-gradient(135deg, #c33140, #8d1e2c);
 }
 :focus-visible {
   outline-color: var(--energy);
 }
 .typing-surface .character--current {
   border-left-color: var(--energy);
-  background: #e7bf7414;
+  background: #63e7f214;
 }
 .dial-accent {
-  stroke: #e7bf74;
+  stroke: var(--energy);
 }
 .dial-needle {
   fill: #e5c090;
 }
 .speedometer .dial-value {
-  color: #fff3d9;
+  color: #e8faff;
 }
 .topbar nav a[aria-current] {
   border-color: var(--energy);
-}
-.campaign-card--orange {
-  --card-accent: #e7bf74;
 }

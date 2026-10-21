@@ -13,15 +13,15 @@ Race four computer opponents while improving physical-keyboard speed, accuracy a
 
 </div>
 
-![TurboType metallic red and gold kart race with live WPM](docs/images/alpha9/laptop-1440-race.png)
+![TurboType graphite and crimson kart race with cyan accents and live WPM](docs/images/alpha10/laptop-race.png)
 
-*Actual alpha.9 metallic red/gold development preview from `feat/race-polish`. The integrated full-window kart design is awaiting device acceptance in [PR #4](https://github.com/sahilshah2904/TurboType/pull/4).*
+*Actual alpha.10 restored graphite/crimson/cyan development preview from `feat/race-polish`. The integrated full-window kart design is awaiting device acceptance in [PR #4](https://github.com/sahilshah2904/TurboType/pull/4).*
 
 ## Current focus — laptop typing
 
 TurboType now targets **laptop/desktop browsers and physical keyboards only**. Phone/tablet support was explicitly removed from the scope. Layouts adapt to laptop window sizes (960 CSS px minimum), with checks at 1024–1920 widths. Mobile keyboard/rotation handling and phone/tablet test profiles are removed. Cloud progress and friends multiplayer remain planned. Earlier mobile test reports below are historical.
 
-Current preview **0.1.0-alpha.9** emphasizes metallic red and gold, with cyan limited to small light details. **Ignition**, a brighter 124 BPM major-key browsing track, replaces Nightforge. The user-approved **Overdrive** racing track is unchanged.
+Current preview **0.1.0-alpha.10** restores the earlier graphite/crimson/cyan colors after the red/gold variation was rejected. **Ignition**, a brighter 124 BPM major-key browsing track, replaces Nightforge. The user-approved **Overdrive** racing track is unchanged.
 
 ## What is TurboType?
 
@@ -47,17 +47,17 @@ Open **Sound & music** to enable the original soundtrack: **Ignition** while bro
 
 ## Progress checkpoint and next session
 
-Current preview is **0.1.0-alpha.9** on **feat/race-polish**, in open [PR #4](https://github.com/sahilshah2904/TurboType/pull/4). **Phases 1–4 are complete for their agreed scope; Phase 5 remains in progress.** Existing-page Phase 6 visuals are implemented, but onboarding is not. No Pages game, backend or database is deployed.
+Current preview is **0.1.0-alpha.10** on **feat/race-polish**, in open [PR #4](https://github.com/sahilshah2904/TurboType/pull/4). **Phases 1–4 are complete for their agreed scope; Phase 5 remains in progress.** Existing-page Phase 6 visuals are implemented, but onboarding is not. No Pages game, backend or database is deployed.
 
 Delivered: planning/rules and repository foundation; strict typing engine; four seeded CPU races; countdown, WPM/accuracy/streaks, pause/results/retry/recovery; full-window kart racing and one visible typing surface; live speedometer, exhaust/nitro/parallax/finish effects; full-width hub preview; revamped existing pages; independent original browsing/racing music and countdown; saved preferences and reproducible checks/docs.
 
-Latest user feedback: racing music and checks 5/6 (typing/speedometer/mistakes/correction and pause/resume/retry) work. **Overdrive is unchanged.** Ignition replaces the rejected sad menu track; metallic red/gold replaces the cyan-heavy palette. Phone/tablet compatibility was explicitly canceled. Hardware IME input and accessibility remain supported; the reported phone word-at-a-time caret issue is out of scope, not fixed.
+Latest user feedback: racing music and checks 5/6 (typing/speedometer/mistakes/correction and pause/resume/retry) work. **Overdrive is unchanged.** Ignition replaces the rejected sad menu track; the earlier graphite/crimson/cyan palette is restored. Phone/tablet compatibility was explicitly canceled. Hardware IME input and accessibility remain supported; the reported phone word-at-a-time caret issue is out of scope, not fixed.
 
 Validation: local formatting/types/build, **87 unit cases and 26 desktop Chromium browser cases pass**. Phone/tablet profiles were removed, so the former 78 executions (26 × 3) are historical. Current laptop screenshots are in [docs/images/alpha9](docs/images/alpha9); [test evidence](docs/TESTING.md) distinguishes each source and hosted CI. Earlier ASUS/Samsung reports do not imply current mobile support.
 
 | Next phase | Pending work |
 | --- | --- |
-| **5** | Laptop review of new red/gold colors and Ignition; distinct vehicle bodies/wheels; real laptop loop/mix/interruptions and performance/decode/transfer/memory measurements; final PR integration after acceptance. TT-505/506/508–513/515/518–520. |
+| **5** | Laptop review of the restored colors and Ignition; distinct vehicle bodies/wheels; real laptop loop/mix/interruptions and performance/decode/transfer/memory measurements; final PR integration after acceptance. TT-505/506/508–513/515/518–520. |
 | **6** | Cinematic opening/loading, rules/welcome/tutorial/calibration and final laptop flow. |
 | **7–8** | Three rightward 100-node maps with locks/chapters/bonuses; author, validate and balance all 300 levels. |
 | **9** | Rewards/rank/garage/records/coaching, robust guest saves and optional account-backed cloud progress before public solo launch. |

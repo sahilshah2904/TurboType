@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.0-alpha.10 — 21 October 2026
+
+- Restore the earlier graphite/crimson/cyan CSS and Phaser palette after the user rejected red/gold.
+- Preserve laptop-only support, mobile-code removal, Ignition menu music and the accepted Overdrive race recording. No rules/save/content change.
+
 ## 0.1.0-alpha.9 — 21 October 2026
 
 - Narrow product scope to laptop/desktop physical-keyboard typing at the user's request. Remove mobile/tablet browser profiles, touch-screen CSS and software-keyboard VisualViewport handling; retain regular window resizing and hardware IME composition.

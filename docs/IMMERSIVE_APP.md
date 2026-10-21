@@ -1,5 +1,7 @@
 # Immersive application integration
 
+**Latest palette decision — 0.1.0-alpha.10:** Alpha.10 restores the previous alpha.8 graphite/crimson/cyan palette at the user's request, replacing the rejected alpha.9 red/gold armor panels. Laptop-only scope, Ignition browsing music, the accepted Overdrive racing master, typing rules and mobile-removal changes stay in place.
+
 21 October 2026. App 0.1.0-alpha.9, rules 3 unchanged. This implements the user-approved kart direction in the actual hash-routed app, rather than only the earlier docs/design review prototype. Formal verification results belong in TESTING.md; available-device acceptance remains open.
 
 ## Alpha.9 laptop-only revision

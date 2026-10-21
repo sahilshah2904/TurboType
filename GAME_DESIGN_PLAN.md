@@ -292,3 +292,7 @@ User requested a full-width hub preview without side columns, energetic non-race
 ### 21 October 2026 revised audiovisual direction
 
 The user rejected the alpha.7 sound and burgundy gradient, canceled personal-music selection, and requested distinct original browsing/racing music. Alpha.8 uses original rendered Nightforge (96 BPM) and Overdrive (150 BPM), plus the separate countdown. Styling follows the supplied reference's graphite, metallic red, cyan lighting and restrained gold using original game imagery. This supersedes the previous personal-file decision and uniform red/black palette; available-device listening/visual acceptance remains required in Phase 5.
+
+### 21 October 2026 palette restoration
+
+Alpha.10 restores the previous alpha.8 graphite/crimson/cyan palette at the user's request, replacing the rejected alpha.9 red/gold armor panels. Laptop-only scope, Ignition browsing music, the accepted Overdrive racing master, typing rules and mobile-removal changes stay in place.

@@ -1,5 +1,10 @@
 # Verification evidence
 
+## Alpha.10 — restore previous palette, 21 October 2026
+
+Restore alpha.8 CSS/Phaser colors while retaining alpha.9 laptop-only layout cleanup and current Ignition/Overdrive music. Strict types/production build and six focused desktop immersive/polish browser cases pass (20.2 seconds). Fresh 1440×900 captures are in docs/images/alpha10. This color-only change does not claim a new full unit/browser run; alpha.9 full-suite evidence below remains separate. No audio, rules, save schema or mobile-support changes.
+
+
 ## Alpha.9 — laptop scope, red/gold and upbeat menu, 21 October 2026
 
 The full local npm run check passed: formatting/types/build, 87 unit cases and all 26 desktop Chromium browser behaviors (59.7 seconds). The prior 78 executions represented those 26 behaviors multiplied across desktop/phone/tablet; retiring the two mobile profiles reduces runs without dropping the desktop behavior suite. Phone-sized resize cases were replaced with laptop sizes; OS-keyboard/VisualViewport handling and small-screen CSS are removed. Native physical-keyboard composition/strict correction tests remain.
