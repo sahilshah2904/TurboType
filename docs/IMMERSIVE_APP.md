@@ -8,7 +8,7 @@ The current theme applies to all five normal routes, not the historical standalo
 
 Recreate the palette by following those two CSS files and the scene color constants in src/game/race-track.ts and src/game/track-preview.ts. The approved PNG stays byte-for-byte unchanged. CSS hue-rotate(285deg) colors the hub hero; Phaser bakes the same rotation into a 640×320 player texture once per scene. Race still uses four baked variants total, with CPU 1 using the original asset. The decorative hub adds one 640×320 red texture (about 0.8 MB RGBA), disposed with its scene. No per-frame bitmap filtering, additional dependency, rules or storage changes are introduced. Distinct vehicle models remain TT-510.
 
-Current red/black captures: [desktop race](images/alpha6/desktop-racing.png), [hub](images/alpha6/desktop-hub.png), [phone race](images/alpha6/phone-racing.png) and [phone settings](images/alpha6/phone-settings.png). Alpha.5 captures below preserve earlier composition evidence and the previous palette. Real ASUS/Samsung contrast and native-keyboard acceptance remain pending.
+Current red/black captures: [desktop race](images/alpha6/desktop-racing.png), [hub](images/alpha6/desktop-hub.png), [phone race](images/alpha6/phone-racing.png) and [phone settings](images/alpha6/phone-settings.png). Alpha.5 captures below preserve earlier composition evidence and the previous palette. Settings captures wait until all reveal elements reach opacity 1, avoiding a misleading mid-transition contrast sample. Real ASUS/Samsung contrast and native-keyboard acceptance remain pending.
 
 ## Existing pages revamped
 

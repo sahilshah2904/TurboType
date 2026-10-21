@@ -4,7 +4,7 @@
 
 On feat/race-polish, npm run format:check, strict typechecking and production build pass. The targeted command npx playwright test tests/browser/immersive.spec.ts tests/browser/race-polish.spec.ts passed **18 cases in 1.3 minutes** across desktop/phone/tablet Chromium with two workers. It verifies all route shells, full-width racing, the live dial, native input retention on compact resize, art loading, audio/failure behavior and bounded/reduced effects. No new tests mirror color constants. Existing rules and settings schemas are unchanged.
 
-This targeted run is distinct from alpha.5's previous 83-unit/72-browser full check and CI evidence below. Alpha.6 hosted CI is pending until its pushed source is verified. Scripted screenshots are recorded in docs/images/alpha6; native Samsung keyboard, perceived contrast/smoothness and final user acceptance remain open. Earlier software-renderer measurements do not constitute new alpha.6 profiling.
+This targeted run is distinct from alpha.5's previous 83-unit/72-browser full check and CI evidence below. Theme source `dec855d` is pushed; hosted [run 39521010519](https://github.com/sahilshah2904/TurboType/actions/runs/39521010519) was in progress at handoff. Scripted screenshots are recorded in docs/images/alpha6; native Samsung keyboard, perceived contrast/smoothness and final user acceptance remain open. Earlier software-renderer measurements do not constitute new alpha.6 profiling.
 
 
 ## Alpha.5 — integrated full-window pages and Live WPM, 21 October 2026
