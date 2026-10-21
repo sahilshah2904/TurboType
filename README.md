@@ -23,7 +23,7 @@ TurboType turns typing practice into a side-view motor race. Your car advances a
 
 The project is being built in documented stages: a responsive single-player game first, followed by campaign progression, optional cloud saves and friends multiplayer. Original vehicles, scenery and synthesized music give the game its own identity.
 
-> **Development status:** `main` contains the accepted Phase 4 playable race. The latest Phase 5/6 visual integration is on `feat/race-polish`: the approved full-window kart race, one visible typing surface, Live WPM dial and revamped existing pages are implemented with a red-and-black theme; alpha.8 adds the graphite/crimson/cyan palette and separate original browsing/racing soundtracks. Current checks are recorded in [verification evidence](docs/TESTING.md); actual-device acceptance remains open; the distinct fleet and cinematic onboarding are still pending. There is **no public GitHub Pages game link yet**. You can run either version locally.
+> **Development status:** `main` contains the accepted Phase 4 playable race. The latest Phase 5/6 visual integration is on `feat/race-polish`: the approved full-window kart race, one visible typing surface, Live WPM dial and revamped existing pages are implemented with the current graphite/crimson/cyan palette and separate original browsing/racing soundtracks. Current checks are recorded in [verification evidence](docs/TESTING.md); actual-device acceptance remains open; the distinct fleet and cinematic onboarding are still pending. There is **no public GitHub Pages game link yet**. You can run either version locally.
 
 ## What you can play today
 
@@ -38,6 +38,33 @@ The project is being built in documented stages: a responsive single-player game
 The current passages are short exercises for validating the game. Campaign levels, stars, rewards, a garage, accounts, cloud progress and multiplayer are planned features. Campaign cards in the hub are previews.
 
 Open **Sound & music** to enable the original soundtrack: **Nightforge** while browsing and **Overdrive** while racing, with a separate 3–2–1 start score. There is no personal-music chooser. [Audio details and recreation](docs/AUDIO.md).
+
+## Progress checkpoint and next session
+
+**Saved on 21 October 2026 — 0.1.0-alpha.8.** Current work is on **feat/race-polish**, implementation commit **0b4eef6**, in open [PR #4](https://github.com/sahilshah2904/TurboType/pull/4). Phases **1–4 are complete for their agreed scopes**; **Phase 5 is still in progress**, and Phase 6 has existing-page visual work only. No Pages game, backend or database is deployed. This is a handoff for continuing later, not a release.
+
+Completed so far:
+
+- **Planning/foundation:** reference research, eleven-phase plan, game/rule/storage/online boundaries, TypeScript/Vite + Phaser/Anime.js setup, naming/version conventions, GitHub branches/PRs and reproducible checks/documentation.
+- **Typing and playable single-player:** strict character validation and Backspace, WPM/accuracy/streak/timing, 3–2–1, pause/resume, four seeded CPUs, placement, timeout/results/retry and graphics recovery. Earlier ASUS/Samsung acceptance for Phases 2–4 is recorded.
+- **Immersive app:** full-window kart race, full-width preview without side columns, one visible typing surface, Live WPM speedometer, exhaust/nitro/parallax/spoke/suspension/finish effects, reduced/low settings, and revamped Hub/Practice/Keyboard/Settings pages.
+- **Current art/audio:** graphite/steel, metallic crimson, cyan light and gold details; original **Nightforge** browsing music and distinct **Overdrive** race music, plus a separate countdown and game cues. The personal-file chooser/loader and old music were removed. Original asset provenance and a deterministic soundtrack composer are documented.
+- **Validation:** final local formatting/types/build, **87 unit cases and 78 desktop/phone/tablet Chromium cases pass**. Current captures are in [docs/images/alpha8](docs/images/alpha8). [Hosted CI passed for exact source 0b4eef6](https://github.com/sahilshah2904/TurboType/actions/runs/39524238316). This later documentation checkpoint has its own CI status. Automated profiles do not replace physical-device listening/keyboard/performance acceptance.
+
+Pending work, in delivery order:
+
+| Phase | Required remaining work | Tracking |
+| --- | --- | --- |
+| **5 — finish current work** | User acceptance of latest colors/music; real ASUS/Samsung typing/rotation/gauge/sound/loop joins; performance, audio decode/transfer/memory and interruption checks; distinct original vehicle fleet/body/wheel artwork; final PR integration after acceptance | TT-501/505/506/508–513/515/518/519 |
+| **6 — onboarding** | Cinematic loading, welcome/rules, interactive tutorial, optional calibration and first/returning-player flow; finish validation of existing-page visuals | TT-601–604 |
+| **7–8 — campaign** | Three rightward maps with 100 circular levels each, locks/chapters/bonus branches/saved location; author, validate and balance all 300 passages/definitions | TT-701–704, TT-801–806 |
+| **9 — progression and data** | Stars/rewards/unlocks/rank/garage/records/charts/coaching/drills; resilient guest saves and optional account-backed cloud progress before public solo launch | TT-901–910 |
+| **10 — launch** | Browser/device/accessibility/performance/recovery and cloud-security/sync evidence, Pages setup, release docs and real public-link verification; physical iPhone/tablet coverage remains unverified | TT-1001–1008 |
+| **11 — friends multiplayer** | Backend, private rooms, invite links, ready checks, synchronized races, reconnects and rematches immediately after solo launch | TT-1101–1107 |
+
+**Resume here:** recheck branch/PR/CI and read [AGENTS.md](AGENTS.md), [current status](PROJECT_STATUS.md) and [backlog](BACKLOG.md). First run the [latest ASUS/Samsung acceptance checklist](docs/PHASE5_POLISH_TESTS.md) and address feedback on the new music/theme; complete the remaining Phase 5 art/performance gates before treating that phase as finished. Cinematic onboarding comes next. Current short passages, campaign cards and kart palette variants are previews, not completed campaign content or a final fleet.
+
+The detailed [eleven-phase roadmap](#roadmap) below remains the delivery plan. Do not infer an overall completion percentage by counting phases.
 
 ## Get started
 
@@ -157,9 +184,9 @@ npm run check
 | `npm run format` | Format source, tests and configuration. |
 | `npm run check` | Run formatting checks, types, unit tests, build and browser tests. |
 
-**Historical alpha.4 verification:** 83 unit tests and 66 Chromium browser checks passed with hosted CI. **Current alpha.5 local verification:** formatting/types/build, 83 unit tests and 72 browser checks pass. Hosted CI [passed for implementation 2a2c11b](https://github.com/sahilshah2904/TurboType/actions/runs/39519820938); exact evidence is recorded in the test guide. Browser device profiles test layouts and interactions; they do not certify real phone keyboards, audible mix quality or hardware frame rates. ASUS/Samsung Phase 5 acceptance remains open. Read the [verification evidence](https://github.com/sahilshah2904/TurboType/blob/feat/race-polish/docs/TESTING.md) and [device checklist](https://github.com/sahilshah2904/TurboType/blob/feat/race-polish/docs/PHASE5_POLISH_TESTS.md).
+**Current alpha.8 verification:** local formatting/types/build, **87 unit cases and 78 browser cases passed**. Hosted CI has its own status in the checkpoint above. Real ASUS/Samsung listening/native-keyboard/smoothness and broader physical-device evidence remain open; see [verification evidence](docs/TESTING.md) and the [device checklist](docs/PHASE5_POLISH_TESTS.md).
 
-On the Phase 5 branch, `node assets-source/build-vehicles.mjs` recreates all three car bodies. The original music is authored directly in source. [Asset provenance](https://github.com/sahilshah2904/TurboType/blob/feat/race-polish/docs/ASSETS.md), [audio recreation](https://github.com/sahilshah2904/TurboType/blob/feat/race-polish/docs/AUDIO.md) and [renderer profiling](https://github.com/sahilshah2904/TurboType/blob/feat/race-polish/docs/PERFORMANCE.md) document how to reproduce them.
+Recreate the shipped audio with `node assets-source/build-soundtracks.mjs`. The earlier `build-vehicles.mjs` recreates legacy SVGs; current racing uses one original kart PNG with runtime palettes. See [asset provenance](docs/ASSETS.md), [audio source and lifecycle](docs/AUDIO.md) and [current implementation](docs/IMMERSIVE_APP.md). Older renderer profiles remain historical and do not certify alpha.8 on physical devices.
 
 ## Roadmap
 

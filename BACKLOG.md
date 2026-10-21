@@ -1,5 +1,7 @@
 # TurboType future work backlog
 
+21 October 2026 handoff: current implementation is alpha.8 / 0b4eef6 on feat/race-polish, PR #4 open. The user asked to continue later. Resume instructions and the delivered-work summary are in [AGENTS.md](AGENTS.md#resume-checkpoint--21-october-2026) and [README.md](README.md#progress-checkpoint-and-next-session). First resolve remaining Phase 5 acceptance/fleet/performance tasks; do not skip straight to campaigns. All unchecked items below remain pending unless explicitly retired; TT-514 was canceled by the user.
+
 Last reviewed: 20 October 2026. All unchecked items are future work, not implemented features. This backlog captures commitments and deferred ideas; [PROJECT_STATUS.md](PROJECT_STATUS.md) reports actual phase progress. Design details and acceptance criteria remain in the linked specifications.
 
 ## Maintenance rules
