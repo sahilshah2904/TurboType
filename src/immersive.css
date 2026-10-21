@@ -1,8 +1,8 @@
 /* Shared full-window world. Readable forms retain local grouping; no enclosing page card. */
 :root {
-  --accent: #ff5364;
-  --muted: #beb8bb;
-  background: #1f191c;
+  --accent: #ff5964;
+  --muted: #b6bcc1;
+  background: #0c1218;
 }
 .world-backdrop {
   position: fixed;
@@ -10,8 +10,8 @@
   z-index: -1;
   overflow: hidden;
   background:
-    radial-gradient(ellipse at 80% 15%, #8c263d66, transparent 45%),
-    linear-gradient(#100b10, #34131e 70%, #140d12);
+    radial-gradient(ellipse at 80% 15%, #28768a66, transparent 45%),
+    linear-gradient(#080d12, #152b34 70%, #090f15);
 }
 .world-moon {
   position: absolute;
@@ -20,13 +20,22 @@
   width: 110px;
   aspect-ratio: 1;
   border-radius: 50%;
-  background: #efb3b799;
-  box-shadow: 0 0 130px #ff536422;
+  background: radial-gradient(
+    circle,
+    #e8fcff 0 16%,
+    #5fd7ec99 18% 26%,
+    #172b35 29% 38%,
+    #66dff344 40% 42%,
+    #101b24 45% 60%,
+    #69e8f266 62% 64%,
+    transparent 66%
+  );
+  box-shadow: 0 0 90px #4ad9ed18;
 }
 .world-mountains {
   position: absolute;
   inset: 25% -10% 0;
-  background: #211018;
+  background: #101d25;
   clip-path: polygon(
     0 70%,
     20% 15%,
@@ -46,11 +55,11 @@
     repeating-linear-gradient(
       90deg,
       transparent 0 45px,
-      #ffadb618 46px 49px,
+      #77dcea18 46px 49px,
       transparent 50px 70px
     ),
-    repeating-linear-gradient(0deg, transparent 0 25px, #ffadb60c 26px 28px),
-    #180e14;
+    repeating-linear-gradient(0deg, transparent 0 25px, #77dcea0c 26px 28px),
+    #0c161e;
   clip-path: polygon(
     0 30%,
     6% 30%,
@@ -86,8 +95,8 @@
   position: absolute;
   inset: 66% 0 0;
   background:
-    linear-gradient(#120c1199, #120c11cc),
-    repeating-linear-gradient(0deg, transparent 0 64px, #d5919b26 65px 66px);
+    linear-gradient(#080f1599, #080f15cc),
+    repeating-linear-gradient(0deg, transparent 0 64px, #78b5c626 65px 66px);
 }
 html[data-route] .app-shell {
   max-width: none;
@@ -114,7 +123,7 @@ html[data-route] .app-shell {
   font-size: 10px;
 }
 .footer {
-  border-color: #c7c1c422;
+  border-color: #bfc5ca22;
   background: transparent;
 }
 #main {
@@ -133,10 +142,10 @@ html[data-route] .app-shell {
   line-height: 1.03;
 }
 .page-heading p {
-  color: #cbc5c8;
+  color: #c3c9ce;
 }
 .eyebrow {
-  color: #c1bbbe;
+  color: #b9bfc4;
 }
 .input-panel,
 .settings-panel,
@@ -154,12 +163,12 @@ html[data-route] .app-shell {
   padding: 24px 0;
 }
 .section-top {
-  border-color: #bcb6b92b;
+  border-color: #b4babf2b;
 }
 .help,
 .card-copy,
 .card-bottom {
-  color: #beb8bb;
+  color: #b6bcc1;
 }
 .hero {
   min-height: 65vh;
@@ -175,7 +184,7 @@ html[data-route] .app-shell {
   line-height: 0.98;
 }
 .hero .hero-copy {
-  color: #d4ced1;
+  color: #ccd2d7;
 }
 .hero-note {
   align-self: center;
@@ -199,13 +208,13 @@ html[data-route] .app-shell {
   left: 8%;
   font-size: 9px;
   letter-spacing: 2px;
-  color: #d2cccf;
+  color: #cad0d5;
 }
 .hero-note > span:last-child {
   display: block;
   text-align: center;
   font-size: 11px;
-  color: #c5bfc2;
+  color: #bdc3c8;
 }
 .track-card {
   margin: 0 calc(-1 * clamp(16px, 3vw, 56px));
@@ -228,7 +237,7 @@ html[data-route] .app-shell {
 }
 .campaign-card {
   border: 0;
-  border-top: 1px solid #b9b3b650;
+  border-top: 1px solid #b1b7bc50;
   border-radius: 0;
   background: transparent;
   padding: 25px 0;
@@ -237,11 +246,11 @@ html[data-route] .app-shell {
   display: none;
 }
 .development-note {
-  border-top: 1px solid #b9b3b630;
+  border-top: 1px solid #b1b7bc30;
 }
 .keyboard-visual [data-key] {
-  background: #2a242766;
-  border-color: #938d9044;
+  background: #22282d66;
+  border-color: #8b919644;
 }
 .settings-panel {
   max-width: none;
@@ -250,17 +259,17 @@ html[data-route] .app-shell {
 }
 .setting-row {
   background: transparent;
-  border-color: #cfc9cc33;
+  border-color: #c7cdd233;
   padding: 22px 0;
 }
 .setting-row p {
-  color: #beb8bb;
+  color: #b6bcc1;
 }
 textarea,
 input,
 select {
-  background: #1f191cbf;
-  border-color: #847e8166;
+  background: #0c1218bf;
+  border-color: #7c828766;
 }
 #sample {
   font-size: clamp(24px, 3vw, 40px);
@@ -270,14 +279,14 @@ select {
   margin: 0 auto;
 }
 .diagnostics {
-  border-color: #bfb9bc33;
+  border-color: #b7bdc233;
 }
 .audio-controls {
   background: transparent;
-  border-color: #c0babd3a;
+  border-color: #b8bec33a;
 }
 .audio-controls__body {
-  background: #241e21a6;
+  background: #111c25a6;
 }
 .practice-panel {
   position: relative;
@@ -286,7 +295,7 @@ select {
 .practice-panel .metrics-grid > div {
   background: transparent;
   border: 0;
-  border-left: 1px solid #c1bbbe44;
+  border-left: 1px solid #b9bfc444;
   border-radius: 0;
 }
 .practice-panel .practice-typing {
@@ -301,7 +310,7 @@ select {
   top: 220px;
 }
 .practice-panel .run-results {
-  background: #352f3299;
+  background: #2d333899;
   border-radius: 0;
 }
 .practice-panel .practice-options {
@@ -332,7 +341,7 @@ select {
   min-height: 52px;
 }
 .typing-surface:focus-within {
-  box-shadow: 0 2px #ff536466;
+  box-shadow: 0 2px #ff596466;
 }
 .typing-surface #race-passage {
   position: relative;
@@ -346,7 +355,7 @@ select {
     clamp(22px, 2.2vw, 34px)/1.35 ui-monospace,
     monospace;
   letter-spacing: 0;
-  color: #f2ecef;
+  color: #eaf0f5;
   text-align: left;
 }
 .typing-surface #race-passage span {
@@ -382,8 +391,8 @@ select {
   color: #a69b9e;
 }
 .typing-surface .character--current {
-  border-left: 2px solid #ff5364;
-  background: #ff536414;
+  border-left: 2px solid #ff5964;
+  background: #ff596414;
 }
 .typing-surface .character--error {
   background: #ffbb634d;
@@ -406,7 +415,7 @@ select {
 .speedometer {
   width: 175px;
   height: 160px;
-  color: #e5dfe2;
+  color: #dde3e8;
   position: relative;
   text-align: center;
   pointer-events: none;
@@ -420,26 +429,26 @@ select {
   font:
     8px ui-monospace,
     monospace;
-  fill: #c2bcbf;
+  fill: #bac0c5;
 }
 .dial-track {
   fill: none;
-  stroke: #908a8d66;
+  stroke: #888e9366;
   stroke-width: 4;
 }
 .dial-accent {
   fill: none;
-  stroke: #ff5364;
+  stroke: #ff5964;
   stroke-width: 3;
 }
 .dial-needle {
   transform: rotate(var(--needle, -140deg));
   transform-origin: 90px 90px;
   transition: transform 150ms linear;
-  fill: #ff5364;
+  fill: #ff5964;
 }
 .dial-needle circle {
-  fill: #e6e0e3;
+  fill: #dee4e9;
 }
 .speedometer .dial-value {
   position: absolute;
@@ -457,7 +466,7 @@ select {
   bottom: 0;
   font-size: 8px;
   letter-spacing: 2px;
-  color: #cbc5c8;
+  color: #c3c9ce;
 }
 /* Race owns the available visual viewport; world and sprites resize independently. */
 html[data-route="race"] .world-backdrop,
@@ -485,7 +494,7 @@ html[data-route="race"] .topbar {
   right: 0;
   padding: 12px 3vw;
   min-height: 68px;
-  background: linear-gradient(#1a1417cf, transparent);
+  background: linear-gradient(#12181dcf, transparent);
 }
 html[data-route="race"] .topbar .wordmark {
   font-size: 22px;
@@ -563,8 +572,8 @@ html[data-route="race"] .topbar .guest {
   top: 82px;
   z-index: 4;
   padding: 9px 16px;
-  background: #241e218c;
-  border-color: #b2acaf44;
+  background: #111c258c;
+  border-color: #aab0b544;
 }
 .immersive-race .race-fullscreen {
   position: absolute;
@@ -590,8 +599,8 @@ html[data-route="race"] .topbar .guest {
   z-index: 4;
   padding: 18px max(22px, env(safe-area-inset-right)) 12px
     max(22px, env(safe-area-inset-left));
-  background: linear-gradient(#282225f5, #1c1619);
-  border-top: 1px solid #c6c0c33b;
+  background: linear-gradient(#20262bf5, #141a1f);
+  border-top: 1px solid #bec4c93b;
 }
 .immersive-race .race-console > .help {
   font-size: 10px;
@@ -617,7 +626,7 @@ html[data-route="race"] .topbar .guest {
   transform: translateX(-50%);
   border: 0;
   background: transparent;
-  text-shadow: 0 1px 8px #1f191c;
+  text-shadow: 0 1px 8px #0c1218;
   font-size: 13px;
   letter-spacing: 2px;
 }
@@ -657,8 +666,8 @@ html[data-route="race"] .topbar .guest {
   max-height: calc(var(--visible-height, 100dvh) - 210px);
   overflow: auto;
   padding: 26px 30px;
-  background: #241e21f5;
-  border: 1px solid #96909333;
+  background: #111c25f5;
+  border: 1px solid #8e949933;
   box-shadow: 0 15px 130px #0007;
   scrollbar-width: thin;
 }
@@ -674,7 +683,7 @@ html[data-route="race"] .topbar .guest {
   margin: 0 0 22px;
 }
 .race-deck-title span {
-  color: #ff5364;
+  color: #ff5964;
 }
 .race-deck .practice-options {
   display: grid;
@@ -808,7 +817,7 @@ html[data-route="race"] .topbar .guest {
     padding: 5px 0;
   }
   .topbar nav a[aria-current] {
-    border-bottom-color: #ff5364;
+    border-bottom-color: #ff5964;
   }
   .hero {
     grid-template-columns: 1fr;
@@ -1208,17 +1217,80 @@ html[data-compact-viewport="true"] .race-deck #race-controls-help {
 .hub-audio {
   padding: 12px 0 30px;
 }
-.audio-controls input[type="file"] {
-  display: block;
-  max-width: 100%;
-  margin-top: 10px;
-}
 
-.audio-controls__body > .help,
-.audio-controls__body > label[for="personal-music"],
-.audio-controls__body > #clear-personal-music {
-  grid-column: 1 / -1;
+/* Graphite armor, localized crimson and cyan illumination from the approved reference. */
+:root {
+  --energy: #63e7f2;
 }
-.audio-controls__body > #clear-personal-music {
-  justify-self: start;
+.world-backdrop {
+  background:
+    radial-gradient(ellipse at 78% 33%, #25515e55, transparent 52%),
+    radial-gradient(ellipse at 12% 70%, #7c1e281c, transparent 34%), #080e14;
+}
+.world-backdrop::before {
+  content: "";
+  position: absolute;
+  right: -8%;
+  top: -12%;
+  width: min(90vw, 1100px);
+  aspect-ratio: 1;
+  border: 1px solid #6cdaeb25;
+  border-radius: 50%;
+  box-shadow:
+    inset 0 0 60px #4ab7cd0c,
+    0 0 60px #4ab7cd0c;
+  background: repeating-radial-gradient(
+    circle,
+    transparent 0 19%,
+    #63d9ec0b 19.1% 19.3%,
+    transparent 19.4% 23%
+  );
+}
+.world-backdrop::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    125deg,
+    transparent 25%,
+    #a3c5d307 25.1% 40%,
+    transparent 40.1% 67%,
+    #06101855 67.1%
+  );
+}
+.world-moon {
+  width: 180px;
+}
+.eyebrow {
+  color: #b9b0a0;
+}
+.button--primary {
+  color: #fff3ec;
+  background: linear-gradient(135deg, #ad2634, #701723);
+  border: 1px solid #ec687155;
+  box-shadow:
+    inset 0 1px #ffd4bd25,
+    0 5px 20px #02070a55;
+}
+.button--primary:hover {
+  background: linear-gradient(135deg, #c33140, #8d1e2c);
+}
+:focus-visible {
+  outline-color: var(--energy);
+}
+.typing-surface .character--current {
+  border-left-color: var(--energy);
+  background: #63e7f214;
+}
+.dial-accent {
+  stroke: var(--energy);
+}
+.dial-needle {
+  fill: #e5c090;
+}
+.speedometer .dial-value {
+  color: #e8faff;
+}
+.topbar nav a[aria-current] {
+  border-color: var(--energy);
 }

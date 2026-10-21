@@ -1,0 +1,26 @@
+[
+  {
+    "name": "nightforge",
+    "bpm": 96,
+    "bars": 8,
+    "sampleRate": 22050,
+    "channels": 1,
+    "seconds": 20,
+    "bytes": 882044,
+    "peak": 0.84,
+    "rms": 0.11439969887485034,
+    "sha256": "88ffd6b6b80c6873afbe06b5244f8f817e1cfdf73b2d7233344c61952f8a66d4"
+  },
+  {
+    "name": "overdrive",
+    "bpm": 150,
+    "bars": 16,
+    "sampleRate": 22050,
+    "channels": 1,
+    "seconds": 25.6,
+    "bytes": 1129004,
+    "peak": 0.84,
+    "rms": 0.2126623628660462,
+    "sha256": "b8a95059350b3a10cd0cfac876a90d247deb3fca4d77093d0b4ae658583a45cd"
+  }
+]

@@ -1,26 +1,21 @@
-# Asset register — current preview
+# Asset register — alpha.8
 
-Only the following assets are shipped in this phase. The reel, screenshots, extracted frames, local video-analysis helper binaries and working QA captures remain under ignored local directories and are not bundled. Selected screenshots in docs/images are versioned documentation, excluded from the built game.
+The reel, supplied screenshots, local analysis frames and helper binaries stay in ignored Reference_Images. Documentation captures under docs/images are versioned review evidence and excluded from the built game. No reference soundtrack, Nintendo media, Marvel character/logo or Iron Man screenshot is shipped.
 
-| Asset | Origin and editable source | Usage / license |
+| Asset | Origin and editable source | Current use / provenance |
 | --- | --- | --- |
-| TurboType mark | Original project-authored vector in public/assets/brand-mark.svg | Favicon and wordmark; alpha.6 uses a crimson/warm-white palette; not derived from the reference game's branding |
-| Neon GT, Apex R, Volt X bodies | Original editable generator assets-source/build-vehicles.mjs → public/assets/cars/*.svg | Explicit 760×240 SVG raster; no brand/traced references; runtime wheels/shadows/lighting remain separate. Legacy sedan removed from current build, retained in Git history |
-| Harbor Circuit music and cues | Original authored score in src/audio/score.ts and synthesis/envelopes in race-audio.ts | Native runtime synthesis; 116 BPM eight-bar loop, menu/race arrangements, no borrowed samples/song/audio download. See AUDIO.md |
-| Road, skyline, wheels, shadow, particles | Original procedural drawings in src/game/track-preview.ts and src/game/race-track.ts | No downloaded raster artwork |
-| Barlow Condensed | Fontsource package 5.3.0; upstream font authors and OFL license included in package | Self-hosted Latin weights 600/700; retain accompanying OFL notice |
-| DM Sans | Fontsource package 5.3.0; upstream font authors and OFL license included in package | Self-hosted Latin weights 400/500/700; retain accompanying OFL notice |
+| TurboType mark | Project-authored public/assets/brand-mark.svg | Original favicon/wordmark with crimson and warm-white accents |
+| Volt kart PNG | Original built-in image_gen concept, docs/design/race-direction/PROMPT.md | public/assets/karts/volt-kart.png copies the approved 1774×887 RGBA concept; runtime palette variants, not a completed distinct fleet or separated body/wheel render |
+| Retained Neon GT/Apex R/Volt X SVGs | Project-authored assets-source/build-vehicles.mjs | Legacy art in public/assets/cars, retained from the previous preview; current hub/race uses the kart PNG |
+| Nightforge music | Original notes/instruments in assets-source/build-soundtracks.mjs | public/assets/audio/nightforge.wav: 96 BPM, 20 seconds, mono 22050 Hz 16-bit PCM; no borrowed samples or melody |
+| Overdrive music | Same deterministic offline composer; distinct authored arrangement | public/assets/audio/overdrive.wav: 150 BPM, 25.6 seconds, same export format; no borrowed samples or melody |
+| Start sequence and game cues | Original synthesis/envelopes in src/audio/race-audio.ts | Bounded runtime Web Audio; independent countdown/engine/error/nitro/finish effects |
+| Road, skyline, rings, shadow, particles | Project-authored CSS/Phaser drawing in src/immersive.css and src/game | Graphite/crimson/cyan lighting based on the user's color reference, using original shapes |
+| Barlow Condensed | Fontsource 5.3.0, upstream authors / OFL | Self-hosted Latin weights 600/700; accompanying notice in public/assets/licenses |
+| DM Sans | Fontsource 5.3.0, upstream authors / OFL | Self-hosted Latin weights 400/500/700; accompanying notice retained |
 
-Font license text is copied verbatim to public/assets/licenses/ during authoring and tracked, so production output includes it. The package lockfile records exact distribution versions. Original source-authored music/effects are now included; no mascot, third-party car images, external audio samples or AI-generated raster art has been added. This asset register does not imply a repository-wide license grant; no overall project license has been chosen.
+Run node assets-source/build-soundtracks.mjs to reproduce both masters and soundtracks.json (SHA-256, tempo, duration, level/size metrics). See AUDIO.md for generation/runtime ownership and known limits. The two WAV files total 2,011,048 bytes; no external audio tool or sample bank is needed. Original ownership here does not imply a repository-wide license grant; no overall project license has been selected.
 
-Future assets must add creator/source/license, modifications, export settings and an editable source or recreation instruction. Never use the reel's music or game assets as shipped TurboType content.
+The kart source prompt and exact approved concept remain in docs/design/race-direction. It is AI-generated project artwork, not a 3D model or traced Nintendo asset. The original lime PNG remains unchanged; CSS and pre-baked canvas palettes color its runtime variants. Separate fleet/body/wheel work remains TT-510.
 
-## Phase 5 kart direction review (not shipped by the production entry)
-
-`docs/design/race-direction/volt-kart-concept.png`: original AI-generated transparent raster concept, built-in image_gen, 1774×887 RGBA, approximately 1.69 MB. Editable generation prompt/provenance are in [PROMPT.md](design/race-direction/PROMPT.md); this is not a 3D source model or separated production sprite set. HTML/CSS review scenery is project-authored; desktop/phone captures come from that prototype. CPU copies are temporary hue variations. Mario Kart was user-requested broad inspiration; no Nintendo media is shipped. No Misirlou recording is included: the prototype can play a user-selected local file without upload/persistence. See [prototype notes](design/race-direction/README.md).
-
-## Alpha.5 production kart integration
-
-`public/assets/karts/volt-kart.png` is an exact copy of the accepted generated concept from docs/design/race-direction, retaining its recorded prompt/provenance. Race and hub now request this PNG. The race bakes palette variants at runtime; these are not new distinct vehicle designs. Original full-resolution art is about 1.69 MB; optimize/measure before release. Native SVG speedometer and CSS world are authored in source. Earlier SVG cars remain historical development assets. No Nintendo media or Misirlou recording is included.
-
-Alpha.7 audio: menu/race/countdown music remains project-authored synthesis (src/audio/score.ts and race-audio.ts). Personal files use visit-only browser object URLs and are not tracked or redistributed assets. No Misirlou recording is bundled; see AUDIO.md for provenance and the separate user-file workflow.
+Historical alpha.7 personal-file playback was explicitly canceled by the user and removed from the normal app in alpha.8. The older docs/design prototype is a historical review artifact, not the production music experience. No Misirlou recording was supplied or bundled. Future assets must record creator/source/license, modifications, export settings and an editable source or recreation instructions here.

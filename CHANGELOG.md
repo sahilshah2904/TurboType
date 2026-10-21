@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.0-alpha.8 — 21 October 2026
+
+- Replace the rejected burgundy wash with graphite surfaces, metallic crimson controls, cyan reactor-style light/rings and restrained gold details across pages and Phaser scenes.
+- Replace the old realtime music loop with two distinct original instrumental WAV masters: Nightforge for browsing and Overdrive for racing. Include a deterministic offline composer, checksums and mix metadata. Preserve independent countdown/FX and lifecycle controls.
+- Remove personal-music selection and its loader/tests at the user's request. No external music, film artwork or soundtrack is added. Rules/save/content versions remain compatible.
+
 ## 0.1.0-alpha.7 — 21 October 2026
 
 - Fill the hub track preview across its container by resizing/redrawing scenery with uniform kart scaling; remove grey side columns.

@@ -1,5 +1,12 @@
 # Verification evidence
 
+## Alpha.8 — original masters and graphite/crimson/cyan theme, 21 October 2026
+
+The user rejected the old music/palette and canceled personal-file playback. Alpha.8 removes that loader, controls and tests; replaces the runtime oscillator arrangement with two deterministic original WAV masters; and updates CSS/Phaser colors and lighting. The two published asset hashes/lengths/levels are checked against public/assets/audio/soundtracks.json. Unit tests cover late loading after pause/disposal, fetch failure/retry, single context/gesture ownership and existing countdown behavior. Unit total is now 87: three retired personal-file cases removed and two soundtrack-loading cases added, replacing the score-content check.
+
+Formatting, strict types, 87 unit cases and production build pass. The final full npm run check passed with exit 0, including all 78 desktop/phone/tablet Chromium cases in 3.0 minutes. The new real decoded-source regression distinguishes the 20-second browsing master from the 25.6-second racing master, checks menu music across tabs, countdown/pause/mute and absence of file inputs. Sequential desktop/phone hub, settings and active-race captures are in docs/images/alpha8, with no page errors or horizontal overflow observed. They wait for reveals/initial scene fades and are emulated layout evidence, not native-keyboard or audible approval. Re-running the formatted offline composer produced identical SHA-256 hashes. Older alpha.7 evidence below is historical. Audible preference, real loop joins and physical-device performance remain open; no deployment or Phase 5 completion is claimed.
+
+
 ## Alpha.7 — full-width preview and music lifecycle, 21 October 2026
 
 The focused preview/audio/immersive/polish run passed 24 Chromium profile cases in 1.1 minutes. New six cases cover full-width canvas fitting at 1920/390/1440 widths, preview disposal, real generated-WAV playback, mute/routes/countdown/pause, invalid-file preservation, clear and visit-only reload. Four initial additional unit tests cover local URL ownership, interrupted/blocked playback and countdown/music scene transitions; menu score expectations now require percussion. No commercial recording or downloaded sample is used in tests.

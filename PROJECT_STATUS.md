@@ -6,6 +6,9 @@ Last reviewed: 21 October 2026. This file is the persistent status source for fu
 
 ## Current position
 
+**Latest: alpha.8 replaces the rejected burgundy gradient with graphite, metallic crimson and cyan lighting, and replaces the rejected oscillator loop with two distinct rendered original masters: Nightforge (browsing) and Overdrive (racing).** Personal-file controls/loader were removed at the user's explicit request. The separate countdown remains. Source, deterministic asset generator, audio lifecycle and recreation are documented in docs/AUDIO.md. The full local check passes: formatting/types/build, 87 unit and 78 browser cases; final desktop/phone captures are in docs/images/alpha8. Physical ASUS/Samsung listening and final Phase 5 acceptance remain open. Older alpha.6/7 descriptions below are historical, not the current product direction.
+
+
 **Latest implementation: alpha.7 removes the hub preview side gutters, adds energetic menu percussion and a separate countdown score, and integrates visit-only personal audio-file playback.** No Misirlou recording was supplied/downloaded/bundled. The full baseline check passed (87 unit / 78 browser); the final countdown-unlock regression brings the passing unit total to 88. Final rebuilt preview/audio/polish verification passed 18 browser cases; full-width desktop/phone captures are in docs/images/alpha7. Technical regression evidence is in docs/TESTING.md; actual ASUS/Samsung listening and visual acceptance remain open. This is Phase 5 refinement with existing-page integration, not completion of Phase 6 onboarding or later phases.
 
 

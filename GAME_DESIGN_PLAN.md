@@ -286,3 +286,7 @@ Proposed defaults needing playtesting rather than blocking initial work: ten cha
 ### 21 October 2026 preview and audio refinement
 
 User requested a full-width hub preview without side columns, energetic non-race background music and a dedicated 3–2–1 start score. Implement these in Phase 5 with the existing-page Phase 6 visuals; do not postpone them until campaigns. Support personal local soundtrack selection for this visit, including the user's own Misirlou recording, while retaining original shipped music. Pause/countdown/visibility rules and independent game timing remain authoritative. No commercial recording is included or downloaded; explicit recording/device verification remains pending.
+
+### 21 October 2026 revised audiovisual direction
+
+The user rejected the alpha.7 sound and burgundy gradient, canceled personal-music selection, and requested distinct original browsing/racing music. Alpha.8 uses original rendered Nightforge (96 BPM) and Overdrive (150 BPM), plus the separate countdown. Styling follows the supplied reference's graphite, metallic red, cyan lighting and restrained gold using original game imagery. This supersedes the previous personal-file decision and uniform red/black palette; available-device listening/visual acceptance remains required in Phase 5.

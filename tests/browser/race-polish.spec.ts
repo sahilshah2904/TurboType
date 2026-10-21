@@ -73,7 +73,7 @@ test("loads modern artwork, keeps the active caret readable and fills the viewpo
   });
   expect(errors).toEqual([]);
 });
-test("audio is opt-in, persists controls, reuses one context and silences practice navigation", async ({
+test("audio is opt-in, persists controls and reuses one context without race effects during browsing", async ({
   page,
 }) => {
   await page.addInitScript(() => {

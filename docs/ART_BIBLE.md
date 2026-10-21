@@ -1,3 +1,5 @@
+> Alpha.8 current direction: graphite #080e14 / steel #18232c, localized metallic crimson #ad2634–#701723, cyan light #63e7f2 and gold detail #e5c090. The user supplied an Iron Man browser theme as a color/lighting reference and rejected the uniform burgundy wash. Use original city/kart/ring imagery; no Marvel character, logo or screenshot is shipped. This supersedes alpha.6 palette text below.
+
 > Alpha.6 palette update (21 October 2026): the user requested red/black. The current application uses near-black #100b10 / charcoal #201c21, crimson #ff5364, warm white #f3edf0 and muted text #beb8bb. Burgundy skyline depth replaces teal. The player kart is red; named CPUs retain different palettes. Typing mistakes use amber #ffcc84 plus an underline, rather than sharing decorative red. Earlier lime/cyan specifications below are historical. No new artwork or external assets were added.
 
 > Alpha.5: the user approved the kart direction. The normal app now integrates it; see [IMMERSIVE_APP.md](IMMERSIVE_APP.md). Older sedan/composition text below is historical, not the current renderer. Distinct vehicle bodies and final device acceptance remain open.

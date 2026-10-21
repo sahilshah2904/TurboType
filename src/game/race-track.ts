@@ -71,7 +71,7 @@ export async function mountRaceTrack(
         .text(0, 0, "NEON HARBOR", {
           fontFamily: "monospace",
           fontSize: "24px",
-          color: "#c6b9bd",
+          color: "#a8bcc6",
           letterSpacing: 5,
         })
         .setAlpha(0.65);
@@ -119,7 +119,7 @@ export async function mountRaceTrack(
           .text(0, -53, name, {
             fontFamily: "monospace",
             fontSize: "10px",
-            color: i ? "#e5dfe1" : "#ff5364",
+            color: i ? "#d6e2e9" : "#63e7f2",
           })
           .setOrigin(0.5);
         root.add(label);
@@ -151,17 +151,17 @@ export async function mountRaceTrack(
         this.backdrop
           .fillStyle(
             Phaser.Display.Color.GetColor(
-              16 + (y / horizon) * 36,
-              11 + (y / horizon) * 8,
-              16 + (y / horizon) * 14,
+              9 + (y / horizon) * 14,
+              16 + (y / horizon) * 25,
+              23 + (y / horizon) * 27,
             ),
           )
           .fillRect(0, y, w, 6);
       this.backdrop
-        .fillStyle(0xefb3b7, 0.65)
+        .fillStyle(0xa4ebff, 0.65)
         .fillCircle(w * 0.81, horizon * 0.27, Math.min(w * 0.045, 55));
       this.backdrop
-        .fillStyle(0x211018)
+        .fillStyle(0x12222b)
         .fillTriangle(-100, horizon, w * 0.28, horizon * 0.4, w * 0.65, horizon)
         .fillTriangle(
           w * 0.35,
@@ -176,13 +176,13 @@ export async function mountRaceTrack(
         const x = i * 58,
           height = 24 + ((i * 37) % Math.max(25, Math.floor(horizon * 0.48)));
         this.city
-          .fillStyle(i % 2 ? 0x24141c : 0x2b1921)
+          .fillStyle(i % 2 ? 0x172b34 : 0x1d353f)
           .fillRect(x, horizon - height, 45, height);
         for (let y = 10; y < height; y += 18)
           for (let k = 0; k < 3; k++)
             if ((i + y + k) % 3)
               this.city
-                .fillStyle(0xffadb6, 0.19)
+                .fillStyle(0x72c4db, 0.19)
                 .fillRect(x + 7 + k * 12, horizon - height + y, 3, 5);
       }
       this.title
@@ -208,7 +208,7 @@ export async function mountRaceTrack(
             : Math.sin(angle) * 35,
           age: 0,
           life: confetti ? 1500 : 450,
-          color: [0xff5364, 0xffa165, 0xf2dce0, 0xf6d46b][i % 4],
+          color: [0x63e7f2, 0xffa165, 0xf2dce0, 0xf6d46b][i % 4],
           confetti,
         });
       }
@@ -233,9 +233,9 @@ export async function mountRaceTrack(
       this.city.x = reduced ? 0 : -(s.progress * w * 0.6) % (w * 0.5);
       this.road
         .clear()
-        .fillStyle(0x201c21)
+        .fillStyle(0x18232c)
         .fillRect(0, horizon, w, h - horizon);
-      this.road.fillStyle(0xff5364).fillRect(0, horizon, w, 3);
+      this.road.fillStyle(0x63e7f2).fillRect(0, horizon, w, 3);
       this.road.lineStyle(1, 0xbcb0b7, 0.3);
       const offset = reduced ? 0 : (s.elapsedMs * 0.15) % 100;
       for (let i = 1; i <= 5; i++)
@@ -247,7 +247,7 @@ export async function mountRaceTrack(
             horizon + laneHeight * i,
           );
       if (decorative && high && s.recentWpm > 25) {
-        this.road.lineStyle(1, 0xff7d8b, 0.15);
+        this.road.lineStyle(1, 0x78cddd, 0.15);
         for (let i = 0; i < 9; i++) {
           const x = (((i * 157 - s.elapsedMs * 0.3) % w) + w) % w;
           const y = horizon + 15 + ((i * 43) % (h - horizon - 15));
@@ -315,7 +315,7 @@ export async function mountRaceTrack(
               (nitro ? 100 : 48) *
               (0.83 + Math.sin(s.elapsedMs / 37 + i) * 0.17);
           flame
-            .fillStyle(nitro ? 0xff405c : 0xff8d28, 0.9)
+            .fillStyle(nitro ? 0x53dcf5 : 0xff8d28, 0.9)
             .fillTriangle(-91, -13, -91, 0, -91 - size, -7)
             .fillStyle(0xfff2b0)
             .fillTriangle(-91, -11, -91, -2, -91 - size * 0.6, -7);
@@ -373,7 +373,7 @@ export async function mountRaceTrack(
     parent,
     width: Math.max(1, parent.clientWidth),
     height: Math.max(1, parent.clientHeight),
-    backgroundColor: "#160d13",
+    backgroundColor: "#0a131b",
     banner: false,
     audio: { noAudio: true },
     scale: { mode: Phaser.Scale.RESIZE },

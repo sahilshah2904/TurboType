@@ -1,11 +1,10 @@
-import { PersonalMusic } from "./personal-music";
 import type { TypingSnapshot } from "../core/typing-engine";
 import {
   LocalAudioRepository,
   type AudioPreferences,
   validAudio,
 } from "../storage/audio-settings";
-import { midiHz, scoreStep, SCORE_STEP_SECONDS } from "./score";
+import { midiHz, SOUNDTRACKS } from "./score";
 type Scene = "silent" | "menu" | "countdown" | "race";
 type Source = AudioScheduledSourceNode;
 type Cue =
@@ -14,7 +13,11 @@ type Cue =
 /** One app-owned optional context. No network, microphone, autoplay or gameplay dependency. */
 export class RaceAudio {
   private prefs: AudioPreferences;
-  private personal = new PersonalMusic(() => this.publish());
+  private musicBuffers = new Map<string, AudioBuffer>();
+  private musicLoop: AudioBufferSourceNode | undefined;
+  private loadingMusic: Promise<void> | undefined;
+  private musicFailed = false;
+  private musicAbort = new AbortController();
   private context: AudioContext | undefined;
   private master: GainNode | undefined;
   private music: GainNode | undefined;
@@ -57,31 +60,20 @@ export class RaceAudio {
           ? "running"
           : "locked";
   }
-  get personalTrack() {
-    return { name: this.personal.name, failed: this.personal.failed };
-  }
-  selectMusic(file: File): void {
-    this.stopSources();
-    this.personal.select(file);
-    this.syncPersonal();
-    this.publish();
-  }
-  clearMusic(): void {
-    this.personal.clear();
-    this.publish();
-  }
-  private syncPersonal(): void {
-    this.personal.sync(
-      !this.disposed &&
-        !this.prefs.muted &&
-        this.visible &&
-        (this.scene === "menu" || this.scene === "race"),
-      this.prefs.master * this.prefs.music,
-    );
-  }
   get diagnostics() {
     return {
       scene: this.scene,
+      soundtrack:
+        this.scene === "countdown"
+          ? "Start sequence"
+          : this.scene === "race"
+            ? SOUNDTRACKS.race.title
+            : SOUNDTRACKS.menu.title,
+      musicStatus: this.musicFailed
+        ? "unavailable"
+        : this.musicBuffers.size === 2
+          ? "ready"
+          : "loading",
       context: this.context?.state ?? "not-created",
       sources: this.sources.size,
     };
@@ -116,15 +108,12 @@ export class RaceAudio {
       this.timer = undefined;
     }
     this.volumes();
-    this.syncPersonal();
     this.publish();
     return saved;
   }
   /** Must be called synchronously from Start/Enable sound's real click handler. */
   async unlock(): Promise<boolean> {
     if (this.disposed || this.prefs.muted) return false;
-    this.personal.retry();
-    this.syncPersonal();
     const token = ++this.generation;
     try {
       if (!this.context || this.context.state === "closed") {
@@ -166,6 +155,7 @@ export class RaceAudio {
           25,
         );
       this.unavailable = false;
+      void this.prepareMusic(this.context);
       this.playCountdown();
       this.nextAt = this.context.currentTime + 0.03;
       this.volumes();
@@ -202,16 +192,15 @@ export class RaceAudio {
     this.visible = visible;
     if (!visible) this.stopSources();
     this.volumes();
-    this.syncPersonal();
   }
   setScene(scene: Scene): void {
     if (scene === this.scene) return;
     this.stopSources();
     this.scene = scene;
     if (scene === "countdown") this.soundedCountdown = null;
-    this.syncPersonal();
     this.step = 0;
     this.nextAt = (this.context?.currentTime ?? 0) + 0.03;
+    this.publish();
   }
   private track(source: Source, gain: GainNode): void {
     this.sources.add(source);
@@ -277,10 +266,51 @@ export class RaceAudio {
       this.context?.state === "running"
     );
   }
+  private async prepareMusic(ctx: AudioContext): Promise<void> {
+    if (this.loadingMusic) return this.loadingMusic;
+    this.musicFailed = false;
+    this.loadingMusic = Promise.all(
+      Object.entries(SOUNDTRACKS).map(async ([scene, track]) => {
+        const response = await fetch(import.meta.env.BASE_URL + track.path, {
+          signal: this.musicAbort.signal,
+        });
+        if (!response.ok) throw new Error("Soundtrack unavailable");
+        const buffer = await ctx.decodeAudioData(await response.arrayBuffer());
+        if (!this.disposed && this.context === ctx)
+          this.musicBuffers.set(scene, buffer);
+      }),
+    )
+      .then(() => {
+        if (!this.disposed) this.publish();
+      })
+      .catch(() => {
+        if (!this.disposed) {
+          this.musicFailed = true;
+          this.loadingMusic = undefined;
+          this.publish();
+        }
+      });
+    return this.loadingMusic;
+  }
   private schedule(): void {
-    if (!this.allowed() || this.scene === "silent" || this.personal.active)
-      return;
+    if (!this.allowed() || this.scene === "silent") return;
     const ctx = this.context!;
+    if (this.scene === "menu" || this.scene === "race") {
+      const buffer = this.musicBuffers.get(this.scene);
+      if (buffer && !this.musicLoop) {
+        const source = ctx.createBufferSource(),
+          gain = ctx.createGain();
+        source.buffer = buffer;
+        source.loop = true;
+        gain.gain.value = 0.72;
+        source.connect(gain);
+        gain.connect(this.music!);
+        this.track(source, gain);
+        this.musicLoop = source;
+        source.start();
+      }
+      return;
+    }
     if (ctx.currentTime - this.nextAt > 0.25)
       this.nextAt = ctx.currentTime + 0.02; // Never burst missed background beats.
     while (this.nextAt < ctx.currentTime + 0.12) {
@@ -299,20 +329,6 @@ export class RaceAudio {
         this.nextAt += 0.125;
         continue;
       }
-      const part = scoreStep(this.step++, this.scene === "race");
-      for (const note of part.notes)
-        this.tone(
-          midiHz(note.midi),
-          note.duration,
-          note.level,
-          note.wave,
-          this.nextAt,
-          this.music!,
-        );
-      if (part.kick) this.tone(55, 0.15, 0.2, "sine", this.nextAt, this.music!);
-      if (part.hat) this.noiseHit(0.035, 0.025, this.nextAt, this.music!);
-      if (part.snare) this.noiseHit(0.1, 0.05, this.nextAt, this.music!);
-      this.nextAt += SCORE_STEP_SECONDS;
     }
   }
   cue(kind: Cue): void {
@@ -440,12 +456,14 @@ export class RaceAudio {
         /* Already ended. */
       }
     }
+    this.musicLoop = undefined;
     this.engine = undefined;
     this.engineGain = undefined;
   }
   dispose(): void {
     this.disposed = true;
-    this.personal.clear();
+    this.musicAbort.abort();
+    this.musicBuffers.clear();
     this.generation++;
     window.clearInterval(this.timer);
     this.stopSources();

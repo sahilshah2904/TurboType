@@ -1,28 +1,5 @@
 import { expect, test } from "@playwright/test";
 
-function wave(): Buffer {
-  const frames = 8000,
-    data = Buffer.alloc(44 + frames * 2);
-  data.write("RIFF");
-  data.writeUInt32LE(data.length - 8, 4);
-  data.write("WAVEfmt ", 8);
-  data.writeUInt32LE(16, 16);
-  data.writeUInt16LE(1, 20);
-  data.writeUInt16LE(1, 22);
-  data.writeUInt32LE(8000, 24);
-  data.writeUInt32LE(16000, 28);
-  data.writeUInt16LE(2, 32);
-  data.writeUInt16LE(16, 34);
-  data.write("data", 36);
-  data.writeUInt32LE(frames * 2, 40);
-  for (let i = 0; i < frames; i++)
-    data.writeInt16LE(
-      Math.round(Math.sin((i * 2 * Math.PI * 220) / 8000) * 1500),
-      44 + i * 2,
-    );
-  return data;
-}
-
 test("preview fills wide and phone widths after resize without side gutters", async ({
   page,
 }) => {
@@ -57,45 +34,55 @@ test("preview fills wide and phone widths after resize without side gutters", as
   await expect(page.locator("canvas")).toHaveCount(0);
 });
 
-test("personal music follows routes, mute and countdown and never persists the file", async ({
+test("distinct original scores follow menu, countdown and race without file controls", async ({
   page,
 }) => {
   await page.addInitScript(() => {
-    const Native = window.Audio;
-    (window as unknown as { personalMedia: HTMLAudioElement[] }).personalMedia =
-      [];
-    window.Audio = class extends Native {
-      constructor() {
-        super();
-        (
-          window as unknown as { personalMedia: HTMLAudioElement[] }
-        ).personalMedia.push(this);
+    const Native = window.AudioContext;
+    const events: { duration: number; stopped: boolean }[] = [];
+    (window as unknown as { musicEvents: typeof events }).musicEvents = events;
+    window.AudioContext = class extends Native {
+      override createBufferSource() {
+        const source = super.createBufferSource(),
+          start = source.start.bind(source),
+          stop = source.stop.bind(source);
+        let entry: (typeof events)[number] | undefined;
+        source.start = (...args: Parameters<typeof source.start>) => {
+          if (source.loop) {
+            entry = { duration: source.buffer!.duration, stopped: false };
+            events.push(entry);
+          }
+          start(...args);
+        };
+        source.stop = (...args: Parameters<typeof source.stop>) => {
+          if (entry) entry.stopped = true;
+          stop(...args);
+        };
+        return source;
       }
     };
   });
   await page.goto("./#/hub");
+  await expect(page.locator('input[type="file"]')).toHaveCount(0);
   await page.getByText("Sound & music", { exact: true }).click();
   await page.getByRole("button", { name: "Enable sound", exact: true }).click();
-  await page.getByLabel("Personal music file", { exact: true }).setInputFiles({
-    name: "test-track.wav",
-    mimeType: "audio/wav",
-    buffer: wave(),
-  });
-  await expect(page.locator("#personal-music-status")).toContainText(
-    "test-track.wav — selected",
-  );
-  const paused = () =>
-    page.evaluate(
-      () =>
-        (
-          window as unknown as { personalMedia: HTMLAudioElement[] }
-        ).personalMedia.at(-1)!.paused,
+  const music = () =>
+    page.evaluate(() =>
+      (
+        window as unknown as {
+          musicEvents: { duration: number; stopped: boolean }[];
+        }
+      ).musicEvents
+        .filter((e) => !e.stopped)
+        .map((e) => Math.round(e.duration * 10) / 10),
     );
-  await expect.poll(paused).toBe(false);
-  await page.getByRole("button", { name: "Mute sound", exact: true }).click();
-  await expect.poll(paused).toBe(true);
-  await page.getByRole("button", { name: "Enable sound", exact: true }).click();
-  await expect.poll(paused).toBe(false);
+  await expect.poll(music).toEqual([20]);
+  await expect(page.locator("#audio-status")).toContainText("Nightforge");
+  for (const tab of ["Practice", "Keyboard check", "Settings"]) {
+    await page.getByRole("link", { name: tab, exact: true }).click();
+    await expect.poll(music).toEqual([20]);
+  }
+  await expect(page.locator('input[type="file"]')).toHaveCount(0);
   await page.getByRole("link", { name: "Race", exact: true }).click();
   await expect(page.locator("#race-track")).toHaveAttribute(
     "data-ready",
@@ -104,44 +91,14 @@ test("personal music follows routes, mute and countdown and never persists the f
   );
   await page.getByRole("button", { name: /^Start race/ }).click();
   await expect(page.locator("#race-countdown")).toHaveText("3");
-  await expect.poll(paused).toBe(true);
-  await expect(page.locator("#race-countdown")).toHaveText("2");
-  await expect(page.locator("#race-countdown")).toHaveText("1");
+  await expect.poll(music).toEqual([]);
   await expect(page.locator("#race-state")).toHaveText("Racing");
-  await expect.poll(paused).toBe(false);
+  await expect.poll(music).toEqual([25.6]);
   await page.getByRole("button", { name: "Pause", exact: true }).click();
-  await expect.poll(paused).toBe(true);
+  await expect.poll(music).toEqual([]);
   await page.getByRole("link", { name: "Settings", exact: true }).click();
   await page.getByText("Sound & music", { exact: true }).click();
-  await expect(page.locator("#personal-music-status")).toContainText(
-    "test-track.wav",
-  );
-  await expect.poll(paused).toBe(false);
-  await page.getByLabel("Personal music file", { exact: true }).setInputFiles({
-    name: "invalid.txt",
-    mimeType: "text/plain",
-    buffer: Buffer.from("invalid"),
-  });
-  await expect(page.locator("#personal-music-status")).toContainText(
-    "previous track is unchanged",
-  );
-  await page
-    .getByRole("button", { name: "Use original music", exact: true })
-    .click();
-  await expect.poll(paused).toBe(true);
-  await expect(page.locator("#personal-music-status")).toContainText(
-    "Original Harbor Circuit",
-  );
-  await page.reload();
-  await page.getByText("Sound & music", { exact: true }).click();
-  await expect(page.locator("#personal-music-status")).toContainText(
-    "Original Harbor Circuit",
-  );
-  expect(
-    await page.evaluate(() =>
-      Object.values(localStorage).some(
-        (value) => value.includes("test-track.wav") || value.includes("blob:"),
-      ),
-    ),
-  ).toBe(false);
+  await expect.poll(music).toEqual([20]);
+  await page.getByRole("button", { name: "Mute sound", exact: true }).click();
+  await expect.poll(music).toEqual([]);
 });

@@ -2,7 +2,9 @@ import { afterEach, beforeEach, expect, it, vi } from "vitest";
 import { RaceAudio } from "./race-audio";
 import { DEFAULT_AUDIO, LocalAudioRepository } from "../storage/audio-settings";
 import { SoloRace } from "../core/solo-race";
-import { scoreStep, SCORE_STEP_SECONDS } from "./score";
+import { SOUNDTRACKS } from "./score";
+import { readFileSync } from "node:fs";
+import { createHash } from "node:crypto";
 
 class Param {
   value = 0;
@@ -66,6 +68,9 @@ class Context {
   createBufferSource() {
     return this.createOscillator();
   }
+  async decodeAudioData() {
+    return this.createBuffer(1, 100);
+  }
   async resume() {
     this.state = "running";
   }
@@ -89,6 +94,13 @@ beforeEach(() => {
   vi.useFakeTimers();
   vi.setSystemTime(0);
   vi.stubGlobal("window", { setInterval, clearInterval });
+  vi.stubGlobal(
+    "fetch",
+    vi.fn(async () => ({
+      ok: true,
+      arrayBuffer: async () => new ArrayBuffer(8),
+    })),
+  );
 });
 afterEach(() => {
   vi.useRealTimers();
@@ -103,7 +115,7 @@ it("creates no audio before an explicit unmuted gesture and reuses a single cont
   expect(await audio.unlock()).toBe(true);
   expect(factory).toHaveBeenCalledTimes(1);
   audio.setScene("menu");
-  vi.advanceTimersByTime(200);
+  await vi.advanceTimersByTimeAsync(200);
   expect(context.sources.length).toBeGreaterThan(0);
   audio.setPreferences({ ...audio.preferences, muted: true });
   expect(context.sources.every((s) => s.stops > 0)).toBe(true);
@@ -182,24 +194,27 @@ it("keeps runtime audio graph failures from escaping into typing updates", async
   expect(audio.status).toBe("unavailable");
   audio.dispose();
 });
-it("repeats the authored eight-bar score with bounded note envelopes and energetic menu percussion", () => {
-  for (let i = 0; i < 128; i++) {
-    const step = scoreStep(i, true);
-    expect(step).toEqual(scoreStep(i + 128, true));
-    expect(
-      step.notes.every(
-        (n) =>
-          Number.isFinite(n.midi) &&
-          n.duration > 0 &&
-          n.duration <= 2 &&
-          n.level <= 0.2,
-      ),
-    ).toBe(true);
+it("ships distinct reproducible menu and racing masters with safe levels and correct WAV headers", () => {
+  const reports = JSON.parse(
+    readFileSync("public/assets/audio/soundtracks.json", "utf8"),
+  );
+  for (const [scene, track] of Object.entries(SOUNDTRACKS)) {
+    const wav = readFileSync("public/" + track.path),
+      report = reports.find((r: { name: string }) =>
+        track.path.endsWith(r.name + ".wav"),
+      );
+    expect(wav.toString("ascii", 0, 4)).toBe("RIFF");
+    expect(wav.readUInt32LE(24)).toBe(22050);
+    expect((wav.length - 44) / 44100).toBeCloseTo(
+      (track.bars * 4 * 60) / track.bpm,
+      3,
+    );
+    expect(createHash("sha256").update(wav).digest("hex")).toBe(report.sha256);
+    expect(report.peak).toBeLessThan(0.9);
+    expect(report.rms).toBeGreaterThan(0.08);
+    expect(scene === "race" ? report.bpm >= 140 : report.bpm < 110).toBe(true);
   }
-  expect(scoreStep(0, false).kick).toBe(true);
-  expect(scoreStep(4, false).snare).toBe(true);
-  expect(scoreStep(0, true).kick).toBe(true);
-  expect(128 * SCORE_STEP_SECONDS).toBeCloseTo(16.55, 1);
+  expect(reports[0].sha256).not.toBe(reports[1].sha256);
 });
 
 it("separates countdown music, freezes on pause and returns to menu music on results", async () => {
@@ -260,5 +275,39 @@ it("plays the current number once when a first-gesture resume resolves during co
   expect(context.sources[0].frequency.value).toBe(440);
   audio.updateRace(s);
   expect(context.sources.length).toBe(1);
+  audio.dispose();
+});
+
+it("keeps delayed soundtrack loading silent after pause and aborts loading on dispose", async () => {
+  let complete!: (value: unknown) => void;
+  const pending = new Promise((resolve) => (complete = resolve));
+  vi.stubGlobal(
+    "fetch",
+    vi.fn(() => pending),
+  );
+  const { audio, context } = fixture();
+  audio.setPreferences({ ...DEFAULT_AUDIO, muted: false });
+  await audio.unlock();
+  audio.setScene("menu");
+  audio.setScene("silent");
+  complete({ ok: true, arrayBuffer: async () => new ArrayBuffer(8) });
+  await vi.advanceTimersByTimeAsync(200);
+  expect(context.sources.length).toBe(0);
+  audio.dispose();
+  expect(
+    (vi.mocked(fetch).mock.calls[0][1] as RequestInit).signal!.aborted,
+  ).toBe(true);
+});
+it("isolates soundtrack fetch failure and retries without replacing the audio context", async () => {
+  const { audio, factory } = fixture();
+  vi.mocked(fetch).mockRejectedValueOnce(Error("offline"));
+  audio.setPreferences({ ...DEFAULT_AUDIO, muted: false });
+  await audio.unlock();
+  await vi.advanceTimersByTimeAsync(100);
+  expect(audio.diagnostics.musicStatus).toBe("unavailable");
+  await audio.unlock();
+  await vi.advanceTimersByTimeAsync(100);
+  expect(audio.diagnostics.musicStatus).toBe("ready");
+  expect(factory).toHaveBeenCalledTimes(1);
   audio.dispose();
 });

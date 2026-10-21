@@ -1,8 +1,12 @@
 # Immersive application integration
 
-21 October 2026. App 0.1.0-alpha.7, rules 3 unchanged. This implements the user-approved kart direction in the actual hash-routed app, rather than only the earlier docs/design review prototype. Formal verification results belong in TESTING.md; available-device acceptance remains open.
+21 October 2026. App 0.1.0-alpha.8, rules 3 unchanged. This implements the user-approved kart direction in the actual hash-routed app, rather than only the earlier docs/design review prototype. Formal verification results belong in TESTING.md; available-device acceptance remains open.
 
-## Alpha.7 preview and audio follow-up
+## Alpha.8 current visual and soundtrack direction
+
+All existing pages now use graphite/steel depth, localized metallic crimson, cyan reactor-style lighting and gold instrument details. CSS world rings/facets are static lightweight layers; Phaser skies/cities/road accents use the same palette. The earlier flat burgundy direction below is historical. The user requested removal of personal music: that UI and loader are deleted. New original Nightforge and Overdrive masters replace Harbor Circuit; browsing and racing have different instruments/melodies/tempi. See [audio generation and lifecycle](AUDIO.md). No Iron Man artwork or film music is included. Current captures: [desktop hub](images/alpha8/desktop-hub.png), [phone hub](images/alpha8/phone-hub.png), [desktop racing](images/alpha8/desktop-racing.png), [phone racing](images/alpha8/phone-racing.png), [desktop settings](images/alpha8/desktop-settings.png) and [phone settings](images/alpha8/phone-settings.png). Older screenshots below retain historical layouts/palettes.
+
+## Alpha.7 preview and audio follow-up (historical)
 
 The hub preview now uses Phaser RESIZE rather than fitting a fixed 1200×420 canvas inside a capped-height container. A 420-unit-high world scales uniformly with container height; scenery is redrawn to the corresponding full logical width, car positions follow width fractions, and road dashes extend through both edges. This removes the empty side columns without stretching artwork. ResizeObserver updates both canvas dimensions and scene layout; navigation destroys the scene/observer. See src/game/track-preview.ts. Verified captures: [1920px preview](images/alpha7/wide-preview.png), [390px preview](images/alpha7/phone-preview.png), [desktop audio controls](images/alpha7/wide-audio.png) and [phone audio controls](images/alpha7/phone-audio.png).
 

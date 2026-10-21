@@ -64,7 +64,7 @@ Required redesign added after review of recordings 2–4 and user rejection of c
 - [ ] TT-512: Alpha.5 moving exhaust, spoke overlays, suspension, bounded sparks/confetti and live WPM dial implemented; actual-device sound/frame/texture acceptance remains. Refine speed/streak/overtaking/exhaust/audio/finish choreography around the accepted composition; preserve reduced-motion/low-effects and independent engine outcomes. Validate texture/source cleanup and actual-device responsiveness.
 - [ ] TT-513: Refresh regression checks, physical-device checklist, measured evidence, screenshots and public README after redesign. Obtain explicit visual/device acceptance before closing Phase 5/merging PR #4; previous 83/66 tests do not verify the replacement.
 
-- [ ] TT-514: Production personal-file playback is implemented in alpha.7 (hub/Race/Settings), with generated-WAV browser checks for menu/race/countdown/pause/mute/navigation, fallback, visit-only selection and URL cleanup. Remaining: actual Misirlou recording and ASUS/Samsung audible acceptance, coordinated with TT-505/506. No recording was supplied, downloaded or bundled; public-game audio remains original. See docs/AUDIO.md.
+- [x] TT-514: Retired by explicit user request on 21 October: alpha.8 removes the production personal-music chooser, loader and its tests. This closes the deferred personal-file scope by cancellation, not by claiming Misirlou playback or licensing verification. The normal app uses original bundled masters only.
 
 - [ ] TT-515: Live WPM speedometer implemented in Race/Practice (existing rolling three-active-second pace; average WPM remains separate; 0–160 needle with uncapped numeric reading, pause/result freeze and retry reset). Record new browser evidence and ASUS/Samsung readability/performance acceptance before closing.
 
@@ -72,7 +72,9 @@ Required redesign added after review of recordings 2–4 and user rejection of c
 
 - [x] TT-517: Remove hub preview side gutters with Phaser RESIZE, full-width scenery redraw and uniform kart scaling. Wide/phone resize and cleanup regressions pass; implementation/recreation in docs/IMMERSIVE_APP.md.
 
-- [ ] TT-518: Alpha.7 energetic menu percussion, hub radio controls, Race setup/results music and dedicated countdown pulse/rising 3–2–1 cues implemented. Complete ASUS/Samsung listening and volume-balance acceptance with TT-505/506; technical tests cannot close audible review.
+- [ ] TT-518: Dedicated countdown pulse/rising 3–2–1 cues remain implemented. The user rejected the old menu/race mix; alpha.8 replaces it with distinct rendered Nightforge/Overdrive originals. Complete ASUS/Samsung listening and volume-balance acceptance with TT-505/506.
+
+- [ ] TT-519: Alpha.8 original rendered browsing/racing masters and graphite/crimson/cyan theme implemented; final technical evidence is in docs/TESTING.md. Obtain user audiovisual acceptance, test real loop joins/mix and measure new audio decode/transfer/memory before closing, coordinated with TT-505/506/513. No new public release or completed Phase 5 is implied.
 
 Alpha.5 integration evidence: source `2a2c11b`, PR #4, full local check 83 unit / 72 browser passed, hosted Linux [run 39519820938](https://github.com/sahilshah2904/TurboType/actions/runs/39519820938) passed, all existing routes captured and isolated renderer profile recorded in docs/PERFORMANCE_ALPHA5.md. TT-508/509/511/512/515 and TT-604 implementations are automatically verified; their remaining physical-device/visual gates are not closed by that evidence.
 

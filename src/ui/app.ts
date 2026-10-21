@@ -70,7 +70,7 @@ export function mountApp(root: HTMLElement): () => void {
     const route = parseRoute(location.hash);
     document.documentElement.dataset.route = route;
     main.classList.remove("quick-race-active", "practice-active");
-    audio.setScene(route === "practice" ? "silent" : "menu");
+    audio.setScene("menu");
     applyPreferences();
     root.querySelectorAll<HTMLElement>("[data-route]").forEach((link) => {
       if (link.dataset.route === route)
@@ -222,7 +222,7 @@ function hubScreen(): string {
       <div><p class="eyebrow"><span class="status-dot"></span> FIND YOUR RHYTHM. OWN THE ROAD.</p><h1 id="hero-title">YOUR WORDS.<br /><span>FULL THROTTLE.</span></h1><p class="hero-copy">Turn every keystroke into momentum.<br />Take on four CPUs. Build clean speed.</p><a class="button button--primary" href="#/race">Start a race ${ARROW}</a></div>
       <aside class="hero-note"><span class="garage-label">VOLT KART / YOUR STARTING LINE</span><img class="garage-kart" src="${import.meta.env.BASE_URL}assets/karts/volt-kart.png" alt="Original coral-red arcade racing kart" /><span>Four opponents. One passage.<br />Your pace sets your progress.</span></aside>
     </section>
-    <section class="hub-audio reveal" aria-label="Menu soundtrack"><h2>Pit lane radio</h2><p class="help">Enable sound for energetic menu music, or choose your own soundtrack.</p>${audioControls()}</section>
+    <section class="hub-audio reveal" aria-label="Menu soundtrack"><h2>Pit lane radio</h2><p class="help">Nightforge while you browse. Overdrive when you race.</p>${audioControls()}</section>
     <section class="track-card reveal" aria-label="Animated track preview">
       <div class="section-top"><span class="eyebrow"><span class="status-dot"></span> TRACK PREVIEW</span><span class="micro">CITY CIRCUIT <span class="divider">/</span> NIGHT RUN</span></div>
       <div id="track-preview" class="track-preview" role="img" aria-label="A red arcade kart on an illustrated city road, with two decorative rival karts"></div>
