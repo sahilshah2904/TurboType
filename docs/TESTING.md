@@ -8,7 +8,7 @@ After the small final preview-exhaust attachment/CSS cleanup, production build a
 
 1440×900 selector/Comet race/clean hub and 1024×768 paused-selector captures were inspected in docs/images/alpha12. No page errors or 1024px horizontal overflow were observed. Model changes redraw existing body/wheel-highlight objects, keeping the same canvas. This is functional/layout evidence, not a new physical GPU/latency benchmark; alpha.11 timings remain historical and TT-522 stays open.
 
-The user accepted the alpha.11 car silhouettes. Five starters are available now, with a validated local cosmetic preference. Ten future milestone reward cars, ownership/receipt/cloud rules and remaining art are planned only in [GARAGE_PROGRESSION.md](GARAGE_PROGRESSION.md), tracked TT-911. No unlock system, campaign progress or backend is claimed. App alpha.12; rules 3, save/content 1. Hosted CI is separate from local results; PR #4 remains open and no Pages deployment occurred.
+The user accepted the alpha.11 car silhouettes. Five starters are available now, with a validated local cosmetic preference. Ten future milestone reward cars, ownership/receipt/cloud rules and remaining art are planned only in [GARAGE_PROGRESSION.md](GARAGE_PROGRESSION.md), tracked TT-911. No unlock system, campaign progress or backend is claimed. App alpha.12; rules 3, save/content 1. Hosted PR [run 39578558652](https://github.com/sahilshah2904/TurboType/actions/runs/39578558652) completed successfully for exact implementation `722ee85`, verified at the subsequent progress review. PR #4 remains open/unmerged; this later documentation checkpoint has its own CI state. No Pages deployment occurred.
 
 ## Alpha.11 — distinct rivals and full-app evidence, 21 October 2026
 

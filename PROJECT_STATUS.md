@@ -9,6 +9,8 @@ The user accepted the four distinct CPU cars (“these cars looks very nice”),
 
 Phase 5 remains open on `feat/race-polish` / PR #4 for separate body/wheel art and actual laptop performance/tuning (TT-501/510, TT-505/506/511–513/522). Current fleet silhouettes, palette and music are user-accepted; do not repeat those approval requests. Native laptop input, rules 3 and save/content 1 remain. No new campaign, backend or Pages deployment. Eleven phases and laptop-only scope are preserved. Local full check passed formatting/types/build, 93 unit and 30 browser cases; final preview-anchor/CSS cleanup passed build and all four affected garage/audio cases (21.0 seconds). Captures are in docs/images/alpha12. Current evidence is in docs/TESTING.md; alpha.11 performance data is historical, not a new alpha.12 benchmark.
 
+Progress review: hosted PR run 39578558652 passed for implementation `722ee85`; PR #4 is open/unmerged. The final laptop checklist is refreshed for alpha.12 in docs/PHASE5_POLISH_TESTS.md. User action is limited to latest selector/Settings behavior and a short physical smoothness session; developer art/performance work remains. Ten future reward cars do not block Phase 5.
+
 ## Historical alpha.11 checkpoint
 
 

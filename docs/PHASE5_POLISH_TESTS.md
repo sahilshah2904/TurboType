@@ -1,11 +1,14 @@
-# Alpha.11 focused laptop review
+# Alpha.12 final laptop checks
 
-The user accepted the restored graphite/crimson/cyan colors and Ignition browsing music on 21 October (“everything is good”). Overdrive and typing/speedometer/mistakes/pause/resume/retry were already accepted. Do not repeat those approval requests. Phone/tablet support is canceled; native hardware-keyboard IME support remains.
+Current target: laptop/desktop with a physical keyboard. The user accepted the starter silhouettes, restored graphite/crimson/cyan palette, Ignition/Overdrive music, typing/dial and pause/resume/retry. Do not ask for repeat aesthetic approval or phone testing. These checks cover the latest selector/control changes and physical performance.
 
-The next user review is limited to the new fleet and physical performance:
+1. Refresh and confirm footer `0.1.0-alpha.12`. Choose a different starter in Race, visit the hub, then refresh: the selected car should remain. The hub must have no sound controls.
+2. Start, type part of the passage, pause and choose another car. Text, elapsed time and standings must remain frozen. Resume, then retry: retry clears the run while retaining the chosen car.
+3. In Settings, enable/mute sound and adjust volumes. Return to the hub and race: the preferences must apply; sound controls appear only in Settings.
+4. Play for about five minutes with repeated retries. Compare High, Low and Reduced motion, resize the laptop window and check at normal zoom. Report delayed letters, visible judder, hidden text, audio interruptions or worsening behavior over time. Include browser/version and Windows version with the known ASUS laptop model.
 
-1. Refresh the laptop preview and confirm footer `0.1.0-alpha.11`. In Race, look for the amber rally, blue aero, pearl/magenta streamliner and violet electric CPUs. The coral player is unchanged. Report clipped art or wheel/exhaust attachment problems.
-2. Type with the physical keyboard during a longer Steady rhythm race. Compare Full/High, Full/Low and Reduced motion; report visible judder, delayed character feedback or uncomfortable effects. Resize within supported laptop widths; typing must remain intact and the gauge below the course.
-3. For reproducible physical evidence, record browser/OS, laptop model, hardware-acceleration state, viewport/zoom and effects mode. A browser performance trace during typing/retry is useful. Headless profiles are not physical frame-rate evidence.
+Automated evidence: 93 unit / 30 browser cases; final preview-exhaust/CSS cleanup passed build and four affected garage/audio cases. Hosted PR run 39578558652 passed for implementation 722ee85. These checks cover selection, storage failure, input, results, scene cleanup and supported widths; they do not certify physical keyboard-to-paint latency or presented frame rate.
 
-Developer checks already cover all five assets, 1024/1366/1440/1920 windows, failed rival artwork/text fallback/recovery, stable standings nodes, results/retry and canvas disposal. See [verification](TESTING.md) and [full-app measurements](PERFORMANCE_ALPHA11.md). The measured software-renderer callback tails remain TT-522. Separate body/wheel art and final fleet review remain TT-501/510, so Phase 5/PR #4 are still open. No new music choice or mobile test is needed.
+Developer work remains: TT-501/510 separate body/wheel parts and actual rotation (current wheels have baked artwork plus rotating highlights); TT-505/506/511–513/522 hardware performance tracing/tuning, final evidence and PR #4 integration after acceptance. Current software-renderer callback tails remain documented in PERFORMANCE_ALPHA11.md. Do not close Phase 5 from CI alone.
+
+After these gates: Phase 6 cinematic loading, welcome/rules, interactive tutorial and optional calibration. Ten campaign reward cars (TT-911) stay future Phase 8/9 scope, not a Phase 5 prerequisite.
