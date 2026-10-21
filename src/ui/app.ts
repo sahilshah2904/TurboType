@@ -1,5 +1,4 @@
 import { animate, createScope } from "animejs";
-import { connectViewport } from "./viewport";
 import { RaceAudio } from "../audio/race-audio";
 import { audioControls, connectAudioControls } from "./audio-controls";
 import { APP_VERSION } from "../config/versions";
@@ -24,7 +23,6 @@ const SAMPLE = "Every great run starts with a single keystroke.";
 const ARROW = '<span aria-hidden="true">↗</span>';
 
 export function mountApp(root: HTMLElement): () => void {
-  const clearViewport = connectViewport();
   const repository = new LocalSettingsRepository(() => localStorage);
   let settings = repository.load();
   const audio = new RaceAudio();
@@ -204,7 +202,6 @@ export function mountApp(root: HTMLElement): () => void {
     scope?.revert();
     unmountPreview?.();
     audio.dispose();
-    clearViewport();
     delete document.documentElement.dataset.route;
     window.removeEventListener("blur", audioBlur);
     window.removeEventListener("focus", audioFocus);
@@ -222,7 +219,7 @@ function hubScreen(): string {
       <div><p class="eyebrow"><span class="status-dot"></span> FIND YOUR RHYTHM. OWN THE ROAD.</p><h1 id="hero-title">YOUR WORDS.<br /><span>FULL THROTTLE.</span></h1><p class="hero-copy">Turn every keystroke into momentum.<br />Take on four CPUs. Build clean speed.</p><a class="button button--primary" href="#/race">Start a race ${ARROW}</a></div>
       <aside class="hero-note"><span class="garage-label">VOLT KART / YOUR STARTING LINE</span><img class="garage-kart" src="${import.meta.env.BASE_URL}assets/karts/volt-kart.png" alt="Original coral-red arcade racing kart" /><span>Four opponents. One passage.<br />Your pace sets your progress.</span></aside>
     </section>
-    <section class="hub-audio reveal" aria-label="Menu soundtrack"><h2>Pit lane radio</h2><p class="help">Nightforge while you browse. Overdrive when you race.</p>${audioControls()}</section>
+    <section class="hub-audio reveal" aria-label="Menu soundtrack"><h2>Pit lane radio</h2><p class="help">Ignition while you browse. Overdrive when you race.</p>${audioControls()}</section>
     <section class="track-card reveal" aria-label="Animated track preview">
       <div class="section-top"><span class="eyebrow"><span class="status-dot"></span> TRACK PREVIEW</span><span class="micro">CITY CIRCUIT <span class="divider">/</span> NIGHT RUN</span></div>
       <div id="track-preview" class="track-preview" role="img" aria-label="A red arcade kart on an illustrated city road, with two decorative rival karts"></div>
@@ -263,7 +260,7 @@ function hubScreen(): string {
 
 function keyboardScreen(): string {
   return `<section class="page-heading reveal"><a class="back-link" href="#/hub">← Back to the hub</a><p class="eyebrow">GET COMFORTABLE AT THE KEYS</p><h1>Check your <span>connection.</span></h1><p>Check how your keyboard enters and edits text.</p></section>
-    <section class="input-panel reveal"><div class="section-top"><h2>Keyboard check</h2><span class="pill">NO TIMER · NO SCORE</span></div><p id="sample-label" class="micro">TYPE THIS SENTENCE</p><p id="sample" class="sample">${SAMPLE}</p><label for="keyboard-input">Your text</label><textarea id="keyboard-input" rows="2" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" aria-describedby="input-help input-status" placeholder="Tap here or start typing…"></textarea><div class="input-meta"><p id="input-status" role="status">Ready when you are.</p><button id="reset-input" class="text-button">Clear text</button></div><p id="input-help" class="help">Use your phone keyboard or a physical keyboard. Backspace works normally. This check accepts editing and paste; choose Practice for correction-required typing.</p><div class="keyboard-visual" aria-hidden="true">${["qwertyuiop", "asdfghjkl", "zxcvbnm"].map((row) => `<div>${[...row].map((key) => `<span data-key="${key}">${key.toUpperCase()}</span>`).join("")}</div>`).join("")}</div><details class="diagnostics"><summary>Input diagnostics</summary><p>For checking keyboard and viewport behavior. Nothing here is uploaded.</p><dl><div><dt>Last input</dt><dd id="event-type">None</dd></div><div><dt>Composition</dt><dd id="composition">Idle</dd></div><div><dt>Visible viewport</dt><dd id="viewport-size">Checking…</dd></div></dl></details></section>`;
+    <section class="input-panel reveal"><div class="section-top"><h2>Keyboard check</h2><span class="pill">NO TIMER · NO SCORE</span></div><p id="sample-label" class="micro">TYPE THIS SENTENCE</p><p id="sample" class="sample">${SAMPLE}</p><label for="keyboard-input">Your text</label><textarea id="keyboard-input" rows="2" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" aria-describedby="input-help input-status" placeholder="Click here and start typing…"></textarea><div class="input-meta"><p id="input-status" role="status">Ready when you are.</p><button id="reset-input" class="text-button">Clear text</button></div><p id="input-help" class="help">Use your laptop or external physical keyboard. Backspace works normally. This check accepts editing and paste; choose Practice for correction-required typing.</p><div class="keyboard-visual" aria-hidden="true">${["qwertyuiop", "asdfghjkl", "zxcvbnm"].map((row) => `<div>${[...row].map((key) => `<span data-key="${key}">${key.toUpperCase()}</span>`).join("")}</div>`).join("")}</div><details class="diagnostics"><summary>Input diagnostics</summary><p>For checking keyboard and viewport behavior. Nothing here is uploaded.</p><dl><div><dt>Last input</dt><dd id="event-type">None</dd></div><div><dt>Composition</dt><dd id="composition">Idle</dd></div><div><dt>Visible viewport</dt><dd id="viewport-size">Checking…</dd></div></dl></details></section>`;
 }
 
 function connectKeyboard(main: HTMLElement): () => void {
@@ -322,12 +319,10 @@ function connectKeyboard(main: HTMLElement): () => void {
     },
     options,
   );
-  const viewport = window.visualViewport;
   const updateViewport = () => {
     main.querySelector("#viewport-size")!.textContent =
-      `${Math.round(viewport?.width ?? innerWidth)} × ${Math.round(viewport?.height ?? innerHeight)}`;
+      `${innerWidth} × ${innerHeight}`;
   };
-  viewport?.addEventListener("resize", updateViewport, options);
   window.addEventListener("resize", updateViewport, options);
   updateViewport();
   update();

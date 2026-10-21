@@ -21,25 +21,6 @@ export default defineConfig({
         },
       },
     },
-    {
-      name: "phone-chromium",
-      use: {
-        ...devices["Pixel 7"],
-        launchOptions: {
-          args: ["--use-angle=swiftshader", "--enable-unsafe-swiftshader"],
-        },
-      },
-    },
-    {
-      name: "tablet-chromium",
-      use: {
-        ...devices["iPad Mini"],
-        defaultBrowserType: "chromium",
-        launchOptions: {
-          args: ["--use-angle=swiftshader", "--enable-unsafe-swiftshader"],
-        },
-      },
-    },
   ],
   webServer: {
     command: "npm run preview",

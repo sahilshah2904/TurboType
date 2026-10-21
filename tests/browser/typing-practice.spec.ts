@@ -193,7 +193,7 @@ test("window focus loss pauses the run and resize alone preserves it", async ({
   await page
     .getByRole("textbox", { name: "Your typing" })
     .pressSequentially("Every");
-  await page.setViewportSize({ width: 640, height: 320 });
+  await page.setViewportSize({ width: 1024, height: 768 });
   await expect(page.locator("#run-state")).toHaveText("Racing");
   await expect(page.getByRole("textbox")).toHaveValue("Every");
   await page.evaluate(() => window.dispatchEvent(new Event("blur")));

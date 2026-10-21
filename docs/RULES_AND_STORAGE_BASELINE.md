@@ -1,3 +1,5 @@
+**Current scope override — 21 October 2026:** the user explicitly narrowed TurboType to laptop/desktop browsers with a physical keyboard. Phone/tablet compatibility, software-keyboard layout, rotation and mobile acceptance are canceled requirements. Earlier multi-device statements are historical. Keep laptop window responsiveness (960 CSS px minimum; verify 1024/1366/1440/1920 widths), accessibility, hardware-keyboard IME composition, cloud saves before solo launch and multiplayer afterward. Do not restore mobile work without a new user request.
+
 # Phase 1 audit: rules, rewards, pace, and storage
 
 Status: design baseline, 20 October 2026. These are explicit starting defaults for implementation and testing, not implemented features or playtested balance. This document resolves omissions/ambiguities in the broader game plan; update both documents when a decision changes. Future implementation rulebook and save documentation must describe the actual shipped behavior.

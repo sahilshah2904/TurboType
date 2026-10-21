@@ -10,7 +10,7 @@ const directory = new URL("../public/assets/audio/", import.meta.url);
 mkdirSync(directory, { recursive: true });
 const reports = [];
 for (const race of [false, true]) {
-  const bpm = race ? 150 : 96;
+  const bpm = race ? 150 : 124;
   const bars = race ? 16 : 8;
   const beat = 60 / bpm;
   const length = Math.round(bars * beat * 4 * RATE);
@@ -95,7 +95,7 @@ for (const race of [false, true]) {
   const chord = (at, root, duration, power = 1) => {
     const notes = race
       ? [root + 12, root + 19, root + 24]
-      : [root + 24, root + 27, root + 31, root + 38];
+      : [root + 24, root + 28, root + 31, root + 36];
     add(
       at,
       duration,
@@ -145,10 +145,10 @@ for (const race of [false, true]) {
   };
   const roots = race
     ? [38, 38, 34, 36, 38, 41, 36, 33]
-    : [40, 36, 43, 38, 40, 36, 43, 38];
+    : [36, 43, 41, 43, 36, 43, 41, 43];
   const hook = race
     ? [74, 77, 81, 79, 77, 74, 72, 69]
-    : [76, 83, 79, 74, 76, 71, 74, 79];
+    : [76, 79, 84, 83, 81, 79, 77, 79];
   for (let bar = 0; bar < bars; bar++) {
     const at = bar * beat * 4;
     const root = roots[bar % roots.length];
@@ -183,17 +183,27 @@ for (const race of [false, true]) {
         for (let n = 0; n < 4; n++)
           snare(at + beat * (3 + n / 4), 0.25 + n * 0.12);
     } else {
-      kick(at, 0.65);
-      kick(at + beat * 2.5, 0.45);
-      snare(at + beat * 2, 0.45);
-      chord(at, root, beat * 3.7);
+      for (let n = 0; n < 4; n++) kick(at + beat * n, 0.58);
+      snare(at + beat, 0.6);
+      snare(at + beat * 3, 0.6);
+      chord(at, root, beat * 1.8, 0.8);
+      chord(at + beat * 2, root, beat * 1.8, 0.7);
       for (let tick = 0; tick < 8; tick++) {
-        hat(at + (tick * beat) / 2, tick === 7, tick % 2 ? 0.3 : 0.5);
-        if ([0, 3, 4, 6].includes(tick))
-          bass(at + (tick * beat) / 2, root, beat * 0.42, 0.8);
+        hat(at + (tick * beat) / 2, tick % 2 === 1, tick % 2 ? 0.5 : 0.4);
+        bass(
+          at + (tick * beat) / 2,
+          root + (tick % 4 === 3 ? 12 : 0),
+          beat * 0.35,
+          0.8,
+        );
+        if (tick % 2 === 1 || bar % 2 === 1)
+          lead(
+            at + (tick * beat) / 2,
+            hook[(tick + bar * 2) % 8],
+            beat * 0.3,
+            0.65,
+          );
       }
-      lead(at + beat / 2, hook[bar], beat * 0.6, 0.65);
-      lead(at + beat * 2.75, hook[(bar + 3) % 8], beat * 0.7, 0.5);
     }
   }
   // Circular delay/reverb tails wrap into the start, keeping loop boundaries continuous.
@@ -233,7 +243,7 @@ for (const race of [false, true]) {
     energy += v * v;
     wav.writeInt16LE(Math.round(v * 32767), 44 + i * 2);
   }
-  const name = race ? "overdrive" : "nightforge";
+  const name = race ? "overdrive" : "ignition";
   writeFileSync(new URL(`${name}.wav`, directory), wav);
   reports.push({
     name,

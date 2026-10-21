@@ -113,7 +113,7 @@ export async function mountTrackPreview(
       const label = this.add.text(505, 111, "YOUR RIDE", {
         fontFamily: "monospace",
         fontSize: "11px",
-        color: "#63e7f2",
+        color: "#e7bf74",
         backgroundColor: "#2b141c",
         padding: { x: 12, y: 6 },
       });
@@ -142,20 +142,20 @@ export async function mountTrackPreview(
       this.courseWidth = Math.max(1, this.scale.width) / scale;
       this.world.setScale(scale);
       const w = this.courseWidth;
-      this.art.clear().fillStyle(0x0a1219).fillRect(0, 0, w, 130);
-      this.art.fillStyle(0x184657).fillCircle(w * 0.8, 30, 100);
+      this.art.clear().fillStyle(0x100d10).fillRect(0, 0, w, 130);
+      this.art.fillStyle(0x3a111b).fillCircle(w * 0.8, 30, 100);
       for (let i = 0; i < Math.ceil(w / 49); i++) {
         const height = 25 + ((i * 37) % 73);
         this.art
-          .fillStyle(i % 2 ? 0x192b35 : 0x13232c)
+          .fillStyle(i % 2 ? 0x6c1b28 : 0x45151f)
           .fillRect(i * 49, 130 - height, 36, height);
         for (let j = 0; j < 4; j++)
           this.art
             .fillStyle(0xd995a1, 0.35)
             .fillRect(i * 49 + 8, 139 - height + j * 13, 3, 4);
       }
-      this.art.fillStyle(0x63e7f2).fillRect(0, 128, w, 3);
-      this.art.fillStyle(0x18232c).fillRect(0, 132, w, 288);
+      this.art.fillStyle(0xe7bf74).fillRect(0, 128, w, 3);
+      this.art.fillStyle(0x1b191e).fillRect(0, 132, w, 288);
       this.cars.forEach((car, i) => (car.x = w * [0.56, 0.4, 0.24][i]));
       this.label.x = this.cars[0].x - 35;
     }
@@ -188,7 +188,7 @@ export async function mountTrackPreview(
     parent,
     width: Math.max(1, parent.clientWidth),
     height: Math.max(1, parent.clientHeight),
-    backgroundColor: "#0a1219",
+    backgroundColor: "#100d10",
     banner: false,
     audio: { noAudio: true },
     scale: { mode: Phaser.Scale.RESIZE },

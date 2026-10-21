@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-test("all existing routes use the open world shell and preserve mobile controls", async ({
+test("all existing routes use the open world shell and preserve controls on laptop resize", async ({
   page,
 }) => {
   for (const route of ["hub", "practice", "keyboard", "settings", "race"]) {
@@ -30,10 +30,9 @@ test("all existing routes use the open world shell and preserve mobile controls"
         };
       });
       expect(geometry).toEqual({ fullWidth: true, noOverlap: true });
-      await page.setViewportSize({ width: 390, height: 480 });
-      await expect(page.locator("html")).toHaveAttribute(
+      await page.setViewportSize({ width: 1024, height: 768 });
+      await expect(page.locator("html")).not.toHaveAttribute(
         "data-compact-viewport",
-        "true",
       );
       expect(
         await page.evaluate(

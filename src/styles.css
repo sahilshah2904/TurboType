@@ -19,7 +19,7 @@
 }
 body {
   margin: 0;
-  min-width: 320px;
+  min-width: 960px;
 }
 a {
   color: inherit;
@@ -632,7 +632,7 @@ textarea::placeholder {
 }
 .button--secondary {
   border: 1px solid #4a5055;
-  background: #111c25;
+  background: #191417;
   color: #dee4e9;
 }
 button:disabled {
@@ -791,65 +791,11 @@ textarea[aria-invalid="true"] {
 .practice-active .metrics-grid {
   margin: 14px 0;
 }
-@media (max-width: 650px) {
-  .practice-active .metrics-grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 6px;
-  }
-  .practice-active .metrics-grid > div {
-    padding: 8px;
-  }
-  .practice-active .metrics-grid .micro {
-    font-size: 8px;
-    letter-spacing: 0;
-  }
-  .practice-active .metrics-grid strong {
-    font-size: 22px;
-    overflow-wrap: anywhere;
-  }
-  .practice-active .run-banner #run-instruction {
-    font-size: 11px;
-  }
-  .practice-active .countdown {
-    font-size: 38px;
-  }
-}
+
 :root[data-text-size="large"] .race-passage {
   font-size: 25px;
 }
-@media (max-width: 650px) {
-  nav {
-    gap: 16px;
-  }
-  .practice-options {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-  .metrics-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    margin: 20px 0;
-  }
-  .metrics-grid > div {
-    padding: 12px;
-  }
-  .metrics-grid strong {
-    font-size: 28px;
-  }
-  .race-passage {
-    font-size: 18px;
-    line-height: 1.8;
-  }
-  .run-banner {
-    padding: 20px 0;
-  }
-  .countdown {
-    font-size: 48px;
-    min-width: 55px;
-  }
-  .run-results {
-    padding: 16px;
-  }
-}
+
 :root[data-motion="reduced"] *,
 :root[data-motion="reduced"] *::before,
 :root[data-motion="reduced"] *::after {
@@ -863,187 +809,7 @@ textarea[aria-invalid="true"] {
     padding-right: 64px;
   }
 }
-@media (max-width: 900px) {
-  .app-shell {
-    padding-left: max(24px, env(safe-area-inset-left));
-    padding-right: max(24px, env(safe-area-inset-right));
-  }
-  .guest {
-    display: none;
-  }
-  .hero {
-    padding-top: 44px;
-  }
-  .hero-note {
-    padding-right: 14px;
-  }
-  .outline-number {
-    font-size: 100px;
-  }
-  .campaign-card {
-    padding: 18px 18px 0;
-  }
-  .card-bottom {
-    flex-direction: column;
-  }
-  .footer > span:first-child {
-    display: none;
-  }
-}
-@media (max-width: 650px) {
-  .app-shell {
-    padding-left: max(16px, env(safe-area-inset-left));
-    padding-right: max(16px, env(safe-area-inset-right));
-  }
-  .topbar {
-    min-height: 112px;
-    flex-wrap: wrap;
-    gap: 0;
-    padding-top: 16px;
-  }
-  .wordmark {
-    font-size: 24px;
-  }
-  .wordmark img {
-    width: 30px;
-    height: 30px;
-  }
-  nav {
-    width: 100%;
-    min-height: 52px;
-    gap: 30px;
-    font-size: 12px;
-  }
-  nav a {
-    min-height: 48px;
-  }
-  .hero {
-    padding: 36px 0 30px;
-  }
-  .hero h1 {
-    font-size: clamp(55px, 11.4vw, 74px);
-  }
-  .hero-note {
-    display: none;
-  }
-  .eyebrow {
-    font-size: 9px;
-    letter-spacing: 1.1px;
-  }
-  .hero-copy {
-    font-size: 13px;
-  }
-  .section-top {
-    padding: 14px;
-  }
-  .section-top > .micro {
-    display: none;
-  }
-  .track-preview {
-    aspect-ratio: 2.2;
-  }
-  .track-bottom {
-    padding: 10px 14px;
-    font-size: 9px;
-  }
-  .track-bottom > span:last-of-type {
-    display: none;
-  }
-  .section-heading {
-    flex-wrap: wrap;
-  }
-  .section-heading h2 {
-    font-size: 30px;
-  }
-  .campaign-section {
-    margin-top: 30px;
-  }
-  .campaign-grid {
-    grid-template-columns: 1fr;
-    gap: 14px;
-  }
-  .campaign-card {
-    padding: 20px 22px 0;
-  }
-  .card-copy {
-    max-width: unset;
-    min-height: unset;
-  }
-  .node-path {
-    max-width: 300px;
-  }
-  .card-bottom {
-    flex-direction: row;
-  }
-  .development-note {
-    align-items: flex-start;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-  .development-note p {
-    min-width: 200px;
-  }
-  .development-note a {
-    margin-left: 28px;
-    padding: 10px 0;
-  }
-  .footer {
-    flex-wrap: wrap;
-    font-size: 8px;
-  }
-  .page-heading {
-    padding-top: 20px;
-  }
-  .page-heading h1 {
-    font-size: 55px;
-  }
-  .input-panel,
-  .settings-panel {
-    padding: 18px;
-  }
-  .input-panel .section-top {
-    margin-top: 0;
-    flex-wrap: wrap;
-  }
-  .sample {
-    font-size: 20px;
-    padding: 8px 0;
-  }
-  textarea {
-    font-size: 18px;
-    padding: 12px;
-  }
-  .keyboard-visual {
-    padding: 16px 0 0;
-  }
-  .keyboard-visual > div {
-    gap: 4px;
-    margin: 5px 0;
-  }
-  .keyboard-visual span {
-    width: 8%;
-    height: 32px;
-    font-size: 10px;
-  }
-  .setting-row {
-    align-items: flex-start;
-    flex-wrap: wrap;
-    gap: 8px;
-    padding: 18px 0;
-  }
-  .setting-row select {
-    width: 100%;
-  }
-  .input-meta {
-    align-items: flex-start;
-  }
-  #input-status {
-    line-height: 1.8;
-  }
-  .diagnostics dl {
-    gap: 16px;
-  }
-}
+
 @media (prefers-reduced-motion: reduce) {
   :root:not([data-motion="full"]) * {
     transition: none !important;
@@ -1153,49 +919,6 @@ textarea[aria-invalid="true"] {
 .race-table-wrap [data-racer="player"] {
   color: #ff5964;
 }
-@media (max-width: 650px) {
-  nav {
-    flex-wrap: wrap;
-    column-gap: 14px;
-    row-gap: 0;
-  }
-  .quick-race .race-hud {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 5px;
-  }
-  .quick-race .race-hud > div {
-    padding: 8px 5px;
-  }
-  .quick-race .race-hud .micro {
-    font-size: 8px;
-    letter-spacing: 0;
-  }
-  .quick-race .race-hud strong {
-    font-size: 23px;
-    overflow-wrap: anywhere;
-  }
-  .quick-race .run-banner #race-instruction {
-    font-size: 11px;
-  }
-  .quick-race .countdown {
-    font-size: 35px;
-  }
-  .quick-race .track-bottom {
-    padding: 8px;
-    font-size: 10px;
-  }
-  .quick-race .practice-actions {
-    flex-wrap: wrap;
-  }
-  .quick-race .race-table-wrap table {
-    font-size: 11px;
-  }
-  .quick-race .race-table-wrap th,
-  .quick-race .race-table-wrap td {
-    padding: 8px 4px;
-    overflow-wrap: anywhere;
-  }
-}
 
 /* Keep the active course and typing within reach; restore the full setup at results. */
 .quick-race-active .quick-race > .section-top {
@@ -1220,60 +943,6 @@ textarea[aria-invalid="true"] {
 }
 .quick-race-active .quick-race .race-passage {
   margin: 8px 0;
-}
-@media (max-width: 650px) {
-  .app-shell:has(.quick-race-active) .topbar {
-    min-height: 48px;
-    padding-top: 0;
-  }
-  .app-shell:has(.quick-race-active) .wordmark,
-  .app-shell:has(.quick-race-active) nav [data-route="keyboard"] {
-    display: none;
-  }
-  .app-shell:has(.quick-race-active) nav {
-    min-height: 44px;
-  }
-  .app-shell:has(.quick-race-active) nav a {
-    min-height: 44px;
-  }
-  .quick-race-active .quick-race {
-    margin-top: 10px;
-    padding: 12px;
-  }
-  .quick-race-active .run-banner {
-    padding: 4px 0;
-  }
-  .quick-race-active #race-instruction {
-    display: none;
-  }
-  .quick-race-active .race-hud {
-    margin: 5px 0;
-  }
-  .quick-race-active .race-hud > div {
-    padding: 5px;
-  }
-  .quick-race-active .race-hud strong {
-    font-size: 21px;
-    margin-top: 3px;
-  }
-  .quick-race-active #race-passage-label {
-    font-size: 8px;
-  }
-  .quick-race-active .race-passage {
-    font-size: 16px;
-    line-height: 1.5;
-  }
-  .quick-race-active #race-input {
-    min-height: 72px;
-    margin-top: 5px;
-    padding: 8px;
-    font-size: 16px;
-    line-height: 1.5;
-  }
-  :root[data-text-size="large"] .quick-race-active .race-passage,
-  :root[data-text-size="large"] .quick-race-active #race-input {
-    font-size: 23px;
-  }
 }
 
 /* Neon Harbor: a compact instrument strip above an uninterrupted racing view. */
@@ -1338,7 +1007,7 @@ textarea[aria-invalid="true"] {
   margin: 0;
   border: 1px solid #c3c9ce66;
   border-radius: 30px;
-  background: #111c25eb;
+  background: #191417eb;
   color: #e9eff4;
   text-align: center;
   font:
@@ -1379,30 +1048,6 @@ textarea[aria-invalid="true"] {
 .audio-controls #audio-status {
   grid-column: 1 / -1;
   margin: 0;
-}
-@media (max-width: 650px) {
-  .quick-race .race-hud > div {
-    padding: 7px 8px;
-  }
-  .quick-race .race-hud strong {
-    font-size: 23px;
-  }
-  .race-callout {
-    left: 8%;
-    right: 8%;
-    padding: 6px 10px;
-    font-size: 12px;
-  }
-  .audio-controls__body {
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-  }
-  .audio-controls__body button {
-    grid-column: 1 / -1;
-  }
-  .quick-race-active .race-hud > div {
-    padding: 5px 8px;
-  }
 }
 
 .quick-race .race-passage {

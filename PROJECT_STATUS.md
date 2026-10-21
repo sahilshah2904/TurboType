@@ -6,6 +6,11 @@ Last reviewed: 21 October 2026. This file is the persistent status source for fu
 
 ## Current position
 
+**Latest alpha.9 revision:** **Current scope override — 21 October 2026:** the user explicitly narrowed TurboType to laptop/desktop browsers with a physical keyboard. Phone/tablet compatibility, software-keyboard layout, rotation and mobile acceptance are canceled requirements. Earlier multi-device statements are historical. Keep laptop window responsiveness (960 CSS px minimum; verify 1024/1366/1440/1920 widths), accessibility, hardware-keyboard IME composition, cloud saves before solo launch and multiplayer afterward. Do not restore mobile work without a new user request.
+
+User feedback accepted Overdrive racing music and functional checks 5/6 (typing/speedometer, pause/resume/retry); requested red/gold nanotech-style colors and happier browsing music. Alpha.9 implements the red/gold emphasis, upbeat major-key Ignition at 124 BPM and preserves the exact accepted Overdrive WAV checksum. Phone/tablet profiles, small-screen/OS-keyboard CSS, VisualViewport module and touch input-profile type were removed. Desktop native IME behavior is retained. Local final evidence is in docs/TESTING.md. Phase 5 remains open for laptop audiovisual/performance review and distinct fleet; no phone acceptance is required. The alpha.8 checkpoint below is historical.
+
+
 **Handoff saved 21 October 2026: alpha.8, Phase 5 still in progress.** Phases 1–4 are complete for their agreed scopes; existing-page Phase 6 visuals are implemented, but cinematic opening/rules/tutorial/calibration remain future work. The user asked to document progress and continue later. The detailed resumable checkpoint is now in [AGENTS.md](AGENTS.md) and the [README](README.md#progress-checkpoint-and-next-session).
 
 Current branch **feat/race-polish**, implementation **0b4eef6**, open/unmerged [PR #4](https://github.com/sahilshah2904/TurboType/pull/4). Final local npm run check passed formatting/types/build, **87 unit and 78 Chromium profile cases**. [Hosted run 39524238316](https://github.com/sahilshah2904/TurboType/actions/runs/39524238316) was verified completed successfully for that exact implementation at the final handoff check. Do not apply that result to newer source without verifying its own checks. This documentation change has its own later commit/check status.

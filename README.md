@@ -5,7 +5,7 @@
 ### Build your rhythm. Find your speed. Race the road ahead.
 
 A browser-based typing racer where every correct character moves your car forward.
-Race four computer opponents while practicing speed, accuracy and clean corrections.
+Race four computer opponents while improving physical-keyboard speed, accuracy and clean corrections on your laptop.
 
 [![Project checks](https://github.com/sahilshah2904/TurboType/actions/workflows/checks.yml/badge.svg?branch=main)](https://github.com/sahilshah2904/TurboType/actions/workflows/checks.yml)
 
@@ -13,9 +13,15 @@ Race four computer opponents while practicing speed, accuracy and clean correcti
 
 </div>
 
-![TurboType graphite and crimson kart race with cyan lighting and live WPM](docs/images/alpha8/desktop-racing.png)
+![TurboType metallic red and gold kart race with live WPM](docs/images/alpha9/laptop-1440-race.png)
 
-*Actual alpha.8 graphite/crimson/cyan development preview from `feat/race-polish`. The integrated full-window kart design is awaiting device acceptance in [PR #4](https://github.com/sahilshah2904/TurboType/pull/4).*
+*Actual alpha.9 metallic red/gold development preview from `feat/race-polish`. The integrated full-window kart design is awaiting device acceptance in [PR #4](https://github.com/sahilshah2904/TurboType/pull/4).*
+
+## Current focus — laptop typing
+
+TurboType now targets **laptop/desktop browsers and physical keyboards only**. Phone/tablet support was explicitly removed from the scope. Layouts adapt to laptop window sizes (960 CSS px minimum), with checks at 1024–1920 widths. Mobile keyboard/rotation handling and phone/tablet test profiles are removed. Cloud progress and friends multiplayer remain planned. Earlier mobile test reports below are historical.
+
+Current preview **0.1.0-alpha.9** emphasizes metallic red and gold, with cyan limited to small light details. **Ignition**, a brighter 124 BPM major-key browsing track, replaces Nightforge. The user-approved **Overdrive** racing track is unchanged.
 
 ## What is TurboType?
 
@@ -23,7 +29,7 @@ TurboType turns typing practice into a side-view motor race. Your car advances a
 
 The project is being built in documented stages: a responsive single-player game first, followed by campaign progression, optional cloud saves and friends multiplayer. Original vehicles, scenery and synthesized music give the game its own identity.
 
-> **Development status:** `main` contains the accepted Phase 4 playable race. The latest Phase 5/6 visual integration is on `feat/race-polish`: the approved full-window kart race, one visible typing surface, Live WPM dial and revamped existing pages are implemented with the current graphite/crimson/cyan palette and separate original browsing/racing soundtracks. Current checks are recorded in [verification evidence](docs/TESTING.md); actual-device acceptance remains open; the distinct fleet and cinematic onboarding are still pending. There is **no public GitHub Pages game link yet**. You can run either version locally.
+> **Development status:** `main` contains the accepted Phase 4 playable race. The latest Phase 5/6 visual integration is on `feat/race-polish`: the approved full-window kart race, one visible typing surface, Live WPM dial and revamped existing pages are implemented with the current metallic red/gold palette and separate original browsing/racing soundtracks. Current checks are recorded in [verification evidence](docs/TESTING.md); actual-device acceptance remains open; the distinct fleet and cinematic onboarding are still pending. There is **no public GitHub Pages game link yet**. You can run either version locally.
 
 ## What you can play today
 
@@ -31,40 +37,34 @@ The project is being built in documented stages: a responsive single-player game
 | --- | --- |
 | **Quick Race** | Four seeded CPU opponents, selectable pace, countdown, live standings, passage completion or a 60-second time trial, and frozen results. |
 | **Typing Practice** | The same typing engine without opponents, with WPM, accuracy, active time and clean-streak feedback. |
-| **Keyboard Check** | A free-editing screen for checking your physical or phone keyboard before racing. |
+| **Keyboard Check** | A free-editing screen for checking your physical keyboard before racing. |
 | **Preferences** | Saved motion, effects, text size and audio volumes; separate original menu/race music. |
 | **Integrated kart preview** | Edge-to-edge Phaser racing, one visible typing strip, recent-WPM speedometer, moving exhaust, bounded effects, and original optional music. Existing hub, practice, keyboard and settings pages share the new open world layout. The distinct vehicle fleet remains in development. |
 
 The current passages are short exercises for validating the game. Campaign levels, stars, rewards, a garage, accounts, cloud progress and multiplayer are planned features. Campaign cards in the hub are previews.
 
-Open **Sound & music** to enable the original soundtrack: **Nightforge** while browsing and **Overdrive** while racing, with a separate 3–2–1 start score. There is no personal-music chooser. [Audio details and recreation](docs/AUDIO.md).
+Open **Sound & music** to enable the original soundtrack: **Ignition** while browsing and **Overdrive** while racing, with a separate 3–2–1 start score. There is no personal-music chooser. [Audio details and recreation](docs/AUDIO.md).
 
 ## Progress checkpoint and next session
 
-**Saved on 21 October 2026 — 0.1.0-alpha.8.** Current work is on **feat/race-polish**, implementation commit **0b4eef6**, in open [PR #4](https://github.com/sahilshah2904/TurboType/pull/4). Phases **1–4 are complete for their agreed scopes**; **Phase 5 is still in progress**, and Phase 6 has existing-page visual work only. No Pages game, backend or database is deployed. This is a handoff for continuing later, not a release.
+Current preview is **0.1.0-alpha.9** on **feat/race-polish**, in open [PR #4](https://github.com/sahilshah2904/TurboType/pull/4). **Phases 1–4 are complete for their agreed scope; Phase 5 remains in progress.** Existing-page Phase 6 visuals are implemented, but onboarding is not. No Pages game, backend or database is deployed.
 
-Completed so far:
+Delivered: planning/rules and repository foundation; strict typing engine; four seeded CPU races; countdown, WPM/accuracy/streaks, pause/results/retry/recovery; full-window kart racing and one visible typing surface; live speedometer, exhaust/nitro/parallax/finish effects; full-width hub preview; revamped existing pages; independent original browsing/racing music and countdown; saved preferences and reproducible checks/docs.
 
-- **Planning/foundation:** reference research, eleven-phase plan, game/rule/storage/online boundaries, TypeScript/Vite + Phaser/Anime.js setup, naming/version conventions, GitHub branches/PRs and reproducible checks/documentation.
-- **Typing and playable single-player:** strict character validation and Backspace, WPM/accuracy/streak/timing, 3–2–1, pause/resume, four seeded CPUs, placement, timeout/results/retry and graphics recovery. Earlier ASUS/Samsung acceptance for Phases 2–4 is recorded.
-- **Immersive app:** full-window kart race, full-width preview without side columns, one visible typing surface, Live WPM speedometer, exhaust/nitro/parallax/spoke/suspension/finish effects, reduced/low settings, and revamped Hub/Practice/Keyboard/Settings pages.
-- **Current art/audio:** graphite/steel, metallic crimson, cyan light and gold details; original **Nightforge** browsing music and distinct **Overdrive** race music, plus a separate countdown and game cues. The personal-file chooser/loader and old music were removed. Original asset provenance and a deterministic soundtrack composer are documented.
-- **Validation:** final local formatting/types/build, **87 unit cases and 78 desktop/phone/tablet Chromium cases pass**. Current captures are in [docs/images/alpha8](docs/images/alpha8). [Hosted CI passed for exact source 0b4eef6](https://github.com/sahilshah2904/TurboType/actions/runs/39524238316). This later documentation checkpoint has its own CI status. Automated profiles do not replace physical-device listening/keyboard/performance acceptance.
+Latest user feedback: racing music and checks 5/6 (typing/speedometer/mistakes/correction and pause/resume/retry) work. **Overdrive is unchanged.** Ignition replaces the rejected sad menu track; metallic red/gold replaces the cyan-heavy palette. Phone/tablet compatibility was explicitly canceled. Hardware IME input and accessibility remain supported; the reported phone word-at-a-time caret issue is out of scope, not fixed.
 
-Pending work, in delivery order:
+Validation: local formatting/types/build, **87 unit cases and 26 desktop Chromium browser cases pass**. Phone/tablet profiles were removed, so the former 78 executions (26 × 3) are historical. Current laptop screenshots are in [docs/images/alpha9](docs/images/alpha9); [test evidence](docs/TESTING.md) distinguishes each source and hosted CI. Earlier ASUS/Samsung reports do not imply current mobile support.
 
-| Phase | Required remaining work | Tracking |
-| --- | --- | --- |
-| **5 — finish current work** | User acceptance of latest colors/music; real ASUS/Samsung typing/rotation/gauge/sound/loop joins; performance, audio decode/transfer/memory and interruption checks; distinct original vehicle fleet/body/wheel artwork; final PR integration after acceptance | TT-501/505/506/508–513/515/518/519 |
-| **6 — onboarding** | Cinematic loading, welcome/rules, interactive tutorial, optional calibration and first/returning-player flow; finish validation of existing-page visuals | TT-601–604 |
-| **7–8 — campaign** | Three rightward maps with 100 circular levels each, locks/chapters/bonus branches/saved location; author, validate and balance all 300 passages/definitions | TT-701–704, TT-801–806 |
-| **9 — progression and data** | Stars/rewards/unlocks/rank/garage/records/charts/coaching/drills; resilient guest saves and optional account-backed cloud progress before public solo launch | TT-901–910 |
-| **10 — launch** | Browser/device/accessibility/performance/recovery and cloud-security/sync evidence, Pages setup, release docs and real public-link verification; physical iPhone/tablet coverage remains unverified | TT-1001–1008 |
-| **11 — friends multiplayer** | Backend, private rooms, invite links, ready checks, synchronized races, reconnects and rematches immediately after solo launch | TT-1101–1107 |
+| Next phase | Pending work |
+| --- | --- |
+| **5** | Laptop review of new red/gold colors and Ignition; distinct vehicle bodies/wheels; real laptop loop/mix/interruptions and performance/decode/transfer/memory measurements; final PR integration after acceptance. TT-505/506/508–513/515/518–520. |
+| **6** | Cinematic opening/loading, rules/welcome/tutorial/calibration and final laptop flow. |
+| **7–8** | Three rightward 100-node maps with locks/chapters/bonuses; author, validate and balance all 300 levels. |
+| **9** | Rewards/rank/garage/records/coaching, robust guest saves and optional account-backed cloud progress before public solo launch. |
+| **10** | Desktop browser/keyboard/accessibility/performance/cloud verification, Pages setup and actual public-link release checks. Phone/tablet coverage is retired. |
+| **11** | Friends backend, private rooms/invites, synchronized races/reconnects/rematches immediately after solo launch. |
 
-**Resume here:** recheck branch/PR/CI and read [AGENTS.md](AGENTS.md), [current status](PROJECT_STATUS.md) and [backlog](BACKLOG.md). First run the [latest ASUS/Samsung acceptance checklist](docs/PHASE5_POLISH_TESTS.md) and address feedback on the new music/theme; complete the remaining Phase 5 art/performance gates before treating that phase as finished. Cinematic onboarding comes next. Current short passages, campaign cards and kart palette variants are previews, not completed campaign content or a final fleet.
-
-The detailed [eleven-phase roadmap](#roadmap) below remains the delivery plan. Do not infer an overall completion percentage by counting phases.
+Resume from [AGENTS.md](AGENTS.md), [PROJECT_STATUS.md](PROJECT_STATUS.md), [BACKLOG.md](BACKLOG.md) and the [laptop checklist](docs/PHASE5_POLISH_TESTS.md). Complete current Phase 5 gates before moving on. The [eleven-phase roadmap](#roadmap) below retains its numbering; phase counts are not a completion percentage.
 
 ## Get started
 
@@ -86,17 +86,7 @@ Open **[http://127.0.0.1:5173/TurboType/](http://127.0.0.1:5173/TurboType/)** an
 
 To use the accepted Phase 4 baseline, stay on `main` instead of switching to the preview branch. Once Phase 5 merges, `main` will include the polished experience.
 
-### 3. Try it on your phone or tablet
-
-Connect the device and development computer to the same Wi-Fi network, then run:
-
-```powershell
-npm run dev -- --host 0.0.0.0
-```
-
-Open the **Network** URL printed by Vite, including `/TurboType/`. Use **`http://`** for this local server; it does not provide HTTPS. The computer's `127.0.0.1` address will not open the game from your phone. If prompted, allow the port on your private network.
-
-For more setup details and troubleshooting, read the [setup guide](docs/SETUP.md).
+For laptop setup details and troubleshooting, read the [setup guide](docs/SETUP.md).
 
 ## How to play
 
@@ -125,8 +115,8 @@ The [typing rules](docs/GAME_RULES.md) and [Quick Race guide](docs/QUICK_RACE.md
 | **Vite** | Local development and static production builds. |
 | **Phaser** | Track rendering, vehicles, camera and racing effects. |
 | **Anime.js** | Interface entrances and short animated feedback. |
-| **Web Audio API** | Phase 5 original synthesized music and sound effects, without audio downloads. |
-| **Vitest + Playwright** | Unit tests and browser checks across desktop, phone and tablet layout profiles. |
+| **Web Audio API** | Phase 5 original synthesized music and sound effects, using original bundled audio. |
+| **Vitest + Playwright** | Unit tests and browser checks across the desktop Chromium profile at laptop window sizes. |
 | **GitHub Actions** | Installation, formatting, type checks, tests and production-build verification. |
 
 The [immersive integration guide](docs/IMMERSIVE_APP.md) explains the new page layouts, native typing strip, live speedometer and renderer limitations.
@@ -184,7 +174,7 @@ npm run check
 | `npm run format` | Format source, tests and configuration. |
 | `npm run check` | Run formatting checks, types, unit tests, build and browser tests. |
 
-**Current alpha.8 verification:** local formatting/types/build, **87 unit cases and 78 browser cases passed**. Hosted CI has its own status in the checkpoint above. Real ASUS/Samsung listening/native-keyboard/smoothness and broader physical-device evidence remain open; see [verification evidence](docs/TESTING.md) and the [device checklist](docs/PHASE5_POLISH_TESTS.md).
+**Current alpha.9 verification:** local formatting/types/build, **87 unit cases and 26 desktop browser cases passed**. Hosted CI has its own status in the checkpoint above. Real ASUS/Samsung listening/native-keyboard/smoothness and broader physical-device evidence remain open; see [verification evidence](docs/TESTING.md) and the [device checklist](docs/PHASE5_POLISH_TESTS.md).
 
 Recreate the shipped audio with `node assets-source/build-soundtracks.mjs`. The earlier `build-vehicles.mjs` recreates legacy SVGs; current racing uses one original kart PNG with runtime palettes. See [asset provenance](docs/ASSETS.md), [audio source and lifecycle](docs/AUDIO.md) and [current implementation](docs/IMMERSIVE_APP.md). Older renderer profiles remain historical and do not certify alpha.8 on physical devices.
 
@@ -208,7 +198,7 @@ Create the TypeScript/Vite project, integrate Phaser and Anime.js, and establish
 
 **Status: Complete for the agreed scope.**
 
-Implement character validation, Backspace correction, accuracy, WPM, streaks, timing, pauses and finishing. Test these rules independently of animation, then verify input behavior on available laptop and phone hardware.
+Implement character validation, Backspace correction, accuracy, WPM, streaks, timing, pauses and finishing. Test these rules independently of animation, then verify input behavior on available laptop hardware.
 
 ### 4. Create one complete playable race
 
@@ -250,7 +240,7 @@ Implement cosmetic rewards, Driver Rank, garage customization, personal records,
 
 **Status: Planned; not started.**
 
-Check performance, accessibility, browser compatibility, saves, recovery and repeated retries across phones, tablets and laptops. Verify cloud synchronization and data access controls. Configure GitHub Pages and test the live game before calling it launched.
+Check performance, accessibility, browser compatibility, saves, recovery and repeated retries across supported laptops/desktops. Verify cloud synchronization and data access controls. Configure GitHub Pages and test the live game before calling it launched.
 
 ### 11. Add friends multiplayer later
 

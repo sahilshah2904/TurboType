@@ -212,7 +212,11 @@ it("ships distinct reproducible menu and racing masters with safe levels and cor
     expect(createHash("sha256").update(wav).digest("hex")).toBe(report.sha256);
     expect(report.peak).toBeLessThan(0.9);
     expect(report.rms).toBeGreaterThan(0.08);
-    expect(scene === "race" ? report.bpm >= 140 : report.bpm < 110).toBe(true);
+    expect(
+      scene === "race"
+        ? report.bpm >= 140
+        : report.bpm >= 120 && report.bpm < 140,
+    ).toBe(true);
   }
   expect(reports[0].sha256).not.toBe(reports[1].sha256);
 });

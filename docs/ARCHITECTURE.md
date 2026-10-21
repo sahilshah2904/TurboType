@@ -1,3 +1,5 @@
+**Current scope override — 21 October 2026:** the user explicitly narrowed TurboType to laptop/desktop browsers with a physical keyboard. Phone/tablet compatibility, software-keyboard layout, rotation and mobile acceptance are canceled requirements. Earlier multi-device statements are historical. Keep laptop window responsiveness (960 CSS px minimum; verify 1024/1366/1440/1920 widths), accessibility, hardware-keyboard IME composition, cloud saves before solo launch and multiplayer afterward. Do not restore mobile work without a new user request.
+
 > Alpha.5 update: [IMMERSIVE_APP.md](IMMERSIVE_APP.md) and [ADR 0006](adr/0006-immersive-app-and-live-wpm.md) supersede earlier fixed-size race/art/composition descriptions below. Race uses responsive Phaser RESIZE, the approved kart PNG/palette textures, integrated native typing and a rolling-WPM dial. Existing pages share a full-window world; previous sections retain historical ownership context.
 
 # Application architecture

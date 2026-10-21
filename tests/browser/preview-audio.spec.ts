@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-test("preview fills wide and phone widths after resize without side gutters", async ({
+test("preview fills laptop and wide window widths after resize without side gutters", async ({
   page,
 }) => {
   await page.setViewportSize({ width: 1920, height: 1000 });
@@ -9,7 +9,7 @@ test("preview fills wide and phone widths after resize without side gutters", as
   await expect(preview).toHaveAttribute("data-ready", "true", {
     timeout: 12000,
   });
-  for (const width of [1920, 390, 1440]) {
+  for (const width of [1920, 1024, 1440]) {
     await page.setViewportSize({ width, height: 900 });
     await expect
       .poll(async () =>
@@ -76,11 +76,11 @@ test("distinct original scores follow menu, countdown and race without file cont
         .filter((e) => !e.stopped)
         .map((e) => Math.round(e.duration * 10) / 10),
     );
-  await expect.poll(music).toEqual([20]);
-  await expect(page.locator("#audio-status")).toContainText("Nightforge");
+  await expect.poll(music).toEqual([15.5]);
+  await expect(page.locator("#audio-status")).toContainText("Ignition");
   for (const tab of ["Practice", "Keyboard check", "Settings"]) {
     await page.getByRole("link", { name: tab, exact: true }).click();
-    await expect.poll(music).toEqual([20]);
+    await expect.poll(music).toEqual([15.5]);
   }
   await expect(page.locator('input[type="file"]')).toHaveCount(0);
   await page.getByRole("link", { name: "Race", exact: true }).click();
@@ -98,7 +98,7 @@ test("distinct original scores follow menu, countdown and race without file cont
   await expect.poll(music).toEqual([]);
   await page.getByRole("link", { name: "Settings", exact: true }).click();
   await page.getByText("Sound & music", { exact: true }).click();
-  await expect.poll(music).toEqual([20]);
+  await expect.poll(music).toEqual([15.5]);
   await page.getByRole("button", { name: "Mute sound", exact: true }).click();
   await expect.poll(music).toEqual([]);
 });

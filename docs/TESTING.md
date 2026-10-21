@@ -1,5 +1,12 @@
 # Verification evidence
 
+## Alpha.9 — laptop scope, red/gold and upbeat menu, 21 October 2026
+
+The full local npm run check passed: formatting/types/build, 87 unit cases and all 26 desktop Chromium browser behaviors (59.7 seconds). The prior 78 executions represented those 26 behaviors multiplied across desktop/phone/tablet; retiring the two mobile profiles reduces runs without dropping the desktop behavior suite. Phone-sized resize cases were replaced with laptop sizes; OS-keyboard/VisualViewport handling and small-screen CSS are removed. Native physical-keyboard composition/strict correction tests remain.
+
+The user reported alpha.8 points 5/6 working and accepted Overdrive racing music. Its SHA-256 remains b8a95059350b3a10cd0cfac876a90d247deb3fca4d77093d0b4ae658583a45cd. Ignition replaces the rejected Nightforge menu track with a brighter major-key 124 BPM arrangement. Phone word-at-a-time feedback is retired with phone support, not fixed. Laptop audiovisual acceptance/performance and distinct fleet remain open. Current laptop captures are in docs/images/alpha9 (1024×768 and 1440×900 across the existing pages), checked for page errors and horizontal overflow. Hosted CI is recorded separately; earlier mobile results below are historical, not release obligations.
+
+
 ## Alpha.8 — original masters and graphite/crimson/cyan theme, 21 October 2026
 
 The user rejected the old music/palette and canceled personal-file playback. Alpha.8 removes that loader, controls and tests; replaces the runtime oscillator arrangement with two deterministic original WAV masters; and updates CSS/Phaser colors and lighting. The two published asset hashes/lengths/levels are checked against public/assets/audio/soundtracks.json. Unit tests cover late loading after pause/disposal, fetch failure/retry, single context/gesture ownership and existing countdown behavior. Unit total is now 87: three retired personal-file cases removed and two soundtrack-loading cases added, replacing the score-content check.

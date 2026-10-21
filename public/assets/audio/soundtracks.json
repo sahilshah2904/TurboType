@@ -1,15 +1,15 @@
 [
   {
-    "name": "nightforge",
-    "bpm": 96,
+    "name": "ignition",
+    "bpm": 124,
     "bars": 8,
     "sampleRate": 22050,
     "channels": 1,
-    "seconds": 20,
-    "bytes": 882044,
+    "seconds": 15.483854875283447,
+    "bytes": 682882,
     "peak": 0.84,
-    "rms": 0.11439969887485034,
-    "sha256": "88ffd6b6b80c6873afbe06b5244f8f817e1cfdf73b2d7233344c61952f8a66d4"
+    "rms": 0.134854754313554,
+    "sha256": "a8e088a4bea68612376f307f142063fc2062ebcd7ca2e0dd39a8025867cef19b"
   },
   {
     "name": "overdrive",

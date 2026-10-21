@@ -1,3 +1,5 @@
+**Current scope override — 21 October 2026:** the user explicitly narrowed TurboType to laptop/desktop browsers with a physical keyboard. Phone/tablet compatibility, software-keyboard layout, rotation and mobile acceptance are canceled requirements. Earlier multi-device statements are historical. Keep laptop window responsiveness (960 CSS px minimum; verify 1024/1366/1440/1920 widths), accessibility, hardware-keyboard IME composition, cloud saves before solo launch and multiplayer afterward. Do not restore mobile work without a new user request.
+
 # Run TurboType locally
 
 The app includes Phase 4 Quick Race against four CPUs with real progress/standings/results, plus typing practice, the hub preview, free-editing keyboard check and local preferences. Alpha.5 integrates the accepted full-window kart race, Live WPM dial, native single typing surface and shared world revamp of all existing pages, with optional original synthesized audio. Progression/cloud accounts and cinematic onboarding are later tasks.
@@ -44,18 +46,11 @@ npm run preview
 
 Open **http://127.0.0.1:4173/TurboType/**. `dist` is generated output, excluded from Git. `vite preview` is a local artifact check, not production hosting. Hash links such as `#/keyboard` work with the repository base path and do not require server rewrites.
 
-To test from your own phone/tablet on the same trusted Wi-Fi network:
-
-```powershell
-npm run dev -- --host 0.0.0.0
-```
-
-Open the printed Network URL ending in `/TurboType/` on the device. Loopback (`127.0.0.1`) on a phone points to the phone, not your laptop. Allow the dev-server port only on the relevant private network if your firewall asks. This is temporary local testing, not public deployment. The foundation preview does not use secure-context-only player/race ID generation; later cloud/auth flows require their documented HTTPS callback configuration.
 
 ## Recreate original assets and profile
 
 - `node assets-source/build-vehicles.mjs` recreates the earlier SVG car bodies for historical development. Alpha.5 loads public/assets/karts/volt-kart.png, an exact copy of the accepted concept in docs/design/race-direction. Its preserved PNG/prompt/provenance recreate this snapshot; generation itself is nondeterministic. See IMMERSIVE_APP.md.
-- Original music/effects are synthesized directly from src/audio/score.ts and race-audio.ts. Open Sound & music in Race/Settings to enable; sound defaults off and no audio downloads or API credentials are needed.
+- Original music masters are recreated with node assets-source/build-soundtracks.mjs; src/audio/score.ts is the manifest and race-audio.ts owns playback/effects. Open Sound & music in Race/Settings to enable; sound defaults off and the shipped original WAVs need no external music service or API credentials.
 - `node scripts/profile-race.mjs` profiles the isolated scene against the running Vite dev server. Optional first argument changes the URL. It closes only its own browser; see PERFORMANCE.md for actual scope/limits.
 - Follow PHASE5_POLISH_TESTS.md for new physical sound/visual/performance checks; prior typing/race acceptance does not certify this polish.
 
@@ -68,7 +63,7 @@ Open the printed Network URL ending in `/TurboType/` on the device. Loopback (`1
 | `npm run typecheck` | Strict TypeScript checks |
 | `npm test` | Unit tests for seeded CPUs/solo outcomes, typing/timing/standings, IDs, routing and safe settings persistence |
 | `npm run build` | Typecheck and generate the production artifact |
-| `npm run test:browser` | Test the previously built artifact in three Chromium layout profiles |
+| `npm run test:browser` | Test the previously built artifact in the desktop Chromium profile, including laptop resizing |
 | `npm run check` | Full formatting/type/unit/build/browser sequence |
 
 The browser suite launches a preview server on 4173 if one is not already running locally; stop any stale manually started preview to avoid checking an old artifact. In CI reuse is disabled. Traces and output go to ignored test-results; inspect a retained failure trace with `npx playwright show-trace <trace.zip>`.
@@ -80,6 +75,6 @@ The browser suite launches a preview server on 4173 if one is not already runnin
 - **404 assets/blank track:** use the `/TurboType/` URL, inspect requests, and retry the artwork. The current kart PNG must load from assets/karts/volt-kart.png; earlier foundation SVG rasterization issues are documented in historical evidence.
 - **Blocked browser storage:** settings still apply for the current visit and show an unsaved message. No cloud progress exists yet.
 - **Windows AutoRun warning:** this workstation's existing Command Processor AutoRun configuration sometimes prints `& was unexpected at this time` when npm starts nested scripts. Recorded checks still finish successfully. We have not changed the user's registry; assess actual exit codes and errors if reproducing the warning.
-- **Phone keyboard issues:** record the real browser, OS, orientation, viewport and keyboard behavior. Chromium device emulation cannot verify the physical software keyboard. See TESTING.md for pending checks.
+- **Laptop layout/input issues:** record browser/OS, window size, zoom and physical keyboard/IME behavior. Mobile keyboards are outside the current scope.
 
 Exact installed versions are in package.json/package-lock.json. Design rationale, lifecycle and data boundaries are documented in ARCHITECTURE.md and the ADRs.

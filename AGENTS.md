@@ -6,10 +6,18 @@
 - Product decisions live in `GAME_DESIGN_PLAN.md`. `docs/RULES_AND_STORAGE_BASELINE.md` clarifies the initial rule/reward/storage defaults. Research and visual observations are in `IMPLEMENTATION_RESEARCH.md` and `docs/REFERENCE_VIDEO_ANALYSIS.md`.
 - Follow `docs/ENGINEERING_CONVENTIONS.md` and `docs/GITHUB_WORKFLOW.md` for naming, versions, documentation, meaningful checks, and commit/push workflow. Keep documentation in the same change as the behavior it describes.
 - Use short plain-English commit messages without conventional-commit prefixes, per the user's Phase 2 instruction. Do not rewrite older shared commits.
-- Scope: responsive single-player for phones/tablets/laptops first, four CPUs, 100 levels each in Easy/Medium/Hard and rightward maps. Plan storage/auth/network boundaries from the foundation, add optional account-backed cloud progress before public single-player launch, then implement friends multiplayer immediately afterward. See `docs/RESPONSIVE_AND_ONLINE_ARCHITECTURE.md`; it supersedes earlier desktop-first/local-only launch assumptions.
+- Scope: laptop/desktop physical-keyboard typing improvement only, four CPUs, 100 levels each in Easy/Medium/Hard and rightward maps. Phone/tablet support and mobile testing were explicitly canceled by the user on 21 October. Plan storage/auth/network boundaries, optional cloud progress before public solo launch and friends multiplayer immediately afterward. Current scope overrides historical multi-device assumptions in older checkpoints.
 - Keep user reference media and analysis tools local under ignored `Reference_Images/`. Do not ship the reel's assets or soundtrack. Use original or appropriately licensed game assets/audio and record provenance.
 
-## Resume checkpoint — 21 October 2026
+## Latest alpha.9 scope and acceptance update
+
+**Current scope override — 21 October 2026:** the user explicitly narrowed TurboType to laptop/desktop browsers with a physical keyboard. Phone/tablet compatibility, software-keyboard layout, rotation and mobile acceptance are canceled requirements. Earlier multi-device statements are historical. Keep laptop window responsiveness (960 CSS px minimum; verify 1024/1366/1440/1920 widths), accessibility, hardware-keyboard IME composition, cloud saves before solo launch and multiplayer afterward. Do not restore mobile work without a new user request.
+
+The user accepted alpha.8 race music (Overdrive), typing/speedometer checks and pause/resume/retry (points 5/6). They rejected the cyan-dominant palette and sad Nightforge menu score. Alpha.9 makes metallic red/gold dominant with small cyan light details; replaces Nightforge with upbeat major-key Ignition (124 BPM); preserves Overdrive byte-for-byte; removes VisualViewport/software-keyboard handling, small-screen CSS and phone/tablet Playwright projects. Hardware IME composition/correction stays unchanged. The reported Samsung word-at-a-time caret symptom is out of current scope, not claimed fixed. Laptop review/performance and distinct fleet remain open.
+
+## Historical resume checkpoint — 21 October 2026
+
+The following alpha.8 snapshot is historical; the scope update above supersedes its phone/tablet and menu/theme requirements.
 
 The user asked to stop after documenting progress and continue later. Resume from the current checkout; do not start a new phase, merge or deploy merely because this handoff exists.
 

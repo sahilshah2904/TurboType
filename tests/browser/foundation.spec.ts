@@ -73,7 +73,7 @@ test("saved motion/text preferences survive reload and scene navigation cleans u
   }
 });
 
-test("unknown hash recovers and narrow landscape resize preserves text", async ({
+test("unknown hash recovers and laptop window resize preserves text", async ({
   page,
 }) => {
   await page.goto("./#/unknown");
@@ -82,7 +82,7 @@ test("unknown hash recovers and narrow landscape resize preserves text", async (
   ).toBeVisible();
   await page.getByRole("link", { name: "Keyboard check", exact: true }).click();
   await page.getByRole("textbox").fill("Every");
-  await page.setViewportSize({ width: 640, height: 320 });
+  await page.setViewportSize({ width: 1024, height: 768 });
   await expect(page.getByRole("textbox")).toHaveValue("Every");
   expect(
     await page.evaluate(

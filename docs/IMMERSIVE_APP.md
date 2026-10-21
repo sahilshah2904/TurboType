@@ -1,8 +1,14 @@
 # Immersive application integration
 
-21 October 2026. App 0.1.0-alpha.8, rules 3 unchanged. This implements the user-approved kart direction in the actual hash-routed app, rather than only the earlier docs/design review prototype. Formal verification results belong in TESTING.md; available-device acceptance remains open.
+21 October 2026. App 0.1.0-alpha.9, rules 3 unchanged. This implements the user-approved kart direction in the actual hash-routed app, rather than only the earlier docs/design review prototype. Formal verification results belong in TESTING.md; available-device acceptance remains open.
 
-## Alpha.8 current visual and soundtrack direction
+## Alpha.9 laptop-only revision
+
+The user explicitly canceled phone/tablet support. Native OS-keyboard VisualViewport code and compact phone CSS were removed; all live scene sizing uses desktop CSS viewport dimensions and normal ResizeObserver behavior. Phone/tablet Playwright profiles were retired; the 26 existing browser behaviors now run in desktop Chromium with laptop window resize checks. General native textarea accessibility, composition and strict correction remain for hardware keyboards. The reported phone word-at-a-time update was not changed or claimed fixed.
+
+Target minimum window width is 960 CSS px with representative 1024/1366/1440/1920 checks. Metallic red/gold now dominates with small cyan lights; bright major-key Ignition replaces Nightforge while the accepted Overdrive WAV remains byte-identical. Latest captures: [1440px hub](images/alpha9/laptop-1440-hub.png), [1024px hub](images/alpha9/laptop-1024-hub.png), [1440px race](images/alpha9/laptop-1440-race.png) and [1024px race](images/alpha9/laptop-1024-race.png). Earlier mobile/palette sections below describe history and do not impose active requirements.
+
+## Alpha.8 visual and soundtrack direction (historical)
 
 All existing pages now use graphite/steel depth, localized metallic crimson, cyan reactor-style lighting and gold instrument details. CSS world rings/facets are static lightweight layers; Phaser skies/cities/road accents use the same palette. The earlier flat burgundy direction below is historical. The user requested removal of personal music: that UI and loader are deleted. New original Nightforge and Overdrive masters replace Harbor Circuit; browsing and racing have different instruments/melodies/tempi. See [audio generation and lifecycle](AUDIO.md). No Iron Man artwork or film music is included. Current captures: [desktop hub](images/alpha8/desktop-hub.png), [phone hub](images/alpha8/phone-hub.png), [desktop racing](images/alpha8/desktop-racing.png), [phone racing](images/alpha8/phone-racing.png), [desktop settings](images/alpha8/desktop-settings.png) and [phone settings](images/alpha8/phone-settings.png). Older screenshots below retain historical layouts/palettes.
 

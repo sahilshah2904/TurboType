@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.0-alpha.9 — 21 October 2026
+
+- Narrow product scope to laptop/desktop physical-keyboard typing at the user's request. Remove mobile/tablet browser profiles, touch-screen CSS and software-keyboard VisualViewport handling; retain regular window resizing and hardware IME composition.
+- Make metallic red/gold dominant, with cyan restricted to small lights; original shapes follow the nanotech armor color reference.
+- Replace the rejected sad menu score with upbeat major-key Ignition (124 BPM). Preserve the accepted Overdrive race WAV byte-for-byte.
+- Record user acceptance of typing/speedometer and pause/resume/retry checks. The phone word-at-a-time symptom is out of scope, not claimed fixed. Rules remain 3, save/content 1.
+
 ## 0.1.0-alpha.8 — 21 October 2026
 
 - Replace the rejected burgundy wash with graphite surfaces, metallic crimson controls, cyan reactor-style light/rings and restrained gold details across pages and Phaser scenes.

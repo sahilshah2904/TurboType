@@ -4,7 +4,7 @@ export type Category = (typeof CATEGORIES)[number];
 export type LevelId = `${Category}-${string}`;
 export type RaceId = string & { readonly __raceId: unique symbol };
 export type PlayerId = string & { readonly __playerId: unique symbol };
-export type InputProfile = "touch" | "hardware" | "unspecified";
+export type InputProfile = "hardware" | "unspecified";
 export type RaceStatus =
   | "ready"
   | "countdown"

@@ -169,7 +169,7 @@ test("art failure allows explicit text racing, retry recovery and cleanup after 
   await expect(page.locator("#race-track canvas")).toHaveCount(1);
   await expect(page.locator("#race-state")).toHaveText("Finished");
 });
-test("validates seeds and supports new opponents, reduced motion and narrow rotation", async ({
+test("validates seeds and supports new opponents, reduced motion and laptop resize", async ({
   page,
 }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
@@ -185,12 +185,12 @@ test("validates seeds and supports new opponents, reduced motion and narrow rota
   await page
     .getByRole("textbox", { name: "Your typing" })
     .pressSequentially("Every");
-  await page.setViewportSize({ width: 640, height: 320 });
+  await page.setViewportSize({ width: 1024, height: 768 });
   await expect(page.locator("#race-state")).toHaveText("Racing");
   await expect(page.getByRole("textbox", { name: "Your typing" })).toHaveValue(
     "Every",
   );
-  await page.setViewportSize({ width: 320, height: 740 });
+  await page.setViewportSize({ width: 1366, height: 768 });
   expect(
     await page.evaluate(
       () => document.documentElement.scrollWidth <= innerWidth,

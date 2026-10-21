@@ -1,6 +1,8 @@
 # TurboType future work backlog
 
-21 October 2026 handoff: current implementation is alpha.8 / 0b4eef6 on feat/race-polish, PR #4 open. The user asked to continue later. Resume instructions and the delivered-work summary are in [AGENTS.md](AGENTS.md#resume-checkpoint--21-october-2026) and [README.md](README.md#progress-checkpoint-and-next-session). First resolve remaining Phase 5 acceptance/fleet/performance tasks; do not skip straight to campaigns. All unchecked items below remain pending unless explicitly retired; TT-514 was canceled by the user.
+**Current scope override — 21 October 2026:** the user explicitly narrowed TurboType to laptop/desktop browsers with a physical keyboard. Phone/tablet compatibility, software-keyboard layout, rotation and mobile acceptance are canceled requirements. Earlier multi-device statements are historical. Keep laptop window responsiveness (960 CSS px minimum; verify 1024/1366/1440/1920 widths), accessibility, hardware-keyboard IME composition, cloud saves before solo launch and multiplayer afterward. Do not restore mobile work without a new user request.
+
+21 October 2026 handoff: current implementation is alpha.8 / 0b4eef6 on feat/race-polish, PR #4 open. The user asked to continue later. Resume instructions and the delivered-work summary are in [AGENTS.md](AGENTS.md#latest-alpha9-scope-and-acceptance-update) and [README.md](README.md#progress-checkpoint-and-next-session). First resolve remaining Phase 5 acceptance/fleet/performance tasks; do not skip straight to campaigns. All unchecked items below remain pending unless explicitly retired; TT-514 was canceled by the user.
 
 Last reviewed: 20 October 2026. All unchecked items are future work, not implemented features. This backlog captures commitments and deferred ideas; [PROJECT_STATUS.md](PROJECT_STATUS.md) reports actual phase progress. Design details and acceptance criteria remain in the linked specifications.
 
@@ -41,7 +43,7 @@ Completion evidence for TT-301–304: `src/core/typing-engine.ts`, `standings.ts
 
 Evidence for TT-401–403: `src/core/cpu-schedule.ts`, `solo-race.ts`, `src/ui/quick-race.ts`, `src/game/race-track.ts`, documented rules/recreation and ADR 0004; local `npm run check` passes with 69 unit tests and 54 Chromium profile checks on `feat/solo-race`. Implementation commit `e4e664d`, PR #3. User acceptance of the new race is separately TT-404.
 
-- [x] TT-404: Verify the implemented Quick Race on the available ASUS laptop/Samsung S25 Ultra: start/actual vehicle progress, correction while CPUs continue, all-lane pause/navigation preservation, keyboard space/rotation, frozen results/simulation labels and retry. Follow docs/PHASE4_RACE_TESTS.md. Completed by user report on 20 October 2026: all five requested cases worked on ASUS/Samsung, with a supplied paused-race laptop screenshot. Exact browser/OS/keyboard versions and event traces were not supplied; physical iOS/tablet and broader performance remain TT-1008/Phase 10.
+- [x] TT-404: Verify the implemented Quick Race on the available ASUS laptop/Samsung S25 Ultra: start/actual vehicle progress, correction while CPUs continue, all-lane pause/navigation preservation, keyboard space/rotation, frozen results/simulation labels and retry. Follow docs/PHASE4_RACE_TESTS.md. Completed by user report on 20 October 2026: all five requested cases worked on ASUS laptop, with a supplied paused-race laptop screenshot. Exact browser/OS/keyboard versions and event traces were not supplied; physical iOS/tablet and broader performance remain TT-1008/Phase 10.
 
 - [x] TT-405: Apply user-requested race reading order: status/metrics above track, then passage and typing field directly below. Also contain the canvas inside its aspect-ratio parent so compacting the screen does not retain the old intrinsic canvas height. CPU schedules, rules and exercise lengths are unchanged. See docs/TESTING.md for verification.
 
@@ -60,9 +62,9 @@ Required redesign added after review of recordings 2–4 and user rejection of c
 
 - [x] TT-507: User approved the full-window kart design on 21 October ("yes this design is very good"). Playable desktop/phone review artifact, car concept, prompt/provenance and captures are in docs/design/race-direction. Requested moving exhaust is implemented/checked in the prototype. This is direction approval only: normal Race integration, distinct fleet and physical-device acceptance remain TT-508–513/505/506.
 - [ ] TT-508: Alpha.5 implementation is in the normal Race route; final responsive/device verification pending. Implement edge-to-edge active racing without outer card, fixed width cap, page gutters or large navigation/footer. Move setup/secondary controls to pre-race/pause screens, use a compact upper HUD, and support optional user-initiated fullscreen with harmless refusal.
-- [ ] TT-509: Alpha.5 Race/Practice now have one visible native-input-backed strip; automated regressions and actual Samsung keyboard acceptance must be recorded. Replace separate passage/answer box with one visible integrated typing strip backed by a real accessible native input. Preserve correction, prediction/composition policy, focus, pause, timing, larger text and Samsung keyboard behavior; verify before expanding effects.
+- [ ] TT-509: Alpha.5 Race/Practice now have one visible native-input-backed strip; automated regressions and actual laptop keyboard acceptance must be recorded. Replace separate passage/answer box with one visible integrated typing strip backed by a real accessible native input. Preserve correction, prediction/composition policy, focus, pause, timing, larger text and laptop keyboard behavior; verify before expanding effects.
 - [ ] TT-510: Produce and review a distinctly improved original/appropriately licensed vehicle fleet with consistent proportions, depth/shading, glass, wheels/lights/shadows and editable source/export/anchor/provenance records. Prefer a prerendered 2.5D pipeline after concept review; no final assets/pipeline selected yet.
-- [ ] TT-511: Alpha.5 Phaser RESIZE scene/proportional kart layout, compressed relative overview, full-course reduced view and VisualViewport integration implemented. Final viewport/device evidence pending. Recompose responsive lanes/scenery and relative camera framing so nearby CPUs remain readable and distant indicators/overview remain truthful. Test desktop, ultrawide, phone portrait, keyboard-open, rotation, safe areas and zoom without stretched cars or hidden text.
+- [ ] TT-511: Alpha.9 retains responsive Phaser RESIZE, truthful relative CPU framing and full-course reduced motion for supported laptop windows; OS-keyboard VisualViewport/phone layouts were removed by scope change. Automated 1024–1920 resize checks pass. Finish real laptop zoom/window/readability and smoothness validation without stretched karts or hidden text.
 - [ ] TT-512: Alpha.5 moving exhaust, spoke overlays, suspension, bounded sparks/confetti and live WPM dial implemented; actual-device sound/frame/texture acceptance remains. Refine speed/streak/overtaking/exhaust/audio/finish choreography around the accepted composition; preserve reduced-motion/low-effects and independent engine outcomes. Validate texture/source cleanup and actual-device responsiveness.
 - [ ] TT-513: Refresh regression checks, physical-device checklist, measured evidence, screenshots and public README after redesign. Obtain explicit visual/device acceptance before closing Phase 5/merging PR #4; previous 83/66 tests do not verify the replacement.
 
@@ -76,15 +78,17 @@ Required redesign added after review of recordings 2–4 and user rejection of c
 
 - [ ] TT-518: Dedicated countdown pulse/rising 3–2–1 cues remain implemented. The user rejected the old menu/race mix; alpha.8 replaces it with distinct rendered Nightforge/Overdrive originals. Complete ASUS/Samsung listening and volume-balance acceptance with TT-505/506.
 
-- [ ] TT-519: Alpha.8 original rendered browsing/racing masters and graphite/crimson/cyan theme implemented; final technical evidence is in docs/TESTING.md. Obtain user audiovisual acceptance, test real loop joins/mix and measure new audio decode/transfer/memory before closing, coordinated with TT-505/506/513. No new public release or completed Phase 5 is implied.
+- [ ] TT-519: Alpha.9 red/gold theme and upbeat Ignition menu master replace rejected alpha.8 choices. Overdrive is user-accepted and byte-identical. Technical evidence in docs/TESTING.md; finish laptop audiovisual/loop/mix and audio decode/transfer/memory evidence with TT-505/506/513. Phase 5 remains open.
 
 Alpha.5 integration evidence: source `2a2c11b`, PR #4, full local check 83 unit / 72 browser passed, hosted Linux [run 39519820938](https://github.com/sahilshah2904/TurboType/actions/runs/39519820938) passed, all existing routes captured and isolated renderer profile recorded in docs/PERFORMANCE_ALPHA5.md. TT-508/509/511/512/515 and TT-604 implementations are automatically verified; their remaining physical-device/visual gates are not closed by that evidence.
+
+- [ ] TT-520: Alpha.9 laptop-only scope and red/gold/bright-menu update implemented; verify 1024–1920 laptop windows and latest color/music on ASUS. Overdrive is byte-identical to the user-accepted alpha.8 track. Mobile cursor/composition symptom reported by user is retired with phone support, not claimed fixed. Typing and pause/resume/retry checks accepted by user report; final performance/art gates remain.
 
 ## Phase 6 — entrance and onboarding
 
 - [ ] TT-601: Build original cinematic loading panels, real asset status, optional skip/replay, returning-user shortcut and failed-load recovery.
 - [ ] TT-602: Build welcome/rules, interactive correction/streak tutorial, optional calibration and animated hub.
-- [ ] TT-603: Complete responsive setup/briefing/settings/results navigation with touch, keyboard and accessibility support; test first and returning visits. Present passage/pace/mode naturally for Quick Race, use level-defined campaign setup, and move seed into Advanced/Replay settings for the final player flow.
+- [ ] TT-603: Complete responsive setup/briefing/settings/results navigation with mouse, physical-keyboard and accessibility support; test first and returning visits. Present passage/pace/mode naturally for Quick Race, use level-defined campaign setup, and move seed into Advanced/Replay settings for the final player flow.
 
 - [ ] TT-604: Apply the accepted immersive visual language across existing hub, practice, keyboard check, settings and pre-race navigation: full-window background, no enclosing page card/unused gutters, readable responsive content and accessible focus/zoom/reduced-motion. Hub becomes a garage/city scene; practice keeps one visible typing surface; settings use a clear overlay/dedicated full-window view. Alpha.5 now revamps all those existing routes, including integrated Practice typing and the kart hub; final responsive/device verification remains. New tutorial/welcome flows are not included. Maps are TT-701–704, race/results TT-508–513, and final garage/progress views belong to Phase 9.
 
@@ -121,14 +125,14 @@ TT-906/907 may start earlier once contracts stabilize; cloud progress remains a 
 
 ## Phase 10 — single-player release
 
-- [ ] TT-1001: Test representative real Android/iOS phones, tablets/iPads and laptops, software/hardware input, rotation/resize, browser chrome and supported browsers; publish actual coverage/limitations.
-- [ ] TT-1002: Verify accessibility, touch/focus behavior, input-profile record separation, reduced motion, audio failures and loading/recovery paths.
+- [ ] TT-1001: Test supported laptop/desktop browsers and physical keyboards, standard laptop resolutions, browser zoom/window resize and accessibility; record actual hardware/browser coverage. Mobile/tablet support is canceled.
+- [ ] TT-1002: Verify accessibility, mouse/focus behavior, input-profile record separation, reduced motion, audio failures and loading/recovery paths.
 - [ ] TT-1003: Measure frame times, typing responsiveness, transfer size and repeated-retry memory/cleanup with named devices/settings; tune bottlenecks.
 - [ ] TT-1004: Configure Pages deployment/CI and repository protections where supported; validate the public bundle contains no secrets and all project-base paths work.
 - [ ] TT-1005: Verify account/cloud sync, outages and data policies; make game-data export/deletion and local-save limitations clear.
 - [ ] TT-1006: Reproduce clean-clone setup, complete docs/assets registry/release notes, tag a tested release and document deployment rollback plus save compatibility.
 - [ ] TT-1007: Verify the actual public game link with a complete race, replay, level unlock and saved progress before calling the launch complete.
-- [ ] TT-1008: Deferred from TT-204 on 20 October 2026 because the user has no iPhone/tablet: obtain representative physical iPhone/Safari and tablet/iPad keyboard/viewport/orientation coverage before claiming broad mobile release support. Record browser/OS/model/keyboard versions for available ASUS/Samsung tests, fill missing composition/safe-area cases, and publish actual coverage/remaining limits. Device access is an external dependency; emulation alone cannot close this task. Coordinate with TT-1001 rather than duplicating its tests.
+- [x] TT-1008: Retired by explicit user scope change on 21 October. Physical phone/tablet/iOS software-keyboard verification is no longer a release requirement. Earlier Samsung observations remain historical, not current compatibility claims.
 
 ## Phase 11 — friends multiplayer, immediately after solo launch
 
