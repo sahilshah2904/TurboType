@@ -1,5 +1,19 @@
 # TurboType project continuity
 
+
+## Current checkpoint — alpha.11, 21 October 2026
+
+The user said “yes everything is good. lets go ahead” after the restored alpha.10 palette and Ignition review. Record those colors/menu music as accepted, alongside previously accepted Overdrive, typing/dial and pause/resume/retry. Do not ask them to repeat that acceptance. Current scope remains laptop/desktop physical keyboards only; the historical phone/tablet requirements below are superseded.
+
+Phase 5 continues on `feat/race-polish`, open PR #4. Alpha.11 adds four original distinct CPU models, shared race/hub anchors, 800×400 WebP exports (267,580 bytes total), tracked PNG masters/prompts and export script. Player kart, accepted colors and both soundtrack WAVs are unchanged. Standings nodes are retained rather than rebuilt. See docs/KART_FLEET.md and docs/PERFORMANCE_ALPHA11.md for source/verification/measurement limits.
+
+Still open in Phase 5: separately authored body/wheel assets and final fleet review (TT-501/510); physical laptop frame/input-latency evidence, low-end tuning and final acceptance/integration (TT-505/506/511–513, TT-522). Full-app software-renderer measurements show long-tail frame callbacks; they do not certify 60 fps. Current art includes baked wheels plus rotating highlights. No Phase 6 onboarding, campaign, database/backend or Pages deployment was added. Rules 3, save/content 1. Preserve the eleven phases; do not merge or mark Phase 5 complete solely from these automated checks.
+
+Final local `npm run check` passed formatting/types/build, 87 unit and 28 desktop browser cases. Current evidence/captures: docs/TESTING.md, docs/images/alpha11 and docs/performance/alpha11-full-app.json. CI must be checked for the pushed source; earlier runs are historical.
+
+Earlier checkpoints below describe earlier source versions, not current pending color/music acceptance.
+
+
 **Latest palette decision — 0.1.0-alpha.10:** Alpha.10 restores the previous alpha.8 graphite/crimson/cyan palette at the user's request, replacing the rejected alpha.9 red/gold armor panels. Laptop-only scope, Ignition browsing music, the accepted Overdrive racing master, typing rules and mobile-removal changes stay in place.
 
 - Read `PROJECT_STATUS.md` before reporting progress or starting a new implementation phase. Check the actual repository and validation evidence; update the tracker after meaningful work.

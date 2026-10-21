@@ -1,3 +1,5 @@
+> Current alpha.11: four distinct original CPU models replace palette copies; the accepted player, restored graphite/crimson/cyan palette and Ignition/Overdrive masters are preserved. See [fleet sources and remaining wheel work](KART_FLEET.md) and [full-app evidence](PERFORMANCE_ALPHA11.md). Earlier version-specific sections below are historical.
+
 # Immersive application integration
 
 **Latest palette decision — 0.1.0-alpha.10:** Alpha.10 restores the previous alpha.8 graphite/crimson/cyan palette at the user's request, replacing the rejected alpha.9 red/gold armor panels. Laptop-only scope, Ignition browsing music, the accepted Overdrive racing master, typing rules and mobile-removal changes stay in place.

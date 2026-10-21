@@ -107,6 +107,7 @@ export function connectQuickRace(
   let trackReady = false;
   let loadTimeout: number | undefined;
   let lastState = "";
+  const standingsRows = new Map<string, HTMLLIElement>();
   const text = (selector: string, value: string) => {
     const el = find(selector);
     if (el.textContent !== value) el.textContent = value;
@@ -204,7 +205,7 @@ export function connectQuickRace(
     main
       .querySelectorAll<HTMLElement>("#race-passage span")
       .forEach((el, i) => {
-        el.className =
+        const className =
           i < s.validatedLength
             ? "character--correct"
             : i === s.validatedLength
@@ -212,6 +213,7 @@ export function connectQuickRace(
                 ? "character--current"
                 : "character--error"
               : "";
+        if (el.className !== className) el.className = className;
       });
     const passageView = find("#race-passage");
     if (document.documentElement.dataset.textSize !== "large") {
@@ -235,15 +237,22 @@ export function connectQuickRace(
           caret.offsetTop - passageView.clientHeight / 2,
         );
     }
-    // Fixed-size list, canonical text only; no per-keystroke reconstruction of the input.
-    text("#race-standings", "");
-    for (const row of standings) {
-      const li = document.createElement("li");
-      li.dataset.racer = row.id;
-      li.dataset.progress = String(row.progress);
-      li.textContent = `${row.place}. ${row.name}${row.cpu ? " · CPU" : ""} — ${Math.floor(row.progress * 100)}%${row.finishTimeMs !== null ? " · finished" : ""}`;
-      find("#race-standings").append(li);
-    }
+    // Keep the five nodes alive; update only changed content/order at the HUD cadence.
+    const standingsList = find("#race-standings");
+    standings.forEach((row, index) => {
+      let li = standingsRows.get(row.id);
+      if (!li) {
+        li = document.createElement("li");
+        li.dataset.racer = row.id;
+        standingsRows.set(row.id, li);
+      }
+      const progress = String(row.progress);
+      if (li.dataset.progress !== progress) li.dataset.progress = progress;
+      const value = `${row.place}. ${row.name}${row.cpu ? " · CPU" : ""} — ${Math.floor(row.progress * 100)}%${row.finishTimeMs !== null ? " · finished" : ""}`;
+      if (li.textContent !== value) li.textContent = value;
+      if (standingsList.children[index] !== li)
+        standingsList.insertBefore(li, standingsList.children[index] ?? null);
+    });
     find("#race-results").hidden = results === null;
     if (results && s.state !== lastState) {
       const place = results.find((row) => row.id === "player")!.place;

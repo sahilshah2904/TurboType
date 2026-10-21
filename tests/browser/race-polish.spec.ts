@@ -42,8 +42,19 @@ test("loads modern artwork, keeps the active caret readable and fills the viewpo
   page.on("pageerror", (e) => errors.push(e.message));
   await openRace(page);
   expect(assets.some((u) => u.endsWith("volt-kart.png"))).toBe(true);
+  for (const model of ["neon-fox", "apex-nova", "comet", "volt-rival"]) {
+    expect(assets.some((u) => u.endsWith(`${model}.webp`))).toBe(true);
+  }
+  await expect(page.locator("#race-track")).toHaveAttribute(
+    "data-fleet",
+    "volt-kart,neon-fox,apex-nova,comet,volt-rival",
+  );
+  const standingsRow = await page
+    .locator('#race-standings [data-racer="player"]')
+    .elementHandle();
   await go(page);
   await typePrefix(page, SAMPLE.slice(0, 30));
+  expect(await standingsRow!.evaluate((row) => row.isConnected)).toBe(true);
   const layout = await page.evaluate(() => {
     const selectors = [
       ".race-hud",
@@ -72,6 +83,37 @@ test("loads modern artwork, keeps the active caret readable and fills the viewpo
     caret: true,
   });
   expect(errors).toEqual([]);
+});
+test("fleet course and typing survive all supported laptop window checks", async ({
+  page,
+}) => {
+  await openRace(page);
+  await go(page);
+  await typePrefix(page, "Every");
+  for (const [width, height] of [
+    [1024, 768],
+    [1366, 768],
+    [1440, 900],
+    [1920, 1080],
+  ]) {
+    await page.setViewportSize({ width, height });
+    await page.clock.runFor(120);
+    await expect
+      .poll(() =>
+        page.locator("#race-track").evaluate((track) => {
+          const canvas = track.querySelector("canvas")!;
+          return (
+            Math.abs(canvas.width - track.clientWidth) < 2 &&
+            Math.abs(canvas.height - track.clientHeight) < 2 &&
+            document.documentElement.scrollWidth <= innerWidth
+          );
+        }),
+      )
+      .toBe(true);
+    await expect(page.locator("#race-input")).toHaveValue("Every");
+    await expect(page.locator("#race-input")).toBeInViewport();
+    await expect(page.locator("#race-state")).toHaveText("Racing");
+  }
 });
 test("audio is opt-in, persists controls and reuses one context without race effects during browsing", async ({
   page,

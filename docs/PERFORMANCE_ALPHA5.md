@@ -1,3 +1,5 @@
+> Current alpha.11: four distinct original CPU models replace palette copies; the accepted player, restored graphite/crimson/cyan palette and Ignition/Overdrive masters are preserved. See [fleet sources and remaining wheel work](KART_FLEET.md) and [full-app evidence](PERFORMANCE_ALPHA11.md). Earlier version-specific sections below are historical.
+
 # Alpha.5 isolated kart renderer profile
 
 Recorded 21 October 2026 after the final local 83-unit/72-browser suite completed, with no simultaneous browser test workload. Same ASUS TUF Gaming A15 / Ryzen 7 4800H workstation as the historical profile. Headless Chromium uses SwiftShader, not the workstation's hardware GPU. This is not real-device certification.

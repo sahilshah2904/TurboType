@@ -140,35 +140,40 @@ test("CPUs finishing first do not stop learning, while time trials produce hones
     "E",
   );
 });
-test("art failure allows explicit text racing, retry recovery and cleanup after leaving", async ({
-  page,
-}) => {
-  await page.clock.install();
-  await page.route("**/assets/karts/volt-kart.png", (route) => route.abort());
-  await page.goto("./#/race");
-  await expect(
-    page.getByRole("button", { name: "Race with text standings" }),
-  ).toBeVisible();
-  await expect(page.getByRole("button", { name: "Start race" })).toBeDisabled();
-  await page.getByRole("button", { name: "Race with text standings" }).click();
-  await go(page);
-  await page
-    .getByRole("textbox", { name: "Your typing" })
-    .pressSequentially(SAMPLE);
-  await expect(page.locator("#race-state")).toHaveText("Finished");
-  await page.unroute("**/assets/karts/volt-kart.png");
-  await page.getByRole("button", { name: "Retry artwork" }).click();
-  await expect(page.locator("#race-track")).toHaveAttribute(
-    "data-ready",
-    "true",
-    { timeout: 12000 },
-  );
-  await page.getByRole("link", { name: "Practice", exact: true }).click();
-  await expect(page.locator("canvas")).toHaveCount(0);
-  await page.getByRole("link", { name: "Race", exact: true }).click();
-  await expect(page.locator("#race-track canvas")).toHaveCount(1);
-  await expect(page.locator("#race-state")).toHaveText("Finished");
-});
+for (const asset of ["volt-kart.png", "comet.webp"])
+  test(`art failure for ${asset} allows text racing, retry recovery and cleanup`, async ({
+    page,
+  }) => {
+    await page.clock.install();
+    await page.route(`**/assets/karts/${asset}`, (route) => route.abort());
+    await page.goto("./#/race");
+    await expect(
+      page.getByRole("button", { name: "Race with text standings" }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("button", { name: "Start race" }),
+    ).toBeDisabled();
+    await page
+      .getByRole("button", { name: "Race with text standings" })
+      .click();
+    await go(page);
+    await page
+      .getByRole("textbox", { name: "Your typing" })
+      .pressSequentially(SAMPLE);
+    await expect(page.locator("#race-state")).toHaveText("Finished");
+    await page.unroute(`**/assets/karts/${asset}`);
+    await page.getByRole("button", { name: "Retry artwork" }).click();
+    await expect(page.locator("#race-track")).toHaveAttribute(
+      "data-ready",
+      "true",
+      { timeout: 12000 },
+    );
+    await page.getByRole("link", { name: "Practice", exact: true }).click();
+    await expect(page.locator("canvas")).toHaveCount(0);
+    await page.getByRole("link", { name: "Race", exact: true }).click();
+    await expect(page.locator("#race-track canvas")).toHaveCount(1);
+    await expect(page.locator("#race-state")).toHaveText("Finished");
+  });
 test("validates seeds and supports new opponents, reduced motion and laptop resize", async ({
   page,
 }) => {

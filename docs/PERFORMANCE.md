@@ -1,3 +1,5 @@
+> Current alpha.11: four distinct original CPU models replace palette copies; the accepted player, restored graphite/crimson/cyan palette and Ignition/Overdrive masters are preserved. See [fleet sources and remaining wheel work](KART_FLEET.md) and [full-app evidence](PERFORMANCE_ALPHA11.md). Earlier version-specific sections below are historical.
+
 > Historical alpha.4 measurement. Alpha.5 replaces the SVG/fixed-size scene with responsive PNG kart rendering and palette textures; the numbers below do not certify the new renderer. The new isolated measurement is in [PERFORMANCE_ALPHA5.md](PERFORMANCE_ALPHA5.md); actual-device acceptance remains separate. See [IMMERSIVE_APP.md](IMMERSIVE_APP.md).
 
 # Phase 5 renderer measurement and limits

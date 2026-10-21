@@ -1,4 +1,10 @@
 import type { UserSettings } from "../storage/settings";
+import {
+  addKart,
+  bakePlayerPalette,
+  fleetReady,
+  preloadFleet,
+} from "./kart-fleet";
 
 export interface PreviewOptions {
   reducedMotion: boolean;
@@ -17,7 +23,7 @@ export async function mountTrackPreview(
 
   class TrackPreview extends Phaser.Scene {
     private cars: Phaser.GameObjects.Container[] = [];
-    private wheelPairs: Phaser.GameObjects.Container[][] = [];
+    private wheelPairs: Phaser.GameObjects.Graphics[][] = [];
     private marks!: Phaser.GameObjects.Graphics;
     private flame!: Phaser.GameObjects.Particles.ParticleEmitter;
     private elapsedMs = 0;
@@ -27,10 +33,7 @@ export async function mountTrackPreview(
     private courseWidth = 1200;
 
     preload(): void {
-      this.load.image(
-        "coupe",
-        `${import.meta.env.BASE_URL}assets/karts/volt-kart.png`,
-      );
+      preloadFleet(this, [0, 1, 2]);
       this.load.on("loaderror", () =>
         options.onError(
           "Track artwork could not load. Check your connection and retry.",
@@ -39,41 +42,15 @@ export async function mountTrackPreview(
     }
 
     create(): void {
-      if (!this.textures.exists("coupe")) return;
-      // Reuse the original artwork; bake the red player palette once, not per frame.
-      const source = this.textures
-        .get("coupe")
-        .getSourceImage() as HTMLImageElement;
-      const redKart = this.textures.createCanvas("red-kart", 640, 320);
-      if (redKart) {
-        const context = redKart.getContext();
-        context.filter = "hue-rotate(285deg)";
-        context.drawImage(source, 0, 0, 640, 320);
-        redKart.refresh();
-      }
+      if (!fleetReady(this, [0, 1, 2])) return;
+      bakePlayerPalette(this);
       this.art = this.add.graphics();
       this.marks = this.add.graphics();
       for (let i = 0; i < 3; i++) {
-        const car = this.add.container([540, 330, 160][i], 166 + i * 89);
-        const shadow = this.add.ellipse(8, 32, 236, 16, 0x000000, 0.3);
-        const body = this.add
-          .image(0, 0, i === 0 && redKart ? "red-kart" : "coupe")
-          .setDisplaySize(200, 100);
-        if (i === 1) body.setTint(0xffa590);
-        if (i === 2) body.setTint(0x8abfe8);
-        const wheels = [-71, 42].map((x) => {
-          const wheel = this.add
-            .circle(0, 0, 15, 0x11161d, 0)
-            .setStrokeStyle(0, 0x5b6872, 0);
-          const spokes = this.add.graphics().lineStyle(2, 0xb9c8d0);
-          spokes.lineBetween(-9, 0, 9, 0).lineBetween(0, -9, 0, 9);
-          const assembly = this.add.container(x, 20, [wheel, spokes]);
-          car.add(assembly);
-          return assembly;
-        });
-        car.addAt([shadow, body], 0);
-        this.cars.push(car);
-        this.wheelPairs.push(wheels);
+        const { root, spokes } = addKart(this, i);
+        root.setPosition([540, 330, 160][i], 166 + i * 89);
+        this.cars.push(root);
+        this.wheelPairs.push(spokes);
       }
       const dot = this.make.graphics({ x: 0, y: 0 });
       dot

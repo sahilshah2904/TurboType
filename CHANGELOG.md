@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.0-alpha.11 — 21 October 2026
+
+- Replace four recolored CPUs with original amber rally, blue aero, pearl/magenta streamliner and violet electric karts, sharing anchors between race and hub. Preserve the accepted player, palette and both music masters.
+- Add tracked PNG masters/prompts and a reproducible WebP export pipeline; four rival textures total 267,580 bytes. Separate body/wheel art remains tracked.
+- Reuse standings nodes and avoid unchanged passage-class writes; preserve immediate input feedback and core race rules.
+- Add full-app timing/audio/heap/route-cleanup profiling and rival-art failure/recovery checks. Record user approval of the restored colors and Ignition. No rules/save/content change or deployment.
+
 ## 0.1.0-alpha.10 — 21 October 2026
 
 - Restore the earlier graphite/crimson/cyan CSS and Phaser palette after the user rejected red/gold.

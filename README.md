@@ -13,15 +13,15 @@ Race four computer opponents while improving physical-keyboard speed, accuracy a
 
 </div>
 
-![TurboType graphite and crimson kart race with cyan accents and live WPM](docs/images/alpha10/laptop-race.png)
+![TurboType graphite and crimson kart race with cyan accents and live WPM](docs/images/alpha11/laptop-race.png)
 
-*Actual alpha.10 restored graphite/crimson/cyan development preview from `feat/race-polish`. The integrated full-window kart design is awaiting device acceptance in [PR #4](https://github.com/sahilshah2904/TurboType/pull/4).*
+*Actual alpha.11 distinct-fleet graphite/crimson/cyan development preview from `feat/race-polish`. The latest fleet is awaiting final review in [PR #4](https://github.com/sahilshah2904/TurboType/pull/4).*
 
 ## Current focus — laptop typing
 
 TurboType now targets **laptop/desktop browsers and physical keyboards only**. Phone/tablet support was explicitly removed from the scope. Layouts adapt to laptop window sizes (960 CSS px minimum), with checks at 1024–1920 widths. Mobile keyboard/rotation handling and phone/tablet test profiles are removed. Cloud progress and friends multiplayer remain planned. Earlier mobile test reports below are historical.
 
-Current preview **0.1.0-alpha.10** restores the earlier graphite/crimson/cyan colors after the red/gold variation was rejected. **Ignition**, a brighter 124 BPM major-key browsing track, replaces Nightforge. The user-approved **Overdrive** racing track is unchanged.
+Current preview **0.1.0-alpha.11** adds four original rival kart designs. The user accepted the restored graphite/crimson/cyan colors and upbeat Ignition browsing music. **Ignition**, a brighter 124 BPM major-key browsing track, replaces Nightforge. The user-approved **Overdrive** racing track is unchanged.
 
 ## What is TurboType?
 
@@ -29,7 +29,7 @@ TurboType turns typing practice into a side-view motor race. Your car advances a
 
 The project is being built in documented stages: a responsive single-player game first, followed by campaign progression, optional cloud saves and friends multiplayer. Original vehicles, scenery and synthesized music give the game its own identity.
 
-> **Development status:** `main` contains the accepted Phase 4 playable race. The latest Phase 5/6 visual integration is on `feat/race-polish`: the approved full-window kart race, one visible typing surface, Live WPM dial and revamped existing pages are implemented with the current metallic red/gold palette and separate original browsing/racing soundtracks. Current checks are recorded in [verification evidence](docs/TESTING.md); actual-device acceptance remains open; the distinct fleet and cinematic onboarding are still pending. There is **no public GitHub Pages game link yet**. You can run either version locally.
+> **Development status:** `main` contains the accepted Phase 4 playable race. The latest Phase 5/6 visual integration is on `feat/race-polish`: the approved full-window kart race, one visible typing surface, Live WPM dial and revamped existing pages are implemented with the accepted graphite/crimson/cyan palette and separate original browsing/racing soundtracks. Current checks are recorded in [verification evidence](docs/TESTING.md); final fleet/performance review remains open; separate wheel parts and cinematic onboarding are still pending. There is **no public GitHub Pages game link yet**. You can run either version locally.
 
 ## What you can play today
 
@@ -39,7 +39,7 @@ The project is being built in documented stages: a responsive single-player game
 | **Typing Practice** | The same typing engine without opponents, with WPM, accuracy, active time and clean-streak feedback. |
 | **Keyboard Check** | A free-editing screen for checking your physical keyboard before racing. |
 | **Preferences** | Saved motion, effects, text size and audio volumes; separate original menu/race music. |
-| **Integrated kart preview** | Edge-to-edge Phaser racing, one visible typing strip, recent-WPM speedometer, moving exhaust, bounded effects, and original optional music. Existing hub, practice, keyboard and settings pages share the new open world layout. The distinct vehicle fleet remains in development. |
+| **Integrated kart preview** | Edge-to-edge Phaser racing, one visible typing strip, recent-WPM speedometer, moving exhaust, bounded effects, and original optional music. Existing hub, practice, keyboard and settings pages share the new open world layout. Four CPU silhouettes now have individual models; separate wheel art and final review remain. |
 
 The current passages are short exercises for validating the game. Campaign levels, stars, rewards, a garage, accounts, cloud progress and multiplayer are planned features. Campaign cards in the hub are previews.
 
@@ -47,17 +47,17 @@ Open **Sound & music** to enable the original soundtrack: **Ignition** while bro
 
 ## Progress checkpoint and next session
 
-Current preview is **0.1.0-alpha.10** on **feat/race-polish**, in open [PR #4](https://github.com/sahilshah2904/TurboType/pull/4). **Phases 1–4 are complete for their agreed scope; Phase 5 remains in progress.** Existing-page Phase 6 visuals are implemented, but onboarding is not. No Pages game, backend or database is deployed.
+Current preview is **0.1.0-alpha.11** on **feat/race-polish**, in open [PR #4](https://github.com/sahilshah2904/TurboType/pull/4). **Phases 1–4 are complete for their agreed scope; Phase 5 remains in progress.** Existing-page Phase 6 visuals are implemented, but onboarding is not. No Pages game, backend or database is deployed.
 
 Delivered: planning/rules and repository foundation; strict typing engine; four seeded CPU races; countdown, WPM/accuracy/streaks, pause/results/retry/recovery; full-window kart racing and one visible typing surface; live speedometer, exhaust/nitro/parallax/finish effects; full-width hub preview; revamped existing pages; independent original browsing/racing music and countdown; saved preferences and reproducible checks/docs.
 
-Latest user feedback: racing music and checks 5/6 (typing/speedometer/mistakes/correction and pause/resume/retry) work. **Overdrive is unchanged.** Ignition replaces the rejected sad menu track; the earlier graphite/crimson/cyan palette is restored. Phone/tablet compatibility was explicitly canceled. Hardware IME input and accessibility remain supported; the reported phone word-at-a-time caret issue is out of scope, not fixed.
+Latest user feedback: restored colors and Ignition accepted (“everything is good”); racing music and checks 5/6 (typing/speedometer/mistakes/correction and pause/resume/retry) work. **Overdrive is unchanged.** Ignition replaces the rejected sad menu track; the earlier graphite/crimson/cyan palette is restored. Phone/tablet compatibility was explicitly canceled. Hardware IME input and accessibility remain supported; the reported phone word-at-a-time caret issue is out of scope, not fixed.
 
-Validation: local formatting/types/build, **87 unit cases and 26 desktop Chromium browser cases pass**. Phone/tablet profiles were removed, so the former 78 executions (26 × 3) are historical. Current laptop screenshots are in [docs/images/alpha9](docs/images/alpha9); [test evidence](docs/TESTING.md) distinguishes each source and hosted CI. Earlier ASUS/Samsung reports do not imply current mobile support.
+Validation: local formatting/types/build, **87 unit cases and 28 desktop Chromium browser cases pass**. Phone/tablet profiles were removed, so the former 78 executions (26 × 3) are historical; alpha.11 adds rival-failure and four-width fleet checks. Current laptop screenshots are in [docs/images/alpha11](docs/images/alpha11); [test evidence](docs/TESTING.md) distinguishes each source and hosted CI. Earlier ASUS/Samsung reports do not imply current mobile support.
 
 | Next phase | Pending work |
 | --- | --- |
-| **5** | Laptop review of the restored colors and Ignition; distinct vehicle bodies/wheels; real laptop loop/mix/interruptions and performance/decode/transfer/memory measurements; final PR integration after acceptance. TT-505/506/508–513/515/518–520. |
+| **5** | Final review of the new fleet; separate body/wheel art; physical laptop frame/input-latency checks and full-app performance follow-up; final PR integration after acceptance. TT-505/506/508–513/515/518–520/522. |
 | **6** | Cinematic opening/loading, rules/welcome/tutorial/calibration and final laptop flow. |
 | **7–8** | Three rightward 100-node maps with locks/chapters/bonuses; author, validate and balance all 300 levels. |
 | **9** | Rewards/rank/garage/records/coaching, robust guest saves and optional account-backed cloud progress before public solo launch. |
@@ -208,7 +208,7 @@ Add four computer opponents, countdown, vehicle movement, passage display, place
 
 ### 5. Polish the racing experience
 
-**Status: Approved visual direction integrated on `feat/race-polish`; final device acceptance and distinct fleet pending.**
+**Status: Approved visual direction integrated on `feat/race-polish`; distinct CPU models integrated; separate wheel art and final fleet/performance review pending.**
 
 Add detailed vehicles, rotating wheels, suspension, parallax scenery, exhaust, nitro, overtaking effects, sound and finish celebrations. Provide low-effects and reduced-motion options. The rejected boxed layout has been replaced in the development branch by a full-viewport kart race, integrated typing and Live WPM speedometer. See the [implementation guide](docs/IMMERSIVE_APP.md). ASUS/Samsung visual, audible-balance and real-device smoothness checks remain open in [PR #4](https://github.com/sahilshah2904/TurboType/pull/4).
 
@@ -278,3 +278,7 @@ Found a bug or have an idea? [Open an issue](https://github.com/sahilshah2904/Tu
 For code changes, follow the engineering conventions, use a focused branch, update the relevant documentation and run the checks before opening a pull request. Keep future proposals distinct from implemented behavior. Use short, meaningful plain-English commit messages.
 
 Created by **Sahilshah**. Vehicle artwork and synthesized music in the Phase 5 preview are original project assets; fonts retain their license notices. User reference recordings and their soundtrack are not shipped. A project-wide license has not yet been selected.
+
+### Recreate the current fleet and measurements
+
+[Vehicle masters, prompts, exports and anchors](docs/KART_FLEET.md) explain the art pipeline and its remaining wheel-part work. [Full-app measurements](docs/PERFORMANCE_ALPHA11.md) cover HUD, decoded music, synthetic input and repeated navigation, with clear limits on software-renderer and JS-heap evidence. Original art sources are excluded from the published game.

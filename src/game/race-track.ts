@@ -1,4 +1,11 @@
 import type { SoloRace } from "../core/solo-race";
+import {
+  addKart,
+  bakePlayerPalette,
+  fleetReady,
+  KART_FLEET,
+  preloadFleet,
+} from "./kart-fleet";
 interface TrackOptions {
   read: () => ReturnType<SoloRace["snapshot"]>;
   reducedMotion: () => boolean;
@@ -42,27 +49,12 @@ export async function mountRaceTrack(
     private ended = false;
     private qualityAt = 0;
     preload(): void {
-      this.load.image(
-        "volt-kart",
-        `${import.meta.env.BASE_URL}assets/karts/volt-kart.png`,
-      );
+      preloadFleet(this);
       this.load.on("loaderror", options.onError);
     }
     create(): void {
-      if (!this.textures.exists("volt-kart")) return;
-      // Bake palette variations once; labels distinguish opponents if canvas filters are unavailable.
-      const source = this.textures
-        .get("volt-kart")
-        .getSourceImage() as HTMLImageElement;
-      for (let i = 1; i < 5; i++) {
-        const texture = this.textures.createCanvas(`kart-${i}`, 640, 320);
-        if (texture) {
-          const context = texture.getContext();
-          context.filter = `hue-rotate(${[0, 285, 72, 144, 216][i]}deg)`;
-          context.drawImage(source, 0, 0, 640, 320);
-          texture.refresh();
-        }
-      }
+      if (!fleetReady(this)) return;
+      bakePlayerPalette(this);
       this.backdrop = this.add.graphics();
       this.city = this.add.graphics();
       this.road = this.add.graphics();
@@ -82,39 +74,8 @@ export async function mountRaceTrack(
         "COMET · CPU",
         "VOLT · CPU",
       ].forEach((name, i) => {
-        const root = this.add.container(0, 0),
-          flame = this.add.graphics();
-        const shadow = this.add.ellipse(0, 43, 175, 12, 0x000000, 0.4);
-        const paletteKey =
-          i === 0 ? "kart-1" : i === 1 ? "volt-kart" : `kart-${i}`;
-        const body = this.add
-          .image(
-            0,
-            0,
-            this.textures.exists(paletteKey) ? paletteKey : "volt-kart",
-          )
-          .setDisplaySize(200, 100);
-        root.add([shadow, flame, body]);
-        this.spokes.push(
-          [
-            [-71, 20],
-            [42, 20],
-          ].map(([x, y]) => {
-            const spokes = this.add.graphics().lineStyle(1, 0xe6f2f5, 0.55);
-            for (let n = 0; n < 5; n++) {
-              const a = (n * Math.PI) / 2.5;
-              spokes.lineBetween(
-                Math.cos(a) * 7,
-                Math.sin(a) * 7,
-                Math.cos(a) * 16,
-                Math.sin(a) * 16,
-              );
-            }
-            spokes.setPosition(x, y);
-            root.add(spokes);
-            return spokes;
-          }),
-        );
+        const { root, flame, spokes } = addKart(this, i);
+        this.spokes.push(spokes);
         const label = this.add
           .text(0, -53, name, {
             fontFamily: "monospace",
@@ -139,6 +100,7 @@ export async function mountRaceTrack(
       this.layout();
       this.scale.on("resize", this.layout, this);
       parent.dataset.ready = "true";
+      parent.dataset.fleet = KART_FLEET.map((kart) => kart.id).join(",");
       options.onReady();
     }
     private layout(): void {
@@ -314,11 +276,26 @@ export async function mountRaceTrack(
             size =
               (nitro ? 100 : 48) *
               (0.83 + Math.sin(s.elapsedMs / 37 + i) * 0.17);
+          const [exhaustX, exhaustY] = KART_FLEET[i].exhaust;
           flame
             .fillStyle(nitro ? 0x53dcf5 : 0xff8d28, 0.9)
-            .fillTriangle(-91, -13, -91, 0, -91 - size, -7)
+            .fillTriangle(
+              exhaustX,
+              exhaustY - 6,
+              exhaustX,
+              exhaustY + 7,
+              exhaustX - size,
+              exhaustY,
+            )
             .fillStyle(0xfff2b0)
-            .fillTriangle(-91, -11, -91, -2, -91 - size * 0.6, -7);
+            .fillTriangle(
+              exhaustX,
+              exhaustY - 4,
+              exhaustX,
+              exhaustY + 5,
+              exhaustX - size * 0.6,
+              exhaustY,
+            );
           this.spokes[i].forEach(
             (wheel) => (wheel.rotation = s.elapsedMs / 65),
           );

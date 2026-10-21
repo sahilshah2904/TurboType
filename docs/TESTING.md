@@ -1,5 +1,13 @@
 # Verification evidence
 
+## Alpha.11 — distinct rivals and full-app evidence, 21 October 2026
+
+Final local `npm run check` passed formatting, strict types, production build, **87 unit cases and 28 desktop Chromium browser cases (1.3 minutes)**. The two added browser executions cover failed Comet artwork recovery/text standings and the full fleet at 1024/1366/1440/1920 laptop windows. Existing core behavior, native composition, frozen results/retry, audio lifecycle, reduced effects, scene failure and cleanup remain covered. The art-load case checks all five texture responses and retained standings-node identity.
+
+Four distinct generated CPU models replace recolored copies, sharing wheel-highlight/exhaust anchors between Race and Hub. PNG masters/prompts/export recreation are in [KART_FLEET.md](KART_FLEET.md); raw **full-app** HUD/input/music/route-cycle timing, CDP heap and file hashes are in [PERFORMANCE_ALPHA11.md](PERFORMANCE_ALPHA11.md). Captures at 1440×900 and a full-page hub were visually inspected in docs/images/alpha11. No page errors were observed. Software callback tails remain open TT-522; no physical 60 fps/GPU-memory or typing-latency certification is claimed.
+
+The user accepted the restored alpha.10 colors and Ignition before this work; Overdrive and typing/dial/pause/resume/retry were already accepted. Overdrive SHA-256 remains `b8a95059350b3a10cd0cfac876a90d247deb3fca4d77093d0b4ae658583a45cd`; Ignition remains `a8e088a4bea68612376f307f142063fc2062ebcd7ca2e0dd39a8025867cef19b`. Final new-fleet review and separated body/wheel sources remain TT-501/510. Phase 5/PR #4 stay open. Hosted CI is recorded separately from this local result; no Pages/backend deployment occurred.
+
 ## Alpha.10 — restore previous palette, 21 October 2026
 
 Restore alpha.8 CSS/Phaser colors while retaining alpha.9 laptop-only layout cleanup and current Ignition/Overdrive music. Strict types/production build and six focused desktop immersive/polish browser cases pass (20.2 seconds). Fresh 1440×900 captures are in docs/images/alpha10. This color-only change does not claim a new full unit/browser run; alpha.9 full-suite evidence below remains separate. No audio, rules, save schema or mobile-support changes.

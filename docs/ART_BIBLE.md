@@ -1,3 +1,5 @@
+> Current alpha.11: four distinct original CPU models replace palette copies; the accepted player, restored graphite/crimson/cyan palette and Ignition/Overdrive masters are preserved. See [fleet sources and remaining wheel work](KART_FLEET.md) and [full-app evidence](PERFORMANCE_ALPHA11.md). Earlier version-specific sections below are historical.
+
 > Alpha.9 current palette: metallic red armor (#ac2737 / #751725), gold seams and instruments (#e7bf74), near-black joints (#100d0f), and small cyan-white lights only. The user rejected cyan-dominant alpha.8 and requested nanotech suit colors. Reference: [licensed Mark 50 manufacturer presentation](https://www.threezerohk.com/shop/marvel-studios-the-infinity-saga-dlx-iron-man-mark-50-6702). Original code-native armor facets/city imagery is used; no character artwork is shipped.
 
 **Latest palette decision — 0.1.0-alpha.10:** Alpha.10 restores the previous alpha.8 graphite/crimson/cyan palette at the user's request, replacing the rejected alpha.9 red/gold armor panels. Laptop-only scope, Ignition browsing music, the accepted Overdrive racing master, typing rules and mobile-removal changes stay in place.
