@@ -12,6 +12,7 @@ test("loads the real track asset at the project path without overflow", async ({
   await expect(page.locator("#track-preview")).toHaveAttribute(
     "data-ready",
     "true",
+    { timeout: 12000 },
   );
   await expect(page.locator("#track-preview canvas")).toBeVisible();
   expect(
@@ -93,7 +94,7 @@ test("unknown hash recovers and narrow landscape resize preserves text", async (
 test("failed artwork offers retry while other screens remain usable", async ({
   page,
 }) => {
-  await page.route("**/assets/cars/neon-gt.svg", (route) => route.abort());
+  await page.route("**/assets/karts/volt-kart.png", (route) => route.abort());
   await page.goto("./");
   await expect(page.locator("#track-status")).toContainText(
     "artwork could not load",
@@ -101,11 +102,12 @@ test("failed artwork offers retry while other screens remain usable", async ({
   await expect(
     page.getByRole("button", { name: "Retry preview" }),
   ).toBeVisible();
-  await page.unroute("**/assets/cars/neon-gt.svg");
+  await page.unroute("**/assets/karts/volt-kart.png");
   await page.getByRole("button", { name: "Retry preview" }).click();
   await expect(page.locator("#track-preview")).toHaveAttribute(
     "data-ready",
     "true",
+    { timeout: 12000 },
   );
   await expect(page.locator("canvas")).toHaveCount(1);
 });

@@ -1,3 +1,4 @@
+import { speedometer, updateSpeedometer } from "./speedometer";
 import { animate } from "animejs";
 import { RaceFeedback } from "../game/race-view";
 import type { RaceAudio } from "../audio/race-audio";
@@ -34,10 +35,26 @@ export function createQuickRaceSession(): QuickRaceSession {
   return { ...setup, race: buildRace(setup) };
 }
 export function quickRaceScreen(): string {
-  return `<section class="page-heading reveal"><a class="back-link" href="#/hub">← Back to the hub</a><p class="eyebrow">FIVE LANES. YOUR NEXT CHALLENGE.</p><h1>Words into <span>motion.</span></h1><p>Race four computer opponents. Finish at your own pace, even if they get there first.</p></section>
-  <section class="quick-race input-panel reveal" aria-label="Quick Race">
-    <div class="section-top"><h2>Quick Race</h2><span class="pill">YOU + FOUR CPUs</span></div>
-    <div class="race-setup practice-options">
+  return `<section class="quick-race immersive-race" aria-label="Quick Race">
+    <div class="race-visual"><p id="race-callout" class="race-callout" role="status" hidden></p><div id="race-track" role="img" aria-label="Five-lane race track; exact positions are listed below"></div></div>
+    <div class="race-hud metrics-grid">${[
+      ["place", "POSITION"],
+      ["wpm", "WPM"],
+      ["accuracy", "ACCURACY"],
+      ["time", "ACTIVE TIME"],
+    ]
+      .map(
+        ([id, label]) =>
+          `<div><span class="micro">${label}</span><strong id="race-${id}">—</strong></div>`,
+      )
+      .join("")}</div>
+<button id="pause-race" class="race-pause button button--secondary" disabled>Pause</button><button id="race-fullscreen" class="race-fullscreen text-button">Full screen</button>    <div class="run-banner"><div><p id="race-state" class="eyebrow" role="status">Ready</p><p id="race-instruction">Wait for the track, then start the countdown.</p></div><span id="race-lights" class="race-lights" aria-hidden="true"><i></i><i></i><i></i></span><span id="race-countdown" class="countdown" aria-hidden="true">—</span></div>
+<div class="race-console">${speedometer()}
+    <label id="race-passage-label" class="sr-only">MATCH CASE, SPACES AND PUNCTUATION</label><div class="typing-surface"><p id="race-passage" class="race-passage" aria-labelledby="race-passage-label"></p>
+    <label class="sr-only" for="race-input">Your typing</label><textarea id="race-input" rows="2" readonly autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" aria-describedby="race-passage race-notice race-controls-help" placeholder="Start the race, then type after GO…"></textarea></div>
+    <p id="race-notice" class="help" role="status">One mistake stops progress. Backspace corrects it.</p>
+</div><section class="race-deck" aria-label="Race setup and controls"><h1 class="race-deck-title">Your next <span>starting line.</span></h1><div class="track-bottom"><span id="race-track-status" role="status">Loading race track…</span><button id="retry-race-track" class="text-button" hidden>Retry artwork</button><button id="text-race" class="text-button" hidden>Race with text standings</button></div>
+    <section id="race-results" class="run-results" aria-labelledby="race-result-title" hidden><p class="eyebrow">RACE RESULT · SESSION ONLY</p><h2 id="race-result-title"></h2><p id="race-result-summary"></p><p id="race-coaching"></p><div class="race-table-wrap"><table><caption>Final standings. Later CPU outcomes are simulated from fixed schedules; they are not live players.</caption><thead><tr><th scope="col">Place</th><th scope="col">Driver</th><th scope="col">Time</th><th scope="col">Status</th></tr></thead><tbody id="race-result-rows"></tbody></table></div><p class="help">No XP, credits, stars, unlocks or personal records are saved. Original Neon Harbor art and sound. Campaign progression arrives in later phases.</p></section>    <div class="race-setup practice-options">
       <div><label for="race-passage-select">Passage</label><select id="race-passage-select">${PRACTICE_PASSAGES.map((p, i) => `<option value="${i}">${p.name}</option>`).join("")}</select></div>
       <div><label for="cpu-tier">Opponent pace</label><select id="cpu-tier">${Object.entries(
         CPU_TIERS,
@@ -51,29 +68,12 @@ export function quickRaceScreen(): string {
       <div><label for="race-seed">Race seed</label><input id="race-seed" type="number" min="0" max="4294967295" step="1" inputmode="numeric" required aria-describedby="setup-help" /></div>
     </div>
     <p id="setup-help" class="help race-setup">Targets are before reaction, hesitation and correction delays. This is Quick Race, not campaign levels. The same passage, pace and seed replay the same CPU schedules. Pauses or assisted input make a run practice-only. No rewards or results are saved yet.</p>
-    <div class="run-banner"><div><p id="race-state" class="eyebrow" role="status">Ready</p><p id="race-instruction">Wait for the track, then start the countdown.</p></div><span id="race-lights" class="race-lights" aria-hidden="true"><i></i><i></i><i></i></span><span id="race-countdown" class="countdown" aria-hidden="true">—</span></div>
-    <div class="race-hud metrics-grid">${[
-      ["place", "POSITION"],
-      ["wpm", "WPM"],
-      ["accuracy", "ACCURACY"],
-      ["time", "ACTIVE TIME"],
-    ]
-      .map(
-        ([id, label]) =>
-          `<div><span class="micro">${label}</span><strong id="race-${id}">—</strong></div>`,
-      )
-      .join("")}</div>
-    <div class="race-visual"><p id="race-callout" class="race-callout" role="status" hidden></p><div id="race-track" role="img" aria-label="Five-lane race track; exact positions are listed below"></div><div class="track-bottom"><span id="race-track-status" role="status">Loading race track…</span><button id="retry-race-track" class="text-button" hidden>Retry artwork</button><button id="text-race" class="text-button" hidden>Race with text standings</button></div></div>
-    <label id="race-passage-label" class="micro">MATCH CASE, SPACES AND PUNCTUATION</label><p id="race-passage" class="race-passage" aria-labelledby="race-passage-label"></p>
-    <label for="race-input">Your typing</label><textarea id="race-input" rows="2" readonly autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" aria-describedby="race-notice race-controls-help" placeholder="Start the race, then type after GO…"></textarea>
-    <p id="race-notice" class="help" role="status">One mistake stops progress. Backspace corrects it.</p>
-    <div class="practice-actions"><button id="start-race" class="button button--primary" disabled>Start race →</button><button id="pause-race" class="button button--secondary" disabled>Pause</button><button id="retry-race" class="text-button">Retry same race</button><button id="new-race" class="text-button">New seed</button></div>
+    <div class="practice-actions"><button id="start-race" class="button button--primary" disabled>Start race →</button><button id="retry-race" class="text-button">Retry same race</button><button id="new-race" class="text-button">New seed</button></div>
     ${audioControls()}
     <p id="race-controls-help" class="help">Esc or leaving this screen pauses everyone. Resume has a fresh countdown. Retry resets the run; refresh discards this unsaved session.</p>
     <div class="run-details"><span id="race-errors">0 errors · 0 corrected</span><span id="race-eligibility">Session only · not saved</span><span id="race-streak">0 clean streak</span></div>
     <details class="live-standings" open><summary>Live standings · all opponents are CPUs</summary><ol id="race-standings"></ol></details>
-    <section id="race-results" class="run-results" aria-labelledby="race-result-title" hidden><p class="eyebrow">RACE RESULT · SESSION ONLY</p><h2 id="race-result-title"></h2><p id="race-result-summary"></p><p id="race-coaching"></p><div class="race-table-wrap"><table><caption>Final standings. Later CPU outcomes are simulated from fixed schedules; they are not live players.</caption><thead><tr><th scope="col">Place</th><th scope="col">Driver</th><th scope="col">Time</th><th scope="col">Status</th></tr></thead><tbody id="race-result-rows"></tbody></table></div><p class="help">No XP, credits, stars, unlocks or personal records are saved. Original Neon Harbor art and sound. Campaign progression arrives in later phases.</p></section>
-  </section>`;
+</section></section>`;
 }
 
 export function connectQuickRace(
@@ -139,6 +139,8 @@ export function connectQuickRace(
       calloutAnimation?.revert();
       callout.hidden = true;
     }
+    find(".immersive-race").dataset.state = s.state;
+    updateSpeedometer(main, s.recentWpm);
     const active = ["countdown", "racing", "paused"].includes(s.state);
     main.classList.toggle("quick-race-active", active);
     input.readOnly = !["countdown", "racing"].includes(s.state);
@@ -222,7 +224,17 @@ export function connectQuickRace(
           0,
           caret.offsetLeft - passageView.clientWidth * 0.3,
         );
-    } else passageView.scrollLeft = 0;
+    } else {
+      passageView.scrollLeft = 0;
+      const caret = passageView.querySelector<HTMLElement>(
+        ".character--current,.character--error",
+      );
+      if (caret)
+        passageView.scrollTop = Math.max(
+          0,
+          caret.offsetTop - passageView.clientHeight / 2,
+        );
+    }
     // Fixed-size list, canonical text only; no per-keystroke reconstruction of the input.
     text("#race-standings", "");
     for (const row of standings) {
@@ -301,7 +313,7 @@ export function connectQuickRace(
         revealResults = window.setTimeout(
           () => {
             if (!disposed)
-              find("#race-results").scrollIntoView({ block: "nearest" });
+              find("#race-result-title").setAttribute("tabindex", "-1");
           },
           reducedMotion() ? 0 : 1000,
         );
@@ -415,6 +427,20 @@ export function connectQuickRace(
       update();
       input.focus();
       input.scrollIntoView({ block: "nearest" });
+    },
+    eventOptions,
+  );
+  find("#race-fullscreen").addEventListener(
+    "click",
+    async () => {
+      try {
+        if (document.fullscreenElement) await document.exitFullscreen();
+        else await document.documentElement.requestFullscreen();
+      } catch {
+        notice(
+          "Fullscreen unavailable. The race still fills the browser window.",
+        );
+      }
     },
     eventOptions,
   );

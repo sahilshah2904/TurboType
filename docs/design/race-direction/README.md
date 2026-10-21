@@ -1,6 +1,6 @@
 # Immersive kart race — review prototype
 
-Created 21 October 2026 for TT-507 (Phase 5 visual direction). **Review artifact, not the replacement production race.** The normal Race route and its previous Phaser art remain unchanged. The user approved this car/full-window design on 21 October 2026. This accepts TT-507 direction; production integration and physical-device acceptance remain pending.
+Created 21 October 2026 for TT-507 (Phase 5 visual direction). **Review artifact, not the replacement production race.** Historical note: this was initially separate from the old Race route. Alpha.5 now integrates the accepted direction into the normal app; see [IMMERSIVE_APP.md](../../IMMERSIVE_APP.md). This review artifact remains independently playable and is not the production renderer. The user approved this car/full-window design on 21 October 2026. This accepts TT-507 direction; production integration and physical-device acceptance remain pending.
 
 ## Open and review
 

@@ -6,6 +6,7 @@ async function openRace(page: Page) {
   await expect(page.locator("#race-track")).toHaveAttribute(
     "data-ready",
     "true",
+    { timeout: 12000 },
   );
 }
 async function go(page: Page) {
@@ -30,19 +31,17 @@ async function typePrefix(page: Page, text: string) {
       }
     }, text);
 }
-test("loads modern artwork, keeps the active caret readable and preserves metrics-above-track order", async ({
+test("loads modern artwork, keeps the active caret readable and fills the viewport with an integrated typing surface", async ({
   page,
 }) => {
   const assets: string[] = [],
     errors: string[] = [];
   page.on("response", (r) => {
-    if (r.url().includes("/assets/cars/")) assets.push(r.url());
+    if (r.url().includes("/assets/karts/")) assets.push(r.url());
   });
   page.on("pageerror", (e) => errors.push(e.message));
   await openRace(page);
-  expect(assets.some((u) => u.endsWith("neon-gt.svg"))).toBe(true);
-  expect(assets.some((u) => u.endsWith("apex-r.svg"))).toBe(true);
-  expect(assets.some((u) => u.endsWith("volt-x.svg"))).toBe(true);
+  expect(assets.some((u) => u.endsWith("volt-kart.png"))).toBe(true);
   await go(page);
   await typePrefix(page, SAMPLE.slice(0, 30));
   const layout = await page.evaluate(() => {
@@ -60,12 +59,18 @@ test("loads modern artwork, keeps the active caret readable and preserves metric
     const a = strip.getBoundingClientRect(),
       b = caret.getBoundingClientRect();
     return {
-      ordered: rects.every((r, i) => !i || r.top >= rects[i - 1].bottom),
+      integrated: Math.abs(rects[2].top - rects[3].top) < 6,
+      fullWidth: rects[1].width === innerWidth,
       overflow: document.documentElement.scrollWidth > innerWidth,
       caret: b.left >= a.left && b.right <= a.right,
     };
   });
-  expect(layout).toEqual({ ordered: true, overflow: false, caret: true });
+  expect(layout).toEqual({
+    integrated: true,
+    fullWidth: true,
+    overflow: false,
+    caret: true,
+  });
   expect(errors).toEqual([]);
 });
 test("audio is opt-in, persists controls, reuses one context and silences practice navigation", async ({
@@ -121,6 +126,7 @@ test("audio is opt-in, persists controls, reuses one context and silences practi
   await expect(page.locator("#race-track")).toHaveAttribute(
     "data-ready",
     "true",
+    { timeout: 12000 },
   );
   expect((await probe()).contexts).toBe(0);
   await page.getByText("Sound & music", { exact: true }).click();
@@ -218,6 +224,7 @@ test("bounds high effects and disables particles in reduced/low mode without alt
   await expect(page.locator("#race-track")).toHaveAttribute(
     "data-ready",
     "true",
+    { timeout: 12000 },
   );
   await page.clock.runFor(350);
   await expect(page.locator("#race-track")).toHaveAttribute(

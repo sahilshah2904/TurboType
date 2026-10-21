@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-alpha.5 — 21 October 2026
+
+- Integrate the approved full-window Phaser kart race, moving exhaust, responsive lanes and native single typing surface into the normal app.
+- Add Live WPM analog/numeric speedometers in Race/Practice, using the existing rolling pace independently of average WPM and outcomes.
+- Revamp hub, practice, keyboard check and settings with a shared open world layout; retain their working controls/preferences.
+- Add disposable visual-viewport support, integrated setup/pause/results/recovery controls and browser regression coverage. No rules/save/content migration or backend change; final device acceptance and distinct fleet remain pending.
+
+
 ## 0.1.0-alpha.4 — Neon Harbor polish, 20 October 2026
 
 Working on feat/race-polish from merged main c4127c7; not a tagged or deployed release.

@@ -1,3 +1,5 @@
+> Alpha.5: the user approved the kart direction. The normal app now integrates it; see [IMMERSIVE_APP.md](IMMERSIVE_APP.md). Older sedan/composition text below is historical, not the current renderer. Distinct vehicle bodies and final device acceptance remain open.
+
 # TurboType art and motion bible — Neon Harbor
 
 Initial Phase 5 direction, 20 October 2026. **Superseded in vehicle quality, composition and typing presentation by the 21 October [race redesign plan](RACE_REDESIGN.md), following user rejection.** The content below describes the existing implementation, not accepted final art. Original modern motorsport illustration, independent of TypeDriveGame/GTA artwork, logos and music. The supplied reel informs pacing and layers, not reusable assets. This document defines the implemented first track; campaign districts and the cinematic opening remain later phases.

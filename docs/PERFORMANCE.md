@@ -1,3 +1,5 @@
+> Historical alpha.4 measurement. Alpha.5 replaces the SVG/fixed-size scene with responsive PNG kart rendering and palette textures; the numbers below do not certify the new renderer. The new isolated measurement is in [PERFORMANCE_ALPHA5.md](PERFORMANCE_ALPHA5.md); actual-device acceptance remains separate. See [IMMERSIVE_APP.md](IMMERSIVE_APP.md).
+
 # Phase 5 renderer measurement and limits
 
 Recorded 20 October 2026 on Windows, ASUS TUF Gaming A15 FA506II_FA506II, Ryzen 7 4800H, approximately 7 GiB system-reported memory. The workstation reports AMD Radeon Graphics and NVIDIA GTX 1650 Ti, but **this profile used headless Chromium 156.0.8078.4 with SwiftShader software rendering**, not those hardware GPUs.

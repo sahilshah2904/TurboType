@@ -23,10 +23,9 @@ export async function mountTrackPreview(
     private elapsedMs = 0;
 
     preload(): void {
-      this.load.svg(
+      this.load.image(
         "coupe",
-        `${import.meta.env.BASE_URL}assets/cars/neon-gt.svg`,
-        { width: 760, height: 240 },
+        `${import.meta.env.BASE_URL}assets/karts/volt-kart.png`,
       );
       this.load.on("loaderror", () =>
         options.onError(
@@ -57,17 +56,17 @@ export async function mountTrackPreview(
       for (let i = 0; i < 3; i++) {
         const car = this.add.container([540, 330, 160][i], 166 + i * 89);
         const shadow = this.add.ellipse(8, 32, 236, 16, 0x000000, 0.3);
-        const body = this.add.image(0, 0, "coupe").setDisplaySize(230, 75);
+        const body = this.add.image(0, 0, "coupe").setDisplaySize(200, 100);
         if (i === 1) body.setTint(0xffa590);
         if (i === 2) body.setTint(0x8abfe8);
         if (i === 0) body.setTint(0xb7f36b);
-        const wheels = [-57, 62].map((x) => {
+        const wheels = [-71, 42].map((x) => {
           const wheel = this.add
-            .circle(0, 0, 15, 0x11161d)
-            .setStrokeStyle(4, 0x5b6872);
+            .circle(0, 0, 15, 0x11161d, 0)
+            .setStrokeStyle(0, 0x5b6872, 0);
           const spokes = this.add.graphics().lineStyle(2, 0xb9c8d0);
           spokes.lineBetween(-9, 0, 9, 0).lineBetween(0, -9, 0, 9);
-          const assembly = this.add.container(x, 17, [wheel, spokes]);
+          const assembly = this.add.container(x, 20, [wheel, spokes]);
           car.add(assembly);
           return assembly;
         });

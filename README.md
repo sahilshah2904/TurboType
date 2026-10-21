@@ -15,7 +15,7 @@ Race four computer opponents while practicing speed, accuracy and clean correcti
 
 ![TurboType Neon Harbor race: modern sports car, night skyline, live metrics and typing passage](docs/images/neon-harbor.png)
 
-*Actual Phase 5 development preview from `feat/race-polish`. The polished art and audio are awaiting device acceptance in [PR #4](https://github.com/sahilshah2904/TurboType/pull/4).*
+*Actual alpha.5 development preview from `feat/race-polish`. The integrated full-window kart design is awaiting device acceptance in [PR #4](https://github.com/sahilshah2904/TurboType/pull/4).*
 
 ## What is TurboType?
 
@@ -23,7 +23,7 @@ TurboType turns typing practice into a side-view motor race. Your car advances a
 
 The project is being built in documented stages: a responsive single-player game first, followed by campaign progression, optional cloud saves and friends multiplayer. Original vehicles, scenery and synthesized music give the game its own identity.
 
-> **Development status:** `main` contains the accepted Phase 4 playable race. The latest Phase 5 racing polish is on `feat/race-polish`; its initial code passed automated checks, but the visual/input direction needs rework following user review. A full-viewport race, one integrated typing surface and revised vehicle art are planned before final device acceptance. There is **no public GitHub Pages game link yet**. You can run either version locally.
+> **Development status:** `main` contains the accepted Phase 4 playable race. The latest Phase 5/6 visual integration is on `feat/race-polish`: the approved full-window kart race, one visible typing surface, Live WPM dial and revamped existing pages are implemented in alpha.5. Local checks pass with 83 unit and 72 browser cases; actual-device acceptance remains open; the distinct fleet and cinematic onboarding are still pending. There is **no public GitHub Pages game link yet**. You can run either version locally.
 
 ## What you can play today
 
@@ -33,7 +33,7 @@ The project is being built in documented stages: a responsive single-player game
 | **Typing Practice** | The same typing engine without opponents, with WPM, accuracy, active time and clean-streak feedback. |
 | **Keyboard Check** | A free-editing screen for checking your physical or phone keyboard before racing. |
 | **Preferences** | Saved motion, effects and text-size choices, including a reduced-motion option. |
-| **Phase 5 preview** | Three modern sports-car designs, Neon Harbor scenery, a following camera, nitro/overtaking/finish effects, and optional original music with saved volume controls. |
+| **Integrated kart preview** | Edge-to-edge Phaser racing, one visible typing strip, recent-WPM speedometer, moving exhaust, bounded effects, and original optional music. Existing hub, practice, keyboard and settings pages share the new open world layout. The distinct vehicle fleet remains in development. |
 
 The current passages are short exercises for validating the game. Campaign levels, stars, rewards, a garage, accounts, cloud progress and multiplayer are planned features. Campaign cards in the hub are previews.
 
@@ -100,6 +100,8 @@ The [typing rules](docs/GAME_RULES.md) and [Quick Race guide](docs/QUICK_RACE.md
 | **Vitest + Playwright** | Unit tests and browser checks across desktop, phone and tablet layout profiles. |
 | **GitHub Actions** | Installation, formatting, type checks, tests and production-build verification. |
 
+The [immersive integration guide](docs/IMMERSIVE_APP.md) explains the new page layouts, native typing strip, live speedometer and renderer limitations.
+
 The application uses HTML/CSS for readable controls and typing input, with a separate canvas for the race. Rendering and sound read game state; they do not determine typing accuracy, CPU outcomes or rewards. See the [architecture guide](docs/ARCHITECTURE.md) for ownership and cleanup boundaries.
 
 ## Project structure
@@ -153,13 +155,13 @@ npm run check
 | `npm run format` | Format source, tests and configuration. |
 | `npm run check` | Run formatting checks, types, unit tests, build and browser tests. |
 
-**Verified Phase 5 snapshot:** 83 unit tests and 66 Chromium browser checks pass, with successful hosted CI. Browser device profiles test layouts and interactions; they do not certify real phone keyboards, audible mix quality or hardware frame rates. ASUS/Samsung Phase 5 acceptance remains open. Read the [verification evidence](https://github.com/sahilshah2904/TurboType/blob/feat/race-polish/docs/TESTING.md) and [device checklist](https://github.com/sahilshah2904/TurboType/blob/feat/race-polish/docs/PHASE5_POLISH_TESTS.md).
+**Historical alpha.4 verification:** 83 unit tests and 66 Chromium browser checks passed with hosted CI. **Current alpha.5 local verification:** formatting/types/build, 83 unit tests and 72 browser checks pass. Hosted CI evidence is recorded separately in the test guide. Browser device profiles test layouts and interactions; they do not certify real phone keyboards, audible mix quality or hardware frame rates. ASUS/Samsung Phase 5 acceptance remains open. Read the [verification evidence](https://github.com/sahilshah2904/TurboType/blob/feat/race-polish/docs/TESTING.md) and [device checklist](https://github.com/sahilshah2904/TurboType/blob/feat/race-polish/docs/PHASE5_POLISH_TESTS.md).
 
 On the Phase 5 branch, `node assets-source/build-vehicles.mjs` recreates all three car bodies. The original music is authored directly in source. [Asset provenance](https://github.com/sahilshah2904/TurboType/blob/feat/race-polish/docs/ASSETS.md), [audio recreation](https://github.com/sahilshah2904/TurboType/blob/feat/race-polish/docs/AUDIO.md) and [renderer profiling](https://github.com/sahilshah2904/TurboType/blob/feat/race-polish/docs/PERFORMANCE.md) document how to reproduce them.
 
 ## Roadmap
 
-TurboType follows eleven phases, with single-player first and friends multiplayer immediately after its public launch. **Current position: Phase 5 needs visual/input redesign following user review; the initial implementation passed automated checks.** Completed phases describe their agreed scope, not certification on every device.
+TurboType follows eleven phases, with single-player first and friends multiplayer immediately after its public launch. **Current position: the approved Phase 5 kart design is integrated in alpha.5; existing-page visual work from Phase 6 is also implemented. Final verification and device acceptance remain open.** Completed phases describe their agreed scope, not certification on every device.
 
 ### 1. Finalize the design
 
@@ -187,13 +189,13 @@ Add four computer opponents, countdown, vehicle movement, passage display, place
 
 ### 5. Polish the racing experience
 
-**Status: Initial implementation tested; required visual/input redesign on `feat/race-polish`.**
+**Status: Approved visual direction integrated on `feat/race-polish`; final device acceptance and distinct fleet pending.**
 
-Add detailed vehicles, rotating wheels, suspension, parallax scenery, exhaust, nitro, overtaking effects, sound and finish celebrations. Provide low-effects and reduced-motion options. The current boxed layout, cars and separate passage/input were rejected. Required rework adds a full-viewport race, one integrated typing strip and reviewed new vehicle art; see the [redesign plan](docs/RACE_REDESIGN.md). Existing automated checks cover the initial version; redesigned ASUS/Samsung visual, audible-balance and real-device smoothness checks remain open in [PR #4](https://github.com/sahilshah2904/TurboType/pull/4).
+Add detailed vehicles, rotating wheels, suspension, parallax scenery, exhaust, nitro, overtaking effects, sound and finish celebrations. Provide low-effects and reduced-motion options. The rejected boxed layout has been replaced in the development branch by a full-viewport kart race, integrated typing and Live WPM speedometer. See the [implementation guide](docs/IMMERSIVE_APP.md). ASUS/Samsung visual, audible-balance and real-device smoothness checks remain open in [PR #4](https://github.com/sahilshah2904/TurboType/pull/4).
 
 ### 6. Build the opening and onboarding
 
-**Status: Planned; not started.**
+**Status: Existing hub/practice/keyboard/settings visually revamped; new opening/onboarding flows not started.**
 
 Create the cinematic loading sequence, welcome screen, rules, interactive tutorial, optional calibration and animated main hub. Support both first-time and returning players.
 

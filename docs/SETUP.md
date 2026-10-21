@@ -1,6 +1,6 @@
 # Run TurboType locally
 
-The app includes Phase 4 Quick Race against four CPUs with real progress/standings/results, plus typing practice, the hub preview, free-editing keyboard check and local preferences. Phase 5 adds original modern cars, Neon Harbor camera/effects and optional synthesized audio. Progression/cloud accounts and cinematic onboarding are later tasks.
+The app includes Phase 4 Quick Race against four CPUs with real progress/standings/results, plus typing practice, the hub preview, free-editing keyboard check and local preferences. Alpha.5 integrates the accepted full-window kart race, Live WPM dial, native single typing surface and shared world revamp of all existing pages, with optional original synthesized audio. Progression/cloud accounts and cinematic onboarding are later tasks.
 
 ## Reproducible prerequisites
 
@@ -54,7 +54,7 @@ Open the printed Network URL ending in `/TurboType/` on the device. Loopback (`1
 
 ## Recreate original assets and profile
 
-- `node assets-source/build-vehicles.mjs` recreates all three modern SVG car bodies; no network or art tool is required. The old sedan is removed from the current runtime and recoverable in Git history.
+- `node assets-source/build-vehicles.mjs` recreates the earlier SVG car bodies for historical development. Alpha.5 loads public/assets/karts/volt-kart.png, an exact copy of the accepted concept in docs/design/race-direction. Its preserved PNG/prompt/provenance recreate this snapshot; generation itself is nondeterministic. See IMMERSIVE_APP.md.
 - Original music/effects are synthesized directly from src/audio/score.ts and race-audio.ts. Open Sound & music in Race/Settings to enable; sound defaults off and no audio downloads or API credentials are needed.
 - `node scripts/profile-race.mjs` profiles the isolated scene against the running Vite dev server. Optional first argument changes the URL. It closes only its own browser; see PERFORMANCE.md for actual scope/limits.
 - Follow PHASE5_POLISH_TESTS.md for new physical sound/visual/performance checks; prior typing/race acceptance does not certify this polish.
@@ -77,7 +77,7 @@ The browser suite launches a preview server on 4173 if one is not already runnin
 
 - **Missing packages:** use the documented Node version and `npm ci` from the folder containing package-lock.json. Avoid global installs of Vite or TypeScript.
 - **Missing browser executable:** run `npx playwright install chromium`. Browser downloads are not stored in Git.
-- **404 assets/blank track:** use the `/TurboType/` URL, inspect requests, and retry the artwork. The modern SVG loader explicitly rasterizes at 760×240; omitting explicit dimensions caused black image rectangles in the earlier foundation spike.
+- **404 assets/blank track:** use the `/TurboType/` URL, inspect requests, and retry the artwork. The current kart PNG must load from assets/karts/volt-kart.png; earlier foundation SVG rasterization issues are documented in historical evidence.
 - **Blocked browser storage:** settings still apply for the current visit and show an unsaved message. No cloud progress exists yet.
 - **Windows AutoRun warning:** this workstation's existing Command Processor AutoRun configuration sometimes prints `& was unexpected at this time` when npm starts nested scripts. Recorded checks still finish successfully. We have not changed the user's registry; assess actual exit codes and errors if reproducing the warning.
 - **Phone keyboard issues:** record the real browser, OS, orientation, viewport and keyboard behavior. Chromium device emulation cannot verify the physical software keyboard. See TESTING.md for pending checks.

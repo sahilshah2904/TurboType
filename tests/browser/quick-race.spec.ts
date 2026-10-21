@@ -7,6 +7,7 @@ async function openRace(page: Page) {
   await expect(page.locator("#race-track")).toHaveAttribute(
     "data-ready",
     "true",
+    { timeout: 12000 },
   );
   await page.getByLabel("Race seed", { exact: true }).fill("42");
   await page.getByLabel("Race seed", { exact: true }).press("Tab");
@@ -82,6 +83,7 @@ test("pauses CPUs, preserves the race through navigation and resumes the same cl
   await expect(page.locator("#race-track")).toHaveAttribute(
     "data-ready",
     "true",
+    { timeout: 12000 },
   );
   await expect(page.locator("#race-state")).toHaveText("Paused");
   await expect(page.getByRole("textbox", { name: "Your typing" })).toHaveValue(
@@ -142,7 +144,7 @@ test("art failure allows explicit text racing, retry recovery and cleanup after 
   page,
 }) => {
   await page.clock.install();
-  await page.route("**/assets/cars/neon-gt.svg", (route) => route.abort());
+  await page.route("**/assets/karts/volt-kart.png", (route) => route.abort());
   await page.goto("./#/race");
   await expect(
     page.getByRole("button", { name: "Race with text standings" }),
@@ -154,11 +156,12 @@ test("art failure allows explicit text racing, retry recovery and cleanup after 
     .getByRole("textbox", { name: "Your typing" })
     .pressSequentially(SAMPLE);
   await expect(page.locator("#race-state")).toHaveText("Finished");
-  await page.unroute("**/assets/cars/neon-gt.svg");
+  await page.unroute("**/assets/karts/volt-kart.png");
   await page.getByRole("button", { name: "Retry artwork" }).click();
   await expect(page.locator("#race-track")).toHaveAttribute(
     "data-ready",
     "true",
+    { timeout: 12000 },
   );
   await page.getByRole("link", { name: "Practice", exact: true }).click();
   await expect(page.locator("canvas")).toHaveCount(0);

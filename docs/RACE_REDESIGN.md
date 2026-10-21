@@ -1,6 +1,8 @@
+> Alpha.5 integration update: the accepted direction now runs in the normal application, with a responsive Phaser kart scene, one typing strip and Live WPM dial. Existing hub/practice/keyboard/settings pages are also visually revamped. See [IMMERSIVE_APP.md](IMMERSIVE_APP.md). The observations and original delivery plan below retain their historical context; final fleet/device acceptance is still outstanding.
+
 # Phase 5 race redesign — viewport, typing and vehicle direction
 
-Recorded: 21 October 2026. Status: required rework in progress after user rejection of the current visual result. A separate playable review prototype and one kart concept are available in [design/race-direction](design/race-direction/README.md); the user accepted the prototype visual direction on 21 October, while the production replacement and physical-device acceptance remain outstanding. This revises the earlier Phase 5 composition, not the eleven-phase numbering. PR #4 remains open. Existing core rule/test evidence remains valid for its tested snapshot, but is not visual acceptance or verification of this proposed replacement.
+Recorded: 21 October 2026. Status: required rework in progress after user rejection of the current visual result. A separate playable review prototype and one kart concept are available in [design/race-direction](design/race-direction/README.md); the user accepted the prototype visual direction on 21 October, while the production integration is now implemented in alpha.5; final distinct fleet and physical-device acceptance remain outstanding. This revises the earlier Phase 5 composition, not the eleven-phase numbering. PR #4 remains open. Existing core rule/test evidence remains valid for its tested snapshot, but is not visual acceptance or verification of this proposed replacement.
 
 ## Why the current screen needs another pass
 
@@ -79,7 +81,7 @@ Existing Phase 5 work is retained where useful. No wholesale rewrite of the typi
 
 ## Other pages: coherent full-window direction
 
-These are planned changes, not revamped production pages. The standalone prototype does not change the existing hub, practice, keyboard check or settings.
+Alpha.5 now implements the race and existing-page visual treatments below. Opening/tutorial/calibration, functional campaign maps and final garage/progression remain planned. The standalone review prototype remains separate, while the normal app receives its own integration.
 
 | Screen | Intended treatment | Phase/task |
 | --- | --- | --- |

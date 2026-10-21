@@ -1,3 +1,5 @@
+> Alpha.5 update: [IMMERSIVE_APP.md](IMMERSIVE_APP.md) and [ADR 0006](adr/0006-immersive-app-and-live-wpm.md) supersede earlier fixed-size race/art/composition descriptions below. Race uses responsive Phaser RESIZE, the approved kart PNG/palette textures, integrated native typing and a rolling-WPM dial. Existing pages share a full-window world; previous sections retain historical ownership context.
+
 # Application architecture
 
 This describes the implemented foundation, typing engine, four-CPU Quick Race and Phase 5 audiovisual polish. Cloud services and progression remain future work.
@@ -21,7 +23,7 @@ index.html → main.ts → mountApp
 - `src/storage/settings.ts` injects its Storage boundary for tests. It validates version/values, preserves unreadable existing data, returns defaults on failure and reports failed writes. It stores no progress/rewards/history yet.
 - `src/core/contracts.ts` defines vendor/framework-free race, auth, sync and settings interfaces for later adapters. They are TypeScript contracts, not implemented backend services. Durations explicitly use milliseconds; raw counts remain separate from final metrics.
 - `src/core/ids.ts` enforces category-qualified 001–100 IDs and provides secure UUID creators for future race/player identity. UUID creation requires the browser's secure-context crypto API (localhost/HTTPS); it is not invoked by the Phase 2 guest preview.
-- `src/config/versions.ts` separates app/rules/save/content versions. App version is currently 0.1.0-alpha.4; rules version remains 3. No release tag exists.
+- `src/config/versions.ts` separates app/rules/save/content versions. App version is currently 0.1.0-alpha.5; rules version remains 3. No release tag exists.
 
 ## Cleanup and asynchronous work
 

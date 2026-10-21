@@ -1,3 +1,5 @@
+> Alpha.5 presentation revision: see [IMMERSIVE_APP.md](IMMERSIVE_APP.md) for current full-window kart rendering, responsive/proportional composition, integrated typing strip, control deck and recent-WPM speedometer. Fixed 1000×450/SVG composition described below is historical; CPU/core/result rules remain version 3.
+
 # Recreate the single-player Quick Race
 
 Implemented in Phase 4, app 0.1.0-alpha.3, rules version 3. This is a playable local single-player preview, not a public deployment or campaign release. Phase 5 (app alpha.4) replaces the prototype car with original modern sports bodies, Neon Harbor camera/effects and optional synth sound; this document retains the exact Phase 4 gameplay semantics.

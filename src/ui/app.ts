@@ -1,4 +1,5 @@
 import { animate, createScope } from "animejs";
+import { connectViewport } from "./viewport";
 import { RaceAudio } from "../audio/race-audio";
 import { audioControls, connectAudioControls } from "./audio-controls";
 import { APP_VERSION } from "../config/versions";
@@ -23,6 +24,7 @@ const SAMPLE = "Every great run starts with a single keystroke.";
 const ARROW = '<span aria-hidden="true">↗</span>';
 
 export function mountApp(root: HTMLElement): () => void {
+  const clearViewport = connectViewport();
   const repository = new LocalSettingsRepository(() => localStorage);
   let settings = repository.load();
   const audio = new RaceAudio();
@@ -38,7 +40,7 @@ export function mountApp(root: HTMLElement): () => void {
     (settings.motion === "system" && systemMotion.matches);
 
   root.innerHTML = `
-    <div class="app-shell">
+    <div class="world-backdrop" aria-hidden="true"><div class="world-moon"></div><div class="world-mountains"></div><div class="world-city"></div><div class="world-grid"></div></div><div class="app-shell">
       <header class="topbar">
         <a class="wordmark" href="#/hub" aria-label="TurboType home"><img src="${import.meta.env.BASE_URL}assets/brand-mark.svg" width="34" height="34" alt="" />TURBO<span>TYPE</span></a>
         <nav aria-label="Main navigation"><a href="#/hub" data-route="hub">The hub</a><a href="#/race" data-route="race">Race</a><a href="#/practice" data-route="practice">Practice</a><a href="#/keyboard" data-route="keyboard">Keyboard check</a><a href="#/settings" data-route="settings">Settings</a></nav>
@@ -66,6 +68,8 @@ export function mountApp(root: HTMLElement): () => void {
     unmountPreview?.();
     unmountPreview = undefined;
     const route = parseRoute(location.hash);
+    document.documentElement.dataset.route = route;
+    main.classList.remove("quick-race-active", "practice-active");
     audio.setScene(route === "hub" || route === "settings" ? "menu" : "silent");
     applyPreferences();
     root.querySelectorAll<HTMLElement>("[data-route]").forEach((link) => {
@@ -199,6 +203,8 @@ export function mountApp(root: HTMLElement): () => void {
     scope?.revert();
     unmountPreview?.();
     audio.dispose();
+    clearViewport();
+    delete document.documentElement.dataset.route;
     window.removeEventListener("blur", audioBlur);
     window.removeEventListener("focus", audioFocus);
     document.removeEventListener("visibilitychange", audioVisibility);
@@ -213,7 +219,7 @@ function hubScreen(): string {
   return `
     <section class="hero reveal" aria-labelledby="hero-title">
       <div><p class="eyebrow"><span class="status-dot"></span> FIND YOUR RHYTHM. OWN THE ROAD.</p><h1 id="hero-title">YOUR WORDS.<br /><span>FULL THROTTLE.</span></h1><p class="hero-copy">Turn every keystroke into momentum.<br />Take on four CPUs. Build clean speed.</p><a class="button button--primary" href="#/race">Start a race ${ARROW}</a></div>
-      <aside class="hero-note"><span class="outline-number">01</span><p>THE ROAD STARTS HERE</p><span>Four opponents. One passage.<br />Your pace sets your progress.</span></aside>
+      <aside class="hero-note"><span class="garage-label">VOLT KART / YOUR STARTING LINE</span><img class="garage-kart" src="${import.meta.env.BASE_URL}assets/karts/volt-kart.png" alt="Original lime and teal arcade racing kart" /><span>Four opponents. One passage.<br />Your pace sets your progress.</span></aside>
     </section>
     <section class="track-card reveal" aria-label="Animated track preview">
       <div class="section-top"><span class="eyebrow"><span class="status-dot"></span> TRACK PREVIEW</span><span class="micro">CITY CIRCUIT <span class="divider">/</span> NIGHT RUN</span></div>
@@ -250,7 +256,7 @@ function hubScreen(): string {
         )
         .join("")}
     </div></section>
-    <div class="development-note reveal"><span class="note-icon" aria-hidden="true">↳</span><p><strong>A strong start, built one lap at a time.</strong> Quick Race is ready. Campaign progression, rewards, cloud saves and visual polish are still being built.</p><a href="#/keyboard">Try the input check →</a></div>`;
+    <div class="development-note reveal"><span class="note-icon" aria-hidden="true">↳</span><p><strong>A strong start, built one lap at a time.</strong> Quick Race is ready. Campaign progression, rewards and cloud saves are still being built.</p><a href="#/keyboard">Try the input check →</a></div>`;
 }
 
 function keyboardScreen(): string {

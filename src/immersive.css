@@ -1,0 +1,1206 @@
+/* Shared full-window world. Readable forms retain local grouping; no enclosing page card. */
+:root {
+  --accent: #c2ff69;
+  --muted: #a4c1c6;
+  background: #0c202a;
+}
+.world-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 80% 15%, #45666b66, transparent 45%),
+    linear-gradient(#0a1b28, #193e49 70%, #102932);
+}
+.world-moon {
+  position: absolute;
+  right: 15%;
+  top: 15%;
+  width: 110px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #e0cfac99;
+  box-shadow: 0 0 130px #dec19422;
+}
+.world-mountains {
+  position: absolute;
+  inset: 25% -10% 0;
+  background: #193b48;
+  clip-path: polygon(
+    0 70%,
+    20% 15%,
+    36% 65%,
+    55% 5%,
+    73% 64%,
+    89% 0,
+    100% 48%,
+    100% 100%,
+    0 100%
+  );
+}
+.world-city {
+  position: absolute;
+  inset: 35% -10% 0;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      transparent 0 45px,
+      #b8eeee18 46px 49px,
+      transparent 50px 70px
+    ),
+    repeating-linear-gradient(0deg, transparent 0 25px, #b8eeee0c 26px 28px),
+    #15313c;
+  clip-path: polygon(
+    0 30%,
+    6% 30%,
+    6% 10%,
+    13% 10%,
+    13% 48%,
+    19% 48%,
+    19% 23%,
+    25% 23%,
+    25% 58%,
+    34% 58%,
+    34% 0,
+    42% 0,
+    42% 35%,
+    49% 35%,
+    49% 20%,
+    57% 20%,
+    57% 60%,
+    65% 60%,
+    65% 15%,
+    75% 15%,
+    75% 40%,
+    85% 40%,
+    85% 8%,
+    94% 8%,
+    94% 50%,
+    100% 50%,
+    100% 100%,
+    0 100%
+  );
+}
+.world-grid {
+  position: absolute;
+  inset: 66% 0 0;
+  background:
+    linear-gradient(#0b202999, #0b2029cc),
+    repeating-linear-gradient(0deg, transparent 0 64px, #96cedb26 65px 66px);
+}
+html[data-route] .app-shell {
+  max-width: none;
+  width: 100%;
+  padding: 0 clamp(16px, 3vw, 56px);
+  min-height: 100dvh;
+}
+.topbar {
+  border: 0;
+  min-height: 82px;
+  position: relative;
+  z-index: 10;
+  gap: 20px;
+}
+.topbar nav {
+  gap: clamp(14px, 2vw, 32px);
+}
+.topbar nav a {
+  font-size: 12px;
+}
+.topbar .guest {
+  background: transparent;
+  border: 0;
+  font-size: 10px;
+}
+.footer {
+  border-color: #aecbc322;
+  background: transparent;
+}
+#main {
+  position: relative;
+  min-height: calc(100dvh - 170px);
+}
+.page-heading {
+  padding-top: 5vh;
+  margin-bottom: 30px;
+}
+.page-heading h1 {
+  font-family: "DM Sans", sans-serif;
+  font-size: clamp(40px, 5vw, 72px);
+  font-weight: 700;
+  letter-spacing: -3px;
+  line-height: 1.03;
+}
+.page-heading p {
+  color: #b2ced1;
+}
+.eyebrow {
+  color: #a9c4c6;
+}
+.input-panel,
+.settings-panel,
+.practice-panel,
+.track-card,
+.development-note {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.input-panel,
+.settings-panel,
+.practice-panel {
+  padding: 24px 0;
+}
+.section-top {
+  border-color: #9bc1c62b;
+}
+.help,
+.card-copy,
+.card-bottom {
+  color: #a4c1c6;
+}
+.hero {
+  min-height: 65vh;
+  padding: 5vh 0 3vh;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 30px;
+}
+.hero h1 {
+  font-family: "DM Sans", sans-serif;
+  letter-spacing: -5px;
+  font-size: clamp(46px, 6vw, 94px);
+  line-height: 0.98;
+}
+.hero .hero-copy {
+  color: #bdd6d7;
+}
+.hero-note {
+  align-self: center;
+  justify-self: stretch;
+  border: 0;
+  padding: 0;
+  position: relative;
+  width: 100%;
+  max-width: none;
+}
+.garage-kart {
+  width: 100%;
+  max-height: 380px;
+  object-fit: contain;
+  filter: drop-shadow(0 24px 10px #0005);
+  animation: garage-float 4s ease-in-out infinite;
+}
+.garage-label {
+  position: absolute;
+  top: -18px;
+  left: 8%;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: #bdd4d5;
+}
+.hero-note > span:last-child {
+  display: block;
+  text-align: center;
+  font-size: 11px;
+  color: #adc8ca;
+}
+.track-card {
+  margin: 0 calc(-1 * clamp(16px, 3vw, 56px));
+  padding: 0;
+}
+.track-card > .section-top,
+.track-card > .track-bottom {
+  padding: 18px clamp(16px, 3vw, 56px);
+  border: 0;
+}
+.track-card .track-preview {
+  aspect-ratio: 1200/300;
+  max-height: 350px;
+}
+.campaign-section {
+  padding: 50px 0;
+}
+.campaign-grid {
+  gap: 30px;
+}
+.campaign-card {
+  border: 0;
+  border-top: 1px solid #9bbeb950;
+  border-radius: 0;
+  background: transparent;
+  padding: 25px 0;
+}
+.campaign-card::before {
+  display: none;
+}
+.development-note {
+  border-top: 1px solid #9bbeb930;
+}
+.keyboard-visual [data-key] {
+  background: #102c3666;
+  border-color: #71989a44;
+}
+.settings-panel {
+  max-width: none;
+  width: min(900px, 100%);
+  margin-left: auto;
+}
+.setting-row {
+  background: transparent;
+  border-color: #b2d3d033;
+  padding: 22px 0;
+}
+.setting-row p {
+  color: #a4c1c6;
+}
+textarea,
+input,
+select {
+  background: #0a202abf;
+  border-color: #63888e66;
+}
+#sample {
+  font-size: clamp(24px, 3vw, 40px);
+}
+.input-panel:has(#keyboard-input) {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.diagnostics {
+  border-color: #97c6c633;
+}
+.audio-controls {
+  background: transparent;
+  border-color: #a4c4c33a;
+}
+.audio-controls__body {
+  background: #0d2530a6;
+}
+.practice-panel {
+  position: relative;
+  min-height: 60vh;
+}
+.practice-panel .metrics-grid > div {
+  background: transparent;
+  border: 0;
+  border-left: 1px solid #9cc7cb44;
+  border-radius: 0;
+}
+.practice-panel .practice-typing {
+  margin: 45px 0 18px;
+}
+.practice-panel .typing-surface {
+  margin-right: 200px;
+}
+.practice-panel .speedometer {
+  position: absolute;
+  right: 0;
+  top: 220px;
+}
+.practice-panel .run-results {
+  background: #173a3499;
+  border-radius: 0;
+}
+.practice-panel .practice-options {
+  max-width: 900px;
+}
+.practice-active .practice-panel {
+  padding: 20px 0;
+}
+.practice-active .page-heading {
+  display: none;
+}
+.practice-active .practice-panel .speedometer {
+  top: 155px;
+}
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+.typing-surface {
+  position: relative;
+  min-height: 52px;
+}
+.typing-surface:focus-within {
+  box-shadow: 0 2px #c2ff6966;
+}
+.typing-surface #race-passage {
+  position: relative;
+  white-space: pre;
+  overflow: hidden;
+  margin: 0;
+  padding: 4px 0;
+  min-height: 0;
+  height: 52px;
+  font:
+    clamp(22px, 2.2vw, 34px)/1.35 ui-monospace,
+    monospace;
+  letter-spacing: 0;
+  color: #e9f1ee;
+  text-align: left;
+}
+.typing-surface #race-passage span {
+  position: relative;
+}
+.typing-surface #race-input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  resize: none;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  color: transparent;
+  caret-color: transparent;
+  box-shadow: none;
+  outline: 0;
+  padding: 4px 0;
+  font:
+    clamp(22px, 2.2vw, 34px)/1.35 ui-monospace,
+    monospace;
+  overflow: hidden;
+}
+.typing-surface #race-input::placeholder {
+  color: transparent;
+}
+.typing-surface #race-input::selection {
+  background: transparent;
+}
+.typing-surface .character--correct {
+  color: #668d9a;
+}
+.typing-surface .character--current {
+  border-left: 2px solid #c2ff69;
+  background: #c2ff6914;
+}
+.typing-surface .character--error {
+  background: #f3616a4d;
+  border-bottom: 2px solid #ff8c96;
+}
+:root[data-text-size="large"] .typing-surface #race-passage {
+  white-space: pre-wrap;
+  height: 110px;
+  line-height: 1.4;
+  font-size: 30px;
+  overflow: auto;
+}
+:root[data-text-size="large"] .typing-surface {
+  height: 110px;
+}
+:root[data-text-size="large"] .typing-surface #race-input {
+  font-size: 30px;
+  line-height: 1.4;
+}
+.speedometer {
+  width: 175px;
+  height: 160px;
+  color: #d5e5e5;
+  position: relative;
+  text-align: center;
+  pointer-events: none;
+}
+.speedometer svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.speedometer text {
+  font:
+    8px ui-monospace,
+    monospace;
+  fill: #a4c6cc;
+}
+.dial-track {
+  fill: none;
+  stroke: #6e959c66;
+  stroke-width: 4;
+}
+.dial-accent {
+  fill: none;
+  stroke: #bfff70;
+  stroke-width: 3;
+}
+.dial-needle {
+  transform: rotate(var(--needle, -140deg));
+  transform-origin: 90px 90px;
+  transition: transform 150ms linear;
+  fill: #c2ff69;
+}
+.dial-needle circle {
+  fill: #d6e7e8;
+}
+.speedometer .dial-value {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 66%;
+  font:
+    700 27px/1 ui-monospace,
+    monospace;
+}
+.speedometer > span {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  font-size: 8px;
+  letter-spacing: 2px;
+  color: #b1cecf;
+}
+/* Race owns the available visual viewport; world and sprites resize independently. */
+html[data-route="race"] .world-backdrop,
+html[data-route="race"] .footer {
+  display: none;
+}
+html[data-route="race"] body {
+  overflow: hidden;
+}
+html[data-route="race"] .app-shell {
+  padding: 0;
+  height: var(--visible-height, 100dvh);
+  min-height: 0;
+}
+html[data-route="race"] #main {
+  position: fixed;
+  inset: var(--visible-top, 0px) 0 auto;
+  height: var(--visible-height, 100dvh);
+  min-height: 0;
+}
+html[data-route="race"] .topbar {
+  position: fixed;
+  top: var(--visible-top, 0px);
+  left: 0;
+  right: 0;
+  padding: 12px 3vw;
+  min-height: 68px;
+  background: linear-gradient(#091a25cf, transparent);
+}
+html[data-route="race"] .topbar .wordmark {
+  font-size: 22px;
+}
+html[data-route="race"] .topbar .guest {
+  display: none;
+}
+.immersive-race.quick-race {
+  position: absolute;
+  inset: 0;
+  min-height: 0;
+  margin: 0;
+  padding: 0 !important;
+  background: transparent;
+  border: 0;
+}
+.immersive-race .race-visual {
+  position: absolute;
+  inset: 0 0 125px;
+  width: 100%;
+  max-width: none !important;
+  border: 0;
+  border-radius: 0;
+  aspect-ratio: auto;
+  margin: 0;
+}
+.immersive-race #race-track {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  aspect-ratio: auto;
+  width: 100%;
+  min-height: 0;
+  border: 0;
+  border-radius: 0;
+}
+.immersive-race #race-track canvas {
+  display: block;
+  position: absolute;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+}
+.immersive-race .race-hud {
+  position: absolute;
+  top: 77px;
+  left: 24%;
+  right: 23%;
+  display: flex;
+  justify-content: center;
+  gap: clamp(12px, 4vw, 65px);
+  background: transparent;
+  border: 0;
+  z-index: 3;
+}
+.immersive-race .race-hud > div {
+  padding: 0;
+  border: 0;
+  flex: 1;
+  min-width: 0;
+}
+.immersive-race .race-hud .micro {
+  font-size: 9px;
+  white-space: nowrap;
+  letter-spacing: 1px;
+}
+.immersive-race .race-hud strong {
+  font-family: "DM Sans", sans-serif;
+  font-size: 25px;
+  margin-top: 6px;
+}
+.immersive-race .race-pause {
+  position: absolute;
+  right: 3vw;
+  top: 82px;
+  z-index: 4;
+  padding: 9px 16px;
+  background: #0c25358c;
+  border-color: #91b7be44;
+}
+.immersive-race .race-fullscreen {
+  position: absolute;
+  right: 3vw;
+  top: 125px;
+  z-index: 4;
+  font-size: 10px;
+}
+.immersive-race .speedometer {
+  position: absolute;
+  bottom: 12px;
+  left: 20px;
+  z-index: 3;
+  width: 155px;
+  height: 145px;
+}
+.immersive-race .race-console {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  min-height: 125px;
+  z-index: 4;
+  padding: 18px max(22px, env(safe-area-inset-right)) 12px
+    max(22px, env(safe-area-inset-left));
+  background: linear-gradient(#102a34f5, #0a1c26);
+  border-top: 1px solid #adc9c53b;
+}
+.immersive-race .race-console > .help {
+  font-size: 10px;
+  margin: 7px 0 0;
+  min-height: 15px;
+}
+.immersive-race .track-bottom {
+  position: absolute;
+  bottom: 0;
+  right: 15px;
+  left: 190px;
+  font-size: 9px;
+  padding: 5px 0;
+  z-index: 4;
+  background: transparent;
+  border: 0;
+  min-height: 16px;
+}
+.immersive-race .race-callout {
+  top: 24%;
+  left: 50%;
+  max-width: 80vw;
+  transform: translateX(-50%);
+  border: 0;
+  background: transparent;
+  text-shadow: 0 1px 8px #0b202b;
+  font-size: 13px;
+  letter-spacing: 2px;
+}
+.immersive-race .run-banner {
+  position: absolute;
+  z-index: 3;
+  top: 38%;
+  left: 35%;
+  right: 35%;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  justify-content: center;
+  pointer-events: none;
+}
+.immersive-race:not([data-state="countdown"]) > .run-banner {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+.immersive-race .run-banner > div,
+.immersive-race .race-lights {
+  display: none;
+}
+.immersive-race #race-countdown {
+  font-size: 90px;
+}
+.immersive-race .race-deck {
+  position: absolute;
+  z-index: 5;
+  top: 52%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(730px, calc(100% - 32px));
+  max-height: calc(var(--visible-height, 100dvh) - 210px);
+  overflow: auto;
+  padding: 26px 30px;
+  background: #0c2535f5;
+  border: 1px solid #729c9b33;
+  box-shadow: 0 15px 130px #0007;
+  scrollbar-width: thin;
+}
+.immersive-race[data-state="racing"] .race-deck,
+.immersive-race[data-state="countdown"] .race-deck {
+  display: none;
+}
+.race-deck-title {
+  font-family: "DM Sans", sans-serif;
+  font-size: 36px;
+  line-height: 1.1;
+  letter-spacing: -1.5px;
+  margin: 0 0 22px;
+}
+.race-deck-title span {
+  color: #c2ff69;
+}
+.race-deck .practice-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.race-deck .practice-options label {
+  font-size: 12px;
+}
+.race-deck select,
+.race-deck input {
+  width: 100%;
+  padding: 10px;
+  font-size: 12px;
+}
+.race-deck #setup-help {
+  font-size: 10px;
+  line-height: 1.6;
+}
+.race-deck .practice-actions {
+  margin: 18px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+.race-deck .live-standings {
+  margin-top: 15px;
+}
+.race-deck .run-details,
+.race-deck #race-controls-help {
+  font-size: 10px;
+}
+.race-deck .run-results {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+.race-deck .run-results h2 {
+  font-size: 28px;
+}
+.race-deck .run-results p,
+.race-deck table {
+  font-size: 12px;
+}
+.race-deck .run-results .help {
+  font-size: 10px;
+}
+.immersive-race:is(
+    [data-state="finished"],
+    [data-state="timed-out"],
+    [data-state="abandoned"]
+  )
+  .race-deck-title,
+.immersive-race:is(
+    [data-state="finished"],
+    [data-state="timed-out"],
+    [data-state="abandoned"]
+  )
+  .race-setup,
+.immersive-race:is(
+    [data-state="finished"],
+    [data-state="timed-out"],
+    [data-state="abandoned"]
+  )
+  #start-race {
+  display: none;
+}
+.immersive-race[data-state="paused"] .race-deck-title {
+  font-size: 26px;
+}
+.immersive-race[data-state="paused"] .race-setup {
+  display: none;
+}
+:root[data-text-size="large"] .immersive-race .race-console {
+  min-height: 180px;
+}
+:root[data-text-size="large"] .immersive-race .race-visual {
+  bottom: 180px;
+}
+@keyframes garage-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+:root[data-motion="reduced"] .garage-kart {
+  animation: none;
+}
+:root[data-motion="reduced"] .dial-needle {
+  transition: none;
+}
+@media (min-width: 1050px) {
+  html[data-route="settings"] .page-heading {
+    position: absolute;
+    top: 7vh;
+    left: 0;
+    width: 40%;
+  }
+  html[data-route="settings"] .settings-panel {
+    padding-top: 8vh;
+    width: 50%;
+    min-height: 75vh;
+  }
+}
+@media (max-width: 700px) {
+  .topbar {
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 12px 0;
+    min-height: 86px;
+  }
+  .topbar .wordmark {
+    font-size: 22px;
+    width: 100%;
+  }
+  .topbar .guest {
+    display: none;
+  }
+  .topbar nav {
+    width: 100%;
+    justify-content: space-between;
+    gap: 8px;
+    overflow: visible;
+  }
+  .topbar nav a {
+    font-size: 10px;
+    padding: 5px 0;
+  }
+  .topbar nav a[aria-current] {
+    border-bottom-color: #c2ff69;
+  }
+  .hero {
+    grid-template-columns: 1fr;
+    min-height: 0;
+    padding-top: 30px;
+    gap: 28px;
+  }
+  .hero h1 {
+    font-size: clamp(40px, 11vw, 65px);
+    letter-spacing: -2px;
+  }
+  .hero-note {
+    display: block;
+    min-height: 0;
+    max-width: 100%;
+    padding: 0;
+  }
+  .garage-kart {
+    max-height: 220px;
+  }
+  .garage-label {
+    top: -8px;
+    font-size: 8px;
+  }
+  .hero-note > span:last-child {
+    font-size: 10px;
+  }
+  .hero-copy {
+    font-size: 14px;
+  }
+  .track-card {
+    margin-top: 30px;
+  }
+  .campaign-grid {
+    grid-template-columns: 1fr;
+  }
+  .campaign-card {
+    padding-bottom: 0;
+  }
+  .page-heading {
+    padding-top: 25px;
+    margin-bottom: 16px;
+  }
+  .page-heading h1 {
+    font-size: 42px;
+    letter-spacing: -2px;
+  }
+  .input-panel,
+  .settings-panel {
+    padding-top: 10px;
+  }
+  .settings-panel .setting-row {
+    gap: 14px;
+  }
+  .settings-panel .setting-row select {
+    max-width: 145px;
+  }
+  .practice-panel .speedometer,
+  .practice-active .practice-panel .speedometer {
+    position: relative;
+    top: auto;
+    right: auto;
+    width: 125px;
+    height: 115px;
+    margin: 10px auto;
+  }
+  .practice-panel .typing-surface {
+    margin-right: 0;
+  }
+  .practice-panel .practice-typing {
+    margin: 15px 0;
+  }
+  .practice-active .practice-panel {
+    padding: 10px 0;
+  }
+  .typing-surface #race-passage,
+  .typing-surface #race-input {
+    font-size: 24px;
+    height: 42px;
+  }
+  .typing-surface {
+    min-height: 42px;
+  }
+  .practice-panel .metrics-grid {
+    gap: 8px;
+  }
+  .practice-panel .metrics-grid > div {
+    padding: 8px;
+  }
+  .practice-panel .metrics-grid strong {
+    font-size: 25px;
+  }
+  .immersive-race .race-hud {
+    top: 103px;
+    left: 16px;
+    right: 90px;
+    gap: 12px;
+  }
+  .immersive-race .race-hud > div:nth-child(3) {
+    display: none;
+  }
+  .immersive-race .race-hud strong {
+    font-size: 18px;
+  }
+  .immersive-race .race-hud .micro {
+    font-size: 7px;
+  }
+  .immersive-race .race-pause {
+    top: 105px;
+    right: 14px;
+    font-size: 11px;
+    padding: 7px 12px;
+  }
+  .immersive-race .race-fullscreen {
+    top: 140px;
+    right: 16px;
+    font-size: 9px;
+  }
+  .immersive-race .race-visual {
+    bottom: 120px;
+  }
+  .immersive-race .race-console {
+    min-height: 120px;
+    padding: 16px 16px 12px;
+  }
+  .immersive-race .race-console > .help {
+    font-size: 9px;
+  }
+  .immersive-race .speedometer {
+    width: 92px;
+    height: 86px;
+    bottom: 5px;
+    left: 8px;
+  }
+  .speedometer .dial-value {
+    font-size: 18px;
+  }
+  .speedometer > span {
+    font-size: 7px;
+    letter-spacing: 1px;
+  }
+  .immersive-race .track-bottom {
+    left: 110px;
+    right: 10px;
+    font-size: 7px;
+    line-height: 1.4;
+  }
+  .immersive-race .race-deck {
+    top: 55%;
+    padding: 20px 18px;
+    max-height: calc(var(--visible-height, 100dvh) - 205px);
+  }
+  .race-deck-title {
+    font-size: 30px;
+  }
+  .race-deck .practice-options {
+    gap: 10px;
+  }
+  .race-deck .practice-actions {
+    gap: 10px;
+  }
+  .race-deck .practice-actions .button {
+    padding: 12px 16px;
+  }
+  .race-deck .audio-controls {
+    margin: 15px 0;
+  }
+  .race-deck .live-standings li {
+    font-size: 10px;
+  }
+  .race-deck .run-details {
+    gap: 8px;
+  }
+  .immersive-race .race-callout {
+    top: 28%;
+    font-size: 10px;
+    max-width: 95%;
+  }
+  .footer {
+    font-size: 9px;
+    gap: 15px;
+  }
+}
+@media (max-height: 550px) {
+  html[data-route="race"] .topbar {
+    min-height: 42px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    flex-wrap: nowrap;
+  }
+  html[data-route="race"] .topbar .wordmark {
+    width: auto;
+    font-size: 18px;
+  }
+  html[data-route="race"] .topbar nav {
+    width: auto;
+  }
+  .immersive-race .race-hud {
+    top: 50px;
+    left: 22%;
+    right: 110px;
+  }
+  .immersive-race .race-hud strong {
+    font-size: 17px;
+  }
+  .immersive-race .race-hud .micro {
+    font-size: 7px;
+  }
+  .immersive-race .race-pause {
+    top: 55px;
+  }
+  .immersive-race .race-fullscreen {
+    top: 90px;
+  }
+  .immersive-race .race-visual {
+    bottom: 85px;
+  }
+  .immersive-race .race-console {
+    min-height: 85px;
+    padding: 8px 16px;
+  }
+  .immersive-race .typing-surface #race-passage,
+  .immersive-race .typing-surface #race-input {
+    font-size: 20px;
+    height: 33px;
+  }
+  .immersive-race .typing-surface {
+    min-height: 33px;
+  }
+  .immersive-race .speedometer {
+    width: 75px;
+    height: 70px;
+  }
+  .immersive-race .race-deck {
+    top: 53%;
+    max-height: calc(var(--visible-height, 100dvh) - 125px);
+    padding: 15px 20px;
+  }
+  .race-deck-title {
+    font-size: 25px;
+  }
+  .race-deck .practice-options {
+    grid-template-columns: 1fr 1fr;
+  }
+  .race-deck .run-details,
+  .race-deck #race-controls-help {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .garage-kart {
+    animation: none;
+  }
+}
+
+/* Reserve a separate dial area: it must never cover a CPU lane. */
+.hero {
+  display: grid;
+}
+.immersive-race .race-console {
+  padding-left: 190px;
+}
+.immersive-race .race-console .speedometer {
+  width: 140px;
+  height: 125px;
+  left: 20px;
+  bottom: 0;
+}
+@media (max-width: 700px) {
+  .immersive-race .race-console {
+    padding-left: 100px;
+  }
+  .immersive-race .race-console .speedometer {
+    width: 80px;
+    height: 75px;
+    left: 6px;
+    bottom: 23px;
+  }
+}
+@media (max-height: 550px) {
+  .immersive-race .race-console {
+    padding-left: 90px;
+  }
+  .immersive-race .race-console .speedometer {
+    width: 70px;
+    height: 65px;
+    left: 8px;
+    bottom: 7px;
+  }
+}
+
+.typing-surface #race-input {
+  margin: 0;
+}
+
+/* VisualViewport can shrink for a keyboard without changing CSS height media queries. */
+html[data-route="race"][data-compact-viewport="true"] .topbar {
+  min-height: 42px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  flex-wrap: nowrap;
+}
+html[data-route="race"][data-compact-viewport="true"] .topbar .wordmark {
+  width: auto;
+  font-size: 18px;
+}
+html[data-route="race"][data-compact-viewport="true"] .topbar nav {
+  width: auto;
+}
+html[data-compact-viewport="true"] .immersive-race .race-hud {
+  top: 50px;
+  left: 22%;
+  right: 110px;
+}
+html[data-compact-viewport="true"] .immersive-race .race-hud strong {
+  font-size: 17px;
+}
+html[data-compact-viewport="true"] .immersive-race .race-hud .micro {
+  font-size: 7px;
+}
+html[data-compact-viewport="true"] .immersive-race .race-pause {
+  top: 55px;
+}
+html[data-compact-viewport="true"] .immersive-race .race-fullscreen {
+  top: 90px;
+}
+html[data-compact-viewport="true"] .immersive-race .race-visual {
+  bottom: 85px;
+}
+html[data-compact-viewport="true"] .immersive-race .race-console {
+  min-height: 85px;
+  padding: 8px 16px 8px 90px;
+}
+html[data-compact-viewport="true"]
+  .immersive-race
+  .typing-surface
+  #race-passage,
+html[data-compact-viewport="true"] .immersive-race .typing-surface #race-input {
+  font-size: 20px;
+  height: 33px;
+}
+html[data-compact-viewport="true"] .immersive-race .typing-surface {
+  min-height: 33px;
+}
+html[data-compact-viewport="true"] .immersive-race .race-console .speedometer {
+  width: 70px;
+  height: 65px;
+  left: 8px;
+  bottom: 7px;
+}
+html[data-compact-viewport="true"] .immersive-race .race-deck {
+  top: 53%;
+  max-height: calc(var(--visible-height, 100dvh) - 125px);
+  padding: 15px 20px;
+}
+html[data-compact-viewport="true"] .race-deck .run-details,
+html[data-compact-viewport="true"] .race-deck #race-controls-help {
+  display: none;
+}
+
+.immersive-race .race-deck .track-bottom {
+  position: static;
+  padding: 0 0 12px;
+  font-size: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.immersive-race .race-deck .track-bottom > span {
+  display: block;
+}
+
+@media (max-width: 700px) {
+  html[data-route="race"][data-compact-viewport="true"] .topbar .wordmark {
+    width: 26px;
+    flex: 0 0 26px;
+    font-size: 0;
+  }
+  html[data-route="race"][data-compact-viewport="true"] .topbar .wordmark span {
+    font-size: 0;
+  }
+  html[data-route="race"][data-compact-viewport="true"] .topbar .wordmark img {
+    width: 26px;
+    height: 26px;
+    margin: 0;
+  }
+  html[data-route="race"][data-compact-viewport="true"] .topbar nav {
+    flex: 1;
+    min-width: 0;
+    gap: 6px;
+  }
+  html[data-route="race"][data-compact-viewport="true"] .topbar nav a {
+    font-size: 9px;
+  }
+}

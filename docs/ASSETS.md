@@ -18,3 +18,7 @@ Future assets must add creator/source/license, modifications, export settings an
 ## Phase 5 kart direction review (not shipped by the production entry)
 
 `docs/design/race-direction/volt-kart-concept.png`: original AI-generated transparent raster concept, built-in image_gen, 1774×887 RGBA, approximately 1.69 MB. Editable generation prompt/provenance are in [PROMPT.md](design/race-direction/PROMPT.md); this is not a 3D source model or separated production sprite set. HTML/CSS review scenery is project-authored; desktop/phone captures come from that prototype. CPU copies are temporary hue variations. Mario Kart was user-requested broad inspiration; no Nintendo media is shipped. No Misirlou recording is included: the prototype can play a user-selected local file without upload/persistence. See [prototype notes](design/race-direction/README.md).
+
+## Alpha.5 production kart integration
+
+`public/assets/karts/volt-kart.png` is an exact copy of the accepted generated concept from docs/design/race-direction, retaining its recorded prompt/provenance. Race and hub now request this PNG. The race bakes palette variants at runtime; these are not new distinct vehicle designs. Original full-resolution art is about 1.69 MB; optimize/measure before release. Native SVG speedometer and CSS world are authored in source. Earlier SVG cars remain historical development assets. No Nintendo media or Misirlou recording is included.
