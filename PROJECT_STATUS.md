@@ -1,5 +1,15 @@
 # TurboType project status
 
+## Phase 6 complete and integrated — 22 October 2026
+
+The user asked to finish Phase 6 after choosing to retain the current appearance and improve visuals later. **Phases 1–6 are complete for their agreed scope.** App 0.1.0-alpha.20 is integrated into main through [PR #6](https://github.com/sahilshah2904/TurboType/pull/6), merge `cf741b6cb27e9fe8da230d52394d40bbc4964baf`. Accepted head `3f6125c8d9c40405048453f7b7c17233182d14ae` has a completed successful exact-head check and hosted job in [run 39801084219](https://github.com/sahilshah2904/TurboType/actions/runs/39801084219). A fresh full local check on the same final application code passed formatting/types/build, **102 unit / 56 browser cases**.
+
+TT-601–607 are closed for implemented/reviewed Phase 6 scope. **TT-608 stays open** for the reported atmosphere visibility problem and later opening polish; this does not certify final appearance or physical frame rate. See [Phase 6 closeout](docs/PHASE6_CLOSEOUT.md) and docs/TESTING.md. Older pending-integration sections below are historical.
+
+Current checkout is main. The existing LAN server at http://192.168.0.31:5173/TurboType/ is preserved. This post-merge documentation checkpoint has its own main-push CI; inspect its actual HEAD/event/conclusion separately. No Pages game, account/backend/cloud save or multiplayer is deployed. Rules 3/save/content 1 remain; only preferences/tutorial setup/calibration persist, and race/results remain session-only.
+
+Next implementation is Phase 7 campaign maps when requested; it is not started by this closeout. Preserve all eleven phase numbers, 300 planned levels, 23 varied starter/reward vehicles, 26 tracks, independent category milestones and the free-only ten-player private-room plan.
+
 ## Keep current appearance; defer visual polish — 22 October 2026
 
 The user reports they cannot perceive the replacement race haze/air effect, says some opening changes are good and explicitly asks to keep the current scene for now and improve it later. Record this as permission to retain the current baseline and defer further visual iteration, not proof that the atmosphere is perceptible or final-quality approved. No new animation work or Phase 7 implementation is requested in this status turn.
@@ -157,7 +167,7 @@ Then continue Phase 6 onboarding, Phase 7 maps, Phase 8 all 300 reviewed levels,
 | 3 | Build typing engine | Complete for agreed scope | TT-301–305 implemented/verified, 48 unit/39 browser checks and user-reported ASUS/Samsung strict-input acceptance; broader device evidence remains TT-1008 |
 | 4 | Complete playable race | Complete for agreed scope | TT-401–404 complete: core/browser evidence and user-reported ASUS/Samsung race checks; requested metrics-above-track layout included |
 | 5 | Polish racing experience | Complete for agreed scope, accepted and merged | Alpha.14 independent parts, 96 unit/36 browser checks, actual-GPU evidence and final physical input/user acceptance; PR #4 merged as de464ce. Broader release validation remains Phase 10. |
-| 6 | Opening and onboarding | Alpha.17 implemented; local checks pass | TT-601–604 implemented/tested in PR #6; user visual/interaction acceptance and integration pending |
+| 6 | Opening and onboarding | Complete for agreed scope; alpha.20 merged into main | TT-601–607 closed through PR #6; TT-608 visual polish deferred by user |
 | 7 | Campaign maps | Not started | Three rightward 100-node maps, locks, accessibility, saved location/progress |
 | 8 | All 300 levels | Not started | 300 reviewed playable definitions/passages, progression curve, chapter/bonus events; manifest validation |
 | 9 | Progression and learning | Not started | Garage/rewards/coaching/drills; local guest saves plus optional permanent-account cloud progress, sync/conflicts, migrations, access policies and recovery |

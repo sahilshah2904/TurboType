@@ -1,5 +1,15 @@
 # TurboType project continuity
 
+## Phase 6 complete and integrated — 22 October 2026
+
+The user asked to finish Phase 6 after choosing to retain the current appearance and improve visuals later. **Phases 1–6 are complete for their agreed scope.** App 0.1.0-alpha.20 is integrated into main through [PR #6](https://github.com/sahilshah2904/TurboType/pull/6), merge `cf741b6cb27e9fe8da230d52394d40bbc4964baf`. Accepted head `3f6125c8d9c40405048453f7b7c17233182d14ae` has a completed successful exact-head check and hosted job in [run 39801084219](https://github.com/sahilshah2904/TurboType/actions/runs/39801084219). A fresh full local check on the same final application code passed formatting/types/build, **102 unit / 56 browser cases**.
+
+TT-601–607 are closed for implemented/reviewed Phase 6 scope. **TT-608 stays open** for the reported atmosphere visibility problem and later opening polish; this does not certify final appearance or physical frame rate. See [Phase 6 closeout](docs/PHASE6_CLOSEOUT.md) and docs/TESTING.md. Older pending-integration sections below are historical.
+
+Current checkout is main. The existing LAN server at http://192.168.0.31:5173/TurboType/ is preserved. This post-merge documentation checkpoint has its own main-push CI; inspect its actual HEAD/event/conclusion separately. No Pages game, account/backend/cloud save or multiplayer is deployed. Rules 3/save/content 1 remain; only preferences/tutorial setup/calibration persist, and race/results remain session-only.
+
+Next implementation is Phase 7 campaign maps when requested; it is not started by this closeout. Preserve all eleven phase numbers, 300 planned levels, 23 varied starter/reward vehicles, 26 tracks, independent category milestones and the free-only ten-player private-room plan.
+
 ## Keep current appearance; defer visual polish — 22 October 2026
 
 The user reports they cannot perceive the replacement race haze/air effect, says some opening changes are good and explicitly asks to keep the current scene for now and improve it later. Record this as permission to retain the current baseline and defer further visual iteration, not proof that the atmosphere is perceptible or final-quality approved. No new animation work or Phase 7 implementation is requested in this status turn.

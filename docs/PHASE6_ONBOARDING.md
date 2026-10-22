@@ -1,6 +1,6 @@
 # Phase 6 opening and learning — alpha.20
 
-Implemented 22 October 2026 on `codex/phase6-onboarding`. User visual acceptance and integration remain pending. Rules 3 and save/content 1 are unchanged; no dependencies or backend were added.
+Completed and integrated into main through PR #6 on 22 October 2026 after the user requested finishing Phase 6. Current appearance is retained; further polish is deferred as TT-608. See PHASE6_CLOSEOUT.md. Rules 3 and save/content 1 are unchanged; no dependencies or backend were added.
 
 ## Entrance and navigation
 

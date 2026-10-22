@@ -1,5 +1,13 @@
 # Verification evidence
 
+## Phase 6 accepted and integrated — 22 October 2026
+
+User requested finishing Phase 6 after retaining the current appearance with TT-608 deferred. [PR #6](https://github.com/sahilshah2904/TurboType/pull/6) merged as `cf741b6cb27e9fe8da230d52394d40bbc4964baf` after exact head `3f6125c8d9c40405048453f7b7c17233182d14ae` had a completed successful check_run named check and hosted job 119901899341 in [run 39801084219](https://github.com/sahilshah2904/TurboType/actions/runs/39801084219). Every job step completed successfully; install ended at 15:06:04 UTC, full check at 15:09:34, job at 15:09:37. The workflow-run header continued to report in_progress while the exact-head check_run/job already reported completed/success; merge was gated on the actual successful check and every hosted job, plus the expected PR head, not an older run/header assumption.
+
+Fresh full local `npm run check` passed formatting/types/build, **102 unit / 56 desktop browser cases** (3.5 minutes) on final application source 0631587. Source 3f6125c only changes hosted dependency setup and verification docs. Run 39799004327 attempt 1 was canceled during slow Azure package downloads; attempt 2 was superseded by the mirror fix. Neither is passing app-test evidence. The new job above verifies the pipeline correction too. Shell syntax/Prettier checks passed for the workflow; no test coverage/timeouts, triggers or notifications were relaxed.
+
+Final implementation review covered route cleanup/loading recovery, native learning input, calibration eligibility/ready-only pace application, optional validated preferences, rendering-only effects and unchanged rules/save/content versions. No new implementation issue blocked integration. The current main documentation checkpoint has its own push run; inspect its head/conclusion separately. TT-608 records unresolved appearance feedback; no physical GPU certification or game/backend deployment is claimed. See PHASE6_CLOSEOUT.md.
+
 ## Phase 6 integration verification — 22 October 2026
 
 Fresh full local `npm run check` on final application source 0631587 passed formatting/types/build, **102 unit / 56 desktop browser cases** (3.5-minute browser run). This includes the final alpha.20 visibility tuning, all route/input/effect/recovery tests and action-link alignment. No captures/profiling ran concurrently, and the existing 5173 server was preserved.

@@ -1,5 +1,9 @@
 # TurboType future work backlog
 
+## Phase 6 closed — 22 October 2026
+
+TT-601–607 are complete for agreed Phase 6 scope and integrated through PR #6 after exact-head hosted checks and fresh 102-unit/56-browser local verification. User authorized closure while explicitly deferring further appearance iteration. TT-608 remains a later visual-polish follow-up. See docs/PHASE6_CLOSEOUT.md for source/merge/check evidence. No Phase 7 implementation or deployment starts from this note. Older pending-merge sections are historical.
+
 ## Visual polish deferred by the user — 22 October 2026
 
 - [ ] TT-608: Revisit race atmosphere visibility/quality and opening cinematic polish later. The user cannot perceive the new haze/air, accepts keeping the current baseline for now, and explicitly defers more visual work. Diagnose on the actual rendered scene/settings with the user before claiming success; scene-object counts are not visibility or aesthetic acceptance. Include sky/mountain/road depth, maintain readable typing and quality/motion fallbacks. Schedule after campaign groundwork or a later requested polish pass; this does not reopen accepted Phase 5 hardware work or block current Phase 6 functionality. No extra implementation is authorized by this status request.

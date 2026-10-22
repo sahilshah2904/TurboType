@@ -1,5 +1,7 @@
 # TurboType engineering conventions
 
+Current checkpoint: Phases 1–6 are complete for agreed scope; alpha.20 is integrated into main through PR #6. See PHASE6_CLOSEOUT.md and TESTING.md for exact source/check evidence and deferred TT-608. No Pages/backend deployment or Phase 7 implementation is implied. Earlier status wording below is historical.
+
 Status: Phases 2–5 are merged into main; alpha.14 was accepted with the final physical laptop evidence and integrated through PR #4 on 22 October 2026 (de464ce). Actual check results and limitations are in TESTING.md. Phase 6 opening/onboarding is next. Release tags and Pages deployment do not exist yet.
 
 ## Git and change management

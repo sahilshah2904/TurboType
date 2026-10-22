@@ -16,9 +16,9 @@ An original browser typing racer: build physical-keyboard speed and accuracy whi
 
 *Actual **0.1.0-alpha.14** gameplay, accepted and integrated into **main** through [PR #4](https://github.com/sahilshah2904/TurboType/pull/4). This is a local preview; no public game is deployed.*
 
-## Phase 6 preview — alpha.20
+## Phase 6 complete — alpha.20
 
-[PR #6](https://github.com/sahilshah2904/TurboType/pull/6) implements a 5.6-second fullscreen purple-car burnout and flaming-title opening, real loading/recovery, welcome/rules, guided tutorial, optional pace calibration and returning-visitor controls. Local checks pass 102 unit / 56 browser cases; user acceptance and merge remain pending. The five starter tracks and presentation follow-up are accepted and integrated through PR #5. The alpha.14 captures below are historical race evidence.
+[PR #6](https://github.com/sahilshah2904/TurboType/pull/6) implements a 5.6-second fullscreen purple-car burnout and flaming-title opening, real loading/recovery, welcome/rules, guided tutorial, optional pace calibration and returning-visitor controls. Local checks pass 102 unit / 56 browser cases. PR #6 is merged after exact-head hosted checks and the user requested completion; visual polish remains deferred as TT-608. See [Phase 6 closeout](docs/PHASE6_CLOSEOUT.md). The five starter tracks and presentation follow-up are accepted and integrated through PR #5. The alpha.14 captures below are historical race evidence.
 
 The alpha.20 follow-up replaces rejected curved air paths with a researched layered atmosphere over sky/mountains/road, centres action links with buttons, retains the cleaner Hub/Settings, and plans varied future vehicle families. Latest captures/verification are in docs/TESTING.md. Alpha.17 opening panels are superseded.
 
@@ -89,7 +89,7 @@ Open **Settings → Sound & music** to enable sound or change volumes. The hub h
 
 ## Development progress
 
-**Phases 1–5 are complete for their agreed scope.** Alpha.14 includes independent parts, automated/actual-GPU evidence, final physical laptop acceptance and PR integration. Broader browser/long-session release testing remains Phase 10. Phase 6 alpha.17 implementation and local verification are complete, awaiting user acceptance and PR #6 integration.
+**Phases 1–6 are complete for their agreed scope.** Alpha.14 includes independent parts, automated/actual-GPU evidence, final physical laptop acceptance and PR integration. Broader browser/long-session release testing remains Phase 10. Phase 6 alpha.20 is integrated through PR #6. Further opening/atmosphere polish is deferred; Phase 7 maps are next when requested.
 
 | Phase | Delivery | Current status |
 | --- | --- | --- |
@@ -98,7 +98,7 @@ Open **Settings → Sound & music** to enable sound or change volumes. The hub h
 | 3 | Build validation/correction, WPM/accuracy, streaks, timing, pause and finishing | Complete for agreed engine/input scope |
 | 4 | Create one complete four-CPU race with countdown, placement, results and retry | Complete and merged into main |
 | 5 | Polish vehicles, wheels/suspension, scenery, exhaust/nitro, sound and celebration | Complete for agreed scope; accepted and merged into main |
-| 6 | Cinematic loading/welcome/rules, tutorial, calibration and final navigation | Alpha.20 implemented and locally verified; user review and PR #6 integration pending |
+| 6 | Cinematic loading/welcome/rules, tutorial, calibration and final navigation | Complete for agreed scope; PR #6 merged, TT-608 polish deferred |
 | 7 | Easy/Medium/Hard rightward maps, 100 numbered nodes each, locks, chapters and saved position | Planned |
 | 8 | Author/validate all 300 passages, learning goals, difficulty/star curves and bonus challenges | Planned |
 | 9 | Rewards/rank/garage, records/charts/coaching/drills, robust guest saves and optional account-backed cloud progress | Planned |
@@ -111,7 +111,7 @@ Phases vary greatly in size; phase numbers are not a completion percentage.
 
 - **Vehicle parts:** alpha.14 implements separate chassis/wheel sources, independent rotation, chassis-only suspension and compact shared previews while preserving the accepted silhouettes/colors. See [Phase 5 closeout](docs/PHASE5_CLOSEOUT.md).
 - **Physical acceptance:** the user accepted the final laptop checklist. The two-minute recorder captured 100 trusted racing keys and zero page errors; actual-GPU experiments cover High/Low/Reduced. Timing/resource limitations and broader release checks remain explicit.
-- **Integration:** PR #4 merged as de464ce after exact-head checks passed. Main contains the accepted alpha.14 preview. Next is Phase 6 loading/onboarding; no deployment has occurred.
+- **Integration:** PR #4 merged as de464ce after exact-head checks passed. Main now also includes alpha.20 Phase 6 through PR #6. Next is Phase 7 maps when requested; no deployment has occurred.
 
 ### Future category reward cars
 
