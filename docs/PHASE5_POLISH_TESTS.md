@@ -1,5 +1,7 @@
 # Alpha.14 final physical laptop check
 
+Completed and accepted on 22 October 2026: user reported “I believe everything worked fine.” Reviewed two-minute recorder evidence has 100 trusted racing keys and zero page errors; see TESTING.md and performance/alpha14-physical-input.json. The checklist below is retained for reproduction, not a request to repeat acceptance. Broader release testing remains Phase 10.
+
 The accepted palette, silhouettes, music and earlier functional reports remain accepted. This is a short check of the newly independent parts and physical responsiveness, not another preference review. Automated regression and actual-GPU synthetic-input evidence are separate from your physical typing report.
 
 1. Keep the existing development server running. In the project terminal run `node scripts/profile-laptop-input.mjs`. It opens a separate hardware-accelerated Chromium test profile for two minutes; leave that test window open until it finishes. It does not touch your normal browser profile or automate typing.

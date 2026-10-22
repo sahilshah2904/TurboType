@@ -1,5 +1,10 @@
 # TurboType — resume in a new chat
 
+## Phase 5 accepted — 22 October 2026
+
+The user reported “I believe everything worked fine” after the final physical checklist. Reviewed recorder evidence: 120-second hardware-accelerated session, 100 trusted racing keys, 99 trusted inputs, zero page errors, median/p95/max handler-to-next-rAF 9.3/18.8/22.2ms. This is a bounded input diagnostic and available-laptop acceptance, not universal performance certification. TT-506/511/512/513/522 are closed for the agreed Phase 5 scope; broader release testing stays in Phase 10. All Phase 5 backlog items are now complete, including explicitly canceled scope. Integration of PR #4 is the remaining step and requires this updated head’s passing hosted checks. See [closeout](PHASE5_CLOSEOUT.md). No Phase 6 implementation or deployment started. Older pending-acceptance paragraphs below are historical.
+
+
 ## Active Phase 5 work — 22 October 2026
 
 Current implementation is `2eadeef`, followed by history-sync `d168720` with an identical file tree. That sync resolves the README-only conflict from main's prior documentation publication; no preview code was merged into main. Exact-head hosted PR run [39725624773](https://github.com/sahilshah2904/TurboType/actions/runs/39725624773) passed for `d1687206a2130cc6e5356d24cd16a10f7c5b6561`, freshly verified. This subsequent evidence-documentation checkpoint has its own CI status. PR #4 stays open/unmerged; inspect actual HEAD/checks on resume. The two-minute physical recorder/report remains the next user action, followed by review of TT-506/511/512/513/522 and final integration. No deployment.

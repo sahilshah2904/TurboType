@@ -1,5 +1,9 @@
 # TurboType project continuity
 
+## Latest acceptance — 22 October 2026
+
+The user accepted the final alpha.14 laptop check (“I believe everything worked fine”). Reviewed two-minute physical recorder: 100 trusted racing keys, 99 trusted inputs, zero errors, accelerated AMD Direct3D11; handler-to-next-rAF median/p95/max 9.3/18.8/22.2ms. Summary: docs/performance/alpha14-physical-input.json. This closes TT-506/511/512/513/522 for agreed Phase 5 scope, without universal performance certification; broad release testing remains Phase 10. Finish integration of PR #4 after exact acceptance-head CI. Earlier pending-user-check instructions are historical; do not repeat that checklist. No authorization to start Phase 6 implementation or deploy is inferred.
+
 ## Read first in a new chat
 
 1. Read [PROJECT_STATUS.md](PROJECT_STATUS.md), [docs/SESSION_HANDOFF.md](docs/SESSION_HANDOFF.md) and [BACKLOG.md](BACKLOG.md) before reporting progress or starting work. The detailed handoff records accepted decisions, source paths, checks, CI history, limitations and exact next steps; the previous chat is not required.

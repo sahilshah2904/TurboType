@@ -1,5 +1,10 @@
 # TurboType project status
 
+## Phase 5 accepted — 22 October 2026
+
+The user reported “I believe everything worked fine” after the final physical checklist. Reviewed recorder evidence: 120-second hardware-accelerated session, 100 trusted racing keys, 99 trusted inputs, zero page errors, median/p95/max handler-to-next-rAF 9.3/18.8/22.2ms. This is a bounded input diagnostic and available-laptop acceptance, not universal performance certification. TT-506/511/512/513/522 are closed for the agreed Phase 5 scope; broader release testing stays in Phase 10. All Phase 5 backlog items are now complete, including explicitly canceled scope. Integration of PR #4 is the remaining step and requires this updated head’s passing hosted checks. See [closeout](docs/PHASE5_CLOSEOUT.md). No Phase 6 implementation or deployment started. Older pending-acceptance paragraphs below are historical.
+
+
 ## Active Phase 5 work — 22 October 2026
 
 Verified implementation `2eadeef`; feature history-sync head `d168720` has identical file contents and successful hosted PR [run 39725624773](https://github.com/sahilshah2904/TurboType/actions/runs/39725624773). The sync resolves the README-only conflict with main d86d046; it does not integrate the preview into main. This evidence-only follow-up has its own check. PR #4 is open/unmerged; the two-minute physical report/evidence remains TT-506/511/512/513/522 before integration. Working branch remains feat/race-polish.
