@@ -1,5 +1,8 @@
 # TurboType session handoff
 
+Implementation source **b1f0d6cf740bfa3aea2e85f12d961814be4e9cee**, [open PR #7](https://github.com/sahilshah2904/TurboType/pull/7). Local full check passed **116 unit / 71 browser cases**; final compact-results adjustment passed fresh build/types and **23 focused browser cases**. Ten current sequential captures had zero page errors. This documentation checkpoint has its own hosted check; inspect its actual PR head/check_run/job before claiming success. User review/integration remains pending; branch is pushed and no game is deployed.
+
+
 ## Resume checkpoint — 23 October 2026
 
 User requested refreshed README/continuity through Phase 6, substantial paragraphs beyond the first short races, and completed Phase 7 maps with a laptop review checklist. Documentation refresh `1ee0aba` is pushed on main. Phase 7 is separate on `codex/phase7-campaign-maps`; inspect actual HEAD/PR/exact-head checks. No automatic merge, next phase or deployment from this handoff.

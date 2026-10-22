@@ -28,7 +28,7 @@ Three rightward journeys now have 100 numbered stops each, chapters/bonus branch
 
 ![Longer paragraph in an actual race; isolated capture fixture opens level 4](docs/images/alpha21/paragraph-race-fixture-1440.png)
 
-[Implementation and laptop checklist](docs/PHASE7_CAMPAIGN_MAPS.md) · [Current verification](docs/TESTING.md). Phase 7 is on a separate feature branch pending review/integration; the existing LAN preview serves that checkout. The Phase 6 documentation refresh is already on main. No public game is deployed.
+[Implementation and laptop checklist](docs/PHASE7_CAMPAIGN_MAPS.md) · [Current verification](docs/TESTING.md). Phase 7 is pushed in [open PR #7](https://github.com/sahilshah2904/TurboType/pull/7) pending review/integration; the existing LAN preview serves that checkout. The Phase 6 documentation refresh is already on main. No public game is deployed.
 
 ## Phase 6 complete — alpha.20
 

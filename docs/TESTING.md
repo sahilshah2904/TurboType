@@ -1,5 +1,8 @@
 # Verification evidence
 
+Implementation source **b1f0d6cf740bfa3aea2e85f12d961814be4e9cee**, [open PR #7](https://github.com/sahilshah2904/TurboType/pull/7). Local full check passed **116 unit / 71 browser cases**; final compact-results adjustment passed fresh build/types and **23 focused browser cases**. Ten current sequential captures had zero page errors. This documentation checkpoint has its own hosted check; inspect its actual PR head/check_run/job before claiming success. User review/integration remains pending; branch is pushed and no game is deployed.
+
+
 ## Phase 7 maps — alpha.21, 22–23 October 2026
 
 Branch `codex/phase7-campaign-maps`, based on main `1ee0aba`. Final application check is recorded in `Reference_Images/analysis/phase7-final-reviewed-check.log` (ignored diagnostic log): formatting, TypeScript, **116 unit cases**, production build at `/TurboType/`, **71 headless desktop browser cases**. The final fresh full local check on 23 October passed all 116 unit/71 browser cases after the dialog focus correction. The final compact campaign-results layout then passed a fresh build/typecheck and all **23 focused campaign/Quick Race browser cases** (`phase7-results-focused.log`); score/metrics precede saved-star feedback/expanded standings, with Retry/Next/Return together below. Hosted PR validation is tracked separately against its actual head; source/PR details are finalized below. No public deployment or new physical-performance certification.

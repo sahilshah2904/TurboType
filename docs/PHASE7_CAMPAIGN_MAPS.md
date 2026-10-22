@@ -1,6 +1,6 @@
 # Phase 7 campaign maps — alpha.21
 
-Implemented on `codex/phase7-campaign-maps`, based on main `1ee0aba`. User review/integration remain separate. No public deployment or backend exists.
+Implemented on `codex/phase7-campaign-maps`, based on main `1ee0aba`; source `b1f0d6c`, [open PR #7](https://github.com/sahilshah2904/TurboType/pull/7). User review/integration remain separate. No public deployment or backend exists.
 
 ## Delivered scope
 

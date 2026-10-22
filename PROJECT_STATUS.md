@@ -1,5 +1,8 @@
 # TurboType project status
 
+Implementation source **b1f0d6cf740bfa3aea2e85f12d961814be4e9cee**, [open PR #7](https://github.com/sahilshah2904/TurboType/pull/7). Local full check passed **116 unit / 71 browser cases**; final compact-results adjustment passed fresh build/types and **23 focused browser cases**. Ten current sequential captures had zero page errors. This documentation checkpoint has its own hosted check; inspect its actual PR head/check_run/job before claiming success. User review/integration remains pending; branch is pushed and no game is deployed.
+
+
 ## Current checkpoint — 23 October 2026
 
 Alpha.21 Phase 7 implementation is on `codex/phase7-campaign-maps`, based on main `1ee0aba`. The user requested refreshed README/Phase 6 continuity, longer paragraphs and completed maps. See [implementation/review](docs/PHASE7_CAMPAIGN_MAPS.md), [handoff](docs/SESSION_HANDOFF.md), [testing](docs/TESTING.md) and [backlog](BACKLOG.md). Inspect actual Git/CI; implementation, acceptance, integration and deployment remain separate.
