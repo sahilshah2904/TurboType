@@ -311,3 +311,46 @@ test("bounds high effects and disables particles in reduced/low mode without alt
       .evaluate((el) => getComputedStyle(el).whiteSpace),
   ).toBe("pre-wrap");
 });
+
+test("layered atmosphere spans sky and road, follows typing pace and stops for pause, low effects and reduced motion", async ({
+  page,
+}) => {
+  await page.addInitScript(() =>
+    localStorage.setItem(
+      "turbotype:settings:v1",
+      JSON.stringify({
+        schemaVersion: 1,
+        settings: { motion: "full", effects: "high", largeText: false },
+      }),
+    ),
+  );
+  await openRace(page);
+  await go(page);
+  await typePrefix(page, SAMPLE.slice(0, 12));
+  await page.clock.runFor(200);
+  const track = page.locator("#race-track");
+  const gusts = Number(await track.getAttribute("data-wind"));
+  expect(gusts).toBeGreaterThanOrEqual(34);
+  expect(gusts).toBeLessThanOrEqual(44);
+  await expect(track).toHaveAttribute("data-wind-model", "layered-atmosphere");
+  expect(Number(await track.getAttribute("data-wind-sky"))).toBe(20);
+  await page.getByRole("button", { name: "Pause", exact: true }).click();
+  await page.clock.runFor(200);
+  await expect(track).toHaveAttribute("data-wind", "0");
+  await page.getByRole("link", { name: "Settings", exact: true }).click();
+  await page.getByLabel("Track effects", { exact: true }).selectOption("low");
+  await page.getByRole("link", { name: "Race", exact: true }).click();
+  await expect(track).toHaveAttribute("data-ready", "true", { timeout: 12000 });
+  await page.getByRole("button", { name: /^Resume race/ }).click();
+  await page.clock.runFor(3200);
+  await expect(track).toHaveAttribute("data-wind", "0");
+  await page.getByRole("button", { name: "Pause", exact: true }).click();
+  await page.getByRole("link", { name: "Settings", exact: true }).click();
+  await page.getByLabel("Track effects", { exact: true }).selectOption("high");
+  await page.getByLabel("Motion", { exact: true }).selectOption("reduced");
+  await page.getByRole("link", { name: "Race", exact: true }).click();
+  await expect(track).toHaveAttribute("data-ready", "true", { timeout: 12000 });
+  await page.getByRole("button", { name: /^Resume race/ }).click();
+  await page.clock.runFor(3200);
+  await expect(track).toHaveAttribute("data-wind", "0");
+});

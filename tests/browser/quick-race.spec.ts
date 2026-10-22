@@ -9,6 +9,7 @@ async function openRace(page: Page) {
     "true",
     { timeout: 12000 },
   );
+  await page.getByText("Advanced / Replay", { exact: true }).click();
   await page.getByLabel("Race seed", { exact: true }).fill("42");
   await page.getByLabel("Race seed", { exact: true }).press("Tab");
 }
@@ -190,7 +191,7 @@ test("validates seeds and supports new opponents, reduced motion and laptop resi
   await expect(page.locator("#race-state")).toHaveText("Ready");
   await page.getByLabel("Race seed", { exact: true }).fill("42");
   await page.getByLabel("Race seed", { exact: true }).press("Tab");
-  await page.getByRole("button", { name: "New seed", exact: true }).click();
+  await page.getByRole("button", { name: "New race", exact: true }).click();
   await expect(page.locator("#race-seed")).toHaveValue("43");
   await go(page);
   await page

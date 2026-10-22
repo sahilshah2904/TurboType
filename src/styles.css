@@ -726,6 +726,7 @@ textarea[aria-invalid="true"] {
 }
 .practice-actions {
   display: flex;
+  align-items: center;
   flex-wrap: wrap;
   gap: 12px;
   margin: 20px 0 14px;
@@ -1083,4 +1084,12 @@ textarea[aria-invalid="true"] {
 .race-lights[data-state="racing"] i {
   background: #ff5964;
   box-shadow: 0 0 8px #ff596444;
+}
+
+.practice-actions > a:not(.button) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 12px 10px;
 }

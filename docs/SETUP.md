@@ -1,5 +1,7 @@
 **Current scope override — 21 October 2026:** the user explicitly narrowed TurboType to laptop/desktop browsers with a physical keyboard. Phone/tablet compatibility, software-keyboard layout, rotation and mobile acceptance are canceled requirements. Earlier multi-device statements are historical. Keep laptop window responsiveness (960 CSS px minimum; verify 1024/1366/1440/1920 widths), accessibility, hardware-keyboard IME composition, cloud saves before solo launch and multiplayer afterward. Do not restore mobile work without a new user request.
 
+Alpha.17: open the base LAN URL without a fragment for the entrance, or use Settings → Replay opening. Explicit #/hub and #/race links remain direct. Welcome/Settings can skip future openings. Failed bundle downloads expose Reload before the app mounts; essential art/module loading has separate retry and text-help routes. The existing 5173 server serves the current feature checkout. See PHASE6_REVIEW.md.
+
 # Run TurboType locally
 
 The app includes Phase 4 Quick Race against four CPUs with real progress/standings/results, plus typing practice, the hub preview, free-editing keyboard check and local preferences. Alpha.5 integrates the accepted full-window kart race, Live WPM dial, native single typing surface and shared world revamp of all existing pages, with optional original synthesized audio. Progression/cloud accounts and cinematic onboarding are later tasks.

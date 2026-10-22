@@ -1,3 +1,15 @@
+import type { CpuTier } from "../core/cpu-schedule";
+import {
+  LocalOnboardingRepository,
+  type OnboardingPreferences,
+} from "../storage/onboarding";
+import {
+  entranceScreen,
+  connectEntrance,
+  welcomeScreen,
+  rulesScreen,
+} from "./entrance";
+import { learningScreen, connectLearning } from "./driving-lessons";
 import { trackChoices } from "./track-selector";
 import { isTrackId, type TrackId } from "../content/track-catalog";
 import { LocalTrackRepository } from "../storage/tracks";
@@ -21,6 +33,7 @@ import {
 } from "./typing-practice";
 import {
   createQuickRaceSession,
+  applyQuickRacePace,
   quickRaceScreen,
   connectQuickRace,
 } from "./quick-race";
@@ -42,7 +55,16 @@ export function mountApp(root: HTMLElement): () => void {
   let clearScreen: (() => void) | undefined;
   let generation = 0;
   const practiceSession = createPracticeSession();
-  const quickRaceSession = createQuickRaceSession();
+  const onboarding = new LocalOnboardingRepository(() => localStorage);
+  let learning = onboarding.load();
+  const saveLearning = (patch: Partial<OnboardingPreferences>) => {
+    learning = { ...learning, ...patch };
+    return onboarding.save(learning);
+  };
+  const quickRaceSession = createQuickRaceSession(learning.preferredPace);
+  let pendingPace: CpuTier | undefined;
+  if (["", "#", "#/"].includes(location.hash))
+    history.replaceState(null, "", learning.skipIntro ? "#/hub" : "#/intro");
   const reducedMotion = () =>
     settings.motion === "reduced" ||
     (settings.motion === "system" && systemMotion.matches);
@@ -79,7 +101,11 @@ export function mountApp(root: HTMLElement): () => void {
     unmountPreview = undefined;
     const route = parseRoute(location.hash);
     document.documentElement.dataset.route = route;
-    main.classList.remove("quick-race-active", "practice-active");
+    main.classList.remove(
+      "quick-race-active",
+      "practice-active",
+      "learning-active",
+    );
     audio.setScene("menu");
     applyPreferences();
     root.querySelectorAll<HTMLElement>("[data-route]").forEach((link) => {
@@ -87,22 +113,30 @@ export function mountApp(root: HTMLElement): () => void {
         link.setAttribute("aria-current", "page");
       else link.removeAttribute("aria-current");
     });
-    document.title = `TurboType — ${route === "hub" ? "Your words. Full throttle." : route === "race" ? "Quick Race" : route === "practice" ? "Typing practice" : route === "keyboard" ? "Keyboard check" : "Settings"}`;
+    document.title = `TurboType — ${{ hub: "Your words. Full throttle.", intro: "Enter TurboType", welcome: "Welcome", rules: "How to play", tutorial: "Guided tutorial", calibration: "Find your starting pace", race: "Quick Race", practice: "Typing practice", keyboard: "Keyboard check", settings: "Settings" }[route]}`;
     main.innerHTML =
-      route === "hub"
-        ? hubScreen(selectedKart, selectedTrack)
-        : route === "race"
-          ? quickRaceScreen(
-              selectedKart,
-              quickRaceSession.race.snapshot().player.state === "ready"
-                ? selectedTrack
-                : quickRaceSession.trackId,
-            )
-          : route === "practice"
-            ? practiceScreen()
-            : route === "keyboard"
-              ? keyboardScreen()
-              : settingsScreen(settings);
+      route === "intro"
+        ? entranceScreen(selectedKart)
+        : route === "welcome"
+          ? welcomeScreen(learning)
+          : route === "rules"
+            ? rulesScreen()
+            : route === "tutorial" || route === "calibration"
+              ? learningScreen(route)
+              : route === "hub"
+                ? hubScreen(selectedKart, selectedTrack)
+                : route === "race"
+                  ? quickRaceScreen(
+                      selectedKart,
+                      quickRaceSession.race.snapshot().player.state === "ready"
+                        ? selectedTrack
+                        : quickRaceSession.trackId,
+                    )
+                  : route === "practice"
+                    ? practiceScreen()
+                    : route === "keyboard"
+                      ? keyboardScreen()
+                      : settingsScreen(settings, learning);
     scope = createScope({ root: main }).add(() => {
       if (!reducedMotion())
         animate(".reveal", {
@@ -113,21 +147,64 @@ export function mountApp(root: HTMLElement): () => void {
           ease: "out(3)",
         });
     });
+    if (route === "intro")
+      clearScreen = connectEntrance(
+        main,
+        selectedKart,
+        () => learning,
+        () => {
+          void audio.unlock().then((ok) => {
+            if (ok) audio.cue("go");
+          });
+        },
+      );
+    if (route === "welcome") {
+      main
+        .querySelector<HTMLInputElement>("#welcome-skip-intro")!
+        .addEventListener("change", (event) => {
+          const saved = saveLearning({
+            skipIntro: (event.target as HTMLInputElement).checked,
+          });
+          main.querySelector("#welcome-save-status")!.textContent = saved
+            ? "Opening preference saved on this browser."
+            : "Applied for this visit; browser storage is unavailable.";
+        });
+      for (const id of ["#welcome-rules", "#welcome-hub"])
+        main.querySelector(id)!.addEventListener("click", () => {
+          saveLearning({ welcomeSeen: true });
+        });
+    }
+    if (route === "tutorial" || route === "calibration")
+      clearScreen = connectLearning(main, {
+        kind: route,
+        preferred: learning.preferredPace,
+        completed: () =>
+          saveLearning({ tutorialComplete: true, welcomeSeen: true }),
+        applyPace: (tier, sample) => {
+          const saved = saveLearning({
+            preferredPace: tier,
+            ...(sample ? { calibration: sample } : {}),
+          });
+          const applied = applyQuickRacePace(quickRaceSession, tier);
+          pendingPace = applied ? undefined : tier;
+          return { saved, applied };
+        },
+      });
     if (route === "hub") {
       const track = main.querySelector<HTMLElement>("#track-preview")!;
       const message = main.querySelector<HTMLElement>("#track-status")!;
       const mount = () => {
         track.removeAttribute("data-ready");
         main.querySelector("#retry-preview")?.setAttribute("hidden", "");
-        message.textContent = "Loading track preview…";
+        message.textContent = "Preparing your circuit…";
         mountTrackPreview(track, {
           reducedMotion: reducedMotion(),
           effects: settings.effects,
           playerKart: selectedKart,
           track: selectedTrack,
-          onReady: (text) => {
+          onReady: () => {
             if (currentGeneration === generation) {
-              message.textContent = text;
+              message.textContent = "";
               main.querySelector("#retry-preview")?.setAttribute("hidden", "");
             }
           },
@@ -193,9 +270,24 @@ export function mountApp(root: HTMLElement): () => void {
             return tracks.save(id);
           },
         },
+        () => {
+          const pace = pendingPace;
+          pendingPace = undefined;
+          return pace;
+        },
       );
     if (route === "settings") {
       clearScreen = connectAudioControls(main, audio);
+      main
+        .querySelector<HTMLInputElement>("#skip-opening")!
+        .addEventListener("change", (event) => {
+          const saved = saveLearning({
+            skipIntro: (event.target as HTMLInputElement).checked,
+          });
+          main.querySelector("#opening-save-status")!.textContent = saved
+            ? "Opening preference saved on this browser."
+            : "Applied for this visit; browser storage is unavailable.";
+        });
       main.querySelector("form")!.addEventListener("change", () => {
         const form = new FormData(main.querySelector("form")!);
         settings = {
@@ -262,13 +354,13 @@ function hubScreen(selectedKart: KartId, selectedTrack: TrackId): string {
   const kart = STARTER_KARTS.find((kart) => kart.id === selectedKart)!;
   return `
     <section class="hero reveal" aria-labelledby="hero-title">
-      <div><p class="eyebrow"><span class="status-dot"></span> FIND YOUR RHYTHM. OWN THE ROAD.</p><h1 id="hero-title">YOUR WORDS.<br /><span>FULL THROTTLE.</span></h1><p class="hero-copy">Turn every keystroke into momentum.<br />Take on four CPUs. Build clean speed.</p><a class="button button--primary" href="#/race">Start a race ${ARROW}</a></div>
+      <div><p class="eyebrow"><span class="status-dot"></span> FIND YOUR RHYTHM. OWN THE ROAD.</p><h1 id="hero-title">YOUR WORDS.<br /><span>FULL THROTTLE.</span></h1><p class="hero-copy">Turn every keystroke into momentum.<br />Take on four CPUs. Build clean speed.</p><a class="button button--primary" href="#/race">Start a race ${ARROW}</a><div class="onboarding-links"><a href="#/rules">How to play</a><a href="#/tutorial">Guided tutorial</a><a href="#/calibration">Find my pace</a></div></div>
       <aside class="hero-note"><span class="garage-label">${kart.name.toUpperCase()} / YOUR STARTING LINE</span><img class="garage-kart ${kart.id === "volt-kart" ? "kart-art--starter" : ""}" src="${import.meta.env.BASE_URL}assets/karts/${kart.file}" alt="${kart.name} — ${kart.style}" /><span>Four opponents. One passage.<br />Your pace sets your progress.</span></aside>
     </section>
     <section class="track-card reveal" aria-label="Animated track preview">
-      <div class="section-top"><span class="eyebrow"><span class="status-dot"></span> TRACK PREVIEW</span>${trackChoices(selectedTrack, "hub-track-select")}</div>
+      <div class="section-top"><span class="eyebrow"><span class="status-dot"></span> YOUR CIRCUIT</span>${trackChoices(selectedTrack, "hub-track-select")}</div>
       <div id="track-preview" class="track-preview" role="img" aria-label="Your selected kart on an illustrated city road, with two decorative rival karts"></div>
-      <div class="track-bottom"><span id="track-status" role="status">Loading track preview…</span><span>Scene preview · no race in progress</span><button id="retry-preview" class="text-button" hidden>Retry preview</button></div>
+      <div class="track-bottom"><span id="track-status" role="status">Preparing your circuit…</span><button id="retry-preview" class="text-button" hidden>Retry preview</button></div>
     </section>
     <section class="campaign-section reveal" aria-labelledby="campaign-heading"><div class="section-heading"><div><p class="eyebrow">THREE GEARS. ONE JOURNEY.</p><h2 id="campaign-heading">Find your starting line.</h2></div><span class="pill">CAMPAIGNS IN DEVELOPMENT</span></div><div class="campaign-grid">
       ${[
@@ -374,7 +466,10 @@ function connectKeyboard(main: HTMLElement): () => void {
   return () => controller.abort();
 }
 
-function settingsScreen(settings: UserSettings): string {
+function settingsScreen(
+  settings: UserSettings,
+  learning: OnboardingPreferences,
+): string {
   return `<section class="page-heading reveal"><a class="back-link" href="#/hub">← Back to the hub</a><p class="eyebrow">MAKE IT YOUR OWN</p><h1>Your ride.<br /><span>Your settings.</span></h1><p>Comfort first. Find the setup that works for you.</p></section><section class="settings-panel reveal"><form><div class="setting-row"><div><label for="motion">Motion</label><p>Choose how much the track and interface move.</p></div><select name="motion" id="motion">${[
     ["system", "Follow device"],
     ["reduced", "Reduced motion"],
@@ -386,5 +481,5 @@ function settingsScreen(settings: UserSettings): string {
     )
     .join(
       "",
-    )}</select></div><div class="setting-row"><div><label for="effects">Track effects</label><p>Use fewer particles for a lighter ride.</p></div><select name="effects" id="effects"><option value="high" ${settings.effects === "high" ? "selected" : ""}>High</option><option value="low" ${settings.effects === "low" ? "selected" : ""}>Low</option></select></div><div class="setting-row"><div><label for="large-text">Larger typing text</label><p>Make passages and typing easier to read.</p></div><input type="checkbox" name="largeText" id="large-text" ${settings.largeText ? "checked" : ""} /></div></form><p id="save-status" class="help" role="status">Preferences are stored on this browser. Cloud saves are not available in this preview.</p>${audioControls()}</section>`;
+    )}</select></div><div class="setting-row"><div><label for="effects">Track effects</label><p>Use fewer particles for a lighter ride.</p></div><select name="effects" id="effects"><option value="high" ${settings.effects === "high" ? "selected" : ""}>High</option><option value="low" ${settings.effects === "low" ? "selected" : ""}>Low</option></select></div><div class="setting-row"><div><label for="large-text">Larger typing text</label><p>Make passages and typing easier to read.</p></div><input type="checkbox" name="largeText" id="large-text" ${settings.largeText ? "checked" : ""} /></div></form><p id="save-status" class="help" role="status">Preferences are stored on this browser. Cloud saves are not available in this preview.</p>${audioControls()}<section class="opening-settings" aria-labelledby="opening-settings-title"><h2 id="opening-settings-title">Opening & learning</h2><label class="guide-check"><input type="checkbox" id="skip-opening" ${learning.skipIntro ? "checked" : ""}/>Skip opening next time</label><p id="opening-save-status" class="help" role="status">${learning.tutorialComplete ? "Tutorial completed. Replay anytime." : "Tutorial is optional and can be replayed anytime."}</p><div class="setting-row"><div><span class="setting-label">Replay opening</span><p>Watch the TurboType title sequence again.</p></div><a class="button button--secondary" href="#/intro">Replay opening</a></div><div class="setting-row"><div><span class="setting-label">Welcome</span><p>Return to your starting line.</p></div><a class="button button--secondary" href="#/welcome">Welcome</a></div><div class="setting-row"><div><span class="setting-label">How to play</span><p>Read the racing rules and controls.</p></div><a class="button button--secondary" href="#/rules">How to play</a></div><div class="setting-row"><div><span class="setting-label">Replay tutorial</span><p>Practice matching, correcting and building a clean streak.</p></div><a class="button button--secondary" href="#/tutorial">Replay tutorial</a></div><div class="setting-row"><div><span class="setting-label">Recalibrate pace</span><p>Try a thirty-second sample or choose CPU pace manually.</p></div><a class="button button--secondary" href="#/calibration">Recalibrate pace</a></div></section></section>`;
 }

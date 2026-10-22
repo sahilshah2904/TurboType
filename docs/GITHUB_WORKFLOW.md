@@ -1,5 +1,7 @@
 # TurboType GitHub workflow
 
+22 October 2026: accepted alpha.16 PR #5 merged as 1b832ce after exact-head run 39771450182 passed. Phase 6 alpha.17 uses codex/phase6-onboarding against main; its own checks/user review are required before merge. No Pages deployment exists.
+
 ## Repository and workspace
 
 - GitHub account: `sahilshah2904`, verified through the authenticated GitHub API during setup.

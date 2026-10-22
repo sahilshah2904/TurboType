@@ -1,12 +1,12 @@
 # Car selection and future campaign rewards
 
-Product decision: 21 October 2026. The user accepted the distinct alpha.11 cars, requested player choice, ten later locked vehicles with increasingly sporty styling, and sound controls only in Settings. This extends Phases 5/8/9 without renumbering the eleven phases.
+Product decision: 21 October 2026. The user accepted the distinct alpha.11 cars, requested player choice, ten later locked vehicles with increasingly varied showcase styling (the 22 October vehicle-family correction below supersedes sports-car-only briefs), and sound controls only in Settings. This extends Phases 5/8/9 without renumbering the eleven phases.
 
 ## Available now — alpha.13
 
 Quick Race has five starter cars, all available: Volt Kart, Neon Fox, Apex Nova, Comet and Volt Electric. Choose using the illustrated native radio group before starting a new race. Starting the countdown locks the chosen car for the entire run, including pauses and navigation away/back. Pause does not offer car selection. Retry/new race clears the run and reopens selection, defaulting to the remembered choice. Changing the starter model before countdown updates the existing scene without changing CPU schedules or race rules. Refresh discards the unsaved run under the existing policy.
 
-All cars have identical gameplay performance. Progress comes from correct typing. Increasingly advanced cars are visual rewards, not speed/accuracy/nitro advantages; this keeps later friends multiplayer fair.
+All cars have identical gameplay performance. Progress comes from correct typing. Increasingly varied vehicles are visual rewards, not speed/accuracy/nitro advantages; this keeps later friends multiplayer fair.
 
 The chosen model is used for the player. The CPUs receive the remaining four models in catalog order; driver IDs, names and seeded difficulty stay independent of model assignment. The hub hero and decorative preview reflect your choice. Sound controls, enable/mute and volume sliders exist only in Settings; enabled music continues across browsing/racing under the existing lifecycle rules. The hub has no radio section or sound controls.
 
@@ -16,20 +16,20 @@ The chosen model is used for the player. The CPUs receive the remaining four mod
 
 **22 October 2026 user correction supersedes the original ten-car/global-clear plan.** Easy, Medium and Hard each have 100 main levels. Each category awards its own new car at **15, 30, 45, 60, 75 and 90 unique eligible main-level clears**: six per category, **18 reward cars and 23 cars total** including the five starters. Clears in another category never advance this counter. Level 100 retains campaign/finale rewards but does not add an extra car under the every-15 rule. Model names/directions below are authoring briefs; art and unlock behavior are future Phase 8/9 work.
 
-| Clears within category | Easy reward ID / working name | Medium reward ID / working name | Hard reward ID / working name | Art progression |
+| Clears within category | Easy reward ID / working name | Medium reward ID / working name | Hard reward ID / working name | Proposed family variety (Easy / Medium / Hard) |
 | --- | --- | --- | --- | --- |
-| 15 | reward-easy-015 / Streetline RS | reward-medium-015 / Rallysport R | reward-hard-015 / Phantom RX | Distinct sporty street/rally/track bodies |
-| 30 | reward-easy-030 / Vector GT | reward-medium-030 / Apex Sprint | reward-hard-030 / Shadow GT | Lower chassis, sculpted sidepods |
-| 45 | reward-easy-045 / Circuit S | reward-medium-045 / Circuit GTR | reward-hard-045 / Vortex Hyper | Larger aero, diffuser, carbon trim |
-| 60 | reward-easy-060 / Aero V6 | reward-medium-060 / Aero V8 | reward-hard-060 / Ion Prototype | Advanced supercar/prototype forms |
-| 75 | reward-easy-075 / Horizon R | reward-medium-075 / Horizon RX | reward-hard-075 / Zenith R | Dramatic canopy, distinctive lighting |
-| 90 | reward-easy-090 / Summit GT | reward-medium-090 / Summit Hyper | reward-hard-090 / Zenith X | Category showcase designs, most advanced in their series |
+| 15 | reward-easy-015 / Streetline RS | reward-medium-015 / Trailbreaker XR | reward-hard-015 / Aero Board | Sports coupe / monster truck / hoverboard |
+| 30 | reward-easy-030 / Vector GT | reward-medium-030 / Apex Sprint | reward-hard-030 / Sky Phantom | Rally buggy / gravity board / flying car |
+| 45 | reward-easy-045 / Circuit S | reward-medium-045 / Circuit GTR | reward-hard-045 / Vortex Hyper | Drift trike / six-wheel crawler / jet kart |
+| 60 | reward-easy-060 / Aero Skimmer | reward-medium-060 / Aero Wing | reward-hard-060 / Ion Prototype | Hovercraft / flying roadster / anti-gravity pod |
+| 75 | reward-easy-075 / Horizon R | reward-medium-075 / Horizon RX | reward-hard-075 / Zenith Board | Compact monster truck / rally-raid truck / showcase hoverboard |
+| 90 | reward-easy-090 / Summit GT | reward-medium-090 / Summit Hyper | reward-hard-090 / Zenith X | Transforming car / hover GT / futuristic showcase craft |
 
 Count **distinct eligible main-level IDs separately within each category**, using the campaign's clear rules. For example, 14 Easy clears plus 1 Medium clear earns neither category's first car; 15 Easy clears earns only reward-easy-015. Replays, extra stars, Quick Race, Practice and bonus events do not increase these counts. Skipped, failed, practice-only or assisted runs do not create qualifying receipts. Stars/chapter/finale rewards remain separate. Retire the never-shipped reward-001–reward-010 IDs; there are no persisted entitlements to migrate today. If an external draft ever used them, do not silently map aggregate ownership onto category rewards.
 
 ## Delivery and verification — Phases 8/9
 
-- Author/review all eighteen distinct original vehicle bodies/parts with increasingly sporty silhouettes; export/anchor/provenance, reduced/low rendering and loading recovery follow the fleet pipeline. Avoid preloading all twenty-three high-resolution models into every race.
+- Author/review all eighteen distinct original vehicle bodies/parts across wheeled, hover, board and flight families; export/anchor/provenance, reduced/low rendering and loading recovery follow the fleet pipeline. Avoid preloading all twenty-three high-resolution models into every race.
 - Show locked garage entries with category, silhouette, required milestone and progress such as “Easy: 14 / 15 levels”; no purchase or usable selection until earned. Unlock notifications need reduced-motion and accessible text variants. Keep the hub focused on play; detailed collection management belongs in Garage.
 - Derive ownership from versioned campaign clear receipts, not a user-editable selected-car preference or credit balance. Award once per stable reward ID, recover unlocks after interrupted writes and support save migration/import. Legacy players retain valid starter selections; unavailable or not-owned selections fall back safely.
 - Optional account/cloud progress must merge category-qualified cleared-level sets without double-counting repeats across devices or adding progress to another category. Server policies validate ownership where online features depend on it. Friends multiplayer shares appearance only after authoritative entitlement checks; car choice never modifies race simulation.
@@ -42,3 +42,11 @@ Tracked as TT-911 in [BACKLOG.md](../BACKLOG.md), alongside campaign completion/
 The eighteen category-specific car rewards stay at 15/30/45/60/75/90. Track rewards are independent, at 10/25/40/55/70/85/100 per category: 21 reward tracks plus five starters, **26 tracks total** alongside **23 cars total**. This supersedes the paired car/track plan; a car unlock does not award a track and a track unlock does not award a car. At 100 clears, award the seventh category track but no seventh car. Derive separate idempotent entitlements from validated category clear receipts, with independent reward IDs and interrupted-write/cloud recovery.
 
 The source category controls earning only; once owned, either cosmetic is usable in every category on already-unlocked levels, including replays. Replaying never creates another qualifying clear or unlocks a level. See [TRACK_PROGRESSION.md](TRACK_PROGRESSION.md) for starter implementation, all twenty-one proposed track IDs/briefs and phase dependencies. No campaign entitlements are implemented by the alpha.16 starter-track preference.
+
+## Vehicle-family correction — 22 October 2026
+
+The user explicitly requests monster trucks, hoverboards, flying cars and other creative silhouettes, rather than eighteen variations of the same car structure. The working briefs above are revised proposals, not final approved artwork. Original sports cars can remain part of the mix. Keep the existing eighteen stable reward IDs, six per category at 15/30/45/60/75/90, and 23 total starter/reward vehicles. Family variety creates no additional milestone or paid content.
+
+Phase 8 art authoring should define vehicle families and a presentation manifest (wheeled, hover/board, flight), optional axle lists rather than exactly two wheels, ground/shadow anchors, cosmetic ride height, exhaust/lift sockets, bounded idle movement and a common five-lane footprint. A monster truck needs larger independently rotating tyres/suspension; hoverboards and flying cars need lift/shadows rather than fake wheels. Flight/hover stays a cosmetic lane-relative animation: no jumping past letters, shortcuts, speed, hitbox or multiplayer advantage. Cars remains the familiar collection label until a later Garage naming review; internal stable IDs and entitlement rules do not depend on body shape. The renderer/manifest extension belongs to Phase 8/9 implementation, not a claim that these vehicles already exist.
+
+Phase 9 owns preview/locked silhouettes, selection, receipts/guest/cloud compatibility and accessibility fallbacks across all families. Review representative original family silhouettes before producing all eighteen, with laptop memory, thumbnail readability, road/sky contrast, selected-car lock and multiplayer entitlement checks. Current five accepted starters and the purple opening remain unchanged.

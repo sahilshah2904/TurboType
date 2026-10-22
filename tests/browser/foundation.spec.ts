@@ -5,7 +5,7 @@ test("loads the real track asset at the project path without overflow", async ({
 }) => {
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
-  await page.goto("./");
+  await page.goto("./#/hub");
   await expect(
     page.getByRole("heading", { name: "YOUR WORDS. FULL THROTTLE." }),
   ).toBeVisible();
@@ -97,7 +97,7 @@ test("failed artwork offers retry while other screens remain usable", async ({
   await page.route("**/assets/karts/parts/volt-kart-body.webp", (route) =>
     route.abort(),
   );
-  await page.goto("./");
+  await page.goto("./#/hub");
   await expect(page.locator("#track-status")).toContainText(
     "artwork could not load",
   );

@@ -18,6 +18,7 @@ test("five starter tracks share preview/race choice and keep a running race lock
   await page.goto("./#/race");
   await ready(page);
   const canvas = await page.locator("#race-track canvas").elementHandle();
+  await page.getByText("Advanced / Replay", { exact: true }).click();
   await page.getByLabel("Race seed", { exact: true }).fill("42");
   await page.getByLabel("Race seed", { exact: true }).press("Tab");
   for (const id of tracks) {

@@ -1,3 +1,4 @@
+import { RaceAtmosphere } from "./race-atmosphere";
 import { trackTheme, type TrackId } from "../content/track-catalog";
 import { drawTrackScenery } from "./track-scenery";
 import type { SoloRace } from "../core/solo-race";
@@ -47,6 +48,7 @@ export async function mountRaceTrack(
     private backdrop!: Phaser.GameObjects.Graphics;
     private city!: Phaser.GameObjects.Graphics;
     private road!: Phaser.GameObjects.Graphics;
+    private atmosphere!: RaceAtmosphere;
     private gate!: Phaser.GameObjects.Graphics;
     private particles!: Phaser.GameObjects.Graphics;
     private title!: Phaser.GameObjects.Text;
@@ -68,6 +70,7 @@ export async function mountRaceTrack(
       this.backdrop = this.add.graphics();
       this.city = this.add.graphics();
       this.road = this.add.graphics();
+      this.atmosphere = new RaceAtmosphere(this);
       this.gate = this.add.graphics();
       this.title = this.add
         .text(0, 0, "NEON HARBOR", {
@@ -197,7 +200,18 @@ export async function mountRaceTrack(
       const step = Math.min(delta, 50),
         active = s.state === "racing",
         decorative = active && !reduced;
-      this.city.x = reduced ? 0 : -(s.progress * w * 0.6) % (w * 0.5);
+      const air = this.atmosphere.update({
+        width: w,
+        height: h,
+        delta: step,
+        racing: active,
+        reduced,
+        high,
+        wpm: s.recentWpm,
+        ready: s.state === "ready",
+        tint: trackTheme(this.selectedTrack).detail,
+      });
+      this.city.x = reduced ? 0 : -(air.travel * 0.16) % (w * 0.5);
       this.road
         .clear()
         .fillStyle(trackTheme(this.selectedTrack).road)
@@ -206,7 +220,7 @@ export async function mountRaceTrack(
         .fillStyle(trackTheme(this.selectedTrack).edge)
         .fillRect(0, horizon, w, 3);
       this.road.lineStyle(1, 0xbcb0b7, 0.3);
-      const offset = reduced ? 0 : (s.elapsedMs * 0.15) % 100;
+      const offset = reduced ? 0 : air.travel % 100;
       for (let i = 1; i <= 5; i++)
         for (let x = -100; x < w + 100; x += 100)
           this.road.lineBetween(
@@ -215,14 +229,6 @@ export async function mountRaceTrack(
             x + 42 - offset,
             horizon + laneHeight * i,
           );
-      if (decorative && high && s.recentWpm > 25) {
-        this.road.lineStyle(1, 0x78cddd, 0.15);
-        for (let i = 0; i < 9; i++) {
-          const x = (((i * 157 - s.elapsedMs * 0.3) % w) + w) % w;
-          const y = horizon + 15 + ((i * 43) % (h - horizon - 15));
-          this.road.lineBetween(x, y, x + 45, y);
-        }
-      }
       this.gate.clear();
       const playerX = reduced ? w * (0.12 + s.progress * 0.76) : w * 0.43;
       const finishX = reduced
@@ -342,6 +348,9 @@ export async function mountRaceTrack(
       this.qualityAt += step;
       if (this.qualityAt >= 100) {
         this.qualityAt = 0;
+        parent.dataset.wind = String(air.count);
+        parent.dataset.windSky = String(air.sky);
+        parent.dataset.windModel = "layered-atmosphere";
         parent.dataset.particles = String(this.pool.length);
         parent.dataset.motion = reduced ? "reduced" : "full";
         parent.dataset.effects = options.effects();
