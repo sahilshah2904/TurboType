@@ -1,5 +1,11 @@
 # TurboType project status
 
+## Alpha.19 purple-car opening — 22 October 2026
+
+The latest user request supersedes alpha.18's simple title-only reveal: the accepted purple Volt Electric enters fast from the left, brakes at the middle, holds briefly, spins its independent tyres with burnout smoke, rolls back slightly and launches right as TURBOTYPE reveals. Original three-layer SVG flames burn along its invisible middle road and around the title. Choreography remains 5.6 seconds after its original body/wheel artwork decodes; Skip stays immediately available. Low/Reduced show the finished static title without the car/fire sequence. A four-second decode watchdog or failed opening art falls back to the static title with feedback and an available Enter action. Route cleanup cancels both timers and ignores stale image promises.
+
+This remains Phase 6 refinement on codex/phase6-onboarding / open PR #6, pending user visual acceptance and integration. No new raster assets, dependencies, copyrighted footage, audio, gameplay rules, ownership or storage were added. Purple in this opening is a fixed cinematic role; the player's selected race car is preserved. Evidence and captures: docs/TESTING.md / docs/images/alpha19; the previous alpha.18 opening frames are historical.
+
 ## Alpha.18 visual follow-up — 22 October 2026
 
 The user requested a full-window, five-to-six-second game-title opening instead of the alpha.17 illustrated panels, more visible wind during the five-car race, no Hub preview labels and row-based learning actions in Settings. Alpha.18 replaces the panels with an original **5.6-second TurboType title reveal**: dark start, emblem emergence, slow expanding name, cyan/crimson light sweeps and final tagline/Enter hold. It is a real-time browser animation, with no film download or copied Rockstar artwork. Skip remains available immediately; Enter appears after the sequence. Low effects/Reduced motion show the finished title immediately. Replay/skip-visit/loading/failure behavior is preserved.

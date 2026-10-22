@@ -2,11 +2,25 @@ import { type KartId } from "../content/kart-catalog";
 import type { OnboardingPreferences } from "../storage/onboarding";
 import { prepareEntrance } from "./entrance-assets";
 
+/** Original vector flame ribbons; reused at road level and behind the title. */
+function fireRibbon(id: string): string {
+  const ribbon = (height: number, inset: number) => {
+    let path = "M0 160 L0 132";
+    for (let i = 0; i < 20; i++) {
+      const x = i * 60,
+        tip = 160 - height * (0.55 + ((i * 7) % 9) / 20);
+      path += ` Q${x + 10} 120 ${x + 24} ${tip} Q${x + 18 + inset} ${tip + 45} ${x + 43} 130 Q${x + 49} 110 ${x + 60} 135`;
+    }
+    return path + " L1200 160 Z";
+  };
+  return `<svg class="intro-fire-svg" viewBox="0 0 1200 160" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="${id}" x2="0" y2="1"><stop stop-color="#ffb237"/><stop offset=".5" stop-color="#ff5a13"/><stop offset="1" stop-color="#d82714"/></linearGradient></defs><g class="intro-fire-outer"><path d="${ribbon(155, 0)}" fill="url(#${id})"/></g><g class="intro-fire-inner"><path d="${ribbon(95, 8)}" fill="#ffca54"/></g><g class="intro-fire-core"><path d="${ribbon(40, 12)}" fill="#fff0ad"/></g></svg>`;
+}
 export function entranceScreen(_kartId: KartId): string {
-  return `<section class="entrance-screen" aria-labelledby="entrance-title">
+  return `<section class="entrance-screen" data-cinema="preparing" aria-labelledby="entrance-title">
     <div class="entrance-art" aria-hidden="true"><div class="intro-halo"></div><div class="intro-light intro-light--cyan"></div><div class="intro-light intro-light--red"></div><div class="intro-road"></div></div>
-    <div class="entrance-copy"><img class="intro-emblem" src="${import.meta.env.BASE_URL}assets/brand-mark.svg" width="100" height="100" alt=""/><p class="intro-kicker">IGNITION / PRECISION / MOMENTUM</p><h1 id="entrance-title" aria-label="TurboType"><span>TURBO</span><span>TYPE</span></h1><p class="intro-tagline">YOUR WORDS. FULL THROTTLE.</p>
-    <div class="entrance-actions"><button id="enter-turbotype" class="button button--primary">Enter TurboType →</button></div>
+    <div class="intro-driving-scene" aria-hidden="true"><div class="intro-track-fire">${fireRibbon("intro-road-flames")}</div><div class="intro-track-glow"></div><div class="intro-car"><div class="intro-burnout">${Array.from({ length: 5 }, (_, i) => `<i style="--smoke:${i}"></i>`).join("")}</div><div class="intro-car-chassis"><div class="intro-exhaust"></div><img class="intro-car-body" src="${import.meta.env.BASE_URL}assets/karts/parts/volt-rival-body.webp" alt=""/></div><div class="intro-wheel intro-wheel--rear"><img src="${import.meta.env.BASE_URL}assets/karts/parts/volt-rival-wheel.webp" alt=""/></div><div class="intro-wheel intro-wheel--front"><img src="${import.meta.env.BASE_URL}assets/karts/parts/volt-rival-wheel.webp" alt=""/></div></div></div>
+    <div class="entrance-copy"><img class="intro-emblem" src="${import.meta.env.BASE_URL}assets/brand-mark.svg" width="100" height="100" alt=""/><p class="intro-kicker">IGNITION / PRECISION / MOMENTUM</p><div class="intro-title-wrap"><div class="intro-logo-fire intro-logo-fire--crown" aria-hidden="true">${fireRibbon("intro-crown-flames")}</div><div class="intro-logo-fire" aria-hidden="true">${fireRibbon("intro-logo-flames")}</div><h1 id="entrance-title" aria-label="TurboType"><span>TURBO</span><span>TYPE</span></h1></div><p class="intro-tagline">YOUR WORDS. FULL THROTTLE.</p>
+    <p id="intro-cinema-status" class="intro-cinema-status" role="status">Preparing opening…</p><div class="entrance-actions"><button id="enter-turbotype" class="button button--primary">Enter TurboType →</button></div>
     <div id="entrance-loading" hidden><label for="entrance-progress">Preparing your starting line</label><progress id="entrance-progress" max="5" value="0"></progress><p id="entrance-status" role="status">Waiting to prepare essential artwork.</p></div>
     <div id="entrance-error" hidden><p id="entrance-error-message" role="alert"></p><button id="retry-entrance" class="button button--primary">Retry loading</button><a href="#/rules">Read the rules</a><a href="#/keyboard">Open keyboard check</a></div></div>
     <button id="skip-entrance" class="text-button intro-skip">Skip opening</button></section>`;
@@ -25,14 +39,48 @@ export function connectEntrance(
   const still =
     document.documentElement.dataset.motion === "reduced" ||
     document.documentElement.dataset.effects === "low";
+  let titleTimer: number | undefined, artworkTimer: number | undefined;
+  const cinemaStatus = main.querySelector<HTMLElement>("#intro-cinema-status")!;
   const finishTitle = () => {
     screen.dataset.ended = "true";
     enter.hidden = false;
   };
+  const staticTitle = (message = "") => {
+    clearTimeout(artworkTimer);
+    screen.dataset.cinema = "still";
+    cinemaStatus.textContent = message;
+    finishTitle();
+  };
   enter.hidden = !still;
-  let titleTimer: number | undefined;
-  if (still) finishTitle();
-  else titleTimer = window.setTimeout(finishTitle, 5600);
+  if (still) staticTitle();
+  else {
+    // The choreography starts only after all independent car parts decode.
+    artworkTimer = window.setTimeout(() => {
+      if (!abort.signal.aborted)
+        staticTitle(
+          "Opening artwork took too long. You can still enter TurboType.",
+        );
+    }, 4000);
+    void Promise.all(
+      Array.from(main.querySelectorAll<HTMLImageElement>(".intro-car img")).map(
+        (img) => img.decode(),
+      ),
+    )
+      .then(() => {
+        if (abort.signal.aborted || screen.dataset.cinema !== "preparing")
+          return;
+        clearTimeout(artworkTimer);
+        cinemaStatus.textContent = "";
+        screen.dataset.cinema = "playing";
+        titleTimer = window.setTimeout(finishTitle, 5600);
+      })
+      .catch(() => {
+        if (!abort.signal.aborted && screen.dataset.cinema === "preparing")
+          staticTitle(
+            "Opening artwork could not load. You can still enter TurboType.",
+          );
+      });
+  }
   let skip = false,
     loading = false;
   const find = <T extends HTMLElement>(id: string) =>
@@ -84,7 +132,7 @@ export function connectEntrance(
     () => {
       skip = true;
       clearTimeout(titleTimer);
-      finishTitle();
+      staticTitle();
       main.querySelector(".entrance-art")!.setAttribute("hidden", "");
       find("#skip-entrance").textContent =
         "Opening skipped · preparing essentials";
@@ -104,6 +152,7 @@ export function connectEntrance(
   );
   return () => {
     clearTimeout(titleTimer);
+    clearTimeout(artworkTimer);
     abort.abort();
     attempt?.abort();
   };

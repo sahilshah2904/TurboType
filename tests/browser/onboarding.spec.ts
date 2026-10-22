@@ -25,6 +25,26 @@ test("first entry loads real essentials, welcomes once and remembers the returni
   await page.getByRole("link", { name: "Back to hub", exact: true }).click();
   await page.goto("./");
   await expect(page.locator("html")).toHaveAttribute("data-route", "hub");
+});
+
+test("returning visitors can replay the opening without repeating welcome", async ({
+  page,
+}) => {
+  await page.addInitScript(() =>
+    localStorage.setItem(
+      "turbotype:onboarding:v1",
+      JSON.stringify({
+        schemaVersion: 1,
+        welcomeSeen: true,
+        tutorialComplete: false,
+        skipIntro: true,
+        preferredPace: "easy",
+        calibration: null,
+      }),
+    ),
+  );
+  await page.goto("./");
+  await expect(page.locator("html")).toHaveAttribute("data-route", "hub");
   await page.getByRole("link", { name: "Settings", exact: true }).click();
   await expect(page.getByLabel("Skip opening next time")).toBeChecked();
   await page.getByRole("link", { name: "Replay opening" }).click();
@@ -34,6 +54,7 @@ test("first entry loads real essentials, welcomes once and remembers the returni
     timeout: 12000,
   });
 });
+
 test("skipping optional panels still waits for required assets", async ({
   page,
 }) => {
@@ -296,8 +317,14 @@ test("active lessons keep typing and pause controls in view on a small laptop wi
 test("opening plays a full-window 5.6-second title reveal and reduced motion skips the wait", async ({
   page,
 }) => {
-  await page.clock.install();
+  const start = new Date("2026-10-22T12:00:00Z");
+  await page.clock.install({ time: start });
+  await page.clock.pauseAt(new Date(start.getTime() + 1000));
   await page.goto("./#/intro");
+  await expect(page.locator(".entrance-screen")).toHaveAttribute(
+    "data-cinema",
+    "playing",
+  );
   await expect(
     page.getByRole("heading", { name: "TurboType", exact: true }),
   ).toBeVisible();
@@ -339,4 +366,75 @@ test("opening plays a full-window 5.6-second title reveal and reduced motion ski
     .locator(".entrance-screen")
     .evaluate((el) => el.getAnimations({ subtree: true }).length);
   expect(animations).toBe(0);
+});
+
+test("purple opening car brakes, burns out, rolls back and reveals the flaming title on launch", async ({
+  page,
+}) => {
+  await page.goto("./#/intro");
+  await expect(page.locator(".entrance-screen")).toHaveAttribute(
+    "data-cinema",
+    "playing",
+  );
+  const sample = (ms: number) =>
+    page.locator(".entrance-screen").evaluate((screen, time) => {
+      for (const animation of screen.getAnimations({ subtree: true })) {
+        animation.pause();
+        animation.currentTime = time;
+      }
+      const car = screen.querySelector<HTMLElement>(".intro-car")!;
+      const bounds = car.getBoundingClientRect();
+      return {
+        x: bounds.x + bounds.width / 2,
+        wheel: getComputedStyle(screen.querySelector(".intro-wheel img")!)
+          .transform,
+        title: Number(getComputedStyle(screen.querySelector("h1")!).opacity),
+        trail: Number(
+          getComputedStyle(screen.querySelector(".intro-track-fire")!).opacity,
+        ),
+        fire: Number(
+          getComputedStyle(screen.querySelector(".intro-logo-fire")!).opacity,
+        ),
+      };
+    }, ms);
+  const width = page.viewportSize()!.width;
+  expect((await sample(0)).x).toBeLessThan(0);
+  const halt = await sample(1600),
+    rev = await sample(2100);
+  expect(halt.x).toBeCloseTo(width / 2, 0);
+  expect(rev.x).toBeCloseTo(halt.x, 0);
+  expect(rev.wheel).not.toBe(halt.wheel);
+  expect(rev.trail).toBeGreaterThan(0.9);
+  expect(rev.title).toBe(0);
+  expect((await sample(3100)).x).toBeLessThan(halt.x - width * 0.05);
+  expect((await sample(4300)).x).toBeGreaterThan(width);
+  const reveal = await sample(5100);
+  expect(reveal.title).toBe(1);
+  expect(reveal.fire).toBeGreaterThan(0.8);
+  await expect(page.locator(".intro-car-body")).toHaveAttribute(
+    "src",
+    /volt-rival-body/,
+  );
+});
+
+test("missing purple opening artwork offers a static title without blocking the game", async ({
+  page,
+}) => {
+  await page.route("**/assets/karts/parts/volt-rival-body.webp", (route) =>
+    route.abort(),
+  );
+  await page.goto("./#/intro");
+  await expect(page.locator(".entrance-screen")).toHaveAttribute(
+    "data-cinema",
+    "still",
+  );
+  await expect(page.locator("#intro-cinema-status")).toContainText(
+    "could not load",
+  );
+  await expect(page.locator(".intro-driving-scene")).toBeHidden();
+  await expect(page.locator("#enter-turbotype")).toBeVisible();
+  await page.getByRole("button", { name: "Enter TurboType" }).click();
+  await expect(page.locator("html")).toHaveAttribute("data-route", "welcome", {
+    timeout: 12000,
+  });
 });

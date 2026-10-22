@@ -1,5 +1,9 @@
 # TurboType future work backlog
 
+## Purple-car opening refinement — alpha.19
+
+- [x] TT-606: Requested purple-car arrival/brake/burnout/short reverse/rightward launch with blazing road trails and animated fire around the revealed game title. Implemented in existing PR #6 with original parts and SVG fire; full check passes 102 unit / 55 browser cases, with final CSS/capture evidence in docs/TESTING.md. User acceptance/integration remain pending. Fixed cinematic car never overwrites the selected racing car.
+
 ## Requested Phase 6 refinement — alpha.18
 
 - [x] TT-605: User requested full-window 5.6-second title animation, richer bounded race airflow, removal of Hub preview labels and setting-row learning actions. Implemented on the existing PR #6; full local check passes 102 unit / 52 browser cases; final validation/captures in docs/TESTING.md. User visual acceptance remains pending. This refines TT-601/604 and TT-505/530 presentation without starting maps or changing race rules.
