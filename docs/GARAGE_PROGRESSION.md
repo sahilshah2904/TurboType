@@ -37,6 +37,8 @@ Count **distinct eligible main-level IDs separately within each category**, usin
 
 Tracked as TT-911 in [BACKLOG.md](../BACKLOG.md), alongside campaign completion/progression tasks. Current selector and Settings-only audio are TT-523/524.
 
-## Paired tracks and global use — 22 October 2026
+## Staggered tracks and global use — corrected 22 October 2026
 
-Each of the eighteen planned category-specific car milestones also unlocks a distinct track, giving 23 cars and 23 tracks including five starters of each. The source category controls earning only; once owned, either cosmetic is usable in every category on already-unlocked levels, including replays. Replaying never creates another qualifying clear or unlocks a level. Pair ownership must derive from the same milestone receipt and survive interrupted writes/cloud reconciliation together. See [TRACK_PROGRESSION.md](TRACK_PROGRESSION.md) for starter implementation, all eighteen proposed track IDs/briefs and phase dependencies. No campaign entitlements are implemented by the alpha.16 starter-track preference.
+The eighteen category-specific car rewards stay at 15/30/45/60/75/90. Track rewards are independent, at 10/25/40/55/70/85/100 per category: 21 reward tracks plus five starters, **26 tracks total** alongside **23 cars total**. This supersedes the paired car/track plan; a car unlock does not award a track and a track unlock does not award a car. At 100 clears, award the seventh category track but no seventh car. Derive separate idempotent entitlements from validated category clear receipts, with independent reward IDs and interrupted-write/cloud recovery.
+
+The source category controls earning only; once owned, either cosmetic is usable in every category on already-unlocked levels, including replays. Replaying never creates another qualifying clear or unlocks a level. See [TRACK_PROGRESSION.md](TRACK_PROGRESSION.md) for starter implementation, all twenty-one proposed track IDs/briefs and phase dependencies. No campaign entitlements are implemented by the alpha.16 starter-track preference.

@@ -1,5 +1,9 @@
 # TurboType future work backlog
 
+## Latest reward schedule correction — 22 October 2026
+
+Latest reward schedule correction (22 October 2026): cars unlock at **15/30/45/60/75/90** eligible unique main clears within each category (6 × 3 = 18 rewards; **23 cars total** with starters). Tracks unlock independently at **10/25/40/55/70/85/100** (7 × 3 = 21 rewards; **26 tracks total** with starters). This supersedes the paired-unlock plan: car and track rewards are staggered and have separate receipts/IDs. Any owned car or track remains usable across Easy/Medium/Hard on already-unlocked levels and replays; replays cannot inflate earning counters or unlock levels. Phase 7 briefing/replay selection, Phase 8 content and Phase 9 independent ownership/saves remain the delivery plan. Five starter tracks are implemented; future reward unlocks are not. See docs/TRACK_PROGRESSION.md.
+
 ## Alpha.15 requested presentation follow-up — 22 October 2026
 
 - [x] TT-529: Simplify final Race results to place, average WPM, accuracy and time; show completion for DNFs and retain accurate CPU outcomes in an optional disclosure. Alpha.15 implemented/tested; user accepts the presentation on 22 October, with alpha.16 expanded-standings refinement. Current regression evidence: 98 unit / 40 browser cases; docs/TESTING.md.
@@ -199,7 +203,7 @@ TT-906/907 may start earlier once contracts stabilize; cloud progress remains a 
 
 - [ ] TT-1201: Best-run ghost/replay racing using versioned, bounded recordings; assess storage before adoption.
 - [ ] TT-1202: Deterministic daily passages/challenges; decide local versus shared rankings and abuse validation before enabling online scores.
-- [ ] TT-1203: Optional additional tracks/weather/vehicles beyond the required 23-track/23-car collection, after core art/performance budgets are proven. Required paired tracks are TT-807/912, not optional.
+- [ ] TT-1203: Optional additional tracks/weather/vehicles beyond the required 26-track/23-car collection, after core art/performance budgets are proven. Required staggered track rewards are TT-807/912, not optional.
 - [ ] TT-1204: Animated pit-crew mascot or authored Rive/Lottie badges, only if asset quality and measured runtime cost justify another dependency.
 - [ ] TT-1205: Fuller offline/PWA installation support, distinct from continuing an already-loaded solo session during a cloud outage.
 - [ ] TT-1206: Broader language/input support with grapheme-aware content, composition behavior and fair scoring defined first.
@@ -229,13 +233,13 @@ The user accepted the restored colors and Ignition and authorized continued work
 
 - [x] TT-522: Investigated software-renderer callback tails with actual AMD Direct3D11 experiments, preserved variable/failed runs, reduced kart payload, bounded/streamed trace analysis and verified active race time. Final guarded all-preset samples plus the two-minute physical keyboard session and user acceptance satisfy Phase 5. Handler-to-next-rAF median 9.3ms/p95 18.8ms/max22.2ms is diagnostic, not physical presentation/OS-to-photon certification. Broader long-session/GPU/native-memory work remains TT-1003.
 
-## Required track collection follow-up — 22 October 2026
+## Required track collection follow-up — corrected 22 October 2026
 
 The user accepts the alpha.15 compact score/metrics presentation and requests standings expanded by default; the existing fire instrument is preserved. Alpha.16 adds five starter environments and remembered Hub/Quick Race choice. Reward tracks are required campaign scope, not an optional replacement for opening/tutorial work.
 
 - [ ] TT-531: Five distinct original starter track environments shared by Hub and Quick Race, remembered optional preference, ready-only race selection and active-race lock. Implemented and locally tested (98 unit / 40 browser cases); starter visuals await review. Evidence: docs/TESTING.md.
 - [ ] TT-705: Add owned car/track selection to campaign level briefing and replay across every category; ownership does not bypass locked nodes. Depends on maps and Phase 9 ownership contracts.
-- [ ] TT-807: Author/review eighteen original reward track environments/previews, stable car/track pair references and campaign default scenery. Validate references and lazy loading; no placeholder assets count as finished.
-- [ ] TT-912: Pair each category car milestone with its matching track at 15/30/45/60/75/90 eligible unique main clears. Globally usable across all categories on already-unlocked levels and replays; category earning counters remain isolated. Derive both entitlements idempotently from the same validated receipt, recover interrupted writes and merge guest/cloud data without replay inflation or locked-level bypass. Eighteen reward tracks plus five starters. See docs/TRACK_PROGRESSION.md; depends on TT-801/807/901–911.
+- [ ] TT-807: Author/review twenty-one original reward track environments/previews, independent category/threshold IDs and campaign default scenery. Seven per category at 10/25/40/55/70/85/100; 26 tracks total including five starters. Validate references and lazy loading; no placeholder assets count as finished.
+- [ ] TT-912: Unlock independent track rewards at 10/25/40/55/70/85/100 eligible unique main clears in each category: 21 rewards plus five starters, 26 tracks total. Supersedes paired car/track awards; cars stay at 15/30/45/60/75/90, 23 cars total. Derive separate idempotent entitlements from validated category-qualified clear receipts, recover interrupted writes and merge guest/cloud data safely. Globally usable on already-unlocked levels across categories and replays; no replay inflation or locked-level bypass. Verify 100 gives a track but no car. See docs/TRACK_PROGRESSION.md; depends on TT-801/807/901–911.
 
-TT-1203 now applies only to optional tracks/weather/vehicles beyond the required 23-track/23-car collection. Existing baseline phases remain complete for their agreed scope; new presentation acceptance and future campaign work are tracked separately.
+TT-1203 now applies only to optional tracks/weather/vehicles beyond the required 26-track/23-car collection. Existing baseline phases remain complete for their agreed scope; new presentation acceptance and future campaign work are tracked separately.

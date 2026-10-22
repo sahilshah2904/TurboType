@@ -1,12 +1,12 @@
 # TurboType — resume in a new chat
 
-## Alpha.16 — starter tracks and paired reward plan, 22 October 2026
+## Alpha.16 — starter tracks and staggered reward plan, 22 October 2026
 
 The user accepted the compact score/metrics presentation and requested Final standings expanded by default below it. This supersedes alpha.15's collapsed default; the disclosure can still be closed manually. Implemented on codex/results-and-fire-dial / open PR #5, which already contains alpha.15. No merge or deployment is implied by acceptance of the previous presentation.
 
 Five starter environments are now implemented for Hub preview and Quick Race: Neon Harbor, Coral Coast, Copper Canyon, Emerald Trail and Frostline Pass. Track choice is a validated optional browser preference; the active race pins its track through countdown/pause/navigation/final state, and retry applies the next chosen preference. Original bounded geometric scenery, road/edge palettes and shared renderer preserve the typing/CPU/rules behavior. Rules 3 and save/content 1 remain.
 
-New required future scope: eighteen reward tracks paired with the eighteen car milestones, for 23 tracks and 23 cars total. Earn at 15/30/45/60/75/90 eligible unique main clears independently in each category; globally use any owned pair across Easy/Medium/Hard on already-unlocked levels and replays. Replay cannot inflate earnings or open locked nodes. docs/TRACK_PROGRESSION.md records all IDs/briefs, receipt/cloud rules and phase placement: Phase 7 briefing/replay selection, Phase 8 authoring/defaults, Phase 9 ownership/unlocks/saves. No real campaign/reward unlock/save/cloud system is claimed by the starter preference. Keep Phase 6 opening/tutorial next in the main roadmap; preserve all eleven phases.
+Latest reward schedule correction (22 October 2026): cars unlock at **15/30/45/60/75/90** eligible unique main clears within each category (6 × 3 = 18 rewards; **23 cars total** with starters). Tracks unlock independently at **10/25/40/55/70/85/100** (7 × 3 = 21 rewards; **26 tracks total** with starters). This supersedes the paired-unlock plan: car and track rewards are staggered and have separate receipts/IDs. Any owned car or track remains usable across Easy/Medium/Hard on already-unlocked levels and replays; replays cannot inflate earning counters or unlock levels. Phase 7 briefing/replay selection, Phase 8 content and Phase 9 independent ownership/saves remain the delivery plan. Five starter tracks are implemented; future reward unlocks are not. See docs/TRACK_PROGRESSION.md.
 
 Manual review stays at the existing LAN link http://192.168.0.31:5173/TurboType/. The server and active feature checkout are preserved. See docs/TESTING.md for current verification; do not reuse alpha.15's hosted pass for this new source. Starter visuals await review; no repeat review of accepted cars/music/palette is needed.
 

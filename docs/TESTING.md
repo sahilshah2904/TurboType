@@ -1,5 +1,10 @@
 # Verification evidence
 
+## Reward schedule documentation correction — 22 October 2026
+
+Cars remain at 15/30/45/60/75/90 per category (18 rewards, 23 total). Tracks change to 10/25/40/55/70/85/100 per category (21 rewards, 26 total). Updated planning/status/handoff/backlog, independent proposed track IDs, level-100 behavior and future save/cloud/boundary requirements. The paired schedule is superseded; alpha.16 screenshots and source checks below are historical evidence for the five implemented starters, not implementation of the revised future reward system. This change edits Markdown only, with no app/version/storage/runtime change; arithmetic and manifest consistency were checked directly. Browser suites were not repeated for this documentation-only correction.
+
+
 ## Alpha.16 — expanded standings and five starter tracks, 22 October 2026
 
 Final `npm run check` passed formatting, types, build, **98 unit / 40 desktop browser cases**. New tests cover all five starter choices using the same canvas and seed, countdown/pause lock including synthetic changes, navigating through Hub with a next-race preference, retry application, reload, single-canvas cleanup and blocked writes. Unit checks round-trip five stable starter IDs and reject malformed/unsupported/reward preferences. The result regression now expects standings open for finishes and DNFs, allows manual collapse/reopen and verifies readable metrics/no horizontal overflow at 1024/1366/1440/1920 widths. Existing input, CPU/results freeze, art fallback, audio, car lock, dial, reduced/low, fullscreen and laptop checks also pass.

@@ -1,10 +1,17 @@
-# Track collection and paired campaign rewards
+# Track collection and staggered campaign rewards
 
 ## Accepted decision — 22 October 2026
 
-Five starter tracks are available without campaign progress. Each of the eighteen future car rewards also unlocks one distinct track: six pairs in each of Easy, Medium and Hard at 15/30/45/60/75/90 unique eligible main-level clears. Total collection: **23 cars and 23 tracks** (five starters plus eighteen rewards of each). Level 100 does not create a seventh pair. This required collection supersedes the older optional-extra-tracks wording.
+Five starter tracks are available without campaign progress. **Latest 22 October correction supersedes paired unlocks:**
 
-Earning category determines the milestone counter, **not where an owned cosmetic can be used**. For example, the Easy-15 car and track can be equipped for an already-unlocked Hard level, provided that Hard level is playable. All owned cars/tracks work across Easy/Medium/Hard, including replaying completed levels and optional Quick Race. Owning a track never unlocks a campaign node, skips prerequisites or grants a clear. Replaying a level never increases the distinct-clear count. First plays may also use any owned car/track; an authored level supplies its default scenery, not a mandatory cosmetic restriction. A default must be a starter or currently owned track; if unavailable, fall back to an appropriate starter without granting the locked track.
+| Reward | Milestones within each 100-level category | Per category | Across 3 categories | With 5 starters |
+| --- | --- | --- | --- | --- |
+| Cars | 15, 30, 45, 60, 75, 90 | 6 | 18 reward cars | **23 cars** |
+| Tracks | 10, 25, 40, 55, 70, 85, 100 | 7 | 21 reward tracks | **26 tracks** |
+
+Track count per category is floor((100 − 10) / 15) + 1 = 7. The next track threshold, 115, is outside the campaign. Level 100 awards a track but no extra car. Cars and tracks unlock independently; no paired transaction or shared reward ID is assumed. This required collection supersedes the older optional-extra-tracks wording.
+
+Earning category determines the milestone counter, **not where an owned cosmetic can be used**. For example, the Easy-15 car and Easy-10 track can be equipped for an already-unlocked Hard level, provided that Hard level is playable. All owned cars/tracks work across Easy/Medium/Hard, including replaying completed levels and optional Quick Race. Owning a track never unlocks a campaign node, skips prerequisites or grants a clear. Replaying a level never increases the distinct-clear count. First plays may also use any owned car/track; an authored level supplies its default scenery, not a mandatory cosmetic restriction. A default must be a starter or currently owned track; if unavailable, fall back to an appropriate starter without granting the locked track.
 
 ## Implemented now — alpha.16
 
@@ -22,39 +29,42 @@ Choose Track in the Hub preview or before a Quick Race countdown. Race selection
 
 The independent optional preference `turbotype:track:v1` stores `{schemaVersion: 1, selectedTrack}`. Unknown/reward IDs, malformed JSON and unsupported versions fall back to Neon Harbor. Failed writes apply the selection in memory with clear feedback. The old car preference remains intact. This starter preference is not ownership, campaign progress, an account or cloud storage; rules 3 and campaign save/content version 1 remain unchanged.
 
-## Planned reward manifest — eighteen distinct environments
+## Planned reward manifest — twenty-one distinct environments
 
-These are stable proposed IDs and working art briefs, **not shipped tracks or usable unlocks**. Each pair uses the car reward ID in GARAGE_PROGRESSION.md and its category milestone receipt.
+These are proposed IDs and working art briefs, **not shipped tracks or usable unlocks**. Track IDs now use their own thresholds, independently of car IDs in GARAGE_PROGRESSION.md. Retire the never-shipped paired track IDs (track-{category}-015/030/045/060/075/090); no persisted track ownership exists to migrate. Preserve starter IDs.
 
-| Category / clears | Car reward ID | Track ID | Working environment brief |
-| --- | --- | --- | --- |
-| Easy / 15 | reward-easy-015 | track-easy-015 | Lantern Canal — lit waterways and footbridges |
-| Easy / 30 | reward-easy-030 | track-easy-030 | Sunset Boardwalk — seaside piers and ferris silhouette |
-| Easy / 45 | reward-easy-045 | track-easy-045 | Orchard Loop — terraces, blossom trees and windmills |
-| Easy / 60 | reward-easy-060 | track-easy-060 | Amber Badlands — sandstone arches and dry riverbeds |
-| Easy / 75 | reward-easy-075 | track-easy-075 | Riverlight Viaduct — layered bridges and river lights |
-| Easy / 90 | reward-easy-090 | track-easy-090 | Harbor Skyway — elevated port skyline showcase |
-| Medium / 15 | reward-medium-015 | track-medium-015 | Rainline Metro — wet city and transit silhouettes |
-| Medium / 30 | reward-medium-030 | track-medium-030 | Sapphire Cliffs — coastal headlands and lighthouse |
-| Medium / 45 | reward-medium-045 | track-medium-045 | Redstone Arch — canyon bridge and natural arches |
-| Medium / 60 | reward-medium-060 | track-medium-060 | Fernfall Valley — layered forest and waterfalls |
-| Medium / 75 | reward-medium-075 | track-medium-075 | Solar Observatory — mountain domes and warm horizons |
-| Medium / 90 | reward-medium-090 | track-medium-090 | Prism Causeway — futuristic glass-city showcase |
-| Hard / 15 | reward-hard-015 | track-hard-015 | Stormfront Docks — cranes, ships and storm clouds |
-| Hard / 30 | reward-hard-030 | track-hard-030 | Midnight Switchback — alpine road and distant city |
-| Hard / 45 | reward-hard-045 | track-hard-045 | Ember Caldera — volcanic terrain and lava glow |
-| Hard / 60 | reward-hard-060 | track-hard-060 | Aurora Ridge — snowfields and static aurora ribbons |
-| Hard / 75 | reward-hard-075 | track-hard-075 | Orbital Yard — launch structures and futuristic skyline |
-| Hard / 90 | reward-hard-090 | track-hard-090 | Zenith Skyline — flagship elevated megacity showcase |
+| Category / clears | Track ID | Working environment brief |
+| --- | --- | --- |
+| Easy / 10 | track-easy-010 | Lantern Canal — lit waterways and footbridges |
+| Easy / 25 | track-easy-025 | Sunset Boardwalk — seaside piers and ferris silhouette |
+| Easy / 40 | track-easy-040 | Orchard Loop — terraces, blossom trees and windmills |
+| Easy / 55 | track-easy-055 | Amber Badlands — sandstone arches and dry riverbeds |
+| Easy / 70 | track-easy-070 | Riverlight Viaduct — layered bridges and river lights |
+| Easy / 85 | track-easy-085 | Harbor Skyway — elevated port skyline showcase |
+| Easy / 100 | track-easy-100 | Centennial Boulevard — anniversary-lit city boulevard and grandstands |
+| Medium / 10 | track-medium-010 | Rainline Metro — wet city and transit silhouettes |
+| Medium / 25 | track-medium-025 | Sapphire Cliffs — coastal headlands and lighthouse |
+| Medium / 40 | track-medium-040 | Redstone Arch — canyon bridge and natural arches |
+| Medium / 55 | track-medium-055 | Fernfall Valley — layered forest and waterfalls |
+| Medium / 70 | track-medium-070 | Solar Observatory — mountain domes and warm horizons |
+| Medium / 85 | track-medium-085 | Prism Causeway — futuristic glass-city showcase |
+| Medium / 100 | track-medium-100 | Celestial Ring — observatory district and sweeping illuminated bridges |
+| Hard / 10 | track-hard-010 | Stormfront Docks — cranes, ships and storm clouds |
+| Hard / 25 | track-hard-025 | Midnight Switchback — alpine road and distant city |
+| Hard / 40 | track-hard-040 | Ember Caldera — volcanic terrain and lava glow |
+| Hard / 55 | track-hard-055 | Aurora Ridge — snowfields and static aurora ribbons |
+| Hard / 70 | track-hard-070 | Orbital Yard — launch structures and futuristic skyline |
+| Hard / 85 | track-hard-085 | Zenith Skyline — flagship elevated megacity showcase |
+| Hard / 100 | track-hard-100 | Eventide Citadel — flagship fortified skyline and elevated circuit |
 
 ## Delivery across the existing phases
 
 - **Now / presentation follow-up (TT-531):** five real starter environments, shared preview/race selector, optional remembered preference, per-race lock and recovery/layout checks. Final standings default open (TT-529 refinement).
 - **Phase 7 (TT-705):** put car/track choice in the level briefing/replay flow, gated by both owned cosmetics and separately unlocked level IDs; keep map districts and track choice distinct concepts.
-- **Phase 8 (TT-807):** author/review all eighteen original reward environments and their previews, stable pair references and per-level default scenery. Validate all 300 levels' references. Do not preload all 23 tracks or introduce visibility-obscuring weather.
-- **Phase 9 (TT-911/912 with TT-901–910):** implement actual eligible-clear receipts, paired unlock presentation, global collection/equipment, guest save migration/recovery and optional cloud reconciliation. This work depends on real campaign levels and validated clears, which do not exist in the preview.
+- **Phase 8 (TT-807):** author/review all twenty-one original reward environments and their previews, independent reward references and per-level default scenery. Validate all 300 levels' references. Do not preload all 26 tracks or introduce visibility-obscuring weather.
+- **Phase 9 (TT-911/912 with TT-901–910):** implement actual eligible-clear receipts, independent unlock presentation, global collection/equipment, guest save migration/recovery and optional cloud reconciliation. This work depends on real campaign levels and validated clears, which do not exist in the preview.
 - **Phase 10:** verify all scenery on the desktop matrix, Low/Reduced settings, readability, bounded rendering and lazy resource loading. Friends later validate ownership; no scenery may change simulation or competitive eligibility.
 
-Use a category/milestone receipt to derive both car and track entitlements. Persist a completed receipt atomically or reconstruct both entitlements from the same validated clear set, so an interrupted write cannot permanently grant only half the pair. Never trust the selected preference as proof of ownership. Cloud merges union valid category-qualified clear IDs and rederive pairs idempotently, rather than summing counts across devices or categories. Imported/legacy selections fall back safely if unavailable. Initial future reward migration must preserve existing starter choices.
+Use validated category-qualified unique clear receipts to derive **separate** car and track entitlements at their own thresholds. Store reward kind/category/threshold in the stable reward ID, award each idempotently and recover missing awards from the clear set after interrupted writes. A track award must not grant a car or vice versa. Never trust the selected preference as proof of ownership. Cloud merges union valid category-qualified clear IDs and rederive each reward schedule independently, rather than summing counts across devices or categories. Imported/legacy selections fall back safely if unavailable. Initial future reward migration must preserve existing starter choices.
 
-Required tests with implementation: threshold−1/threshold/+1 at all eighteen milestones; category counter isolation with globally usable ownership; 90→100 without another pair; no replay/bonus/Practice/Quick Race inflation; failed/assisted runs excluded; duplicate and interrupted pair awards; guest save recovery; offline/cloud duplicate merges; owned cosmetics on unlocked levels in every category; locked levels stay locked; unowned selection rejection; and presentation/cleanup across all 23 environments. Preview tests cover only the starter behavior implemented now.
+Required tests with implementation: threshold−1/threshold/+1 for all **18 car and 21 track awards**; category counter isolation with globally usable ownership; 9→10 track only, 14→15 car only, 24→25 track only, 29→30 car only; 90→100 grants the seventh track but no seventh car; no milestone beyond 100; no replay/bonus/Practice/Quick Race inflation; failed/assisted runs excluded; duplicate/interrupted independent awards; guest save recovery; offline/cloud duplicate merges; owned cosmetics on unlocked levels in every category; locked levels stay locked; unowned selection rejection; and presentation/cleanup across all 26 environments. Preview tests cover only the starter behavior implemented now.
