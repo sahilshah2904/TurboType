@@ -16,6 +16,14 @@ An original browser typing racer: build physical-keyboard speed and accuracy whi
 
 *Actual **0.1.0-alpha.14** gameplay, accepted and integrated into **main** through [PR #4](https://github.com/sahilshah2904/TurboType/pull/4). This is a local preview; no public game is deployed.*
 
+## Phase 6 preview — alpha.17
+
+[PR #6](https://github.com/sahilshah2904/TurboType/pull/6) implements the cinematic opening, real loading/recovery, welcome/rules, guided tutorial, optional pace calibration and returning-visitor controls. Local checks pass 102 unit / 50 browser cases; user acceptance and merge remain pending. The five starter tracks and presentation follow-up are accepted and integrated through PR #5. The alpha.14 captures below are historical race evidence.
+
+![Alpha.17 original cinematic entrance](docs/images/alpha17/entrance-1440.png)
+
+[Implementation and recreation](docs/PHASE6_ONBOARDING.md) · [Laptop review checklist](docs/PHASE6_REVIEW.md) · [Current verification](docs/TESTING.md)
+
 ## What is TurboType?
 
 TurboType turns typing practice into a side-view motor race. Correct characters move your car; mistakes require correction while four seeded computer opponents continue. It makes practice enjoyable while showing honest speed, accuracy and consistency metrics.
@@ -77,7 +85,7 @@ Open **Settings → Sound & music** to enable sound or change volumes. The hub h
 
 ## Development progress
 
-**Phases 1–5 are complete for their agreed scope.** Alpha.14 includes independent parts, automated/actual-GPU evidence, final physical laptop acceptance and PR integration. Broader browser/long-session release testing remains Phase 10. Existing-page visuals are partial Phase 6 work; cinematic loading/onboarding is next.
+**Phases 1–5 are complete for their agreed scope.** Alpha.14 includes independent parts, automated/actual-GPU evidence, final physical laptop acceptance and PR integration. Broader browser/long-session release testing remains Phase 10. Phase 6 alpha.17 implementation and local verification are complete, awaiting user acceptance and PR #6 integration.
 
 | Phase | Delivery | Current status |
 | --- | --- | --- |
@@ -86,7 +94,7 @@ Open **Settings → Sound & music** to enable sound or change volumes. The hub h
 | 3 | Build validation/correction, WPM/accuracy, streaks, timing, pause and finishing | Complete for agreed engine/input scope |
 | 4 | Create one complete four-CPU race with countdown, placement, results and retry | Complete and merged into main |
 | 5 | Polish vehicles, wheels/suspension, scenery, exhaust/nitro, sound and celebration | Complete for agreed scope; accepted and merged into main |
-| 6 | Cinematic loading/welcome/rules, tutorial, calibration and final navigation | Existing pages revamped; onboarding not implemented |
+| 6 | Cinematic loading/welcome/rules, tutorial, calibration and final navigation | Alpha.17 implemented and locally verified; user review and PR #6 integration pending |
 | 7 | Easy/Medium/Hard rightward maps, 100 numbered nodes each, locks, chapters and saved position | Planned |
 | 8 | Author/validate all 300 passages, learning goals, difficulty/star curves and bonus challenges | Planned |
 | 9 | Rewards/rank/garage, records/charts/coaching/drills, robust guest saves and optional account-backed cloud progress | Planned |
