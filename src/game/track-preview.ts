@@ -1,3 +1,5 @@
+import { trackTheme, type TrackId } from "../content/track-catalog";
+import { drawTrackScenery } from "./track-scenery";
 import type { UserSettings } from "../storage/settings";
 import { kartLineup, type KartId } from "../content/kart-catalog";
 import {
@@ -13,6 +15,7 @@ export interface PreviewOptions {
   reducedMotion: boolean;
   effects: UserSettings["effects"];
   playerKart?: KartId;
+  track?: TrackId;
   onReady: (message: string) => void;
   onError: (message: string) => void;
 }
@@ -26,6 +29,7 @@ export async function mountTrackPreview(
   if (!parent.isConnected) return () => {};
   const lineup = kartLineup(options.playerKart ?? "volt-kart").slice(0, 3);
 
+  const theme = trackTheme(options.track ?? "neon-harbor");
   class TrackPreview extends Phaser.Scene {
     private cars: Phaser.GameObjects.Container[] = [];
     private assemblies: ReturnType<typeof addKart>[] = [];
@@ -34,6 +38,7 @@ export async function mountTrackPreview(
     private elapsedMs = 0;
     private world!: Phaser.GameObjects.Container;
     private art!: Phaser.GameObjects.Graphics;
+    private scenery!: Phaser.GameObjects.Graphics;
     private label!: Phaser.GameObjects.Text;
     private courseWidth = 1200;
 
@@ -50,6 +55,7 @@ export async function mountTrackPreview(
       if (!fleetReady(this, [...new Set([0, ...lineup])])) return;
       bakePlayerPalette(this);
       this.art = this.add.graphics();
+      this.scenery = this.add.graphics();
       this.marks = this.add.graphics();
       for (let i = 0; i < 3; i++) {
         const assembly = addKart(this, lineup[i]);
@@ -82,7 +88,7 @@ export async function mountTrackPreview(
           blendAmount: 0.2,
         });
       }
-      this.add.text(36, 22, "NIGHT RUN / CITY CIRCUIT", {
+      this.add.text(36, 22, theme.name.toUpperCase(), {
         fontFamily: "monospace",
         fontSize: "13px",
         color: "#bfb1b8",
@@ -117,6 +123,11 @@ export async function mountTrackPreview(
       this.layout();
       this.scale.on("resize", this.layout, this);
       parent.dataset.ready = "true";
+      parent.dataset.track = theme.id;
+      parent.setAttribute(
+        "aria-label",
+        theme.name + ": your kart with two decorative rivals",
+      );
       parent.dataset.parts = "independent-body-wheels";
       options.onReady("Track preview ready");
     }
@@ -126,20 +137,9 @@ export async function mountTrackPreview(
       this.courseWidth = Math.max(1, this.scale.width) / scale;
       this.world.setScale(scale);
       const w = this.courseWidth;
-      this.art.clear().fillStyle(0x0a1219).fillRect(0, 0, w, 130);
-      this.art.fillStyle(0x184657).fillCircle(w * 0.8, 30, 100);
-      for (let i = 0; i < Math.ceil(w / 49); i++) {
-        const height = 25 + ((i * 37) % 73);
-        this.art
-          .fillStyle(i % 2 ? 0x192b35 : 0x13232c)
-          .fillRect(i * 49, 130 - height, 36, height);
-        for (let j = 0; j < 4; j++)
-          this.art
-            .fillStyle(0xd995a1, 0.35)
-            .fillRect(i * 49 + 8, 139 - height + j * 13, 3, 4);
-      }
-      this.art.fillStyle(0x63e7f2).fillRect(0, 128, w, 3);
-      this.art.fillStyle(0x18232c).fillRect(0, 132, w, 288);
+      drawTrackScenery(this.art, this.scenery, w, 130, theme);
+      this.art.fillStyle(theme.edge).fillRect(0, 128, w, 3);
+      this.art.fillStyle(theme.road).fillRect(0, 132, w, 288);
       this.cars.forEach((car, i) => (car.x = w * [0.56, 0.4, 0.24][i]));
       this.label.x = this.cars[0].x - 35;
     }

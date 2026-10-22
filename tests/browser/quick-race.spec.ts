@@ -209,7 +209,7 @@ test("validates seeds and supports new opponents, reduced motion and laptop resi
   ).toBe(true);
 });
 
-test("compact results fit laptop windows and reveal honest CPU details on demand", async ({
+test("compact results show standings by default and retain honest CPU details", async ({
   page,
 }) => {
   await openRace(page);
@@ -223,19 +223,18 @@ test("compact results fit laptop windows and reveal honest CPU details on demand
     "Place 1 of 5",
   );
   await expect(page.locator("#race-result-accuracy")).toHaveText("100.0%");
-  await expect(page.locator("#race-result-details")).not.toHaveAttribute(
-    "open",
-  );
-  await expect(page.locator("#race-result-rows")).not.toBeVisible();
+  await expect(page.locator("#race-result-details")).toHaveAttribute("open");
+  await expect(page.locator("#race-result-rows")).toBeVisible();
   for (const width of [1024, 1366, 1440, 1920]) {
     await page.setViewportSize({ width, height: 768 });
     await expect(
       page.getByRole("button", { name: "Retry same race" }),
     ).toBeInViewport();
+    await expect(page.locator("#race-result-wpm")).toBeInViewport();
     expect(
-      await page
-        .locator(".race-deck")
-        .evaluate((el) => el.scrollHeight <= el.clientHeight),
+      await page.evaluate(
+        () => document.documentElement.scrollWidth <= innerWidth,
+      ),
     ).toBe(true);
     expect(
       await page
@@ -243,6 +242,8 @@ test("compact results fit laptop windows and reveal honest CPU details on demand
         .evaluate((el) => parseFloat(getComputedStyle(el).fontSize)),
     ).toBeGreaterThanOrEqual(32);
   }
+  await page.getByText("Final standings", { exact: true }).click();
+  await expect(page.locator("#race-result-rows")).not.toBeVisible();
   await page.getByText("Final standings", { exact: true }).click();
   await expect(page.locator("#race-result-rows")).toBeVisible();
   await expect(page.locator("#race-result-rows")).toContainText(
@@ -260,7 +261,5 @@ test("compact results fit laptop windows and reveal honest CPU details on demand
   await expect(page.locator("#race-result-progress")).toContainText(
     `${Math.floor((5 / SAMPLE.length) * 100)}% of passage completed`,
   );
-  await expect(page.locator("#race-result-details")).not.toHaveAttribute(
-    "open",
-  );
+  await expect(page.locator("#race-result-details")).toHaveAttribute("open");
 });

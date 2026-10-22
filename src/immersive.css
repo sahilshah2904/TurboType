@@ -1285,3 +1285,46 @@ html[data-route="race"] .topbar {
   text-decoration: none;
   font-weight: 700;
 }
+
+.track-choice {
+  min-width: 240px;
+}
+.track-choice label {
+  display: block;
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+.track-choice select {
+  width: 100%;
+  min-height: 44px;
+  font-size: 16px;
+}
+.track-choice .help {
+  font-size: 16px;
+  margin: 8px 0;
+}
+.track-card > .section-top {
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.immersive-race .race-deck:has(#race-results:not([hidden])) {
+  top: 50%;
+  max-height: calc(100dvh - 160px);
+}
+
+/* Keep counters legible against snow caps and other bright scenery. */
+.immersive-race .race-hud {
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: #09121be6;
+}
+/* Expanded standings may scroll on short laptops; keep replay actions available. */
+.immersive-race .race-deck:has(#race-results:not([hidden])) .practice-actions {
+  position: sticky;
+  bottom: -26px;
+  z-index: 1;
+  padding: 12px 0;
+  margin-bottom: 0;
+  background: #111c25;
+  box-shadow: 0 -12px 12px #111c25;
+}

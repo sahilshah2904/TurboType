@@ -1,3 +1,6 @@
+import { trackChoices } from "./track-selector";
+import { isTrackId, type TrackId } from "../content/track-catalog";
+import { LocalTrackRepository } from "../storage/tracks";
 import { animate, createScope } from "animejs";
 import { RaceAudio } from "../audio/race-audio";
 import { audioControls, connectAudioControls } from "./audio-controls";
@@ -30,6 +33,8 @@ export function mountApp(root: HTMLElement): () => void {
   let settings = repository.load();
   const garage = new LocalGarageRepository(() => localStorage);
   let selectedKart = garage.load();
+  const tracks = new LocalTrackRepository(() => localStorage);
+  let selectedTrack = tracks.load();
   const audio = new RaceAudio();
   const systemMotion = matchMedia("(prefers-reduced-motion: reduce)");
   let scope: ReturnType<typeof createScope> | undefined;
@@ -85,9 +90,14 @@ export function mountApp(root: HTMLElement): () => void {
     document.title = `TurboType — ${route === "hub" ? "Your words. Full throttle." : route === "race" ? "Quick Race" : route === "practice" ? "Typing practice" : route === "keyboard" ? "Keyboard check" : "Settings"}`;
     main.innerHTML =
       route === "hub"
-        ? hubScreen(selectedKart)
+        ? hubScreen(selectedKart, selectedTrack)
         : route === "race"
-          ? quickRaceScreen(selectedKart)
+          ? quickRaceScreen(
+              selectedKart,
+              quickRaceSession.race.snapshot().player.state === "ready"
+                ? selectedTrack
+                : quickRaceSession.trackId,
+            )
           : route === "practice"
             ? practiceScreen()
             : route === "keyboard"
@@ -114,6 +124,7 @@ export function mountApp(root: HTMLElement): () => void {
           reducedMotion: reducedMotion(),
           effects: settings.effects,
           playerKart: selectedKart,
+          track: selectedTrack,
           onReady: (text) => {
             if (currentGeneration === generation) {
               message.textContent = text;
@@ -139,6 +150,18 @@ export function mountApp(root: HTMLElement): () => void {
             }
           });
       };
+      main
+        .querySelector("#hub-track-select")!
+        .addEventListener("change", (event) => {
+          const value = (event.target as HTMLSelectElement).value;
+          if (!isTrackId(value)) return;
+          selectedTrack = value;
+          const saved = tracks.save(value);
+          render();
+          main.querySelector("#track-choice-status")!.textContent = saved
+            ? "Track saved on this browser. Ready for your next race."
+            : "Track applied for this visit; browser storage is unavailable.";
+        });
       mount();
       main.querySelector("#retry-preview")?.addEventListener("click", () => {
         unmountPreview?.();
@@ -161,6 +184,13 @@ export function mountApp(root: HTMLElement): () => void {
           choose: (id) => {
             selectedKart = id;
             return garage.save(id);
+          },
+        },
+        {
+          read: () => selectedTrack,
+          choose: (id) => {
+            selectedTrack = id;
+            return tracks.save(id);
           },
         },
       );
@@ -228,7 +258,7 @@ export function mountApp(root: HTMLElement): () => void {
   };
 }
 
-function hubScreen(selectedKart: KartId): string {
+function hubScreen(selectedKart: KartId, selectedTrack: TrackId): string {
   const kart = STARTER_KARTS.find((kart) => kart.id === selectedKart)!;
   return `
     <section class="hero reveal" aria-labelledby="hero-title">
@@ -236,7 +266,7 @@ function hubScreen(selectedKart: KartId): string {
       <aside class="hero-note"><span class="garage-label">${kart.name.toUpperCase()} / YOUR STARTING LINE</span><img class="garage-kart ${kart.id === "volt-kart" ? "kart-art--starter" : ""}" src="${import.meta.env.BASE_URL}assets/karts/${kart.file}" alt="${kart.name} — ${kart.style}" /><span>Four opponents. One passage.<br />Your pace sets your progress.</span></aside>
     </section>
     <section class="track-card reveal" aria-label="Animated track preview">
-      <div class="section-top"><span class="eyebrow"><span class="status-dot"></span> TRACK PREVIEW</span><span class="micro">CITY CIRCUIT <span class="divider">/</span> NIGHT RUN</span></div>
+      <div class="section-top"><span class="eyebrow"><span class="status-dot"></span> TRACK PREVIEW</span>${trackChoices(selectedTrack, "hub-track-select")}</div>
       <div id="track-preview" class="track-preview" role="img" aria-label="Your selected kart on an illustrated city road, with two decorative rival karts"></div>
       <div class="track-bottom"><span id="track-status" role="status">Loading track preview…</span><span>Scene preview · no race in progress</span><button id="retry-preview" class="text-button" hidden>Retry preview</button></div>
     </section>

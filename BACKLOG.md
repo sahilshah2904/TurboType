@@ -2,8 +2,8 @@
 
 ## Alpha.15 requested presentation follow-up — 22 October 2026
 
-- [ ] TT-529: Simplify final Race results to place, average WPM, accuracy and time; show completion for DNFs and retain accurate CPU outcomes in an optional disclosure. Implemented and locally tested (96 unit / 38 browser cases); awaiting user visual acceptance before closure. Evidence: docs/TESTING.md.
-- [ ] TT-530: Give the shared Live WPM dial an original blazing SVG background, richer instrument face and protected large readout. Keep speed/scoring semantics; stop flame animation for pause/finish, Low effects and Reduced motion. Implemented and locally tested (96 unit / 38 browser cases); awaiting user visual acceptance before closure. Evidence: docs/TESTING.md.
+- [x] TT-529: Simplify final Race results to place, average WPM, accuracy and time; show completion for DNFs and retain accurate CPU outcomes in an optional disclosure. Alpha.15 implemented/tested; user accepts the presentation on 22 October, with alpha.16 expanded-standings refinement. Current regression evidence: 98 unit / 40 browser cases; docs/TESTING.md.
+- [x] TT-530: Give the shared Live WPM dial an original blazing SVG background, richer instrument face and protected large readout. Keep speed/scoring semantics; stop flame animation for pause/finish, Low effects and Reduced motion. Alpha.15 implemented/tested; user accepts the presentation on 22 October, with alpha.16 expanded-standings refinement. Current regression evidence: 98 unit / 40 browser cases; docs/TESTING.md.
 
 These are authorized follow-ups to the accepted Phase 5 baseline, not reopening its hardware gates or implementing Phase 6 onboarding. Review at the existing LAN URL before merge; source stays on codex/results-and-fire-dial pending acceptance. Reward correction remains six per category (15/30/45/60/75/90), eighteen total; no reward implementation is added.
 
@@ -199,7 +199,7 @@ TT-906/907 may start earlier once contracts stabilize; cloud progress remains a 
 
 - [ ] TT-1201: Best-run ghost/replay racing using versioned, bounded recordings; assess storage before adoption.
 - [ ] TT-1202: Deterministic daily passages/challenges; decide local versus shared rankings and abuse validation before enabling online scores.
-- [ ] TT-1203: More authored tracks/weather/vehicles after the core art and performance budgets are proven.
+- [ ] TT-1203: Optional additional tracks/weather/vehicles beyond the required 23-track/23-car collection, after core art/performance budgets are proven. Required paired tracks are TT-807/912, not optional.
 - [ ] TT-1204: Animated pit-crew mascot or authored Rive/Lottie badges, only if asset quality and measured runtime cost justify another dependency.
 - [ ] TT-1205: Fuller offline/PWA installation support, distinct from continuing an already-loaded solo session during a cloud outage.
 - [ ] TT-1206: Broader language/input support with grapheme-aware content, composition behavior and fair scoring defined first.
@@ -228,3 +228,14 @@ These ideas are captured from research/future possibilities and do not expand th
 The user accepted the restored colors and Ignition and authorized continued work. Distinct CPU models are implemented; TT-501/510 retain the separate body/wheel and final-review work. Earlier phone/tablet acceptance references are historical; those platforms are canceled scope.
 
 - [x] TT-522: Investigated software-renderer callback tails with actual AMD Direct3D11 experiments, preserved variable/failed runs, reduced kart payload, bounded/streamed trace analysis and verified active race time. Final guarded all-preset samples plus the two-minute physical keyboard session and user acceptance satisfy Phase 5. Handler-to-next-rAF median 9.3ms/p95 18.8ms/max22.2ms is diagnostic, not physical presentation/OS-to-photon certification. Broader long-session/GPU/native-memory work remains TT-1003.
+
+## Required track collection follow-up — 22 October 2026
+
+The user accepts the alpha.15 compact score/metrics presentation and requests standings expanded by default; the existing fire instrument is preserved. Alpha.16 adds five starter environments and remembered Hub/Quick Race choice. Reward tracks are required campaign scope, not an optional replacement for opening/tutorial work.
+
+- [ ] TT-531: Five distinct original starter track environments shared by Hub and Quick Race, remembered optional preference, ready-only race selection and active-race lock. Implemented and locally tested (98 unit / 40 browser cases); starter visuals await review. Evidence: docs/TESTING.md.
+- [ ] TT-705: Add owned car/track selection to campaign level briefing and replay across every category; ownership does not bypass locked nodes. Depends on maps and Phase 9 ownership contracts.
+- [ ] TT-807: Author/review eighteen original reward track environments/previews, stable car/track pair references and campaign default scenery. Validate references and lazy loading; no placeholder assets count as finished.
+- [ ] TT-912: Pair each category car milestone with its matching track at 15/30/45/60/75/90 eligible unique main clears. Globally usable across all categories on already-unlocked levels and replays; category earning counters remain isolated. Derive both entitlements idempotently from the same validated receipt, recover interrupted writes and merge guest/cloud data without replay inflation or locked-level bypass. Eighteen reward tracks plus five starters. See docs/TRACK_PROGRESSION.md; depends on TT-801/807/901–911.
+
+TT-1203 now applies only to optional tracks/weather/vehicles beyond the required 23-track/23-car collection. Existing baseline phases remain complete for their agreed scope; new presentation acceptance and future campaign work are tracked separately.

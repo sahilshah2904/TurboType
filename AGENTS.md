@@ -1,5 +1,15 @@
 # TurboType project continuity
 
+## Alpha.16 — starter tracks and paired reward plan, 22 October 2026
+
+The user accepted the compact score/metrics presentation and requested Final standings expanded by default below it. This supersedes alpha.15's collapsed default; the disclosure can still be closed manually. Implemented on codex/results-and-fire-dial / open PR #5, which already contains alpha.15. No merge or deployment is implied by acceptance of the previous presentation.
+
+Five starter environments are now implemented for Hub preview and Quick Race: Neon Harbor, Coral Coast, Copper Canyon, Emerald Trail and Frostline Pass. Track choice is a validated optional browser preference; the active race pins its track through countdown/pause/navigation/final state, and retry applies the next chosen preference. Original bounded geometric scenery, road/edge palettes and shared renderer preserve the typing/CPU/rules behavior. Rules 3 and save/content 1 remain.
+
+New required future scope: eighteen reward tracks paired with the eighteen car milestones, for 23 tracks and 23 cars total. Earn at 15/30/45/60/75/90 eligible unique main clears independently in each category; globally use any owned pair across Easy/Medium/Hard on already-unlocked levels and replays. Replay cannot inflate earnings or open locked nodes. docs/TRACK_PROGRESSION.md records all IDs/briefs, receipt/cloud rules and phase placement: Phase 7 briefing/replay selection, Phase 8 authoring/defaults, Phase 9 ownership/unlocks/saves. No real campaign/reward unlock/save/cloud system is claimed by the starter preference. Keep Phase 6 opening/tutorial next in the main roadmap; preserve all eleven phases.
+
+Manual review stays at the existing LAN link http://192.168.0.31:5173/TurboType/. The server and active feature checkout are preserved. See docs/TESTING.md for current verification; do not reuse alpha.15's hosted pass for this new source. Starter visuals await review; no repeat review of accepted cars/music/palette is needed.
+
 ## Current presentation follow-up — 22 October 2026
 
 Alpha.15 on `codex/results-and-fire-dial` adds the user's compact Race results and original SVG fire instrument. This branch starts at accepted main `e1bbaff`; PR #4 remains merged as de464ce. The Phase 5 checkpoint below is the accepted alpha.14 baseline. New presentation changes need their own review/acceptance before merge; no Phase 6 onboarding or deployment is implied. Read the newest sections in PROJECT_STATUS.md, docs/SESSION_HANDOFF.md and docs/TESTING.md for exact validation and PR state.

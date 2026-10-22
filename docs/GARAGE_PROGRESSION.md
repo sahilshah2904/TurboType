@@ -36,3 +36,7 @@ Count **distinct eligible main-level IDs separately within each category**, usin
 - Verify threshold−1/threshold/threshold+1 for all six milestones in all three categories, category isolation, 90→100 with no seventh award, replay/bonus exclusion, interrupted/repeated awards, save recovery, offline/cloud merge conflicts and multiplayer entitlement handling. These tests belong with the implemented reward system; the current preview does not pretend it exists.
 
 Tracked as TT-911 in [BACKLOG.md](../BACKLOG.md), alongside campaign completion/progression tasks. Current selector and Settings-only audio are TT-523/524.
+
+## Paired tracks and global use — 22 October 2026
+
+Each of the eighteen planned category-specific car milestones also unlocks a distinct track, giving 23 cars and 23 tracks including five starters of each. The source category controls earning only; once owned, either cosmetic is usable in every category on already-unlocked levels, including replays. Replaying never creates another qualifying clear or unlocks a level. Pair ownership must derive from the same milestone receipt and survive interrupted writes/cloud reconciliation together. See [TRACK_PROGRESSION.md](TRACK_PROGRESSION.md) for starter implementation, all eighteen proposed track IDs/briefs and phase dependencies. No campaign entitlements are implemented by the alpha.16 starter-track preference.

@@ -61,3 +61,8 @@ The user accepted the five requested ASUS/Samsung race checks (TT-404); [PHASE4_
 ## Compact results (alpha.15)
 
 The default final card contains place (or DNF), average WPM, accuracy and active time. Unfinished runs also show passage completion. Expand Final standings for all five drivers and the explicit distinction between real elapsed finishes and later simulated CPU outcomes. Results remain frozen and session-only; collapsing the standings changes no race data. Retry same race and New seed retain their existing setup semantics.
+
+
+## Alpha.16 starter tracks and default standings
+
+Final standings are expanded by default below the compact metrics, as accepted by the user; they can still be collapsed manually. Five starter scenery tracks can be selected in the Hub or before Quick Race countdown, with a remembered preference and a race-local lock through pauses/navigation. Track choice changes no passage, mode, CPU schedules, seed or timing; it never resets a ready race's configuration. Retry applies the next preference. See TRACK_PROGRESSION.md for the five implemented starter IDs and eighteen future paired rewards, globally usable on unlocked campaign levels across all categories.

@@ -300,3 +300,7 @@ The user rejected the alpha.7 sound and burgundy gradient, canceled personal-mus
 ### 21 October 2026 palette restoration
 
 Alpha.10 restores the previous alpha.8 graphite/crimson/cyan palette at the user's request, replacing the rejected alpha.9 red/gold armor panels. Laptop-only scope, Ignition browsing music, the accepted Overdrive racing master, typing rules and mobile-removal changes stay in place.
+
+## Track collection decision — 22 October 2026
+
+The user accepted the compact result/fire instrument, requested Final standings expanded by default, and required five starter tracks plus eighteen new reward tracks paired with the eighteen category-specific car milestones. Each earned car and track is globally usable across Easy/Medium/Hard on any already-unlocked level, including replays; owning a cosmetic never opens a locked level. Counts remain category-isolated at 15/30/45/60/75/90 eligible unique main clears, so replays cannot inflate them. Cosmetic scenery has no gameplay performance effect. See docs/TRACK_PROGRESSION.md for stable starter/reward IDs, implemented alpha.16 behavior and the Phase 7 briefing / Phase 8 content / Phase 9 entitlement-save-cloud delivery plan. Additional tracks beyond the required 23 remain optional. The eleven phase numbers are preserved.
