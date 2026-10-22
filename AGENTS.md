@@ -4,7 +4,7 @@ Read PROJECT_STATUS.md, docs/SESSION_HANDOFF.md and BACKLOG.md before reporting 
 
 ## Current checkpoint — 23 October 2026
 
-Phase 7 implementation source is b1f0d6cf740bfa3aea2e85f12d961814be4e9cee, pushed in open/unmerged PR #7: https://github.com/sahilshah2904/TurboType/pull/7. Local full check passed 116 unit/71 browser cases; final compact-results adjustment passed fresh build/types and 23 focused browser cases. Ten refreshed captures have zero page errors. This documentation checkpoint has its own hosted check: inspect current PR head/check_run/job, never assume it passed. User review/integration remains pending.
+Initial Phase 7 source b1f0d6cf740bfa3aea2e85f12d961814be4e9cee is followed by a race-session isolation fix in open/unmerged PR #7: https://github.com/sahilshah2904/TurboType/pull/7. Each race now pins its own car, so campaign/Quick Race choices cannot alter another paused run; retry applies the latest preference. Final fresh full check passed 116 unit/73 browser cases. Ten refreshed captures have zero page errors. Inspect current PR head/check_run/job for its separate hosted result; never assume it passed. User review/integration remains pending.
 
 The user requested refreshed README/Phase 6 handoff, longer paragraphs and Phase 7 maps. Phase 6 PR #6 merged cf741b6; accepted 3f6125c passed run 39801084219; main docs 6554956 passed 39803134301. Documentation refresh 1ee0aba is on main. Current feature codex/phase7-campaign-maps, app alpha.21, rules 3/save 1/content 2. Inspect actual HEAD/PR/checks; never infer fresh success from older runs.
 

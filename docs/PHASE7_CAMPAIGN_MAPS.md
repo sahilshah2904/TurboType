@@ -1,6 +1,6 @@
 # Phase 7 campaign maps — alpha.21
 
-Implemented on `codex/phase7-campaign-maps`, based on main `1ee0aba`; source `b1f0d6c`, [open PR #7](https://github.com/sahilshah2904/TurboType/pull/7). User review/integration remain separate. No public deployment or backend exists.
+Implemented on `codex/phase7-campaign-maps`, based on main `1ee0aba`; initial source `b1f0d6c` plus the current race-session isolation follow-up, [open PR #7](https://github.com/sahilshah2904/TurboType/pull/7). User review/integration remain separate. No public deployment or backend exists.
 
 ## Delivered scope
 
@@ -51,3 +51,6 @@ Use the preserved [LAN preview](http://192.168.0.31:5173/TurboType/) serving the
 6. Move right, switch category/Settings and return. Category positions restore; Jump to current returns to next stop. Check Reduced motion.
 
 Do not clear browser storage unless you intend to discard progress. Export is a diagnostic backup; importing is Phase 9. No repeat approval of accepted cars/music/palette or physical-frame-rate certification requested. See TESTING.md for exact verification and images/alpha21 for sequential headless captures.
+
+
+Final session isolation: each run pins its own kart. Changing a campaign/Quick Race preference never changes the other paused run; retry applies the latest remembered preference. Final full local verification passes 116 unit/73 browser cases, including both directions. See TESTING.md for exact hosted head/state.

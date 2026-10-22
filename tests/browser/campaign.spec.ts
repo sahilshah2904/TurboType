@@ -391,3 +391,71 @@ test("a complete multi-sentence paragraph saves a real campaign clear", async ({
     308,
   );
 });
+
+test("campaign choices cannot change the car pinned to a paused Quick Race", async ({
+  page,
+}) => {
+  await page.clock.install();
+  await page.goto("./#/race");
+  await ready(page);
+  await page.locator('input[name="player-kart"][value="neon-fox"]').check();
+  await start(page);
+  await page.locator("#pause-race").click();
+  await page.evaluate(() => (location.hash = "#/campaign/hard"));
+  await page.locator("#map-current").click();
+  await page.locator("#briefing-car").selectOption("comet");
+  await page.locator("#briefing-start").click();
+  await ready(page);
+  await expect(page.locator("#race-track")).toHaveAttribute(
+    "data-player-kart",
+    "comet",
+  );
+  await page.getByRole("link", { name: "Race", exact: true }).click();
+  await ready(page);
+  await expect(page.locator("#race-state")).toHaveText("Paused");
+  await expect(page.locator("#race-track")).toHaveAttribute(
+    "data-player-kart",
+    "neon-fox",
+  );
+  await expect(page.locator('input[name="player-kart"]:checked')).toHaveValue(
+    "neon-fox",
+  );
+  await page.locator("#retry-race").click();
+  await page.clock.fastForward(100);
+  await expect(page.locator("#race-track")).toHaveAttribute(
+    "data-player-kart",
+    "comet",
+  );
+  await expect(page.locator('input[name="player-kart"]:checked')).toHaveValue(
+    "comet",
+  );
+});
+
+test("Quick Race choices cannot change the car pinned to a paused campaign", async ({
+  page,
+}) => {
+  await page.clock.install();
+  await page.goto("./#/level/easy/1");
+  await ready(page);
+  await start(page);
+  await page.locator("#pause-race").click();
+  await page.getByRole("link", { name: "Race", exact: true }).click();
+  await ready(page);
+  await page.locator('input[name="player-kart"][value="apex-nova"]').check();
+  await page.evaluate(() => (location.hash = "#/level/easy/1"));
+  await ready(page);
+  await expect(page.locator("#race-state")).toHaveText("Paused");
+  await expect(page.locator("#race-track")).toHaveAttribute(
+    "data-player-kart",
+    "volt-kart",
+  );
+  await expect(page.locator('input[name="player-kart"]:checked')).toHaveValue(
+    "volt-kart",
+  );
+  await page.locator("#retry-race").click();
+  await page.clock.fastForward(100);
+  await expect(page.locator("#race-track")).toHaveAttribute(
+    "data-player-kart",
+    "apex-nova",
+  );
+});

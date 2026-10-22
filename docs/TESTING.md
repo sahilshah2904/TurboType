@@ -1,7 +1,13 @@
 # Verification evidence
 
-Implementation source **b1f0d6cf740bfa3aea2e85f12d961814be4e9cee**, [open PR #7](https://github.com/sahilshah2904/TurboType/pull/7). Local full check passed **116 unit / 71 browser cases**; final compact-results adjustment passed fresh build/types and **23 focused browser cases**. Ten current sequential captures had zero page errors. This documentation checkpoint has its own hosted check; inspect its actual PR head/check_run/job before claiming success. User review/integration remains pending; branch is pushed and no game is deployed.
+Initial implementation source **b1f0d6cf740bfa3aea2e85f12d961814be4e9cee**, [open PR #7](https://github.com/sahilshah2904/TurboType/pull/7). Local full check passed **116 unit / 71 browser cases**; final compact-results adjustment passed fresh build/types and **23 focused browser cases**. Ten current sequential captures had zero page errors. This documentation checkpoint has its own hosted check; inspect its actual PR head/check_run/job before claiming success. User review/integration remains pending; branch is pushed and no game is deployed.
 
+
+## Final session isolation follow-up — 23 October 2026
+
+Each Quick Race/campaign run now pins its own selected kart independently. Changing the shared preference through another ready session cannot alter an already-paused race or its checked picker. Retry reapplies the latest remembered preference. Two additional browser regressions cover both directions and the retry handover.
+
+A fresh complete `npm run check` on this final source passed formatting/types, **116 unit / 73 browser cases**, production build (`Reference_Images/analysis/phase7-isolation-final-check.log`). This supersedes the earlier 71-case checkpoint for current source. No visual change from the final alpha21 captures; the final results layout and ten zero-error captures remain current. Hosted validation belongs to the actual latest PR #7 head, not a prior source/check.
 
 ## Phase 7 maps — alpha.21, 22–23 October 2026
 

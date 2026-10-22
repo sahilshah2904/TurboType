@@ -14,6 +14,7 @@ import { connectRaceInput, type RaceInputController } from "./race-input";
 import { mountRaceTrack } from "../game/race-track";
 
 export interface QuickRaceSession {
+  kartId?: KartId;
   trackId: TrackId;
   race: SoloRace;
   passageIndex: number;
@@ -152,8 +153,10 @@ export function connectQuickRace(
   const seed = find<HTMLInputElement>("#race-seed");
   const track = find("#race-track");
   const trackSelect = find<HTMLSelectElement>("#race-track-select");
-  if (session.race.snapshot().player.state === "ready")
+  if (session.race.snapshot().player.state === "ready") {
     session.trackId = tracks.read();
+    session.kartId = garage.read();
+  }
   trackSelect.value = session.trackId;
   const feedback = new RaceFeedback();
   const kartPicker = find<HTMLFieldSetElement>("#kart-picker");
@@ -451,6 +454,12 @@ export function connectQuickRace(
       tier.value = pendingPace;
     }
     session.trackId = tracks.read();
+    session.kartId = garage.read();
+    main
+      .querySelectorAll<HTMLInputElement>('input[name="player-kart"]')
+      .forEach((input) => {
+        input.checked = input.value === session.kartId;
+      });
     trackSelect.value = session.trackId;
     session.race = buildRace(session);
     lastState = "";
@@ -493,7 +502,7 @@ export function connectQuickRace(
       read: () => session.race.snapshot(),
       reducedMotion,
       effects,
-      playerKart: garage.read,
+      playerKart: () => session.kartId ?? garage.read(),
       track: () => session.trackId,
       onReady: () => {
         if (token !== generation || disposed) return;
@@ -568,6 +577,7 @@ export function connectQuickRace(
         session.race.snapshot().player.state !== "ready"
       )
         return;
+      session.kartId = target.value;
       const saved = garage.choose(target.value);
       const name = STARTER_KARTS.find((kart) => kart.id === target.value)!.name;
       text(

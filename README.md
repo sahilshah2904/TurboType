@@ -171,7 +171,7 @@ The full check runs formatting, TypeScript, unit tests, build and browser scenar
 
 ## Verification and GitHub emails
 
-Current Phase 7 alpha.21 verification is **116 unit / 71 desktop browser cases**, including real campaign clears/replays, storage recovery, keyboard/list/drag navigation, four laptop widths and long-paragraph caret tracking. See [current evidence](docs/TESTING.md). User review and exact-head hosted validation remain distinct.
+Current Phase 7 alpha.21 verification is **116 unit / 73 desktop browser cases**, including real campaign clears/replays, storage recovery, keyboard/list/drag navigation, four laptop widths and long-paragraph caret tracking. See [current evidence](docs/TESTING.md). User review and exact-head hosted validation remain distinct.
 
 The accepted Phase 5 baseline alpha.14 passed **96 unit tests and 36 desktop Chromium browser cases**, actual-GPU High/Low/Reduced checks and final physical laptop acceptance. The two-minute recorder captured 100 trusted racing keys with zero page errors. Exact acceptance head 398d455 passed [hosted run 39727202033](https://github.com/sahilshah2904/TurboType/actions/runs/39727202033), then PR #4 merged as de464ce. Later documentation/main heads have their own check state; the badge tracks main.
 

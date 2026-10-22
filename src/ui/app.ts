@@ -189,7 +189,9 @@ export function mountApp(root: HTMLElement): () => void {
                     ? `<section class="page-heading campaign-unavailable"><h1>Road not open yet.</h1><p>${selectedLevel && !isUnlocked(campaign.read(), selectedLevel) ? `Clear ${selectedLevel.category} level ${selectedLevel.number - 1} first.` : "This passage arrives in Phase 8."}</p><a class="button button--primary" href="#/campaign/${campaignRoute?.category ?? "easy"}">Return to map</a></section>`
                     : route === "race" || route === "level"
                       ? quickRaceScreen(
-                          selectedKart,
+                          activeSession.race.snapshot().player.state === "ready"
+                            ? selectedKart
+                            : (activeSession.kartId ?? selectedKart),
                           activeSession.race.snapshot().player.state === "ready"
                             ? selectedTrack
                             : activeSession.trackId,

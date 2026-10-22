@@ -2,7 +2,7 @@
 
 ## Phase 7 map delivery — alpha.21, 22 October 2026
 
-TT-701–704 and TT-705's map/briefing starter-inventory portion are implemented for review. Fresh full local check: **116 unit / 71 browser cases**; hosted exact-head state is recorded separately in docs/TESTING.md. Three 100-stop maps have eighteen real sample races (six/category), with substantial paragraphs at levels4–6. Levels7–100 and bonuses remain unavailable content previews until Phase8 authoring; never count them as playable. Review/integration are separate. Current specification/checklist: docs/PHASE7_CAMPAIGN_MAPS.md.
+TT-701–704 and TT-705's map/briefing starter-inventory portion are implemented for review. Fresh full local check: **116 unit / 73 browser cases**; hosted exact-head state is recorded separately in docs/TESTING.md. Three 100-stop maps have eighteen real sample races (six/category), with substantial paragraphs at levels4–6. Levels7–100 and bonuses remain unavailable content previews until Phase8 authoring; never count them as playable. Review/integration are separate. Current specification/checklist: docs/PHASE7_CAMPAIGN_MAPS.md.
 
 Phase9 still owns earned inventory binding and canonical save migration/economy/receipts/import/recovery/cloud. Basic local map progress is implemented now, not the complete guest-save system. TT-608 remains deferred. Earlier status notes below are historical; the latest checkpoint takes precedence.
 
