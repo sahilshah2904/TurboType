@@ -1,5 +1,13 @@
 # Verification evidence
 
+## Phase 6 integration verification — 22 October 2026
+
+Fresh full local `npm run check` on final application source 0631587 passed formatting/types/build, **102 unit / 56 desktop browser cases** (3.5-minute browser run). This includes the final alpha.20 visibility tuning, all route/input/effect/recovery tests and action-link alignment. No captures/profiling ran concurrently, and the existing 5173 server was preserved.
+
+Hosted run 39799004327 attempt 1 was canceled after the browser dependency installation spent almost nine minutes downloading 25.9 MB from azure.archive.ubuntu.com with repeated ignored/slow requests. No application tests ran in that attempt. One same-source rerun was requested; its dependency installation was also slow. Completed attempt logs were inspected locally under ignored Reference_Images/analysis/phase6-ci-attempt1.zip. Canceled/superseded attempts are not passing evidence. Some GET responses were stale; exact-head status reads now request no-cache with a unique audit query.
+
+The workflow now prefers the official Ubuntu HTTPS archive, retaining an HTTPS Azure fallback, and sets bounded APT network timeouts/retries before the unchanged Playwright dependency installation. Runtime versions, all tests, test timeouts, triggers, concurrency and notifications remain unchanged. This pipeline correction has its own exact-head hosted check; record its conclusion before merging. The current user request authorizes Phase 6 integration, with TT-608 visual polish explicitly deferred.
+
 ## Alpha.20 researched atmosphere and action alignment — 22 October 2026
 
 Final `npm run check` passed formatting/types/build, **102 unit / 56 desktop browser cases** (2.3-minute browser run). The new shared action-row geometry case covers Welcome/rules/tutorial/calibration at 1024/1440 widths and verifies aligned centres with at least 44px link targets. The revised atmosphere case checks the new model, bounded sprites (42 total, 20 sky/mountain), and pause/Low/Reduced suppression; all prior input, race, opening, fleet, tracks, audio and recovery regressions pass. A final visibility tuning of haze size/opacity and feathered accent thickness then passed a fresh production build/typecheck and three focused race/atmosphere/effect cases (15.4 seconds); sprite counts, lifecycle and rules are unchanged.
