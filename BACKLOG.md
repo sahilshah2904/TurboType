@@ -1,5 +1,9 @@
 # TurboType future work backlog
 
+## Phase 6 implementation checkpoint — 22 October 2026
+
+TT-601–604 are implemented in alpha.17. Their source, behavior, recovery and verification map is [docs/PHASE6_ONBOARDING.md](docs/PHASE6_ONBOARDING.md); human review is [docs/PHASE6_REVIEW.md](docs/PHASE6_REVIEW.md). Checked boxes record implemented/tested scope, not user acceptance, integration or deployment. Final check evidence belongs in docs/TESTING.md. Campaign-specific briefing remains TT-701–704; current Quick Race has natural choices and a closed Advanced / Replay seed panel. TT-531 starter tracks are now user-accepted and integrated through PR #5. Phase 6 visual/interaction acceptance remains pending. Historical progress statements below do not override this checkpoint.
+
 ## Private multiplayer and zero-cost scope — 22 October 2026
 
 User requests rooms for up to **10 human players including host**, for up to 100 approved friends/relatives, with a **$0/free-tier-only** budget. Plan: Multiplayer → Create room / Join room by code → host chooses an owned track and shared passage preset → each player chooses an owned car → everyone including host clicks I'm ready → host starts a synchronized race. Host/roster/configuration changes invalidate readiness; server validates admission, readiness, progress and results. No single-player pause online; reconnect/host-transfer/rematch policies are in docs/MULTIPLAYER_ROOMS.md.
@@ -146,11 +150,11 @@ Completion evidence for TT-525–527: src/ui/fullscreen.ts, app-owned control li
 
 ## Phase 6 — entrance and onboarding
 
-- [ ] TT-601: Build original cinematic loading panels, real asset status, optional skip/replay, returning-user shortcut and failed-load recovery.
-- [ ] TT-602: Build welcome/rules, interactive correction/streak tutorial, optional calibration and animated hub.
-- [ ] TT-603: Complete responsive setup/briefing/settings/results navigation with mouse, physical-keyboard and accessibility support; test first and returning visits. Present passage/pace/mode naturally for Quick Race, use level-defined campaign setup, and move seed into Advanced/Replay settings for the final player flow.
+- [x] TT-601: Build original cinematic loading panels, real asset status, optional skip/replay, returning-user shortcut and failed-load recovery.
+- [x] TT-602: Build welcome/rules, interactive correction/streak tutorial, optional calibration and animated hub.
+- [x] TT-603: Complete responsive setup/briefing/settings/results navigation with mouse, physical-keyboard and accessibility support; test first and returning visits. Present passage/pace/mode naturally for Quick Race, use level-defined campaign setup, and move seed into Advanced/Replay settings for the final player flow.
 
-- [ ] TT-604: Apply the accepted immersive visual language across existing hub, practice, keyboard check, settings and pre-race navigation: full-window background, no enclosing page card/unused gutters, readable responsive content and accessible focus/zoom/reduced-motion. Hub becomes a garage/city scene; practice keeps one visible typing surface; settings use a clear overlay/dedicated full-window view. Alpha.5 now revamps all those existing routes, including integrated Practice typing and the kart hub; final responsive/device verification remains. New tutorial/welcome flows are not included. Maps are TT-701–704, race/results TT-508–513, and final garage/progress views belong to Phase 9.
+- [x] TT-604: Apply the accepted immersive visual language across existing hub, practice, keyboard check, settings and pre-race navigation: full-window background, no enclosing page card/unused gutters, readable responsive content and accessible focus/zoom/reduced-motion. Hub becomes a garage/city scene; practice keeps one visible typing surface; settings use a clear overlay/dedicated full-window view. Alpha.17 completes new welcome/rules/tutorial/calibration pages and laptop layout/accessibility regressions at 1024/1366/1440/1920, including active Larger typing text. Existing full-window routes remain covered. New visual acceptance is pending; broad release browser/hardware coverage stays Phase 10. Maps are TT-701–704, race/results TT-508–513, and final garage/progress views belong to Phase 9.
 
 ## Phase 7 — campaign maps
 
@@ -250,7 +254,7 @@ The user accepted the restored colors and Ignition and authorized continued work
 
 The user accepts the alpha.15 compact score/metrics presentation and requests standings expanded by default; the existing fire instrument is preserved. Alpha.16 adds five starter environments and remembered Hub/Quick Race choice. Reward tracks are required campaign scope, not an optional replacement for opening/tutorial work.
 
-- [ ] TT-531: Five distinct original starter track environments shared by Hub and Quick Race, remembered optional preference, ready-only race selection and active-race lock. Implemented and locally tested (98 unit / 40 browser cases); starter visuals await review. Evidence: docs/TESTING.md.
+- [x] TT-531: Five distinct original starter track environments shared by Hub and Quick Race, remembered optional preference, ready-only race selection and active-race lock. Implemented and locally tested (98 unit / 40 browser cases); User accepted all five starter tracks on 22 October 2026; PR #5 merged as 1b832ce after exact-head hosted run 39771450182 passed. Evidence: docs/TESTING.md.
 - [ ] TT-705: Add owned car/track selection to campaign level briefing and replay across every category; ownership does not bypass locked nodes. Depends on maps and Phase 9 ownership contracts.
 - [ ] TT-807: Author/review twenty-one original reward track environments/previews, independent category/threshold IDs and campaign default scenery. Seven per category at 10/25/40/55/70/85/100; 26 tracks total including five starters. Validate references and lazy loading; no placeholder assets count as finished.
 - [ ] TT-912: Unlock independent track rewards at 10/25/40/55/70/85/100 eligible unique main clears in each category: 21 rewards plus five starters, 26 tracks total. Supersedes paired car/track awards; cars stay at 15/30/45/60/75/90, 23 cars total. Derive separate idempotent entitlements from validated category-qualified clear receipts, recover interrupted writes and merge guest/cloud data safely. Globally usable on already-unlocked levels across categories and replays; no replay inflation or locked-level bypass. Verify 100 gives a track but no car. See docs/TRACK_PROGRESSION.md; depends on TT-801/807/901–911.

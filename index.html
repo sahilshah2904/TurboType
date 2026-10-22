@@ -17,13 +17,53 @@
       href="%BASE_URL%assets/brand-mark.svg"
     />
     <title>TurboType — Your words. Full throttle.</title>
+    <script>
+      function recoverBoot(message) {
+        if (document.readyState === "loading") {
+          document.addEventListener(
+            "DOMContentLoaded",
+            () => recoverBoot(message),
+            { once: true },
+          );
+          return;
+        }
+        const status = document.getElementById("boot-status");
+        if (!status) return;
+        status.textContent = message;
+        document.getElementById("boot-retry").hidden = false;
+      }
+      window.addEventListener(
+        "error",
+        (event) => {
+          if (
+            event.target instanceof HTMLScriptElement &&
+            event.target.type === "module"
+          ) {
+            recoverBoot(
+              "TurboType could not download. Check your connection and reload.",
+            );
+          }
+        },
+        true,
+      );
+      setTimeout(
+        () =>
+          recoverBoot(
+            "Taking longer than expected. Check your connection, or reload to retry.",
+          ),
+        12000,
+      );
+    </script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
     <div id="app">
       <main class="boot">
         <strong>TURBO<span>TYPE</span></strong>
-        <p>Starting the engine…</p>
+        <p id="boot-status" role="status">Starting the engine…</p>
+        <button id="boot-retry" hidden onclick="location.reload()">
+          Reload TurboType
+        </button>
       </main>
     </div>
     <noscript

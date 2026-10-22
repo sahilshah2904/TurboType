@@ -1,5 +1,10 @@
 export const ROUTES = [
   "hub",
+  "intro",
+  "welcome",
+  "rules",
+  "tutorial",
+  "calibration",
   "race",
   "practice",
   "keyboard",

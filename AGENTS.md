@@ -1,5 +1,13 @@
 # TurboType project continuity
 
+## Phase 6 implementation — 22 October 2026
+
+Alpha.17 is implemented on `codex/phase6-onboarding`: cinematic entrance with actual essential-asset readiness and recovery, welcome/rules, three native-input tutorial lessons, optional thirty-active-second pace calibration, returning-visitor skip/replay preferences and natural Quick Race setup with seed in Advanced / Replay. See [Phase 6 implementation](docs/PHASE6_ONBOARDING.md) and [laptop review checklist](docs/PHASE6_REVIEW.md). Phase 6 implementation is complete locally verified (102 unit / 50 browser cases), pending the user's new visual/interaction acceptance; integration remains pending. No Phase 7 implementation or deployment is authorized by this checkpoint. Older checkpoints below are historical.
+
+The user accepted all five starter tracks and requested Phase 6. Accepted alpha.16 PR #5 was merged into main as `1b832ce3683e9791690cc58c1046138552bebf1b` after freshly confirming its exact-head `2a0a6f8af5ae0466b7d7635db5ccdcca24b86426` hosted check [39771450182](https://github.com/sahilshah2904/TurboType/actions/runs/39771450182) passed. Phase 6 is separate, not merged. Review remains at http://192.168.0.31:5173/TurboType/ on the preserved existing server; automation stays headless on 4173.
+
+Rules 3 and save/content 1 remain. Only validated local preferences/tutorial completion/calibration sample persist; no race history, accounts, cloud, campaign maps/levels or multiplayer exists. Next after Phase 6 acceptance/integration: Phase 7 maps, Phase 8 curriculum, Phase 9 rewards/learning/guest and optional cloud saves, Phase 10 solo release/Pages, Phase 11 private rooms. Preserve independent reward milestones (23 cars / 26 tracks), ten simultaneous players and free-tier-only infrastructure plan.
+
 ## Private multiplayer and zero-cost scope — 22 October 2026
 
 User requests rooms for up to **10 human players including host**, for up to 100 approved friends/relatives, with a **$0/free-tier-only** budget. Plan: Multiplayer → Create room / Join room by code → host chooses an owned track and shared passage preset → each player chooses an owned car → everyone including host clicks I'm ready → host starts a synchronized race. Host/roster/configuration changes invalidate readiness; server validates admission, readiness, progress and results. No single-player pause online; reconnect/host-transfer/rematch policies are in docs/MULTIPLAYER_ROOMS.md.

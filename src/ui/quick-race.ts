@@ -28,15 +28,27 @@ function buildRace(session: Omit<QuickRaceSession, "race">): SoloRace {
     ...(session.timed ? { timeLimitMs: 60000 } : {}),
   });
 }
-export function createQuickRaceSession(): QuickRaceSession {
+export function createQuickRaceSession(
+  tier: CpuTier = "easy",
+): QuickRaceSession {
   const setup = {
     trackId: "neon-harbor",
     passageIndex: 0,
-    tier: "easy",
+    tier,
     seed: Math.floor(Math.random() * 0x100000000),
     timed: false,
   } as const;
   return { ...setup, race: buildRace(setup) };
+}
+/** Apply an explicit learning suggestion only to a ready setup; never replace a paused run. */
+export function applyQuickRacePace(
+  session: QuickRaceSession,
+  tier: CpuTier,
+): boolean {
+  if (session.race.snapshot().player.state !== "ready") return false;
+  session.tier = tier;
+  session.race = buildRace(session);
+  return true;
 }
 export function quickRaceScreen(
   selectedKart: KartId = "volt-kart",
@@ -78,12 +90,12 @@ export function quickRaceScreen(
         )
         .join("")}</select></div>
       <div><label for="race-mode">Mode</label><select id="race-mode"><option value="untimed">Complete the passage · untimed</option><option value="timed">Time trial · 60 active seconds</option></select></div>
-      <div><label for="race-seed">Race seed</label><input id="race-seed" type="number" min="0" max="4294967295" step="1" inputmode="numeric" required aria-describedby="setup-help" /></div>
+      <details class="race-advanced"><summary>Advanced / Replay</summary><label for="race-seed">Race seed</label><input id="race-seed" type="number" min="0" max="4294967295" step="1" inputmode="numeric" required aria-describedby="setup-help" /><p id="setup-help" class="help">The same passage, pace and seed reproduce CPU schedules. Your own typing is always live. A seed is chosen automatically for normal play.</p></details>
     </div>
-    <p id="setup-help" class="help race-setup">Targets are before reaction, hesitation and correction delays. This is Quick Race, not campaign levels. The same passage, pace and seed replay the same CPU schedules. Pauses or assisted input make a run practice-only. No rewards or results are saved yet.</p>
+    <p class="help race-setup">Choose your exercise and CPU pace, then your car and track. CPU targets include extra reaction and correction delays. Paused or assisted runs are practice-only. Results stay in this session.</p>
     <div class="race-setup">${trackChoices(selectedTrack, "race-track-select")}</div>
     <fieldset id="kart-picker" class="kart-picker"><legend>Choose your car</legend><div class="kart-picker__grid">${STARTER_KARTS.map((kart) => `<label class="kart-choice"><input type="radio" name="player-kart" value="${kart.id}" ${kart.id === selectedKart ? "checked" : ""} /><img class="${kart.id === "volt-kart" ? "kart-art--starter" : ""}" src="${import.meta.env.BASE_URL}assets/karts/${kart.file}" alt="" width="200" height="100" /><strong>${kart.name}</strong><span>${kart.style}</span></label>`).join("")}</div><p id="kart-save-status" class="help" role="status">Choose before starting. Your car stays locked through pauses until retry. All cars have the same performance.</p></fieldset>
-    <div class="practice-actions"><button id="start-race" class="button button--primary" disabled>Start race →</button><button id="retry-race" class="text-button">Retry same race</button><button id="new-race" class="text-button">New seed</button></div>
+    <div class="practice-actions"><button id="start-race" class="button button--primary" disabled>Start race →</button><button id="retry-race" class="text-button">Retry same race</button><button id="new-race" class="text-button">New race</button></div>
     <p id="race-controls-help" class="help">Esc or leaving this screen pauses everyone. Resume has a fresh countdown. Retry resets the run; refresh discards this unsaved session.</p>
     <div class="run-details"><span id="race-errors">0 errors · 0 corrected</span><span id="race-eligibility">Session only · not saved</span><span id="race-streak">0 clean streak</span></div>
     <details class="live-standings" open><summary>Live standings · all opponents are CPUs</summary><ol id="race-standings"></ol></details>
@@ -98,6 +110,7 @@ export function connectQuickRace(
   audio: RaceAudio,
   garage: { read: () => KartId; choose: (id: KartId) => boolean },
   tracks: { read: () => TrackId; choose: (id: TrackId) => boolean },
+  takePendingPace?: () => CpuTier | undefined,
 ): () => void {
   const abort = new AbortController();
   const eventOptions = { signal: abort.signal };
@@ -380,6 +393,11 @@ export function connectQuickRace(
     session.race.abandon();
     if (newSeed) session.seed = (session.seed + 1) >>> 0;
     seed.value = String(session.seed);
+    const pendingPace = takePendingPace?.();
+    if (pendingPace) {
+      session.tier = pendingPace;
+      tier.value = pendingPace;
+    }
     session.trackId = tracks.read();
     trackSelect.value = session.trackId;
     session.race = buildRace(session);
