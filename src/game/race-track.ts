@@ -1,3 +1,4 @@
+import { RaceAtmosphere } from "./race-atmosphere";
 import { trackTheme, type TrackId } from "../content/track-catalog";
 import { drawTrackScenery } from "./track-scenery";
 import type { SoloRace } from "../core/solo-race";
@@ -47,9 +48,7 @@ export async function mountRaceTrack(
     private backdrop!: Phaser.GameObjects.Graphics;
     private city!: Phaser.GameObjects.Graphics;
     private road!: Phaser.GameObjects.Graphics;
-    private wind!: Phaser.GameObjects.Graphics;
-    private windTravel = 0;
-    private windStrength = 0;
+    private atmosphere!: RaceAtmosphere;
     private gate!: Phaser.GameObjects.Graphics;
     private particles!: Phaser.GameObjects.Graphics;
     private title!: Phaser.GameObjects.Text;
@@ -71,7 +70,7 @@ export async function mountRaceTrack(
       this.backdrop = this.add.graphics();
       this.city = this.add.graphics();
       this.road = this.add.graphics();
-      this.wind = this.add.graphics().setDepth(4);
+      this.atmosphere = new RaceAtmosphere(this);
       this.gate = this.add.graphics();
       this.title = this.add
         .text(0, 0, "NEON HARBOR", {
@@ -201,7 +200,18 @@ export async function mountRaceTrack(
       const step = Math.min(delta, 50),
         active = s.state === "racing",
         decorative = active && !reduced;
-      this.city.x = reduced ? 0 : -(s.progress * w * 0.6) % (w * 0.5);
+      const air = this.atmosphere.update({
+        width: w,
+        height: h,
+        delta: step,
+        racing: active,
+        reduced,
+        high,
+        wpm: s.recentWpm,
+        ready: s.state === "ready",
+        tint: trackTheme(this.selectedTrack).detail,
+      });
+      this.city.x = reduced ? 0 : -(air.travel * 0.16) % (w * 0.5);
       this.road
         .clear()
         .fillStyle(trackTheme(this.selectedTrack).road)
@@ -210,7 +220,7 @@ export async function mountRaceTrack(
         .fillStyle(trackTheme(this.selectedTrack).edge)
         .fillRect(0, horizon, w, 3);
       this.road.lineStyle(1, 0xbcb0b7, 0.3);
-      const offset = reduced ? 0 : (s.elapsedMs * 0.15) % 100;
+      const offset = reduced ? 0 : air.travel % 100;
       for (let i = 1; i <= 5; i++)
         for (let x = -100; x < w + 100; x += 100)
           this.road.lineBetween(
@@ -219,62 +229,6 @@ export async function mountRaceTrack(
             x + 42 - offset,
             horizon + laneHeight * i,
           );
-      // Bounded curved airflow, separate from lane markings and authoritative progress.
-      this.wind.clear();
-      let windCount = 0;
-      const windActive = decorative && high && s.recentWpm > 0;
-      const targetWind = windActive ? Math.min(1, s.recentWpm / 90) : 0;
-      this.windStrength +=
-        (targetWind - this.windStrength) * Math.min(1, step / 180);
-      if (windActive) {
-        this.windTravel += step * (0.22 + this.windStrength * 0.9);
-        const strength = this.windStrength;
-        // Smooth, staggered ribbons sweep past every lane at different depths.
-        for (let i = 0; i < 26; i++) {
-          const x =
-            ((((i * 173 - this.windTravel * (0.7 + (i % 4) * 0.23)) %
-              (w + 320)) +
-              w +
-              320) %
-              (w + 320)) -
-            160;
-          const y = horizon + 12 + ((i * 47) % Math.max(1, h - horizon - 28));
-          const length = 45 + strength * 110 + (i % 3) * 18;
-          this.wind.lineStyle(
-            i % 5 === 0 ? 2 : 1,
-            i % 3 === 0 ? 0x87d9e5 : 0xe0edf1,
-            0.08 + strength * 0.16,
-          );
-          this.wind.beginPath();
-          for (let point = 0; point <= 4; point++) {
-            const px = x + (length * point) / 4;
-            const py =
-              y +
-              Math.sin(point * 0.8 + i + s.elapsedMs / 800) *
-                (3 + strength * 5);
-            if (point === 0) this.wind.moveTo(px, py);
-            else this.wind.lineTo(px, py);
-          }
-          this.wind.strokePath();
-          windCount++;
-        }
-        // Longer oblique gusts at the near edge sell camera speed without covering the HUD/input.
-        for (let i = 0; i < 8; i++) {
-          const x =
-            ((((i * 241 - this.windTravel * 1.8) % (w + 500)) + w + 500) %
-              (w + 500)) -
-            250;
-          const y = horizon + (h - horizon) * (i % 2 ? 0.94 : 0.05);
-          this.wind.lineStyle(2, 0xc7e4ec, 0.06 + strength * 0.12);
-          this.wind.beginPath();
-          this.wind.moveTo(x, y + (i % 2 ? 22 : -12));
-          this.wind.lineTo(x + w * 0.08, y + 3);
-          this.wind.lineTo(x + w * 0.18, y);
-          this.wind.lineTo(x + w * 0.24, y - 3);
-          this.wind.strokePath();
-          windCount++;
-        }
-      }
       this.gate.clear();
       const playerX = reduced ? w * (0.12 + s.progress * 0.76) : w * 0.43;
       const finishX = reduced
@@ -326,25 +280,6 @@ export async function mountRaceTrack(
           )
           .setOrigin(gap < 0 ? 0 : 1, 0)
           .setText(`${gap < 0 ? "◀" : "▶"} ${Math.round(row.progress * 100)}%`);
-        if (windActive && row.progress < 1) {
-          // Two short slipstream curls behind each car, leaving its silhouette clear.
-          for (let trail = 0; trail < 2; trail++) {
-            const tailX = root.x - carWidth * 0.48;
-            const tailY = root.y + carWidth * (trail ? 0.08 : -0.1);
-            const reach = carWidth * (0.45 + this.windStrength * 0.8);
-            this.wind.lineStyle(1, 0xaee4ec, 0.15 + this.windStrength * 0.18);
-            this.wind.beginPath();
-            this.wind.moveTo(tailX, tailY);
-            this.wind.lineTo(tailX - reach * 0.3, tailY - 5);
-            this.wind.lineTo(tailX - reach * 0.7, tailY + 3);
-            this.wind.lineTo(
-              tailX - reach,
-              tailY + Math.sin(s.elapsedMs / 160 + i) * 5,
-            );
-            this.wind.strokePath();
-            windCount++;
-          }
-        }
         const flame = this.flames[i];
         animateKart(this.assemblies[i], step, moving, s.elapsedMs + i * 190);
         flame.clear();
@@ -377,7 +312,6 @@ export async function mountRaceTrack(
       });
       if (s.state === "ready") {
         this.pool = [];
-        this.windTravel = this.windStrength = 0;
         this.burst = 0;
         this.ended = false;
         this.previous.clear();
@@ -414,7 +348,9 @@ export async function mountRaceTrack(
       this.qualityAt += step;
       if (this.qualityAt >= 100) {
         this.qualityAt = 0;
-        parent.dataset.wind = String(windCount);
+        parent.dataset.wind = String(air.count);
+        parent.dataset.windSky = String(air.sky);
+        parent.dataset.windModel = "layered-atmosphere";
         parent.dataset.particles = String(this.pool.length);
         parent.dataset.motion = reduced ? "reduced" : "full";
         parent.dataset.effects = options.effects();

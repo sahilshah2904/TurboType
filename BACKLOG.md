@@ -1,5 +1,9 @@
 # TurboType future work backlog
 
+## Requested atmosphere and navigation refinement — alpha.20
+
+- [x] TT-607: Replace rejected curved road air lines with a researched layered atmosphere across sky/mountains/horizon/road, retain readable foreground and motion/quality controls; align shared action links including Skip to hub. Implemented in PR #6; full local check passes 102 unit / 56 browser cases; final evidence in docs/TESTING.md, user appearance acceptance pending. TT-911 now explicitly includes monster trucks, hoverboards, flying cars and varied original vehicle structures; future renderer/art/ownership work stays Phase 8/9. IDs/milestones/totals are unchanged.
+
 ## Purple-car opening refinement — alpha.19
 
 - [x] TT-606: Requested purple-car arrival/brake/burnout/short reverse/rightward launch with blazing road trails and animated fire around the revealed game title. Implemented in existing PR #6 with original parts and SVG fire; full check passes 102 unit / 55 browser cases, with final CSS/capture evidence in docs/TESTING.md. User acceptance/integration remain pending. Fixed cinematic car never overwrites the selected racing car.
@@ -195,7 +199,7 @@ Completion evidence for TT-525–527: src/ui/fullscreen.ts, app-owned control li
 
 TT-906/907 may start earlier once contracts stabilize; cloud progress remains a single-player launch requirement, not work postponed until multiplayer.
 
-- [ ] TT-911: Required future category-specific reward collection: one distinct car every 15 unique eligible main-level clears within Easy, Medium and Hard (100 levels each), at 15/30/45/60/75/90 per category. Eighteen rewards plus five starters; counters never combine categories. This 22 October correction supersedes the ten-car/global-clear plan. Replays/bonus/Quick Race/Practice do not inflate counts; no extra car at 100 is implied. Author/export/anchor parts, persist idempotent category-qualified ownership from campaign receipts, migrate/recover guest saves and merge cloud clears/ownership safely; multiplayer validates entitlement. Cosmetic only. See docs/GARAGE_PROGRESSION.md for IDs, art briefs and boundary tests. Depends on campaign clear rules and Phase 9 save/cloud work; not implemented by the starter selector.
+- [ ] TT-911: Required future category-specific reward collection: one distinct car every 15 unique eligible main-level clears within Easy, Medium and Hard (100 levels each), at 15/30/45/60/75/90 per category. Eighteen rewards plus five starters; counters never combine categories. Include monster trucks, hoverboards, flying cars and other original vehicle families rather than only sports-car chassis; support optional wheels/lift anchors within equal gameplay performance. This 22 October correction supersedes the ten-car/global-clear plan. Replays/bonus/Quick Race/Practice do not inflate counts; no extra car at 100 is implied. Author/export/anchor parts, persist idempotent category-qualified ownership from campaign receipts, migrate/recover guest saves and merge cloud clears/ownership safely; multiplayer validates entitlement. Cosmetic only. See docs/GARAGE_PROGRESSION.md for IDs, art briefs and boundary tests. Depends on campaign clear rules and Phase 9 save/cloud work; not implemented by the starter selector.
 
 - [ ] TT-913: Adopt the private-audience $0 policy in identity/storage delivery: up to 100 approved profiles, optional solo sign-in but approved persistent identity online, preferred verified social OAuth instead of paid SMTP/SMS, bounded history, manual export/restore and free-provider pause/quota fallback. Supabase remains proposed until TT-906/1101 gates pass. See docs/MULTIPLAYER_ROOMS.md.
 

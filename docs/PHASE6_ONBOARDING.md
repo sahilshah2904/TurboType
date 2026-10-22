@@ -1,4 +1,4 @@
-# Phase 6 opening and learning — alpha.19
+# Phase 6 opening and learning — alpha.20
 
 Implemented 22 October 2026 on `codex/phase6-onboarding`. User visual acceptance and integration remain pending. Rules 3 and save/content 1 are unchanged; no dependencies or backend were added.
 
@@ -43,3 +43,7 @@ See [TESTING.md](TESTING.md), `tests/browser/onboarding.spec.ts`, calibration/st
 ## Alpha.18 race airflow
 
 `src/game/race-track.ts` renders 26 curved road ribbons, eight oblique near-edge gusts and two trails behind each unfinished car, with a hard ceiling of 44 paths and no extra particle objects/timers/assets. Recent WPM smoothly controls strength and decorative travel; delta is capped at 50 ms. Pause/countdown/end clear airflow; Low effects/Reduced motion disable it. It only draws inside the canvas and does not touch score/CPU progress. Existing exhaust and independent wheels remain. Reference-video observations about thin speed streaks/exhaust are developed into visible layered airflow while retaining the accepted tracks/cars/palette. This is a visual refinement, not a new physical frame-rate certification.
+
+## Alpha.20 atmosphere and action alignment
+
+The user rejected the alpha.18/19 curved air paths. They are replaced by a fixed layered sprite atmosphere over the entire race visual, including upper sky/mountains; see [ATMOSPHERE_RESEARCH.md](ATMOSPHERE_RESEARCH.md). Shared practice-action rows now centre plain links such as Skip to hub with buttons and provide 44px targets across learning/welcome/rules and other existing action rows. This does not change the accepted opening choreography or future phase order.

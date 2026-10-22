@@ -438,3 +438,33 @@ test("missing purple opening artwork offers a static title without blocking the 
     timeout: 12000,
   });
 });
+
+test("hub action links align with buttons across welcome, tutorial and calibration", async ({
+  page,
+}) => {
+  for (const width of [1024, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    for (const route of ["welcome", "tutorial", "calibration", "rules"]) {
+      await page.goto(`./#/${route}`);
+      const actions = page.locator(".practice-actions").first();
+      const centers = await actions.evaluate((el) =>
+        Array.from(el.children)
+          .filter((child) => (child as HTMLElement).offsetHeight > 0)
+          .map((child) => {
+            const r = child.getBoundingClientRect();
+            return { x: r.x, y: r.y + r.height / 2, h: r.height };
+          }),
+      );
+      expect(centers.length).toBeGreaterThan(1);
+      for (const item of centers) expect(item.h).toBeGreaterThanOrEqual(44);
+      // Each row starts when the next item wraps to the left; all controls in that row share a centre.
+      let rowY = centers[0].y,
+        previousX = -1;
+      for (const item of centers) {
+        if (item.x <= previousX) rowY = item.y;
+        expect(Math.abs(item.y - rowY)).toBeLessThanOrEqual(1);
+        previousX = item.x;
+      }
+    }
+  }
+});

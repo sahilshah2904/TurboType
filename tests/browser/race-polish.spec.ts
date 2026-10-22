@@ -312,7 +312,7 @@ test("bounds high effects and disables particles in reduced/low mode without alt
   ).toBe("pre-wrap");
 });
 
-test("curved airflow follows typing pace and stops for pause, low effects and reduced motion", async ({
+test("layered atmosphere spans sky and road, follows typing pace and stops for pause, low effects and reduced motion", async ({
   page,
 }) => {
   await page.addInitScript(() =>
@@ -332,6 +332,8 @@ test("curved airflow follows typing pace and stops for pause, low effects and re
   const gusts = Number(await track.getAttribute("data-wind"));
   expect(gusts).toBeGreaterThanOrEqual(34);
   expect(gusts).toBeLessThanOrEqual(44);
+  await expect(track).toHaveAttribute("data-wind-model", "layered-atmosphere");
+  expect(Number(await track.getAttribute("data-wind-sky"))).toBe(20);
   await page.getByRole("button", { name: "Pause", exact: true }).click();
   await page.clock.runFor(200);
   await expect(track).toHaveAttribute("data-wind", "0");

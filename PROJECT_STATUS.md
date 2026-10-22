@@ -1,5 +1,11 @@
 # TurboType project status
 
+## Alpha.20 atmosphere, action alignment and future vehicle variety — 22 October 2026
+
+The user rejected the white curved air lines. Alpha.20 removes them entirely and uses researched, layered atmospheric movement across the full race scene: soft distant haze over sky/mountains, small suspended motes and feathered peripheral speed accents. These are 42 reused sprites from three tiny generated gradient textures, including 20 in the upper sky/mountain area. Smooth WPM response and slower scenery parallax replace stepwise scene movement. Cars, labels, HUD and typing stay sharp. Pause/end/Low/Reduced hide the atmosphere. Research/design/limits: docs/ATMOSPHERE_RESEARCH.md. User visual acceptance is pending; do not describe quality or physical frame rate as certified.
+
+Shared action rows now centre-align buttons and plain links, with a minimum 44px link target, fixing Skip to hub in Welcome/tutorial/calibration and other action rows. The user also requests future monster trucks, hoverboards, flying cars and other original vehicle families. Proposed Phase 8/9 briefs now vary body/propulsion structures; eighteen stable reward IDs, milestones, 23 total vehicles and cosmetic-only gameplay stay unchanged. No future vehicles/ownership are implemented. See docs/GARAGE_PROGRESSION.md. Work stays in codex/phase6-onboarding / open PR #6; no merge/deployment or Phase 7 implementation.
+
 ## Alpha.19 purple-car opening — 22 October 2026
 
 The latest user request supersedes alpha.18's simple title-only reveal: the accepted purple Volt Electric enters fast from the left, brakes at the middle, holds briefly, spins its independent tyres with burnout smoke, rolls back slightly and launches right as TURBOTYPE reveals. Original three-layer SVG flames burn along its invisible middle road and around the title. Choreography remains 5.6 seconds after its original body/wheel artwork decodes; Skip stays immediately available. Low/Reduced show the finished static title without the car/fire sequence. A four-second decode watchdog or failed opening art falls back to the static title with feedback and an available Enter action. Route cleanup cancels both timers and ignores stale image promises.
