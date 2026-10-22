@@ -54,7 +54,13 @@ export function quickRaceScreen(selectedKart: KartId = "volt-kart"): string {
     <label class="sr-only" for="race-input">Your typing</label><textarea id="race-input" rows="2" readonly autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" aria-describedby="race-passage race-notice race-controls-help" placeholder="Start the race, then type after GO…"></textarea></div>
     <p id="race-notice" class="help" role="status">One mistake stops progress. Backspace corrects it.</p>
 </div><section class="race-deck" aria-label="Race setup and controls"><h1 class="race-deck-title">Your next <span>starting line.</span></h1><div class="track-bottom"><span id="race-track-status" role="status">Loading race track…</span><button id="retry-race-track" class="text-button" hidden>Retry artwork</button><button id="text-race" class="text-button" hidden>Race with text standings</button></div>
-    <section id="race-results" class="run-results" aria-labelledby="race-result-title" hidden><p class="eyebrow">RACE RESULT · SESSION ONLY</p><h2 id="race-result-title"></h2><p id="race-result-summary"></p><p id="race-coaching"></p><div class="race-table-wrap"><table><caption>Final standings. Later CPU outcomes are simulated from fixed schedules; they are not live players.</caption><thead><tr><th scope="col">Place</th><th scope="col">Driver</th><th scope="col">Time</th><th scope="col">Status</th></tr></thead><tbody id="race-result-rows"></tbody></table></div><p class="help">No XP, credits, stars, unlocks or personal records are saved. Original Neon Harbor art and sound. Campaign progression arrives in later phases.</p></section>    <div class="race-setup practice-options">
+    <section id="race-results" class="run-results" aria-labelledby="race-result-title" hidden>
+      <p class="eyebrow">SESSION RESULT · NOT SAVED</p>
+      <div class="result-heading"><h2 id="race-result-title"></h2><strong id="race-result-place"></strong></div>
+      <dl id="race-result-summary" class="result-metrics"><div><dt>Average WPM</dt><dd id="race-result-wpm"></dd></div><div><dt>Accuracy</dt><dd id="race-result-accuracy"></dd></div><div><dt>Time</dt><dd id="race-result-time"></dd></div></dl>
+      <p id="race-result-progress" hidden></p>
+      <details id="race-result-details"><summary>Final standings</summary><div class="race-table-wrap"><table><caption>CPU opponents · later finishes are simulated.</caption><thead><tr><th scope="col">Place</th><th scope="col">Driver</th><th scope="col">Time</th><th scope="col">Status</th></tr></thead><tbody id="race-result-rows"></tbody></table></div></details>
+    </section>    <div class="race-setup practice-options">
       <div><label for="race-passage-select">Passage</label><select id="race-passage-select">${PRACTICE_PASSAGES.map((p, i) => `<option value="${i}">${p.name}</option>`).join("")}</select></div>
       <div><label for="cpu-tier">Opponent pace</label><select id="cpu-tier">${Object.entries(
         CPU_TIERS,
@@ -142,7 +148,7 @@ export function connectQuickRace(
       callout.hidden = true;
     }
     find(".immersive-race").dataset.state = s.state;
-    updateSpeedometer(main, s.recentWpm);
+    updateSpeedometer(main, s.recentWpm, s.state === "racing");
     const active = ["countdown", "racing", "paused"].includes(s.state);
     kartPicker.disabled = s.state !== "ready";
     main.classList.toggle("quick-race-active", active);
@@ -261,21 +267,31 @@ export function connectQuickRace(
       text(
         "#race-result-title",
         s.state === "finished"
-          ? `Passage complete · place ${place} of 5`
+          ? "Race complete"
           : s.state === "timed-out"
             ? "Time is up · unfinished"
             : "Race abandoned",
       );
       text(
-        "#race-result-summary",
-        `${s.wpm.toFixed(1)} WPM · ${s.accuracyPercent === null ? "No attempts" : `${s.accuracyPercent.toFixed(1)}% accuracy`} · ${(s.elapsedMs / 1000).toFixed(1)}s · ${Math.floor(s.progress * 100)}% complete.`,
+        "#race-result-place",
+        s.state === "finished" ? `${place} / 5` : "DNF",
       );
+      find("#race-result-place").setAttribute(
+        "aria-label",
+        s.state === "finished" ? `Place ${place} of 5` : "Did not finish",
+      );
+      text("#race-result-wpm", s.wpm.toFixed(1));
       text(
-        "#race-coaching",
-        s.accuracyPercent !== null && s.accuracyPercent < 95
-          ? "Ease your pace slightly and build clean words first."
-          : "Keep a steady rhythm. Try a longer passage when ready.",
+        "#race-result-accuracy",
+        s.accuracyPercent === null ? "—" : `${s.accuracyPercent.toFixed(1)}%`,
       );
+      text("#race-result-time", `${(s.elapsedMs / 1000).toFixed(1)}s`);
+      text(
+        "#race-result-progress",
+        `${Math.floor(s.progress * 100)}% of passage completed`,
+      );
+      find("#race-result-progress").hidden = s.state === "finished";
+      find<HTMLDetailsElement>("#race-result-details").open = false;
       const rows = find("#race-result-rows");
       rows.replaceChildren();
       for (const row of results) {

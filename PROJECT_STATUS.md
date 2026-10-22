@@ -1,5 +1,11 @@
 # TurboType project status
 
+## Alpha.15 presentation follow-up — 22 October 2026
+
+User-requested Race result simplification and fiery Live WPM instrument are implemented on `codex/results-and-fire-dial`, branched from accepted main `e1bbaff`. The default result has place, average WPM, accuracy and active time; unfinished runs include completion percentage. CPU standings expand on demand with simulation labels intact. Original SVG fire animates only during racing with High effects/full motion; Low/Reduced and pause/finish are static. No scoring/storage changes (rules 3, save/content 1), new dependencies or Phase 6 onboarding. See docs/IMMERSIVE_APP.md and docs/TESTING.md for validation and captures.
+
+Normal human review uses the existing LAN link http://192.168.0.31:5173/TurboType/, which serves the active local checkout, including this unmerged branch. The existing server is preserved. Automated regressions remain headless on 4173. PR #4 is verified merged; base e1bbaff has successful exact-source main run 39727697321. This follow-up requires its own checks and user review before merge; no deployment.
+
 ## Phase 5 complete and integrated — 22 October 2026
 
 The user reported “I believe everything worked fine” after the final physical checklist. Reviewed recorder evidence: 120-second hardware-accelerated session, 100 trusted racing keys, 99 trusted inputs, zero page errors, median/p95/max handler-to-next-rAF 9.3/18.8/22.2ms. This is a bounded input diagnostic and available-laptop acceptance, not universal performance certification. TT-506/511/512/513/522 are closed for the agreed Phase 5 scope; broader release testing stays in Phase 10. All Phase 5 backlog items are now complete, including explicitly canceled scope. [PR #4](https://github.com/sahilshah2904/TurboType/pull/4) merged into main as `de464ce` after exact acceptance-head `398d455` passed hosted run [39727202033](https://github.com/sahilshah2904/TurboType/actions/runs/39727202033). The local checkout is now main. This post-merge documentation update has its own main-push check; inspect actual HEAD/checks. See [closeout](docs/PHASE5_CLOSEOUT.md). No Phase 6 implementation or deployment started. Older pending-acceptance paragraphs below are historical.

@@ -57,3 +57,7 @@ Original optional audio is described in [AUDIO.md](AUDIO.md); it defaults muted 
 `npm run check` validates types, formatting, pure behavioral tests, build and Chromium profile flows. New tests cover reproducibility, seed bounds, character/finish boundaries, frame-independent progress, all-CPU-first continuation, pause/countdown exclusion, frozen/projected outcomes, timed/abandoned DNFs, retry, graphics recovery/context loss, navigation cleanup and narrow layouts. Actual run evidence lives in [TESTING.md](TESTING.md).
 
 The user accepted the five requested ASUS/Samsung race checks (TT-404); [PHASE4_RACE_TESTS.md](PHASE4_RACE_TESTS.md) retains the procedure. Physical iPhone/tablet and broader browser/performance coverage remain TT-1008/Phase 10. No Phase 3 acceptance is retroactively presented as testing this new scene. Future rewards/storage, cloud accounts, cinematic art/audio, 300 campaign levels and multiplayer remain tracked in [BACKLOG.md](../BACKLOG.md).
+
+## Compact results (alpha.15)
+
+The default final card contains place (or DNF), average WPM, accuracy and active time. Unfinished runs also show passage completion. Expand Final standings for all five drivers and the explicit distinction between real elapsed finishes and later simulated CPU outcomes. Results remain frozen and session-only; collapsing the standings changes no race data. Retry same race and New seed retain their existing setup semantics.

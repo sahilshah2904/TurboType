@@ -56,6 +56,7 @@ export function mountApp(root: HTMLElement): () => void {
   const clearFullscreen = connectFullscreen(root);
 
   function applyPreferences(): void {
+    document.documentElement.dataset.effects = settings.effects;
     document.documentElement.dataset.motion = reducedMotion()
       ? "reduced"
       : "full";

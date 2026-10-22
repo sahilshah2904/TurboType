@@ -12,6 +12,25 @@ test("all existing routes use the open world shell and preserve controls on lapt
         .maxWidth,
     }));
     expect(layout).toEqual({ overflow: false, maxWidth: "none" });
+    if (route === "practice") {
+      await page.setViewportSize({ width: 1024, height: 768 });
+      for (const state of ["ready", "countdown"]) {
+        if (state === "countdown")
+          await page.getByRole("button", { name: "Start run" }).click();
+        expect(
+          await page.evaluate(() => {
+            const box = (selector: string) =>
+              document.querySelector(selector)!.getBoundingClientRect();
+            const dial = box(".speedometer");
+            return (
+              dial.top >= box(".metrics-grid").bottom &&
+              dial.left >= box(".typing-surface").right &&
+              dial.bottom <= box(".run-progress").top
+            );
+          }),
+        ).toBe(true);
+      }
+    }
     if (route === "race") {
       await expect(page.locator('#race-track[data-ready="true"]')).toBeVisible({
         timeout: 12000,
@@ -85,4 +104,46 @@ test("live WPM dial rises, clamps only its needle, freezes on pause and decays d
   await page.getByRole("button", { name: "Pause", exact: true }).click();
   await page.getByRole("button", { name: "Retry same race" }).click();
   await expect(dial.locator(".dial-value")).toHaveText("0");
+});
+
+test("instrument flames respect racing, pause, low effects and reduced motion", async ({
+  page,
+}) => {
+  await page.clock.install();
+  await page.goto("./#/settings");
+  await page.getByLabel("Motion", { exact: true }).selectOption("full");
+  await page.getByRole("link", { name: "Race", exact: true }).click();
+  await expect(page.locator('#race-track[data-ready="true"]')).toBeVisible({
+    timeout: 12000,
+  });
+  const burn = () =>
+    page
+      .locator(".dial-flames")
+      .evaluate((el) => getComputedStyle(el).animationName);
+  await page.getByRole("button", { name: /^Start race/ }).click();
+  await page.clock.fastForward(4000);
+  expect(await burn()).toBe("dial-burn");
+  await page.getByRole("button", { name: "Pause", exact: true }).click();
+  expect(await burn()).toBe("none");
+  for (const preset of ["low", "reduced"] as const) {
+    await page.getByRole("link", { name: "Settings", exact: true }).click();
+    await page
+      .getByLabel("Track effects", { exact: true })
+      .selectOption(preset === "low" ? "low" : "high");
+    await page
+      .getByLabel("Motion", { exact: true })
+      .selectOption(preset === "reduced" ? "reduced" : "full");
+    await page.getByRole("link", { name: "Race", exact: true }).click();
+    await expect(page.locator('#race-track[data-ready="true"]')).toBeVisible({
+      timeout: 12000,
+    });
+    await page.getByRole("button", { name: "Resume race" }).click();
+    await page.clock.fastForward(4000);
+    await expect(page.locator(".speedometer")).toHaveAttribute(
+      "data-active",
+      "true",
+    );
+    expect(await burn()).toBe("none");
+    await page.getByRole("button", { name: "Pause", exact: true }).click();
+  }
 });

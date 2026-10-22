@@ -1,5 +1,11 @@
 # TurboType project continuity
 
+## Current presentation follow-up — 22 October 2026
+
+Alpha.15 on `codex/results-and-fire-dial` adds the user's compact Race results and original SVG fire instrument. This branch starts at accepted main `e1bbaff`; PR #4 remains merged as de464ce. The Phase 5 checkpoint below is the accepted alpha.14 baseline. New presentation changes need their own review/acceptance before merge; no Phase 6 onboarding or deployment is implied. Read the newest sections in PROJECT_STATUS.md, docs/SESSION_HANDOFF.md and docs/TESTING.md for exact validation and PR state.
+
+The user's manual review should use the already-running LAN server at http://192.168.0.31:5173/TurboType/ rather than spawning visible test windows. It serves the active local branch immediately, not a main-only deployment. Keep automated regressions headless and isolated on 4173; preserve the existing 5173 server. Compact results retain optional honest CPU standings and DNF progress; fire stays static when paused/finished, in Low effects or Reduced motion. Scoring, saved data and accepted vehicle/audio direction remain unchanged.
+
 ## Read first in a new chat
 
 1. Read [PROJECT_STATUS.md](PROJECT_STATUS.md), [docs/SESSION_HANDOFF.md](docs/SESSION_HANDOFF.md) and [BACKLOG.md](BACKLOG.md) before reporting progress or starting work. The handoff records accepted decisions, source paths, evidence, limitations and next steps; the previous chat is not required.

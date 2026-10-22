@@ -1,5 +1,12 @@
 # TurboType future work backlog
 
+## Alpha.15 requested presentation follow-up — 22 October 2026
+
+- [ ] TT-529: Simplify final Race results to place, average WPM, accuracy and time; show completion for DNFs and retain accurate CPU outcomes in an optional disclosure. Implemented and locally tested (96 unit / 38 browser cases); awaiting user visual acceptance before closure. Evidence: docs/TESTING.md.
+- [ ] TT-530: Give the shared Live WPM dial an original blazing SVG background, richer instrument face and protected large readout. Keep speed/scoring semantics; stop flame animation for pause/finish, Low effects and Reduced motion. Implemented and locally tested (96 unit / 38 browser cases); awaiting user visual acceptance before closure. Evidence: docs/TESTING.md.
+
+These are authorized follow-ups to the accepted Phase 5 baseline, not reopening its hardware gates or implementing Phase 6 onboarding. Review at the existing LAN URL before merge; source stays on codex/results-and-fire-dial pending acceptance. Reward correction remains six per category (15/30/45/60/75/90), eighteen total; no reward implementation is added.
+
 ## Phase 5 complete and integrated — 22 October 2026
 
 The user reported “I believe everything worked fine” after the final physical checklist. Reviewed recorder evidence: 120-second hardware-accelerated session, 100 trusted racing keys, 99 trusted inputs, zero page errors, median/p95/max handler-to-next-rAF 9.3/18.8/22.2ms. This is a bounded input diagnostic and available-laptop acceptance, not universal performance certification. TT-506/511/512/513/522 are closed for the agreed Phase 5 scope; broader release testing stays in Phase 10. All Phase 5 backlog items are now complete, including explicitly canceled scope. [PR #4](https://github.com/sahilshah2904/TurboType/pull/4) merged into main as `de464ce` after exact acceptance-head `398d455` passed hosted run [39727202033](https://github.com/sahilshah2904/TurboType/actions/runs/39727202033). The local checkout is now main. This post-merge documentation update has its own main-push check; inspect actual HEAD/checks. See [closeout](docs/PHASE5_CLOSEOUT.md). No Phase 6 implementation or deployment started. Older pending-acceptance paragraphs below are historical.

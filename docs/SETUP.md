@@ -78,3 +78,7 @@ The browser suite launches a preview server on 4173 if one is not already runnin
 - **Laptop layout/input issues:** record browser/OS, window size, zoom and physical keyboard/IME behavior. Mobile keyboards are outside the current scope.
 
 Exact installed versions are in package.json/package-lock.json. Design rationale, lifecycle and data boundaries are documented in ARCHITECTURE.md and the ADRs.
+
+## Manual review over the LAN
+
+The existing development server is reachable at http://192.168.0.31:5173/TurboType/. It serves the current working-tree branch immediately; GitHub main and the LAN preview are separate. Keep the user's existing server running. If starting a new server intentionally, `npm run dev -- --host 0.0.0.0` exposes Vite on the laptop's current LAN address. The address may change with the network. Automated Playwright checks continue to use an isolated headless preview on port 4173, without opening or closing the user's Chrome windows. Branch review at the LAN URL can happen before a PR is merged; pushing or merging source does not deploy the game.
