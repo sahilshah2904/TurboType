@@ -20,6 +20,7 @@ export function createCpuSchedules(
   length: number,
   tier: CpuTier,
   seed: number,
+  campaignBand?: { minWpm: number; maxWpm: number },
 ): readonly CpuSchedule[] {
   if (
     !Number.isInteger(length) ||
@@ -33,7 +34,15 @@ export function createCpuSchedules(
     throw new RangeError(
       "Invalid CPU passage length, tier or unsigned 32-bit seed.",
     );
-  const band = CPU_TIERS[tier];
+  const band = campaignBand ?? CPU_TIERS[tier];
+  if (
+    !Number.isFinite(band.minWpm) ||
+    !Number.isFinite(band.maxWpm) ||
+    band.minWpm < 1 ||
+    band.maxWpm < band.minWpm ||
+    band.maxWpm > 200
+  )
+    throw new RangeError("Invalid campaign CPU band.");
   return Object.freeze(
     ["Neon Fox", "Apex Nova", "Comet", "Volt"].map((name, index) => {
       let state = (seed ^ Math.imul(index + 1, 0x9e3779b9)) >>> 0;

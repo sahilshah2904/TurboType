@@ -544,25 +544,25 @@ select {
   color: #c3c9ce;
 }
 /* Race owns the available visual viewport; world and sprites resize independently. */
-html[data-route="race"] .world-backdrop,
-html[data-route="race"] .footer {
+html:is([data-route="race"], [data-route="level"]) .world-backdrop,
+html:is([data-route="race"], [data-route="level"]) .footer {
   display: none;
 }
-html[data-route="race"] body {
+html:is([data-route="race"], [data-route="level"]) body {
   overflow: hidden;
 }
-html[data-route="race"] .app-shell {
+html:is([data-route="race"], [data-route="level"]) .app-shell {
   padding: 0;
   height: 100dvh;
   min-height: 0;
 }
-html[data-route="race"] #main {
+html:is([data-route="race"], [data-route="level"]) #main {
   position: fixed;
   inset: 0px 0 auto;
   height: 100dvh;
   min-height: 0;
 }
-html[data-route="race"] .topbar {
+html:is([data-route="race"], [data-route="level"]) .topbar {
   position: fixed;
   top: 0px;
   left: 0;
@@ -571,10 +571,10 @@ html[data-route="race"] .topbar {
   min-height: 68px;
   background: linear-gradient(#12181dcf, transparent);
 }
-html[data-route="race"] .topbar .wordmark {
+html:is([data-route="race"], [data-route="level"]) .topbar .wordmark {
   font-size: 22px;
 }
-html[data-route="race"] .topbar .guest {
+html:is([data-route="race"], [data-route="level"]) .topbar .guest {
   display: none;
 }
 .immersive-race.quick-race {
@@ -1014,7 +1014,7 @@ html[data-route="race"] .topbar .guest {
 .topbar {
   padding-right: 56px;
 }
-html[data-route="race"] .topbar {
+html:is([data-route="race"], [data-route="level"]) .topbar {
   padding-right: 80px;
 }
 .fullscreen-control {

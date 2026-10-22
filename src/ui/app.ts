@@ -1,3 +1,12 @@
+import { readCampaignRoute, campaignLevel } from "../content/campaign";
+import { isUnlocked, starCount } from "../core/campaign-progress";
+import { LocalCampaignRepository } from "../storage/campaign";
+import {
+  campaignCards,
+  campaignMapScreen,
+  connectCampaignMap,
+} from "./campaign-map";
+import { createCampaignRaceSession, type QuickRaceSession } from "./quick-race";
 import type { CpuTier } from "../core/cpu-schedule";
 import {
   LocalOnboardingRepository,
@@ -49,6 +58,11 @@ export function mountApp(root: HTMLElement): () => void {
   const tracks = new LocalTrackRepository(() => localStorage);
   let selectedTrack = tracks.load();
   const audio = new RaceAudio();
+  const campaign = new LocalCampaignRepository(() => localStorage);
+  let campaignSession: QuickRaceSession | undefined;
+  let forceCampaignStart = false;
+  let unlockedNode: { category: string; number: number } | undefined;
+  const campaignResults = new WeakMap<object, string>();
   const systemMotion = matchMedia("(prefers-reduced-motion: reduce)");
   let scope: ReturnType<typeof createScope> | undefined;
   let unmountPreview: (() => void) | undefined;
@@ -100,6 +114,44 @@ export function mountApp(root: HTMLElement): () => void {
     unmountPreview?.();
     unmountPreview = undefined;
     const route = parseRoute(location.hash);
+    const campaignRoute = readCampaignRoute(location.hash);
+    if (route === "campaign" || route === "hub") campaign.reload();
+    const selectedLevel = campaignRoute?.number
+      ? campaignLevel(campaignRoute.category, campaignRoute.number)
+      : undefined;
+    if (
+      route === "level" &&
+      selectedLevel?.passage &&
+      isUnlocked(campaign.read(), selectedLevel) &&
+      (forceCampaignStart ||
+        campaignSession?.campaign?.level.id !== selectedLevel.id)
+    ) {
+      forceCampaignStart = false;
+      campaignSession?.race.abandon();
+      campaignSession = createCampaignRaceSession(
+        selectedLevel,
+        selectedTrack,
+        (snapshot) => {
+          const previous = campaignResults.get(campaignSession!.race);
+          if (previous) return previous;
+          const result = campaign.finish(selectedLevel, snapshot);
+          if (result.newlyCleared && selectedLevel.number < 100)
+            unlockedNode = {
+              category: selectedLevel.category,
+              number: selectedLevel.number + 1,
+            };
+          const recorded = result.accepted
+            ? `${starCount(result.progress.clears[selectedLevel.id].stars)} / 3 stars · ${result.newlyCleared ? "Level cleared." : "Replay complete."} ${result.saved ? "Map progress saved on this browser." : "Progress lasts for this visit only; browser storage is unavailable."}${selectedLevel.number === 6 ? " More passages arrive in Phase 8." : ""}`
+            : "Practice finish · no stars or unlock. Retry without pausing or assisted input for an eligible clear.";
+          campaignResults.set(campaignSession!.race, recorded);
+          return recorded;
+        },
+      );
+    }
+    const levelAllowed =
+      !!selectedLevel?.passage && isUnlocked(campaign.read(), selectedLevel);
+    const activeSession =
+      route === "level" && levelAllowed ? campaignSession! : quickRaceSession;
     document.documentElement.dataset.route = route;
     main.classList.remove(
       "quick-race-active",
@@ -113,7 +165,7 @@ export function mountApp(root: HTMLElement): () => void {
         link.setAttribute("aria-current", "page");
       else link.removeAttribute("aria-current");
     });
-    document.title = `TurboType — ${{ hub: "Your words. Full throttle.", intro: "Enter TurboType", welcome: "Welcome", rules: "How to play", tutorial: "Guided tutorial", calibration: "Find your starting pace", race: "Quick Race", practice: "Typing practice", keyboard: "Keyboard check", settings: "Settings" }[route]}`;
+    document.title = `TurboType — ${{ hub: "Your words. Full throttle.", intro: "Enter TurboType", welcome: "Welcome", rules: "How to play", tutorial: "Guided tutorial", calibration: "Find your starting pace", race: "Quick Race", practice: "Typing practice", keyboard: "Keyboard check", settings: "Settings", campaign: "Campaign map", level: "Campaign race" }[route]}`;
     main.innerHTML =
       route === "intro"
         ? entranceScreen(selectedKart)
@@ -124,19 +176,30 @@ export function mountApp(root: HTMLElement): () => void {
             : route === "tutorial" || route === "calibration"
               ? learningScreen(route)
               : route === "hub"
-                ? hubScreen(selectedKart, selectedTrack)
-                : route === "race"
-                  ? quickRaceScreen(
-                      selectedKart,
-                      quickRaceSession.race.snapshot().player.state === "ready"
-                        ? selectedTrack
-                        : quickRaceSession.trackId,
+                ? hubScreen(selectedKart, selectedTrack, campaign.read())
+                : route === "campaign" && campaignRoute
+                  ? campaignMapScreen(
+                      campaignRoute.category,
+                      campaign.read(),
+                      unlockedNode?.category === campaignRoute.category
+                        ? unlockedNode.number
+                        : undefined,
                     )
-                  : route === "practice"
-                    ? practiceScreen()
-                    : route === "keyboard"
-                      ? keyboardScreen()
-                      : settingsScreen(settings, learning);
+                  : route === "level" && !levelAllowed
+                    ? `<section class="page-heading campaign-unavailable"><h1>Road not open yet.</h1><p>${selectedLevel && !isUnlocked(campaign.read(), selectedLevel) ? `Clear ${selectedLevel.category} level ${selectedLevel.number - 1} first.` : "This passage arrives in Phase 8."}</p><a class="button button--primary" href="#/campaign/${campaignRoute?.category ?? "easy"}">Return to map</a></section>`
+                    : route === "race" || route === "level"
+                      ? quickRaceScreen(
+                          selectedKart,
+                          activeSession.race.snapshot().player.state === "ready"
+                            ? selectedTrack
+                            : activeSession.trackId,
+                          route === "level" ? selectedLevel : undefined,
+                        )
+                      : route === "practice"
+                        ? practiceScreen()
+                        : route === "keyboard"
+                          ? keyboardScreen()
+                          : settingsScreen(settings, learning);
     scope = createScope({ root: main }).add(() => {
       if (!reducedMotion())
         animate(".reveal", {
@@ -246,13 +309,40 @@ export function mountApp(root: HTMLElement): () => void {
         mount();
       });
     }
+    if (route === "campaign" && campaignRoute) {
+      clearScreen = connectCampaignMap(
+        main,
+        campaignRoute.category,
+        campaign,
+        {
+          kart: () => selectedKart,
+          track: () => selectedTrack,
+          chooseKart: (id) => {
+            selectedKart = id;
+            garage.save(id);
+          },
+          chooseTrack: (id) => {
+            selectedTrack = id;
+            tracks.save(id);
+          },
+        },
+        (level) => {
+          forceCampaignStart = true;
+          location.hash = `#/level/${level.category}/${level.number}`;
+        },
+        unlockedNode?.category === campaignRoute.category
+          ? unlockedNode.number
+          : undefined,
+      );
+      unlockedNode = undefined;
+    }
     if (route === "keyboard") clearScreen = connectKeyboard(main);
     if (route === "practice")
       clearScreen = connectTypingPractice(main, practiceSession);
-    if (route === "race")
+    if (route === "race" || (route === "level" && levelAllowed))
       clearScreen = connectQuickRace(
         main,
-        quickRaceSession,
+        activeSession,
         reducedMotion,
         () => settings.effects,
         audio,
@@ -316,6 +406,14 @@ export function mountApp(root: HTMLElement): () => void {
       else applyPreferences();
     }
   };
+  const onCampaignStorage = (event: StorageEvent) => {
+    if (
+      event.key === "turbotype:campaign-map:v1" &&
+      ["campaign", "hub"].includes(parseRoute(location.hash))
+    )
+      render();
+  };
+  window.addEventListener("storage", onCampaignStorage);
   window.addEventListener("hashchange", onNavigate);
   const audioBlur = () => audio.setVisible(false);
   const audioFocus = () => audio.setVisible(!document.hidden);
@@ -344,13 +442,18 @@ export function mountApp(root: HTMLElement): () => void {
     window.removeEventListener("focus", audioFocus);
     document.removeEventListener("visibilitychange", audioVisibility);
     window.removeEventListener("hashchange", onNavigate);
+    window.removeEventListener("storage", onCampaignStorage);
     systemMotion.removeEventListener("change", onMotion);
     skipLink?.removeEventListener("click", skip);
     root.replaceChildren();
   };
 }
 
-function hubScreen(selectedKart: KartId, selectedTrack: TrackId): string {
+function hubScreen(
+  selectedKart: KartId,
+  selectedTrack: TrackId,
+  progress: import("../core/campaign-progress").CampaignProgress,
+): string {
   const kart = STARTER_KARTS.find((kart) => kart.id === selectedKart)!;
   return `
     <section class="hero reveal" aria-labelledby="hero-title">
@@ -362,37 +465,10 @@ function hubScreen(selectedKart: KartId, selectedTrack: TrackId): string {
       <div id="track-preview" class="track-preview" role="img" aria-label="Your selected kart on an illustrated city road, with two decorative rival karts"></div>
       <div class="track-bottom"><span id="track-status" role="status">Preparing your circuit…</span><button id="retry-preview" class="text-button" hidden>Retry preview</button></div>
     </section>
-    <section class="campaign-section reveal" aria-labelledby="campaign-heading"><div class="section-heading"><div><p class="eyebrow">THREE GEARS. ONE JOURNEY.</p><h2 id="campaign-heading">Find your starting line.</h2></div><span class="pill">CAMPAIGNS IN DEVELOPMENT</span></div><div class="campaign-grid">
-      ${[
-        [
-          "01",
-          "Easy",
-          "Build your rhythm",
-          "Common words. Clean corrections. A confident start.",
-          "green",
-        ],
-        [
-          "02",
-          "Medium",
-          "Find your flow",
-          "Longer words, capitals, and a little more pressure.",
-          "orange",
-        ],
-        [
-          "03",
-          "Hard",
-          "Push your limits",
-          "Dense passages. Sharp precision. Sustained speed.",
-          "purple",
-        ],
-      ]
-        .map(
-          ([number, title, subtitle, description, color]) =>
-            `<article class="campaign-card campaign-card--${color}"><div class="card-top"><span class="micro">GEAR ${number}</span><span class="gear-icon" aria-hidden="true">${title === "Easy" ? "Ⅰ" : title === "Medium" ? "Ⅱ" : "Ⅲ"}</span></div><h3>${title}</h3><p class="card-subtitle">${subtitle}</p><p class="card-copy">${description}</p><div class="node-path" aria-hidden="true"><span class="node node--current">1</span><i></i><span class="node">2</span><i></i><span class="node">3</span><i></i><span class="node">···</span></div><div class="card-bottom"><span>100 planned levels</span><span>Coming next ${ARROW}</span></div></article>`,
-        )
-        .join("")}
+    <section class="campaign-section reveal" aria-labelledby="campaign-heading"><div class="section-heading"><div><p class="eyebrow">THREE GEARS. ONE JOURNEY.</p><h2 id="campaign-heading">Find your starting line.</h2></div><span class="pill">CHOOSE YOUR JOURNEY</span></div><div class="campaign-grid">
+      ${campaignCards(progress)}
     </div></section>
-    <div class="development-note reveal"><span class="note-icon" aria-hidden="true">↳</span><p><strong>A strong start, built one lap at a time.</strong> Quick Race is ready. Campaign progression, rewards and cloud saves are still being built.</p><a href="#/keyboard">Try the input check →</a></div>`;
+    <div class="development-note reveal"><span class="note-icon" aria-hidden="true">↳</span><p><strong>A strong start, built one lap at a time.</strong> Explore the campaign maps and six sample races per category, from short starts to longer paragraphs. Full curricula, rewards and cloud saves are still being built.</p><a href="#/keyboard">Try the input check →</a></div>`;
 }
 
 function keyboardScreen(): string {

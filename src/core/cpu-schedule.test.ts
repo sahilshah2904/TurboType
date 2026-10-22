@@ -60,3 +60,19 @@ describe("seeded CPU schedules", () => {
     expect(() => cpuProgress(cpu, NaN)).toThrow(RangeError);
   });
 });
+
+it("uses a fixed validated campaign band without changing Quick Race defaults", () => {
+  const band = { minWpm: 10, maxWpm: 18 };
+  const a = createCpuSchedules(900, "hard", 42, band);
+  expect(a).toEqual(createCpuSchedules(900, "hard", 42, band));
+  for (const cpu of a) {
+    expect(cpu.targetWpm).toBeGreaterThanOrEqual(10);
+    expect(cpu.targetWpm).toBeLessThanOrEqual(18);
+  }
+  expect(() =>
+    createCpuSchedules(900, "easy", 42, { minWpm: NaN, maxWpm: 18 }),
+  ).toThrow();
+  expect(() =>
+    createCpuSchedules(900, "easy", 42, { minWpm: 20, maxWpm: 10 }),
+  ).toThrow();
+});

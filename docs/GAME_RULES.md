@@ -1,3 +1,5 @@
+> Alpha.21 implements campaign clear/stars via core/campaign-progress.ts: exact eligible unpaused completion, isolated sequential unlock, independent completion/95%-accuracy/level-pace stars unioned across replays, no place gate or duplicate unique clears. Basic local map progress persists; Quick Race results remain session-only. Rules stay3. See PHASE7_CAMPAIGN_MAPS.md.
+
 # Implemented rules — version 3
 
 Typing was implemented in Phase 3; Phase 4 adds four-CPU Quick Race in app 0.1.0-alpha.3, rules version 3. Practice still has no opponents. Both modes save no results, rewards or progress. Planned campaign/rewards remain in GAME_DESIGN_PLAN.md and RULES_AND_STORAGE_BASELINE.md.

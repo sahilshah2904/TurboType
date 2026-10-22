@@ -1,5 +1,12 @@
 # TurboType future work backlog
 
+## Phase 7 map delivery — alpha.21, 22 October 2026
+
+TT-701–704 and TT-705's map/briefing starter-inventory portion are implemented for review. Fresh full local check: **116 unit / 71 browser cases**; hosted exact-head state is recorded separately in docs/TESTING.md. Three 100-stop maps have eighteen real sample races (six/category), with substantial paragraphs at levels4–6. Levels7–100 and bonuses remain unavailable content previews until Phase8 authoring; never count them as playable. Review/integration are separate. Current specification/checklist: docs/PHASE7_CAMPAIGN_MAPS.md.
+
+Phase9 still owns earned inventory binding and canonical save migration/economy/receipts/import/recovery/cloud. Basic local map progress is implemented now, not the complete guest-save system. TT-608 remains deferred. Earlier status notes below are historical; the latest checkpoint takes precedence.
+
+
 ## Phase 6 closed — 22 October 2026
 
 TT-601–607 are complete for agreed Phase 6 scope and integrated through PR #6 after exact-head hosted checks and fresh 102-unit/56-browser local verification. User authorized closure while explicitly deferring further appearance iteration. TT-608 remains a later visual-polish follow-up. See docs/PHASE6_CLOSEOUT.md for source/merge/check evidence. No Phase 7 implementation or deployment starts from this note. Older pending-merge sections are historical.
@@ -180,25 +187,25 @@ Completion evidence for TT-525–527: src/ui/fullscreen.ts, app-owned control li
 
 ## Phase 7 — campaign maps
 
-- [ ] TT-701: Implement category selection and three rightward winding maps with 100 numbered circular main nodes each, chapter districts and bonus branches.
-- [ ] TT-702: Implement locked/current/available/completed states, sequential category-isolated unlocks, stars, unlock animations and level briefing.
-- [ ] TT-703: Implement saved map position, Continue/Jump to Current, chapter jump, swipe/drag, keyboard navigation and accessible list view; test narrow screens and reduced motion.
-- [ ] TT-704: Lazy-load scenery/previews and avoid running scenes/animations for every future level.
+- [x] TT-701: Implement category selection and three rightward winding maps with 100 numbered circular main nodes each, chapter districts and bonus branches.
+- [x] TT-702: Implement locked/current/available/completed states, sequential category-isolated unlocks, stars, unlock animations and level briefing.
+- [x] TT-703: Implement saved map position, Continue/Jump to Current, chapter jump, swipe/drag, keyboard navigation and accessible list view; test narrow screens and reduced motion.
+- [x] TT-704: Lazy-load scenery/previews and avoid running scenes/animations for every future level.
 
 ## Phase 8 — all 300 levels
 
-- [ ] TT-801: Define and validate campaign/passage schemas, stable IDs/revisions, all prerequisites, rewards and referenced assets.
-- [ ] TT-802: Author/review Easy 001–100 across ten chapters with explicit learning objectives and gradual difficulty.
-- [ ] TT-803: Author/review Medium 001–100 across ten chapters with explicit learning objectives and gradual difficulty.
-- [ ] TT-804: Author/review Hard 001–100 across ten chapters with explicit learning objectives and gradual difficulty.
+- [ ] TT-801: Extend the Phase 7 manifest into the full reviewed campaign/passage schemas, prerequisites, rewards and asset references; retain stable IDs/revisions and validate all 300 authored definitions. Raise/test the current 2,000-character engine/CPU cap before late Hard paragraphs up to 3,000 characters.
+- [ ] TT-802: Review the six original map samples and author/review the full Easy 001–100 across ten chapters with explicit learning objectives and gradual difficulty.
+- [ ] TT-803: Review the six original map samples and author/review the full Medium 001–100 across ten chapters with explicit learning objectives and gradual difficulty.
+- [ ] TT-804: Review the six original map samples and author/review the full Hard 001–100 across ten chapters with explicit learning objectives and gradual difficulty.
 - [ ] TT-805: Author chapter showcases, optional side challenges, milestones and finale content; no locked placeholder levels counted as complete.
 - [ ] TT-806: Validate all 300 definitions, duplicates/references/reachability, boundaries 9→10→11 and 99→100, and no level 101; playtest representative levels and every introduced skill.
 
 ## Phase 9 — progression, learning and persistent data
 
-- [ ] TT-901: Implement stars, first-clear unlocks, Driver Rank, exact reward formulas, pit stops, trophies, caches, perfect/recovery awards and one-time receipts.
+- [ ] TT-901: Integrate existing Phase 7 stars/first-clear unlocks into the canonical receipt model, then implement Driver Rank, exact reward formulas, pit stops, trophies, caches, perfect/recovery awards and one-time receipts.
 - [ ] TT-902: Build garage ownership/equipment/previews and fixed cosmetic rewards; verify no speed advantages and no duplicate claims.
-- [ ] TT-903: Build bounded local saves, migrations, backup export/import, malformed-save recovery, quota failure and multiple-tab protection.
+- [ ] TT-903: Migrate validated rules/revision-qualified Phase 7 map clears/stars/bests/positions from turbotype:campaign-map:v1; preserve malformed exports and define simultaneous-tab conflicts. Then build bounded local saves, migrations, backup export/import, malformed-save recovery, quota failure and multiple-tab protection.
 - [ ] TT-904: Add comparable personal records, recent-history/pace charts, bounded learning aggregates and one evidence-based coaching suggestion.
 - [ ] TT-905: Implement correction/capitalization/punctuation/consistency drills and optional keyboard guidance; separate practice from competitive eligibility.
 - [ ] TT-906: Validate the free-only cloud provider before integration: preferred Supabase Free Auth/Postgres/private Realtime; check current quotas, OAuth/allowlist setup, region, recovery/export, authorization and static-site callbacks. Hard $0 budget; no paid dependencies or automatic upgrade. Gate final selection on measured validation, not a generic free-tier promise. See docs/MULTIPLAYER_ROOMS.md; depends on TT-205 and stable completed-run contracts.
@@ -277,7 +284,7 @@ The user accepted the restored colors and Ignition and authorized continued work
 The user accepts the alpha.15 compact score/metrics presentation and requests standings expanded by default; the existing fire instrument is preserved. Alpha.16 adds five starter environments and remembered Hub/Quick Race choice. Reward tracks are required campaign scope, not an optional replacement for opening/tutorial work.
 
 - [x] TT-531: Five distinct original starter track environments shared by Hub and Quick Race, remembered optional preference, ready-only race selection and active-race lock. Implemented and locally tested (98 unit / 40 browser cases); User accepted all five starter tracks on 22 October 2026; PR #5 merged as 1b832ce after exact-head hosted run 39771450182 passed. Evidence: docs/TESTING.md.
-- [ ] TT-705: Add owned car/track selection to campaign level briefing and replay across every category; ownership does not bypass locked nodes. Depends on maps and Phase 9 ownership contracts.
+- [x] TT-705 (Phase 7 portion): Implement starter car/track selection in level briefing and replay across categories, with a shared inventory boundary and no lock bypass. Future earned inventory/entitlement binding remains TT-902/911/912 in Phase 9; it is not claimed complete here.
 - [ ] TT-807: Author/review twenty-one original reward track environments/previews, independent category/threshold IDs and campaign default scenery. Seven per category at 10/25/40/55/70/85/100; 26 tracks total including five starters. Validate references and lazy loading; no placeholder assets count as finished.
 - [ ] TT-912: Unlock independent track rewards at 10/25/40/55/70/85/100 eligible unique main clears in each category: 21 rewards plus five starters, 26 tracks total. Supersedes paired car/track awards; cars stay at 15/30/45/60/75/90, 23 cars total. Derive separate idempotent entitlements from validated category-qualified clear receipts, recover interrupted writes and merge guest/cloud data safely. Globally usable on already-unlocked levels across categories and replays; no replay inflation or locked-level bypass. Verify 100 gives a track but no car. See docs/TRACK_PROGRESSION.md; depends on TT-801/807/901–911.
 

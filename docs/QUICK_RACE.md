@@ -1,3 +1,5 @@
+> Alpha.21 reuses the race renderer/input for campaign samples with level-defined passage/band/seed and untimed completion. Quick Race retains its three short validation exercises/session-only results. Longer samples and eligible saved map progress are described in PHASE7_CAMPAIGN_MAPS.md.
+
 > Alpha.5 presentation revision: see [IMMERSIVE_APP.md](IMMERSIVE_APP.md) for current full-window kart rendering, responsive/proportional composition, integrated typing strip, control deck and recent-WPM speedometer. Fixed 1000×450/SVG composition described below is historical; CPU/core/result rules remain version 3.
 
 Alpha.17 setup: numeric seed is under closed-by-default Advanced / Replay. The visible New race action increments the seed; Retry same race preserves it. Passage/pace/mode stay available for Quick Race. Optional calibration can set the next ready race pace, preserving an active/final race until reset. See PHASE6_ONBOARDING.md.
