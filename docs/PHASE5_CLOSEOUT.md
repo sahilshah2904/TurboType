@@ -1,5 +1,7 @@
 # Phase 5 closeout — alpha.14, 22 October 2026
 
+**Phase 5 is complete for agreed scope and integrated.** [PR #4](https://github.com/sahilshah2904/TurboType/pull/4) merged as `de464ce165b0c379cb562aa99ab42e04cb33a33f` after exact acceptance-head `398d455` passed [hosted run 39727202033](https://github.com/sahilshah2904/TurboType/actions/runs/39727202033). Local checkout is main. All Phase 5 backlog tasks are reconciled; Phase 6 loading/onboarding is next when requested. This post-merge documentation update has its own main-push check. No deployment. Earlier pending-integration paragraphs below describe the pre-merge checkpoint.
+
 **Final physical acceptance received.** The user reported “I believe everything worked fine.” The reviewed two-minute recorder session contains 100 trusted racing keydown events, 99 trusted inputs, zero page errors and enabled AMD Direct3D11 compositing. Handler-to-next-rAF median/p95/max are 9.3/18.8/22.2ms. [Published summary](performance/alpha14-physical-input.json), with raw details kept ignored locally. This meets the agreed Phase 5 physical gate together with the prior automated/visual evidence; it is not universal frame-rate or end-to-end latency certification. All Phase 5 tasks are reconciled complete (including canceled scope); PR #4 integration follows the updated exact-head check. Older pending-gate wording below records the pre-acceptance checkpoint.
 
 The user authorized the three remaining steps: component artwork, hardware performance work and final reconciliation/integration. The older stop-and-save restriction is historical. Phases 6–11 are unchanged; campaign/reward correction is documentation for later work.
@@ -26,7 +28,7 @@ Developer review preserves core timing/rules, bounded effects, one-car-per-race,
 
 The backlog now closes implemented/verified feature work TT-501/502/505/508/509/510/515/518/519/520, with final physical acceptance explicitly retained in TT-506/511/512/513/522. This consolidates overlapping historical gate wording without claiming those final gates passed. The old soundtrack/palette/functional approvals are preserved rather than requested again.
 
-**The physical laptop evidence and user report have been reviewed and accepted.** PR #4 is ready for integration after the acceptance-documentation head passes its own check. No Pages/backend deployment is part of Phase 5.
+**The physical laptop evidence and user report have been reviewed and accepted, and PR #4 is merged.** The exact acceptance-head check passed before integration. No Pages/backend deployment is part of Phase 5.
 
 ## Reward correction and setup controls
 

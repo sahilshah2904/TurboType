@@ -20,12 +20,12 @@ cd TurboType
 While the implementation branches are under review, switch to the race-polish branch before installation:
 
 ```powershell
-git switch feat/race-polish
+git switch main
 npm ci
 npx playwright install chromium
 ```
 
-Phase 2–4 PRs are merged into main baseline c4127c7. The Phase 5 branch starts from that baseline and targets main; after it merges, main is the normal starting branch. No `.env` file, cloud credentials, or API services are required for this preview. On Linux CI, `npx playwright install --with-deps chromium` also installs required system libraries.
+Phases 2–5 are merged into main; PR #4 integrated accepted alpha.14 as de464ce on 22 October 2026. Main is the normal starting branch. No `.env` file, cloud credentials, or API services are required for this preview. On Linux CI, `npx playwright install --with-deps chromium` also installs required system libraries.
 
 ## Develop and preview
 

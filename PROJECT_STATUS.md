@@ -1,11 +1,11 @@
 # TurboType project status
 
-## Phase 5 accepted — 22 October 2026
+## Phase 5 complete and integrated — 22 October 2026
 
-The user reported “I believe everything worked fine” after the final physical checklist. Reviewed recorder evidence: 120-second hardware-accelerated session, 100 trusted racing keys, 99 trusted inputs, zero page errors, median/p95/max handler-to-next-rAF 9.3/18.8/22.2ms. This is a bounded input diagnostic and available-laptop acceptance, not universal performance certification. TT-506/511/512/513/522 are closed for the agreed Phase 5 scope; broader release testing stays in Phase 10. All Phase 5 backlog items are now complete, including explicitly canceled scope. Integration of PR #4 is the remaining step and requires this updated head’s passing hosted checks. See [closeout](docs/PHASE5_CLOSEOUT.md). No Phase 6 implementation or deployment started. Older pending-acceptance paragraphs below are historical.
+The user reported “I believe everything worked fine” after the final physical checklist. Reviewed recorder evidence: 120-second hardware-accelerated session, 100 trusted racing keys, 99 trusted inputs, zero page errors, median/p95/max handler-to-next-rAF 9.3/18.8/22.2ms. This is a bounded input diagnostic and available-laptop acceptance, not universal performance certification. TT-506/511/512/513/522 are closed for the agreed Phase 5 scope; broader release testing stays in Phase 10. All Phase 5 backlog items are now complete, including explicitly canceled scope. [PR #4](https://github.com/sahilshah2904/TurboType/pull/4) merged into main as `de464ce` after exact acceptance-head `398d455` passed hosted run [39727202033](https://github.com/sahilshah2904/TurboType/actions/runs/39727202033). The local checkout is now main. This post-merge documentation update has its own main-push check; inspect actual HEAD/checks. See [closeout](docs/PHASE5_CLOSEOUT.md). No Phase 6 implementation or deployment started. Older pending-acceptance paragraphs below are historical.
 
 
-## Active Phase 5 work — 22 October 2026
+## Historical pre-integration checkpoint — 22 October 2026
 
 Verified implementation `2eadeef`; feature history-sync head `d168720` has identical file contents and successful hosted PR [run 39725624773](https://github.com/sahilshah2904/TurboType/actions/runs/39725624773). The sync resolves the README-only conflict with main d86d046; it does not integrate the preview into main. This evidence-only follow-up has its own check. PR #4 is open/unmerged; the two-minute physical report/evidence remains TT-506/511/512/513/522 before integration. Working branch remains feat/race-polish.
 
@@ -31,7 +31,7 @@ The README now describes alpha.13 and shows actual current race/hub/car-selector
 Verified pre-handoff hosted run 39582296673 passed for 717c76e, separately from implementation b76392b / run 39581833203. This documentation handoff has newer commits/checks; do not attribute an old pass to a new head. See docs/TESTING.md for evidence and docs/SESSION_HANDOFF.md for exact source/commands/limitations.
 
 
-## Current checkpoint — alpha.13, 21 October 2026
+## Historical checkpoint — alpha.13, 21 October 2026
 
 The user reported the other laptop tests good, requested one car per race (no paused switching), a visible fullscreen symbol on every page and larger readable copy. Alpha.13 locks selection whenever state is not ready, hides it in pause and rejects synthetic mid-race changes; retry/new race reopens it. Shared app-owned 44px fullscreen/restore corner control replaces Race-only text. Main prose/controls are 16px+, compact metadata 14px, with brighter secondary copy and laptop layout adjustments.
 
@@ -74,7 +74,7 @@ Last reviewed: 21 October 2026. This file is the persistent status source for fu
 
 [BACKLOG.md](BACKLOG.md) is the persistent future-work checklist with stable task IDs, phase grouping, dependencies and optional ideas. Read it before starting a phase and update it when deferring or completing work.
 
-## Current position
+## Historical position
 
 **Latest alpha.9 revision:** **Current scope override — 21 October 2026:** the user explicitly narrowed TurboType to laptop/desktop browsers with a physical keyboard. Phone/tablet compatibility, software-keyboard layout, rotation and mobile acceptance are canceled requirements. Earlier multi-device statements are historical. Keep laptop window responsiveness (960 CSS px minimum; verify 1024/1366/1440/1920 widths), accessibility, hardware-keyboard IME composition, cloud saves before solo launch and multiplayer afterward. Do not restore mobile work without a new user request.
 
@@ -101,7 +101,7 @@ Then continue Phase 6 onboarding, Phase 7 maps, Phase 8 all 300 reviewed levels,
 | 2 | Set up application | Foundation complete, with exceptions | Code/local/CI checks and available ASUS/Samsung checks recorded. TT-204 closed with word-completion work moved to TT-305 and unavailable iOS/tablet verification to TT-1008; not blanket device certification |
 | 3 | Build typing engine | Complete for agreed scope | TT-301–305 implemented/verified, 48 unit/39 browser checks and user-reported ASUS/Samsung strict-input acceptance; broader device evidence remains TT-1008 |
 | 4 | Complete playable race | Complete for agreed scope | TT-401–404 complete: core/browser evidence and user-reported ASUS/Samsung race checks; requested metrics-above-track layout included |
-| 5 | Polish racing experience | Approved direction integrated; final validation/acceptance pending | Full-window kart race and live WPM dial implemented; distinct fleet TT-510 and device/performance TT-505/506/513 remain |
+| 5 | Polish racing experience | Complete for agreed scope, accepted and merged | Alpha.14 independent parts, 96 unit/36 browser checks, actual-GPU evidence and final physical input/user acceptance; PR #4 merged as de464ce. Broader release validation remains Phase 10. |
 | 6 | Opening and onboarding | Existing-page visual revamp implemented; onboarding not started | TT-604 visual integration under verification; opening/tutorial/calibration TT-601–603 remain future work |
 | 7 | Campaign maps | Not started | Three rightward 100-node maps, locks, accessibility, saved location/progress |
 | 8 | All 300 levels | Not started | 300 reviewed playable definitions/passages, progression curve, chapter/bonus events; manifest validation |

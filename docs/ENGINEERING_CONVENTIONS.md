@@ -1,6 +1,6 @@
 # TurboType engineering conventions
 
-Status: Phases 2–4 merged into main; Phase 5 alpha.5 integration and existing-page visual revamp implemented, with new formal/device evidence tracked separately, 21 October 2026. Local Git and the public remote are configured. The Phase 2 app, tests and CI workflow now exist; actual check results are in TESTING.md. Release tags and Pages deployment do not exist yet.
+Status: Phases 2–5 are merged into main; alpha.14 was accepted with the final physical laptop evidence and integrated through PR #4 on 22 October 2026 (de464ce). Actual check results and limitations are in TESTING.md. Phase 6 opening/onboarding is next. Release tags and Pages deployment do not exist yet.
 
 ## Git and change management
 

@@ -1,11 +1,11 @@
 # TurboType future work backlog
 
-## Phase 5 accepted — 22 October 2026
+## Phase 5 complete and integrated — 22 October 2026
 
-The user reported “I believe everything worked fine” after the final physical checklist. Reviewed recorder evidence: 120-second hardware-accelerated session, 100 trusted racing keys, 99 trusted inputs, zero page errors, median/p95/max handler-to-next-rAF 9.3/18.8/22.2ms. This is a bounded input diagnostic and available-laptop acceptance, not universal performance certification. TT-506/511/512/513/522 are closed for the agreed Phase 5 scope; broader release testing stays in Phase 10. All Phase 5 backlog items are now complete, including explicitly canceled scope. Integration of PR #4 is the remaining step and requires this updated head’s passing hosted checks. See [closeout](docs/PHASE5_CLOSEOUT.md). No Phase 6 implementation or deployment started. Older pending-acceptance paragraphs below are historical.
+The user reported “I believe everything worked fine” after the final physical checklist. Reviewed recorder evidence: 120-second hardware-accelerated session, 100 trusted racing keys, 99 trusted inputs, zero page errors, median/p95/max handler-to-next-rAF 9.3/18.8/22.2ms. This is a bounded input diagnostic and available-laptop acceptance, not universal performance certification. TT-506/511/512/513/522 are closed for the agreed Phase 5 scope; broader release testing stays in Phase 10. All Phase 5 backlog items are now complete, including explicitly canceled scope. [PR #4](https://github.com/sahilshah2904/TurboType/pull/4) merged into main as `de464ce` after exact acceptance-head `398d455` passed hosted run [39727202033](https://github.com/sahilshah2904/TurboType/actions/runs/39727202033). The local checkout is now main. This post-merge documentation update has its own main-push check; inspect actual HEAD/checks. See [closeout](docs/PHASE5_CLOSEOUT.md). No Phase 6 implementation or deployment started. Older pending-acceptance paragraphs below are historical.
 
 
-## Active Phase 5 work — 22 October 2026
+## Historical pre-integration checkpoint — 22 October 2026
 
 Implementation `2eadeef`, identical-tree README history sync `d168720`, hosted PR [run 39725624773](https://github.com/sahilshah2904/TurboType/actions/runs/39725624773) successful for exact d168720 head. See docs/TESTING.md for why the earlier conflicting head had no PR run. Completed alpha.14 feature tasks below have this shared source/check evidence; remaining physical/integration IDs are still open. This follow-up documentation receives its own CI and does not merge PR #4.
 

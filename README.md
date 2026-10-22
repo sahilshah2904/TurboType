@@ -6,7 +6,7 @@
 
 An original browser typing racer: build physical-keyboard speed and accuracy while racing four computer opponents.
 
-[![Preview checks](https://github.com/sahilshah2904/TurboType/actions/workflows/checks.yml/badge.svg?branch=feat%2Frace-polish&event=pull_request)](https://github.com/sahilshah2904/TurboType/pull/4)
+[![Preview checks](https://github.com/sahilshah2904/TurboType/actions/workflows/checks.yml/badge.svg?branch=main&event=push)](https://github.com/sahilshah2904/TurboType/actions/workflows/checks.yml)
 
 [Run locally](#run-the-latest-preview) · [How to play](#how-to-play) · [Progress](#development-progress) · [Structure](#project-structure) · [Documentation](#documentation)
 
@@ -14,7 +14,7 @@ An original browser typing racer: build physical-keyboard speed and accuracy whi
 
 ![Actual TurboType alpha.14 race: independent kart parts, four CPUs, city circuit, integrated typing strip and Live WPM dial](docs/images/alpha14/active-race-1440.png)
 
-*Actual **0.1.0-alpha.14** gameplay. Screenshots show the latest development preview on **feat/race-polish**, not a deployed website. Main game code remains the accepted Phase 4 baseline until [PR #4](https://github.com/sahilshah2904/TurboType/pull/4) is integrated. Updating this README does not merge that code.*
+*Actual **0.1.0-alpha.14** gameplay, accepted and integrated into **main** through [PR #4](https://github.com/sahilshah2904/TurboType/pull/4). This is a local preview; no public game is deployed.*
 
 ## What is TurboType?
 
@@ -45,7 +45,7 @@ The preview uses a full-window city circuit, detailed original karts, graphite/c
 
 </details>
 
-These are real app captures, not concept artwork. [Current parts/laptop captures](https://github.com/sahilshah2904/TurboType/tree/feat/race-polish/docs/images/alpha14) include all five starter models and 1024–1920px race layouts. Earlier screenshots remain historical evidence.
+These are real app captures, not concept artwork. [Current parts/laptop captures](https://github.com/sahilshah2904/TurboType/tree/main/docs/images/alpha14) include all five starter models and 1024–1920px race layouts. Earlier screenshots remain historical evidence.
 
 ## What you can play now
 
@@ -73,11 +73,11 @@ The HUD shows average WPM; the **Live WPM** dial shows recent correct typing ove
 
 Open **Settings → Sound & music** to enable sound or change volumes. The hub has no audio widgets. The corner icon enters/restores fullscreen when permitted. Refresh retains preferences but discards an unsaved race.
 
-[Implemented rules](https://github.com/sahilshah2904/TurboType/blob/feat/race-polish/docs/GAME_RULES.md) · [Race/CPU semantics](https://github.com/sahilshah2904/TurboType/blob/feat/race-polish/docs/QUICK_RACE.md)
+[Implemented rules](https://github.com/sahilshah2904/TurboType/blob/main/docs/GAME_RULES.md) · [Race/CPU semantics](https://github.com/sahilshah2904/TurboType/blob/main/docs/QUICK_RACE.md)
 
 ## Development progress
 
-**Phases 1–4 are complete for their agreed scope. Phase 5 is not fully closed.** Its main visible features and automated checks are complete; independent parts are now implemented in alpha.14; physical-input acceptance and final PR integration remain. Existing-page visuals are partial Phase 6 work, not a completed cinematic introduction.
+**Phases 1–5 are complete for their agreed scope.** Alpha.14 includes independent parts, automated/actual-GPU evidence, final physical laptop acceptance and PR integration. Broader browser/long-session release testing remains Phase 10. Existing-page visuals are partial Phase 6 work; cinematic loading/onboarding is next.
 
 | Phase | Delivery | Current status |
 | --- | --- | --- |
@@ -85,7 +85,7 @@ Open **Settings → Sound & music** to enable sound or change volumes. The hub h
 | 2 | Set up TypeScript/Vite, Phaser/Anime.js, structure, configuration and checks | Foundation complete |
 | 3 | Build validation/correction, WPM/accuracy, streaks, timing, pause and finishing | Complete for agreed engine/input scope |
 | 4 | Create one complete four-CPU race with countdown, placement, results and retry | Complete and merged into main |
-| 5 | Polish vehicles, wheels/suspension, scenery, exhaust/nitro, sound and celebration | Main features implemented/tested; remaining developer gates below |
+| 5 | Polish vehicles, wheels/suspension, scenery, exhaust/nitro, sound and celebration | Complete for agreed scope; accepted and merged into main |
 | 6 | Cinematic loading/welcome/rules, tutorial, calibration and final navigation | Existing pages revamped; onboarding not implemented |
 | 7 | Easy/Medium/Hard rightward maps, 100 numbered nodes each, locks, chapters and saved position | Planned |
 | 8 | Author/validate all 300 passages, learning goals, difficulty/star curves and bonus challenges | Planned |
@@ -95,17 +95,17 @@ Open **Settings → Sound & music** to enable sound or change volumes. The hub h
 
 Phases vary greatly in size; phase numbers are not a completion percentage.
 
-### What remains in Phase 5?
+### Phase 5 completion
 
 - **Vehicle parts:** alpha.14 implements separate chassis/wheel sources, independent rotation, chassis-only suspension and compact shared previews while preserving the accepted silhouettes/colors. See [Phase 5 closeout](docs/PHASE5_CLOSEOUT.md).
-- **Physical acceptance:** actual-GPU synthetic-input profiling supplements the prior software evidence. A focused physical typing/parts check remains before closing TT-506/513/522; callback cadence and JS heap do not certify OS-to-photon latency or GPU memory.
-- **Integration:** reconcile those gates, verify the final source/checks and integrate PR #4. No merge/deployment happens merely because a documentation handoff is saved.
+- **Physical acceptance:** the user accepted the final laptop checklist. The two-minute recorder captured 100 trusted racing keys and zero page errors; actual-GPU experiments cover High/Low/Reduced. Timing/resource limitations and broader release checks remain explicit.
+- **Integration:** PR #4 merged as de464ce after exact-head checks passed. Main contains the accepted alpha.14 preview. Next is Phase 6 loading/onboarding; no deployment has occurred.
 
 ### Future category reward cars
 
 Five starters are available now. Later, **each 100-level category (Easy, Medium, Hard) unlocks a distinct car every 15 eligible main-level clears**, at **15, 30, 45, 60, 75 and 90 within that category**. That is **18 reward cars plus five starters**. Category counters are independent; replay, bonus events, Quick Race and Practice do not inflate them. Cars remain cosmetic.
 
-Stable IDs, art briefs, locked garage UX, receipt-based ownership, save recovery and cloud merges are in the [garage progression plan](https://github.com/sahilshah2904/TurboType/blob/feat/race-polish/docs/GARAGE_PROGRESSION.md), tracked **TT-911**. These cars/unlocks are future Phase 8/9 work, not a Phase 5 prerequisite.
+Stable IDs, art briefs, locked garage UX, receipt-based ownership, save recovery and cloud merges are in the [garage progression plan](https://github.com/sahilshah2904/TurboType/blob/main/docs/GARAGE_PROGRESSION.md), tracked **TT-911**. These cars/unlocks are future Phase 8/9 work, not a Phase 5 prerequisite.
 
 ## Run the latest preview
 
@@ -114,7 +114,7 @@ Use **Node.js 24.13.0**, **npm 11** and Git. Dependencies are pinned. Local solo
 ```powershell
 git clone https://github.com/sahilshah2904/TurboType.git
 cd TurboType
-git switch feat/race-polish
+git switch main
 npm ci
 npm run dev
 ```
@@ -126,13 +126,13 @@ npx playwright install chromium
 npm run check
 ```
 
-The full check runs formatting, TypeScript, unit tests, build and browser scenarios. **npm run build** creates the static artifact; **npm run preview** previews it locally. Follow the [setup guide](https://github.com/sahilshah2904/TurboType/blob/feat/race-polish/docs/SETUP.md) for commands/troubleshooting.
+The full check runs formatting, TypeScript, unit tests, build and browser scenarios. **npm run build** creates the static artifact; **npm run preview** previews it locally. Follow the [setup guide](https://github.com/sahilshah2904/TurboType/blob/main/docs/SETUP.md) for commands/troubleshooting.
 
 ## Verification and GitHub emails
 
-Alpha.13 passed **93 unit tests and 35 desktop Chromium browser cases**, plus repeated garage runs and focused fullscreen/readability checks. Implementation b76392b passed [hosted run 39581833203](https://github.com/sahilshah2904/TurboType/actions/runs/39581833203); documentation checkpoint 717c76e passed [run 39582296673](https://github.com/sahilshah2904/TurboType/actions/runs/39582296673). New documentation/code commits have their own check state.
+Alpha.14 passed **96 unit tests and 36 desktop Chromium browser cases**, actual-GPU High/Low/Reduced checks and final physical laptop acceptance. The two-minute recorder captured 100 trusted racing keys with zero page errors. Exact acceptance head 398d455 passed [hosted run 39727202033](https://github.com/sahilshah2904/TurboType/actions/runs/39727202033), then PR #4 merged as de464ce. Later documentation/main heads have their own check state; the badge tracks main.
 
-Two older runs genuinely failed when the combined garage browser test exceeded its 30-second budget while duplicate counterparts passed. The scenario is now split into focused cases without raising the timeout. Feature validation runs once per PR update, main on push, with manual dispatch and cancellation of superseded runs. Notification settings remain unchanged. [Detailed evidence/limits](https://github.com/sahilshah2904/TurboType/blob/feat/race-polish/docs/TESTING.md).
+Two older runs genuinely failed when the combined garage browser test exceeded its 30-second budget while duplicate counterparts passed. The scenario is now split into focused cases without raising the timeout. Feature validation runs once per PR update, main on push, with manual dispatch and cancellation of superseded runs. Notification settings remain unchanged. [Detailed evidence/limits](https://github.com/sahilshah2904/TurboType/blob/main/docs/TESTING.md).
 
 ## Project structure
 
@@ -165,7 +165,7 @@ GitHub Pages will host the frontend. Friends rooms need external auth/data/realt
 
 ## Continue in a new project chat
 
-Start with [AGENTS.md](https://github.com/sahilshah2904/TurboType/blob/feat/race-polish/AGENTS.md), the [detailed session handoff](https://github.com/sahilshah2904/TurboType/blob/feat/race-polish/docs/SESSION_HANDOFF.md), [project status](https://github.com/sahilshah2904/TurboType/blob/feat/race-polish/PROJECT_STATUS.md) and [stable backlog](https://github.com/sahilshah2904/TurboType/blob/feat/race-polish/BACKLOG.md). They record accepted decisions, current code/CI, completed work, pending tasks and the next steps. The previous chat is not required.
+Start with [AGENTS.md](https://github.com/sahilshah2904/TurboType/blob/main/AGENTS.md), the [detailed session handoff](https://github.com/sahilshah2904/TurboType/blob/main/docs/SESSION_HANDOFF.md), [project status](https://github.com/sahilshah2904/TurboType/blob/main/PROJECT_STATUS.md) and [stable backlog](https://github.com/sahilshah2904/TurboType/blob/main/BACKLOG.md). They record accepted decisions, current code/CI, completed work, pending tasks and the next steps. The previous chat is not required.
 
 ## Documentation
 
@@ -173,10 +173,10 @@ These links deliberately target the preview branch so the default-branch README 
 
 | Purpose | Guide |
 | --- | --- |
-| Product and designed rule/reward/storage defaults | [Game plan](https://github.com/sahilshah2904/TurboType/blob/feat/race-polish/GAME_DESIGN_PLAN.md) · [Baseline](https://github.com/sahilshah2904/TurboType/blob/feat/race-polish/docs/RULES_AND_STORAGE_BASELINE.md) |
-| Implemented behavior | [Rules](https://github.com/sahilshah2904/TurboType/blob/feat/race-polish/docs/GAME_RULES.md) · [Quick Race](https://github.com/sahilshah2904/TurboType/blob/feat/race-polish/docs/QUICK_RACE.md) |
-| Architecture and conventions | [Architecture](https://github.com/sahilshah2904/TurboType/blob/feat/race-polish/docs/ARCHITECTURE.md) · [Engineering](https://github.com/sahilshah2904/TurboType/blob/feat/race-polish/docs/ENGINEERING_CONVENTIONS.md) · [GitHub workflow](https://github.com/sahilshah2904/TurboType/blob/feat/race-polish/docs/GITHUB_WORKFLOW.md) |
-| Recreate the assets and app | [Fleet](https://github.com/sahilshah2904/TurboType/blob/feat/race-polish/docs/KART_FLEET.md) · [Audio](https://github.com/sahilshah2904/TurboType/blob/feat/race-polish/docs/AUDIO.md) · [Visual integration](https://github.com/sahilshah2904/TurboType/blob/feat/race-polish/docs/IMMERSIVE_APP.md) |
-| Testing and measured limits | [Verification](https://github.com/sahilshah2904/TurboType/blob/feat/race-polish/docs/TESTING.md) · [Full-app profile](https://github.com/sahilshah2904/TurboType/blob/feat/race-polish/docs/PERFORMANCE_ALPHA11.md) |
+| Product and designed rule/reward/storage defaults | [Game plan](https://github.com/sahilshah2904/TurboType/blob/main/GAME_DESIGN_PLAN.md) · [Baseline](https://github.com/sahilshah2904/TurboType/blob/main/docs/RULES_AND_STORAGE_BASELINE.md) |
+| Implemented behavior | [Rules](https://github.com/sahilshah2904/TurboType/blob/main/docs/GAME_RULES.md) · [Quick Race](https://github.com/sahilshah2904/TurboType/blob/main/docs/QUICK_RACE.md) |
+| Architecture and conventions | [Architecture](https://github.com/sahilshah2904/TurboType/blob/main/docs/ARCHITECTURE.md) · [Engineering](https://github.com/sahilshah2904/TurboType/blob/main/docs/ENGINEERING_CONVENTIONS.md) · [GitHub workflow](https://github.com/sahilshah2904/TurboType/blob/main/docs/GITHUB_WORKFLOW.md) |
+| Recreate the assets and app | [Fleet](https://github.com/sahilshah2904/TurboType/blob/main/docs/KART_FLEET.md) · [Audio](https://github.com/sahilshah2904/TurboType/blob/main/docs/AUDIO.md) · [Visual integration](https://github.com/sahilshah2904/TurboType/blob/main/docs/IMMERSIVE_APP.md) |
+| Testing and measured limits | [Verification](https://github.com/sahilshah2904/TurboType/blob/main/docs/TESTING.md) · [Full-app profile](https://github.com/sahilshah2904/TurboType/blob/main/docs/PERFORMANCE_ALPHA14.md) |
 
 Original assets/audio have tracked sources/prompts/provenance. Reel assets/music and franchise artwork are not shipped. This is a development preview, not a completed single-player release.

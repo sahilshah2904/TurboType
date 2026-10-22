@@ -1,5 +1,9 @@
 # Verification evidence
 
+## Phase 5 integration — 22 October 2026
+
+Exact acceptance head `398d4552e2662c6a7ce4700c28fe68ec08ee0b85` passed PR [run 39727202033](https://github.com/sahilshah2904/TurboType/actions/runs/39727202033). The merge API rechecked the expected head and passing checks, and confirmed PR #4 merged into main as `de464ce165b0c379cb562aa99ab42e04cb33a33f`. Local main fast-forwarded to that merge. Final physical evidence and scope acceptance below close the Phase 5 tasks; broad release tests remain open. This documentation-only post-merge checkpoint has its own main-push check, separate from the passing PR run. No new app code, local gameplay rerun or deployment is claimed by this documentation update.
+
 ## Final physical acceptance — 22 October 2026
 
 After the requested final checklist, the user reported “I believe everything worked fine.” The recorder saved a completed 120-second session at 2026-10-22T05:14:30.648Z: Chromium 156.0.8078.4, Ryzen 7 4800H, Windows 10.0.26200, accelerated AMD Radeon Direct3D11. It records **100 trusted racing keydown events, 99 trusted inputs, zero page errors**, 119 periodic samples and Ready/Countdown/Racing/Paused/Finished states. Race, Settings, Hub, Keyboard check and Practice were visited; observed canvas counts were zero or one. Handler-to-next-rAF median/p95/max were **9.3/18.8/22.2ms**. These are diagnostic event-handler timings, not key-to-photon or GPU-presentation measurements. The manual OS build differs from the earlier automated capture and is recorded as observed.

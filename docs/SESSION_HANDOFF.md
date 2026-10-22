@@ -1,11 +1,11 @@
 # TurboType — resume in a new chat
 
-## Phase 5 accepted — 22 October 2026
+## Phase 5 complete and integrated — 22 October 2026
 
-The user reported “I believe everything worked fine” after the final physical checklist. Reviewed recorder evidence: 120-second hardware-accelerated session, 100 trusted racing keys, 99 trusted inputs, zero page errors, median/p95/max handler-to-next-rAF 9.3/18.8/22.2ms. This is a bounded input diagnostic and available-laptop acceptance, not universal performance certification. TT-506/511/512/513/522 are closed for the agreed Phase 5 scope; broader release testing stays in Phase 10. All Phase 5 backlog items are now complete, including explicitly canceled scope. Integration of PR #4 is the remaining step and requires this updated head’s passing hosted checks. See [closeout](PHASE5_CLOSEOUT.md). No Phase 6 implementation or deployment started. Older pending-acceptance paragraphs below are historical.
+The user reported “I believe everything worked fine” after the final physical checklist. Reviewed recorder evidence: 120-second hardware-accelerated session, 100 trusted racing keys, 99 trusted inputs, zero page errors, median/p95/max handler-to-next-rAF 9.3/18.8/22.2ms. This is a bounded input diagnostic and available-laptop acceptance, not universal performance certification. TT-506/511/512/513/522 are closed for the agreed Phase 5 scope; broader release testing stays in Phase 10. All Phase 5 backlog items are now complete, including explicitly canceled scope. [PR #4](https://github.com/sahilshah2904/TurboType/pull/4) merged into main as `de464ce` after exact acceptance-head `398d455` passed hosted run [39727202033](https://github.com/sahilshah2904/TurboType/actions/runs/39727202033). The local checkout is now main. This post-merge documentation update has its own main-push check; inspect actual HEAD/checks. See [closeout](PHASE5_CLOSEOUT.md). No Phase 6 implementation or deployment started. Older pending-acceptance paragraphs below are historical.
 
 
-## Active Phase 5 work — 22 October 2026
+## Historical pre-integration checkpoint — 22 October 2026
 
 Current implementation is `2eadeef`, followed by history-sync `d168720` with an identical file tree. That sync resolves the README-only conflict from main's prior documentation publication; no preview code was merged into main. Exact-head hosted PR run [39725624773](https://github.com/sahilshah2904/TurboType/actions/runs/39725624773) passed for `d1687206a2130cc6e5356d24cd16a10f7c5b6561`, freshly verified. This subsequent evidence-documentation checkpoint has its own CI status. PR #4 stays open/unmerged; inspect actual HEAD/checks on resume. The two-minute physical recorder/report remains the next user action, followed by review of TT-506/511/512/513/522 and final integration. No deployment.
 
@@ -22,7 +22,7 @@ The next implementation remains TT-501/510 separated body/wheel art preserving t
 
 Saved 21 October 2026 at the user's request to stop and continue later. This is a documentation handoff, not permission to start a new phase, merge PR #4 or deploy. Read this file with `AGENTS.md`, `PROJECT_STATUS.md`, `BACKLOG.md` and current Git status before working. Earlier chat messages are not required to resume.
 
-## Exact checkpoint
+## Historical handoff checkpoint — 21 October 2026
 
 | Item | Verified state at handoff preparation |
 | --- | --- |
@@ -104,7 +104,7 @@ The handoff itself creates newer documentation commits. Verify actual HEAD and h
 - The user accepted the art/music/palette and reported the rest of the previous laptop checklist good. New alpha.13 fullscreen/font/car-lock behavior is automatically verified; a new subjective preference is not fabricated.
 - Headless tests/profiling use SwiftShader. `docs/PERFORMANCE_ALPHA11.md` / `docs/performance/alpha11-full-app.json` include HUD, synthetic input, decoded music, four route cycles, rAF cadence, transfer and CDP JS heap. They show callback tails; **not a 60fps, physical key latency or GPU-memory certification**, and not a fresh alpha.13 benchmark. Default headless GPU probe also reported SwiftShader.
 
-## Phase 5 is not completely closed
+## Historical pre-closeout Phase 5 gates
 
 Do not tell the user it is finished just because the visible features and tests pass. The two main remaining developer gates are:
 
@@ -121,7 +121,7 @@ Then reconcile the linked backlog gates, verify exact PR head/checks, and review
 | 2 — Set up application | Complete for agreed foundation; historical phone reports are not current scope |
 | 3 — Typing engine | Complete for agreed engine/input scope |
 | 4 — Complete playable race | Complete for agreed four-CPU slice, merged to main |
-| 5 — Polish racing | Main features implemented/tested; remaining art/performance/integration gates above |
+| 5 — Polish racing | Complete for agreed scope, final physical acceptance recorded, PR #4 merged into main as de464ce |
 | 6 — Opening/onboarding | Existing pages visually revamped; cinematic loading/welcome/rules/tutorial/calibration not implemented (TT-601–604) |
 | 7 — Campaign maps | Three rightward winding Easy/Medium/Hard maps, 100 numbered circular nodes each, locks/stars/chapters/bonus branches, accessible navigation and saved position (TT-701–704) |
 | 8 — All 300 levels | Author/review/validate passages, learning goals, difficulty curves/CPU pace/star targets, chapter/bonus events; current short exercises do not satisfy this (TT-801–806) |
@@ -153,14 +153,14 @@ Phaser owns the canvas; native HTML owns input/navigation; Anime.js owns brief D
 ## Reproduce, inspect and continue
 
 1. Read this handoff and project tracker/backlog; inspect `git status --short`, branch/log/remotes and PR #4 before edits. Preserve intervening user changes. No force pushes or destructive cleanup.
-2. Reuse the feature checkout for Phase 5. If starting on main, inspect status first and switch safely to `feat/race-polish` for the pictured preview; main's code remains older until integration. A main README update is documentation publication, not game deployment.
+2. Use current main as the base for future authorized feature work. PR #4 is merged and main contains the alpha.14 preview. Preserve the old feature branch as history unless cleanup is requested. Source integration is not deployment.
 3. Use `.nvmrc` Node **24.13.0**, npm **11**, pinned lockfile. `npm ci`, then `npx playwright install chromium` if needed. No API key/database/.env is required for local solo preview.
 4. `npm run dev`; normal URL `http://127.0.0.1:5173/TurboType/`. An existing user-owned Vite server on 5173 was used; do not kill/restart it blindly. HMR refresh discards the in-memory run.
 5. `npm run check` runs formatting, types, unit tests, build and browser suite. Playwright uses preview port 4173 and two SwiftShader workers. Do not run profiling/captures/browser suites concurrently on this approximately 7GiB workstation. A Windows shell AutoRun warning sometimes appears; inspect real exit status, do not change the user's registry.
 6. Artwork: see `docs/KART_FLEET.md`, committed masters and `assets-source/karts/PROMPTS.md`. `node scripts/export-karts.mjs` exports WebP; generation is nondeterministic, committed masters make export reproducible. Never overwrite accepted art casually.
 7. Music: `node assets-source/build-soundtracks.mjs`; metadata in `public/assets/audio/soundtracks.json`. Preserve accepted WAVs. Overdrive SHA-256 `b8a95059350b3a10cd0cfac876a90d247deb3fca4d77093d0b4ae658583a45cd`; Ignition `a8e088a4bea68612376f307f142063fc2062ebcd7ca2e0dd39a8025867cef19b`.
-8. Next implementation is the remaining Phase 5 art/performance gate, not 300 levels or a new palette. Update code/tests/docs/backlog together, use meaningful checks, short English commits and push the existing PR branch. Attach any new/relevant PR in the app.
-9. Once Phase 5 is genuinely reconciled and integrated, start Phase 6 cinematic loading/onboarding with real asset progress, skip/replay, welcome/rules, interactive correction/streak tutorial, optional calibration and first/returning-player flows. Final Quick Race seed belongs under Advanced/Replay; campaign settings will come from level definitions.
+8. Phase 5 is complete for agreed scope. The next implementation is Phase 6 loading/onboarding when requested, not 300 levels or a new palette. Update code/tests/docs/backlog together, use meaningful checks and short English commits. Create a new feature branch from current main for authorized work and attach any new/relevant PR.
+9. When the user requests the next phase, start Phase 6 cinematic loading/onboarding with real asset progress, skip/replay, welcome/rules, interactive correction/streak tutorial, optional calibration and first/returning-player flows. Final Quick Race seed belongs under Advanced/Replay; campaign settings will come from level definitions.
 
 ## Documents and precedence
 
