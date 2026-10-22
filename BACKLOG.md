@@ -2,7 +2,7 @@
 
 ## Phase 6 implementation checkpoint — 22 October 2026
 
-TT-601–604 are implemented in alpha.17. Their source, behavior, recovery and verification map is [docs/PHASE6_ONBOARDING.md](docs/PHASE6_ONBOARDING.md); human review is [docs/PHASE6_REVIEW.md](docs/PHASE6_REVIEW.md). Checked boxes record implemented/tested scope, not user acceptance, integration or deployment. Final check evidence belongs in docs/TESTING.md. Campaign-specific briefing remains TT-701–704; current Quick Race has natural choices and a closed Advanced / Replay seed panel. TT-531 starter tracks are now user-accepted and integrated through PR #5. Phase 6 visual/interaction acceptance remains pending. Historical progress statements below do not override this checkpoint.
+TT-601–604 are implemented in alpha.17, source 3bac5e7 / open PR #6; final local check passes 102 unit / 50 browser cases. Their source, behavior, recovery and verification map is [docs/PHASE6_ONBOARDING.md](docs/PHASE6_ONBOARDING.md); human review is [docs/PHASE6_REVIEW.md](docs/PHASE6_REVIEW.md). Checked boxes record implemented/tested scope, not user acceptance, integration or deployment. Final check evidence belongs in docs/TESTING.md. Campaign-specific briefing remains TT-701–704; current Quick Race has natural choices and a closed Advanced / Replay seed panel. TT-531 starter tracks are now user-accepted and integrated through PR #5. Phase 6 visual/interaction acceptance remains pending. Historical progress statements below do not override this checkpoint.
 
 ## Private multiplayer and zero-cost scope — 22 October 2026
 
