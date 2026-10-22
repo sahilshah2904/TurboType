@@ -1,5 +1,11 @@
 # TurboType future work backlog
 
+## Visual polish deferred by the user — 22 October 2026
+
+- [ ] TT-608: Revisit race atmosphere visibility/quality and opening cinematic polish later. The user cannot perceive the new haze/air, accepts keeping the current baseline for now, and explicitly defers more visual work. Diagnose on the actual rendered scene/settings with the user before claiming success; scene-object counts are not visibility or aesthetic acceptance. Include sky/mountain/road depth, maintain readable typing and quality/motion fallbacks. Schedule after campaign groundwork or a later requested polish pass; this does not reopen accepted Phase 5 hardware work or block current Phase 6 functionality. No extra implementation is authorized by this status request.
+
+Phase 6 implementation is complete for the current functional scope; PR #6 review/exact-head CI/integration remain pending. Do not merge or start Phase 7 solely from this status note. All future maps/content/reward/cloud/release/private-room tasks below remain pending.
+
 ## Requested atmosphere and navigation refinement — alpha.20
 
 - [x] TT-607: Replace rejected curved road air lines with a researched layered atmosphere across sky/mountains/horizon/road, retain readable foreground and motion/quality controls; align shared action links including Skip to hub. Implemented in PR #6; full local check passes 102 unit / 56 browser cases; final evidence in docs/TESTING.md, user appearance acceptance pending. TT-911 now explicitly includes monster trucks, hoverboards, flying cars and varied original vehicle structures; future renderer/art/ownership work stays Phase 8/9. IDs/milestones/totals are unchanged.

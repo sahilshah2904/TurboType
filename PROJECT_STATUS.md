@@ -1,5 +1,11 @@
 # TurboType project status
 
+## Keep current appearance; defer visual polish — 22 October 2026
+
+The user reports they cannot perceive the replacement race haze/air effect, says some opening changes are good and explicitly asks to keep the current scene for now and improve it later. Record this as permission to retain the current baseline and defer further visual iteration, not proof that the atmosphere is perceptible or final-quality approved. No new animation work or Phase 7 implementation is requested in this status turn.
+
+Phase 6 functionality is implemented/locally verified (102 unit / 56 browser cases plus final focused checks). PR #6 remains open/unmerged; exact implementation head 962af56 has its own hosted check, whose latest state must be inspected before integration. Remaining immediate work is final PR review/integration after successful exact-head checks. Deferred TT-608 owns more visible, better-looking scene-wide atmosphere and later opening polish. Next implementation phase is Phase 7 campaign maps, then Phase 8 content/art, Phase 9 progression/guest and optional cloud saves, Phase 10 release/Pages, Phase 11 private multiplayer. No phase is started or game deployed by this status update.
+
 ## Alpha.20 atmosphere, action alignment and future vehicle variety — 22 October 2026
 
 The user rejected the white curved air lines. Alpha.20 removes them entirely and uses researched, layered atmospheric movement across the full race scene: soft distant haze over sky/mountains, small suspended motes and feathered peripheral speed accents. These are 42 reused sprites from three tiny generated gradient textures, including 20 in the upper sky/mountain area. Smooth WPM response and slower scenery parallax replace stepwise scene movement. Cars, labels, HUD and typing stay sharp. Pause/end/Low/Reduced hide the atmosphere. Research/design/limits: docs/ATMOSPHERE_RESEARCH.md. User visual acceptance is pending; do not describe quality or physical frame rate as certified.
