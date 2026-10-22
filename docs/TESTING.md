@@ -1,5 +1,10 @@
 # Verification evidence
 
+## Free-only multiplayer plan review — 22 October 2026
+
+Documentation-only update: room flow/2–10 capacity including host, about 100 approved accounts, project-wide initial ten-active-racer admission budget, host track and individual cars, everyone-ready start, backend authority, reconnect/host migration, retention, zero campaign awards and strict $0 fallback are specified in MULTIPLAYER_ROOMS.md. Current official free-tier/authorization/OAuth/quota documentation was checked and linked there; future provider selection still needs a ten-client spike. Verified the illustrative message budget: 11 × 180 × 10 × 30 = 594,000 snapshots/month before overhead; roughly 1.2 GB at 2 KB/message. No backend, account/project provisioning, runtime/version change, deployment or browser rerun is claimed. Existing gameplay check evidence remains tied to its original source; this new documentation commit receives its own hosted check.
+
+
 ## Reward schedule documentation correction — 22 October 2026
 
 Cars remain at 15/30/45/60/75/90 per category (18 rewards, 23 total). Tracks change to 10/25/40/55/70/85/100 per category (21 rewards, 26 total). Updated planning/status/handoff/backlog, independent proposed track IDs, level-100 behavior and future save/cloud/boundary requirements. The paired schedule is superseded; alpha.16 screenshots and source checks below are historical evidence for the five implemented starters, not implementation of the revised future reward system. This change edits Markdown only, with no app/version/storage/runtime change; arithmetic and manifest consistency were checked directly. Browser suites were not repeated for this documentation-only correction.

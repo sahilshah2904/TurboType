@@ -1,5 +1,12 @@
 # TurboType — resume in a new chat
 
+## Private multiplayer and zero-cost scope — 22 October 2026
+
+User requests rooms for up to **10 human players including host**, for up to 100 approved friends/relatives, with a **$0/free-tier-only** budget. Plan: Multiplayer → Create room / Join room by code → host chooses an owned track and shared passage preset → each player chooses an owned car → everyone including host clicks I'm ready → host starts a synchronized race. Host/roster/configuration changes invalidate readiness; server validates admission, readiness, progress and results. No single-player pause online; reconnect/host-transfer/rematch policies are in docs/MULTIPLAYER_ROOMS.md.
+
+The initial free-capacity interpretation is at most ten active racers across the project, also ten per room. Host track is temporarily shared for that match without granting ownership; multiplayer does not generate campaign unlock progress. GitHub Pages plus **Supabase Free is the preferred architecture to validate**, not provisioned infrastructure or a promise of unlimited service. Prefer approved social login, private channels, bounded shared snapshots and quota controls; no paid services, SMTP/SMS, add-ons or automatic upgrades. Pause/restrict online features when free capacity is unavailable and preserve local solo. Phase 9 owns identity/saves and the free-only provider gate; Phase 11 owns rooms/races after solo launch. This request updates plans only; no new runtime feature, account, deployment, merge or app-version bump. Cars/tracks keep their staggered milestone plan (23 cars / 26 tracks).
+
+
 ## Alpha.16 — starter tracks and staggered reward plan, 22 October 2026
 
 The user accepted the compact score/metrics presentation and requested Final standings expanded by default below it. This supersedes alpha.15's collapsed default; the disclosure can still be closed manually. Implemented on codex/results-and-fire-dial / open PR #5, which already contains alpha.15. No merge or deployment is implied by acceptance of the previous presentation.

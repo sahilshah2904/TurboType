@@ -1,3 +1,5 @@
+**Latest online scope — 22 October 2026:** private friends/relatives (up to 100 approved people), up to 10 active racers, rooms of 2–10 including host, free tiers only with a hard $0 budget. docs/MULTIPLAYER_ROOMS.md is authoritative for room codes, host track selection, individual cars, everyone-ready host start, reconnection and usage limits. Supersedes paid hosting assumptions and email-OTP-first plans; no backend is provisioned.
+
 **Current scope override — 21 October 2026:** the user explicitly narrowed TurboType to laptop/desktop browsers with a physical keyboard. Phone/tablet compatibility, software-keyboard layout, rotation and mobile acceptance are canceled requirements. Earlier multi-device statements are historical. Keep laptop window responsiveness (960 CSS px minimum; verify 1024/1366/1440/1920 widths), accessibility, hardware-keyboard IME composition, cloud saves before solo launch and multiplayer afterward. Do not restore mobile work without a new user request.
 
 # TurboType — game design and engineering delivery plan
@@ -213,9 +215,11 @@ Provide reduced motion, adjustable effects, readable text size, visible focus, n
 
 ## 8. Multiplayer evolution and shared-link journey
 
-Future journey: open `https://<owner>.github.io/TurboType/` → Multiplayer → Create private room → copy an invitation such as `#/room/<room-id>` → friends open it → choose names and ready up → host starts once assets are ready → shared passage/countdown → live race → shared results → rematch.
+Future journey: game Hub → Multiplayer → Create room (host) / Join room with an 8-character code (friends) → host selects an owned track and shared passage/difficulty preset → each of 2–10 players including host selects an owned car and clicks **I'm ready** → host starts only when all current players/assets/configuration versions are ready → backend-timed 3–2–1 → live race → results → same-room rematch with fresh readiness.
 
-Room links are examples until implemented. The client remains on GitHub Pages; a realtime service and persistence, if required, run elsewhere. Research provider pricing and deployment only when this milestone begins. The existing research identifies Colyseus as a candidate, not a selected or deployed service.
+The launch audience is up to 100 approved friends/relatives, with up to 10 active racers across the project initially. Code/slot access, configuration locks, host migration, temporary access to the host's track, authoritative results, no online pause and quota behavior are specified in [MULTIPLAYER_ROOMS.md](docs/MULTIPLAYER_ROOMS.md). Multiplayer does not award campaign clears or unlocks in its first release. Existing car/track ownership remains cosmetic.
+
+Use GitHub Pages plus a separately configured **free-only** backend. Preferred prototype: one Supabase Free project with Auth/Postgres/private Realtime and server-validated operations, not a paid dedicated server. A successful ten-client authority/latency/quota spike is required before final selection/provisioning. Do not assume Realtime Broadcast alone validates progress or that free hosting is unlimited. No payment method, paid add-on, SMTP/SMS cost or automatic upgrade; online play may be unavailable if paused or over capacity, with solo retained. The former Colyseus mention is background research, not a commitment to another service. No rooms or backend are implemented today.
 
 Design now for later reuse:
 

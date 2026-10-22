@@ -1,5 +1,12 @@
 # TurboType future work backlog
 
+## Private multiplayer and zero-cost scope — 22 October 2026
+
+User requests rooms for up to **10 human players including host**, for up to 100 approved friends/relatives, with a **$0/free-tier-only** budget. Plan: Multiplayer → Create room / Join room by code → host chooses an owned track and shared passage preset → each player chooses an owned car → everyone including host clicks I'm ready → host starts a synchronized race. Host/roster/configuration changes invalidate readiness; server validates admission, readiness, progress and results. No single-player pause online; reconnect/host-transfer/rematch policies are in docs/MULTIPLAYER_ROOMS.md.
+
+The initial free-capacity interpretation is at most ten active racers across the project, also ten per room. Host track is temporarily shared for that match without granting ownership; multiplayer does not generate campaign unlock progress. GitHub Pages plus **Supabase Free is the preferred architecture to validate**, not provisioned infrastructure or a promise of unlimited service. Prefer approved social login, private channels, bounded shared snapshots and quota controls; no paid services, SMTP/SMS, add-ons or automatic upgrades. Pause/restrict online features when free capacity is unavailable and preserve local solo. Phase 9 owns identity/saves and the free-only provider gate; Phase 11 owns rooms/races after solo launch. This request updates plans only; no new runtime feature, account, deployment, merge or app-version bump. Cars/tracks keep their staggered milestone plan (23 cars / 26 tracks).
+
+
 ## Latest reward schedule correction — 22 October 2026
 
 Latest reward schedule correction (22 October 2026): cars unlock at **15/30/45/60/75/90** eligible unique main clears within each category (6 × 3 = 18 rewards; **23 cars total** with starters). Tracks unlock independently at **10/25/40/55/70/85/100** (7 × 3 = 21 rewards; **26 tracks total** with starters). This supersedes the paired-unlock plan: car and track rewards are staggered and have separate receipts/IDs. Any owned car or track remains usable across Easy/Medium/Hard on already-unlocked levels and replays; replays cannot inflate earning counters or unlock levels. Phase 7 briefing/replay selection, Phase 8 content and Phase 9 independent ownership/saves remain the delivery plan. Five starter tracks are implemented; future reward unlocks are not. See docs/TRACK_PROGRESSION.md.
@@ -168,7 +175,7 @@ Completion evidence for TT-525–527: src/ui/fullscreen.ts, app-owned control li
 - [ ] TT-903: Build bounded local saves, migrations, backup export/import, malformed-save recovery, quota failure and multiple-tab protection.
 - [ ] TT-904: Add comparable personal records, recent-history/pace charts, bounded learning aggregates and one evidence-based coaching suggestion.
 - [ ] TT-905: Implement correction/capitalization/punctuation/consistency drills and optional keyboard guidance; separate practice from competitive eligibility.
-- [ ] TT-906: Validate/select the cloud provider before integration (Supabase Auth/Postgres is proposed); review limits/costs, region, ownership, recovery and static-site auth callbacks. Dependency: TT-205 and stable completed-run contracts.
+- [ ] TT-906: Validate the free-only cloud provider before integration: preferred Supabase Free Auth/Postgres/private Realtime; check current quotas, OAuth/allowlist setup, region, recovery/export, authorization and static-site callbacks. Hard $0 budget; no paid dependencies or automatic upgrade. Gate final selection on measured validation, not a generic free-tier promise. See docs/MULTIPLAYER_ROOMS.md; depends on TT-205 and stable completed-run contracts.
 - [ ] TT-907: Provision/configure the selected service when authorized/accessible; commit database migrations, test fixtures, access policies and reproducible setup docs without secrets.
 - [ ] TT-908: Add optional permanent sign-in, guest-to-account import preview, account switching isolation and cross-device profile/progress.
 - [ ] TT-909: Implement pending/synced/failed states, idempotent submissions, server-applied reward transactions, conflict handling, bounded queues and local fallback.
@@ -177,6 +184,8 @@ Completion evidence for TT-525–527: src/ui/fullscreen.ts, app-owned control li
 TT-906/907 may start earlier once contracts stabilize; cloud progress remains a single-player launch requirement, not work postponed until multiplayer.
 
 - [ ] TT-911: Required future category-specific reward collection: one distinct car every 15 unique eligible main-level clears within Easy, Medium and Hard (100 levels each), at 15/30/45/60/75/90 per category. Eighteen rewards plus five starters; counters never combine categories. This 22 October correction supersedes the ten-car/global-clear plan. Replays/bonus/Quick Race/Practice do not inflate counts; no extra car at 100 is implied. Author/export/anchor parts, persist idempotent category-qualified ownership from campaign receipts, migrate/recover guest saves and merge cloud clears/ownership safely; multiplayer validates entitlement. Cosmetic only. See docs/GARAGE_PROGRESSION.md for IDs, art briefs and boundary tests. Depends on campaign clear rules and Phase 9 save/cloud work; not implemented by the starter selector.
+
+- [ ] TT-913: Adopt the private-audience $0 policy in identity/storage delivery: up to 100 approved profiles, optional solo sign-in but approved persistent identity online, preferred verified social OAuth instead of paid SMTP/SMS, bounded history, manual export/restore and free-provider pause/quota fallback. Supabase remains proposed until TT-906/1101 gates pass. See docs/MULTIPLAYER_ROOMS.md.
 
 ## Phase 10 — single-player release
 
@@ -191,13 +200,17 @@ TT-906/907 may start earlier once contracts stabilize; cloud progress remains a 
 
 ## Phase 11 — friends multiplayer, immediately after solo launch
 
-- [ ] TT-1101: Prototype/select the authoritative realtime service, reusing existing identity/data contracts; validate hosting, connection limits/costs and deployment requirements. Colyseus is a candidate, not a selected service.
-- [ ] TT-1102: Define room/match message schemas, server-owned passage/rules/start clock, sequenced progress updates, validation, finish ordering and result persistence.
-- [ ] TT-1103: Implement private-room creation, invitation URLs, join/ready checks, host start, player names and room expiry.
-- [ ] TT-1104: Implement interpolated live opponents, online pause policy, input-profile/mixed-device rules, finish/results and rematch.
-- [ ] TT-1105: Add disconnect/reconnect/timeout/host-departure policies, connection recovery and clear error states.
-- [ ] TT-1106: Test multiple real clients, varied latency and duplicates, account/room isolation and finalized rewards; keep client-run solo records distinct from authoritative online results.
-- [ ] TT-1107: Deploy and document the backend/database migrations, operational monitoring/recovery and costs; verify invitations through the Pages link without regressing solo guest play.
+- [ ] TT-1101: Prototype/select a free-only authoritative room backend for 2–10 humans including host, up to 100 approved accounts and initially ten active racers project-wide. Prefer Supabase Free with existing identity/data contracts; prove server validation, clock/latency, throughput, quota and deployment feasibility. Realtime Broadcast is transport, not authority; Colyseus is unselected background research, not an additional paid host. See docs/MULTIPLAYER_ROOMS.md.
+- [ ] TT-1102: Define versioned room/match schemas and server-owned configuration, ready/admission checks, capacity leases, future start timestamp, bounded sequenced input validation, shared snapshots, finish/DNF ordering and idempotent result persistence. Local typing never waits on network. Verify the batching/fairness policy and reject forged/stale/duplicate events.
+- [ ] TT-1103: Implement Create room / Join room with random readable eight-character codes, transactional 2–10 membership including host, host-owned track/passage selection, player-owned cars, every-player I'm ready and host-only Start. Invalidate readiness on configuration/roster changes; no force-start or mid-race joins. Add invite copy/regeneration, pre-race removal, authorization and expiry.
+- [ ] TT-1104: Implement interpolated live opponents, no global online pause, frozen car/track choices, shared deadlines, readable ten-entrant race/results, DNF and same-room rematch requiring fresh readiness. Host track is temporary match access, never ownership. Multiplayer does not create campaign clears, stars or car/track milestone progress in this first release.
+- [ ] TT-1105: Implement proposed 30-second reconnect grace with continuing server time, validated input recovery, expired-slot DNF, host transfer and track-ownership fallback in lobby, countdown cancellation on loss, 30-minute idle expiry and abandoned-room cleanup. Backend outage yields interrupted/unverified results; never fake online winners.
+- [ ] TT-1106: Test 2/10/11 clients, simultaneous joins/starts, stale readiness, latency/clock skew, forged/reordered inputs, room/account isolation, car/track permissions, host loss, reconnect, rematch and finalized results. Verify no multiplayer campaign awards and preserve solo/cloud record separation.
+- [ ] TT-1107: Deploy/document the verified free backend only after provider/account configuration is available; migrations, access policies, OAuth callbacks, free-tier quotas, restore/export, usage reporting and actual code-based invitations through Pages. No paid fallback, billing method, automatic upgrade or solo guest regression.
+
+- [ ] TT-1108: Implement and measure free-tier admission/usage guards, coalesced room snapshots (initially ≤1/second/room), low-frequency liveness, bounded retention and clean subscription teardown. Proposed internal budgets: 1M messages/month, 3GB backend egress and 100MB application data; compare against provider reports, account for fan-out and refuse new online races before exhaustion without paying.
+- [ ] TT-1109: Verify invitation/account allowlist, private Realtime channel policies, nonmember/removed-account/code abuse, one active driving slot per identity, host privilege limits, temporary guest track access, secret-free public bundle and no raw password collection. Rate-limit failed joins and ordinary writes.
+- [ ] TT-1110: Test ten-player laptop layouts/input/readability, all Ready/Not ready/loading/error states, reduced/low effects and backend sleeping/quota/outage recovery. Publish measured free-tier limitations rather than promising unrestricted uptime.
 
 ## Optional ideas — deferred, not launch commitments
 
