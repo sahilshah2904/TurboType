@@ -1,5 +1,15 @@
 # Verification evidence
 
+## Alpha.18 title and airflow follow-up — 22 October 2026
+
+Supersedes alpha.17's three-panel entrance with a 5.6-second full-window title reveal and static immediate entry for Low/Reduced. Adds a bounded maximum of 44 curved airflow paths during High/full-motion racing, clearing on pause/countdown/end and disabling for Low/Reduced. Hub loading/error handling remains, but successful-load and preview headings are removed; Settings learning actions use setting rows. Rules 3/save/content 1 unchanged. No external video transfer, dependencies or copied commercial assets.
+
+New browser coverage checks actual reveal timing/full-window bounds, reduced-motion animation removal, Hub label cleanup and setting-row actions, plus airflow count/activity/quality suppression. Updated cancellation coverage navigates away by changing the route while the cinematic deliberately hides shell navigation. Initial full run passed 102 units/50 of 52 browser cases; two failures were test selectors (hidden former shell link and an incorrectly named Pause button), corrected without raising timeouts. Final full `npm run check` passed formatting/types/build, **102 unit / 52 desktop browser cases** (3.0-minute browser run), including both corrected cases and bounded active/pause/Low/Reduced airflow. No application changes followed that passing run. Screenshots/timeline frames are captured separately after the suite; no concurrency with browser testing/profiling. No new physical GPU performance certification is claimed.
+
+Final captures under `docs/images/alpha18/`: emblem/reveal/final title at 1440, finished title at 1024, Hub, Settings at 1440/1024 and active wind at 1440. Captured sequentially after the suite against the preserved LAN server; title wall-clock sampling is illustrative, with timing independently verified by the browser test. Reveal/final title, active wind and 1024 Settings were visually inspected. The racing capture reports 44 active airflow paths; the passing test verifies suppression on pause/Low/Reduced. Capture typing is scripted, not a physical input/performance report.
+
+The previous alpha.17 head c5b986c passed exact pull_request run [39776040552](https://github.com/sahilshah2904/TurboType/actions/runs/39776040552); this was freshly verified before the follow-up and does not certify alpha.18. Current work stays in open PR #6 pending new exact-head hosted checks and user review. Nothing is merged or deployed by this follow-up.
+
 ## Alpha.17 Phase 6 — 22 October 2026
 
 Final `npm run check` passed formatting, TypeScript, **102 unit tests and 50 desktop Chromium browser cases**, including the production build. Ten onboarding browser cases cover first/returning visits, real loading/skip/failure/retry/cancellation, all three actual correction/streak lessons, 36-WPM calibration/manual pace and paused-race preservation, blocked storage, new-route layouts at 1024/1366/1440/1920, failed bundle download/reload, and active 1024×768 Larger typing text controls. Existing race/garage/audio/track/fullscreen/input regressions pass. Rules 3 / save/content 1 remain.

@@ -196,15 +196,15 @@ export function mountApp(root: HTMLElement): () => void {
       const mount = () => {
         track.removeAttribute("data-ready");
         main.querySelector("#retry-preview")?.setAttribute("hidden", "");
-        message.textContent = "Loading track preview…";
+        message.textContent = "Preparing your circuit…";
         mountTrackPreview(track, {
           reducedMotion: reducedMotion(),
           effects: settings.effects,
           playerKart: selectedKart,
           track: selectedTrack,
-          onReady: (text) => {
+          onReady: () => {
             if (currentGeneration === generation) {
-              message.textContent = text;
+              message.textContent = "";
               main.querySelector("#retry-preview")?.setAttribute("hidden", "");
             }
           },
@@ -358,9 +358,9 @@ function hubScreen(selectedKart: KartId, selectedTrack: TrackId): string {
       <aside class="hero-note"><span class="garage-label">${kart.name.toUpperCase()} / YOUR STARTING LINE</span><img class="garage-kart ${kart.id === "volt-kart" ? "kart-art--starter" : ""}" src="${import.meta.env.BASE_URL}assets/karts/${kart.file}" alt="${kart.name} — ${kart.style}" /><span>Four opponents. One passage.<br />Your pace sets your progress.</span></aside>
     </section>
     <section class="track-card reveal" aria-label="Animated track preview">
-      <div class="section-top"><span class="eyebrow"><span class="status-dot"></span> TRACK PREVIEW</span>${trackChoices(selectedTrack, "hub-track-select")}</div>
+      <div class="section-top"><span class="eyebrow"><span class="status-dot"></span> YOUR CIRCUIT</span>${trackChoices(selectedTrack, "hub-track-select")}</div>
       <div id="track-preview" class="track-preview" role="img" aria-label="Your selected kart on an illustrated city road, with two decorative rival karts"></div>
-      <div class="track-bottom"><span id="track-status" role="status">Loading track preview…</span><span>Scene preview · no race in progress</span><button id="retry-preview" class="text-button" hidden>Retry preview</button></div>
+      <div class="track-bottom"><span id="track-status" role="status">Preparing your circuit…</span><button id="retry-preview" class="text-button" hidden>Retry preview</button></div>
     </section>
     <section class="campaign-section reveal" aria-labelledby="campaign-heading"><div class="section-heading"><div><p class="eyebrow">THREE GEARS. ONE JOURNEY.</p><h2 id="campaign-heading">Find your starting line.</h2></div><span class="pill">CAMPAIGNS IN DEVELOPMENT</span></div><div class="campaign-grid">
       ${[
@@ -481,5 +481,5 @@ function settingsScreen(
     )
     .join(
       "",
-    )}</select></div><div class="setting-row"><div><label for="effects">Track effects</label><p>Use fewer particles for a lighter ride.</p></div><select name="effects" id="effects"><option value="high" ${settings.effects === "high" ? "selected" : ""}>High</option><option value="low" ${settings.effects === "low" ? "selected" : ""}>Low</option></select></div><div class="setting-row"><div><label for="large-text">Larger typing text</label><p>Make passages and typing easier to read.</p></div><input type="checkbox" name="largeText" id="large-text" ${settings.largeText ? "checked" : ""} /></div></form><p id="save-status" class="help" role="status">Preferences are stored on this browser. Cloud saves are not available in this preview.</p>${audioControls()}<section class="opening-settings" aria-labelledby="opening-settings-title"><h2 id="opening-settings-title">Opening & learning</h2><label class="guide-check"><input type="checkbox" id="skip-opening" ${learning.skipIntro ? "checked" : ""}/>Skip opening next time</label><p id="opening-save-status" class="help" role="status">${learning.tutorialComplete ? "Tutorial completed. Replay anytime." : "Tutorial is optional and can be replayed anytime."}</p><div class="onboarding-links"><a href="#/intro">Replay opening</a><a href="#/welcome">Welcome</a><a href="#/rules">How to play</a><a href="#/tutorial">Replay tutorial</a><a href="#/calibration">Recalibrate pace</a></div></section></section>`;
+    )}</select></div><div class="setting-row"><div><label for="effects">Track effects</label><p>Use fewer particles for a lighter ride.</p></div><select name="effects" id="effects"><option value="high" ${settings.effects === "high" ? "selected" : ""}>High</option><option value="low" ${settings.effects === "low" ? "selected" : ""}>Low</option></select></div><div class="setting-row"><div><label for="large-text">Larger typing text</label><p>Make passages and typing easier to read.</p></div><input type="checkbox" name="largeText" id="large-text" ${settings.largeText ? "checked" : ""} /></div></form><p id="save-status" class="help" role="status">Preferences are stored on this browser. Cloud saves are not available in this preview.</p>${audioControls()}<section class="opening-settings" aria-labelledby="opening-settings-title"><h2 id="opening-settings-title">Opening & learning</h2><label class="guide-check"><input type="checkbox" id="skip-opening" ${learning.skipIntro ? "checked" : ""}/>Skip opening next time</label><p id="opening-save-status" class="help" role="status">${learning.tutorialComplete ? "Tutorial completed. Replay anytime." : "Tutorial is optional and can be replayed anytime."}</p><div class="setting-row"><div><span class="setting-label">Replay opening</span><p>Watch the TurboType title sequence again.</p></div><a class="button button--secondary" href="#/intro">Replay opening</a></div><div class="setting-row"><div><span class="setting-label">Welcome</span><p>Return to your starting line.</p></div><a class="button button--secondary" href="#/welcome">Welcome</a></div><div class="setting-row"><div><span class="setting-label">How to play</span><p>Read the racing rules and controls.</p></div><a class="button button--secondary" href="#/rules">How to play</a></div><div class="setting-row"><div><span class="setting-label">Replay tutorial</span><p>Practice matching, correcting and building a clean streak.</p></div><a class="button button--secondary" href="#/tutorial">Replay tutorial</a></div><div class="setting-row"><div><span class="setting-label">Recalibrate pace</span><p>Try a thirty-second sample or choose CPU pace manually.</p></div><a class="button button--secondary" href="#/calibration">Recalibrate pace</a></div></section></section>`;
 }

@@ -1,17 +1,17 @@
-import { STARTER_KARTS, type KartId } from "../content/kart-catalog";
+import { type KartId } from "../content/kart-catalog";
 import type { OnboardingPreferences } from "../storage/onboarding";
 import { prepareEntrance } from "./entrance-assets";
 
-export function entranceScreen(kartId: KartId): string {
-  const kart = STARTER_KARTS.find((k) => k.id === kartId)!;
+export function entranceScreen(_kartId: KartId): string {
   return `<section class="entrance-screen" aria-labelledby="entrance-title">
-    <div class="entrance-art" aria-hidden="true"><div class="entrance-panel entrance-panel--city"><span>NEON HARBOR</span><div class="entrance-skyline"></div></div><div class="entrance-panel entrance-panel--car"><img class="${kart.id === "volt-kart" ? "kart-art--starter" : ""}" src="${import.meta.env.BASE_URL}assets/karts/${kart.file}" alt=""/><span>YOUR STARTING LINE</span></div><div class="entrance-panel entrance-panel--keys"><span>PRECISION / RHYTHM / MOMENTUM</span><svg class="entrance-driver" viewBox="0 0 180 250"><path d="M35 245 L48 150 Q54 128 74 124 L106 124 Q129 130 134 150 L150 245 Z" fill="#183b49"/><path d="M62 145 L88 178 L114 145 L106 245 L73 245 Z" fill="#d32b4c"/><circle cx="90" cy="76" r="45" fill="#273e4e" stroke="#7aaeba" stroke-width="3"/><path d="M49 66 Q90 46 131 66 L126 83 Q90 94 54 83 Z" fill="#9edfe9"/><path d="M55 90 Q90 115 125 90 L114 112 L68 112 Z" fill="#111e2b"/><path d="M38 230 Q90 170 142 230" fill="none" stroke="#85cad6" stroke-width="8"/></svg><b>G O</b><i></i></div></div>
-    <div class="entrance-copy"><p class="eyebrow">YOUR WORDS. YOUR ENGINE.</p><h1 id="entrance-title">Every keystroke.<br/><span>Full throttle.</span></h1><p>Find your rhythm on the streets of TurboType.<br/>One physical keyboard. Four CPU rivals.</p>
-    <div class="entrance-actions"><button id="enter-turbotype" class="button button--primary">Enter TurboType →</button><button id="skip-entrance" class="text-button">Skip opening</button></div>
+    <div class="entrance-art" aria-hidden="true"><div class="intro-halo"></div><div class="intro-light intro-light--cyan"></div><div class="intro-light intro-light--red"></div><div class="intro-road"></div></div>
+    <div class="entrance-copy"><img class="intro-emblem" src="${import.meta.env.BASE_URL}assets/brand-mark.svg" width="100" height="100" alt=""/><p class="intro-kicker">IGNITION / PRECISION / MOMENTUM</p><h1 id="entrance-title" aria-label="TurboType"><span>TURBO</span><span>TYPE</span></h1><p class="intro-tagline">YOUR WORDS. FULL THROTTLE.</p>
+    <div class="entrance-actions"><button id="enter-turbotype" class="button button--primary">Enter TurboType →</button></div>
     <div id="entrance-loading" hidden><label for="entrance-progress">Preparing your starting line</label><progress id="entrance-progress" max="5" value="0"></progress><p id="entrance-status" role="status">Waiting to prepare essential artwork.</p></div>
-    <div id="entrance-error" hidden><p id="entrance-error-message" role="alert"></p><button id="retry-entrance" class="button button--primary">Retry loading</button><a href="#/rules">Read the rules</a><a href="#/keyboard">Open keyboard check</a></div>
-    <p class="entrance-footnote">Sound follows your Settings preference. You can replay this opening anytime.</p></div></section>`;
+    <div id="entrance-error" hidden><p id="entrance-error-message" role="alert"></p><button id="retry-entrance" class="button button--primary">Retry loading</button><a href="#/rules">Read the rules</a><a href="#/keyboard">Open keyboard check</a></div></div>
+    <button id="skip-entrance" class="text-button intro-skip">Skip opening</button></section>`;
 }
+
 export function connectEntrance(
   main: HTMLElement,
   kart: KartId,
@@ -20,6 +20,19 @@ export function connectEntrance(
 ): () => void {
   const abort = new AbortController();
   let attempt: AbortController | undefined;
+  const screen = main.querySelector<HTMLElement>(".entrance-screen")!;
+  const enter = main.querySelector<HTMLButtonElement>("#enter-turbotype")!;
+  const still =
+    document.documentElement.dataset.motion === "reduced" ||
+    document.documentElement.dataset.effects === "low";
+  const finishTitle = () => {
+    screen.dataset.ended = "true";
+    enter.hidden = false;
+  };
+  enter.hidden = !still;
+  let titleTimer: number | undefined;
+  if (still) finishTitle();
+  else titleTimer = window.setTimeout(finishTitle, 5600);
   let skip = false,
     loading = false;
   const find = <T extends HTMLElement>(id: string) =>
@@ -70,6 +83,8 @@ export function connectEntrance(
     "click",
     () => {
       skip = true;
+      clearTimeout(titleTimer);
+      finishTitle();
       main.querySelector(".entrance-art")!.setAttribute("hidden", "");
       find("#skip-entrance").textContent =
         "Opening skipped · preparing essentials";
@@ -88,6 +103,7 @@ export function connectEntrance(
     { signal: abort.signal },
   );
   return () => {
+    clearTimeout(titleTimer);
     abort.abort();
     attempt?.abort();
   };

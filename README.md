@@ -16,11 +16,13 @@ An original browser typing racer: build physical-keyboard speed and accuracy whi
 
 *Actual **0.1.0-alpha.14** gameplay, accepted and integrated into **main** through [PR #4](https://github.com/sahilshah2904/TurboType/pull/4). This is a local preview; no public game is deployed.*
 
-## Phase 6 preview — alpha.17
+## Phase 6 preview — alpha.18
 
-[PR #6](https://github.com/sahilshah2904/TurboType/pull/6) implements the cinematic opening, real loading/recovery, welcome/rules, guided tutorial, optional pace calibration and returning-visitor controls. Local checks pass 102 unit / 50 browser cases; user acceptance and merge remain pending. The five starter tracks and presentation follow-up are accepted and integrated through PR #5. The alpha.14 captures below are historical race evidence.
+[PR #6](https://github.com/sahilshah2904/TurboType/pull/6) implements a 5.6-second fullscreen title opening, real loading/recovery, welcome/rules, guided tutorial, optional pace calibration and returning-visitor controls. Local checks pass 102 unit / 52 browser cases; user acceptance and merge remain pending. The five starter tracks and presentation follow-up are accepted and integrated through PR #5. The alpha.14 captures below are historical race evidence.
 
-![Alpha.17 original cinematic entrance](docs/images/alpha17/entrance-1440.png)
+The alpha.18 follow-up adds richer curved race airflow, removes routine Hub preview labels and aligns learning actions as Settings rows. Latest captures/verification are in docs/TESTING.md. Alpha.17 opening panels are superseded.
+
+![Alpha.18 full-window TurboType title](docs/images/alpha18/title-finished-1440.png)
 
 [Implementation and recreation](docs/PHASE6_ONBOARDING.md) · [Laptop review checklist](docs/PHASE6_REVIEW.md) · [Current verification](docs/TESTING.md)
 
@@ -94,7 +96,7 @@ Open **Settings → Sound & music** to enable sound or change volumes. The hub h
 | 3 | Build validation/correction, WPM/accuracy, streaks, timing, pause and finishing | Complete for agreed engine/input scope |
 | 4 | Create one complete four-CPU race with countdown, placement, results and retry | Complete and merged into main |
 | 5 | Polish vehicles, wheels/suspension, scenery, exhaust/nitro, sound and celebration | Complete for agreed scope; accepted and merged into main |
-| 6 | Cinematic loading/welcome/rules, tutorial, calibration and final navigation | Alpha.17 implemented and locally verified; user review and PR #6 integration pending |
+| 6 | Cinematic loading/welcome/rules, tutorial, calibration and final navigation | Alpha.18 implemented and locally verified; user review and PR #6 integration pending |
 | 7 | Easy/Medium/Hard rightward maps, 100 numbered nodes each, locks, chapters and saved position | Planned |
 | 8 | Author/validate all 300 passages, learning goals, difficulty/star curves and bonus challenges | Planned |
 | 9 | Rewards/rank/garage, records/charts/coaching/drills, robust guest saves and optional account-backed cloud progress | Planned |

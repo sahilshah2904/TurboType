@@ -215,7 +215,7 @@ test("new learning routes preserve readable layouts, reduced motion and optional
       if (route === "intro")
         expect(
           await page
-            .locator(".entrance-panel")
+            .locator(".intro-emblem")
             .first()
             .evaluate((el) => getComputedStyle(el).animationName),
         ).toBe("none");
@@ -261,7 +261,9 @@ test("leaving a loading entrance cancels stale navigation", async ({
   await page.goto("./");
   await page.getByRole("button", { name: "Enter TurboType" }).click();
   await expect(page.locator("#entrance-loading")).toBeVisible();
-  await page.getByRole("link", { name: "Keyboard check", exact: true }).click();
+  await page.evaluate(() => {
+    location.hash = "#/keyboard";
+  });
   release();
   await expect(page.locator("html")).toHaveAttribute("data-route", "keyboard");
   await page.getByRole("textbox", { name: "Your text" }).fill("Still here");
@@ -289,4 +291,52 @@ test("active lessons keep typing and pause controls in view on a small laptop wi
   await expect(page.locator("#lesson-state")).toContainText("Paused");
   await page.getByRole("link", { name: "The hub", exact: true }).click();
   await expect(page.locator("main")).not.toHaveClass(/learning-active/);
+});
+
+test("opening plays a full-window 5.6-second title reveal and reduced motion skips the wait", async ({
+  page,
+}) => {
+  await page.clock.install();
+  await page.goto("./#/intro");
+  await expect(
+    page.getByRole("heading", { name: "TurboType", exact: true }),
+  ).toBeVisible();
+  await expect(page.locator(".topbar")).toBeHidden();
+  await expect(page.locator("#enter-turbotype")).toBeHidden();
+  const bounds = await page.locator(".entrance-screen").boundingBox();
+  const viewport = page.viewportSize()!;
+  expect(bounds?.width).toBe(viewport.width);
+  expect(bounds?.height).toBe(viewport.height);
+  await page.clock.runFor(5000);
+  await expect(page.locator("#enter-turbotype")).toBeHidden();
+  await page.clock.runFor(700);
+  await expect(
+    page.getByRole("button", { name: "Enter TurboType" }),
+  ).toBeVisible();
+  await page.getByRole("button", { name: "Skip opening" }).click();
+  await expect(page.locator("html")).toHaveAttribute("data-route", "hub", {
+    timeout: 12000,
+  });
+  await expect(page.locator("#track-preview")).toHaveAttribute(
+    "data-ready",
+    "true",
+    { timeout: 12000 },
+  );
+  await expect(page.locator("#track-status")).toBeEmpty();
+  await expect(page.getByText("TRACK PREVIEW", { exact: true })).toHaveCount(0);
+  await page.getByRole("link", { name: "Settings", exact: true }).click();
+  for (const name of ["How to play", "Replay tutorial", "Recalibrate pace"]) {
+    await expect(
+      page
+        .locator(".opening-settings .setting-row")
+        .filter({ has: page.getByRole("link", { name, exact: true }) }),
+    ).toBeVisible();
+  }
+  await page.getByLabel("Motion", { exact: true }).selectOption("reduced");
+  await page.getByRole("link", { name: "Replay opening", exact: true }).click();
+  await expect(page.locator("#enter-turbotype")).toBeVisible();
+  const animations = await page
+    .locator(".entrance-screen")
+    .evaluate((el) => el.getAnimations({ subtree: true }).length);
+  expect(animations).toBe(0);
 });

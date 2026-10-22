@@ -1329,142 +1329,132 @@ html[data-route="race"] .topbar {
   box-shadow: 0 -12px 12px #111c25;
 }
 
-/* Phase 6: original layered entrance, sharing the accepted art and palette. */
+/* Original 5.6-second title film. No video transfer, flashing or external artwork. */
+:root[data-route="intro"] .topbar,
+:root[data-route="intro"] .footer {
+  visibility: hidden;
+}
 .entrance-screen {
-  position: relative;
-  min-height: calc(100dvh - 155px);
+  position: fixed;
+  inset: 0;
+  z-index: 20;
   display: grid;
-  align-items: center;
-  overflow: hidden;
+  place-items: center;
+  overflow: auto;
   isolation: isolate;
+  background: #070c12;
+  min-width: 960px;
+}
+:root[data-route="intro"] .fullscreen-control {
+  z-index: 50;
 }
 .entrance-art {
   position: absolute;
-  inset: 8% 0 5% 43%;
-  z-index: -1;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  transform: skewY(-4deg);
-  opacity: 0.8;
-}
-.entrance-panel {
-  position: relative;
-  min-height: 450px;
+  inset: 0;
   overflow: hidden;
-  border-top: 3px solid #63e7f2;
-  background: linear-gradient(155deg, #153844, #101c26 65%);
-  animation: entrance-drift 8s ease-in-out infinite alternate;
+  z-index: -1;
 }
-.entrance-panel:nth-child(2) {
-  margin-top: 48px;
-  animation-delay: -3s;
-  border-color: #ef3657;
-  background: linear-gradient(140deg, #432535, #121b25);
-}
-.entrance-panel:nth-child(3) {
-  margin-bottom: 48px;
-  animation-delay: -5s;
-}
-.entrance-panel > span {
+.intro-halo {
   position: absolute;
-  top: 24px;
-  left: 16px;
-  writing-mode: vertical-rl;
-  letter-spacing: 3px;
-  font-size: 14px;
-  color: #d0e8f0;
-}
-.entrance-panel--car img {
-  position: absolute;
-  width: 480px;
-  max-width: none;
-  left: -135px;
-  bottom: 18%;
-  transform: rotate(-18deg);
-}
-.entrance-skyline {
-  position: absolute;
-  inset: 38% -10% 0;
-  background:
-    repeating-linear-gradient(
-      90deg,
-      transparent 0 14px,
-      #358093 14px 18px,
-      transparent 18px 40px
-    ),
-    linear-gradient(#183c49, #111921);
-  clip-path: polygon(
-    0 25%,
-    10% 25%,
-    10% 10%,
-    25% 10%,
-    25% 45%,
-    40% 45%,
-    40% 0,
-    58% 0,
-    58% 30%,
-    75% 30%,
-    75% 15%,
-    90% 15%,
-    90% 40%,
-    100% 40%,
-    100% 100%,
-    0 100%
+  width: 80vw;
+  height: 80vw;
+  left: 10vw;
+  top: calc(50% - 40vw);
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse,
+    #bd284c20,
+    #193b4712 40%,
+    transparent 68%
   );
+  animation: title-halo 5.6s ease-out both;
 }
-.entrance-panel--keys b {
+.intro-light {
   position: absolute;
-  bottom: 25%;
-  left: 15%;
-  font:
-    700 110px/1 "Barlow Condensed",
-    sans-serif;
-  color: #63e7f2;
-  writing-mode: vertical-rl;
-  opacity: 0.6;
+  height: 2px;
+  width: 90vw;
+  left: -100vw;
+  top: 52%;
+  opacity: 0;
+  transform: rotate(-12deg);
 }
-.entrance-panel--keys i {
+.intro-light--cyan {
+  background: linear-gradient(90deg, transparent, #63e7f2, transparent);
+  animation: title-light 1.8s 1s ease-out both;
+}
+.intro-light--red {
+  top: 60%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #ef3657, transparent);
+  animation: title-light 2s 2.3s ease-out both;
+}
+.intro-road {
   position: absolute;
-  inset: 25% -30% 0;
+  inset: 65% -30% -40%;
   background: repeating-linear-gradient(
-    -25deg,
-    transparent 0 40px,
-    #dfeef00d 40px 43px
+    90deg,
+    transparent 0 14%,
+    #63e7f20a 14% 14.1%,
+    transparent 14.1% 28%
   );
+  transform: perspective(500px) rotateX(64deg);
+  mask-image: linear-gradient(transparent, black);
+  animation: title-road 5.6s ease-out both;
 }
 .entrance-copy {
-  max-width: 720px;
-  padding: 50px 24px 60px 0;
-  background: linear-gradient(90deg, #0b141cf2 55%, transparent);
+  width: min(90vw, 1280px);
+  padding: 60px 20px;
+  text-align: center;
+}
+.intro-emblem {
+  margin: 0 auto 22px;
+  width: clamp(64px, 7vw, 100px);
+  height: auto;
+  animation: title-emblem 5.6s ease both;
+}
+.intro-kicker {
+  font-size: 14px;
+  letter-spacing: 0.3em;
+  color: #a5bdc9;
+  animation: title-caption 5.6s ease both;
 }
 .entrance-copy h1 {
-  font-size: clamp(60px, 7vw, 100px);
-  line-height: 0.95;
-  margin: 20px 0 28px;
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+  font:
+    700 clamp(100px, 16vw, 240px)/0.9 "Barlow Condensed",
+    sans-serif;
+  letter-spacing: -0.025em;
+  animation: title-name 5.6s cubic-bezier(0.16, 0.8, 0.2, 1) both;
 }
-.entrance-copy h1 span,
-.guide-page h1 span {
-  color: #ff5964;
+.entrance-copy h1 span:last-child {
+  color: #ef3657;
 }
-.entrance-copy > p {
-  font-size: 18px;
-  line-height: 1.7;
+.intro-tagline {
+  font-size: 16px;
+  letter-spacing: 0.35em;
+  color: #d9e5eb;
+  animation: title-caption 5.6s ease both;
 }
 .entrance-actions {
   display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 24px;
-  margin: 30px 0;
+  justify-content: center;
+  margin-top: 36px;
+  min-height: 54px;
 }
-.entrance-footnote {
-  max-width: 550px;
-  color: #c0d4df;
+.entrance-screen[data-ended="true"] .entrance-actions {
+  animation: title-controls 0.5s ease both;
+}
+.intro-skip {
+  position: absolute;
+  right: 32px;
+  bottom: 24px;
+  z-index: 2;
 }
 #entrance-loading {
   max-width: 550px;
-  margin: 24px 0;
+  margin: 24px auto;
 }
 #entrance-loading label {
   font-size: 16px;
@@ -1483,6 +1473,103 @@ html[data-route="race"] .topbar {
 #entrance-error a {
   display: inline-block;
   margin: 12px;
+}
+.guide-page h1 span {
+  color: #ff5964;
+}
+@keyframes title-emblem {
+  0% {
+    opacity: 0;
+    transform: scale(0.7) translateY(40px);
+  }
+  18%,
+  30% {
+    opacity: 1;
+    transform: scale(1.15) translateY(20px);
+  }
+  60%,
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+@keyframes title-name {
+  0%,
+  22% {
+    opacity: 0;
+    transform: scale(1.2) translateY(28px);
+    filter: blur(8px);
+    letter-spacing: 0.12em;
+  }
+  64%,
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0);
+    letter-spacing: -0.025em;
+  }
+}
+@keyframes title-caption {
+  0%,
+  56% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  88%,
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes title-halo {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes title-light {
+  0% {
+    opacity: 0;
+    left: -100vw;
+  }
+  35% {
+    opacity: 0.65;
+  }
+  100% {
+    opacity: 0;
+    left: 110vw;
+  }
+}
+@keyframes title-road {
+  0%,
+  35% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.7;
+  }
+}
+@keyframes title-controls {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+:root[data-motion="reduced"] .entrance-screen *,
+:root[data-effects="low"] .entrance-screen * {
+  animation: none !important;
+}
+:root[data-motion="reduced"] .intro-light,
+:root[data-effects="low"] .intro-light {
+  display: none;
 }
 .guide-page {
   max-width: 1280px;
@@ -1612,38 +1699,17 @@ html[data-route="race"] .topbar {
 .race-advanced[open] {
   padding-bottom: 12px;
 }
-@keyframes entrance-drift {
-  from {
-    transform: translateY(-8px);
-  }
-  to {
-    transform: translateY(10px);
-  }
+.learning-active .learning-page {
+  padding-top: 16px;
 }
-:root[data-motion="reduced"] .entrance-panel,
-:root[data-effects="low"] .entrance-panel {
-  animation: none;
+.learning-active .learning-page > :is(h1, p, .back-link) {
+  display: none;
 }
-@media (prefers-reduced-motion: reduce) {
-  .entrance-panel {
-    animation: none;
-  }
-}
+
 @media (max-width: 1100px) {
   .guide-cards {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-  .entrance-art {
-    left: 38%;
-    opacity: 0.45;
-  }
-}
-.entrance-driver {
-  position: absolute;
-  width: 220px;
-  left: -18%;
-  top: 12%;
-  opacity: 0.75;
 }
 .learning-page {
   padding-top: 24px;
@@ -1666,9 +1732,13 @@ html[data-route="race"] .topbar {
 .lesson-panel .typing-surface {
   margin: 16px 0;
 }
-.learning-active .learning-page {
-  padding-top: 16px;
+.opening-settings .setting-row {
+  gap: 24px;
 }
-.learning-active .learning-page > :is(h1, p, .back-link) {
-  display: none;
+.opening-settings .setting-label {
+  font-size: 16px;
+  font-weight: 700;
+}
+.opening-settings .setting-row .button {
+  flex-shrink: 0;
 }

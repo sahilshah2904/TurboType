@@ -1,5 +1,9 @@
 # TurboType future work backlog
 
+## Requested Phase 6 refinement — alpha.18
+
+- [x] TT-605: User requested full-window 5.6-second title animation, richer bounded race airflow, removal of Hub preview labels and setting-row learning actions. Implemented on the existing PR #6; full local check passes 102 unit / 52 browser cases; final validation/captures in docs/TESTING.md. User visual acceptance remains pending. This refines TT-601/604 and TT-505/530 presentation without starting maps or changing race rules.
+
 ## Phase 6 implementation checkpoint — 22 October 2026
 
 TT-601–604 are implemented in alpha.17, source 3bac5e7 / open PR #6; final local check passes 102 unit / 50 browser cases. Their source, behavior, recovery and verification map is [docs/PHASE6_ONBOARDING.md](docs/PHASE6_ONBOARDING.md); human review is [docs/PHASE6_REVIEW.md](docs/PHASE6_REVIEW.md). Checked boxes record implemented/tested scope, not user acceptance, integration or deployment. Final check evidence belongs in docs/TESTING.md. Campaign-specific briefing remains TT-701–704; current Quick Race has natural choices and a closed Advanced / Replay seed panel. TT-531 starter tracks are now user-accepted and integrated through PR #5. Phase 6 visual/interaction acceptance remains pending. Historical progress statements below do not override this checkpoint.
