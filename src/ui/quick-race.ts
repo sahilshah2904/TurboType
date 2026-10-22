@@ -1,3 +1,5 @@
+import { trackChoices } from "./track-selector";
+import { isTrackId, type TrackId } from "../content/track-catalog";
 import { speedometer, updateSpeedometer } from "./speedometer";
 import { animate } from "animejs";
 import { RaceFeedback } from "../game/race-view";
@@ -10,6 +12,7 @@ import { connectRaceInput, type RaceInputController } from "./race-input";
 import { mountRaceTrack } from "../game/race-track";
 
 export interface QuickRaceSession {
+  trackId: TrackId;
   race: SoloRace;
   passageIndex: number;
   tier: CpuTier;
@@ -27,6 +30,7 @@ function buildRace(session: Omit<QuickRaceSession, "race">): SoloRace {
 }
 export function createQuickRaceSession(): QuickRaceSession {
   const setup = {
+    trackId: "neon-harbor",
     passageIndex: 0,
     tier: "easy",
     seed: Math.floor(Math.random() * 0x100000000),
@@ -34,7 +38,10 @@ export function createQuickRaceSession(): QuickRaceSession {
   } as const;
   return { ...setup, race: buildRace(setup) };
 }
-export function quickRaceScreen(selectedKart: KartId = "volt-kart"): string {
+export function quickRaceScreen(
+  selectedKart: KartId = "volt-kart",
+  selectedTrack: TrackId = "neon-harbor",
+): string {
   return `<section class="quick-race immersive-race" aria-label="Quick Race">
     <div class="race-visual"><p id="race-callout" class="race-callout" role="status" hidden></p><div id="race-track" role="img" aria-label="Five-lane race track; exact positions are listed below"></div></div>
     <div class="race-hud metrics-grid">${[
@@ -54,7 +61,13 @@ export function quickRaceScreen(selectedKart: KartId = "volt-kart"): string {
     <label class="sr-only" for="race-input">Your typing</label><textarea id="race-input" rows="2" readonly autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" aria-describedby="race-passage race-notice race-controls-help" placeholder="Start the race, then type after GO…"></textarea></div>
     <p id="race-notice" class="help" role="status">One mistake stops progress. Backspace corrects it.</p>
 </div><section class="race-deck" aria-label="Race setup and controls"><h1 class="race-deck-title">Your next <span>starting line.</span></h1><div class="track-bottom"><span id="race-track-status" role="status">Loading race track…</span><button id="retry-race-track" class="text-button" hidden>Retry artwork</button><button id="text-race" class="text-button" hidden>Race with text standings</button></div>
-    <section id="race-results" class="run-results" aria-labelledby="race-result-title" hidden><p class="eyebrow">RACE RESULT · SESSION ONLY</p><h2 id="race-result-title"></h2><p id="race-result-summary"></p><p id="race-coaching"></p><div class="race-table-wrap"><table><caption>Final standings. Later CPU outcomes are simulated from fixed schedules; they are not live players.</caption><thead><tr><th scope="col">Place</th><th scope="col">Driver</th><th scope="col">Time</th><th scope="col">Status</th></tr></thead><tbody id="race-result-rows"></tbody></table></div><p class="help">No XP, credits, stars, unlocks or personal records are saved. Original Neon Harbor art and sound. Campaign progression arrives in later phases.</p></section>    <div class="race-setup practice-options">
+    <section id="race-results" class="run-results" aria-labelledby="race-result-title" hidden>
+      <p class="eyebrow">SESSION RESULT · NOT SAVED</p>
+      <div class="result-heading"><h2 id="race-result-title"></h2><strong id="race-result-place"></strong></div>
+      <dl id="race-result-summary" class="result-metrics"><div><dt>Average WPM</dt><dd id="race-result-wpm"></dd></div><div><dt>Accuracy</dt><dd id="race-result-accuracy"></dd></div><div><dt>Time</dt><dd id="race-result-time"></dd></div></dl>
+      <p id="race-result-progress" hidden></p>
+      <details id="race-result-details" open><summary>Final standings</summary><div class="race-table-wrap"><table><caption>CPU opponents · later finishes are simulated.</caption><thead><tr><th scope="col">Place</th><th scope="col">Driver</th><th scope="col">Time</th><th scope="col">Status</th></tr></thead><tbody id="race-result-rows"></tbody></table></div></details>
+    </section>    <div class="race-setup practice-options">
       <div><label for="race-passage-select">Passage</label><select id="race-passage-select">${PRACTICE_PASSAGES.map((p, i) => `<option value="${i}">${p.name}</option>`).join("")}</select></div>
       <div><label for="cpu-tier">Opponent pace</label><select id="cpu-tier">${Object.entries(
         CPU_TIERS,
@@ -68,6 +81,7 @@ export function quickRaceScreen(selectedKart: KartId = "volt-kart"): string {
       <div><label for="race-seed">Race seed</label><input id="race-seed" type="number" min="0" max="4294967295" step="1" inputmode="numeric" required aria-describedby="setup-help" /></div>
     </div>
     <p id="setup-help" class="help race-setup">Targets are before reaction, hesitation and correction delays. This is Quick Race, not campaign levels. The same passage, pace and seed replay the same CPU schedules. Pauses or assisted input make a run practice-only. No rewards or results are saved yet.</p>
+    <div class="race-setup">${trackChoices(selectedTrack, "race-track-select")}</div>
     <fieldset id="kart-picker" class="kart-picker"><legend>Choose your car</legend><div class="kart-picker__grid">${STARTER_KARTS.map((kart) => `<label class="kart-choice"><input type="radio" name="player-kart" value="${kart.id}" ${kart.id === selectedKart ? "checked" : ""} /><img class="${kart.id === "volt-kart" ? "kart-art--starter" : ""}" src="${import.meta.env.BASE_URL}assets/karts/${kart.file}" alt="" width="200" height="100" /><strong>${kart.name}</strong><span>${kart.style}</span></label>`).join("")}</div><p id="kart-save-status" class="help" role="status">Choose before starting. Your car stays locked through pauses until retry. All cars have the same performance.</p></fieldset>
     <div class="practice-actions"><button id="start-race" class="button button--primary" disabled>Start race →</button><button id="retry-race" class="text-button">Retry same race</button><button id="new-race" class="text-button">New seed</button></div>
     <p id="race-controls-help" class="help">Esc or leaving this screen pauses everyone. Resume has a fresh countdown. Retry resets the run; refresh discards this unsaved session.</p>
@@ -83,6 +97,7 @@ export function connectQuickRace(
   effects: () => "high" | "low",
   audio: RaceAudio,
   garage: { read: () => KartId; choose: (id: KartId) => boolean },
+  tracks: { read: () => TrackId; choose: (id: TrackId) => boolean },
 ): () => void {
   const abort = new AbortController();
   const eventOptions = { signal: abort.signal };
@@ -96,6 +111,10 @@ export function connectQuickRace(
   const mode = find<HTMLSelectElement>("#race-mode");
   const seed = find<HTMLInputElement>("#race-seed");
   const track = find("#race-track");
+  const trackSelect = find<HTMLSelectElement>("#race-track-select");
+  if (session.race.snapshot().player.state === "ready")
+    session.trackId = tracks.read();
+  trackSelect.value = session.trackId;
   const feedback = new RaceFeedback();
   const kartPicker = find<HTMLFieldSetElement>("#kart-picker");
   let calloutAnimation: ReturnType<typeof animate> | undefined;
@@ -142,9 +161,10 @@ export function connectQuickRace(
       callout.hidden = true;
     }
     find(".immersive-race").dataset.state = s.state;
-    updateSpeedometer(main, s.recentWpm);
+    updateSpeedometer(main, s.recentWpm, s.state === "racing");
     const active = ["countdown", "racing", "paused"].includes(s.state);
     kartPicker.disabled = s.state !== "ready";
+    trackSelect.disabled = s.state !== "ready";
     main.classList.toggle("quick-race-active", active);
     input.readOnly = !["countdown", "racing"].includes(s.state);
     input.setAttribute("aria-invalid", String(s.errorCharacter !== null));
@@ -261,21 +281,31 @@ export function connectQuickRace(
       text(
         "#race-result-title",
         s.state === "finished"
-          ? `Passage complete · place ${place} of 5`
+          ? "Race complete"
           : s.state === "timed-out"
             ? "Time is up · unfinished"
             : "Race abandoned",
       );
       text(
-        "#race-result-summary",
-        `${s.wpm.toFixed(1)} WPM · ${s.accuracyPercent === null ? "No attempts" : `${s.accuracyPercent.toFixed(1)}% accuracy`} · ${(s.elapsedMs / 1000).toFixed(1)}s · ${Math.floor(s.progress * 100)}% complete.`,
+        "#race-result-place",
+        s.state === "finished" ? `${place} / 5` : "DNF",
       );
+      find("#race-result-place").setAttribute(
+        "aria-label",
+        s.state === "finished" ? `Place ${place} of 5` : "Did not finish",
+      );
+      text("#race-result-wpm", s.wpm.toFixed(1));
       text(
-        "#race-coaching",
-        s.accuracyPercent !== null && s.accuracyPercent < 95
-          ? "Ease your pace slightly and build clean words first."
-          : "Keep a steady rhythm. Try a longer passage when ready.",
+        "#race-result-accuracy",
+        s.accuracyPercent === null ? "—" : `${s.accuracyPercent.toFixed(1)}%`,
       );
+      text("#race-result-time", `${(s.elapsedMs / 1000).toFixed(1)}s`);
+      text(
+        "#race-result-progress",
+        `${Math.floor(s.progress * 100)}% of passage completed`,
+      );
+      find("#race-result-progress").hidden = s.state === "finished";
+      find<HTMLDetailsElement>("#race-result-details").open = true;
       const rows = find("#race-result-rows");
       rows.replaceChildren();
       for (const row of results) {
@@ -350,6 +380,8 @@ export function connectQuickRace(
     session.race.abandon();
     if (newSeed) session.seed = (session.seed + 1) >>> 0;
     seed.value = String(session.seed);
+    session.trackId = tracks.read();
+    trackSelect.value = session.trackId;
     session.race = buildRace(session);
     lastState = "";
     bindInput();
@@ -389,6 +421,7 @@ export function connectQuickRace(
       reducedMotion,
       effects,
       playerKart: garage.read,
+      track: () => session.trackId,
       onReady: () => {
         if (token !== generation || disposed) return;
         window.clearTimeout(loadTimeout);
@@ -430,6 +463,28 @@ export function connectQuickRace(
       },
       eventOptions,
     );
+  trackSelect.addEventListener(
+    "change",
+    () => {
+      if (
+        session.race.snapshot().player.state !== "ready" ||
+        !isTrackId(trackSelect.value)
+      ) {
+        trackSelect.value = session.trackId;
+        return;
+      }
+      session.trackId = trackSelect.value;
+      const saved = tracks.choose(session.trackId);
+      text(
+        "#track-choice-status",
+        saved
+          ? "Track saved on this browser. Scenery only."
+          : "Track applied for this visit; browser storage is unavailable.",
+      );
+      update();
+    },
+    eventOptions,
+  );
   kartPicker.addEventListener(
     "change",
     (event) => {

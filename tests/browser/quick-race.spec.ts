@@ -121,8 +121,10 @@ test("CPUs finishing first do not stop learning, while time trials produce hones
   await page
     .getByRole("textbox", { name: "Your typing" })
     .pressSequentially(SAMPLE);
-  await expect(page.locator("#race-result-title")).toHaveText(
-    "Passage complete · place 5 of 5",
+  await expect(page.locator("#race-result-title")).toHaveText("Race complete");
+  await expect(page.locator("#race-result-place")).toHaveAttribute(
+    "aria-label",
+    "Place 5 of 5",
   );
   await page.getByRole("button", { name: "Retry same race" }).click();
   await page.getByLabel("Mode", { exact: true }).selectOption("timed");
@@ -205,4 +207,59 @@ test("validates seeds and supports new opponents, reduced motion and laptop resi
       () => document.documentElement.scrollWidth <= innerWidth,
     ),
   ).toBe(true);
+});
+
+test("compact results show standings by default and retain honest CPU details", async ({
+  page,
+}) => {
+  await openRace(page);
+  await go(page);
+  await page.clock.fastForward(12000);
+  await page
+    .getByRole("textbox", { name: "Your typing" })
+    .pressSequentially(SAMPLE);
+  await expect(page.locator("#race-result-place")).toHaveAttribute(
+    "aria-label",
+    "Place 1 of 5",
+  );
+  await expect(page.locator("#race-result-accuracy")).toHaveText("100.0%");
+  await expect(page.locator("#race-result-details")).toHaveAttribute("open");
+  await expect(page.locator("#race-result-rows")).toBeVisible();
+  for (const width of [1024, 1366, 1440, 1920]) {
+    await page.setViewportSize({ width, height: 768 });
+    await expect(
+      page.getByRole("button", { name: "Retry same race" }),
+    ).toBeInViewport();
+    await expect(page.locator("#race-result-wpm")).toBeInViewport();
+    expect(
+      await page.evaluate(
+        () => document.documentElement.scrollWidth <= innerWidth,
+      ),
+    ).toBe(true);
+    expect(
+      await page
+        .locator("#race-result-wpm")
+        .evaluate((el) => parseFloat(getComputedStyle(el).fontSize)),
+    ).toBeGreaterThanOrEqual(32);
+  }
+  await page.getByText("Final standings", { exact: true }).click();
+  await expect(page.locator("#race-result-rows")).not.toBeVisible();
+  await page.getByText("Final standings", { exact: true }).click();
+  await expect(page.locator("#race-result-rows")).toBeVisible();
+  await expect(page.locator("#race-result-rows")).toContainText(
+    "Simulated after your finish",
+  );
+  await page.getByRole("button", { name: "Retry same race" }).click();
+  await page.getByLabel("Mode", { exact: true }).selectOption("timed");
+  await go(page);
+  await page
+    .getByRole("textbox", { name: "Your typing" })
+    .pressSequentially("Every");
+  await page.clock.fastForward(60000);
+  await expect(page.locator("#race-result-place")).toHaveText("DNF");
+  await expect(page.locator("#race-result-progress")).toBeVisible();
+  await expect(page.locator("#race-result-progress")).toContainText(
+    `${Math.floor((5 / SAMPLE.length) * 100)}% of passage completed`,
+  );
+  await expect(page.locator("#race-result-details")).toHaveAttribute("open");
 });

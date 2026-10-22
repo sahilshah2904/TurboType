@@ -1,5 +1,28 @@
 # TurboType project continuity
 
+## Private multiplayer and zero-cost scope — 22 October 2026
+
+User requests rooms for up to **10 human players including host**, for up to 100 approved friends/relatives, with a **$0/free-tier-only** budget. Plan: Multiplayer → Create room / Join room by code → host chooses an owned track and shared passage preset → each player chooses an owned car → everyone including host clicks I'm ready → host starts a synchronized race. Host/roster/configuration changes invalidate readiness; server validates admission, readiness, progress and results. No single-player pause online; reconnect/host-transfer/rematch policies are in docs/MULTIPLAYER_ROOMS.md.
+
+The initial free-capacity interpretation is at most ten active racers across the project, also ten per room. Host track is temporarily shared for that match without granting ownership; multiplayer does not generate campaign unlock progress. GitHub Pages plus **Supabase Free is the preferred architecture to validate**, not provisioned infrastructure or a promise of unlimited service. Prefer approved social login, private channels, bounded shared snapshots and quota controls; no paid services, SMTP/SMS, add-ons or automatic upgrades. Pause/restrict online features when free capacity is unavailable and preserve local solo. Phase 9 owns identity/saves and the free-only provider gate; Phase 11 owns rooms/races after solo launch. This request updates plans only; no new runtime feature, account, deployment, merge or app-version bump. Cars/tracks keep their staggered milestone plan (23 cars / 26 tracks).
+
+
+## Alpha.16 — starter tracks and staggered reward plan, 22 October 2026
+
+The user accepted the compact score/metrics presentation and requested Final standings expanded by default below it. This supersedes alpha.15's collapsed default; the disclosure can still be closed manually. Implemented on codex/results-and-fire-dial / open PR #5, which already contains alpha.15. No merge or deployment is implied by acceptance of the previous presentation.
+
+Five starter environments are now implemented for Hub preview and Quick Race: Neon Harbor, Coral Coast, Copper Canyon, Emerald Trail and Frostline Pass. Track choice is a validated optional browser preference; the active race pins its track through countdown/pause/navigation/final state, and retry applies the next chosen preference. Original bounded geometric scenery, road/edge palettes and shared renderer preserve the typing/CPU/rules behavior. Rules 3 and save/content 1 remain.
+
+Latest reward schedule correction (22 October 2026): cars unlock at **15/30/45/60/75/90** eligible unique main clears within each category (6 × 3 = 18 rewards; **23 cars total** with starters). Tracks unlock independently at **10/25/40/55/70/85/100** (7 × 3 = 21 rewards; **26 tracks total** with starters). This supersedes the paired-unlock plan: car and track rewards are staggered and have separate receipts/IDs. Any owned car or track remains usable across Easy/Medium/Hard on already-unlocked levels and replays; replays cannot inflate earning counters or unlock levels. Phase 7 briefing/replay selection, Phase 8 content and Phase 9 independent ownership/saves remain the delivery plan. Five starter tracks are implemented; future reward unlocks are not. See docs/TRACK_PROGRESSION.md.
+
+Manual review stays at the existing LAN link http://192.168.0.31:5173/TurboType/. The server and active feature checkout are preserved. See docs/TESTING.md for current verification; do not reuse alpha.15's hosted pass for this new source. Starter visuals await review; no repeat review of accepted cars/music/palette is needed.
+
+## Current presentation follow-up — 22 October 2026
+
+Alpha.15 on `codex/results-and-fire-dial` adds the user's compact Race results and original SVG fire instrument. This branch starts at accepted main `e1bbaff`; PR #4 remains merged as de464ce. The Phase 5 checkpoint below is the accepted alpha.14 baseline. New presentation changes need their own review/acceptance before merge; no Phase 6 onboarding or deployment is implied. Read the newest sections in PROJECT_STATUS.md, docs/SESSION_HANDOFF.md and docs/TESTING.md for exact validation and PR state.
+
+The user's manual review should use the already-running LAN server at http://192.168.0.31:5173/TurboType/ rather than spawning visible test windows. It serves the active local branch immediately, not a main-only deployment. Keep automated regressions headless and isolated on 4173; preserve the existing 5173 server. Compact results retain optional honest CPU standings and DNF progress; fire stays static when paused/finished, in Low effects or Reduced motion. Scoring, saved data and accepted vehicle/audio direction remain unchanged.
+
 ## Read first in a new chat
 
 1. Read [PROJECT_STATUS.md](PROJECT_STATUS.md), [docs/SESSION_HANDOFF.md](docs/SESSION_HANDOFF.md) and [BACKLOG.md](BACKLOG.md) before reporting progress or starting work. The handoff records accepted decisions, source paths, evidence, limitations and next steps; the previous chat is not required.

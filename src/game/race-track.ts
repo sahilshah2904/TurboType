@@ -1,3 +1,5 @@
+import { trackTheme, type TrackId } from "../content/track-catalog";
+import { drawTrackScenery } from "./track-scenery";
 import type { SoloRace } from "../core/solo-race";
 import { kartLineup, type KartId } from "../content/kart-catalog";
 import {
@@ -14,6 +16,7 @@ interface TrackOptions {
   reducedMotion: () => boolean;
   effects: () => "high" | "low";
   playerKart?: () => KartId;
+  track?: () => TrackId;
   onReady: () => void;
   onError: () => void;
 }
@@ -54,6 +57,7 @@ export async function mountRaceTrack(
     private models = kartLineup("volt-kart");
     private assemblies: ReturnType<typeof addKart>[] = [];
     private selectedKart: KartId = "volt-kart";
+    private selectedTrack: TrackId = "neon-harbor";
     preload(): void {
       preloadFleet(this);
       this.load.on("loaderror", options.onError);
@@ -136,45 +140,15 @@ export async function mountRaceTrack(
       const w = this.scale.width,
         h = this.scale.height,
         horizon = h * 0.4;
-      this.backdrop.clear();
-      for (let y = 0; y < horizon; y += 6)
-        this.backdrop
-          .fillStyle(
-            Phaser.Display.Color.GetColor(
-              9 + (y / horizon) * 14,
-              16 + (y / horizon) * 25,
-              23 + (y / horizon) * 27,
-            ),
-          )
-          .fillRect(0, y, w, 6);
-      this.backdrop
-        .fillStyle(0xa4ebff, 0.65)
-        .fillCircle(w * 0.81, horizon * 0.27, Math.min(w * 0.045, 55));
-      this.backdrop
-        .fillStyle(0x12222b)
-        .fillTriangle(-100, horizon, w * 0.28, horizon * 0.4, w * 0.65, horizon)
-        .fillTriangle(
-          w * 0.35,
-          horizon,
-          w * 0.78,
-          horizon * 0.23,
-          w + 100,
-          horizon,
-        );
-      this.city.clear();
-      for (let i = 0; i < Math.ceil((w * 2) / 58); i++) {
-        const x = i * 58,
-          height = 24 + ((i * 37) % Math.max(25, Math.floor(horizon * 0.48)));
-        this.city
-          .fillStyle(i % 2 ? 0x172b34 : 0x1d353f)
-          .fillRect(x, horizon - height, 45, height);
-        for (let y = 10; y < height; y += 18)
-          for (let k = 0; k < 3; k++)
-            if ((i + y + k) % 3)
-              this.city
-                .fillStyle(0x72c4db, 0.19)
-                .fillRect(x + 7 + k * 12, horizon - height + y, 3, 5);
-      }
+      this.selectedTrack = options.track?.() ?? "neon-harbor";
+      const theme = trackTheme(this.selectedTrack);
+      drawTrackScenery(this.backdrop, this.city, w, horizon, theme);
+      this.title.setText(theme.name.toUpperCase());
+      parent.dataset.track = theme.id;
+      parent.setAttribute(
+        "aria-label",
+        theme.name + ": five-lane race track; exact positions are listed below",
+      );
       this.title
         .setPosition(Math.max(18, w * 0.03), horizon * 0.68)
         .setFontSize(w < 500 ? 15 : 28);
@@ -205,6 +179,8 @@ export async function mountRaceTrack(
     }
     update(_time: number, delta: number): void {
       this.syncModels();
+      if ((options.track?.() ?? "neon-harbor") !== this.selectedTrack)
+        this.layout();
       if (!this.road) return;
       const snapshot = options.read(),
         s = snapshot.player,
@@ -224,9 +200,11 @@ export async function mountRaceTrack(
       this.city.x = reduced ? 0 : -(s.progress * w * 0.6) % (w * 0.5);
       this.road
         .clear()
-        .fillStyle(0x18232c)
+        .fillStyle(trackTheme(this.selectedTrack).road)
         .fillRect(0, horizon, w, h - horizon);
-      this.road.fillStyle(0x63e7f2).fillRect(0, horizon, w, 3);
+      this.road
+        .fillStyle(trackTheme(this.selectedTrack).edge)
+        .fillRect(0, horizon, w, 3);
       this.road.lineStyle(1, 0xbcb0b7, 0.3);
       const offset = reduced ? 0 : (s.elapsedMs * 0.15) % 100;
       for (let i = 1; i <= 5; i++)

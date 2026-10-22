@@ -2,7 +2,7 @@
 
 **Current scope override — 21 October 2026:** the user explicitly narrowed TurboType to laptop/desktop browsers with a physical keyboard. Phone/tablet compatibility, software-keyboard layout, rotation and mobile acceptance are canceled requirements. Earlier multi-device statements are historical. Keep laptop window responsiveness (960 CSS px minimum; verify 1024/1366/1440/1920 widths), accessibility, hardware-keyboard IME composition, cloud saves before solo launch and multiplayer afterward. Do not restore mobile work without a new user request.
 
-Optional account-backed progress before solo launch and friends multiplayer immediately afterward remain planned. No cloud project/database/auth or realtime service is provisioned.
+Optional account-backed progress before the internal solo launch and friends multiplayer immediately afterward remain planned. Latest audience/budget: up to 100 approved relatives/friends, up to 10 active multiplayer racers, $0/free-tier-only. See [MULTIPLAYER_ROOMS.md](MULTIPLAYER_ROOMS.md), which supersedes older room capacity, paid-hosting and email-OTP-first assumptions. No cloud project/database/auth or realtime service is provisioned.
 
 ## Hosting and service boundaries
 
@@ -21,7 +21,7 @@ Laptop / desktop physical keyboard
 
 **Recommended candidate for authentication/persistence: Supabase Auth + Postgres.** Supabase documents authentication methods and an integrated Postgres database. It can support the account/progress portion without moving the static frontend. Selection remains proposed until implementation checks requirements, current usage limits/costs, account ownership, region, recovery/export needs, and static-site authentication callbacks. Do not promise free unlimited hosting or create billable resources as part of this planning update. [Auth](https://supabase.com/docs/guides/auth), [database](https://supabase.com/docs/guides/database/overview).
 
-For live rooms, evaluate a server-authoritative WebSocket service such as Colyseus during phase 11. A database stores durable state; it does not by itself decide fair race start times or validate finish order. Supabase Realtime provides realtime primitives, while Colyseus documents server-mutated room state; choose the actual room implementation after a small multi-client prototype. Avoid shipping both systems without a demonstrated need. [Supabase Realtime](https://supabase.com/docs/guides/realtime), [Colyseus state](https://docs.colyseus.io/state).
+For live rooms, first prototype Supabase Free private Realtime with transactional backend authority/validation for 2–10 humans, rather than adding an always-running Colyseus host. The ten-client load/cost/authority spike remains a selection gate. Realtime is transport, not proof of valid typing or results. Colyseus is background research only; no paid hosting or second realtime service is authorized. Detailed budgets, failure behavior and role/ready/start protocol: [MULTIPLAYER_ROOMS.md](MULTIPLAYER_ROOMS.md).
 
 ## Laptop responsiveness and input
 
@@ -35,7 +35,7 @@ Alpha.9 removes phone/tablet browser profiles, OS-keyboard VisualViewport offset
 
 Guest play stays available without registration. Local guest saves are browser-specific and clearly labeled. Offer “Save progress across devices” through an optional permanent sign-in before public single-player launch. A permanent account is needed to recover the same progress on another device; an anonymous session alone does not provide that. [Supabase anonymous-user limitations](https://supabase.com/docs/guides/auth/auth-anonymous).
 
-Proposed first sign-in method: email OTP, subject to delivery/rate-limit configuration and testing before adoption. Add social providers only when configured and tested. Do not require players to have GitHub accounts just because the frontend is hosted there. Never build our own password storage.
+Latest free-only sign-in proposal: configured provider-hosted Google OAuth through Supabase, plus an owner-approved account allowlist for multiplayer. Verify configuration and family-account suitability before adoption; no requirement for a GitHub account. Supabase built-in email delivery is limited, so the earlier email-OTP-first proposal is superseded; do not add paid SMTP/SMS. Keep solo local guest play; persistent approved identity is required for multiplayer/cloud saves. Never build our own password storage or put credentials in GitHub. See MULTIPLAYER_ROOMS.md for sources and provider gates.
 
 Show save state explicitly: saved locally, pending sync, synced, or sync failed. Never tell the player progress is cloud-saved before a server acknowledgment. A temporary cloud outage should allow an already loaded solo game to continue with local data; this does not imply a full offline-install/PWA feature. Multiplayer requires a connection.
 

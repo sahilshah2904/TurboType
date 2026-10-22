@@ -45,7 +45,7 @@ export function practiceScreen(): string {
           `<div><span class="micro">${label}</span><strong id="metric-${id}">—</strong></div>`,
       )
       .join("")}</div>
-    ${speedometer()}<div class="practice-typing"><div class="typing-surface"><label class="sr-only" id="passage-label">YOUR PASSAGE · MATCH CASE, SPACES AND PUNCTUATION</label><p id="race-passage" class="race-passage" aria-labelledby="passage-label"></p>
+    <div class="practice-typing">${speedometer()}<div class="typing-surface"><label class="sr-only" id="passage-label">YOUR PASSAGE · MATCH CASE, SPACES AND PUNCTUATION</label><p id="race-passage" class="race-passage" aria-labelledby="passage-label"></p>
     <label class="sr-only" for="race-input">Your typing</label><textarea id="race-input" rows="2" readonly autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" aria-describedby="race-passage race-help race-notice" placeholder="Select Start run, then type after GO…"></textarea></div>
     <p id="race-notice" class="help" role="status">Use Backspace to correct a mistake before continuing.</p>
     </div><div class="run-progress"><progress id="typing-progress" max="1" value="0" aria-label="Passage progress"></progress><span id="progress-label">0%</span></div>
@@ -103,7 +103,7 @@ export function connectTypingPractice(
       ["countdown", "racing", "paused"].includes(s.state),
     );
     const stateChanged = s.state !== lastState;
-    updateSpeedometer(main, s.recentWpm);
+    updateSpeedometer(main, s.recentWpm, s.state === "racing");
     text("#metric-wpm", s.wpm.toFixed(1));
     text(
       "#metric-accuracy",

@@ -94,3 +94,13 @@ Browser checks use two SwiftShader workers to bound peak simultaneous decode/ren
 Also captured [390×480 compact racing](images/alpha5/phone-compact.png). All are scripted Chromium captures, not physical Samsung keyboard evidence or human speed records. No console errors or horizontal overflow were observed. At 1440×1000 the track ends at y=875 and the reserved gauge begins there; at 390×844 the track ends at y=724 and the gauge starts at y=746. Input remains separate from the gauge and aligned with the visible passage.
 
 See [current renderer measurement](PERFORMANCE_ALPHA5.md) for the post-suite isolated profile and its limits.
+
+## Alpha.15 result and instrument follow-up — 22 October 2026
+
+After the accepted Phase 5 integration, the user requested a shorter Race result and a blazing instrument background. The default result now shows place, average WPM, accuracy and active time, with completion percentage for unfinished runs. Final standings expand on demand and retain truthful CPU simulation/status labels. Session-only storage is stated once. Retry/new-seed controls remain available; repeated coaching, live standings and setup instructions are hidden in the final view.
+
+The shared Race/Practice dial uses original inline SVG flame shapes, a glass face, bezel, major/minor ticks, redline, bright needle and protected numeric readout. Flame intensity follows capped recent WPM; the numeric reading remains uncapped. CSS animates two small SVG groups only during racing with High effects/full motion. Pause/finish, Low effects and Reduced motion use static fire; no additional timers, raster downloads or dependencies. Rules 3 and save/content 1 are unchanged. This is a requested presentation follow-up, not Phase 6 opening/onboarding.
+
+For normal manual review use the existing LAN server at http://192.168.0.31:5173/TurboType/. It currently listens on all interfaces and serves the active local checkout, including an unmerged feature branch. The URL is not tied to main and is not a public deployment. Automated regressions use their separate headless preview on 4173; they do not operate the user's normal Chrome window. Changes are reviewed on codex/results-and-fire-dial before integration.
+
+Practice anchors the instrument inside its typing row, reserving space beside the strip and above progress so it cannot cover metrics in ready or active layouts.
