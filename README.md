@@ -12,9 +12,9 @@ An original browser typing racer: build physical-keyboard speed and accuracy whi
 
 </div>
 
-![Actual TurboType alpha.14 race: independent kart parts, four CPUs, city circuit, integrated typing strip and Live WPM dial](docs/images/alpha14/active-race-1440.png)
+![Current alpha.20 race with four CPUs, integrated typing and the fire Live WPM dial](docs/images/alpha20/neon-harbor-atmosphere-1440.png)
 
-*Actual **0.1.0-alpha.14** gameplay, accepted and integrated into **main** through [PR #4](https://github.com/sahilshah2904/TurboType/pull/4). This is a local preview; no public game is deployed.*
+*Actual **0.1.0-alpha.20** preview, integrated into **main** through [PR #6](https://github.com/sahilshah2904/TurboType/pull/6). No public game is deployed. Further opening/atmosphere polish is deferred as TT-608.*
 
 ## Phase 6 complete — alpha.20
 
@@ -24,7 +24,19 @@ The alpha.20 follow-up replaces rejected curved air paths with a researched laye
 
 ![Alpha.19 purple car burnout with blazing road trail](docs/images/alpha19/burnout-1440.png)
 
-The previous simple title sequence is superseded; see docs/TESTING.md for the launch and final flaming-title captures.
+![Final flaming TurboType title](docs/images/alpha19/flaming-title-1440.png)
+
+![Welcome and skip preference](docs/images/alpha17/welcome-1440.png)
+
+![How to play](docs/images/alpha17/rules-1440.png)
+
+![Current tutorial with aligned actions at laptop width](docs/images/alpha20/tutorial-actions-1024.png)
+
+![Optional pace calibration](docs/images/alpha20/calibration-actions-1024.png)
+
+![Compact results with standings open](docs/images/alpha16/results-open-1440.png)
+
+These captures show the current Phase 6 behavior; folder numbers record when each unchanged view was captured. Alpha.17 opening panels and alpha.18 wind paths are superseded. The atmosphere is retained for now, with visibility/quality improvements deferred.
 
 [Implementation and recreation](docs/PHASE6_ONBOARDING.md) · [Laptop review checklist](docs/PHASE6_REVIEW.md) · [Current verification](docs/TESTING.md)
 
@@ -45,7 +57,7 @@ The preview uses a full-window city circuit, detailed original karts, graphite/c
 
 ### Clean hub with your chosen car
 
-![Alpha.14 hub: full-width city garage, selected kart and campaign previews; no sound controls](docs/images/alpha14/hub-1440.png)
+![Current clean hub with the selected starter and circuit](docs/images/alpha18/hub-1440.png)
 
 ### Five starter cars before each race
 
@@ -53,7 +65,7 @@ The preview uses a full-window city circuit, detailed original karts, graphite/c
 
 ### All audio controls in Settings
 
-![Alpha.13 Settings with display, motion and sound preferences](docs/images/alpha13/settings-1440.png)
+![Settings with motion, track effects, sound and matching learning action rows](docs/images/alpha18/settings-1440.png)
 
 </details>
 
@@ -71,7 +83,7 @@ These are real app captures, not concept artwork. [Current parts/laptop captures
 | Settings | Saved display/text/motion preferences and all sound enable/mute/volume controls. Original Ignition browsing music, Overdrive racing music and separate countdown/FX |
 | Recovery | Graphics retry or text standings, optional audio, denied-storage notices and graceful fullscreen refusal |
 
-The current passages are three short validation exercises, **not the 300 campaign levels**. Race/results are session-only. No XP, stars, credits, unlock ownership, records, saved campaign, accounts or multiplayer are implemented yet.
+**Curriculum requirement:** only the first few races use short sentences. Subsequent races must grow into substantial, coherent paragraphs for sustained typing practice, with length, punctuation and pace introduced gradually. The current Quick Race passages are three short validation exercises, **not the 300 campaign levels**. Race/results are session-only. No XP, stars, credits, unlock ownership, records, saved campaign, accounts or multiplayer are implemented yet.
 
 ## How to play
 

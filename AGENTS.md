@@ -1,5 +1,12 @@
 # TurboType project continuity
 
+## Phase 6 documentation refresh and Phase 7 request — 22 October 2026
+
+Phase 6 is merged through PR #6 (`cf741b6`); final main documentation head `6554956` has a completed successful exact-head check in [run 39803134301](https://github.com/sahilshah2904/TurboType/actions/runs/39803134301). README now shows the current race, purple burnout/flaming title, welcome/rules, aligned tutorial/calibration actions, clean Hub/Settings and compact expanded standings. Capture folders reflect original capture versions; superseded wind/opening artwork is not presented as current. TT-608 visual polish stays deferred.
+
+The user now authorizes Phase 7 maps and explicitly requires short sentences only for the first few races, then progressively longer coherent paragraphs for sustained practice. Three Quick Race validation sentences are not the campaign. Phase 7 supplies navigation/progression and a playable content sample; Phase 8 still authors/reviews all 300 levels. No paid service, backend, deployment or automatic merge is implied.
+
+
 ## Phase 6 complete and integrated — 22 October 2026
 
 The user asked to finish Phase 6 after choosing to retain the current appearance and improve visuals later. **Phases 1–6 are complete for their agreed scope.** App 0.1.0-alpha.20 is integrated into main through [PR #6](https://github.com/sahilshah2904/TurboType/pull/6), merge `cf741b6cb27e9fe8da230d52394d40bbc4964baf`. Accepted head `3f6125c8d9c40405048453f7b7c17233182d14ae` has a completed successful exact-head check and hosted job in [run 39801084219](https://github.com/sahilshah2904/TurboType/actions/runs/39801084219). A fresh full local check on the same final application code passed formatting/types/build, **102 unit / 56 browser cases**.
