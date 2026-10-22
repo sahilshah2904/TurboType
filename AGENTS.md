@@ -10,6 +10,8 @@
 
 **22 October active override:** the user authorized Phase 5 implementation. Alpha.14 now has independent chassis/wheel assets and compact previews for all five accepted cars, full local 96-unit/36-browser evidence, and actual-GPU synthetic-input profiling. See docs/PHASE5_CLOSEOUT.md and docs/PERFORMANCE_ALPHA14.md. Final physical keyboard/new-parts acceptance and PR #4 integration remain; use the two-minute recorder/checklist in docs/PHASE5_POLISH_TESTS.md. The old stop-and-save instruction below is historical. Do not merge before reviewing that remaining evidence/report. Latest source/check hashes must be re-read from Git/CI after pushes.
 
+Alpha.14 implementation `2eadeef`, identical-tree history sync `d168720`; hosted PR run **39725624773** passed for exact d168720. The sync resolved only the README conflict with main's documentation publication. Subsequent evidence-only documentation commits have separate checks. PR #4 remains open/unmerged; physical follow-up and integration remain, with no deployment.
+
 - App **0.1.0-alpha.13**, rules **3**, save/content **1**. Latest implementation b76392b; verified documentation checkpoint 717c76e. This handoff creates newer documentation commits; inspect actual HEAD.
 - Workspace: S:/AI_Engineer_Journey/Projects/TurboType. Account: sahilshah2904; repository: TurboType; local author: **Sahilshah**. Current branch: **feat/race-polish**; open/unmerged [PR #4](https://github.com/sahilshah2904/TurboType/pull/4).
 - Main code is the accepted Phase 4 baseline. Publishing the README/screenshots on main does not merge the preview or deploy a game.

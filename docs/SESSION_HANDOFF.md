@@ -2,6 +2,8 @@
 
 ## Active Phase 5 work — 22 October 2026
 
+Current implementation is `2eadeef`, followed by history-sync `d168720` with an identical file tree. That sync resolves the README-only conflict from main's prior documentation publication; no preview code was merged into main. Exact-head hosted PR run [39725624773](https://github.com/sahilshah2904/TurboType/actions/runs/39725624773) passed for `d1687206a2130cc6e5356d24cd16a10f7c5b6561`, freshly verified. This subsequent evidence-documentation checkpoint has its own CI status. PR #4 stays open/unmerged; inspect actual HEAD/checks on resume. The two-minute physical recorder/report remains the next user action, followed by review of TT-506/511/512/513/522 and final integration. No deployment.
+
 The user authorized finishing Phase 5. Alpha.14 implements independent body/wheel assets and chassis suspension for all five accepted models, compact shared previews and actual-GPU profiling tools. Full local checks pass: 96 unit / 36 browser cases. See [Phase 5 closeout](PHASE5_CLOSEOUT.md) for current evidence and the remaining physical-input acceptance/integration gate. PR #4 stays open until that gate is reviewed; no deployment. Older stop-and-save/artwork-pending sections below are historical.
 
 **Reward correction:** 100 levels per category; a distinct car at 15/30/45/60/75/90 eligible main clears independently in Easy/Medium/Hard. Eighteen rewards plus five starters replace the ten-car aggregate curve. See GARAGE_PROGRESSION.md. No unlock implementation is claimed.
