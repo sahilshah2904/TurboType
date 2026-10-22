@@ -1,0 +1,1063 @@
+/* Shared full-window world. Readable forms retain local grouping; no enclosing page card. */
+:root {
+  --accent: #ff5964;
+  --muted: #b6bcc1;
+  background: #0c1218;
+}
+.world-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 80% 15%, #28768a66, transparent 45%),
+    linear-gradient(#080d12, #152b34 70%, #090f15);
+}
+.world-moon {
+  position: absolute;
+  right: 15%;
+  top: 15%;
+  width: 110px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    #e8fcff 0 16%,
+    #5fd7ec99 18% 26%,
+    #172b35 29% 38%,
+    #66dff344 40% 42%,
+    #101b24 45% 60%,
+    #69e8f266 62% 64%,
+    transparent 66%
+  );
+  box-shadow: 0 0 90px #4ad9ed18;
+}
+.world-mountains {
+  position: absolute;
+  inset: 25% -10% 0;
+  background: #101d25;
+  clip-path: polygon(
+    0 70%,
+    20% 15%,
+    36% 65%,
+    55% 5%,
+    73% 64%,
+    89% 0,
+    100% 48%,
+    100% 100%,
+    0 100%
+  );
+}
+.world-city {
+  position: absolute;
+  inset: 35% -10% 0;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      transparent 0 45px,
+      #77dcea18 46px 49px,
+      transparent 50px 70px
+    ),
+    repeating-linear-gradient(0deg, transparent 0 25px, #77dcea0c 26px 28px),
+    #0c161e;
+  clip-path: polygon(
+    0 30%,
+    6% 30%,
+    6% 10%,
+    13% 10%,
+    13% 48%,
+    19% 48%,
+    19% 23%,
+    25% 23%,
+    25% 58%,
+    34% 58%,
+    34% 0,
+    42% 0,
+    42% 35%,
+    49% 35%,
+    49% 20%,
+    57% 20%,
+    57% 60%,
+    65% 60%,
+    65% 15%,
+    75% 15%,
+    75% 40%,
+    85% 40%,
+    85% 8%,
+    94% 8%,
+    94% 50%,
+    100% 50%,
+    100% 100%,
+    0 100%
+  );
+}
+.world-grid {
+  position: absolute;
+  inset: 66% 0 0;
+  background:
+    linear-gradient(#080f1599, #080f15cc),
+    repeating-linear-gradient(0deg, transparent 0 64px, #78b5c626 65px 66px);
+}
+html[data-route] .app-shell {
+  max-width: none;
+  width: 100%;
+  padding: 0 clamp(16px, 3vw, 56px);
+  min-height: 100dvh;
+}
+.topbar {
+  border: 0;
+  min-height: 82px;
+  position: relative;
+  z-index: 10;
+  gap: 20px;
+}
+.topbar nav {
+  gap: clamp(14px, 2vw, 32px);
+}
+.topbar nav a {
+  font-size: 16px;
+}
+.topbar .guest {
+  background: transparent;
+  border: 0;
+  font-size: 16px;
+}
+.footer {
+  border-color: #bfc5ca22;
+  background: transparent;
+}
+#main {
+  position: relative;
+  min-height: calc(100dvh - 170px);
+}
+.page-heading {
+  padding-top: 5vh;
+  margin-bottom: 30px;
+}
+.page-heading h1 {
+  font-family: "DM Sans", sans-serif;
+  font-size: clamp(40px, 5vw, 72px);
+  font-weight: 700;
+  letter-spacing: -3px;
+  line-height: 1.03;
+}
+.page-heading p {
+  color: #c3c9ce;
+}
+.eyebrow {
+  color: #b9bfc4;
+}
+.input-panel,
+.settings-panel,
+.practice-panel,
+.track-card,
+.development-note {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.input-panel,
+.settings-panel,
+.practice-panel {
+  padding: 24px 0;
+}
+.section-top {
+  border-color: #b4babf2b;
+}
+.help,
+.card-copy,
+.card-bottom {
+  color: #b6bcc1;
+}
+.hero {
+  min-height: 65vh;
+  padding: 5vh 0 3vh;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 30px;
+}
+.hero h1 {
+  font-family: "DM Sans", sans-serif;
+  letter-spacing: -5px;
+  font-size: clamp(46px, 6vw, 94px);
+  line-height: 0.98;
+}
+.hero .hero-copy {
+  color: #ccd2d7;
+}
+.hero-note {
+  align-self: center;
+  justify-self: stretch;
+  border: 0;
+  padding: 0;
+  position: relative;
+  width: 100%;
+  max-width: none;
+}
+.garage-kart {
+  width: 100%;
+  max-height: 380px;
+  object-fit: contain;
+  filter: drop-shadow(0 24px 10px #0005);
+  animation: garage-float 4s ease-in-out infinite;
+}
+.kart-art--starter,
+.garage-kart.kart-art--starter {
+  filter: hue-rotate(285deg) drop-shadow(0 24px 10px #0005);
+}
+.kart-picker {
+  min-width: 0;
+  border: 0;
+  border-top: 1px solid #8e949933;
+  padding: 16px 0 0;
+  margin: 14px 0;
+}
+.kart-picker legend {
+  padding: 0 12px 0 0;
+  font-weight: 700;
+}
+.kart-picker__grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+}
+.kart-choice {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 4px;
+  border: 1px solid #8e949944;
+  cursor: pointer;
+  border-radius: 6px;
+}
+.kart-choice:has(input:checked) {
+  border-color: #ff5964;
+  background: #ff596414;
+}
+.kart-choice:focus-within {
+  outline: 2px solid #63e7f2;
+  outline-offset: 3px;
+}
+.race-deck .kart-choice input {
+  width: 14px;
+  height: 14px;
+  margin: 0;
+  padding: 0;
+  accent-color: #ff5964;
+  align-self: flex-start;
+}
+.kart-choice img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+.kart-choice strong {
+  font-size: 16px;
+}
+.kart-choice span {
+  font-size: 16px;
+  text-align: center;
+  color: #b6bcc1;
+}
+.kart-picker > .help {
+  margin: 10px 0 0;
+  font-size: 16px;
+}
+.kart-picker:disabled .kart-choice {
+  cursor: default;
+  opacity: 0.65;
+}
+.immersive-race:is(
+    [data-state="finished"],
+    [data-state="timed-out"],
+    [data-state="abandoned"]
+  )
+  .kart-picker {
+  display: none;
+}
+.garage-label {
+  position: absolute;
+  top: -18px;
+  left: 8%;
+  font-size: 16px;
+  letter-spacing: 2px;
+  color: #cad0d5;
+}
+.hero-note > span:last-child {
+  display: block;
+  text-align: center;
+  font-size: 16px;
+  color: #bdc3c8;
+}
+.track-card {
+  margin: 0 calc(-1 * clamp(16px, 3vw, 56px));
+  padding: 0;
+}
+.track-card > .section-top,
+.track-card > .track-bottom {
+  padding: 18px clamp(16px, 3vw, 56px);
+  border: 0;
+}
+.track-card .track-preview {
+  aspect-ratio: 1200/300;
+  max-height: 350px;
+}
+.campaign-section {
+  padding: 50px 0;
+}
+.campaign-grid {
+  gap: 30px;
+}
+.campaign-card {
+  border: 0;
+  border-top: 1px solid #b1b7bc50;
+  border-radius: 0;
+  background: transparent;
+  padding: 25px 0;
+}
+.campaign-card::before {
+  display: none;
+}
+.development-note {
+  border-top: 1px solid #b1b7bc30;
+}
+.keyboard-visual [data-key] {
+  background: #22282d66;
+  border-color: #8b919644;
+}
+.settings-panel {
+  max-width: none;
+  width: min(900px, 100%);
+  margin-left: auto;
+}
+.setting-row {
+  background: transparent;
+  border-color: #c7cdd233;
+  padding: 22px 0;
+}
+.setting-row p {
+  color: #b6bcc1;
+}
+textarea,
+input,
+select {
+  background: #0c1218bf;
+  border-color: #7c828766;
+}
+#sample {
+  font-size: clamp(24px, 3vw, 40px);
+}
+.input-panel:has(#keyboard-input) {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.diagnostics {
+  border-color: #b7bdc233;
+}
+.audio-controls {
+  background: transparent;
+  border-color: #b8bec33a;
+}
+.audio-controls__body {
+  background: #111c25a6;
+}
+.practice-panel {
+  position: relative;
+  min-height: 60vh;
+}
+.practice-panel .metrics-grid > div {
+  background: transparent;
+  border: 0;
+  border-left: 1px solid #b9bfc444;
+  border-radius: 0;
+}
+.practice-panel .practice-typing {
+  margin: 45px 0 18px;
+}
+.practice-panel .typing-surface {
+  margin-right: 200px;
+}
+.practice-panel .speedometer {
+  position: absolute;
+  right: 0;
+  top: 220px;
+}
+.practice-panel .run-results {
+  background: #2d333899;
+  border-radius: 0;
+}
+.practice-panel .practice-options {
+  max-width: 900px;
+}
+.practice-active .practice-panel {
+  padding: 20px 0;
+}
+.practice-active .page-heading {
+  display: none;
+}
+.practice-active .practice-panel .speedometer {
+  top: 155px;
+}
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+.typing-surface {
+  position: relative;
+  min-height: 52px;
+}
+.typing-surface:focus-within {
+  box-shadow: 0 2px #ff596466;
+}
+.typing-surface #race-passage {
+  position: relative;
+  white-space: pre;
+  overflow: hidden;
+  margin: 0;
+  padding: 4px 0;
+  min-height: 0;
+  height: 52px;
+  font:
+    clamp(22px, 2.2vw, 34px)/1.35 ui-monospace,
+    monospace;
+  letter-spacing: 0;
+  color: #eaf0f5;
+  text-align: left;
+}
+.typing-surface #race-passage span {
+  position: relative;
+}
+.typing-surface #race-input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  resize: none;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  color: transparent;
+  caret-color: transparent;
+  box-shadow: none;
+  outline: 0;
+  padding: 4px 0;
+  font:
+    clamp(22px, 2.2vw, 34px)/1.35 ui-monospace,
+    monospace;
+  overflow: hidden;
+}
+.typing-surface #race-input::placeholder {
+  color: transparent;
+}
+.typing-surface #race-input::selection {
+  background: transparent;
+}
+.typing-surface .character--correct {
+  color: #a69b9e;
+}
+.typing-surface .character--current {
+  border-left: 2px solid #ff5964;
+  background: #ff596414;
+}
+.typing-surface .character--error {
+  background: #ffbb634d;
+  border-bottom: 2px solid #ffcc84;
+}
+:root[data-text-size="large"] .typing-surface #race-passage {
+  white-space: pre-wrap;
+  height: 110px;
+  line-height: 1.4;
+  font-size: 30px;
+  overflow: auto;
+}
+:root[data-text-size="large"] .typing-surface {
+  height: 110px;
+}
+:root[data-text-size="large"] .typing-surface #race-input {
+  font-size: 30px;
+  line-height: 1.4;
+}
+.speedometer {
+  width: 175px;
+  height: 160px;
+  color: #dde3e8;
+  position: relative;
+  text-align: center;
+  pointer-events: none;
+}
+.speedometer svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.speedometer text {
+  font:
+    8px ui-monospace,
+    monospace;
+  fill: #bac0c5;
+}
+.dial-track {
+  fill: none;
+  stroke: #888e9366;
+  stroke-width: 4;
+}
+.dial-accent {
+  fill: none;
+  stroke: #ff5964;
+  stroke-width: 3;
+}
+.dial-needle {
+  transform: rotate(var(--needle, -140deg));
+  transform-origin: 90px 90px;
+  transition: transform 150ms linear;
+  fill: #ff5964;
+}
+.dial-needle circle {
+  fill: #dee4e9;
+}
+.speedometer .dial-value {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 66%;
+  font:
+    700 27px/1 ui-monospace,
+    monospace;
+}
+.speedometer > span {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  font-size: 16px;
+  letter-spacing: 2px;
+  color: #c3c9ce;
+}
+/* Race owns the available visual viewport; world and sprites resize independently. */
+html[data-route="race"] .world-backdrop,
+html[data-route="race"] .footer {
+  display: none;
+}
+html[data-route="race"] body {
+  overflow: hidden;
+}
+html[data-route="race"] .app-shell {
+  padding: 0;
+  height: 100dvh;
+  min-height: 0;
+}
+html[data-route="race"] #main {
+  position: fixed;
+  inset: 0px 0 auto;
+  height: 100dvh;
+  min-height: 0;
+}
+html[data-route="race"] .topbar {
+  position: fixed;
+  top: 0px;
+  left: 0;
+  right: 0;
+  padding: 12px 3vw;
+  min-height: 68px;
+  background: linear-gradient(#12181dcf, transparent);
+}
+html[data-route="race"] .topbar .wordmark {
+  font-size: 22px;
+}
+html[data-route="race"] .topbar .guest {
+  display: none;
+}
+.immersive-race.quick-race {
+  position: absolute;
+  inset: 0;
+  min-height: 0;
+  margin: 0;
+  padding: 0 !important;
+  background: transparent;
+  border: 0;
+}
+.immersive-race .race-visual {
+  position: absolute;
+  inset: 0 0 125px;
+  width: 100%;
+  max-width: none !important;
+  border: 0;
+  border-radius: 0;
+  aspect-ratio: auto;
+  margin: 0;
+}
+.immersive-race #race-track {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  aspect-ratio: auto;
+  width: 100%;
+  min-height: 0;
+  border: 0;
+  border-radius: 0;
+}
+.immersive-race #race-track canvas {
+  display: block;
+  position: absolute;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+}
+.immersive-race .race-hud {
+  position: absolute;
+  top: 77px;
+  left: 24%;
+  right: 23%;
+  display: flex;
+  justify-content: center;
+  gap: clamp(12px, 4vw, 65px);
+  background: transparent;
+  border: 0;
+  z-index: 3;
+}
+.immersive-race .race-hud > div {
+  padding: 0;
+  border: 0;
+  flex: 1;
+  min-width: 0;
+}
+.immersive-race .race-hud .micro {
+  font-size: 16px;
+  white-space: nowrap;
+  letter-spacing: 1px;
+}
+.immersive-race .race-hud strong {
+  font-family: "DM Sans", sans-serif;
+  font-size: 25px;
+  margin-top: 6px;
+}
+.immersive-race .race-pause {
+  position: absolute;
+  right: 3vw;
+  top: 82px;
+  z-index: 4;
+  padding: 9px 16px;
+  background: #111c258c;
+  border-color: #aab0b544;
+}
+
+.immersive-race .speedometer {
+  position: absolute;
+  bottom: 12px;
+  left: 20px;
+  z-index: 3;
+  width: 155px;
+  height: 145px;
+}
+.immersive-race .race-console {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  min-height: 125px;
+  z-index: 4;
+  padding: 18px max(22px, env(safe-area-inset-right)) 12px
+    max(22px, env(safe-area-inset-left));
+  background: linear-gradient(#20262bf5, #141a1f);
+  border-top: 1px solid #bec4c93b;
+}
+.immersive-race .race-console > .help {
+  font-size: 16px;
+  margin: 7px 0 0;
+  min-height: 15px;
+}
+.immersive-race .track-bottom {
+  position: absolute;
+  bottom: 0;
+  right: 15px;
+  left: 190px;
+  font-size: 16px;
+  padding: 5px 0;
+  z-index: 4;
+  background: transparent;
+  border: 0;
+  min-height: 16px;
+}
+.immersive-race .race-callout {
+  top: 24%;
+  left: 50%;
+  max-width: 80vw;
+  transform: translateX(-50%);
+  border: 0;
+  background: transparent;
+  text-shadow: 0 1px 8px #0c1218;
+  font-size: 16px;
+  letter-spacing: 2px;
+}
+.immersive-race .run-banner {
+  position: absolute;
+  z-index: 3;
+  top: 38%;
+  left: 35%;
+  right: 35%;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  justify-content: center;
+  pointer-events: none;
+}
+.immersive-race:not([data-state="countdown"]) > .run-banner {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+.immersive-race .run-banner > div,
+.immersive-race .race-lights {
+  display: none;
+}
+.immersive-race #race-countdown {
+  font-size: 90px;
+}
+.immersive-race .race-deck {
+  position: absolute;
+  z-index: 5;
+  top: 52%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(730px, calc(100% - 32px));
+  max-height: calc(100dvh - 210px);
+  overflow: auto;
+  padding: 26px 30px;
+  background: #111c25f5;
+  border: 1px solid #8e949933;
+  box-shadow: 0 15px 130px #0007;
+  scrollbar-width: thin;
+}
+.immersive-race[data-state="racing"] .race-deck,
+.immersive-race[data-state="countdown"] .race-deck {
+  display: none;
+}
+.race-deck-title {
+  font-family: "DM Sans", sans-serif;
+  font-size: 36px;
+  line-height: 1.1;
+  letter-spacing: -1.5px;
+  margin: 0 0 22px;
+}
+.race-deck-title span {
+  color: #ff5964;
+}
+.race-deck .practice-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.race-deck .practice-options label {
+  font-size: 16px;
+}
+.race-deck select,
+.race-deck input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+}
+.race-deck #setup-help {
+  font-size: 16px;
+  line-height: 1.6;
+}
+.race-deck .practice-actions {
+  margin: 18px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+.race-deck .live-standings {
+  margin-top: 15px;
+}
+.race-deck .run-details,
+.race-deck #race-controls-help {
+  font-size: 16px;
+}
+.race-deck .run-results {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+.race-deck .run-results h2 {
+  font-size: 28px;
+}
+.race-deck .run-results p,
+.race-deck table {
+  font-size: 16px;
+}
+.race-deck .run-results .help {
+  font-size: 16px;
+}
+.immersive-race:is(
+    [data-state="finished"],
+    [data-state="timed-out"],
+    [data-state="abandoned"]
+  )
+  .race-deck-title,
+.immersive-race:is(
+    [data-state="finished"],
+    [data-state="timed-out"],
+    [data-state="abandoned"]
+  )
+  .race-setup,
+.immersive-race:is(
+    [data-state="finished"],
+    [data-state="timed-out"],
+    [data-state="abandoned"]
+  )
+  #start-race {
+  display: none;
+}
+.immersive-race[data-state="paused"] .race-deck-title {
+  font-size: 26px;
+}
+.immersive-race[data-state="paused"] .race-setup {
+  display: none;
+}
+:root[data-text-size="large"] .immersive-race .race-console {
+  min-height: 180px;
+}
+:root[data-text-size="large"] .immersive-race .race-visual {
+  bottom: 180px;
+}
+@keyframes garage-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+:root[data-motion="reduced"] .garage-kart {
+  animation: none;
+}
+:root[data-motion="reduced"] .dial-needle {
+  transition: none;
+}
+@media (min-width: 1050px) {
+  html[data-route="settings"] .page-heading {
+    position: absolute;
+    top: 7vh;
+    left: 0;
+    width: 40%;
+  }
+  html[data-route="settings"] .settings-panel {
+    padding-top: 8vh;
+    width: 50%;
+    min-height: 75vh;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .garage-kart {
+    animation: none;
+  }
+}
+
+/* Reserve a separate dial area: it must never cover a CPU lane. */
+.hero {
+  display: grid;
+}
+.immersive-race .race-console {
+  padding-left: 190px;
+}
+.immersive-race .race-console .speedometer {
+  width: 140px;
+  height: 125px;
+  left: 20px;
+  bottom: 0;
+}
+
+.typing-surface #race-input {
+  margin: 0;
+}
+
+.immersive-race .race-deck .track-bottom {
+  position: static;
+  padding: 0 0 12px;
+  font-size: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.immersive-race .race-deck .track-bottom > span {
+  display: block;
+}
+
+/* Graphite armor, localized crimson and cyan illumination from the approved reference. */
+:root {
+  --energy: #63e7f2;
+}
+.world-backdrop {
+  background:
+    radial-gradient(ellipse at 78% 33%, #25515e55, transparent 52%),
+    radial-gradient(ellipse at 12% 70%, #7c1e281c, transparent 34%), #080e14;
+}
+.world-backdrop::before {
+  content: "";
+  position: absolute;
+  right: -8%;
+  top: -12%;
+  width: min(90vw, 1100px);
+  aspect-ratio: 1;
+  border: 1px solid #6cdaeb25;
+  border-radius: 50%;
+  box-shadow:
+    inset 0 0 60px #4ab7cd0c,
+    0 0 60px #4ab7cd0c;
+  background: repeating-radial-gradient(
+    circle,
+    transparent 0 19%,
+    #63d9ec0b 19.1% 19.3%,
+    transparent 19.4% 23%
+  );
+}
+.world-backdrop::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    125deg,
+    transparent 25%,
+    #a3c5d307 25.1% 40%,
+    transparent 40.1% 67%,
+    #06101855 67.1%
+  );
+}
+.world-moon {
+  width: 180px;
+}
+.eyebrow {
+  color: #b9b0a0;
+}
+.button--primary {
+  color: #fff3ec;
+  background: linear-gradient(135deg, #ad2634, #701723);
+  border: 1px solid #ec687155;
+  box-shadow:
+    inset 0 1px #ffd4bd25,
+    0 5px 20px #02070a55;
+}
+.button--primary:hover {
+  background: linear-gradient(135deg, #c33140, #8d1e2c);
+}
+:focus-visible {
+  outline-color: var(--energy);
+}
+.typing-surface .character--current {
+  border-left-color: var(--energy);
+  background: #63e7f214;
+}
+.dial-accent {
+  stroke: var(--energy);
+}
+.dial-needle {
+  fill: #e5c090;
+}
+.speedometer .dial-value {
+  color: #e8faff;
+}
+.topbar nav a[aria-current] {
+  border-color: var(--energy);
+}
+
+/* Laptop readability: prose/controls 16px+, compact metadata 14px. */
+:root {
+  font-size: 16px;
+  --muted: #c3cbd2;
+}
+.app-shell p {
+  line-height: 1.65;
+}
+.eyebrow,
+.micro,
+.topbar .guest,
+.footer,
+.garage-label,
+.card-bottom {
+  font-size: 14px;
+}
+.immersive-race .race-hud .micro {
+  font-size: 14px;
+  letter-spacing: 0.5px;
+}
+.kart-choice strong,
+.kart-choice span,
+.speedometer > span {
+  font-size: 14px;
+}
+.kart-choice {
+  gap: 4px;
+}
+.help,
+.card-copy,
+.card-bottom,
+.card-bottom > span:last-child,
+.setting-row p,
+.development-note p {
+  color: #c3cbd2;
+}
+.topbar {
+  padding-right: 56px;
+}
+html[data-route="race"] .topbar {
+  padding-right: 80px;
+}
+.fullscreen-control {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 50;
+  width: 44px;
+  height: 44px;
+  padding: 10px;
+  display: grid;
+  place-items: center;
+  color: #f1f6fa;
+  background: #111c25f5;
+  border: 1px solid #9aabb977;
+  border-radius: 7px;
+  cursor: pointer;
+  box-shadow: 0 3px 12px #0005;
+}
+.fullscreen-control:hover {
+  background: #293c4a;
+  border-color: #63e7f2;
+}
+.fullscreen-feedback {
+  position: fixed;
+  top: 66px;
+  right: 16px;
+  z-index: 51;
+  max-width: 350px;
+  padding: 12px 16px;
+  border: 1px solid #9aabb977;
+  background: #111c25;
+  color: #f1f6fa;
+  font-size: 16px;
+}
+.immersive-race[data-state="paused"] .kart-picker {
+  display: none;
+}
+@media (max-width: 1200px) {
+  .topbar .guest {
+    display: none;
+  }
+  .topbar nav {
+    gap: 18px;
+  }
+}

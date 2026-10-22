@@ -1,0 +1,26 @@
+[
+  {
+    "name": "ignition",
+    "bpm": 124,
+    "bars": 8,
+    "sampleRate": 22050,
+    "channels": 1,
+    "seconds": 15.483854875283447,
+    "bytes": 682882,
+    "peak": 0.84,
+    "rms": 0.134854754313554,
+    "sha256": "a8e088a4bea68612376f307f142063fc2062ebcd7ca2e0dd39a8025867cef19b"
+  },
+  {
+    "name": "overdrive",
+    "bpm": 150,
+    "bars": 16,
+    "sampleRate": 22050,
+    "channels": 1,
+    "seconds": 25.6,
+    "bytes": 1129004,
+    "peak": 0.84,
+    "rms": 0.2126623628660462,
+    "sha256": "b8a95059350b3a10cd0cfac876a90d247deb3fca4d77093d0b4ae658583a45cd"
+  }
+]

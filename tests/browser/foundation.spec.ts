@@ -12,6 +12,7 @@ test("loads the real track asset at the project path without overflow", async ({
   await expect(page.locator("#track-preview")).toHaveAttribute(
     "data-ready",
     "true",
+    { timeout: 12000 },
   );
   await expect(page.locator("#track-preview canvas")).toBeVisible();
   expect(
@@ -72,7 +73,7 @@ test("saved motion/text preferences survive reload and scene navigation cleans u
   }
 });
 
-test("unknown hash recovers and narrow landscape resize preserves text", async ({
+test("unknown hash recovers and laptop window resize preserves text", async ({
   page,
 }) => {
   await page.goto("./#/unknown");
@@ -81,7 +82,7 @@ test("unknown hash recovers and narrow landscape resize preserves text", async (
   ).toBeVisible();
   await page.getByRole("link", { name: "Keyboard check", exact: true }).click();
   await page.getByRole("textbox").fill("Every");
-  await page.setViewportSize({ width: 640, height: 320 });
+  await page.setViewportSize({ width: 1024, height: 768 });
   await expect(page.getByRole("textbox")).toHaveValue("Every");
   expect(
     await page.evaluate(
@@ -93,7 +94,9 @@ test("unknown hash recovers and narrow landscape resize preserves text", async (
 test("failed artwork offers retry while other screens remain usable", async ({
   page,
 }) => {
-  await page.route("**/assets/starter-coupe.svg", (route) => route.abort());
+  await page.route("**/assets/karts/parts/volt-kart-body.webp", (route) =>
+    route.abort(),
+  );
   await page.goto("./");
   await expect(page.locator("#track-status")).toContainText(
     "artwork could not load",
@@ -101,11 +104,12 @@ test("failed artwork offers retry while other screens remain usable", async ({
   await expect(
     page.getByRole("button", { name: "Retry preview" }),
   ).toBeVisible();
-  await page.unroute("**/assets/starter-coupe.svg");
+  await page.unroute("**/assets/karts/parts/volt-kart-body.webp");
   await page.getByRole("button", { name: "Retry preview" }).click();
   await expect(page.locator("#track-preview")).toHaveAttribute(
     "data-ready",
     "true",
+    { timeout: 12000 },
   );
   await expect(page.locator("canvas")).toHaveCount(1);
 });

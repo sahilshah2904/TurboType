@@ -1,12 +1,20 @@
+**Current scope override — 21 October 2026:** the user explicitly narrowed TurboType to laptop/desktop browsers with a physical keyboard. Phone/tablet compatibility, software-keyboard layout, rotation and mobile acceptance are canceled requirements. Earlier multi-device statements are historical. Keep laptop window responsiveness (960 CSS px minimum; verify 1024/1366/1440/1920 widths), accessibility, hardware-keyboard IME composition, cloud saves before solo launch and multiplayer afterward. Do not restore mobile work without a new user request.
+
 # TurboType — game design and engineering delivery plan
 
-Status: design baseline established; Phase 2 foundation complete with recorded exceptions and Phase 3 typing practice complete for agreed scope, with ASUS/Samsung checks accepted by user report. Phase 4 four-CPU Quick Race is implemented with available-device acceptance pending; docs/QUICK_RACE.md defines actual CPU/result semantics. Read PROJECT_STATUS.md and docs/TESTING.md for actual evidence; docs/GAME_RULES.md describes implemented rules version 3 and takes precedence for current typing behavior.
-Updated: 20 October 2026.
+**22 October reward correction:** each 100-level category (Easy, Medium, Hard) awards a distinct car at 15/30/45/60/75/90 eligible main-level clears within that category: 18 reward cars plus five starters. This supersedes the ten-car aggregate milestone plan; no additional car is implied at 100. See [GARAGE_PROGRESSION.md](docs/GARAGE_PROGRESSION.md) for category-qualified IDs and receipt rules.
+
+**21 October garage/audio decision:** five existing starter cars are selectable only before countdown. One car stays locked for the entire race, including pause/resume; retry/new race reopens selection. A shared top-right fullscreen symbol exists on every page and important prose/controls target 16px text (14px compact labels). The user accepted their distinct visuals. All vehicles are cosmetic. Enable/mute/volume controls belong only in Settings; keep the hub clean. This supersedes earlier enter/hub sound-control placement.
+
+Status: design baseline established; Phase 2 foundation complete with recorded exceptions and Phase 3 typing practice complete for agreed scope, with ASUS/Samsung checks accepted by user report. Phase 4 four-CPU Quick Race is accepted; Phase 5 initial visuals were rejected, then the user approved the kart direction; alpha.5 integrates it and revamps existing pages with a Live WPM dial. Final verification, distinct fleet and device acceptance remain; docs/IMMERSIVE_APP.md describes implementation and docs/RACE_REDESIGN.md retains the redesign plan; docs/QUICK_RACE.md defines actual CPU/result semantics. Read PROJECT_STATUS.md and docs/TESTING.md for actual evidence; docs/GAME_RULES.md describes implemented rules version 3 and takes precedence for current typing behavior.
+Updated: 21 October 2026.
 Technology research and source links: [IMPLEMENTATION_RESEARCH.md](./IMPLEMENTATION_RESEARCH.md).
 
 Phase 1 design coverage has been audited. [PROJECT_STATUS.md](./PROJECT_STATUS.md) tracks the eleven user-facing phases. [Rules and storage baseline](./docs/RULES_AND_STORAGE_BASELINE.md) supplies exact initial rewards, timing/cooldown defaults, save boundaries, backup/recovery policy, and database scope; its clarifications supersede earlier broad suggestions here. Baseline design completion is not implementation or playtest completion.
 
 Latest scope revision: [responsive and online architecture](./docs/RESPONSIVE_AND_ONLINE_ARCHITECTURE.md) supersedes the earlier desktop-first/local-only public release assumption. Design data/auth/network contracts from phase 2, add optional account-backed cloud progress before public single-player launch, and follow with friends multiplayer in phase 11. Phones, tablets and laptops are first-release targets.
+
+Latest visual revision: [Phase 5 race redesign](docs/RACE_REDESIGN.md) supersedes the earlier boxed race and separate visible passage/input composition. Target a full-viewport racing scene, compact upper HUD, one integrated native-input-backed typing strip and a reviewed new vehicle-art direction. This is required Phase 5 work before Phase 6 onboarding; core typing/CPU rules remain intact.
 
 ## 1. Product brief and scope
 
@@ -25,7 +33,7 @@ Use hash-based screen navigation so direct links and refreshes work on the GitHu
 | Screen | Purpose and interaction | Completion / exit |
 | --- | --- | --- |
 | Lightweight boot | Show TurboType identity immediately while checking saved settings and essential resources | Continue to entrance; show recovery actions if resources fail |
-| Enter TurboType | A clear Enter button enables sound after a user gesture; mute and motion controls are accessible immediately | User enters; audio failure does not block progress |
+| Enter TurboType | A clear Enter button enters the game; sound preferences are managed only in Settings and follow browser gesture rules | User enters; audio failure does not block progress |
 | Cinematic loading | Original illustrated racing panels, slow depth motion, logo treatment, real asset status, short driving/typing tips | Continue as soon as essential assets are ready; skip optional montage |
 | First-time welcome | Explain “your typing drives the car” and offer a guided start | Tutorial or Skip to hub; help remains available |
 | How to Play | Short cards covering controls, corrections, progress, nitro, opponents, scoring, and local saves | Start guided tutorial or return |
@@ -197,7 +205,7 @@ Start with one city environment polished end to end. Introduce dusk/night weathe
 
 Audio layers include menu ambience, countdown cues, pace-responsive engine sound, streak accents, overtake cues, and finish music. Use separate master/music/effects controls and remember mute. Missing audio never blocks play. Keep mistake feedback gentle.
 
-Add an original or appropriately licensed instrumental electronic/synthwave racing soundtrack, with a calmer garage loop, optional intensity stems during a race, and a short finish cue. Crossfade layers rather than changing tempo on every keypress. Ignore the recording's song entirely. Track provenance, redistribution rights, editable inputs where available, loop/export settings, and attribution in the asset register; preload short cues and defer larger music files. See the reference analysis for the detailed audio brief. No music has been composed, downloaded, or licensed yet.
+Add an original or appropriately licensed instrumental electronic/synthwave racing soundtrack, with a calmer garage loop, optional intensity stems during a race, and a short finish cue. Crossfade layers rather than changing tempo on every keypress. Ignore the recording's song entirely. Track provenance, redistribution rights, editable inputs where available, loop/export settings, and attribution in the asset register; preload short cues and defer larger music files. See the reference analysis for the detailed audio brief. Phase 5 now implements original source-authored menu/race synth music and effects; see docs/AUDIO.md. No reference song, downloaded sample or externally licensed track is used. Audible mix and physical device review remain pending.
 
 Anime.js owns interface choreography; Phaser owns world motion and effects. One owner per property. Gameplay state owns race start/finish and rewards. Cinematic playback can be skipped without changing results. Decorative effects never cover the passage or important controls.
 
@@ -280,3 +288,15 @@ Recreation acceptance: from a fresh directory and documented tool versions, anot
 Confirmed by the user: single-player with computer opponents first, multiplayer friends through a shared game link later, comprehensive reproducible documentation, clear rules/onboarding, cinematic animated opening/loading screens, proper version control/naming, and 100 levels in each of Easy, Medium, and Hard displayed as a rightward node-based progression map.
 
 Proposed defaults needing playtesting rather than blocking initial work: ten chapters per category, all category entry levels available, pace bands, 95% accuracy star, bonus conditions/reward amounts, Driver Rank XP curve, strict one-error correction model, and cinematic duration. Validate engine/plugin versions during M1. Local Git is initialized on main, the verified GitHub owner is sahilshah2904, and the public TurboType remote repository has been created and linked as origin. The user supplied Sahilshah as the repository-local commit author name. Git history records the planning baseline; docs/GITHUB_WORKFLOW.md describes how future changes reach GitHub. No playable game, Pages deployment, performance result, or learning gain exists yet.
+
+### 21 October 2026 preview and audio refinement
+
+User requested a full-width hub preview without side columns, energetic non-race background music and a dedicated 3–2–1 start score. Implement these in Phase 5 with the existing-page Phase 6 visuals; do not postpone them until campaigns. Support personal local soundtrack selection for this visit, including the user's own Misirlou recording, while retaining original shipped music. Pause/countdown/visibility rules and independent game timing remain authoritative. No commercial recording is included or downloaded; explicit recording/device verification remains pending.
+
+### 21 October 2026 revised audiovisual direction
+
+The user rejected the alpha.7 sound and burgundy gradient, canceled personal-music selection, and requested distinct original browsing/racing music. Alpha.8 uses original rendered Nightforge (96 BPM) and Overdrive (150 BPM), plus the separate countdown. Styling follows the supplied reference's graphite, metallic red, cyan lighting and restrained gold using original game imagery. This supersedes the previous personal-file decision and uniform red/black palette; available-device listening/visual acceptance remains required in Phase 5.
+
+### 21 October 2026 palette restoration
+
+Alpha.10 restores the previous alpha.8 graphite/crimson/cyan palette at the user's request, replacing the rejected alpha.9 red/gold armor panels. Laptop-only scope, Ignition browsing music, the accepted Overdrive racing master, typing rules and mobile-removal changes stay in place.

@@ -1,3 +1,4 @@
+import { speedometer, updateSpeedometer } from "./speedometer";
 import {
   TypingEngine,
   type TypingSnapshot,
@@ -44,10 +45,10 @@ export function practiceScreen(): string {
           `<div><span class="micro">${label}</span><strong id="metric-${id}">—</strong></div>`,
       )
       .join("")}</div>
-    <label class="micro" id="passage-label">YOUR PASSAGE · MATCH CASE, SPACES AND PUNCTUATION</label><p id="race-passage" class="race-passage" aria-labelledby="passage-label"></p>
-    <label for="race-input">Your typing</label><textarea id="race-input" rows="2" readonly autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" aria-describedby="race-help race-notice" placeholder="Select Start run, then type after GO…"></textarea>
+    ${speedometer()}<div class="practice-typing"><div class="typing-surface"><label class="sr-only" id="passage-label">YOUR PASSAGE · MATCH CASE, SPACES AND PUNCTUATION</label><p id="race-passage" class="race-passage" aria-labelledby="passage-label"></p>
+    <label class="sr-only" for="race-input">Your typing</label><textarea id="race-input" rows="2" readonly autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" aria-describedby="race-passage race-help race-notice" placeholder="Select Start run, then type after GO…"></textarea></div>
     <p id="race-notice" class="help" role="status">Use Backspace to correct a mistake before continuing.</p>
-    <div class="run-progress"><progress id="typing-progress" max="1" value="0" aria-label="Passage progress"></progress><span id="progress-label">0%</span></div>
+    </div><div class="run-progress"><progress id="typing-progress" max="1" value="0" aria-label="Passage progress"></progress><span id="progress-label">0%</span></div>
     <div class="practice-actions"><button id="start-run" class="button button--primary">Start run <span aria-hidden="true">→</span></button><button id="pause-run" class="button button--secondary" disabled>Pause</button><button id="restart-run" class="text-button">Restart</button></div>
     <p id="race-help" class="help">One mistake stops progress. Backspace removes it. Esc pauses. Leaving this screen pauses and preserves your run for this visit. Pauses or assisted input make a run practice-only. Refresh starts a fresh session.</p>
     <div class="run-details"><span id="error-summary">0 errors · 0 corrected</span><span id="run-eligibility">Session only · not saved</span><span id="nitro-status">20 clean characters → nitro</span></div>
@@ -102,6 +103,7 @@ export function connectTypingPractice(
       ["countdown", "racing", "paused"].includes(s.state),
     );
     const stateChanged = s.state !== lastState;
+    updateSpeedometer(main, s.recentWpm);
     text("#metric-wpm", s.wpm.toFixed(1));
     text(
       "#metric-accuracy",
@@ -184,6 +186,20 @@ export function connectTypingPractice(
                 : "character--error"
               : "";
       });
+    const passageView = main.querySelector<HTMLElement>("#race-passage")!;
+    const caret = passageView.querySelector<HTMLElement>(
+      ".character--current,.character--error",
+    );
+    if (caret) {
+      passageView.scrollLeft =
+        document.documentElement.dataset.textSize === "large"
+          ? 0
+          : Math.max(0, caret.offsetLeft - passageView.clientWidth * 0.26);
+      passageView.scrollTop = Math.max(
+        0,
+        caret.offsetTop - passageView.clientHeight / 2,
+      );
+    }
     main.querySelector("#run-results")!.toggleAttribute("hidden", !ending);
     if (ending) showResult(s);
     adapter?.sync();

@@ -1,3 +1,8 @@
+import { speedometer, updateSpeedometer } from "./speedometer";
+import { animate } from "animejs";
+import { RaceFeedback } from "../game/race-view";
+import type { RaceAudio } from "../audio/race-audio";
+import { isKartId, STARTER_KARTS, type KartId } from "../content/kart-catalog";
 import { SoloRace } from "../core/solo-race";
 import { CPU_TIERS, type CpuTier } from "../core/cpu-schedule";
 import { PRACTICE_PASSAGES } from "../content/practice-passages";
@@ -29,11 +34,27 @@ export function createQuickRaceSession(): QuickRaceSession {
   } as const;
   return { ...setup, race: buildRace(setup) };
 }
-export function quickRaceScreen(): string {
-  return `<section class="page-heading reveal"><a class="back-link" href="#/hub">← Back to the hub</a><p class="eyebrow">FIVE LANES. YOUR NEXT CHALLENGE.</p><h1>Words into <span>motion.</span></h1><p>Race four computer opponents. Finish at your own pace, even if they get there first.</p></section>
-  <section class="quick-race input-panel reveal" aria-label="Quick Race">
-    <div class="section-top"><h2>Quick Race</h2><span class="pill">YOU + FOUR CPUs</span></div>
-    <div class="race-setup practice-options">
+export function quickRaceScreen(selectedKart: KartId = "volt-kart"): string {
+  return `<section class="quick-race immersive-race" aria-label="Quick Race">
+    <div class="race-visual"><p id="race-callout" class="race-callout" role="status" hidden></p><div id="race-track" role="img" aria-label="Five-lane race track; exact positions are listed below"></div></div>
+    <div class="race-hud metrics-grid">${[
+      ["place", "POSITION"],
+      ["wpm", "WPM"],
+      ["accuracy", "ACCURACY"],
+      ["time", "ACTIVE TIME"],
+    ]
+      .map(
+        ([id, label]) =>
+          `<div><span class="micro">${label}</span><strong id="race-${id}">—</strong></div>`,
+      )
+      .join("")}</div>
+<button id="pause-race" class="race-pause button button--secondary" disabled>Pause</button>    <div class="run-banner"><div><p id="race-state" class="eyebrow" role="status">Ready</p><p id="race-instruction">Wait for the track, then start the countdown.</p></div><span id="race-lights" class="race-lights" aria-hidden="true"><i></i><i></i><i></i></span><span id="race-countdown" class="countdown" aria-hidden="true">—</span></div>
+<div class="race-console">${speedometer()}
+    <label id="race-passage-label" class="sr-only">MATCH CASE, SPACES AND PUNCTUATION</label><div class="typing-surface"><p id="race-passage" class="race-passage" aria-labelledby="race-passage-label"></p>
+    <label class="sr-only" for="race-input">Your typing</label><textarea id="race-input" rows="2" readonly autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" aria-describedby="race-passage race-notice race-controls-help" placeholder="Start the race, then type after GO…"></textarea></div>
+    <p id="race-notice" class="help" role="status">One mistake stops progress. Backspace corrects it.</p>
+</div><section class="race-deck" aria-label="Race setup and controls"><h1 class="race-deck-title">Your next <span>starting line.</span></h1><div class="track-bottom"><span id="race-track-status" role="status">Loading race track…</span><button id="retry-race-track" class="text-button" hidden>Retry artwork</button><button id="text-race" class="text-button" hidden>Race with text standings</button></div>
+    <section id="race-results" class="run-results" aria-labelledby="race-result-title" hidden><p class="eyebrow">RACE RESULT · SESSION ONLY</p><h2 id="race-result-title"></h2><p id="race-result-summary"></p><p id="race-coaching"></p><div class="race-table-wrap"><table><caption>Final standings. Later CPU outcomes are simulated from fixed schedules; they are not live players.</caption><thead><tr><th scope="col">Place</th><th scope="col">Driver</th><th scope="col">Time</th><th scope="col">Status</th></tr></thead><tbody id="race-result-rows"></tbody></table></div><p class="help">No XP, credits, stars, unlocks or personal records are saved. Original Neon Harbor art and sound. Campaign progression arrives in later phases.</p></section>    <div class="race-setup practice-options">
       <div><label for="race-passage-select">Passage</label><select id="race-passage-select">${PRACTICE_PASSAGES.map((p, i) => `<option value="${i}">${p.name}</option>`).join("")}</select></div>
       <div><label for="cpu-tier">Opponent pace</label><select id="cpu-tier">${Object.entries(
         CPU_TIERS,
@@ -47,34 +68,21 @@ export function quickRaceScreen(): string {
       <div><label for="race-seed">Race seed</label><input id="race-seed" type="number" min="0" max="4294967295" step="1" inputmode="numeric" required aria-describedby="setup-help" /></div>
     </div>
     <p id="setup-help" class="help race-setup">Targets are before reaction, hesitation and correction delays. This is Quick Race, not campaign levels. The same passage, pace and seed replay the same CPU schedules. Pauses or assisted input make a run practice-only. No rewards or results are saved yet.</p>
-    <div class="run-banner"><div><p id="race-state" class="eyebrow" role="status">Ready</p><p id="race-instruction">Wait for the track, then start the countdown.</p></div><span id="race-countdown" class="countdown" aria-hidden="true">—</span></div>
-    <div class="race-hud metrics-grid">${[
-      ["place", "POSITION"],
-      ["wpm", "WPM"],
-      ["accuracy", "ACCURACY"],
-      ["time", "ACTIVE TIME"],
-    ]
-      .map(
-        ([id, label]) =>
-          `<div><span class="micro">${label}</span><strong id="race-${id}">—</strong></div>`,
-      )
-      .join("")}</div>
-    <div class="race-visual"><div id="race-track" role="img" aria-label="Five-lane race track; exact positions are listed below"></div><div class="track-bottom"><span id="race-track-status" role="status">Loading race track…</span><button id="retry-race-track" class="text-button" hidden>Retry artwork</button><button id="text-race" class="text-button" hidden>Race with text standings</button></div></div>
-    <label id="race-passage-label" class="micro">MATCH CASE, SPACES AND PUNCTUATION</label><p id="race-passage" class="race-passage" aria-labelledby="race-passage-label"></p>
-    <label for="race-input">Your typing</label><textarea id="race-input" rows="2" readonly autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" aria-describedby="race-notice race-controls-help" placeholder="Start the race, then type after GO…"></textarea>
-    <p id="race-notice" class="help" role="status">One mistake stops progress. Backspace corrects it.</p>
-    <div class="practice-actions"><button id="start-race" class="button button--primary" disabled>Start race →</button><button id="pause-race" class="button button--secondary" disabled>Pause</button><button id="retry-race" class="text-button">Retry same race</button><button id="new-race" class="text-button">New seed</button></div>
+    <fieldset id="kart-picker" class="kart-picker"><legend>Choose your car</legend><div class="kart-picker__grid">${STARTER_KARTS.map((kart) => `<label class="kart-choice"><input type="radio" name="player-kart" value="${kart.id}" ${kart.id === selectedKart ? "checked" : ""} /><img class="${kart.id === "volt-kart" ? "kart-art--starter" : ""}" src="${import.meta.env.BASE_URL}assets/karts/${kart.file}" alt="" width="200" height="100" /><strong>${kart.name}</strong><span>${kart.style}</span></label>`).join("")}</div><p id="kart-save-status" class="help" role="status">Choose before starting. Your car stays locked through pauses until retry. All cars have the same performance.</p></fieldset>
+    <div class="practice-actions"><button id="start-race" class="button button--primary" disabled>Start race →</button><button id="retry-race" class="text-button">Retry same race</button><button id="new-race" class="text-button">New seed</button></div>
     <p id="race-controls-help" class="help">Esc or leaving this screen pauses everyone. Resume has a fresh countdown. Retry resets the run; refresh discards this unsaved session.</p>
     <div class="run-details"><span id="race-errors">0 errors · 0 corrected</span><span id="race-eligibility">Session only · not saved</span><span id="race-streak">0 clean streak</span></div>
     <details class="live-standings" open><summary>Live standings · all opponents are CPUs</summary><ol id="race-standings"></ol></details>
-    <section id="race-results" class="run-results" aria-labelledby="race-result-title" hidden><p class="eyebrow">RACE RESULT · SESSION ONLY</p><h2 id="race-result-title"></h2><p id="race-result-summary"></p><p id="race-coaching"></p><div class="race-table-wrap"><table><caption>Final standings. Later CPU outcomes are simulated from fixed schedules; they are not live players.</caption><thead><tr><th scope="col">Place</th><th scope="col">Driver</th><th scope="col">Time</th><th scope="col">Status</th></tr></thead><tbody id="race-result-rows"></tbody></table></div><p class="help">No XP, credits, stars, unlocks or personal records are saved. Modern cars, scenery, effects and audio are planned for the polish phase.</p></section>
-  </section>`;
+</section></section>`;
 }
 
 export function connectQuickRace(
   main: HTMLElement,
   session: QuickRaceSession,
   reducedMotion: () => boolean,
+  effects: () => "high" | "low",
+  audio: RaceAudio,
+  garage: { read: () => KartId; choose: (id: KartId) => boolean },
 ): () => void {
   const abort = new AbortController();
   const eventOptions = { signal: abort.signal };
@@ -88,6 +96,11 @@ export function connectQuickRace(
   const mode = find<HTMLSelectElement>("#race-mode");
   const seed = find<HTMLInputElement>("#race-seed");
   const track = find("#race-track");
+  const feedback = new RaceFeedback();
+  const kartPicker = find<HTMLFieldSetElement>("#kart-picker");
+  let calloutAnimation: ReturnType<typeof animate> | undefined;
+  let calloutUntil = 0;
+  let revealResults: number | undefined;
   let adapter: RaceInputController;
   let disposeTrack: (() => void) | undefined;
   let generation = 0;
@@ -95,6 +108,7 @@ export function connectQuickRace(
   let trackReady = false;
   let loadTimeout: number | undefined;
   let lastState = "";
+  const standingsRows = new Map<string, HTMLLIElement>();
   const text = (selector: string, value: string) => {
     const el = find(selector);
     if (el.textContent !== value) el.textContent = value;
@@ -102,8 +116,35 @@ export function connectQuickRace(
   const notice = (message: string) => text("#race-notice", message);
 
   function update(): void {
-    const { player: s, standings, results } = session.race.snapshot();
+    const snapshot = session.race.snapshot();
+    const { player: s, standings, results } = snapshot;
+    audio.updateRace(s);
+    find("#race-lights").dataset.state = s.state;
+    find("#race-lights").dataset.countdown = String(s.countdown ?? 0);
+    const message = feedback.update(snapshot);
+    const callout = find("#race-callout");
+    if (message) {
+      calloutAnimation?.revert();
+      callout.hidden = false;
+      callout.textContent = message;
+      calloutUntil = s.elapsedMs + 1600;
+      if (!message.startsWith("CLEAN")) audio.cue("overtake");
+      if (!reducedMotion())
+        calloutAnimation = animate(callout, {
+          opacity: [0, 1, 1, 0],
+          y: [6, 0, 0, -5],
+          duration: 1600,
+          ease: "out(3)",
+        });
+    }
+    if (s.elapsedMs >= calloutUntil || s.state !== "racing") {
+      calloutAnimation?.revert();
+      callout.hidden = true;
+    }
+    find(".immersive-race").dataset.state = s.state;
+    updateSpeedometer(main, s.recentWpm);
     const active = ["countdown", "racing", "paused"].includes(s.state);
+    kartPicker.disabled = s.state !== "ready";
     main.classList.toggle("quick-race-active", active);
     input.readOnly = !["countdown", "racing"].includes(s.state);
     input.setAttribute("aria-invalid", String(s.errorCharacter !== null));
@@ -166,7 +207,7 @@ export function connectQuickRace(
     main
       .querySelectorAll<HTMLElement>("#race-passage span")
       .forEach((el, i) => {
-        el.className =
+        const className =
           i < s.validatedLength
             ? "character--correct"
             : i === s.validatedLength
@@ -174,16 +215,46 @@ export function connectQuickRace(
                 ? "character--current"
                 : "character--error"
               : "";
+        if (el.className !== className) el.className = className;
       });
-    // Fixed-size list, canonical text only; no per-keystroke reconstruction of the input.
-    text("#race-standings", "");
-    for (const row of standings) {
-      const li = document.createElement("li");
-      li.dataset.racer = row.id;
-      li.dataset.progress = String(row.progress);
-      li.textContent = `${row.place}. ${row.name}${row.cpu ? " · CPU" : ""} — ${Math.floor(row.progress * 100)}%${row.finishTimeMs !== null ? " · finished" : ""}`;
-      find("#race-standings").append(li);
+    const passageView = find("#race-passage");
+    if (document.documentElement.dataset.textSize !== "large") {
+      const caret =
+        passageView.querySelector<HTMLElement>(
+          ".character--current,.character--error",
+        ) ?? (passageView.lastElementChild as HTMLElement | null);
+      if (caret)
+        passageView.scrollLeft = Math.max(
+          0,
+          caret.offsetLeft - passageView.clientWidth * 0.3,
+        );
+    } else {
+      passageView.scrollLeft = 0;
+      const caret = passageView.querySelector<HTMLElement>(
+        ".character--current,.character--error",
+      );
+      if (caret)
+        passageView.scrollTop = Math.max(
+          0,
+          caret.offsetTop - passageView.clientHeight / 2,
+        );
     }
+    // Keep the five nodes alive; update only changed content/order at the HUD cadence.
+    const standingsList = find("#race-standings");
+    standings.forEach((row, index) => {
+      let li = standingsRows.get(row.id);
+      if (!li) {
+        li = document.createElement("li");
+        li.dataset.racer = row.id;
+        standingsRows.set(row.id, li);
+      }
+      const progress = String(row.progress);
+      if (li.dataset.progress !== progress) li.dataset.progress = progress;
+      const value = `${row.place}. ${row.name}${row.cpu ? " · CPU" : ""} — ${Math.floor(row.progress * 100)}%${row.finishTimeMs !== null ? " · finished" : ""}`;
+      if (li.textContent !== value) li.textContent = value;
+      if (standingsList.children[index] !== li)
+        standingsList.insertBefore(li, standingsList.children[index] ?? null);
+    });
     find("#race-results").hidden = results === null;
     if (results && s.state !== lastState) {
       const place = results.find((row) => row.id === "player")!.place;
@@ -248,7 +319,16 @@ export function connectQuickRace(
                 ? "Race ended. Your result is frozen; retry when ready."
                 : "One mistake stops progress. Backspace corrects it.",
       );
-      if (results) find("#race-results").scrollIntoView({ block: "nearest" });
+      if (results) {
+        window.clearTimeout(revealResults);
+        revealResults = window.setTimeout(
+          () => {
+            if (!disposed)
+              find("#race-result-title").setAttribute("tabindex", "-1");
+          },
+          reducedMotion() ? 0 : 1000,
+        );
+      }
     }
     lastState = s.state;
   }
@@ -265,6 +345,8 @@ export function connectQuickRace(
     update();
   }
   function reset(newSeed = false): void {
+    window.clearTimeout(revealResults);
+    calloutAnimation?.revert();
     session.race.abandon();
     if (newSeed) session.seed = (session.seed + 1) >>> 0;
     seed.value = String(session.seed);
@@ -305,6 +387,8 @@ export function connectQuickRace(
     mountRaceTrack(track, {
       read: () => session.race.snapshot(),
       reducedMotion,
+      effects,
+      playerKart: garage.read,
       onReady: () => {
         if (token !== generation || disposed) return;
         window.clearTimeout(loadTimeout);
@@ -346,10 +430,30 @@ export function connectQuickRace(
       },
       eventOptions,
     );
+  kartPicker.addEventListener(
+    "change",
+    (event) => {
+      const target = event.target;
+      if (
+        !(target instanceof HTMLInputElement) ||
+        !isKartId(target.value) ||
+        session.race.snapshot().player.state !== "ready"
+      )
+        return;
+      const saved = garage.choose(target.value);
+      const name = STARTER_KARTS.find((kart) => kart.id === target.value)!.name;
+      text(
+        "#kart-save-status",
+        `${name} selected. ${saved ? "Saved on this browser." : "Applied for this visit; browser storage is unavailable."} Cosmetic only; race progress is unchanged.`,
+      );
+    },
+    eventOptions,
+  );
   start.addEventListener(
     "click",
     () => {
       if (!trackReady || !seed.reportValidity()) return;
+      void audio.unlock();
       session.race.start();
       update();
       input.focus();
@@ -407,6 +511,9 @@ export function connectQuickRace(
   const interval = window.setInterval(update, 100);
   return () => {
     disposed = true;
+    window.clearTimeout(revealResults);
+    calloutAnimation?.revert();
+    audio.setScene("silent");
     generation++;
     window.clearTimeout(loadTimeout);
     session.race.pause();

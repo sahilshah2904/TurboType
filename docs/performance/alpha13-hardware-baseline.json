@@ -1,0 +1,645 @@
+{
+  "browser": "156.0.8078.4",
+  "version": "0.1.0-alpha.13",
+  "hardware": true,
+  "host": {
+    "platform": "win32",
+    "release": "10.0.26200",
+    "memoryBytes": 7968333824,
+    "cpu": "AMD Ryzen 7 4800H with Radeon Graphics         "
+  },
+  "renderer": "Headed Chromium / confirmed hardware GPU; local Vite HTTP; 1440×900",
+  "scope": "Full app HUD, synthetic DOM input, renderer and decoded music; rAF callback cadence, hardware trace when requested, and CDP JS heap. No physical-key latency or total GPU-memory claim. 6 route cycles, 12000ms sample; one sample per quality.",
+  "assets": [
+    {
+      "file": "volt-kart.png",
+      "bytes": 1685763,
+      "sha256": "89f68f97670638a90b4fc8203a5a52937bd43e96e03a32f1248ab57ef798d6e0"
+    },
+    {
+      "file": "neon-fox.webp",
+      "bytes": 79284,
+      "sha256": "36c3ccfe03d75fee3a8b32cce2f78b53de502c876b9b00814d18c6e6b666ad79"
+    },
+    {
+      "file": "apex-nova.webp",
+      "bytes": 54608,
+      "sha256": "1730c8a27ae8626a468a4297bc456bf51aa048cbb797b4e8e4a6975ebe83522b"
+    },
+    {
+      "file": "comet.webp",
+      "bytes": 57022,
+      "sha256": "2337b66252790dffea76276c074d2f6266e85f8c4f5b7a4320b4e58d218569e9"
+    },
+    {
+      "file": "volt-rival.webp",
+      "bytes": 76666,
+      "sha256": "be36a2250b1d9c197dd24163428fd9fc31c0d0074643f066b9a598bce57a4d58"
+    }
+  ],
+  "results": [
+    {
+      "profile": {
+        "name": "high",
+        "effects": "high",
+        "motion": "full",
+        "throttle": 1
+      },
+      "trackReadyMs": 2238,
+      "frames": {
+        "samples": 1282,
+        "medianMs": 6.900000000001455,
+        "p95Ms": 7.300000000000182,
+        "p99Ms": 13.900000000000546,
+        "over33ms": 4,
+        "maxParticles": 25,
+        "characters": 75
+      },
+      "heapBefore": {
+        "usedSize": 25235048,
+        "totalSize": 26226688,
+        "embedderHeapUsedSize": 2555120,
+        "backingStorageSize": 30468013
+      },
+      "heapAfter": {
+        "usedSize": 24823364,
+        "totalSize": 26750976,
+        "embedderHeapUsedSize": 2783672,
+        "backingStorageSize": 23848367
+      },
+      "canvasesAfterLeaving": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "audio": {
+        "contexts": 1,
+        "decodes": [
+          {
+            "duration": 15.483854166666667,
+            "elapsedMs": 56.69999998807907
+          },
+          {
+            "duration": 25.6,
+            "elapsedMs": 38.10000002384186
+          }
+        ],
+        "liveLoops": 1
+      },
+      "textures": [
+        {
+          "file": "volt-kart.png",
+          "durationMs": 737.5,
+          "decodedBodyBytes": 1685763,
+          "transferBytes": 1686063
+        },
+        {
+          "file": "comet.webp",
+          "durationMs": 504.9000000357628,
+          "decodedBodyBytes": 57022,
+          "transferBytes": 57322
+        },
+        {
+          "file": "apex-nova.webp",
+          "durationMs": 509,
+          "decodedBodyBytes": 54608,
+          "transferBytes": 54908
+        },
+        {
+          "file": "neon-fox.webp",
+          "durationMs": 530.7000000476837,
+          "decodedBodyBytes": 79284,
+          "transferBytes": 79584
+        },
+        {
+          "file": "volt-rival.webp",
+          "durationMs": 748,
+          "decodedBodyBytes": 76666,
+          "transferBytes": 76966
+        },
+        {
+          "file": "volt-kart.png",
+          "durationMs": 12.799999952316284,
+          "decodedBodyBytes": 1685763,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox.webp",
+          "durationMs": 7.300000011920929,
+          "decodedBodyBytes": 79284,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova.webp",
+          "durationMs": 8.900000035762787,
+          "decodedBodyBytes": 54608,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet.webp",
+          "durationMs": 10.800000011920929,
+          "decodedBodyBytes": 57022,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival.webp",
+          "durationMs": 13.100000023841858,
+          "decodedBodyBytes": 76666,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart.png",
+          "durationMs": 17,
+          "decodedBodyBytes": 1685763,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox.webp",
+          "durationMs": 6.699999988079071,
+          "decodedBodyBytes": 79284,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova.webp",
+          "durationMs": 10.199999988079071,
+          "decodedBodyBytes": 54608,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet.webp",
+          "durationMs": 12.5,
+          "decodedBodyBytes": 57022,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival.webp",
+          "durationMs": 13.900000035762787,
+          "decodedBodyBytes": 76666,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart.png",
+          "durationMs": 9,
+          "decodedBodyBytes": 1685763,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox.webp",
+          "durationMs": 5.600000023841858,
+          "decodedBodyBytes": 79284,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova.webp",
+          "durationMs": 6.800000011920929,
+          "decodedBodyBytes": 54608,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet.webp",
+          "durationMs": 8.100000023841858,
+          "decodedBodyBytes": 57022,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival.webp",
+          "durationMs": 11.600000023841858,
+          "decodedBodyBytes": 76666,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart.png",
+          "durationMs": 10.5,
+          "decodedBodyBytes": 1685763,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox.webp",
+          "durationMs": 8.700000047683716,
+          "decodedBodyBytes": 79284,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova.webp",
+          "durationMs": 10.100000023841858,
+          "decodedBodyBytes": 54608,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet.webp",
+          "durationMs": 11.5,
+          "decodedBodyBytes": 57022,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival.webp",
+          "durationMs": 14,
+          "decodedBodyBytes": 76666,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart.png",
+          "durationMs": 11,
+          "decodedBodyBytes": 1685763,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox.webp",
+          "durationMs": 5.600000023841858,
+          "decodedBodyBytes": 79284,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova.webp",
+          "durationMs": 6.899999976158142,
+          "decodedBodyBytes": 54608,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet.webp",
+          "durationMs": 8.199999988079071,
+          "decodedBodyBytes": 57022,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival.webp",
+          "durationMs": 10.100000023841858,
+          "decodedBodyBytes": 76666,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart.png",
+          "durationMs": 8.400000035762787,
+          "decodedBodyBytes": 1685763,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox.webp",
+          "durationMs": 5.300000011920929,
+          "decodedBodyBytes": 79284,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova.webp",
+          "durationMs": 6.399999976158142,
+          "decodedBodyBytes": 54608,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet.webp",
+          "durationMs": 8,
+          "decodedBodyBytes": 57022,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival.webp",
+          "durationMs": 9,
+          "decodedBodyBytes": 76666,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart.png",
+          "durationMs": 14,
+          "decodedBodyBytes": 1685763,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox.webp",
+          "durationMs": 7,
+          "decodedBodyBytes": 79284,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova.webp",
+          "durationMs": 8.099999964237213,
+          "decodedBodyBytes": 54608,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet.webp",
+          "durationMs": 9.600000023841858,
+          "decodedBodyBytes": 57022,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival.webp",
+          "durationMs": 11.900000035762787,
+          "decodedBodyBytes": 76666,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart.png",
+          "durationMs": 10.099999964237213,
+          "decodedBodyBytes": 1685763,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox.webp",
+          "durationMs": 5.100000023841858,
+          "decodedBodyBytes": 79284,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova.webp",
+          "durationMs": 6.900000035762787,
+          "decodedBodyBytes": 54608,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet.webp",
+          "durationMs": 8.599999964237213,
+          "decodedBodyBytes": 57022,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival.webp",
+          "durationMs": 10.300000011920929,
+          "decodedBodyBytes": 76666,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart.png",
+          "durationMs": 8.300000011920929,
+          "decodedBodyBytes": 1685763,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox.webp",
+          "durationMs": 7.199999988079071,
+          "decodedBodyBytes": 79284,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova.webp",
+          "durationMs": 8.600000023841858,
+          "decodedBodyBytes": 54608,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet.webp",
+          "durationMs": 11.699999988079071,
+          "decodedBodyBytes": 57022,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival.webp",
+          "durationMs": 13.399999976158142,
+          "decodedBodyBytes": 76666,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart.png",
+          "durationMs": 9.199999988079071,
+          "decodedBodyBytes": 1685763,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox.webp",
+          "durationMs": 5.199999988079071,
+          "decodedBodyBytes": 79284,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova.webp",
+          "durationMs": 7.399999976158142,
+          "decodedBodyBytes": 54608,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet.webp",
+          "durationMs": 8.800000011920929,
+          "decodedBodyBytes": 57022,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival.webp",
+          "durationMs": 9.5,
+          "decodedBodyBytes": 76666,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart.png",
+          "durationMs": 9.200000047683716,
+          "decodedBodyBytes": 1685763,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox.webp",
+          "durationMs": 7,
+          "decodedBodyBytes": 79284,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova.webp",
+          "durationMs": 12.299999952316284,
+          "decodedBodyBytes": 54608,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet.webp",
+          "durationMs": 13.899999976158142,
+          "decodedBodyBytes": 57022,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival.webp",
+          "durationMs": 16.100000023841858,
+          "decodedBodyBytes": 76666,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart.png",
+          "durationMs": 15.5,
+          "decodedBodyBytes": 1685763,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox.webp",
+          "durationMs": 8.5,
+          "decodedBodyBytes": 79284,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova.webp",
+          "durationMs": 10.600000023841858,
+          "decodedBodyBytes": 54608,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet.webp",
+          "durationMs": 14.099999964237213,
+          "decodedBodyBytes": 57022,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival.webp",
+          "durationMs": 19.5,
+          "decodedBodyBytes": 76666,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart.png",
+          "durationMs": 14.399999976158142,
+          "decodedBodyBytes": 1685763,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox.webp",
+          "durationMs": 11,
+          "decodedBodyBytes": 79284,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova.webp",
+          "durationMs": 12.899999976158142,
+          "decodedBodyBytes": 54608,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet.webp",
+          "durationMs": 17.19999998807907,
+          "decodedBodyBytes": 57022,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival.webp",
+          "durationMs": 20.30000001192093,
+          "decodedBodyBytes": 76666,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart.png",
+          "durationMs": 8.800000011920929,
+          "decodedBodyBytes": 1685763,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox.webp",
+          "durationMs": 5.300000011920929,
+          "decodedBodyBytes": 79284,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova.webp",
+          "durationMs": 6.600000023841858,
+          "decodedBodyBytes": 54608,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet.webp",
+          "durationMs": 8.100000023841858,
+          "decodedBodyBytes": 57022,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival.webp",
+          "durationMs": 13.600000023841858,
+          "decodedBodyBytes": 76666,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart.png",
+          "durationMs": 10.600000023841858,
+          "decodedBodyBytes": 1685763,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox.webp",
+          "durationMs": 7.199999988079071,
+          "decodedBodyBytes": 79284,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova.webp",
+          "durationMs": 8.800000011920929,
+          "decodedBodyBytes": 54608,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet.webp",
+          "durationMs": 13.899999976158142,
+          "decodedBodyBytes": 57022,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival.webp",
+          "durationMs": 16.19999998807907,
+          "decodedBodyBytes": 76666,
+          "transferBytes": 300
+        }
+      ],
+      "errors": [],
+      "traceSummary": {
+        "eventCounts": {
+          "DroppedFrame": 37,
+          "DirectRenderer::DrawFrame": 1278,
+          "DirectRenderer::DrawFrame ProcessForOverlays": 1278,
+          "DrawFrame": 1284,
+          "FramePresented": 86,
+          "PipelineReporter": 5438,
+          "EventLatency": 346
+        },
+        "longTasksOver50ms": 0,
+        "maxTaskMs": 0,
+        "traceFile": "high-trace.json",
+        "input": "Synthetic DOM InputEvents, not physical keys or trusted OS key-to-paint latency"
+      }
+    }
+  ],
+  "gpu": {
+    "devices": [
+      {
+        "vendorId": 4098,
+        "deviceId": 5686,
+        "subSysId": 383717443,
+        "revision": 198,
+        "vendorString": "",
+        "deviceString": "AMD Radeon(TM) Graphics",
+        "driverVendor": "AMD",
+        "driverVersion": "31.0.12014.6"
+      },
+      {
+        "vendorId": 4318,
+        "deviceId": 8085,
+        "subSysId": 383717443,
+        "revision": 161,
+        "vendorString": "",
+        "deviceString": "NVIDIA GeForce GTX 1650 Ti",
+        "driverVendor": "",
+        "driverVersion": "32.0.15.5597"
+      },
+      {
+        "vendorId": 5140,
+        "deviceId": 140,
+        "subSysId": 0,
+        "revision": 0,
+        "vendorString": "",
+        "deviceString": "Microsoft Basic Render Driver",
+        "driverVendor": "",
+        "driverVersion": "10.0.26100.9711"
+      }
+    ],
+    "featureStatus": {
+      "2d_canvas": "enabled",
+      "direct_rendering_display_compositor": "disabled_off_ok",
+      "gpu_compositing": "enabled",
+      "multiple_raster_threads": "enabled_on",
+      "opengl": "enabled_on",
+      "rasterization": "enabled",
+      "raw_draw": "disabled_off_ok",
+      "skia_graphite": "disabled_off",
+      "trees_in_viz": "disabled_off",
+      "video_decode": "enabled",
+      "video_encode": "enabled",
+      "webgl": "enabled",
+      "webgpu": "enabled",
+      "webnn": "disabled_off"
+    },
+    "renderer": "ANGLE (AMD, AMD Radeon(TM) Graphics (0x00001636) Direct3D11 vs_5_0 ps_5_0, D3D11-31.0.12014.6)"
+  },
+  "recordedDate": "2026-10-22",
+  "sourceContext": "2eebd92 application with local hardware-profile instrumentation, before part changes"
+}

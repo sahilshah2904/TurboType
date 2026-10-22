@@ -12,9 +12,9 @@ An original browser typing racer: build physical-keyboard speed and accuracy whi
 
 </div>
 
-![Actual TurboType alpha.13 race: original Comet kart, four CPUs, city circuit, integrated typing strip and Live WPM dial](docs/images/alpha13/active-race-1440.png)
+![Actual TurboType alpha.14 race: independent kart parts, four CPUs, city circuit, integrated typing strip and Live WPM dial](docs/images/alpha14/active-race-1440.png)
 
-*Actual **0.1.0-alpha.13** gameplay. Screenshots show the latest development preview on **feat/race-polish**, not a deployed website. Main game code remains the accepted Phase 4 baseline until [PR #4](https://github.com/sahilshah2904/TurboType/pull/4) is integrated. Updating this README does not merge that code.*
+*Actual **0.1.0-alpha.14** gameplay. Screenshots show the latest development preview on **feat/race-polish**, not a deployed website. Main game code remains the accepted Phase 4 baseline until [PR #4](https://github.com/sahilshah2904/TurboType/pull/4) is integrated. Updating this README does not merge that code.*
 
 ## What is TurboType?
 
@@ -33,11 +33,11 @@ The preview uses a full-window city circuit, detailed original karts, graphite/c
 
 ### Clean hub with your chosen car
 
-![Alpha.13 hub: full-width city garage, selected kart and campaign previews; no sound controls](docs/images/alpha13/hub-1440.png)
+![Alpha.14 hub: full-width city garage, selected kart and campaign previews; no sound controls](docs/images/alpha14/hub-1440.png)
 
 ### Five starter cars before each race
 
-![Alpha.13 race setup and illustrated starter selector](docs/images/alpha13/race-1440.png)
+![Alpha.14 race setup and illustrated starter selector](docs/images/alpha14/race-setup-1440.png)
 
 ### All audio controls in Settings
 
@@ -45,7 +45,7 @@ The preview uses a full-window city circuit, detailed original karts, graphite/c
 
 </details>
 
-These are real app captures, not concept artwork. [More current laptop captures](https://github.com/sahilshah2904/TurboType/tree/feat/race-polish/docs/images/alpha13) include Practice, Keyboard check and 1024px layouts. Earlier screenshots remain historical evidence.
+These are real app captures, not concept artwork. [Current parts/laptop captures](https://github.com/sahilshah2904/TurboType/tree/feat/race-polish/docs/images/alpha14) include all five starter models and 1024–1920px race layouts. Earlier screenshots remain historical evidence.
 
 ## What you can play now
 
@@ -77,7 +77,7 @@ Open **Settings → Sound & music** to enable sound or change volumes. The hub h
 
 ## Development progress
 
-**Phases 1–4 are complete for their agreed scope. Phase 5 is not fully closed.** Its main visible features and automated checks are complete; separate body/wheel artwork, measured hardware performance/tuning and final PR integration remain. Existing-page visuals are partial Phase 6 work, not a completed cinematic introduction.
+**Phases 1–4 are complete for their agreed scope. Phase 5 is not fully closed.** Its main visible features and automated checks are complete; independent parts are now implemented in alpha.14; physical-input acceptance and final PR integration remain. Existing-page visuals are partial Phase 6 work, not a completed cinematic introduction.
 
 | Phase | Delivery | Current status |
 | --- | --- | --- |
@@ -97,13 +97,13 @@ Phases vary greatly in size; phase numbers are not a completion percentage.
 
 ### What remains in Phase 5?
 
-- **Vehicle parts:** current karts have baked wheel artwork plus rotating highlights. Separate body/wheel sources and proper component animation remain TT-501/510; preserve the accepted silhouettes/colors.
-- **Measured hardware performance:** the user reported the other laptop checks good, but software-renderer rAF/heap data do not certify physical frame rate, key latency or GPU memory. Hardware tracing/tuning and final evidence remain TT-505/506/511–513/522.
+- **Vehicle parts:** alpha.14 implements separate chassis/wheel sources, independent rotation, chassis-only suspension and compact shared previews while preserving the accepted silhouettes/colors. See [Phase 5 closeout](docs/PHASE5_CLOSEOUT.md).
+- **Physical acceptance:** actual-GPU synthetic-input profiling supplements the prior software evidence. A focused physical typing/parts check remains before closing TT-506/513/522; callback cadence and JS heap do not certify OS-to-photon latency or GPU memory.
 - **Integration:** reconcile those gates, verify the final source/checks and integrate PR #4. No merge/deployment happens merely because a documentation handoff is saved.
 
-### Ten future reward cars
+### Future category reward cars
 
-Five starters are available now. Later, **ten additional increasingly sporty cars** unlock after **10, 25, 50, 75, 100, 140, 180, 220, 260 and 300 unique eligible main-level clears** across the three campaigns. Replay, bonus events, Quick Race and Practice do not inflate this count. Cars remain cosmetic.
+Five starters are available now. Later, **each 100-level category (Easy, Medium, Hard) unlocks a distinct car every 15 eligible main-level clears**, at **15, 30, 45, 60, 75 and 90 within that category**. That is **18 reward cars plus five starters**. Category counters are independent; replay, bonus events, Quick Race and Practice do not inflate them. Cars remain cosmetic.
 
 Stable IDs, art briefs, locked garage UX, receipt-based ownership, save recovery and cloud merges are in the [garage progression plan](https://github.com/sahilshah2904/TurboType/blob/feat/race-polish/docs/GARAGE_PROGRESSION.md), tracked **TT-911**. These cars/unlocks are future Phase 8/9 work, not a Phase 5 prerequisite.
 

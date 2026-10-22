@@ -1,8 +1,8 @@
 # Responsive release and online data architecture
 
-Planning revision: 20 October 2026. User requirement: share one GitHub-hosted website that works on phones, tablets and laptops, then add friends multiplayer immediately after the single-player release. Plan the persistent data and network boundaries from the beginning.
+**Current scope override — 21 October 2026:** the user explicitly narrowed TurboType to laptop/desktop browsers with a physical keyboard. Phone/tablet compatibility, software-keyboard layout, rotation and mobile acceptance are canceled requirements. Earlier multi-device statements are historical. Keep laptop window responsiveness (960 CSS px minimum; verify 1024/1366/1440/1920 widths), accessibility, hardware-keyboard IME composition, cloud saves before solo launch and multiplayer afterward. Do not restore mobile work without a new user request.
 
-This document updates the earlier desktop-first/local-only launch assumption. Single-player prototypes may use local saves, but the public single-player release should support optional account-backed cloud progress. Friends racing follows in phase 11. No cloud project, database, authentication provider, or multiplayer service has been provisioned.
+Optional account-backed progress before solo launch and friends multiplayer immediately afterward remain planned. No cloud project/database/auth or realtime service is provisioned.
 
 ## Hosting and service boundaries
 
@@ -11,7 +11,7 @@ GitHub Pages hosts the compiled game, interface, and static content. It serves H
 Proposed architecture:
 
 ```text
-Phone / tablet / laptop
+Laptop / desktop physical keyboard
   → GitHub Pages: responsive TurboType frontend
      → local cache + pending completed-run submissions
      → authentication + persistent database: profiles/progress/results
@@ -23,22 +23,13 @@ Phone / tablet / laptop
 
 For live rooms, evaluate a server-authoritative WebSocket service such as Colyseus during phase 11. A database stores durable state; it does not by itself decide fair race start times or validate finish order. Supabase Realtime provides realtime primitives, while Colyseus documents server-mutated room state; choose the actual room implementation after a small multi-client prototype. Avoid shipping both systems without a demonstrated need. [Supabase Realtime](https://supabase.com/docs/guides/realtime), [Colyseus state](https://docs.colyseus.io/state).
 
-## Responsive behavior from phase 2
+## Laptop responsiveness and input
 
-Target modern supported browsers across Android phones, iPhones, tablets/iPads, and Windows/macOS laptops. Responsive layout is a release requirement, not an optional polish task. It does not guarantee compatibility with every historic device/browser; publish the actual tested matrix and limitations.
+Target modern Windows/macOS/Linux laptop and desktop browsers with a physical keyboard. Design for a minimum 960 CSS px window and verify representative 1024×768, 1366×768, 1440×900 and 1920×1080 layouts, plus zoom and window resizing. Preserve race text/state during resize; actual focus loss follows the pause policy.
 
-- Build for narrow touch screens first, then expand layouts with available space. Use content-driven breakpoints; initial test widths include 320, 360, 390, 768, 1024 and 1440 CSS pixels.
-- Support portrait and landscape without forcing rotation. On phones, stack a compact race scene, essential HUD, readable passage and input above the software keyboard. Compress decorative scenery before shrinking typing text.
-- Keep all four CPUs represented on compact layouts through scaled lanes and, when needed, a compact rank list/edge indicators. Never make the passage unusable to preserve a desktop composition.
-- Phone keyboards change the visible area independently of the layout viewport. Observe viewport changes where supported, account for safe-area insets and dynamic browser chrome, and feature-detect enhancements. Do not depend exclusively on the limited-availability VirtualKeyboard API. [VisualViewport](https://developer.mozilla.org/en-US/docs/Web/API/VisualViewport), [VirtualKeyboard API](https://developer.mozilla.org/en-US/docs/Web/API/VirtualKeyboard_API).
-- Use a real focusable input and a deliberate Start/Focus action. Preserve focus during text updates, avoid auto-opening the keyboard on unrelated screens, and test correction/composition on real devices. Request spellcheck/autocorrect/autocapitalization off where supported, with fallback behavior documented.
-- A viewport resize, rotation, or keyboard appearance must preserve text/progress and must not itself mark a run paused. Actual tab hiding/application focus loss follows solo pause policy; implement these events carefully so keyboard behavior does not accidentally invalidate every mobile run.
-- Menus, map nodes, drawers, and dialogs need practical touch targets (aim for at least 44 CSS pixels), visible focus, touch and keyboard controls. No hover-only essential controls.
-- The campaign map remains rightward-scrolling on touch devices, with swipe/drag, chapter navigation, Jump to Current and an accessible list view. Do not trap vertical page scrolling.
-- Adapt canvas dimensions and device pixel ratio, and reduce particles/filters on lower-power devices. Honor reduced motion from the first entrance screen.
-- Audio starts after a user gesture; a blocked audio context cannot block a race. The same rule applies to touch and hardware keyboard players.
+Use mouse and keyboard navigation, visible focus, readable typing, reduced motion and usable controls at supported window sizes. The rightward campaign map needs mouse scrolling/drag, keyboard navigation, Jump to Current and an accessible list. Do not depend on hover alone for essential explanations. Keep hardware IME composition and native input accessibility; removing phone support does not mean capturing only keydown events.
 
-Software keyboards, predictive text and hardware keyboards produce different typing experiences. Record an explicit user-selected input profile (`touch`, `hardware`, `unspecified`), allow correction of the selection, and do not claim device detection proves how text was entered. Keep comparable records segmented by input profile and rule/content version. Later competitive room rules must state how mixed-input racing is handled. Do not infer accurate input hardware from user agent alone.
+Alpha.9 removes phone/tablet browser profiles, OS-keyboard VisualViewport offsets, compact touch-screen CSS and touch input-profile support. Smaller screens have no compatibility guarantee; they are not a launch gate. Records/network contracts may still identify hardware/unspecified input. Browser storage, auth and network boundaries remain independent of layout.
 
 ## Account and save experience
 
@@ -82,9 +73,9 @@ Game art and the 300-level manifests remain versioned source/static content; pla
 
 1. **Phase 2:** responsive shell, real-device input spike, stable IDs and storage/auth/network boundaries. Decide and document the persistence provider before cloud integration code.
 2. **Phases 3–4:** correct solo game and CPU race using a tested local adapter; no network request in the per-key rendering path.
-3. **Phases 5–8:** build every screen with touch/tablet/laptop behavior; keep the model ready for shared results. Begin cloud schema/auth integration when the completed-run model stabilizes.
+3. **Phases 5–8:** build every screen for laptop/desktop window behavior; keep the model ready for shared results. Begin cloud schema/auth integration when the completed-run model stabilizes.
 4. **Phase 9:** implement account-backed single-player progress, sync, access controls, conflict handling, import and recovery along with the garage/learning features. Local guest mode remains.
 5. **Phase 10:** verify cross-device sign-in/progress, cloud failure behavior and responsive play, then launch the single-player game on Pages. Provider account/configuration is a launch dependency and must be reported if unavailable.
 6. **Phase 11, immediately following single-player launch:** add friends rooms, invitation links, readiness, authoritative countdown/progress/results, reconnect handling and rematch. Reuse identity, data contracts, migrations and persistence from single-player rather than starting them from scratch.
 
-Minimum launch evidence: representative real Android/iOS phone runs with software keyboards, tablet layout/input checks, laptop hardware-keyboard races, portrait/landscape/resize and reduced motion; verified same-account progress across two devices; two accounts unable to read/write each other's private data; duplicate/retried result submissions not duplicating awards; pending/failed sync shown honestly; and no secrets in the built public site.
+Minimum launch evidence: representative physical-keyboard laptop races in supported desktop browsers/resolutions and zoom, reduced motion, verified same-account progress across two supported computers, account access isolation, idempotent/retried awards, honest sync state and no secrets in the public bundle.

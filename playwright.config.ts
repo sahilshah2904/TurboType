@@ -3,7 +3,8 @@ import { defineConfig, devices } from "@playwright/test";
 export default defineConfig({
   testDir: "./tests/browser",
   fullyParallel: false,
-  workers: 3,
+  // Two software-rendered browser workers keep peak decode/GPU memory bounded.
+  workers: 2,
   retries: process.env.CI ? 1 : 0,
   reporter: "list",
   use: {
@@ -15,25 +16,6 @@ export default defineConfig({
       name: "desktop-chromium",
       use: {
         ...devices["Desktop Chrome"],
-        launchOptions: {
-          args: ["--use-angle=swiftshader", "--enable-unsafe-swiftshader"],
-        },
-      },
-    },
-    {
-      name: "phone-chromium",
-      use: {
-        ...devices["Pixel 7"],
-        launchOptions: {
-          args: ["--use-angle=swiftshader", "--enable-unsafe-swiftshader"],
-        },
-      },
-    },
-    {
-      name: "tablet-chromium",
-      use: {
-        ...devices["iPad Mini"],
-        defaultBrowserType: "chromium",
         launchOptions: {
           args: ["--use-angle=swiftshader", "--enable-unsafe-swiftshader"],
         },

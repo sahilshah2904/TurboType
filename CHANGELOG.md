@@ -1,5 +1,85 @@
 # Changelog
 
+## 0.1.0-alpha.14 — 22 October 2026
+
+- Separate all five accepted chassis from their wheels. Add editable original wheel sources, independent tire/rim rotation, chassis-only suspension and shared race/hub anchors; preserve one-car-per-race and cosmetic-only rules.
+- Export compact body/wheel/static-preview WebPs from committed sources instead of loading large composite masters in the live fleet and selector. Keep original masters for provenance.
+- Add hardware-verified headed-browser profiling with trace capture and longer sequential cleanup cycles; keep synthetic input, physical typing and presentation evidence explicitly distinct.
+- Correct future TT-911 rewards to one distinct car every 15 clears within each 100-level category: six per category, eighteen rewards plus five starters. This is documented future work, not current unlock behavior.
+- Explain Quick Race passage/pace/mode/seed and the final level-defined campaign flow; optional seed disclosure remains TT-603. Rules 3 and save/content 1 remain unchanged.
+
+## 0.1.0-alpha.13 — 21 October 2026
+
+- Lock each chosen car from countdown through finish, including pause/navigation. Retry or a new race opens selection again; guard synthetic change events by actual race state.
+- Add one accessible top-right fullscreen/restore icon on every route, with a 44px target, state updates and refusal feedback. Remove the small Race-only text control.
+- Raise prose/controls to at least 16px and compact metadata to 14px, improve muted text contrast and preserve laptop navigation/scrolling.
+- Fix CI test composition: split the 30-second all-in-one garage scenario into focused cases, retaining the same assertions plus the new lock rule. Run feature checks on PR updates, main on push and manual dispatch; cancel superseded runs instead of running duplicate push/PR suites.
+- Record user acceptance of the other laptop checks. Separate wheel parts and measured hardware performance remain open. Rules/save/content versions unchanged.
+
+## 0.1.0-alpha.12 — 21 October 2026
+
+- Add an illustrated five-starter car selector before starting or while paused. Remember the validated cosmetic preference; update the current race in place and show the chosen model in the hub/preview. CPUs use the other four models; typing rules, timing, speed and results are unchanged.
+- Move enable/mute/volume controls exclusively to Settings; remove Pit lane radio from the hub. Preserve the accepted original music and its loading/gesture/cleanup behavior.
+- Record acceptance of the distinct fleet and plan ten increasingly sporty locked cars for unique campaign-clear milestones, with ownership/save/cloud requirements explicitly deferred to Phases 8/9.
+- Add selection/pause/restore/storage-failure and Settings-only audio regression evidence. App version changes only; rules 3, save/content 1 remain.
+
+## 0.1.0-alpha.11 — 21 October 2026
+
+- Replace four recolored CPUs with original amber rally, blue aero, pearl/magenta streamliner and violet electric karts, sharing anchors between race and hub. Preserve the accepted player, palette and both music masters.
+- Add tracked PNG masters/prompts and a reproducible WebP export pipeline; four rival textures total 267,580 bytes. Separate body/wheel art remains tracked.
+- Reuse standings nodes and avoid unchanged passage-class writes; preserve immediate input feedback and core race rules.
+- Add full-app timing/audio/heap/route-cleanup profiling and rival-art failure/recovery checks. Record user approval of the restored colors and Ignition. No rules/save/content change or deployment.
+
+## 0.1.0-alpha.10 — 21 October 2026
+
+- Restore the earlier graphite/crimson/cyan CSS and Phaser palette after the user rejected red/gold.
+- Preserve laptop-only support, mobile-code removal, Ignition menu music and the accepted Overdrive race recording. No rules/save/content change.
+
+## 0.1.0-alpha.9 — 21 October 2026
+
+- Narrow product scope to laptop/desktop physical-keyboard typing at the user's request. Remove mobile/tablet browser profiles, touch-screen CSS and software-keyboard VisualViewport handling; retain regular window resizing and hardware IME composition.
+- Make metallic red/gold dominant, with cyan restricted to small lights; original shapes follow the nanotech armor color reference.
+- Replace the rejected sad menu score with upbeat major-key Ignition (124 BPM). Preserve the accepted Overdrive race WAV byte-for-byte.
+- Record user acceptance of typing/speedometer and pause/resume/retry checks. The phone word-at-a-time symptom is out of scope, not claimed fixed. Rules remain 3, save/content 1.
+
+## 0.1.0-alpha.8 — 21 October 2026
+
+- Replace the rejected burgundy wash with graphite surfaces, metallic crimson controls, cyan reactor-style light/rings and restrained gold details across pages and Phaser scenes.
+- Replace the old realtime music loop with two distinct original instrumental WAV masters: Nightforge for browsing and Overdrive for racing. Include a deterministic offline composer, checksums and mix metadata. Preserve independent countdown/FX and lifecycle controls.
+- Remove personal-music selection and its loader/tests at the user's request. No external music, film artwork or soundtrack is added. Rules/save/content versions remain compatible.
+
+## 0.1.0-alpha.7 — 21 October 2026
+
+- Fill the hub track preview across its container by resizing/redrawing scenery with uniform kart scaling; remove grey side columns.
+- Add energetic menu percussion, hub sound controls and music during Race setup/results. Use a separate pulse score and rising cues during the existing 3–2–1 countdown.
+- Integrate visit-only personal audio-file playback with mute/volume/navigation/pause/countdown behavior, blocked-file fallback and object-URL cleanup. No Misirlou recording is supplied or bundled.
+- Preserve rules 3 and save/content 1; actual-device audible/visual acceptance remains open.
+
+## 0.1.0-alpha.6 — 21 October 2026
+
+- Apply a red-and-black visual theme across Hub, Race, Practice, Keyboard check and Settings: charcoal surfaces, crimson controls, red horizon, HUD and Live WPM dial.
+- Reuse the original kart with a red player palette, warm exhaust and red/white nitro accents. CPU colors and explicit names preserve identification.
+- Keep completed typing muted and mistakes amber with an underline, distinct from decorative red. Rules 3 and save/content 1 stay compatible; device acceptance remains open.
+
+## 0.1.0-alpha.5 — 21 October 2026
+
+- Integrate the approved full-window Phaser kart race, moving exhaust, responsive lanes and native single typing surface into the normal app.
+- Add Live WPM analog/numeric speedometers in Race/Practice, using the existing rolling pace independently of average WPM and outcomes.
+- Revamp hub, practice, keyboard check and settings with a shared open world layout; retain their working controls/preferences.
+- Add disposable visual-viewport support, integrated setup/pause/results/recovery controls and browser regression coverage. No rules/save/content migration or backend change; final device acceptance and distinct fleet remain pending.
+
+
+## 0.1.0-alpha.4 — Neon Harbor polish, 20 October 2026
+
+Working on feat/race-polish from merged main c4127c7; not a tagged or deployed release.
+
+- Merged accepted Phase 4 PR #3, then authored a Neon Harbor art bible and reproducible generator for three original modern sports-car SVGs; replaced the legacy sedan in hub/race and removed its unused current asset.
+- Added city parallax, player-relative camera/approaching finish, edge indicators, wheel/suspension/exhaust, bounded nitro/speed effects, short HTML callouts and finish/confetti treatment. Reduced motion uses a stable whole-course view; low reduces effect budgets.
+- Kept metrics above the course, reduced panel boxing and added a caret-following text strip; Larger typing text retains wrapping.
+- Added original Harbor Circuit menu/race synth score, engine/countdown/error/nitro/overtake/finish cues, opt-in audio, saved master/music/effects/mute controls, bounded scheduler and graceful pause/navigation/failure cleanup. No extra runtime package, audio download, microphone or reference song.
+- Local full check passes 83 unit and 66 browser tests. Isolated headless renderer measurements and reproducible scripts are documented. Rules remain 3; existing save/content versions remain 1 and audio has a separate preference key.
+- Physical ASUS/Samsung sound/visual/performance acceptance remains TT-505/506. Cinematic opening/onboarding remains Phase 6; no cloud progression or Pages release.
+
 ## 0.1.0-alpha.3 — four-CPU Quick Race, 20 October 2026
 
 Working on feat/solo-race from merged main baseline 08cddb4; not a tagged or deployed release.

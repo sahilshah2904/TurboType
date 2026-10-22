@@ -1,4 +1,5 @@
 import "./styles.css";
+import "./immersive.css";
 import { mountApp } from "./ui/app";
 
 const root = document.querySelector<HTMLElement>("#app")!;

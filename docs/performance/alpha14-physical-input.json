@@ -1,0 +1,45 @@
+{
+  "recordedAt": "2026-10-22T05:14:30.648Z",
+  "browser": "156.0.8078.4",
+  "cpu": "AMD Ryzen 7 4800H with Radeon Graphics",
+  "platform": "win32",
+  "osRelease": "10.0.26200",
+  "durationMs": 120000,
+  "trustedRaceKeys": 100,
+  "trustedInputs": 99,
+  "keyHandlerToNextRafMs": {
+    "median": 9.300000011920929,
+    "p95": 18.80000001192093,
+    "max": 22.19999998807907
+  },
+  "errors": [],
+  "sufficientInput": true,
+  "sampleCount": 119,
+  "routes": [
+    "#/race",
+    "#/settings",
+    "#/hub",
+    "#/keyboard",
+    "#/practice"
+  ],
+  "states": [
+    "Ready",
+    "Countdown",
+    "Racing",
+    "",
+    "Paused",
+    "Finished"
+  ],
+  "canvasCounts": [
+    1,
+    0
+  ],
+  "gpu": {
+    "renderer": "ANGLE (AMD, AMD Radeon(TM) Graphics (0x00001636) Direct3D11 vs_5_0 ps_5_0, D3D11-31.0.12014.6)",
+    "compositing": "enabled"
+  },
+  "userReport": "I believe everything worked fine.",
+  "acceptanceDate": "2026-10-22",
+  "scope": "Interactive human session with no typing automation. Handler-to-next-rAF timing is not OS-to-photon latency or GPU presentation certification. User smoothness/audio report remains separate.",
+  "limits": "Key counts include trusted racing keydown events, not a validated character count. Timing is handler-to-next-rAF, not OS-to-photon or GPU presentation latency. Route observations and the user report are separate from automated all-preset coverage. Full raw session remains ignored locally."
+}

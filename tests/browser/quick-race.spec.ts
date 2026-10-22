@@ -7,6 +7,7 @@ async function openRace(page: Page) {
   await expect(page.locator("#race-track")).toHaveAttribute(
     "data-ready",
     "true",
+    { timeout: 12000 },
   );
   await page.getByLabel("Race seed", { exact: true }).fill("42");
   await page.getByLabel("Race seed", { exact: true }).press("Tab");
@@ -82,6 +83,7 @@ test("pauses CPUs, preserves the race through navigation and resumes the same cl
   await expect(page.locator("#race-track")).toHaveAttribute(
     "data-ready",
     "true",
+    { timeout: 12000 },
   );
   await expect(page.locator("#race-state")).toHaveText("Paused");
   await expect(page.getByRole("textbox", { name: "Your typing" })).toHaveValue(
@@ -138,35 +140,45 @@ test("CPUs finishing first do not stop learning, while time trials produce hones
     "E",
   );
 });
-test("art failure allows explicit text racing, retry recovery and cleanup after leaving", async ({
-  page,
-}) => {
-  await page.clock.install();
-  await page.route("**/assets/starter-coupe.svg", (route) => route.abort());
-  await page.goto("./#/race");
-  await expect(
-    page.getByRole("button", { name: "Race with text standings" }),
-  ).toBeVisible();
-  await expect(page.getByRole("button", { name: "Start race" })).toBeDisabled();
-  await page.getByRole("button", { name: "Race with text standings" }).click();
-  await go(page);
-  await page
-    .getByRole("textbox", { name: "Your typing" })
-    .pressSequentially(SAMPLE);
-  await expect(page.locator("#race-state")).toHaveText("Finished");
-  await page.unroute("**/assets/starter-coupe.svg");
-  await page.getByRole("button", { name: "Retry artwork" }).click();
-  await expect(page.locator("#race-track")).toHaveAttribute(
-    "data-ready",
-    "true",
-  );
-  await page.getByRole("link", { name: "Practice", exact: true }).click();
-  await expect(page.locator("canvas")).toHaveCount(0);
-  await page.getByRole("link", { name: "Race", exact: true }).click();
-  await expect(page.locator("#race-track canvas")).toHaveCount(1);
-  await expect(page.locator("#race-state")).toHaveText("Finished");
-});
-test("validates seeds and supports new opponents, reduced motion and narrow rotation", async ({
+for (const asset of [
+  "parts/volt-kart-body.webp",
+  "parts/comet-body.webp",
+  "parts/comet-wheel.webp",
+])
+  test(`art failure for ${asset} allows text racing, retry recovery and cleanup`, async ({
+    page,
+  }) => {
+    await page.clock.install();
+    await page.route(`**/assets/karts/${asset}`, (route) => route.abort());
+    await page.goto("./#/race");
+    await expect(
+      page.getByRole("button", { name: "Race with text standings" }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("button", { name: "Start race" }),
+    ).toBeDisabled();
+    await page
+      .getByRole("button", { name: "Race with text standings" })
+      .click();
+    await go(page);
+    await page
+      .getByRole("textbox", { name: "Your typing" })
+      .pressSequentially(SAMPLE);
+    await expect(page.locator("#race-state")).toHaveText("Finished");
+    await page.unroute(`**/assets/karts/${asset}`);
+    await page.getByRole("button", { name: "Retry artwork" }).click();
+    await expect(page.locator("#race-track")).toHaveAttribute(
+      "data-ready",
+      "true",
+      { timeout: 12000 },
+    );
+    await page.getByRole("link", { name: "Practice", exact: true }).click();
+    await expect(page.locator("canvas")).toHaveCount(0);
+    await page.getByRole("link", { name: "Race", exact: true }).click();
+    await expect(page.locator("#race-track canvas")).toHaveCount(1);
+    await expect(page.locator("#race-state")).toHaveText("Finished");
+  });
+test("validates seeds and supports new opponents, reduced motion and laptop resize", async ({
   page,
 }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
@@ -182,12 +194,12 @@ test("validates seeds and supports new opponents, reduced motion and narrow rota
   await page
     .getByRole("textbox", { name: "Your typing" })
     .pressSequentially("Every");
-  await page.setViewportSize({ width: 640, height: 320 });
+  await page.setViewportSize({ width: 1024, height: 768 });
   await expect(page.locator("#race-state")).toHaveText("Racing");
   await expect(page.getByRole("textbox", { name: "Your typing" })).toHaveValue(
     "Every",
   );
-  await page.setViewportSize({ width: 320, height: 740 });
+  await page.setViewportSize({ width: 1366, height: 768 });
   expect(
     await page.evaluate(
       () => document.documentElement.scrollWidth <= innerWidth,

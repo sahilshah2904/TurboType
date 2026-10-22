@@ -1,8 +1,18 @@
 import type { UserSettings } from "../storage/settings";
+import { kartLineup, type KartId } from "../content/kart-catalog";
+import {
+  addKart,
+  animateKart,
+  bakePlayerPalette,
+  fleetReady,
+  KART_FLEET,
+  preloadFleet,
+} from "./kart-fleet";
 
 export interface PreviewOptions {
   reducedMotion: boolean;
   effects: UserSettings["effects"];
+  playerKart?: KartId;
   onReady: (message: string) => void;
   onError: (message: string) => void;
 }
@@ -14,20 +24,21 @@ export async function mountTrackPreview(
 ): Promise<() => void> {
   const { default: Phaser } = await import("phaser");
   if (!parent.isConnected) return () => {};
+  const lineup = kartLineup(options.playerKart ?? "volt-kart").slice(0, 3);
 
   class TrackPreview extends Phaser.Scene {
     private cars: Phaser.GameObjects.Container[] = [];
-    private wheelPairs: Phaser.GameObjects.Container[][] = [];
+    private assemblies: ReturnType<typeof addKart>[] = [];
     private marks!: Phaser.GameObjects.Graphics;
     private flame!: Phaser.GameObjects.Particles.ParticleEmitter;
     private elapsedMs = 0;
+    private world!: Phaser.GameObjects.Container;
+    private art!: Phaser.GameObjects.Graphics;
+    private label!: Phaser.GameObjects.Text;
+    private courseWidth = 1200;
 
     preload(): void {
-      this.load.svg(
-        "coupe",
-        `${import.meta.env.BASE_URL}assets/starter-coupe.svg`,
-        { width: 680, height: 220 },
-      );
+      preloadFleet(this, [...new Set([0, ...lineup])]);
       this.load.on("loaderror", () =>
         options.onError(
           "Track artwork could not load. Check your connection and retry.",
@@ -36,43 +47,16 @@ export async function mountTrackPreview(
     }
 
     create(): void {
-      if (!this.textures.exists("coupe")) return;
-      const art = this.add.graphics();
-      art.fillStyle(0x121f2b).fillRect(0, 0, 1200, 130);
-      art.fillStyle(0x1c303b).fillCircle(940, 30, 100);
-      for (let i = 0; i < 26; i++) {
-        const height = 25 + ((i * 37) % 73);
-        art
-          .fillStyle(i % 2 ? 0x253f48 : 0x20333e)
-          .fillRect(i * 49, 130 - height, 36, height);
-        for (let j = 0; j < 4; j++)
-          art
-            .fillStyle(0x8aa795, 0.35)
-            .fillRect(i * 49 + 8, 130 - height + 9 + j * 13, 3, 4);
-      }
-      art.fillStyle(0x90bd69).fillRect(0, 128, 1200, 3);
-      art.fillStyle(0x1a222c).fillRect(0, 132, 1200, 288);
-      art.lineStyle(1, 0x293541).lineBetween(0, 414, 1200, 414);
+      if (!fleetReady(this, [...new Set([0, ...lineup])])) return;
+      bakePlayerPalette(this);
+      this.art = this.add.graphics();
       this.marks = this.add.graphics();
       for (let i = 0; i < 3; i++) {
-        const car = this.add.container([540, 330, 160][i], 166 + i * 89);
-        const shadow = this.add.ellipse(8, 32, 236, 16, 0x000000, 0.3);
-        const body = this.add.image(0, 0, "coupe").setDisplaySize(230, 75);
-        if (i === 1) body.setTint(0xffa590);
-        if (i === 2) body.setTint(0x8abfe8);
-        const wheels = [-63, 77].map((x) => {
-          const wheel = this.add
-            .circle(0, 0, 15, 0x11161d)
-            .setStrokeStyle(4, 0x5b6872);
-          const spokes = this.add.graphics().lineStyle(2, 0xb9c8d0);
-          spokes.lineBetween(-9, 0, 9, 0).lineBetween(0, -9, 0, 9);
-          const assembly = this.add.container(x, 20, [wheel, spokes]);
-          car.add(assembly);
-          return assembly;
-        });
-        car.addAt([shadow, body], 0);
-        this.cars.push(car);
-        this.wheelPairs.push(wheels);
+        const assembly = addKart(this, lineup[i]);
+        const { root } = assembly;
+        root.setPosition([540, 330, 160][i], 166 + i * 89);
+        this.cars.push(root);
+        this.assemblies.push(assembly);
       }
       const dot = this.make.graphics({ x: 0, y: 0 });
       dot
@@ -86,7 +70,7 @@ export async function mountTrackPreview(
         lifespan: 420,
         scale: { start: 1.1, end: 0 },
         alpha: { start: 0.8, end: 0 },
-        tint: [0xffb767, 0xff8356, 0xc9f48b],
+        tint: [0xffb767, 0xff8356, 0xffe0d4],
         frequency: options.effects === "low" ? 85 : 30,
         emitting: !options.reducedMotion,
       });
@@ -101,22 +85,23 @@ export async function mountTrackPreview(
       this.add.text(36, 22, "NIGHT RUN / CITY CIRCUIT", {
         fontFamily: "monospace",
         fontSize: "13px",
-        color: "#9db0bb",
+        color: "#bfb1b8",
         letterSpacing: 2,
       });
-      this.add.text(1090, 22, "01", {
+      this.add.text(300, 22, "01", {
         fontFamily: "monospace",
         fontSize: "20px",
-        color: "#c1d1d7",
+        color: "#d9cdd3",
       });
       const label = this.add.text(505, 111, "YOUR RIDE", {
         fontFamily: "monospace",
         fontSize: "11px",
-        color: "#b7f36b",
-        backgroundColor: "#182b25",
+        color: "#63e7f2",
+        backgroundColor: "#2b141c",
         padding: { x: 12, y: 6 },
       });
       label.setDepth(2);
+      this.label = label;
       if (!options.reducedMotion) {
         this.tweens.add({
           targets: label,
@@ -127,45 +112,80 @@ export async function mountTrackPreview(
         });
         this.cameras.main.fadeIn(250);
       }
+      const children = [...this.children.list];
+      this.world = this.add.container(0, 0, children);
+      this.layout();
+      this.scale.on("resize", this.layout, this);
       parent.dataset.ready = "true";
+      parent.dataset.parts = "independent-body-wheels";
       options.onReady("Track preview ready");
+    }
+
+    private layout(): void {
+      const scale = Math.max(1, this.scale.height) / 420;
+      this.courseWidth = Math.max(1, this.scale.width) / scale;
+      this.world.setScale(scale);
+      const w = this.courseWidth;
+      this.art.clear().fillStyle(0x0a1219).fillRect(0, 0, w, 130);
+      this.art.fillStyle(0x184657).fillCircle(w * 0.8, 30, 100);
+      for (let i = 0; i < Math.ceil(w / 49); i++) {
+        const height = 25 + ((i * 37) % 73);
+        this.art
+          .fillStyle(i % 2 ? 0x192b35 : 0x13232c)
+          .fillRect(i * 49, 130 - height, 36, height);
+        for (let j = 0; j < 4; j++)
+          this.art
+            .fillStyle(0xd995a1, 0.35)
+            .fillRect(i * 49 + 8, 139 - height + j * 13, 3, 4);
+      }
+      this.art.fillStyle(0x63e7f2).fillRect(0, 128, w, 3);
+      this.art.fillStyle(0x18232c).fillRect(0, 132, w, 288);
+      this.cars.forEach((car, i) => (car.x = w * [0.56, 0.4, 0.24][i]));
+      this.label.x = this.cars[0].x - 35;
     }
 
     update(_time: number, delta: number): void {
       if (!this.marks) return;
       if (!options.reducedMotion) this.elapsedMs += Math.min(delta, 50);
       const offset = (this.elapsedMs * 0.17) % 100;
-      this.marks.clear().lineStyle(2, 0x52606d, 0.45);
+      this.marks.clear().lineStyle(2, 0x6a5b63, 0.45);
       for (const y of [220, 309, 398])
-        for (let x = -100; x < 1300; x += 100)
+        for (let x = -100; x < this.courseWidth + 100; x += 100)
           this.marks.lineBetween(x - offset, y, x + 38 - offset, y);
       this.cars.forEach((car, i) => {
-        car.y =
-          166 +
-          i * 89 +
-          (options.reducedMotion
-            ? 0
-            : Math.sin(this.elapsedMs / 240 + i) * 1.5);
-        this.wheelPairs[i].forEach(
-          (wheel) => (wheel.rotation = this.elapsedMs / 85),
+        car.y = 166 + i * 89;
+        animateKart(
+          this.assemblies[i],
+          delta,
+          !options.reducedMotion,
+          this.elapsedMs + i * 190,
         );
       });
-      this.flame?.setPosition(this.cars[0].x - 118, this.cars[0].y + 21);
+      const [exhaustX, exhaustY] = KART_FLEET[lineup[0]].exhaust;
+      this.flame?.setPosition(
+        this.cars[0].x + exhaustX,
+        this.cars[0].y + this.assemblies[0].chassis.y + exhaustY,
+      );
     }
   }
 
   const game = new Phaser.Game({
     type: Phaser.AUTO,
     parent,
-    width: 1200,
-    height: 420,
-    backgroundColor: "#121f2b",
+    width: Math.max(1, parent.clientWidth),
+    height: Math.max(1, parent.clientHeight),
+    backgroundColor: "#0a1219",
     banner: false,
     audio: { noAudio: true },
-    scale: { mode: Phaser.Scale.FIT, autoCenter: Phaser.Scale.CENTER_BOTH },
+    scale: { mode: Phaser.Scale.RESIZE },
     scene: TrackPreview,
   });
-  const observer = new ResizeObserver(() => game.scale.refresh());
+  const observer = new ResizeObserver(() =>
+    game.scale.resize(
+      Math.max(1, parent.clientWidth),
+      Math.max(1, parent.clientHeight),
+    ),
+  );
   observer.observe(parent);
   return () => {
     observer.disconnect();

@@ -1,0 +1,2988 @@
+{
+  "browser": "156.0.8078.4",
+  "version": "0.1.0-alpha.14",
+  "hardware": true,
+  "host": {
+    "platform": "win32",
+    "release": "10.0.26200",
+    "memoryBytes": 7968333824,
+    "cpu": "AMD Ryzen 7 4800H with Radeon Graphics         "
+  },
+  "renderer": "Headed Chromium / confirmed hardware GPU; local Vite HTTP; 1440×900",
+  "scope": "Full app HUD, synthetic DOM input, renderer and decoded music; rAF callback cadence, hardware trace when requested, and CDP JS heap. No physical-key latency or total GPU-memory claim. 12 route cycles, 8000ms sample; one sample per quality.",
+  "assets": [
+    {
+      "file": "parts/apex-nova-body.webp",
+      "bytes": 53392,
+      "sha256": "9972a637282c7135dad676078ebe3ad81f92f54ffeba1585e66f5f7b21912095"
+    },
+    {
+      "file": "parts/apex-nova-preview.webp",
+      "bytes": 55274,
+      "sha256": "0eedeb6ee64192a434a4971c0dbc57042d2d9c83bf6e030cf7f19d77af0d5e4c"
+    },
+    {
+      "file": "parts/apex-nova-wheel.webp",
+      "bytes": 7724,
+      "sha256": "c422c615c686114bdfd8c6241e6124ab1e954bf0e6bd88d761c7b8d1e78841ee"
+    },
+    {
+      "file": "parts/comet-body.webp",
+      "bytes": 58442,
+      "sha256": "32b136f5a7bc668d8b486a1683fd6ff154263de202474f156205690184f8b9bc"
+    },
+    {
+      "file": "parts/comet-preview.webp",
+      "bytes": 58128,
+      "sha256": "86ac6d0657ead70c9869a9b5a7417ec9c61bca6aa1860215a32a60a493858b0f"
+    },
+    {
+      "file": "parts/comet-wheel.webp",
+      "bytes": 7612,
+      "sha256": "467fda7ff8174765f1d09b408f174d6fc670f6f299ba7a40b983984c34db800c"
+    },
+    {
+      "file": "parts/neon-fox-body.webp",
+      "bytes": 75974,
+      "sha256": "76e0730b0ebcd3a3d224c9b6b30a3c4d4c0724602b1149c4bdedac1725b15294"
+    },
+    {
+      "file": "parts/neon-fox-preview.webp",
+      "bytes": 75140,
+      "sha256": "9d7b2baadf1b0ed8393edc6f7a46ad178c2f122a64d942c0becaeb924cc30663"
+    },
+    {
+      "file": "parts/neon-fox-wheel.webp",
+      "bytes": 7934,
+      "sha256": "ee08418caf842e41d8d9b222228ace1c20bc748b939dd646c9fd1872ed87b79c"
+    },
+    {
+      "file": "parts/volt-kart-body.webp",
+      "bytes": 66114,
+      "sha256": "3d9b5f3bcc7d120cd95888f20d195be94957aefbf12cde6284a8bc32b8a4f295"
+    },
+    {
+      "file": "parts/volt-kart-preview.webp",
+      "bytes": 69004,
+      "sha256": "7a75c39aabc5db44cc23fd31acd2d988eb1d922e287dde904b5925f6b7520268"
+    },
+    {
+      "file": "parts/volt-kart-wheel.webp",
+      "bytes": 7534,
+      "sha256": "9cf45de498ade50492ed9788c1c3a4ac318754b84cefba95959c330a02a48225"
+    },
+    {
+      "file": "parts/volt-rival-body.webp",
+      "bytes": 63196,
+      "sha256": "f4e1caa05b8779557e77426be8aa796af10133f899abbd8698249fda20d1bd18"
+    },
+    {
+      "file": "parts/volt-rival-preview.webp",
+      "bytes": 65616,
+      "sha256": "55f44006c74a17fa0e9ba879317548489801e028c77377b804f45c99e596c9ad"
+    },
+    {
+      "file": "parts/volt-rival-wheel.webp",
+      "bytes": 7256,
+      "sha256": "389c2deea474580d519a0d7f70e215e38bd32ad484d3e7416d432f925fe67866"
+    }
+  ],
+  "results": [
+    {
+      "profile": {
+        "name": "high",
+        "effects": "high",
+        "motion": "full",
+        "throttle": 1
+      },
+      "trackReadyMs": 1056,
+      "frames": {
+        "sampledWallMs": 8002.600000023842,
+        "activeElapsedMs": 8000,
+        "endedState": "Racing",
+        "samples": 1149,
+        "medianMs": 6.900000000001455,
+        "p95Ms": 7.399999999999636,
+        "p99Ms": 7.600000000000364,
+        "over33ms": 0,
+        "maxParticles": 25,
+        "characters": 49
+      },
+      "heapBefore": {
+        "usedSize": 24970436,
+        "totalSize": 25964544,
+        "embedderHeapUsedSize": 2749608,
+        "backingStorageSize": 30471499
+      },
+      "heapAfter": {
+        "usedSize": 25032836,
+        "totalSize": 26226688,
+        "embedderHeapUsedSize": 2842904,
+        "backingStorageSize": 23851588
+      },
+      "canvasesAfterLeaving": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "audio": {
+        "contexts": 1,
+        "decodes": [
+          {
+            "duration": 15.483854166666667,
+            "elapsedMs": 16.5
+          },
+          {
+            "duration": 25.6,
+            "elapsedMs": 25.200000047683716
+          }
+        ],
+        "liveLoops": 1
+      },
+      "textures": [
+        {
+          "file": "volt-kart-preview.webp",
+          "durationMs": 211.60000002384186,
+          "decodedBodyBytes": 69004,
+          "transferBytes": 69304
+        },
+        {
+          "file": "neon-fox-preview.webp",
+          "durationMs": 212.30000001192093,
+          "decodedBodyBytes": 75140,
+          "transferBytes": 75440
+        },
+        {
+          "file": "apex-nova-preview.webp",
+          "durationMs": 212.10000002384186,
+          "decodedBodyBytes": 55274,
+          "transferBytes": 55574
+        },
+        {
+          "file": "comet-preview.webp",
+          "durationMs": 212.30000001192093,
+          "decodedBodyBytes": 58128,
+          "transferBytes": 58428
+        },
+        {
+          "file": "volt-rival-preview.webp",
+          "durationMs": 225.30000001192093,
+          "decodedBodyBytes": 65616,
+          "transferBytes": 65916
+        },
+        {
+          "file": "volt-kart-body.webp",
+          "durationMs": 7.100000023841858,
+          "decodedBodyBytes": 66114,
+          "transferBytes": 66414
+        },
+        {
+          "file": "volt-kart-wheel.webp",
+          "durationMs": 7.199999988079071,
+          "decodedBodyBytes": 7534,
+          "transferBytes": 7834
+        },
+        {
+          "file": "neon-fox-body.webp",
+          "durationMs": 7.800000011920929,
+          "decodedBodyBytes": 75974,
+          "transferBytes": 76274
+        },
+        {
+          "file": "neon-fox-wheel.webp",
+          "durationMs": 7,
+          "decodedBodyBytes": 7934,
+          "transferBytes": 8234
+        },
+        {
+          "file": "apex-nova-body.webp",
+          "durationMs": 7.399999976158142,
+          "decodedBodyBytes": 53392,
+          "transferBytes": 53692
+        },
+        {
+          "file": "apex-nova-wheel.webp",
+          "durationMs": 8.100000023841858,
+          "decodedBodyBytes": 7724,
+          "transferBytes": 8024
+        },
+        {
+          "file": "comet-body.webp",
+          "durationMs": 17.399999976158142,
+          "decodedBodyBytes": 58442,
+          "transferBytes": 58742
+        },
+        {
+          "file": "comet-wheel.webp",
+          "durationMs": 19.099999964237213,
+          "decodedBodyBytes": 7612,
+          "transferBytes": 7912
+        },
+        {
+          "file": "volt-rival-body.webp",
+          "durationMs": 19.600000023841858,
+          "decodedBodyBytes": 63196,
+          "transferBytes": 63496
+        },
+        {
+          "file": "volt-rival-wheel.webp",
+          "durationMs": 19.099999964237213,
+          "decodedBodyBytes": 7256,
+          "transferBytes": 7556
+        },
+        {
+          "file": "volt-kart-body.webp",
+          "durationMs": 4.899999976158142,
+          "decodedBodyBytes": 66114,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-wheel.webp",
+          "durationMs": 5.100000023841858,
+          "decodedBodyBytes": 7534,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-body.webp",
+          "durationMs": 5.800000011920929,
+          "decodedBodyBytes": 75974,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-wheel.webp",
+          "durationMs": 5.800000011920929,
+          "decodedBodyBytes": 7934,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-body.webp",
+          "durationMs": 6.099999964237213,
+          "decodedBodyBytes": 53392,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-wheel.webp",
+          "durationMs": 7,
+          "decodedBodyBytes": 7724,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-body.webp",
+          "durationMs": 8.600000023841858,
+          "decodedBodyBytes": 58442,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-wheel.webp",
+          "durationMs": 8.800000011920929,
+          "decodedBodyBytes": 7612,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-body.webp",
+          "durationMs": 8.900000035762787,
+          "decodedBodyBytes": 63196,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-wheel.webp",
+          "durationMs": 9.199999988079071,
+          "decodedBodyBytes": 7256,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-body.webp",
+          "durationMs": 2.100000023841858,
+          "decodedBodyBytes": 66114,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-wheel.webp",
+          "durationMs": 4.300000011920929,
+          "decodedBodyBytes": 7534,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-body.webp",
+          "durationMs": 5.300000011920929,
+          "decodedBodyBytes": 75974,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-wheel.webp",
+          "durationMs": 7,
+          "decodedBodyBytes": 7934,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-body.webp",
+          "durationMs": 7.5,
+          "decodedBodyBytes": 53392,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-wheel.webp",
+          "durationMs": 7.699999988079071,
+          "decodedBodyBytes": 7724,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-body.webp",
+          "durationMs": 11.300000011920929,
+          "decodedBodyBytes": 58442,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-wheel.webp",
+          "durationMs": 12.199999988079071,
+          "decodedBodyBytes": 7612,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-body.webp",
+          "durationMs": 13.899999976158142,
+          "decodedBodyBytes": 63196,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-wheel.webp",
+          "durationMs": 15,
+          "decodedBodyBytes": 7256,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-body.webp",
+          "durationMs": 2.599999964237213,
+          "decodedBodyBytes": 66114,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-wheel.webp",
+          "durationMs": 3.100000023841858,
+          "decodedBodyBytes": 7534,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-body.webp",
+          "durationMs": 5.099999964237213,
+          "decodedBodyBytes": 75974,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-wheel.webp",
+          "durationMs": 5.099999964237213,
+          "decodedBodyBytes": 7934,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-body.webp",
+          "durationMs": 5.300000011920929,
+          "decodedBodyBytes": 53392,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-wheel.webp",
+          "durationMs": 6,
+          "decodedBodyBytes": 7724,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-body.webp",
+          "durationMs": 7.199999988079071,
+          "decodedBodyBytes": 58442,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-wheel.webp",
+          "durationMs": 7.600000023841858,
+          "decodedBodyBytes": 7612,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-body.webp",
+          "durationMs": 8.400000035762787,
+          "decodedBodyBytes": 63196,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-wheel.webp",
+          "durationMs": 9.299999952316284,
+          "decodedBodyBytes": 7256,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-body.webp",
+          "durationMs": 4.900000035762787,
+          "decodedBodyBytes": 66114,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-wheel.webp",
+          "durationMs": 5.600000023841858,
+          "decodedBodyBytes": 7534,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-body.webp",
+          "durationMs": 5.899999976158142,
+          "decodedBodyBytes": 75974,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-wheel.webp",
+          "durationMs": 6.300000011920929,
+          "decodedBodyBytes": 7934,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-body.webp",
+          "durationMs": 6.899999976158142,
+          "decodedBodyBytes": 53392,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-wheel.webp",
+          "durationMs": 8.199999988079071,
+          "decodedBodyBytes": 7724,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-body.webp",
+          "durationMs": 9.799999952316284,
+          "decodedBodyBytes": 58442,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-wheel.webp",
+          "durationMs": 10,
+          "decodedBodyBytes": 7612,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-body.webp",
+          "durationMs": 10.600000023841858,
+          "decodedBodyBytes": 63196,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-wheel.webp",
+          "durationMs": 11.199999988079071,
+          "decodedBodyBytes": 7256,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-body.webp",
+          "durationMs": 3.199999988079071,
+          "decodedBodyBytes": 66114,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-wheel.webp",
+          "durationMs": 3.200000047683716,
+          "decodedBodyBytes": 7534,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-body.webp",
+          "durationMs": 5,
+          "decodedBodyBytes": 75974,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-wheel.webp",
+          "durationMs": 4.800000011920929,
+          "decodedBodyBytes": 7934,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-body.webp",
+          "durationMs": 5.199999988079071,
+          "decodedBodyBytes": 53392,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-wheel.webp",
+          "durationMs": 5.5,
+          "decodedBodyBytes": 7724,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-body.webp",
+          "durationMs": 6.200000047683716,
+          "decodedBodyBytes": 58442,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-wheel.webp",
+          "durationMs": 7.099999964237213,
+          "decodedBodyBytes": 7612,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-body.webp",
+          "durationMs": 7.600000023841858,
+          "decodedBodyBytes": 63196,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-wheel.webp",
+          "durationMs": 8.300000011920929,
+          "decodedBodyBytes": 7256,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-body.webp",
+          "durationMs": 3,
+          "decodedBodyBytes": 66114,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-wheel.webp",
+          "durationMs": 3.400000035762787,
+          "decodedBodyBytes": 7534,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-body.webp",
+          "durationMs": 5.300000011920929,
+          "decodedBodyBytes": 75974,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-wheel.webp",
+          "durationMs": 5.199999988079071,
+          "decodedBodyBytes": 7934,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-body.webp",
+          "durationMs": 5.5,
+          "decodedBodyBytes": 53392,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-wheel.webp",
+          "durationMs": 5.699999988079071,
+          "decodedBodyBytes": 7724,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-body.webp",
+          "durationMs": 7.599999964237213,
+          "decodedBodyBytes": 58442,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-wheel.webp",
+          "durationMs": 7.800000011920929,
+          "decodedBodyBytes": 7612,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-body.webp",
+          "durationMs": 8.5,
+          "decodedBodyBytes": 63196,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-wheel.webp",
+          "durationMs": 8.900000035762787,
+          "decodedBodyBytes": 7256,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-body.webp",
+          "durationMs": 4.899999976158142,
+          "decodedBodyBytes": 66114,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-wheel.webp",
+          "durationMs": 5.100000023841858,
+          "decodedBodyBytes": 7534,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-body.webp",
+          "durationMs": 5.899999976158142,
+          "decodedBodyBytes": 75974,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-wheel.webp",
+          "durationMs": 7.800000011920929,
+          "decodedBodyBytes": 7934,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-body.webp",
+          "durationMs": 8.599999964237213,
+          "decodedBodyBytes": 53392,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-wheel.webp",
+          "durationMs": 11,
+          "decodedBodyBytes": 7724,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-body.webp",
+          "durationMs": 11.5,
+          "decodedBodyBytes": 58442,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-wheel.webp",
+          "durationMs": 11.599999964237213,
+          "decodedBodyBytes": 7612,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-body.webp",
+          "durationMs": 12.400000035762787,
+          "decodedBodyBytes": 63196,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-wheel.webp",
+          "durationMs": 13.200000047683716,
+          "decodedBodyBytes": 7256,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-body.webp",
+          "durationMs": 5.400000035762787,
+          "decodedBodyBytes": 66114,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-wheel.webp",
+          "durationMs": 6.300000011920929,
+          "decodedBodyBytes": 7534,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-body.webp",
+          "durationMs": 6.899999976158142,
+          "decodedBodyBytes": 75974,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-wheel.webp",
+          "durationMs": 7.199999988079071,
+          "decodedBodyBytes": 7934,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-body.webp",
+          "durationMs": 7.900000035762787,
+          "decodedBodyBytes": 53392,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-wheel.webp",
+          "durationMs": 8.699999988079071,
+          "decodedBodyBytes": 7724,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-body.webp",
+          "durationMs": 9.400000035762787,
+          "decodedBodyBytes": 58442,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-wheel.webp",
+          "durationMs": 12.800000011920929,
+          "decodedBodyBytes": 7612,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-body.webp",
+          "durationMs": 14,
+          "decodedBodyBytes": 63196,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-wheel.webp",
+          "durationMs": 15.199999988079071,
+          "decodedBodyBytes": 7256,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-body.webp",
+          "durationMs": 3.399999976158142,
+          "decodedBodyBytes": 66114,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-wheel.webp",
+          "durationMs": 5.199999988079071,
+          "decodedBodyBytes": 7534,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-body.webp",
+          "durationMs": 5.199999988079071,
+          "decodedBodyBytes": 75974,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-wheel.webp",
+          "durationMs": 5.599999964237213,
+          "decodedBodyBytes": 7934,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-body.webp",
+          "durationMs": 6.800000011920929,
+          "decodedBodyBytes": 53392,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-wheel.webp",
+          "durationMs": 8,
+          "decodedBodyBytes": 7724,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-body.webp",
+          "durationMs": 8.300000011920929,
+          "decodedBodyBytes": 58442,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-wheel.webp",
+          "durationMs": 8.599999964237213,
+          "decodedBodyBytes": 7612,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-body.webp",
+          "durationMs": 8.699999988079071,
+          "decodedBodyBytes": 63196,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-wheel.webp",
+          "durationMs": 9.399999976158142,
+          "decodedBodyBytes": 7256,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-body.webp",
+          "durationMs": 3.100000023841858,
+          "decodedBodyBytes": 66114,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-wheel.webp",
+          "durationMs": 4.899999976158142,
+          "decodedBodyBytes": 7534,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-body.webp",
+          "durationMs": 6.300000011920929,
+          "decodedBodyBytes": 75974,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-wheel.webp",
+          "durationMs": 7.699999988079071,
+          "decodedBodyBytes": 7934,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-body.webp",
+          "durationMs": 8.099999964237213,
+          "decodedBodyBytes": 53392,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-wheel.webp",
+          "durationMs": 8.5,
+          "decodedBodyBytes": 7724,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-body.webp",
+          "durationMs": 10.600000023841858,
+          "decodedBodyBytes": 58442,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-wheel.webp",
+          "durationMs": 11,
+          "decodedBodyBytes": 7612,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-body.webp",
+          "durationMs": 12.5,
+          "decodedBodyBytes": 63196,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-wheel.webp",
+          "durationMs": 14.199999988079071,
+          "decodedBodyBytes": 7256,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-body.webp",
+          "durationMs": 4,
+          "decodedBodyBytes": 66114,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-wheel.webp",
+          "durationMs": 4,
+          "decodedBodyBytes": 7534,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-body.webp",
+          "durationMs": 4.199999988079071,
+          "decodedBodyBytes": 75974,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-wheel.webp",
+          "durationMs": 5,
+          "decodedBodyBytes": 7934,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-body.webp",
+          "durationMs": 5.200000047683716,
+          "decodedBodyBytes": 53392,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-wheel.webp",
+          "durationMs": 5.199999988079071,
+          "decodedBodyBytes": 7724,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-body.webp",
+          "durationMs": 7.099999964237213,
+          "decodedBodyBytes": 58442,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-wheel.webp",
+          "durationMs": 7.600000023841858,
+          "decodedBodyBytes": 7612,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-body.webp",
+          "durationMs": 8.399999976158142,
+          "decodedBodyBytes": 63196,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-wheel.webp",
+          "durationMs": 9.099999964237213,
+          "decodedBodyBytes": 7256,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-body.webp",
+          "durationMs": 3.300000011920929,
+          "decodedBodyBytes": 66114,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-wheel.webp",
+          "durationMs": 3.599999964237213,
+          "decodedBodyBytes": 7534,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-body.webp",
+          "durationMs": 4.300000011920929,
+          "decodedBodyBytes": 75974,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-wheel.webp",
+          "durationMs": 4.300000011920929,
+          "decodedBodyBytes": 7934,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-body.webp",
+          "durationMs": 5.600000023841858,
+          "decodedBodyBytes": 53392,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-wheel.webp",
+          "durationMs": 6.599999964237213,
+          "decodedBodyBytes": 7724,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-body.webp",
+          "durationMs": 6.799999952316284,
+          "decodedBodyBytes": 58442,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-wheel.webp",
+          "durationMs": 7.199999988079071,
+          "decodedBodyBytes": 7612,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-body.webp",
+          "durationMs": 8.199999988079071,
+          "decodedBodyBytes": 63196,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-wheel.webp",
+          "durationMs": 9.199999988079071,
+          "decodedBodyBytes": 7256,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-body.webp",
+          "durationMs": 2.199999988079071,
+          "decodedBodyBytes": 66114,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-wheel.webp",
+          "durationMs": 3.699999988079071,
+          "decodedBodyBytes": 7534,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-body.webp",
+          "durationMs": 4.299999952316284,
+          "decodedBodyBytes": 75974,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-wheel.webp",
+          "durationMs": 4.300000011920929,
+          "decodedBodyBytes": 7934,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-body.webp",
+          "durationMs": 4.600000023841858,
+          "decodedBodyBytes": 53392,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-wheel.webp",
+          "durationMs": 5.699999988079071,
+          "decodedBodyBytes": 7724,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-body.webp",
+          "durationMs": 7,
+          "decodedBodyBytes": 58442,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-wheel.webp",
+          "durationMs": 7.300000011920929,
+          "decodedBodyBytes": 7612,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-body.webp",
+          "durationMs": 7.699999988079071,
+          "decodedBodyBytes": 63196,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-wheel.webp",
+          "durationMs": 8.400000035762787,
+          "decodedBodyBytes": 7256,
+          "transferBytes": 300
+        }
+      ],
+      "errors": [],
+      "traceSummary": {
+        "eventCounts": {
+          "DrawFrame": 1151,
+          "DirectRenderer::DrawFrame": 1151,
+          "DirectRenderer::DrawFrame ProcessForOverlays": 1151,
+          "DroppedFrame": 3,
+          "PipelineReporter": 4622
+        },
+        "rendererTasksObserved": 7834,
+        "longTasksOver50ms": 0,
+        "maxTaskMs": 27.457,
+        "traceFile": "high-trace.json",
+        "input": "Synthetic DOM InputEvents, not physical keys or trusted OS key-to-paint latency"
+      }
+    },
+    {
+      "profile": {
+        "name": "low",
+        "effects": "low",
+        "motion": "full",
+        "throttle": 1
+      },
+      "trackReadyMs": 958,
+      "frames": {
+        "sampledWallMs": 8005.5,
+        "activeElapsedMs": 8000,
+        "endedState": "Racing",
+        "samples": 1151,
+        "medianMs": 6.900000000001455,
+        "p95Ms": 7.199999999998909,
+        "p99Ms": 7.400000000000546,
+        "over33ms": 0,
+        "maxParticles": 7,
+        "characters": 49
+      },
+      "heapBefore": {
+        "usedSize": 24984196,
+        "totalSize": 26226688,
+        "embedderHeapUsedSize": 2696384,
+        "backingStorageSize": 30471231
+      },
+      "heapAfter": {
+        "usedSize": 25031592,
+        "totalSize": 26750976,
+        "embedderHeapUsedSize": 2627600,
+        "backingStorageSize": 23851576
+      },
+      "canvasesAfterLeaving": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "audio": {
+        "contexts": 1,
+        "decodes": [
+          {
+            "duration": 15.483854166666667,
+            "elapsedMs": 16.599999964237213
+          },
+          {
+            "duration": 25.6,
+            "elapsedMs": 23.100000023841858
+          }
+        ],
+        "liveLoops": 1
+      },
+      "textures": [
+        {
+          "file": "volt-kart-preview.webp",
+          "durationMs": 178.19999998807907,
+          "decodedBodyBytes": 69004,
+          "transferBytes": 69304
+        },
+        {
+          "file": "neon-fox-preview.webp",
+          "durationMs": 179.20000004768372,
+          "decodedBodyBytes": 75140,
+          "transferBytes": 75440
+        },
+        {
+          "file": "apex-nova-preview.webp",
+          "durationMs": 178.89999997615814,
+          "decodedBodyBytes": 55274,
+          "transferBytes": 55574
+        },
+        {
+          "file": "comet-preview.webp",
+          "durationMs": 178.69999998807907,
+          "decodedBodyBytes": 58128,
+          "transferBytes": 58428
+        },
+        {
+          "file": "volt-rival-preview.webp",
+          "durationMs": 186.60000002384186,
+          "decodedBodyBytes": 65616,
+          "transferBytes": 65916
+        },
+        {
+          "file": "volt-kart-body.webp",
+          "durationMs": 6.600000023841858,
+          "decodedBodyBytes": 66114,
+          "transferBytes": 66414
+        },
+        {
+          "file": "volt-kart-wheel.webp",
+          "durationMs": 6.5,
+          "decodedBodyBytes": 7534,
+          "transferBytes": 7834
+        },
+        {
+          "file": "neon-fox-body.webp",
+          "durationMs": 7.399999976158142,
+          "decodedBodyBytes": 75974,
+          "transferBytes": 76274
+        },
+        {
+          "file": "neon-fox-wheel.webp",
+          "durationMs": 6.900000035762787,
+          "decodedBodyBytes": 7934,
+          "transferBytes": 8234
+        },
+        {
+          "file": "apex-nova-body.webp",
+          "durationMs": 6.600000023841858,
+          "decodedBodyBytes": 53392,
+          "transferBytes": 53692
+        },
+        {
+          "file": "apex-nova-wheel.webp",
+          "durationMs": 7,
+          "decodedBodyBytes": 7724,
+          "transferBytes": 8024
+        },
+        {
+          "file": "comet-body.webp",
+          "durationMs": 11.600000023841858,
+          "decodedBodyBytes": 58442,
+          "transferBytes": 58742
+        },
+        {
+          "file": "comet-wheel.webp",
+          "durationMs": 11.600000023841858,
+          "decodedBodyBytes": 7612,
+          "transferBytes": 7912
+        },
+        {
+          "file": "volt-rival-body.webp",
+          "durationMs": 5.800000011920929,
+          "decodedBodyBytes": 63196,
+          "transferBytes": 63496
+        },
+        {
+          "file": "volt-rival-wheel.webp",
+          "durationMs": 5.600000023841858,
+          "decodedBodyBytes": 7256,
+          "transferBytes": 7556
+        },
+        {
+          "file": "volt-kart-body.webp",
+          "durationMs": 2.800000011920929,
+          "decodedBodyBytes": 66114,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-wheel.webp",
+          "durationMs": 2.800000011920929,
+          "decodedBodyBytes": 7534,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-body.webp",
+          "durationMs": 3,
+          "decodedBodyBytes": 75974,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-wheel.webp",
+          "durationMs": 4.5,
+          "decodedBodyBytes": 7934,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-body.webp",
+          "durationMs": 5.099999964237213,
+          "decodedBodyBytes": 53392,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-wheel.webp",
+          "durationMs": 6.700000047683716,
+          "decodedBodyBytes": 7724,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-body.webp",
+          "durationMs": 7.199999988079071,
+          "decodedBodyBytes": 58442,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-wheel.webp",
+          "durationMs": 7.399999976158142,
+          "decodedBodyBytes": 7612,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-body.webp",
+          "durationMs": 7.800000011920929,
+          "decodedBodyBytes": 63196,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-wheel.webp",
+          "durationMs": 8.399999976158142,
+          "decodedBodyBytes": 7256,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-body.webp",
+          "durationMs": 7.100000023841858,
+          "decodedBodyBytes": 66114,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-wheel.webp",
+          "durationMs": 7.899999976158142,
+          "decodedBodyBytes": 7534,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-body.webp",
+          "durationMs": 9.100000023841858,
+          "decodedBodyBytes": 75974,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-wheel.webp",
+          "durationMs": 9.600000023841858,
+          "decodedBodyBytes": 7934,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-body.webp",
+          "durationMs": 11.300000011920929,
+          "decodedBodyBytes": 53392,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-wheel.webp",
+          "durationMs": 13.199999988079071,
+          "decodedBodyBytes": 7724,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-body.webp",
+          "durationMs": 15.099999964237213,
+          "decodedBodyBytes": 58442,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-wheel.webp",
+          "durationMs": 17.19999998807907,
+          "decodedBodyBytes": 7612,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-body.webp",
+          "durationMs": 18.399999976158142,
+          "decodedBodyBytes": 63196,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-wheel.webp",
+          "durationMs": 20.19999998807907,
+          "decodedBodyBytes": 7256,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-body.webp",
+          "durationMs": 4.399999976158142,
+          "decodedBodyBytes": 66114,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-wheel.webp",
+          "durationMs": 4.5,
+          "decodedBodyBytes": 7534,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-body.webp",
+          "durationMs": 4.599999964237213,
+          "decodedBodyBytes": 75974,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-wheel.webp",
+          "durationMs": 5.100000023841858,
+          "decodedBodyBytes": 7934,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-body.webp",
+          "durationMs": 6.100000023841858,
+          "decodedBodyBytes": 53392,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-wheel.webp",
+          "durationMs": 6.400000035762787,
+          "decodedBodyBytes": 7724,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-body.webp",
+          "durationMs": 6.5,
+          "decodedBodyBytes": 58442,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-wheel.webp",
+          "durationMs": 7,
+          "decodedBodyBytes": 7612,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-body.webp",
+          "durationMs": 8.5,
+          "decodedBodyBytes": 63196,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-wheel.webp",
+          "durationMs": 9.699999988079071,
+          "decodedBodyBytes": 7256,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-body.webp",
+          "durationMs": 4,
+          "decodedBodyBytes": 66114,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-wheel.webp",
+          "durationMs": 4.199999988079071,
+          "decodedBodyBytes": 7534,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-body.webp",
+          "durationMs": 4.699999988079071,
+          "decodedBodyBytes": 75974,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-wheel.webp",
+          "durationMs": 5.399999976158142,
+          "decodedBodyBytes": 7934,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-body.webp",
+          "durationMs": 6.699999988079071,
+          "decodedBodyBytes": 53392,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-wheel.webp",
+          "durationMs": 8.5,
+          "decodedBodyBytes": 7724,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-body.webp",
+          "durationMs": 9.099999964237213,
+          "decodedBodyBytes": 58442,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-wheel.webp",
+          "durationMs": 9.399999976158142,
+          "decodedBodyBytes": 7612,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-body.webp",
+          "durationMs": 9.799999952316284,
+          "decodedBodyBytes": 63196,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-wheel.webp",
+          "durationMs": 10.399999976158142,
+          "decodedBodyBytes": 7256,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-body.webp",
+          "durationMs": 3.300000011920929,
+          "decodedBodyBytes": 66114,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-wheel.webp",
+          "durationMs": 4.100000023841858,
+          "decodedBodyBytes": 7534,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-body.webp",
+          "durationMs": 4.5,
+          "decodedBodyBytes": 75974,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-wheel.webp",
+          "durationMs": 6.199999988079071,
+          "decodedBodyBytes": 7934,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-body.webp",
+          "durationMs": 6.5,
+          "decodedBodyBytes": 53392,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-wheel.webp",
+          "durationMs": 6.800000011920929,
+          "decodedBodyBytes": 7724,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-body.webp",
+          "durationMs": 8.400000035762787,
+          "decodedBodyBytes": 58442,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-wheel.webp",
+          "durationMs": 9,
+          "decodedBodyBytes": 7612,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-body.webp",
+          "durationMs": 10.100000023841858,
+          "decodedBodyBytes": 63196,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-wheel.webp",
+          "durationMs": 11,
+          "decodedBodyBytes": 7256,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-body.webp",
+          "durationMs": 3.199999988079071,
+          "decodedBodyBytes": 66114,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-wheel.webp",
+          "durationMs": 7.399999976158142,
+          "decodedBodyBytes": 7534,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-body.webp",
+          "durationMs": 8.800000011920929,
+          "decodedBodyBytes": 75974,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-wheel.webp",
+          "durationMs": 9.600000023841858,
+          "decodedBodyBytes": 7934,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-body.webp",
+          "durationMs": 10.699999988079071,
+          "decodedBodyBytes": 53392,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-wheel.webp",
+          "durationMs": 11,
+          "decodedBodyBytes": 7724,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-body.webp",
+          "durationMs": 12,
+          "decodedBodyBytes": 58442,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-wheel.webp",
+          "durationMs": 13,
+          "decodedBodyBytes": 7612,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-body.webp",
+          "durationMs": 13.099999964237213,
+          "decodedBodyBytes": 63196,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-wheel.webp",
+          "durationMs": 13.800000011920929,
+          "decodedBodyBytes": 7256,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-body.webp",
+          "durationMs": 3.099999964237213,
+          "decodedBodyBytes": 66114,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-wheel.webp",
+          "durationMs": 5.100000023841858,
+          "decodedBodyBytes": 7534,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-body.webp",
+          "durationMs": 5.899999976158142,
+          "decodedBodyBytes": 75974,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-wheel.webp",
+          "durationMs": 5.900000035762787,
+          "decodedBodyBytes": 7934,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-body.webp",
+          "durationMs": 7.099999964237213,
+          "decodedBodyBytes": 53392,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-wheel.webp",
+          "durationMs": 7.699999988079071,
+          "decodedBodyBytes": 7724,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-body.webp",
+          "durationMs": 8.300000011920929,
+          "decodedBodyBytes": 58442,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-wheel.webp",
+          "durationMs": 9.899999976158142,
+          "decodedBodyBytes": 7612,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-body.webp",
+          "durationMs": 10.900000035762787,
+          "decodedBodyBytes": 63196,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-wheel.webp",
+          "durationMs": 11.899999976158142,
+          "decodedBodyBytes": 7256,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-body.webp",
+          "durationMs": 4.300000011920929,
+          "decodedBodyBytes": 66114,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-wheel.webp",
+          "durationMs": 4.399999976158142,
+          "decodedBodyBytes": 7534,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-body.webp",
+          "durationMs": 4.800000011920929,
+          "decodedBodyBytes": 75974,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-wheel.webp",
+          "durationMs": 4.900000035762787,
+          "decodedBodyBytes": 7934,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-body.webp",
+          "durationMs": 5.899999976158142,
+          "decodedBodyBytes": 53392,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-wheel.webp",
+          "durationMs": 6.300000011920929,
+          "decodedBodyBytes": 7724,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-body.webp",
+          "durationMs": 6.700000047683716,
+          "decodedBodyBytes": 58442,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-wheel.webp",
+          "durationMs": 8.899999976158142,
+          "decodedBodyBytes": 7612,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-body.webp",
+          "durationMs": 9.399999976158142,
+          "decodedBodyBytes": 63196,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-wheel.webp",
+          "durationMs": 9.899999976158142,
+          "decodedBodyBytes": 7256,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-body.webp",
+          "durationMs": 3.599999964237213,
+          "decodedBodyBytes": 66114,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-wheel.webp",
+          "durationMs": 3.5,
+          "decodedBodyBytes": 7534,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-body.webp",
+          "durationMs": 3.800000011920929,
+          "decodedBodyBytes": 75974,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-wheel.webp",
+          "durationMs": 3.699999988079071,
+          "decodedBodyBytes": 7934,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-body.webp",
+          "durationMs": 4.599999964237213,
+          "decodedBodyBytes": 53392,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-wheel.webp",
+          "durationMs": 4.699999988079071,
+          "decodedBodyBytes": 7724,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-body.webp",
+          "durationMs": 4.699999988079071,
+          "decodedBodyBytes": 58442,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-wheel.webp",
+          "durationMs": 6.599999964237213,
+          "decodedBodyBytes": 7612,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-body.webp",
+          "durationMs": 7.100000023841858,
+          "decodedBodyBytes": 63196,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-wheel.webp",
+          "durationMs": 7.799999952316284,
+          "decodedBodyBytes": 7256,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-body.webp",
+          "durationMs": 2.600000023841858,
+          "decodedBodyBytes": 66114,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-wheel.webp",
+          "durationMs": 3,
+          "decodedBodyBytes": 7534,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-body.webp",
+          "durationMs": 4.099999964237213,
+          "decodedBodyBytes": 75974,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-wheel.webp",
+          "durationMs": 4.300000011920929,
+          "decodedBodyBytes": 7934,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-body.webp",
+          "durationMs": 4.800000011920929,
+          "decodedBodyBytes": 53392,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-wheel.webp",
+          "durationMs": 5.799999952316284,
+          "decodedBodyBytes": 7724,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-body.webp",
+          "durationMs": 6,
+          "decodedBodyBytes": 58442,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-wheel.webp",
+          "durationMs": 6.399999976158142,
+          "decodedBodyBytes": 7612,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-body.webp",
+          "durationMs": 6.700000047683716,
+          "decodedBodyBytes": 63196,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-wheel.webp",
+          "durationMs": 8.100000023841858,
+          "decodedBodyBytes": 7256,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-body.webp",
+          "durationMs": 3.300000011920929,
+          "decodedBodyBytes": 66114,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-wheel.webp",
+          "durationMs": 3.199999988079071,
+          "decodedBodyBytes": 7534,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-body.webp",
+          "durationMs": 3.800000011920929,
+          "decodedBodyBytes": 75974,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-wheel.webp",
+          "durationMs": 5,
+          "decodedBodyBytes": 7934,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-body.webp",
+          "durationMs": 5.399999976158142,
+          "decodedBodyBytes": 53392,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-wheel.webp",
+          "durationMs": 7.5,
+          "decodedBodyBytes": 7724,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-body.webp",
+          "durationMs": 8.100000023841858,
+          "decodedBodyBytes": 58442,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-wheel.webp",
+          "durationMs": 8.300000011920929,
+          "decodedBodyBytes": 7612,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-body.webp",
+          "durationMs": 8.900000035762787,
+          "decodedBodyBytes": 63196,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-wheel.webp",
+          "durationMs": 10.100000023841858,
+          "decodedBodyBytes": 7256,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-body.webp",
+          "durationMs": 2.5,
+          "decodedBodyBytes": 66114,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-wheel.webp",
+          "durationMs": 4,
+          "decodedBodyBytes": 7534,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-body.webp",
+          "durationMs": 4.599999964237213,
+          "decodedBodyBytes": 75974,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-wheel.webp",
+          "durationMs": 4.5,
+          "decodedBodyBytes": 7934,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-body.webp",
+          "durationMs": 4.899999976158142,
+          "decodedBodyBytes": 53392,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-wheel.webp",
+          "durationMs": 5.199999988079071,
+          "decodedBodyBytes": 7724,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-body.webp",
+          "durationMs": 6.800000011920929,
+          "decodedBodyBytes": 58442,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-wheel.webp",
+          "durationMs": 7.199999988079071,
+          "decodedBodyBytes": 7612,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-body.webp",
+          "durationMs": 7.5,
+          "decodedBodyBytes": 63196,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-wheel.webp",
+          "durationMs": 8.800000011920929,
+          "decodedBodyBytes": 7256,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-body.webp",
+          "durationMs": 3.099999964237213,
+          "decodedBodyBytes": 66114,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-wheel.webp",
+          "durationMs": 3.400000035762787,
+          "decodedBodyBytes": 7534,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-body.webp",
+          "durationMs": 3.699999988079071,
+          "decodedBodyBytes": 75974,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-wheel.webp",
+          "durationMs": 3.800000011920929,
+          "decodedBodyBytes": 7934,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-body.webp",
+          "durationMs": 4,
+          "decodedBodyBytes": 53392,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-wheel.webp",
+          "durationMs": 5.799999952316284,
+          "decodedBodyBytes": 7724,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-body.webp",
+          "durationMs": 6.199999988079071,
+          "decodedBodyBytes": 58442,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-wheel.webp",
+          "durationMs": 6.400000035762787,
+          "decodedBodyBytes": 7612,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-body.webp",
+          "durationMs": 7.199999988079071,
+          "decodedBodyBytes": 63196,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-wheel.webp",
+          "durationMs": 8.099999964237213,
+          "decodedBodyBytes": 7256,
+          "transferBytes": 300
+        }
+      ],
+      "errors": [],
+      "traceSummary": {
+        "eventCounts": {
+          "DrawFrame": 1153,
+          "DirectRenderer::DrawFrame": 1152,
+          "DirectRenderer::DrawFrame ProcessForOverlays": 1152,
+          "DroppedFrame": 1,
+          "PipelineReporter": 4612
+        },
+        "rendererTasksObserved": 7719,
+        "longTasksOver50ms": 0,
+        "maxTaskMs": 10.451,
+        "traceFile": "low-trace.json",
+        "input": "Synthetic DOM InputEvents, not physical keys or trusted OS key-to-paint latency"
+      }
+    },
+    {
+      "profile": {
+        "name": "reduced",
+        "effects": "low",
+        "motion": "reduced",
+        "throttle": 1
+      },
+      "trackReadyMs": 896,
+      "frames": {
+        "sampledWallMs": 8007.900000035763,
+        "activeElapsedMs": 8000,
+        "endedState": "Racing",
+        "samples": 1152,
+        "medianMs": 6.900000000001455,
+        "p95Ms": 7.300000000001091,
+        "p99Ms": 7.5,
+        "over33ms": 0,
+        "maxParticles": 0,
+        "characters": 50
+      },
+      "heapBefore": {
+        "usedSize": 24840896,
+        "totalSize": 25702400,
+        "embedderHeapUsedSize": 2939760,
+        "backingStorageSize": 30471195
+      },
+      "heapAfter": {
+        "usedSize": 24768296,
+        "totalSize": 26488832,
+        "embedderHeapUsedSize": 2782296,
+        "backingStorageSize": 23851550
+      },
+      "canvasesAfterLeaving": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "audio": {
+        "contexts": 1,
+        "decodes": [
+          {
+            "duration": 15.483854166666667,
+            "elapsedMs": 19.5
+          },
+          {
+            "duration": 25.6,
+            "elapsedMs": 29.100000023841858
+          }
+        ],
+        "liveLoops": 1
+      },
+      "textures": [
+        {
+          "file": "volt-kart-preview.webp",
+          "durationMs": 170,
+          "decodedBodyBytes": 69004,
+          "transferBytes": 69304
+        },
+        {
+          "file": "neon-fox-preview.webp",
+          "durationMs": 170.70000004768372,
+          "decodedBodyBytes": 75140,
+          "transferBytes": 75440
+        },
+        {
+          "file": "comet-preview.webp",
+          "durationMs": 170.4000000357628,
+          "decodedBodyBytes": 58128,
+          "transferBytes": 58428
+        },
+        {
+          "file": "apex-nova-preview.webp",
+          "durationMs": 170.60000002384186,
+          "decodedBodyBytes": 55274,
+          "transferBytes": 55574
+        },
+        {
+          "file": "volt-rival-preview.webp",
+          "durationMs": 183.29999995231628,
+          "decodedBodyBytes": 65616,
+          "transferBytes": 65916
+        },
+        {
+          "file": "volt-kart-body.webp",
+          "durationMs": 8.300000011920929,
+          "decodedBodyBytes": 66114,
+          "transferBytes": 66414
+        },
+        {
+          "file": "volt-kart-wheel.webp",
+          "durationMs": 8.199999988079071,
+          "decodedBodyBytes": 7534,
+          "transferBytes": 7834
+        },
+        {
+          "file": "neon-fox-body.webp",
+          "durationMs": 8.400000035762787,
+          "decodedBodyBytes": 75974,
+          "transferBytes": 76274
+        },
+        {
+          "file": "neon-fox-wheel.webp",
+          "durationMs": 8.100000023841858,
+          "decodedBodyBytes": 7934,
+          "transferBytes": 8234
+        },
+        {
+          "file": "apex-nova-body.webp",
+          "durationMs": 8.199999988079071,
+          "decodedBodyBytes": 53392,
+          "transferBytes": 53692
+        },
+        {
+          "file": "apex-nova-wheel.webp",
+          "durationMs": 8.300000011920929,
+          "decodedBodyBytes": 7724,
+          "transferBytes": 8024
+        },
+        {
+          "file": "comet-body.webp",
+          "durationMs": 14.200000047683716,
+          "decodedBodyBytes": 58442,
+          "transferBytes": 58742
+        },
+        {
+          "file": "comet-wheel.webp",
+          "durationMs": 14.299999952316284,
+          "decodedBodyBytes": 7612,
+          "transferBytes": 7912
+        },
+        {
+          "file": "volt-rival-body.webp",
+          "durationMs": 14.400000035762787,
+          "decodedBodyBytes": 63196,
+          "transferBytes": 63496
+        },
+        {
+          "file": "volt-rival-wheel.webp",
+          "durationMs": 15.5,
+          "decodedBodyBytes": 7256,
+          "transferBytes": 7556
+        },
+        {
+          "file": "volt-kart-body.webp",
+          "durationMs": 3.100000023841858,
+          "decodedBodyBytes": 66114,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-wheel.webp",
+          "durationMs": 5.200000047683716,
+          "decodedBodyBytes": 7534,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-body.webp",
+          "durationMs": 5.600000023841858,
+          "decodedBodyBytes": 75974,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-wheel.webp",
+          "durationMs": 5.600000023841858,
+          "decodedBodyBytes": 7934,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-body.webp",
+          "durationMs": 7.300000011920929,
+          "decodedBodyBytes": 53392,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-wheel.webp",
+          "durationMs": 7.600000023841858,
+          "decodedBodyBytes": 7724,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-body.webp",
+          "durationMs": 8.599999964237213,
+          "decodedBodyBytes": 58442,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-wheel.webp",
+          "durationMs": 8.699999988079071,
+          "decodedBodyBytes": 7612,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-body.webp",
+          "durationMs": 8.899999976158142,
+          "decodedBodyBytes": 63196,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-wheel.webp",
+          "durationMs": 9.899999976158142,
+          "decodedBodyBytes": 7256,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-body.webp",
+          "durationMs": 4.100000023841858,
+          "decodedBodyBytes": 66114,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-wheel.webp",
+          "durationMs": 8,
+          "decodedBodyBytes": 7534,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-body.webp",
+          "durationMs": 9.400000035762787,
+          "decodedBodyBytes": 75974,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-wheel.webp",
+          "durationMs": 13,
+          "decodedBodyBytes": 7934,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-body.webp",
+          "durationMs": 13.199999988079071,
+          "decodedBodyBytes": 53392,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-wheel.webp",
+          "durationMs": 13.600000023841858,
+          "decodedBodyBytes": 7724,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-body.webp",
+          "durationMs": 14.800000011920929,
+          "decodedBodyBytes": 58442,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-wheel.webp",
+          "durationMs": 18.700000047683716,
+          "decodedBodyBytes": 7612,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-body.webp",
+          "durationMs": 15.699999988079071,
+          "decodedBodyBytes": 63196,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-wheel.webp",
+          "durationMs": 19.100000023841858,
+          "decodedBodyBytes": 7256,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-body.webp",
+          "durationMs": 3.400000035762787,
+          "decodedBodyBytes": 66114,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-wheel.webp",
+          "durationMs": 3.5,
+          "decodedBodyBytes": 7534,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-body.webp",
+          "durationMs": 7.100000023841858,
+          "decodedBodyBytes": 75974,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-wheel.webp",
+          "durationMs": 7.100000023841858,
+          "decodedBodyBytes": 7934,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-body.webp",
+          "durationMs": 9.399999976158142,
+          "decodedBodyBytes": 53392,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-wheel.webp",
+          "durationMs": 10.699999988079071,
+          "decodedBodyBytes": 7724,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-body.webp",
+          "durationMs": 12.199999988079071,
+          "decodedBodyBytes": 58442,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-wheel.webp",
+          "durationMs": 14.899999976158142,
+          "decodedBodyBytes": 7612,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-body.webp",
+          "durationMs": 16.600000023841858,
+          "decodedBodyBytes": 63196,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-wheel.webp",
+          "durationMs": 17.19999998807907,
+          "decodedBodyBytes": 7256,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-body.webp",
+          "durationMs": 2.399999976158142,
+          "decodedBodyBytes": 66114,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-wheel.webp",
+          "durationMs": 2.400000035762787,
+          "decodedBodyBytes": 7534,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-body.webp",
+          "durationMs": 2.899999976158142,
+          "decodedBodyBytes": 75974,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-wheel.webp",
+          "durationMs": 4.300000011920929,
+          "decodedBodyBytes": 7934,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-body.webp",
+          "durationMs": 4.5,
+          "decodedBodyBytes": 53392,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-wheel.webp",
+          "durationMs": 4.900000035762787,
+          "decodedBodyBytes": 7724,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-body.webp",
+          "durationMs": 5.300000011920929,
+          "decodedBodyBytes": 58442,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-wheel.webp",
+          "durationMs": 6.100000023841858,
+          "decodedBodyBytes": 7612,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-body.webp",
+          "durationMs": 7.199999988079071,
+          "decodedBodyBytes": 63196,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-wheel.webp",
+          "durationMs": 8.400000035762787,
+          "decodedBodyBytes": 7256,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-body.webp",
+          "durationMs": 3.199999988079071,
+          "decodedBodyBytes": 66114,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-wheel.webp",
+          "durationMs": 3.200000047683716,
+          "decodedBodyBytes": 7534,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-body.webp",
+          "durationMs": 3.399999976158142,
+          "decodedBodyBytes": 75974,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-wheel.webp",
+          "durationMs": 4.400000035762787,
+          "decodedBodyBytes": 7934,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-body.webp",
+          "durationMs": 4.599999964237213,
+          "decodedBodyBytes": 53392,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-wheel.webp",
+          "durationMs": 4.599999964237213,
+          "decodedBodyBytes": 7724,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-body.webp",
+          "durationMs": 5.300000011920929,
+          "decodedBodyBytes": 58442,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-wheel.webp",
+          "durationMs": 5.600000023841858,
+          "decodedBodyBytes": 7612,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-body.webp",
+          "durationMs": 5.5,
+          "decodedBodyBytes": 63196,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-wheel.webp",
+          "durationMs": 6.199999988079071,
+          "decodedBodyBytes": 7256,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-body.webp",
+          "durationMs": 2,
+          "decodedBodyBytes": 66114,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-wheel.webp",
+          "durationMs": 3.599999964237213,
+          "decodedBodyBytes": 7534,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-body.webp",
+          "durationMs": 4,
+          "decodedBodyBytes": 75974,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-wheel.webp",
+          "durationMs": 4.200000047683716,
+          "decodedBodyBytes": 7934,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-body.webp",
+          "durationMs": 5.199999988079071,
+          "decodedBodyBytes": 53392,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-wheel.webp",
+          "durationMs": 5.5,
+          "decodedBodyBytes": 7724,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-body.webp",
+          "durationMs": 5.599999964237213,
+          "decodedBodyBytes": 58442,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-wheel.webp",
+          "durationMs": 7.600000023841858,
+          "decodedBodyBytes": 7612,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-body.webp",
+          "durationMs": 8.300000011920929,
+          "decodedBodyBytes": 63196,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-wheel.webp",
+          "durationMs": 8.800000011920929,
+          "decodedBodyBytes": 7256,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-body.webp",
+          "durationMs": 2.800000011920929,
+          "decodedBodyBytes": 66114,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-wheel.webp",
+          "durationMs": 5,
+          "decodedBodyBytes": 7534,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-body.webp",
+          "durationMs": 5.5,
+          "decodedBodyBytes": 75974,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-wheel.webp",
+          "durationMs": 5.5,
+          "decodedBodyBytes": 7934,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-body.webp",
+          "durationMs": 5.699999988079071,
+          "decodedBodyBytes": 53392,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-wheel.webp",
+          "durationMs": 5.800000011920929,
+          "decodedBodyBytes": 7724,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-body.webp",
+          "durationMs": 6,
+          "decodedBodyBytes": 58442,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-wheel.webp",
+          "durationMs": 7.600000023841858,
+          "decodedBodyBytes": 7612,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-body.webp",
+          "durationMs": 7.899999976158142,
+          "decodedBodyBytes": 63196,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-wheel.webp",
+          "durationMs": 8.399999976158142,
+          "decodedBodyBytes": 7256,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-body.webp",
+          "durationMs": 3.599999964237213,
+          "decodedBodyBytes": 66114,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-wheel.webp",
+          "durationMs": 5.399999976158142,
+          "decodedBodyBytes": 7534,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-body.webp",
+          "durationMs": 5.799999952316284,
+          "decodedBodyBytes": 75974,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-wheel.webp",
+          "durationMs": 6.899999976158142,
+          "decodedBodyBytes": 7934,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-body.webp",
+          "durationMs": 8.5,
+          "decodedBodyBytes": 53392,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-wheel.webp",
+          "durationMs": 8.599999964237213,
+          "decodedBodyBytes": 7724,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-body.webp",
+          "durationMs": 8.800000011920929,
+          "decodedBodyBytes": 58442,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-wheel.webp",
+          "durationMs": 9.699999988079071,
+          "decodedBodyBytes": 7612,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-body.webp",
+          "durationMs": 11,
+          "decodedBodyBytes": 63196,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-wheel.webp",
+          "durationMs": 12.5,
+          "decodedBodyBytes": 7256,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-body.webp",
+          "durationMs": 1.800000011920929,
+          "decodedBodyBytes": 66114,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-wheel.webp",
+          "durationMs": 3.100000023841858,
+          "decodedBodyBytes": 7534,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-body.webp",
+          "durationMs": 3.399999976158142,
+          "decodedBodyBytes": 75974,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-wheel.webp",
+          "durationMs": 4,
+          "decodedBodyBytes": 7934,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-body.webp",
+          "durationMs": 5,
+          "decodedBodyBytes": 53392,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-wheel.webp",
+          "durationMs": 5.300000011920929,
+          "decodedBodyBytes": 7724,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-body.webp",
+          "durationMs": 6.600000023841858,
+          "decodedBodyBytes": 58442,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-wheel.webp",
+          "durationMs": 8,
+          "decodedBodyBytes": 7612,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-body.webp",
+          "durationMs": 9.399999976158142,
+          "decodedBodyBytes": 63196,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-wheel.webp",
+          "durationMs": 10.400000035762787,
+          "decodedBodyBytes": 7256,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-body.webp",
+          "durationMs": 2.300000011920929,
+          "decodedBodyBytes": 66114,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-wheel.webp",
+          "durationMs": 2.800000011920929,
+          "decodedBodyBytes": 7534,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-body.webp",
+          "durationMs": 4.599999964237213,
+          "decodedBodyBytes": 75974,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-wheel.webp",
+          "durationMs": 4.600000023841858,
+          "decodedBodyBytes": 7934,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-body.webp",
+          "durationMs": 4.899999976158142,
+          "decodedBodyBytes": 53392,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-wheel.webp",
+          "durationMs": 5.5,
+          "decodedBodyBytes": 7724,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-body.webp",
+          "durationMs": 6,
+          "decodedBodyBytes": 58442,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-wheel.webp",
+          "durationMs": 6.199999988079071,
+          "decodedBodyBytes": 7612,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-body.webp",
+          "durationMs": 9,
+          "decodedBodyBytes": 63196,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-wheel.webp",
+          "durationMs": 10.400000035762787,
+          "decodedBodyBytes": 7256,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-body.webp",
+          "durationMs": 2,
+          "decodedBodyBytes": 66114,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-wheel.webp",
+          "durationMs": 3.399999976158142,
+          "decodedBodyBytes": 7534,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-body.webp",
+          "durationMs": 4.099999964237213,
+          "decodedBodyBytes": 75974,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-wheel.webp",
+          "durationMs": 4.300000011920929,
+          "decodedBodyBytes": 7934,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-body.webp",
+          "durationMs": 4.699999988079071,
+          "decodedBodyBytes": 53392,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-wheel.webp",
+          "durationMs": 6.399999976158142,
+          "decodedBodyBytes": 7724,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-body.webp",
+          "durationMs": 6.799999952316284,
+          "decodedBodyBytes": 58442,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-wheel.webp",
+          "durationMs": 7.900000035762787,
+          "decodedBodyBytes": 7612,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-body.webp",
+          "durationMs": 8.699999988079071,
+          "decodedBodyBytes": 63196,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-wheel.webp",
+          "durationMs": 9.900000035762787,
+          "decodedBodyBytes": 7256,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-body.webp",
+          "durationMs": 1.9000000357627869,
+          "decodedBodyBytes": 66114,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-wheel.webp",
+          "durationMs": 2.200000047683716,
+          "decodedBodyBytes": 7534,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-body.webp",
+          "durationMs": 3.600000023841858,
+          "decodedBodyBytes": 75974,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-wheel.webp",
+          "durationMs": 3.5,
+          "decodedBodyBytes": 7934,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-body.webp",
+          "durationMs": 4,
+          "decodedBodyBytes": 53392,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-wheel.webp",
+          "durationMs": 5.100000023841858,
+          "decodedBodyBytes": 7724,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-body.webp",
+          "durationMs": 5.599999964237213,
+          "decodedBodyBytes": 58442,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-wheel.webp",
+          "durationMs": 6.400000035762787,
+          "decodedBodyBytes": 7612,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-body.webp",
+          "durationMs": 9.399999976158142,
+          "decodedBodyBytes": 63196,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-wheel.webp",
+          "durationMs": 10.300000011920929,
+          "decodedBodyBytes": 7256,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-body.webp",
+          "durationMs": 3.400000035762787,
+          "decodedBodyBytes": 66114,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-kart-wheel.webp",
+          "durationMs": 3.5,
+          "decodedBodyBytes": 7534,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-body.webp",
+          "durationMs": 3.799999952316284,
+          "decodedBodyBytes": 75974,
+          "transferBytes": 300
+        },
+        {
+          "file": "neon-fox-wheel.webp",
+          "durationMs": 4.399999976158142,
+          "decodedBodyBytes": 7934,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-body.webp",
+          "durationMs": 5.699999988079071,
+          "decodedBodyBytes": 53392,
+          "transferBytes": 300
+        },
+        {
+          "file": "apex-nova-wheel.webp",
+          "durationMs": 6.200000047683716,
+          "decodedBodyBytes": 7724,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-body.webp",
+          "durationMs": 7.5,
+          "decodedBodyBytes": 58442,
+          "transferBytes": 300
+        },
+        {
+          "file": "comet-wheel.webp",
+          "durationMs": 8.199999988079071,
+          "decodedBodyBytes": 7612,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-body.webp",
+          "durationMs": 9.100000023841858,
+          "decodedBodyBytes": 63196,
+          "transferBytes": 300
+        },
+        {
+          "file": "volt-rival-wheel.webp",
+          "durationMs": 9.800000011920929,
+          "decodedBodyBytes": 7256,
+          "transferBytes": 300
+        }
+      ],
+      "errors": [],
+      "traceSummary": {
+        "eventCounts": {
+          "DrawFrame": 1154,
+          "DirectRenderer::DrawFrame": 1154,
+          "DirectRenderer::DrawFrame ProcessForOverlays": 1154,
+          "PipelineReporter": 4616
+        },
+        "rendererTasksObserved": 7805,
+        "longTasksOver50ms": 0,
+        "maxTaskMs": 4.637,
+        "traceFile": "reduced-trace.json",
+        "input": "Synthetic DOM InputEvents, not physical keys or trusted OS key-to-paint latency"
+      }
+    }
+  ],
+  "gpu": {
+    "devices": [
+      {
+        "vendorId": 4098,
+        "deviceId": 5686,
+        "subSysId": 383717443,
+        "revision": 198,
+        "vendorString": "",
+        "deviceString": "AMD Radeon(TM) Graphics",
+        "driverVendor": "AMD",
+        "driverVersion": "31.0.12014.6"
+      },
+      {
+        "vendorId": 4318,
+        "deviceId": 8085,
+        "subSysId": 383717443,
+        "revision": 161,
+        "vendorString": "",
+        "deviceString": "NVIDIA GeForce GTX 1650 Ti",
+        "driverVendor": "",
+        "driverVersion": "32.0.15.5597"
+      },
+      {
+        "vendorId": 5140,
+        "deviceId": 140,
+        "subSysId": 0,
+        "revision": 0,
+        "vendorString": "",
+        "deviceString": "Microsoft Basic Render Driver",
+        "driverVendor": "",
+        "driverVersion": "10.0.26100.9711"
+      }
+    ],
+    "featureStatus": {
+      "2d_canvas": "enabled",
+      "direct_rendering_display_compositor": "disabled_off_ok",
+      "gpu_compositing": "enabled",
+      "multiple_raster_threads": "enabled_on",
+      "opengl": "enabled_on",
+      "rasterization": "enabled",
+      "raw_draw": "disabled_off_ok",
+      "skia_graphite": "disabled_off",
+      "trees_in_viz": "disabled_off",
+      "video_decode": "enabled",
+      "video_encode": "enabled",
+      "webgl": "enabled",
+      "webgpu": "enabled",
+      "webnn": "disabled_off"
+    },
+    "renderer": "ANGLE (AMD, AMD Radeon(TM) Graphics (0x00001636) Direct3D11 vs_5_0 ps_5_0, D3D11-31.0.12014.6)"
+  },
+  "recordedDate": "2026-10-22",
+  "sourceContext": "Final alpha.14 app and 800x400 previews; streamed trace analysis; validated active-clock advancement; asset hashes included"
+}
