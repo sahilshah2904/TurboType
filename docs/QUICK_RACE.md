@@ -2,6 +2,12 @@
 
 # Recreate the single-player Quick Race
 
+## Setup now and in the final game
+
+Passage chooses the exercise; opponent pace chooses CPU target bands independently of passage length; mode chooses passage completion or a 60-active-second trial; seed reproduces CPU reaction/hesitation/correction schedules for debugging and fair retries. A seed never replays the human's typing. Current passages are validation exercises, not campaign content.
+
+Keep passage/pace/mode choices for optional Quick Race and Practice where useful. Campaign nodes supply authored passage, CPU profile, mode and targets from the level definition, so players do not configure these four fields before every campaign race. Move the numeric seed to an optional Advanced/Replay disclosure in Phase 6 (TT-603); generate it automatically during normal play and retain Retry same race. It should not be a required final onboarding choice.
+
 Implemented in Phase 4, app 0.1.0-alpha.3, rules version 3. This is a playable local single-player preview, not a public deployment or campaign release. Phase 5 (app alpha.4) replaces the prototype car with original modern sports bodies, Neon Harbor camera/effects and optional synth sound; this document retains the exact Phase 4 gameplay semantics.
 
 ## Run and reproduce

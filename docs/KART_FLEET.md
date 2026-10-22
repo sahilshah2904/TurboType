@@ -4,6 +4,14 @@
 
 # Original rival fleet — alpha.11
 
+## Alpha.14 independent parts — 22 October 2026
+
+This section supersedes the unfinished-part description below. All five models now have wheel-free chassis (`assets-source/karts/parts/*-body.png`), editable original wheel sources (`*-wheel.svg`), and reproducible body/wheel/static-preview WebPs. Built-in image_gen performed one edit per original car; prompts/provenance are committed alongside the sources. The accepted palette and silhouettes are preserved; these remain raster chassis, not 3D meshes.
+
+Run `node scripts/export-kart-parts.mjs` with pinned Node/Chromium. It exports 800×400 bodies, 128×128 wheel textures and 800×400 composed previews, sharing `KART_FLEET` anchors. Chassis art is a separate child container; tires rotate inside fixed elliptical carriers. Suspension moves only the chassis/flame attachment, leaving tires and shadow grounded. Delta-clamped rotation avoids a resume jump and stops when the car stops or decoration is reduced. Model changes reuse the assembly. Missing body or wheel assets trigger the existing graphics recovery path.
+
+Static selector/hub hero images use the same parts and anchors. The large original composites remain intact for provenance, but are no longer requested by current app routes. Final visual evidence, actual transfer budgets, hardware profiling and the remaining physical typing gate are recorded in the alpha.14 testing/performance documentation.
+
 Phase 5 replaces the four palette-copy CPUs with four independently generated silhouettes. The accepted player remains the original Volt kart with the same runtime coral palette. The hub previews the player, Neon Fox and Apex Nova; the race uses all five. Race rules, CPU IDs/schedules and input eligibility are unchanged.
 
 | CPU | Model direction | Shipped WebP |

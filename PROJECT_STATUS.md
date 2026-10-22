@@ -1,5 +1,18 @@
 # TurboType project status
 
+## Active Phase 5 work — 22 October 2026
+
+The user authorized finishing Phase 5. Alpha.14 implements independent body/wheel assets and chassis suspension for all five accepted models, compact shared previews and actual-GPU profiling tools. Full local checks pass: 96 unit / 36 browser cases. See [Phase 5 closeout](docs/PHASE5_CLOSEOUT.md) for current evidence and the remaining physical-input acceptance/integration gate. PR #4 stays open until that gate is reviewed; no deployment. Older stop-and-save/artwork-pending sections below are historical.
+
+**Reward correction:** 100 levels per category; a distinct car at 15/30/45/60/75/90 eligible main clears independently in Easy/Medium/Hard. Eighteen rewards plus five starters replace the ten-car aggregate curve. See docs/GARAGE_PROGRESSION.md. No unlock implementation is claimed.
+
+
+## New-chat audit — 22 October 2026
+
+Read AGENTS.md, the full session handoff, backlog, engineering/workflow guidance and current art/performance/test evidence. Local checkout was clean on feat/race-polish at 2eebd92 (implementation b76392b); GitHub PR #4 is open/unmerged and reports mergeable. Exact-head PR run [39584421655](https://github.com/sahilshah2904/TurboType/actions/runs/39584421655) completed successfully for 2eebd9248f4a4a7d0a80d52fa46396a3d691fd24. Main is d86d046, the README-only publication, with separate successful push run [39584487911](https://github.com/sahilshah2904/TurboType/actions/runs/39584487911). These were freshly read from GitHub, not inferred from the older handoff runs.
+
+Resume Phase 5 with separated body/wheel art (TT-501/510), then hardware-accelerated physical typing/performance and longer-session resource evidence (TT-505/506/511/512/519/522), reconcile remaining integration gates and review PR #4 (TT-502/508/509/513/515/518/520). Accepted silhouettes/palette/music and previous functional reports remain accepted. Alpha.13 has automated car-lock/fullscreen/readability evidence; subjective confirmation is distinct from measured hardware evidence. No task was marked complete in this audit. No application change, new local gameplay test run, merge or deployment occurred. See the dated backlog reconciliation and handoff continuation below their titles.
+
 ## Saved handoff — 21 October 2026
 
 The user asked to stop and continue in a new project chat. Read the refreshed [AGENTS.md](AGENTS.md) and [detailed session handoff](docs/SESSION_HANDOFF.md) before resuming; the old chat is not required. No new implementation, merge or deployment is requested in this handoff task.

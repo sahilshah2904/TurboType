@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-alpha.14 — 22 October 2026
+
+- Separate all five accepted chassis from their wheels. Add editable original wheel sources, independent tire/rim rotation, chassis-only suspension and shared race/hub anchors; preserve one-car-per-race and cosmetic-only rules.
+- Export compact body/wheel/static-preview WebPs from committed sources instead of loading large composite masters in the live fleet and selector. Keep original masters for provenance.
+- Add hardware-verified headed-browser profiling with trace capture and longer sequential cleanup cycles; keep synthetic input, physical typing and presentation evidence explicitly distinct.
+- Correct future TT-911 rewards to one distinct car every 15 clears within each 100-level category: six per category, eighteen rewards plus five starters. This is documented future work, not current unlock behavior.
+- Explain Quick Race passage/pace/mode/seed and the final level-defined campaign flow; optional seed disclosure remains TT-603. Rules 3 and save/content 1 remain unchanged.
+
 ## 0.1.0-alpha.13 — 21 October 2026
 
 - Lock each chosen car from countdown through finish, including pause/navigation. Retry or a new race opens selection again; guard synthetic change events by actual race state.

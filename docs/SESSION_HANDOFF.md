@@ -1,5 +1,18 @@
 # TurboType — resume in a new chat
 
+## Active Phase 5 work — 22 October 2026
+
+The user authorized finishing Phase 5. Alpha.14 implements independent body/wheel assets and chassis suspension for all five accepted models, compact shared previews and actual-GPU profiling tools. Full local checks pass: 96 unit / 36 browser cases. See [Phase 5 closeout](PHASE5_CLOSEOUT.md) for current evidence and the remaining physical-input acceptance/integration gate. PR #4 stays open until that gate is reviewed; no deployment. Older stop-and-save/artwork-pending sections below are historical.
+
+**Reward correction:** 100 levels per category; a distinct car at 15/30/45/60/75/90 eligible main clears independently in Easy/Medium/Hard. Eighteen rewards plus five starters replace the ten-car aggregate curve. See GARAGE_PROGRESSION.md. No unlock implementation is claimed.
+
+
+## Resumed audit — 22 October 2026
+
+The new chat read this handoff and the project trackers, inspected source/art/performance/test evidence and freshly queried GitHub. Starting checkout was clean on feat/race-polish at 2eebd92. PR #4 remains open/unmerged; its exact-head check/run 39584421655 passed for 2eebd9248f4a4a7d0a80d52fa46396a3d691fd24. Main d86d046 is the README-only publication and passed separate push run 39584487911. No app/version/dependency changes, fresh local gameplay suite, merge or deployment were part of the audit.
+
+The next implementation remains TT-501/510 separated body/wheel art preserving the accepted fleet, followed by measured hardware performance/resource work and final Phase 5 reconciliation/integration. The dated section at the top of BACKLOG.md groups every still-open Phase 5 ID and clarifies superseded mobile/paused-switch/repeated-approval wording. The eleven-phase roadmap and future ten reward cars remain intact. These audit edits are local documentation until explicitly committed/pushed; hosted results above certify the audited source, not subsequent edits.
+
 Saved 21 October 2026 at the user's request to stop and continue later. This is a documentation handoff, not permission to start a new phase, merge PR #4 or deploy. Read this file with `AGENTS.md`, `PROJECT_STATUS.md`, `BACKLOG.md` and current Git status before working. Earlier chat messages are not required to resume.
 
 ## Exact checkpoint
@@ -105,15 +118,13 @@ Then reconcile the linked backlog gates, verify exact PR head/checks, and review
 | 6 — Opening/onboarding | Existing pages visually revamped; cinematic loading/welcome/rules/tutorial/calibration not implemented (TT-601–604) |
 | 7 — Campaign maps | Three rightward winding Easy/Medium/Hard maps, 100 numbered circular nodes each, locks/stars/chapters/bonus branches, accessible navigation and saved position (TT-701–704) |
 | 8 — All 300 levels | Author/review/validate passages, learning goals, difficulty curves/CPU pace/star targets, chapter/bonus events; current short exercises do not satisfy this (TT-801–806) |
-| 9 — Progression/learning | Guest saves/recovery/migration, stars/rewards/rank/garage/records/charts/coaching/drills, ten reward cars, optional account-backed cloud progress before solo launch (TT-901–911) |
+| 9 — Progression/learning | Guest saves/recovery/migration, stars/rewards/rank/garage/records/charts/coaching/drills, category-specific reward cars, optional account-backed cloud progress before solo launch (TT-901–911) |
 | 10 — Test/launch solo | Desktop browser/keyboard/accessibility/performance/recovery/cloud policy/sync, Pages workflow and real public-link checks (TT-1001–1008 with mobile scope retired) |
 | 11 — Friends multiplayer | Immediately after solo launch: backend/private rooms/invites/ready/synchronized races/reconnect/rematch, reused auth/data boundaries and multi-client validation (TT-1101–1107) |
 
-### Required ten future reward cars — TT-911
+### Required category-specific reward cars — TT-911
 
-Keep five starters available. Add ten **additional** increasingly advanced/sporty original designs later (15 cars total). Unlock milestones: **10, 25, 50, 75, 100, 140, 180, 220, 260, 300 unique eligible main-level clears** across all three categories. Replay, bonus events, Quick Race and Practice do not inflate the count; the final reward requires all 300. Cars stay cosmetic.
-
-Stable IDs `reward-001`–`reward-010`, working names/directions and planned locked garage UX are in `docs/GARAGE_PROGRESSION.md`. No final art or unlock code exists. Derive ownership idempotently from versioned qualifying-clear receipts, recover interrupted awards, migrate guest saves, safely merge cloud clear sets, and validate online entitlements. Do not trust selected-car localStorage as ownership. These future cars do not block Phase 5.
+**22 October correction:** keep five starters and plan eighteen distinct rewards: one at 15/30/45/60/75/90 unique eligible main-level clears within each 100-level Easy/Medium/Hard category. Counters are independent; replays, bonus events, Quick Race and Practice do not count. There is no extra car at 100 under the every-15 rule. IDs are reward-{category}-{threshold}, documented in docs/GARAGE_PROGRESSION.md. This supersedes the former ten-car/global-clear plan; no reward art, unlock code or persisted ownership exists yet. Derive ownership idempotently from category-qualified clear receipts, recover interrupted awards, migrate guest saves, merge cloud clear sets safely and validate online entitlements. Cars stay cosmetic and this remains Phase 8/9 TT-911, not a Phase 5 blocker.
 
 ## Code map for the next developer
 

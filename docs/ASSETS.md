@@ -2,6 +2,10 @@
 
 # Asset register — alpha.9
 
+## Alpha.14 current parts pipeline
+
+Five wheel-free PNG chassis were edited from the accepted original art with built-in image_gen, preserving framing/colors/silhouettes and genuine transparency. Sources and exact prompts: `assets-source/karts/parts/PROMPTS.md`. Five original editable SVG wheel designs are reproduced by `scripts/export-kart-parts.mjs`, which also exports body/wheel/assembled-preview WebPs into `public/assets/karts/parts/`. Both Race and Hub use independent wheels and chassis-only suspension. Earlier composite files remain historical originals; the current catalog loads compact assembled previews. No third-party branded art or new audio is used.
+
 The reel, supplied screenshots, local analysis frames and helper binaries stay in ignored Reference_Images. Documentation captures under docs/images are versioned review evidence and excluded from the built game. No reference soundtrack, Nintendo media, Marvel character/logo or Iron Man screenshot is shipped.
 
 | Asset | Origin and editable source | Current use / provenance |

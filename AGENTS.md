@@ -8,6 +8,8 @@
 
 ## Current checkpoint — 21 October 2026
 
+**22 October active override:** the user authorized Phase 5 implementation. Alpha.14 now has independent chassis/wheel assets and compact previews for all five accepted cars, full local 96-unit/36-browser evidence, and actual-GPU synthetic-input profiling. See docs/PHASE5_CLOSEOUT.md and docs/PERFORMANCE_ALPHA14.md. Final physical keyboard/new-parts acceptance and PR #4 integration remain; use the two-minute recorder/checklist in docs/PHASE5_POLISH_TESTS.md. The old stop-and-save instruction below is historical. Do not merge before reviewing that remaining evidence/report. Latest source/check hashes must be re-read from Git/CI after pushes.
+
 - App **0.1.0-alpha.13**, rules **3**, save/content **1**. Latest implementation b76392b; verified documentation checkpoint 717c76e. This handoff creates newer documentation commits; inspect actual HEAD.
 - Workspace: S:/AI_Engineer_Journey/Projects/TurboType. Account: sahilshah2904; repository: TurboType; local author: **Sahilshah**. Current branch: **feat/race-polish**; open/unmerged [PR #4](https://github.com/sahilshah2904/TurboType/pull/4).
 - Main code is the accepted Phase 4 baseline. Publishing the README/screenshots on main does not merge the preview or deploy a game.
@@ -26,7 +28,7 @@
 - **Sound controls only in Settings.** No hub radio section, Race audio controls or personal-music chooser. Accepted original **Ignition** browsing and **Overdrive** racing masters; separate countdown/FX. Do not restore Nightforge, the old oscillator loop, Misirlou or uploads.
 - Shared **44px top-right fullscreen/restore icon on all routes**; important prose/controls 16px+, compact metadata 14px, brighter secondary text. Keep Low effects, Reduced motion and Larger typing text.
 - The user accepted the cars/music/palette and reported the other laptop tests good. Do not repeat those approvals. That report is not physical presented-frame-rate/keyboard-latency certification; latest alpha.13 controls/fonts have automated/layout evidence.
-- **Ten additional** increasingly sporty locked reward cars are future Phase 8/9 scope (TT-911), not implemented or a Phase 5 blocker. Unlock at **10/25/50/75/100/140/180/220/260/300 unique eligible main-level clears**. No replay/bonus/Practice inflation. See docs/GARAGE_PROGRESSION.md for stable IDs, art briefs, ownership/save/cloud rules.
+- **22 October reward correction:** unlock a distinct new car every **15 eligible main-level clears within each category**: 15/30/45/60/75/90 in Easy, Medium and Hard, each with 100 levels. This means **18 rewards plus five starters**, superseding the ten-car/global-clear curve. Category counters are independent; replay/bonus/Practice do not inflate them. Future Phase 8/9 TT-911, not a Phase 5 blocker. See docs/GARAGE_PROGRESSION.md for IDs/art/ownership/save/cloud rules.
 
 ## Engineering, documents and Git
 
@@ -36,8 +38,8 @@
 - Reuse the current feature checkout for unfinished Phase 5. No automatic commit/watchers. Source pushes are not deployments. A documented main README/screenshot-only update must not import unfinished app code.
 - Node 24.13.0 / npm 11, pinned lockfile; npm run check is the full check. Playwright preview uses 4173, two SwiftShader workers. Do not kill the existing user-owned Vite server on 5173 blindly. Do not run browser suites/captures/profiling concurrently on the limited-memory workstation.
 - CI emails were real: combined garage tests exceeded 30 seconds in duplicate push/PR runs. Alpha.13 splits cases without raising timeouts, runs feature checks on PR updates/main on push/manual, and cancels superseded runs. Do not mute notifications, disable checks or claim all copies passed from one successful run. Inspect current head/event/conclusion.
-- Keep reference media/analysis tools ignored under Reference_Images/. Ship only original/appropriately licensed assets/audio and record provenance. Raster masters/prompts are not editable 3D meshes. Current baked wheels plus rotating highlights are unfinished part work.
+- Keep reference media/analysis tools ignored under Reference_Images/. Ship only original/appropriately licensed assets/audio and record provenance. Raster masters/prompts are not editable 3D meshes. Alpha.14 now renders independent original wheels and chassis; see the current closeout and physical acceptance gate.
 
 ## Resume order
 
-Read the detailed handoff; audit current Git/CI; finish the remaining Phase 5 art/performance gates and reconcile backlog; verify/review/integrate PR #4 when appropriate. Then Phase 6 opening/tutorial, Phase 7 maps, Phase 8 curriculum, Phase 9 rewards/learning/guest and optional cloud saves, Phase 10 release/Pages, Phase 11 friends. Do not implement more during this stop-and-save request.
+Read the detailed handoff; audit current Git/CI; finish the remaining Phase 5 art/performance gates and reconcile backlog; verify/review/integrate PR #4 when appropriate. Then Phase 6 opening/tutorial, Phase 7 maps, Phase 8 curriculum, Phase 9 rewards/learning/guest and optional cloud saves, Phase 10 release/Pages, Phase 11 friends. The 22 October request authorizes the remaining Phase 5 work; the earlier stop-and-save request is historical. Retain final physical acceptance before integration.

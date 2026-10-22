@@ -2,6 +2,7 @@ import type { SoloRace } from "../core/solo-race";
 import { kartLineup, type KartId } from "../content/kart-catalog";
 import {
   addKart,
+  animateKart,
   bakePlayerPalette,
   fleetReady,
   KART_FLEET,
@@ -37,7 +38,6 @@ export async function mountRaceTrack(
   class HarborCircuit extends Phaser.Scene {
     private cars: Phaser.GameObjects.Container[] = [];
     private flames: Phaser.GameObjects.Graphics[] = [];
-    private spokes: Phaser.GameObjects.Graphics[][] = [];
     private labels: Phaser.GameObjects.Text[] = [];
     private markers: Phaser.GameObjects.Text[] = [];
     private previous = new Map<string, { progress: number; at: number }>();
@@ -82,8 +82,7 @@ export async function mountRaceTrack(
       ].forEach((name, i) => {
         const assembly = addKart(this, i);
         this.assemblies.push(assembly);
-        const { root, flame, spokes } = assembly;
-        this.spokes.push(spokes);
+        const { root, flame } = assembly;
         const label = this.add
           .text(0, -53, name, {
             fontFamily: "monospace",
@@ -109,6 +108,7 @@ export async function mountRaceTrack(
       this.scale.on("resize", this.layout, this);
       parent.dataset.ready = "true";
       parent.dataset.fleet = KART_FLEET.map((kart) => kart.id).join(",");
+      parent.dataset.parts = "independent-body-wheels";
       this.syncModels();
       options.onReady();
     }
@@ -284,9 +284,7 @@ export async function mountRaceTrack(
         root
           .setPosition(
             Math.max(carWidth * 0.52, Math.min(w - carWidth * 0.52, x)),
-            horizon +
-              laneHeight * (lanes[i] + 0.52) +
-              (moving ? Math.sin(s.elapsedMs / 190 + i) * 0.65 : 0),
+            horizon + laneHeight * (lanes[i] + 0.52),
           )
           .setScale(carWidth / 200);
         this.labels[i].setFontSize(Math.max(11, 9 / (carWidth / 200)));
@@ -299,6 +297,7 @@ export async function mountRaceTrack(
           .setOrigin(gap < 0 ? 0 : 1, 0)
           .setText(`${gap < 0 ? "◀" : "▶"} ${Math.round(row.progress * 100)}%`);
         const flame = this.flames[i];
+        animateKart(this.assemblies[i], step, moving, s.elapsedMs + i * 190);
         flame.clear();
         if (moving) {
           const nitro = i === 0 && s.nitroActive,
@@ -325,9 +324,6 @@ export async function mountRaceTrack(
               exhaustX - size * 0.6,
               exhaustY,
             );
-          this.spokes[i].forEach(
-            (wheel) => (wheel.rotation = s.elapsedMs / 65),
-          );
         }
       });
       if (s.state === "ready") {

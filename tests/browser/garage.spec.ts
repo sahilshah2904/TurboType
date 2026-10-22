@@ -75,12 +75,12 @@ test("car choice survives hub navigation and browser reload", async ({
   await page.getByRole("link", { name: "The hub", exact: true }).click();
   await expect(page.locator(".garage-kart")).toHaveAttribute(
     "src",
-    /apex-nova.webp$/,
+    /apex-nova-preview.webp$/,
   );
   await page.reload({ waitUntil: "domcontentloaded" });
   await expect(page.locator(".garage-kart")).toHaveAttribute(
     "src",
-    /apex-nova.webp$/,
+    /apex-nova-preview.webp$/,
   );
   await page.getByRole("link", { name: "Race", exact: true }).click();
   await expect(page.getByRole("radio", { name: /^Apex Nova/ })).toBeChecked();

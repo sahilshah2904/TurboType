@@ -2,6 +2,7 @@ import type { UserSettings } from "../storage/settings";
 import { kartLineup, type KartId } from "../content/kart-catalog";
 import {
   addKart,
+  animateKart,
   bakePlayerPalette,
   fleetReady,
   KART_FLEET,
@@ -27,7 +28,7 @@ export async function mountTrackPreview(
 
   class TrackPreview extends Phaser.Scene {
     private cars: Phaser.GameObjects.Container[] = [];
-    private wheelPairs: Phaser.GameObjects.Graphics[][] = [];
+    private assemblies: ReturnType<typeof addKart>[] = [];
     private marks!: Phaser.GameObjects.Graphics;
     private flame!: Phaser.GameObjects.Particles.ParticleEmitter;
     private elapsedMs = 0;
@@ -51,10 +52,11 @@ export async function mountTrackPreview(
       this.art = this.add.graphics();
       this.marks = this.add.graphics();
       for (let i = 0; i < 3; i++) {
-        const { root, spokes } = addKart(this, lineup[i]);
+        const assembly = addKart(this, lineup[i]);
+        const { root } = assembly;
         root.setPosition([540, 330, 160][i], 166 + i * 89);
         this.cars.push(root);
-        this.wheelPairs.push(spokes);
+        this.assemblies.push(assembly);
       }
       const dot = this.make.graphics({ x: 0, y: 0 });
       dot
@@ -115,6 +117,7 @@ export async function mountTrackPreview(
       this.layout();
       this.scale.on("resize", this.layout, this);
       parent.dataset.ready = "true";
+      parent.dataset.parts = "independent-body-wheels";
       options.onReady("Track preview ready");
     }
 
@@ -150,20 +153,18 @@ export async function mountTrackPreview(
         for (let x = -100; x < this.courseWidth + 100; x += 100)
           this.marks.lineBetween(x - offset, y, x + 38 - offset, y);
       this.cars.forEach((car, i) => {
-        car.y =
-          166 +
-          i * 89 +
-          (options.reducedMotion
-            ? 0
-            : Math.sin(this.elapsedMs / 240 + i) * 1.5);
-        this.wheelPairs[i].forEach(
-          (wheel) => (wheel.rotation = this.elapsedMs / 85),
+        car.y = 166 + i * 89;
+        animateKart(
+          this.assemblies[i],
+          delta,
+          !options.reducedMotion,
+          this.elapsedMs + i * 190,
         );
       });
       const [exhaustX, exhaustY] = KART_FLEET[lineup[0]].exhaust;
       this.flame?.setPosition(
         this.cars[0].x + exhaustX,
-        this.cars[0].y + exhaustY,
+        this.cars[0].y + this.assemblies[0].chassis.y + exhaustY,
       );
     }
   }

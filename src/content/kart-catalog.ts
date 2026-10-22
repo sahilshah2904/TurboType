@@ -3,31 +3,31 @@ export const STARTER_KARTS = [
   {
     id: "volt-kart",
     name: "Volt Kart",
-    file: "volt-kart.png",
+    file: "parts/volt-kart-preview.webp",
     style: "Coral street racer",
   },
   {
     id: "neon-fox",
     name: "Neon Fox",
-    file: "neon-fox.webp",
+    file: "parts/neon-fox-preview.webp",
     style: "Amber rally cage",
   },
   {
     id: "apex-nova",
     name: "Apex Nova",
-    file: "apex-nova.webp",
+    file: "parts/apex-nova-preview.webp",
     style: "Cobalt aero racer",
   },
   {
     id: "comet",
     name: "Comet",
-    file: "comet.webp",
+    file: "parts/comet-preview.webp",
     style: "Pearl rocket streamliner",
   },
   {
     id: "volt-rival",
     name: "Volt Electric",
-    file: "volt-rival.webp",
+    file: "parts/volt-rival-preview.webp",
     style: "Violet electric concept",
   },
 ] as const;

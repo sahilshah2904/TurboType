@@ -140,7 +140,11 @@ test("CPUs finishing first do not stop learning, while time trials produce hones
     "E",
   );
 });
-for (const asset of ["volt-kart.png", "comet.webp"])
+for (const asset of [
+  "parts/volt-kart-body.webp",
+  "parts/comet-body.webp",
+  "parts/comet-wheel.webp",
+])
   test(`art failure for ${asset} allows text racing, retry recovery and cleanup`, async ({
     page,
   }) => {

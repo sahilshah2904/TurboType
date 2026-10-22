@@ -41,10 +41,23 @@ test("loads modern artwork, keeps the active caret readable and fills the viewpo
   });
   page.on("pageerror", (e) => errors.push(e.message));
   await openRace(page);
-  expect(assets.some((u) => u.endsWith("volt-kart.png"))).toBe(true);
-  for (const model of ["neon-fox", "apex-nova", "comet", "volt-rival"]) {
-    expect(assets.some((u) => u.endsWith(`${model}.webp`))).toBe(true);
+  expect(assets.some((u) => u.endsWith("volt-kart-body.webp"))).toBe(true);
+  for (const model of [
+    "volt-kart",
+    "neon-fox",
+    "apex-nova",
+    "comet",
+    "volt-rival",
+  ]) {
+    for (const part of ["body", "wheel", "preview"])
+      expect(assets.some((u) => u.endsWith(`${model}-${part}.webp`))).toBe(
+        true,
+      );
   }
+  await expect(page.locator("#race-track")).toHaveAttribute(
+    "data-parts",
+    "independent-body-wheels",
+  );
   await expect(page.locator("#race-track")).toHaveAttribute(
     "data-fleet",
     "volt-kart,neon-fox,apex-nova,comet,volt-rival",

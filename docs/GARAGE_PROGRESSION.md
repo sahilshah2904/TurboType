@@ -12,31 +12,27 @@ The chosen model is used for the player. The CPUs receive the remaining four mod
 
 `src/content/kart-catalog.ts` defines stable starter IDs/labels. `src/game/kart-fleet.ts` owns visual anchors and in-place model updates. `src/storage/garage.ts` stores only `{schemaVersion: 1, selectedKart}` under `turbotype:garage:v1`. Invalid JSON, unsupported versions or unknown/unavailable IDs fall back to Volt Kart. A blocked write applies the choice in memory for this visit and shows an explicit notice. Display/audio records and rules/save/content versions stay unchanged. This is a cosmetic preference, not campaign or cloud storage.
 
-## Required future scope — ten reward cars
+## Required future scope — rewards every 15 levels in each category
 
-There will be **15 cars total**: these five starters plus ten additional locked rewards. The following milestone curve is the implementation baseline, subject to playtest tuning. Model names/directions are authoring briefs; their art and unlock behavior do not exist in the current app. Do not add selectable fake assets or claim unlocks are already saved.
+**22 October 2026 user correction supersedes the original ten-car/global-clear plan.** Easy, Medium and Hard each have 100 main levels. Each category awards its own new car at **15, 30, 45, 60, 75 and 90 unique eligible main-level clears**: six per category, **18 reward cars and 23 cars total** including the five starters. Clears in another category never advance this counter. Level 100 retains campaign/finale rewards but does not add an extra car under the every-15 rule. Model names/directions below are authoring briefs; art and unlock behavior are future Phase 8/9 work.
 
-| Stable reward ID | Unique main levels cleared | Working model name | Increasingly sporty design brief |
-| --- | --- | --- | --- |
-| reward-001 | 10 | Streetline RS | Clean upgraded street kart, compact spoiler |
-| reward-002 | 25 | Rallysport R | Wider stance, reinforced cage, purposeful exhaust |
-| reward-003 | 50 | Vector GT | Low sports body, sculpted sidepods |
-| reward-004 | 75 | Apex Sprint | Track chassis, exposed suspension, larger aero |
-| reward-005 | 100 | Circuit GTR | Aggressive GT form, carbon trim and diffuser |
-| reward-006 | 140 | Aero V8 | Lightweight supercar shape, deep intakes |
-| reward-007 | 180 | Phantom RX | Long low supercar with refined lighting |
-| reward-008 | 220 | Vortex Hyper | Radical hypercar silhouette and active-looking aero |
-| reward-009 | 260 | Ion Prototype | Futuristic endurance prototype, dramatic canopy/fin |
-| reward-010 | 300 | Zenith X | Most advanced showcase hyperkart, distinctive premium finish |
+| Clears within category | Easy reward ID / working name | Medium reward ID / working name | Hard reward ID / working name | Art progression |
+| --- | --- | --- | --- | --- |
+| 15 | reward-easy-015 / Streetline RS | reward-medium-015 / Rallysport R | reward-hard-015 / Phantom RX | Distinct sporty street/rally/track bodies |
+| 30 | reward-easy-030 / Vector GT | reward-medium-030 / Apex Sprint | reward-hard-030 / Shadow GT | Lower chassis, sculpted sidepods |
+| 45 | reward-easy-045 / Circuit S | reward-medium-045 / Circuit GTR | reward-hard-045 / Vortex Hyper | Larger aero, diffuser, carbon trim |
+| 60 | reward-easy-060 / Aero V6 | reward-medium-060 / Aero V8 | reward-hard-060 / Ion Prototype | Advanced supercar/prototype forms |
+| 75 | reward-easy-075 / Horizon R | reward-medium-075 / Horizon RX | reward-hard-075 / Zenith R | Dramatic canopy, distinctive lighting |
+| 90 | reward-easy-090 / Summit GT | reward-medium-090 / Summit Hyper | reward-hard-090 / Zenith X | Category showcase designs, most advanced in their series |
 
-Count the set of **distinct eligible main-level IDs** across Easy/Medium/Hard (100 each), using the campaign's clear rules. Replaying a cleared level, extra stars, Quick Race, Practice and optional bonus events do not increase this count. A player can reach a milestone through any mix of difficulties; each main level counts once. The final reward requires all 300. Skipped, failed, practice-only or assisted runs do not create a qualifying clear receipt. Stars/chapter bonus rewards remain separate systems.
+Count **distinct eligible main-level IDs separately within each category**, using the campaign's clear rules. For example, 14 Easy clears plus 1 Medium clear earns neither category's first car; 15 Easy clears earns only reward-easy-015. Replays, extra stars, Quick Race, Practice and bonus events do not increase these counts. Skipped, failed, practice-only or assisted runs do not create qualifying receipts. Stars/chapter/finale rewards remain separate. Retire the never-shipped reward-001–reward-010 IDs; there are no persisted entitlements to migrate today. If an external draft ever used them, do not silently map aggregate ownership onto category rewards.
 
 ## Delivery and verification — Phases 8/9
 
-- Author/review all ten original vehicle bodies/parts with increasingly sporty silhouettes; export/anchor/provenance, reduced/low rendering and loading recovery follow the fleet pipeline. Avoid preloading all fifteen high-resolution models into every race.
-- Show locked garage entries with a silhouette, required milestone and progress such as “18 / 25 unique levels”; no purchase or usable selection until earned. Unlock notifications need reduced-motion and accessible text variants. Keep the hub focused on play; detailed collection management belongs in Garage.
+- Author/review all eighteen distinct original vehicle bodies/parts with increasingly sporty silhouettes; export/anchor/provenance, reduced/low rendering and loading recovery follow the fleet pipeline. Avoid preloading all twenty-three high-resolution models into every race.
+- Show locked garage entries with category, silhouette, required milestone and progress such as “Easy: 14 / 15 levels”; no purchase or usable selection until earned. Unlock notifications need reduced-motion and accessible text variants. Keep the hub focused on play; detailed collection management belongs in Garage.
 - Derive ownership from versioned campaign clear receipts, not a user-editable selected-car preference or credit balance. Award once per stable reward ID, recover unlocks after interrupted writes and support save migration/import. Legacy players retain valid starter selections; unavailable or not-owned selections fall back safely.
-- Optional account/cloud progress must merge cleared-level sets without double-counting repeats across devices. Server policies validate ownership where online features depend on it. Friends multiplayer shares appearance only after authoritative entitlement checks; car choice never modifies race simulation.
-- Verify threshold−1/threshold/threshold+1 for every reward, replay/bonus exclusion, interrupted/repeated awards, save recovery, offline/cloud merge conflicts and multiplayer entitlement handling. These tests belong with the implemented reward system; the current preview does not pretend it exists.
+- Optional account/cloud progress must merge category-qualified cleared-level sets without double-counting repeats across devices or adding progress to another category. Server policies validate ownership where online features depend on it. Friends multiplayer shares appearance only after authoritative entitlement checks; car choice never modifies race simulation.
+- Verify threshold−1/threshold/threshold+1 for all six milestones in all three categories, category isolation, 90→100 with no seventh award, replay/bonus exclusion, interrupted/repeated awards, save recovery, offline/cloud merge conflicts and multiplayer entitlement handling. These tests belong with the implemented reward system; the current preview does not pretend it exists.
 
 Tracked as TT-911 in [BACKLOG.md](../BACKLOG.md), alongside campaign completion/progression tasks. Current selector and Settings-only audio are TT-523/524.

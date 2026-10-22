@@ -94,7 +94,9 @@ test("unknown hash recovers and laptop window resize preserves text", async ({
 test("failed artwork offers retry while other screens remain usable", async ({
   page,
 }) => {
-  await page.route("**/assets/karts/volt-kart.png", (route) => route.abort());
+  await page.route("**/assets/karts/parts/volt-kart-body.webp", (route) =>
+    route.abort(),
+  );
   await page.goto("./");
   await expect(page.locator("#track-status")).toContainText(
     "artwork could not load",
@@ -102,7 +104,7 @@ test("failed artwork offers retry while other screens remain usable", async ({
   await expect(
     page.getByRole("button", { name: "Retry preview" }),
   ).toBeVisible();
-  await page.unroute("**/assets/karts/volt-kart.png");
+  await page.unroute("**/assets/karts/parts/volt-kart-body.webp");
   await page.getByRole("button", { name: "Retry preview" }).click();
   await expect(page.locator("#track-preview")).toHaveAttribute(
     "data-ready",

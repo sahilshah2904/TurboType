@@ -1,4 +1,14 @@
-# Alpha.13 focused laptop review
+# Alpha.14 final physical laptop check
+
+The accepted palette, silhouettes, music and earlier functional reports remain accepted. This is a short check of the newly independent parts and physical responsiveness, not another preference review. Automated regression and actual-GPU synthetic-input evidence are separate from your physical typing report.
+
+1. Keep the existing development server running. In the project terminal run `node scripts/profile-laptop-input.mjs`. It opens a separate hardware-accelerated Chromium test profile for two minutes; leave that test window open until it finishes. It does not touch your normal browser profile or automate typing.
+2. Choose a starter, Start and physically type at least 20 keys. Make and correct one mistake; pause/resume, then retry. Watch for detached/double wheels, wheels jumping on resume, or visible typing/animation delay. Try another starter on the new race. Use Settings to compare Low effects and Reduced motion; enable audio if desired and note dropouts rather than reconsidering the accepted tracks.
+3. Report whether the new parts/typing feel good and any stutter, wheel artifact or sound dropout. At your normal zoom, also check fullscreen/restore and readability if you have not tried the alpha.13 changes yet. No repeat phone/tablet checks are needed.
+
+The script writes `Reference_Images/analysis/alpha14/manual/session.json` locally. It records GPU/browser, trusted key counts, errors, scene counts and key-handler-to-next-rAF samples, without typed characters. Fewer than 20 racing keys is insufficient evidence and returns a failing exit status. Handler-to-rAF timing is not physical OS-to-photon latency; your perceptual report remains necessary. The developer must inspect this file and your report before closing TT-506/513/522 and integrating PR #4. If the temporary window closes early, the recorder reports an incomplete session instead of a pass.
+
+## Earlier alpha.13 focused checks
 
 The user reported the other alpha.12 laptop checks good. Do not repeat car/music/palette approval or the already reported checklist. Alpha.13 changes only the car lock, fullscreen placement, readability and CI reliability.
 
