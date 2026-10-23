@@ -1,5 +1,7 @@
 # Cars and Tracks collections
 
+Accepted by the user on23 October2026("all good"). Source bd378c1 passed125 unit/121 browser cases on GitHub run39972392241/job120478169052. PR8 is unmerged. Phase9 was requested, then paused during preparation before code/assets/backend changes. See PHASE9_RESUME.md; save and stop until explicitly resumed.
+
 Latest explicit decision: 23 October 2026, alpha.26. Equipment selection belongs in dedicated tabs, separate from starting a race. This supersedes all earlier Hub dropdown, race radio and level-briefing picker instructions. Five accepted starters in each collection remain usable. The original car models, colors, rules, passages and tracks are unchanged.
 
 ## Selection and race lifecycle

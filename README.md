@@ -2,9 +2,14 @@
 
 # TurboType
 
-Phase 8 alpha.24 implements all 300 main races and 30 optional chapter challenges, with longer prose, explicit skills and gradual pacing. The implementation passed **125 unit / 116 browser tests on GitHub** and is pushed in [PR #8](https://github.com/sahilshah2904/TurboType/pull/8) for review; Phase 7 remains accepted on main. [Curriculum and checks](docs/PHASE8_CURRICULUM.md).
+**Session saved for later — 23 October 2026.** The user accepted the latest alpha.26 curriculum/collection flow. Exact accepted source [bd378c1](https://github.com/sahilshah2904/TurboType/commit/bd378c12711c7b54aa24b284cf182ae5fc052825) passed **125 unit tests and all 121 browser tests** in [GitHub checks](https://github.com/sahilshah2904/TurboType/actions/runs/39972392241/job/120478169052). [PR8](https://github.com/sahilshah2904/TurboType/pull/8) remains unmerged; main still contains the accepted Phase 7 baseline. No game/backend/cloud deployment exists.
 
-Alpha.26 adds separate **Cars** and **Tracks** collection tabs: three-column starter cards, enlarged previews, locked milestone silhouettes and saved equipment for every race. Selection is disabled during ongoing/paused runs. Campaign levels launch from one details dialog directly into countdown. The opening title stays clean and the car keeps its fire trail. [Collections and focused checks](docs/COLLECTIONS.md). The user accepted the remaining Phase8 behavior; PR8 stays unmerged for this equipment-flow review. Fresh unit/build/format/content checks and34 final focused browser cases pass; the broad run and corrected harness assumptions are recorded separately in [testing evidence](docs/TESTING.md).
+**Implemented:** 300 main races and 30 optional challenges, sustained paragraphs, saved local campaign progress, and separate three-column **Cars/Tracks** collections with starter selection/enlarged previews. Equipment applies globally to new races and stays locked during ongoing/paused runs. One level-details dialog leads directly to countdown. Locked reward silhouettes remain previews; 18 reward vehicles and 21 environments still need finished content. [Collections](docs/COLLECTIONS.md) · [Curriculum](docs/PHASE8_CURRICULUM.md).
+
+**Phase 9 is preparation only.** The user requested it, then paused before implementation. The new codex/phase9-progression branch initially contained the unchanged accepted app; this save checkpoint adds documentation only. Canonical guest saves/backup recovery, XP/credits/rank/receipts, real ownership/unlocks, learning history/drills and optional account/cloud sync are all still pending. Supabase Free was researched and explained; no account/project was provided or provisioned. User-owned free backend/sign-in setup will be needed before live cloud verification. Never supply passwords or service-role keys.
+
+[Complete resume checklist and future steps](docs/PHASE9_RESUME.md) · [Session handoff](docs/SESSION_HANDOFF.md) · [Current status](PROJECT_STATUS.md) · [Backlog](BACKLOG.md). **Stop after saving; resume only when requested.** Documentation checkpoint CI is separate from the accepted implementation result.
+
 
 ![Cars collection with five available starters and milestone-sorted locked silhouettes](docs/images/alpha26/cars-1440.png)
 
