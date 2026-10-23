@@ -6,6 +6,8 @@ Read PROJECT_STATUS.md, docs/SESSION_HANDOFF.md and BACKLOG.md before reporting 
 
 ## Current checkpoint — 23 October 2026
 
+STOP-AND-SAVE: the user explicitly requested updated README/handoff and continuation later due to usage limits. Save/push documentation and stop; no implementation, merge, deployment or Phase 9 until a new request. Latest audited pre-save head d96f23cd21d2eedc4b41490324eb56a635a09b65 passed exact-head run39889378905/job120205188148 (completed/success). The new documentation commit has its own CI; inspect it later. PR #8 remains open/unmerged, human Phase 8 curriculum review/integration pending. Resume order/checklist and full continuity are at the top of docs/SESSION_HANDOFF.md. Preserve Vite5173 and current feature checkout.
+
 Verified Phase 8 review source 13b464dd06bab566d6b672fb030fc36ae160ffed passed hosted run39888045399/job120200909330 at02:21:23UTC:125 unit/116 browser cases, no retries/flaky cases. Six captures have zero page errors. PR #8 remains open/unmerged for user review. The subsequent documentation-only checkpoint has unchanged application/test/workflow code and its own CI; inspect actual head/status. Current source remains on codex/phase8-curriculum, not main; no Phase9/deployment started.
 
 The user accepted Phase 7 and requested all Phase 8 implementation plus updated GitHub README/handoff and a focused checklist. Current branch **codex/phase8-curriculum**, based on main **26a7f1d**; app **0.1.0-alpha.24**, rules **3**, content **3**, global future guest schema **1**, map save schema **2**. Inspect actual HEAD/PR/results. Do not merge or begin Phase 9 merely from this handoff.

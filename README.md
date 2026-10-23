@@ -4,6 +4,8 @@
 
 Phase 8 alpha.24 implements all 300 main races and 30 optional chapter challenges, with longer prose, explicit skills and gradual pacing. The implementation passed **125 unit / 116 browser tests on GitHub** and is pushed in [PR #8](https://github.com/sahilshah2904/TurboType/pull/8) for review; Phase 7 remains accepted on main. [Curriculum and checks](docs/PHASE8_CURRICULUM.md).
 
+**Session saved for later.** Phase 8 is implemented and verified, with user curriculum review and [PR #8](https://github.com/sahilshah2904/TurboType/pull/8) integration pending. Latest pre-save head d96f23c passed its [exact-head check](https://github.com/sahilshah2904/TurboType/actions/runs/39889378905/job/120205188148). This documentation checkpoint has separate CI. Resume from [SESSION_HANDOFF](docs/SESSION_HANDOFF.md); do not automatically start Phase 9 or merge/deploy.
+
 ### Your words. Full throttle.
 
 An original browser typing racer: build physical-keyboard speed and accuracy while racing four computer opponents.

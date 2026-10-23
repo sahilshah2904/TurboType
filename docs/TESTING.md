@@ -1,5 +1,16 @@
 # Verification evidence
 
+## Stop-and-save checkpoint — 23 October 2026
+
+The user explicitly asked to update README/handoff and continue later because of usage limits. **Stop after saving; do not implement, merge, deploy or start Phase 9 from this handoff.** Resume only when requested.
+
+Current checkout: codex/phase8-curriculum; PR #8 is open/unmerged. Latest verified pre-save head **d96f23cd21d2eedc4b41490324eb56a635a09b65** passed exact-head hosted **run39889378905/job120205188148**, observed completed/success during this audit. Implementation review source13b464d previously passed the full125 unit/116 browser suite in run39888045399/job120200909330; application/test/workflow code is unchanged since that source. Six current captures remain in docs/images/alpha24. This stop-and-save documentation commit receives its own CI; inspect its actual head/check later rather than inferring success.
+
+Phase 8 implementation/automated verification is delivered; **human curriculum acceptance and PR integration remain pending**. Next session: read AGENTS/PROJECT_STATUS/SESSION_HANDOFF/BACKLOG, audit actual Git/PR/checks, then review the checklist in docs/PHASE8_CURRICULUM.md. Keep existing progress: refresh retention; 6→7 continuation and long-text look-ahead; locked50/100 passage preview without launch; bonus after chapter10 clear/replay/refresh without increasing main counts. Do not ask for repeated approval of accepted Phase7/cars/music/palette/opening/Keyboard check. Phase9 rewards/earned ownership/learning/guest/cloud remains future work.
+
+No Pages/backend/account/cloud/multiplayer deployment. Preserve the user Vite server on5173; http://192.168.0.31:5173/TurboType/ serves this feature checkout. No tests/captures/profiling are running locally. Prior detailed source/decisions/limits remain below and in the archived checkpoints; the previous chat is not needed.
+
+
 ## Verified Phase 8 review checkpoint — 23 October 2026
 
 Exact review source **13b464dd06bab566d6b672fb030fc36ae160ffed** (implementation aba056c) passed the full hosted [run 39888045399/job 120200909330](https://github.com/sahilshah2904/TurboType/actions/runs/39888045399/job/120200909330), completed **02:21:23 UTC**: formatting/content drift/types/build, **125 unit / 116 browser cases**, no retries/flaky cases (10.3 minutes for browsers). Downloaded log: Reference_Images/analysis/phase8-hosted-check.log (ignored). Six sequential current captures have zero page errors.
