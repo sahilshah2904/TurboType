@@ -1,5 +1,20 @@
 # TurboType session handoff
 
+## Paused checkpoint — 23 October 2026
+
+The user accepted alpha.26 ("all good"), requested Phase9 completion, then explicitly asked to **continue later and save README/all handoffs**. Stop after saving documentation. No further implementation, integration, deployment or backend provisioning is authorized during this pause; a later resume request is required.
+
+Accepted implementation **bd378c12711c7b54aa24b284cf182ae5fc052825** passed exact-source hosted [run39972392241/job120478169052](https://github.com/sahilshah2904/TurboType/actions/runs/39972392241/job/120478169052), completed2026-10-23 14:55:35UTC: **125 unit /121 browser cases**, verified from both job conclusion and downloaded log (Reference_Images/analysis/alpha26-hosted-check.log, ignored). Earlier117/119 local failures were corrected harness assumptions; the final full hosted suite passes. Application0.1.0-alpha.26/rules3/content3/map schema2; canonical guest schema1 remains designed only. Six current collection/briefing/title screenshots are in docs/images/alpha26.
+
+PR8 remains **open/unmerged** at the accepted implementation. Phases1–7 are integrated; Phase8 curriculum/collection behavior is implemented, tested and user accepted, while integration and finished reward artwork/environments remain outstanding. No Pages/backend/accounts/cloud/multiplayer deployment exists. Do not describe main as containing Phase8.
+
+Current checkout **codex/phase9-progression** was created from bd378c1 for the user's Phase9 request. **Preparation only:** read progression/storage/fleet/learning contracts and task scope, researched Supabase's official free-plan/auth documentation, and explained cloud storage to the user. No Phase9 application code, reward models/tracks, ownership, canonical saves, account provider, database or cloud integration was written or provisioned. This checkpoint adds documentation only. Its own hosted check must be inspected independently; the accepted source pass does not certify a later commit.
+
+Cloud setup is unresolved: the user asked what Supabase is/how it works and whether they must do anything. Explanation given: GitHub hosts static game files; an external free backend stores optional signed-in cross-device progress. The user will need a free account/project and sign-in configuration; exact instructions are still owed when resumed. No project URL/public key, account access or provider provisioning was supplied. Never request passwords, database passwords or service-role keys. Supabase remains a researched candidate, not measured/provisioned/validated infrastructure. Stay strictly$0; no paid upgrades, SMTP/SMS or hidden billing. Local guest play must remain fully usable if cloud is absent, paused or unavailable.
+
+**Resume from docs/PHASE9_RESUME.md:** audit actual Git/PR/checks first; preserve Vite5173 and user saves; decide reviewed integration versus a documented stack; implement canonical guest migration/recovery and atomic reward receipts before ownership/economy, complete18 vehicle/21 track art, learning/drills, then provider/auth/sync/security verification when user-owned backend setup is available. Cloud is optional for players but still a pre-release capability requirement. Do not call Phase9 complete while cloud/security gates or required reward content remain missing. Previously accepted curriculum/cars/music/typing/opening checks need not be repeated for approval.
+
+
 ## Collection selection follow-up — alpha.26
 
 Verification:125 unit tests/format/content/types/build pass; broad browser117/119 exposed two stale harness assumptions, then corrected final-source34/34 focused cases passed, including the two new loading-interruption guards. Six sequential current captures have zero page errors. See docs/TESTING.md for exact scope/logs; this is not a claimed single full121-case local pass. New exact-head hosted checks are separate. Previously accepted alpha.25 head90e9742 passed run39967016807/job120459414784 before these edits.

@@ -1,5 +1,7 @@
 # TurboType GitHub workflow
 
+23 October stop-and-save checkpoint: accepted Phase8/alpha.26 source bd378c1 passes full hosted run39972392241/job120478169052(125 unit/121 browser). PR8 remains open/unmerged; main still contains accepted Phase7. Phase9 preparation branch codex/phase9-progression starts at bd378c1; no new app code yet, only this documentation checkpoint. Keep any Phase9 PR explicitly stacked against the Phase8 branch until reviewed integration is authorized; do not merge/deploy merely to save handoff. Inspect current PR/HEAD checks on resume; PHASE9_RESUME.md records exact next steps.
+
 Phase 6 PR #6 merged into main as cf741b6cb27e9fe8da230d52394d40bbc4964baf on 22 October 2026 after exact accepted head 3f6125c8d9c40405048453f7b7c17233182d14ae passed its hosted check in run 39801084219. The user authorized finishing Phase 6 and deferred later visual polish as TT-608. Source integration does not deploy the game. Phase 7 starts only when requested. Older pre-integration notes below are historical.
 
 22 October 2026: accepted alpha.16 PR #5 merged as 1b832ce after exact-head run 39771450182 passed. Phase 6 alpha.17 uses codex/phase6-onboarding against main; its own checks/user review are required before merge. No Pages deployment exists.
