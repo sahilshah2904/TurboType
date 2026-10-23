@@ -1,3 +1,143 @@
+/* Collection pages keep the same desktop world and palette. */
+.collection-page {
+  max-width: 1440px;
+  margin: 32px auto 80px;
+}
+.collection-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 28px;
+}
+.collection-heading h1 {
+  font-size: clamp(52px, 6vw, 84px);
+  line-height: 1;
+  margin: 10px 0 18px;
+}
+.collection-heading nav {
+  flex-shrink: 0;
+  display: flex;
+  gap: 24px;
+}
+.collection-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+  margin: 22px 0 52px;
+}
+.collection-card {
+  overflow: hidden;
+  border: 1px solid #586977;
+  border-radius: 14px;
+  background: linear-gradient(140deg, #1a2b36e8, #0c151de8);
+}
+.collection-card[data-selected="true"] {
+  border-color: #65e7f2;
+  box-shadow: 0 0 0 1px #65e7f2;
+}
+.collection-preview {
+  display: block;
+  position: relative;
+  width: 100%;
+  border: 0;
+  padding: 16px;
+  background: radial-gradient(ellipse at 50% 90%, #607b8a30, transparent 70%);
+  cursor: zoom-in;
+}
+.collection-art,
+.collection-shadow {
+  display: block;
+  width: 100%;
+  height: 190px;
+  object-fit: contain;
+}
+.collection-enlarge {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  color: #d7f8ff;
+  font-size: 24px;
+}
+.collection-card-copy {
+  padding: 16px 24px 24px;
+}
+.collection-card-copy h3 {
+  margin: 0 0 8px;
+  font-size: 30px;
+}
+.collection-card-copy p {
+  margin: 8px 0 18px;
+  color: #c3cbd2;
+}
+.collection-card-copy .button {
+  width: 100%;
+}
+.collection-card--locked {
+  background: #0b141ce6;
+  border-color: #354451;
+}
+.collection-card--locked .collection-card-copy {
+  padding-top: 0;
+}
+.collection-card--locked strong {
+  color: #c4f5fb;
+}
+.collection-reward-heading {
+  max-width: 800px;
+}
+.collection-lock {
+  padding: 16px 24px;
+  border-left: 3px solid #ff5964;
+  background: #172530;
+}
+.collection-detail {
+  width: min(1200px, 94vw);
+  max-height: 90dvh;
+  overflow: auto;
+  padding: 28px;
+  border: 1px solid #65e7f2;
+  border-radius: 16px;
+  background: #0e1a24;
+  color: #edf4f8;
+}
+.collection-detail::backdrop {
+  background: #04090ee6;
+}
+#collection-close {
+  display: block;
+  margin-left: auto;
+  min-height: 44px;
+}
+.collection-detail h2 {
+  font-size: 48px;
+  margin: 8px 0 22px;
+}
+.collection-detail-car {
+  display: block;
+  width: 100%;
+  height: min(52vh, 500px);
+  object-fit: contain;
+  background: radial-gradient(ellipse at 50% 80%, #4f697830, transparent 65%);
+}
+.collection-detail .track-preview {
+  height: 360px;
+}
+@media (max-width: 1200px) {
+  .topbar nav {
+    flex-wrap: wrap;
+    justify-content: end;
+    gap: 8px 18px;
+  }
+  .collection-card-copy {
+    padding: 14px 18px 20px;
+  }
+}
+
+.immersive-race.race-launching .race-deck > :not(.track-bottom) {
+  display: none;
+}
+
 /* Shared full-window world. Readable forms retain local grouping; no enclosing page card. */
 :root {
   --accent: #ff5964;

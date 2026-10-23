@@ -1,5 +1,16 @@
 # Verification evidence
 
+## Alpha.26 collection selection
+
+The previous alpha.25 source90e9742 passed hosted run39967016807/job120459414784 (completed/success), verified before publication of this follow-up. That pass does not certify alpha.26. Current implementation adds dedicated collections/global starter preferences, rejects selection while either session is countdown/racing/paused, preserves session equipment on return, supports explicit abandon-to-change, and starts a campaign directly from its single map briefing after track readiness. Starter detail/locked milestone ordering and laptop layout are covered by updated native browser tests. Reward artwork/earned entitlements remain unimplemented and labeled planned.
+
+Local broad log Reference_Images/analysis/alpha26-check.log (ignored): formatting/content drift/types/**125 unit tests**/production build passed. The119-case browser run passed117 in18.6minutes; two stale harness expectations failed: the start helper skipped Resume, and the artwork test still required removed race-picker thumbnails. These were corrected without changing test timeouts/retries or disabling tests. Race assets still require every original body/wheel; the test now also verifies unnecessary thumbnail requests are absent.
+
+The final source additionally cancels pending automatic start when Escape/blur/visibility interrupts initial artwork loading, restoring explicit controls; new Escape/blur cases cover it. After those changes, fresh formatting/types/build and **all34 focused campaign/garage/tracks/race-polish cases passed in1.5minutes** (Reference_Images/analysis/alpha26-final-check.log). This includes both previously failing cases and the two new interruption cases, all target laptop widths, global synthetic-event guards, cross-session pinning, preference retention/denial, locked reward order and one-at-a-time preview cleanup. Do not describe this as a single complete121-case final-source local pass. The new exact-head hosted check runs all121 cases.
+
+Six sequential1440×900 captures in docs/images/alpha26 were visually reviewed with zero page errors. They use isolated starter preferences, no campaign unlock fixtures or user save edits; the level1 briefing is genuine. Track detail settles the shared scene's250ms camera fade before capture. The capture script also confirms direct briefing-to-countdown and no title flame. Capture log Reference_Images/analysis/alpha26-captures.log is ignored. Provenance sits beside the images. Browser suites/captures remain sequential with one SwiftShader worker; the user-owned Vite5173 remains intact. No merge/deployment/Phase9 start.
+
+
 ## Alpha.25 review corrections
 
 Two sequential 1440 × 900 captures in docs/images/alpha25 were visually reviewed: the campaign setup retains Volt Electric/Frostline Pass without a repeated chooser, and the completed opening title has no flame underlay. Capture execution reported zero page errors; provenance is recorded beside the images.

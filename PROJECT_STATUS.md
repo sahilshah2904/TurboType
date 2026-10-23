@@ -1,5 +1,16 @@
 # TurboType project status
 
+## Collection selection follow-up — alpha.26
+
+Verification:125 unit tests/format/content/types/build pass; broad browser117/119 exposed two stale harness assumptions, then corrected final-source34/34 focused cases passed, including the two new loading-interruption guards. Six sequential current captures have zero page errors. See docs/TESTING.md for exact scope/logs; this is not a claimed single full121-case local pass. New exact-head hosted checks are separate. Previously accepted alpha.25 head90e9742 passed run39967016807/job120459414784 before these edits.
+
+The user moved equipment choice out of every race setup and level briefing into dedicated **Cars** and **Tracks** tabs. Each has a three-column scrollable collection: five selectable starters with enlarged detail previews, then dark, non-interactive planned reward silhouettes sorted by milestone first and Easy/Medium/Hard second. Cars:15/30/45/60/75/90 (18+5=23); tracks:10/25/40/55/70/85/100 (21+5=26). Bonuses remain excluded from those counters. This supersedes the alpha.25 briefing-selection/Quick Race picker decision.
+
+Saved starter equipment applies to every new campaign/bonus/Quick Race. Any countdown/racing/paused session globally blocks selection, including synthetic events; previews remain available. The explicit “End current races to change selection” action abandons unfinished runs without rewards and releases that lock. Finished/abandoned session visuals retain their pinned equipment; retry reads the new preference. Existing independent starter preferences and campaign data are preserved; no ownership/save-schema migration is introduced.
+
+A map node still opens its single details dialog; its Race/Replay button starts the countdown automatically after artwork is ready. No second setup confirmation appears. Direct race URLs and retry/resume retain explicit start controls, including artwork/text fallback recovery. Quick Race still offers passage/pace/mode/seed setup but no equipment selector. Hub shows saved equipment and links to the collections. All artwork/ownership beyond the five starters remains **planned and locked**, not falsely earned from current progress; full reward art/receipts/guest/cloud delivery stays Phase 9. No merge, deployment or general Phase 9 start is authorized. See docs/COLLECTIONS.md for implementation and focused checks.
+
+
 ## Phase 8 review follow-up — alpha.25
 
 The user resumed and reports the rest of Phase 8 works well. Only two requested corrections remain for review: choose the campaign/bonus car and track once in the map briefing, then show a read-only setup summary instead of another car picker; remove the flame under the TurboType title while preserving the moving car's trail. Quick Race retains its chooser and each active session keeps its locked cosmetics. Implemented on the existing PR #8 branch; fresh format/types/build and 125 unit/43 focused browser cases pass. New exact-head hosted checks are separate. No merge, Phase 9 or deployment. This supersedes the older stop-and-save instruction and title-underlay decision below. Do not repeat the accepted curriculum/progress checks.

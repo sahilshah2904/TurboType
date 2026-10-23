@@ -4,7 +4,12 @@
 
 Phase 8 alpha.24 implements all 300 main races and 30 optional chapter challenges, with longer prose, explicit skills and gradual pacing. The implementation passed **125 unit / 116 browser tests on GitHub** and is pushed in [PR #8](https://github.com/sahilshah2904/TurboType/pull/8) for review; Phase 7 remains accepted on main. [Curriculum and checks](docs/PHASE8_CURRICULUM.md).
 
-Alpha.25 review correction: campaign/bonus cosmetics are chosen once in the map briefing; race setup shows the chosen car and track. The opening title has no flame underneath, while the car keeps its trail. The user reports the remaining Phase 8 behavior works well. Fresh alpha.25 checks pass 125 unit/43 focused browser cases; its full hosted check is separate. [PR #8](https://github.com/sahilshah2904/TurboType/pull/8) remains unmerged for these final corrections.
+Alpha.26 adds separate **Cars** and **Tracks** collection tabs: three-column starter cards, enlarged previews, locked milestone silhouettes and saved equipment for every race. Selection is disabled during ongoing/paused runs. Campaign levels launch from one details dialog directly into countdown. The opening title stays clean and the car keeps its fire trail. [Collections and focused checks](docs/COLLECTIONS.md). The user accepted the remaining Phase8 behavior; PR8 stays unmerged for this equipment-flow review. Fresh unit/build/format/content checks and34 final focused browser cases pass; the broad run and corrected harness assumptions are recorded separately in [testing evidence](docs/TESTING.md).
+
+![Cars collection with five available starters and milestone-sorted locked silhouettes](docs/images/alpha26/cars-1440.png)
+
+![Enlarged starter car](docs/images/alpha26/car-detail-1440.png)
+
 
 ### Your words. Full throttle.
 

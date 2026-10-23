@@ -1,5 +1,7 @@
 > Alpha.21 implements campaign clear/stars via core/campaign-progress.ts: exact eligible unpaused completion, isolated sequential unlock, independent completion/95%-accuracy/level-pace stars unioned across replays, no place gate or duplicate unique clears. Basic local map progress persists; Quick Race results remain session-only. Rules stay3. See PHASE7_CAMPAIGN_MAPS.md.
 
+Latest23 October alpha.26 equipment decision supersedes earlier selection instructions: dedicated **Cars/Tracks** tabs with a three-column collection, five selectable starters, enlarged starter previews and locked milestone-sorted reward silhouettes. Saved equipment applies globally to new races; any ongoing/paused session blocks changes. Campaign Race/Replay starts directly from the single level-details dialog after track loading. No equipment picker remains in Hub/race/briefing. Planned reward art/earned ownership remains Phase9. See [collection behavior and focused checks](COLLECTIONS.md).
+
 # Implemented rules — version 3
 
 Typing was implemented in Phase 3; Phase 4 adds four-CPU Quick Race in app 0.1.0-alpha.3, rules version 3. Practice still has no opponents. Both modes save no results, rewards or progress. Planned campaign/rewards remain in GAME_DESIGN_PLAN.md and RULES_AND_STORAGE_BASELINE.md.

@@ -16,12 +16,8 @@ import {
   type CampaignProgress,
 } from "../core/campaign-progress";
 import type { LocalCampaignRepository } from "../storage/campaign";
-import { STARTER_KARTS, isKartId, type KartId } from "../content/kart-catalog";
-import {
-  STARTER_TRACKS,
-  isTrackId,
-  type TrackId,
-} from "../content/track-catalog";
+import { STARTER_KARTS, type KartId } from "../content/kart-catalog";
+import { trackTheme, type TrackId } from "../content/track-catalog";
 
 const escapePassage = (text: string) =>
   text.replace(
@@ -106,8 +102,6 @@ export function campaignMapScreen(
 export interface CampaignChoices {
   kart: () => KartId;
   track: () => TrackId;
-  chooseKart: (id: KartId) => void;
-  chooseTrack: (id: TrackId) => void;
 }
 export function connectCampaignMap(
   main: HTMLElement,
@@ -155,19 +149,12 @@ export function connectCampaignMap(
     const unlocked = isUnlocked(progress, level);
     const record = (bonus ? progress.bonuses : progress.clears)[level.id];
     const allowed = unlocked && !!level.passage;
-    content.innerHTML = `<p class="eyebrow">${CATEGORY_NAMES[category]} · CHAPTER ${level.chapter} · ${bonus ? `BONUS ${number}` : `LEVEL ${number}`}</p><h2 id="briefing-title">${level.title}</h2><p>${level.focus}</p><p class="help">${bonus ? "Optional chapter challenge. Completing it never opens a main level or counts toward car/track milestones." : level.role === "finale" ? "Category finale. Complete the journey; every level remains replayable." : level.role === "showcase" ? "Chapter showcase. Combine the skills from this district." : level.role === "pit-stop" ? "Milestone practice. Keep the same calm correction rules." : "Main route lesson."}</p>${!unlocked ? `<p class="briefing-lock">Locked · Clear ${CATEGORY_NAMES[category]} level ${bonus ? level.number : number - 1} first.</p>` : ""}<p>${level.passage.length} characters · ${level.passage.split(" ").length} words · Untimed</p><div class="briefing-targets"><span>★ Finish unpaused</span><span>★ ${level.accuracyGoal}% accuracy</span><span>★ ${level.paceGoal} WPM</span></div><p class="help">${bonus ? "Finish unpaused to record this optional challenge;" : "Finish unpaused to open the next level;"} extra stars are optional and accumulate across replays. Paused or assisted runs are practice-only.</p><p>Four fixed CPUs · ${level.cpuBand.minWpm}–${level.cpuBand.maxWpm} target WPM</p><p>${record ? `Personal best: ${record.bestWpm.toFixed(1)} WPM · ${record.bestAccuracy.toFixed(1)}% accuracy · ${(record.bestTimeMs / 1000).toFixed(1)}s · ${stars(record.stars)} (bests may come from different runs).` : "First visit · set your best."}</p><details class="passage-preview"><summary>Read passage</summary><p>${escapePassage(level.passage)}</p></details>${allowed ? `<div class="briefing-choices"><label>Your car<select id="briefing-car">${STARTER_KARTS.map((k) => `<option value="${k.id}" ${k.id === choices.kart() ? "selected" : ""}>${k.name}</option>`).join("")}</select></label><label>Your track<select id="briefing-track">${STARTER_TRACKS.map((t) => `<option value="${t.id}" ${t.id === choices.track() ? "selected" : ""}>${t.name}</option>`).join("")}</select></label></div><p class="help">Your cosmetics work across categories and replays. All have equal performance.</p><button id="briefing-start" class="button button--primary">${record ? "Replay" : "Race"} ${bonus ? "bonus" : "level"} ${number} →</button>` : ""}`;
+    content.innerHTML = `<p class="eyebrow">${CATEGORY_NAMES[category]} · CHAPTER ${level.chapter} · ${bonus ? `BONUS ${number}` : `LEVEL ${number}`}</p><h2 id="briefing-title">${level.title}</h2><p>${level.focus}</p><p class="help">${bonus ? "Optional chapter challenge. Completing it never opens a main level or counts toward car/track milestones." : level.role === "finale" ? "Category finale. Complete the journey; every level remains replayable." : level.role === "showcase" ? "Chapter showcase. Combine the skills from this district." : level.role === "pit-stop" ? "Milestone practice. Keep the same calm correction rules." : "Main route lesson."}</p>${!unlocked ? `<p class="briefing-lock">Locked · Clear ${CATEGORY_NAMES[category]} level ${bonus ? level.number : number - 1} first.</p>` : ""}<p>${level.passage.length} characters · ${level.passage.split(" ").length} words · Untimed</p><div class="briefing-targets"><span>★ Finish unpaused</span><span>★ ${level.accuracyGoal}% accuracy</span><span>★ ${level.paceGoal} WPM</span></div><p class="help">${bonus ? "Finish unpaused to record this optional challenge;" : "Finish unpaused to open the next level;"} extra stars are optional and accumulate across replays. Paused or assisted runs are practice-only.</p><p>Four fixed CPUs · ${level.cpuBand.minWpm}–${level.cpuBand.maxWpm} target WPM</p><p>${record ? `Personal best: ${record.bestWpm.toFixed(1)} WPM · ${record.bestAccuracy.toFixed(1)}% accuracy · ${(record.bestTimeMs / 1000).toFixed(1)}s · ${stars(record.stars)} (bests may come from different runs).` : "First visit · set your best."}</p><details class="passage-preview"><summary>Read passage</summary><p>${escapePassage(level.passage)}</p></details><p class="briefing-equipment">${STARTER_KARTS.find((k) => k.id === choices.kart())!.name} · ${trackTheme(choices.track()).name}</p>${allowed ? `<button id="briefing-start" class="button button--primary">${record ? "Replay" : "Race"} ${bonus ? "bonus" : "level"} ${number} →</button>` : ""}`;
     content.querySelector("#briefing-start")?.addEventListener(
       "click",
       () => {
         // Recheck the actual progress boundary; a link or preview never bypasses locks.
         if (!isUnlocked(repository.read(), level)) return;
-        const car =
-          content.querySelector<HTMLSelectElement>("#briefing-car")!.value;
-        const track =
-          content.querySelector<HTMLSelectElement>("#briefing-track")!.value;
-        if (!isKartId(car) || !isTrackId(track)) return;
-        choices.chooseKart(car);
-        choices.chooseTrack(track);
         dialog.close();
         launch(level);
       },

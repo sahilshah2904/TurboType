@@ -1,5 +1,7 @@
 # Track collection and staggered campaign rewards
 
+Latest23 October alpha.26 equipment decision supersedes earlier selection instructions: dedicated **Cars/Tracks** tabs with a three-column collection, five selectable starters, enlarged starter previews and locked milestone-sorted reward silhouettes. Saved equipment applies globally to new races; any ongoing/paused session blocks changes. Campaign Race/Replay starts directly from the single level-details dialog after track loading. No equipment picker remains in Hub/race/briefing. Planned reward art/earned ownership remains Phase9. See [collection behavior and focused checks](COLLECTIONS.md).
+
 ## Accepted decision — 22 October 2026
 
 Five starter tracks are available without campaign progress. **Latest 22 October correction supersedes paired unlocks:**

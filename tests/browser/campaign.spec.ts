@@ -9,7 +9,12 @@ async function ready(page: Page) {
   );
 }
 async function start(page: Page) {
-  await page.locator("#start-race").click();
+  if (
+    ["Ready", "Paused"].includes(
+      (await page.locator("#race-state").textContent())!,
+    )
+  )
+    await page.locator("#start-race").click();
   await page.clock.fastForward(3000);
   await expect(page.locator("#race-state")).toHaveText("Racing");
   await page.clock.fastForward(30000);
@@ -131,7 +136,7 @@ test("a real eligible finish saves stars, unlocks only its category and replays 
   await expect(page.locator("#level-briefing")).toContainText("Personal best");
   await page.locator("#briefing-start").click();
   await ready(page);
-  await expect(page.locator("#race-state")).toHaveText("Ready");
+  await expect(page.locator("#race-state")).toHaveText("Countdown");
   await start(page);
   await finish(page);
   await expect(page.locator("#campaign-result-status")).toContainText(
@@ -227,35 +232,41 @@ test("malformed campaign data remains untouched and can be exported", async ({
   );
 });
 
-test("starter cars/tracks work across categories and stay locked through campaign pauses", async ({
+test("collection choices reach a campaign through a single briefing and automatic countdown", async ({
   page,
 }) => {
   await page.clock.install();
+  await page.goto("./#/cars");
+  await page.locator('[data-equip="comet"]').click();
+  await page.goto("./#/tracks");
+  await page.locator('[data-equip="frostline-pass"]').click();
   await page.goto("./#/campaign/hard");
   await page.locator("#map-current").click();
-  await page.locator("#briefing-car").selectOption("comet");
-  await page.locator("#briefing-track").selectOption("frostline-pass");
-  await page.locator("#briefing-start").click();
-  await ready(page);
-  await expect(page.locator("#kart-picker")).toBeHidden();
-  await expect(page.locator("#campaign-equipment")).toHaveText(
+  await expect(page.locator("#briefing-car, #briefing-track")).toHaveCount(0);
+  await expect(page.locator(".briefing-equipment")).toHaveText(
     "Comet · Frostline Pass",
   );
-  await expect(page.locator('input[name="player-kart"]:checked')).toHaveValue(
+  await page.locator("#briefing-start").click();
+  await ready(page);
+  await expect(page.locator("#race-state")).toHaveText("Countdown");
+  await expect(page.locator("#kart-picker, #race-track-select")).toHaveCount(0);
+  await expect(page.locator("#race-track")).toHaveAttribute(
+    "data-player-kart",
     "comet",
   );
-  await expect(page.locator("#race-track-select")).toHaveValue(
+  await expect(page.locator("#race-track")).toHaveAttribute(
+    "data-track",
     "frostline-pass",
   );
-  await start(page);
+  await page.clock.fastForward(3000);
   await page.locator("#pause-race").click();
-  await expect(page.locator("#kart-picker input").first()).toBeDisabled();
-  await expect(page.locator("#race-track-select")).toBeDisabled();
-  await page.locator(".campaign-race-back").click();
+  await page.goto("./#/cars");
+  await expect(page.locator('[data-equip="apex-nova"]')).toBeDisabled();
   await page.goto("./#/campaign/easy");
   await page.locator("#map-current").click();
-  await expect(page.locator("#briefing-car")).toHaveValue("comet");
-  await expect(page.locator("#briefing-track")).toHaveValue("frostline-pass");
+  await expect(page.locator(".briefing-equipment")).toHaveText(
+    "Comet · Frostline Pass",
+  );
 });
 
 for (const width of [1024, 1366, 1440, 1920])
@@ -398,70 +409,79 @@ test("a complete multi-sentence paragraph saves a real campaign clear", async ({
   );
 });
 
-test("campaign choices cannot change the car pinned to a paused Quick Race", async ({
-  page,
-}) => {
-  await page.clock.install();
-  await page.goto("./#/race");
-  await ready(page);
-  await page.locator('input[name="player-kart"][value="neon-fox"]').check();
-  await start(page);
-  await page.locator("#pause-race").click();
-  await page.evaluate(() => (location.hash = "#/campaign/hard"));
-  await page.locator("#map-current").click();
-  await page.locator("#briefing-car").selectOption("comet");
-  await page.locator("#briefing-start").click();
-  await ready(page);
-  await expect(page.locator("#race-track")).toHaveAttribute(
-    "data-player-kart",
-    "comet",
-  );
-  await page.getByRole("link", { name: "Quick Race", exact: true }).click();
-  await ready(page);
-  await expect(page.locator("#race-state")).toHaveText("Paused");
-  await expect(page.locator("#race-track")).toHaveAttribute(
-    "data-player-kart",
-    "neon-fox",
-  );
-  await expect(page.locator('input[name="player-kart"]:checked')).toHaveValue(
-    "neon-fox",
-  );
-  await page.locator("#retry-race").click();
-  await page.clock.fastForward(100);
-  await expect(page.locator("#race-track")).toHaveAttribute(
-    "data-player-kart",
-    "comet",
-  );
-  await expect(page.locator('input[name="player-kart"]:checked')).toHaveValue(
-    "comet",
-  );
-});
+for (const first of ["race", "level/easy/1"]) {
+  test(`${first} pins its car even when a second race session and collections are opened`, async ({
+    page,
+  }) => {
+    await page.clock.install();
+    await page.goto("./#/cars");
+    await page.locator('[data-equip="neon-fox"]').click();
+    await page.goto(`./#/${first}`);
+    await ready(page);
+    await start(page);
+    await page.locator("#pause-race").click();
+    await page.goto("./#/cars");
+    await expect(page.locator('[data-equip="comet"]')).toBeDisabled();
+    await page.locator('[data-equip="comet"]').dispatchEvent("click");
+    const other = first === "race" ? "level/hard/1" : "race";
+    await page.goto(`./#/${other}`);
+    await ready(page);
+    await start(page);
+    await page.goto(`./#/${first}`);
+    await ready(page);
+    await expect(page.locator("#race-state")).toHaveText("Paused");
+    await expect(page.locator("#race-track")).toHaveAttribute(
+      "data-player-kart",
+      "neon-fox",
+    );
+    await page.goto("./#/cars");
+    await page.locator("#collection-end-race").click();
+    await page.locator('[data-equip="comet"]').click();
+    await page.goto(`./#/${first}`);
+    await ready(page);
+    await expect(page.locator("#race-state")).toHaveText("Abandoned");
+    await expect(page.locator("#race-track")).toHaveAttribute(
+      "data-player-kart",
+      "neon-fox",
+    );
+    await page.locator("#retry-race").click();
+    await expect(page.locator("#race-track")).toHaveAttribute(
+      "data-player-kart",
+      "comet",
+    );
+  });
+}
 
-test("Quick Race choices cannot change the car pinned to a paused campaign", async ({
-  page,
-}) => {
-  await page.clock.install();
-  await page.goto("./#/level/easy/1");
-  await ready(page);
-  await start(page);
-  await page.locator("#pause-race").click();
-  await page.getByRole("link", { name: "Quick Race", exact: true }).click();
-  await ready(page);
-  await page.locator('input[name="player-kart"][value="apex-nova"]').check();
-  await page.evaluate(() => (location.hash = "#/level/easy/1"));
-  await ready(page);
-  await expect(page.locator("#race-state")).toHaveText("Paused");
-  await expect(page.locator("#race-track")).toHaveAttribute(
-    "data-player-kart",
-    "volt-kart",
-  );
-  await expect(page.locator('input[name="player-kart"]:checked')).toHaveValue(
-    "volt-kart",
-  );
-  await page.locator("#retry-race").click();
-  await page.clock.fastForward(100);
-  await expect(page.locator("#race-track")).toHaveAttribute(
-    "data-player-kart",
-    "apex-nova",
-  );
-});
+for (const interruption of ["Escape", "blur"])
+  test(`${interruption} during campaign artwork loading cancels automatic start`, async ({
+    page,
+  }) => {
+    await page.clock.install();
+    let release!: () => void;
+    const gate = new Promise<void>((resolve) => {
+      release = resolve;
+    });
+    let blocked = false;
+    await page.route(
+      "**/assets/karts/parts/volt-kart-body.webp",
+      async (route) => {
+        blocked = true;
+        await gate;
+        await route.continue();
+      },
+    );
+    await page.goto("./#/campaign/easy");
+    await page.locator("#map-current").click();
+    await page.locator("#briefing-start").click();
+    await expect.poll(() => blocked).toBe(true);
+    if (interruption === "Escape") await page.keyboard.press("Escape");
+    else await page.evaluate(() => window.dispatchEvent(new Event("blur")));
+    release();
+    await ready(page);
+    await page.clock.fastForward(4000);
+    await expect(page.locator("#race-state")).toHaveText("Ready");
+    await expect(page.locator("#start-race")).toBeVisible();
+    await page.locator("#start-race").click();
+    await page.clock.fastForward(3000);
+    await expect(page.locator("#race-state")).toHaveText("Racing");
+  });

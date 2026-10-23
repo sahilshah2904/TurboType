@@ -1,6 +1,8 @@
 import { readCampaignRoute } from "../content/campaign";
 export const ROUTES = [
   "hub",
+  "cars",
+  "tracks",
   "campaign",
   "level",
   "intro",

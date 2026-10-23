@@ -1,5 +1,7 @@
 > Alpha.24 curriculum: all new prose is project-authored in src/content/curriculum/stories.ts and authoring.ts, materialized in catalog.json by scripts/author-curriculum.mjs. The original 18 accepted passages remain in introductions.ts. No licensed excerpts, fetched articles, live AI service or new third-party art/audio is used. Existing starter asset references resolve to shipped assets. Future earned vehicle/track art and ownership remain TT-911/912, not delivered by this text curriculum.
 
+Alpha.26 collection thumbnails and locked structural concept silhouettes are original SVG geometry authored directly in src/ui/collection.ts. No external images, downloads or packages were added. Available car detail uses the existing original starter WEBP previews; track detail uses the shared original game scenery. Locked concepts are provisional shapes, not completed reward assets. Review screenshots in docs/images/alpha26 use isolated browser preferences and are excluded from the shipped game.
+
 > Current alpha.11: four distinct original CPU models replace palette copies; the accepted player, restored graphite/crimson/cyan palette and Ignition/Overdrive masters are preserved. See [fleet sources and remaining wheel work](KART_FLEET.md) and [full-app evidence](PERFORMANCE_ALPHA11.md). Earlier version-specific sections below are historical.
 
 # Asset register — alpha.9

@@ -45,7 +45,8 @@ async function start(page: Page) {
     "true",
     { timeout: 12000 },
   );
-  await page.locator("#start-race").click();
+  if ((await page.locator("#race-state").textContent()) == "Ready")
+    await page.locator("#start-race").click();
   await page.clock.fastForward(63000);
   await expect(page.locator("#race-state")).toHaveText("Racing");
 }
