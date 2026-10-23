@@ -1,12 +1,14 @@
 # Alpha.22 user review follow-up — 23 October 2026
 
+23 October follow-up: the user accepts these changes; Keyboard check is subsequently corrected in alpha.23 to share strict race typing and Backspace correction. Earlier free editing/paste matching no longer applies. See the newest SESSION_HANDOFF/TESTING checkpoint.
+
 The user accepted unpaused unlock/refresh, replay deduplication, and paused/practice-only then eligible retry. Keep that acceptance; do not ask them to repeat it. Paragraph look-ahead remained a problem. User also requested meaningful keyboard coverage, clarification of Quick Race and a car-following opening fire trail that does not cover the title. Changes stay in open PR #7; no merge or Phase 8 start.
 
 ## Changes
 
 - Wrapped Larger typing text now top-aligns the active visual line as soon as it changes. Three complete 42px lines fit in a 134px viewport, with trailing space so the final line can also align. Race, Practice and learning screens share the same caret-follow helper. Backspace across a wrap follows the previous line immediately; no smooth-scroll delay, font reduction, score or timing change. The race scene reserves 200px for the larger console.
 - Navigation says **Quick Race**. Its setup explains standalone warm-ups/car-track experimentation with selectable passage/CPU pace. It uses seeded CPUs and session results, never campaign progress; it is not the category campaign or a promise of random new passages.
-- Keyboard check has lower/uppercase pangrams, all ten digits and every printable English ASCII symbol. 68 common physical typing/editing/modifier keys show detected presses independently of sample matching. Paste/free editing/IME diagnostics remain available; pasting a matching sample does not mark physical keys as tested. Tab keeps ordinary focus navigation. Browser/OS/Fn shortcuts may be intercepted, so this is not a hardware certification or a test of keys the browser never receives. Detection lasts only for this visit; Reset key check clears it.
+- Keyboard check has lower/uppercase pangrams, all ten digits and every printable English ASCII symbol. 68 common physical typing/editing/modifier keys show detected presses independently of sample matching. Alpha.23 retains IME diagnostics and adds race-style correction; paste/replacement edits are blocked and never mark physical keys as tested. Tab keeps ordinary focus navigation. Browser/OS/Fn shortcuts may be intercepted, so this is not a hardware certification or a test of keys the browser never receives. Detection lasts only for this visit; Reset key check clears it.
 - The opening road flame/glow is a bounded child of the animated car, behind it with a small gap, so it cannot paint ahead of the car. It fades during the stop/reverse and ends before the title reveal. Remove the full-screen road ribbon and crown across the title. One smaller flame accent stays beneath/behind the title, with the name above the driving layer.5.6-second timing, wheel/smoke choreography, Skip, readiness/failure cleanup and static Low/Reduced modes remain.
 
 ## Verification

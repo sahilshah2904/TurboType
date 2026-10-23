@@ -1,5 +1,12 @@
 # Verification evidence
 
+## Alpha.23 strict Keyboard check — 23 October 2026
+
+Uses the real race engine/DOM adapter with immediate diagnostic start. New tests cover error blocking, attempted replacement, Backspace recovery, correct/current/error sample hints, expected physical-key hint, reset/retained key coverage, bulk/paste rejection and full native sample completion. Existing IME diagnostics and laptop resize checks now use strict native typing. Pure coverage validates immediate start/strict correction and rejects negative/nonfinite countdown durations; all existing race countdown cases remain unchanged.
+
+Fresh final `npm run check` passed formatting/types/build, **118 unit / 80 browser cases**, one headless SwiftShader worker (3.3 minutes for browsers). Log: `Reference_Images/analysis/alpha23-final-check.log` (ignored). The initial run passed 79/80 browser cases; the remaining onboarding navigation assertion assumed free-form fill and was updated to native sample typing, preserving its stale-navigation check. Sequential capture `scripts/capture-keyboard-correction.mjs` produced `docs/images/alpha23/keyboard-correction-1024.png` with zero page errors; inspected at 1024px. Existing user Vite/server/storage and visible Chrome windows were untouched. Hosted alpha.23 verification is pending its own exact-head run; do not infer success from alpha.22. Baseline 31b2709 was verified again as completed/success on exact-head hosted run 39879309550/job 120172557695 before implementation. No merge/deployment.
+
+
 ## Alpha.22 follow-up — 23 October 2026
 
 Fresh full `npm run check` with one browser worker passed **117 unit / 79 browser cases**, formatting, TypeScript and production build. Evidence: ignored `Reference_Images/analysis/alpha22-single-worker-check.log`. Six new browser cases cover actual wrapped-line2/3 top alignment and backward wrap at 1024/1920, all printable keyboard sample characters with independent physical presses/reset, bounded car-following flame geometry/fade at 1024/1920 and standalone Quick Race copy. The keyboard unit test exhaustively checks ASCII 32–126 and unique physical-code slots. All existing campaign/IME/audio/garage/recovery/onboarding cases remain enabled.

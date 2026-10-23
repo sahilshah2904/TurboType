@@ -13,6 +13,8 @@ export interface TypingOptions {
   passage: string;
   now: () => number;
   timeLimitMs?: number;
+  /** Untimed keyboard diagnostics start immediately; races retain three seconds. */
+  countdownMs?: number;
 }
 
 export interface TypingSnapshot {
@@ -70,6 +72,11 @@ export class TypingEngine {
       (!Number.isFinite(options.timeLimitMs) || options.timeLimitMs <= 0)
     )
       throw new RangeError("Time limit must be positive and finite.");
+    if (
+      options.countdownMs !== undefined &&
+      (!Number.isFinite(options.countdownMs) || options.countdownMs < 0)
+    )
+      throw new RangeError("Countdown must be nonnegative and finite.");
   }
 
   private time(): number {
@@ -111,7 +118,7 @@ export class TypingEngine {
     const now = this.advance();
     if (this.state !== "ready" && this.state !== "paused") return;
     this.state = "countdown";
-    this.countdownEndMs = now + 3000;
+    this.countdownEndMs = now + (this.options.countdownMs ?? 3000);
   }
 
   pause(): void {

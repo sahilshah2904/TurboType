@@ -287,9 +287,11 @@ test("leaving a loading entrance cancels stale navigation", async ({
   });
   release();
   await expect(page.locator("html")).toHaveAttribute("data-route", "keyboard");
-  await page.getByRole("textbox", { name: "Your text" }).fill("Still here");
+  await page
+    .getByRole("textbox", { name: "Your text" })
+    .pressSequentially("the quick");
   await expect(page.getByRole("textbox", { name: "Your text" })).toHaveValue(
-    "Still here",
+    "the quick",
   );
 });
 

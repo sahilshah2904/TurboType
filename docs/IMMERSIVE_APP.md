@@ -39,7 +39,7 @@ Current red/black captures: [desktop race](images/alpha6/desktop-racing.png), [h
 - Race: responsive edge-to-edge Phaser canvas, compact HUD, pre-race/pause/results controls, integrated typing surface and Live WPM dial. Setup/secondary controls appear before racing or while paused. The recovery buttons remain in that visible control deck after graphics failure; a text-only race keeps the same core rules.
 - Hub: shared full-window city/garage backdrop, large approved kart hero, open activity/campaign previews and updated decorative kart scene. Campaign cards remain previews, not functional maps.
 - Practice: open world background, existing engine/session/setup/results, one visible typing surface and the same recent-WPM dial.
-- Keyboard check: open composition over the shared scene; retains free editing/paste, next-key assistance and diagnostics. It deliberately does not apply race restrictions.
+- Keyboard check: open composition over the shared scene; alpha.23 shares race correction/input validation, while retaining immediate untimed typing, next-key assistance, physical-key indicators and diagnostics. No scores or awards.
 - Settings: open responsive grouping over the shared world, with unchanged saved motion/effects/text preferences and original audio controls.
 
 There is no encompassing page card. Non-race pages can scroll for readable content, accessibility/zoom or long diagnostics; full-window visual composition does not mean forcing all content into a single height. Active racing fills the available visual viewport. Useful local form/overlay grouping remains. New welcome/rules/tutorial/calibration/intro flows, maps, garage unlocks, progression and multiplayer are not implemented by this visual integration. Those retain their original phases.

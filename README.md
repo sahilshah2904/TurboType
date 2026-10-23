@@ -2,6 +2,8 @@
 
 # TurboType
 
+Alpha.23: Keyboard check now uses the same error blocking and Backspace correction as races, with no displayed timer or score. Other alpha.22 improvements are accepted.
+
 ### Your words. Full throttle.
 
 An original browser typing racer: build physical-keyboard speed and accuracy while racing four computer opponents.
@@ -20,7 +22,7 @@ An original browser typing racer: build physical-keyboard speed and accuracy whi
 
 The user accepted campaign unlock/save, replay counts and pause/retry eligibility. Larger typing text now top-aligns each new line with three full look-ahead rows. **Quick Race** is clearly labeled as standalone warm-up/car-track experimentation. Keyboard check covers lower/uppercase, digits/symbols and received physical keys. Opening flames follow behind the car and clear before the title; the title keeps a small flame underneath. [Focused review](docs/ALPHA22_REVIEW.md). Fresh local full check: **117 unit / 79 browser cases** with one worker; hosted exact-head state is separate.
 
-![Keyboard check with complete character sample and received physical-key indicators](docs/images/alpha22/keyboard-check-1024.png)
+![Keyboard check with race-style correction and received physical-key indicators](docs/images/alpha23/keyboard-correction-1024.png)
 
 ![Opening launch with a bounded trailing flame](docs/images/alpha22/launch-trail-1440.png)
 
@@ -103,7 +105,7 @@ These are real app captures, not concept artwork. [Current parts/laptop captures
 | Quick Race | Four seeded CPUs, countdown, selectable passage/pace, live positions, completion or a 60-second trial, frozen results and same-seed retry |
 | Car choice | Five original starters, remembered in this browser and reflected in the hub. One chosen car stays locked from countdown through the whole race, including pauses; retry/new race reopens selection |
 | Typing Practice | Shared engine without opponents; WPM, accuracy, streaks, timing, correction, pause and results |
-| Keyboard check | Free-editing physical-keyboard diagnostic, expected-key assistance and reset |
+| Keyboard check | Race-style exact typing/Backspace correction, full character sample, physical-key indicators and reset |
 | Racing presentation | Parallax city, exhaust flames, nitro/overtake feedback, bounded finish effects, Live WPM dial and High/Low/Reduced modes |
 | Settings | Saved display/text/motion preferences and all sound enable/mute/volume controls. Original Ignition browsing music, Overdrive racing music and separate countdown/FX |
 | Recovery | Graphics retry or text standings, optional audio, denied-storage notices and graceful fullscreen refusal |
@@ -181,7 +183,7 @@ The full check runs formatting, TypeScript, unit tests, build and browser scenar
 
 ## Verification and GitHub emails
 
-Current Phase 7 alpha.21 verification is **116 unit / 73 desktop browser cases**, including real campaign clears/replays, storage recovery, keyboard/list/drag navigation, four laptop widths and long-paragraph caret tracking. See [current evidence](docs/TESTING.md). User review and exact-head hosted validation remain distinct.
+Current alpha.23 full local verification is **118 unit / 80 desktop browser cases**, including real campaign clears/replays, storage recovery, keyboard/list/drag navigation, four laptop widths and long-paragraph caret tracking. See [current evidence](docs/TESTING.md). User review and exact-head hosted validation remain distinct.
 
 The accepted Phase 5 baseline alpha.14 passed **96 unit tests and 36 desktop Chromium browser cases**, actual-GPU High/Low/Reduced checks and final physical laptop acceptance. The two-minute recorder captured 100 trusted racing keys with zero page errors. Exact acceptance head 398d455 passed [hosted run 39727202033](https://github.com/sahilshah2904/TurboType/actions/runs/39727202033), then PR #4 merged as de464ce. Later documentation/main heads have their own check state; the badge tracks main.
 

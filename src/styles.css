@@ -1530,3 +1530,14 @@ textarea[aria-invalid="true"] {
   outline: 2px solid #ff5964;
   outline-offset: 2px;
 }
+
+.keyboard-character--correct {
+  color: var(--cyan, #8ceaf2);
+}
+.keyboard-character--current {
+  border-bottom: 2px solid currentColor;
+}
+.keyboard-character--error {
+  color: #ff536c;
+  background: #ff36552b;
+}

@@ -1,5 +1,12 @@
 # TurboType project status
 
+## Keyboard correction follow-up — alpha.23, 23 October 2026
+
+The user reports all alpha.22 changes work well and requests race-style correction in Keyboard check. The check now shares TypingEngine and connectRaceInput with races: one incorrect character blocks further text until Backspace, exact case/symbols, append-only edits, paste/drop/replacement blocking and committed IME normalization. The sample highlights correct/current/error positions; the next physical-key hint stays on the expected character. Clear text starts a fresh sample while preserving detected keys; Reset key check clears both. Physical-key indicators still record received keys even when their text is rejected. No timer/score is displayed, nothing is saved or awarded. A validated countdownMs=0 option starts this diagnostic immediately; all races retain the default three-second countdown and existing rules/save/content versions.
+
+Alpha.22 source 31b2709 passed exact-head hosted run 39879309550 (check job 120172557695); this was verified again before changes. Fresh alpha.23 full local check passes 118 unit/80 browser cases; sequential 1024px capture has zero page errors. Its own hosted check remains pending; docs/TESTING.md records evidence. Keep the current PR #7 branch; no merge, deployment or Phase 8 start. Earlier free-editing/paste-allowed keyboard descriptions are historical and superseded.
+
+
 ## Alpha.22 review corrections — 23 October 2026
 
 The user accepted campaign unlock/refresh, replay deduplication and pause/practice-only/eligible retry. Remaining feedback: top-align each new wrapped line with three visible look-ahead lines, clarify standalone Quick Race, expand physical keyboard/sample coverage and keep opening fire trailing the car without crossing the name. Implemented for review on the existing PR #7 branch; see [alpha.22 behavior and focused checklist](docs/ALPHA22_REVIEW.md). Broader atmosphere polish remains deferred. Do not merge/start Phase 8 solely from this note.

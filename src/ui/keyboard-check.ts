@@ -1,3 +1,6 @@
+import { TypingEngine } from "../core/typing-engine";
+import { connectRaceInput, type RaceInputController } from "./race-input";
+
 export const KEYBOARD_SAMPLE =
   "the quick brown fox jumps over a lazy dog. THE QUICK BROWN FOX JUMPS OVER A LAZY DOG. Numbers: 0123456789. Symbols: !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
 export const KEY_ROWS = [
@@ -91,30 +94,48 @@ const escapeHtml = (value: string) =>
       ]!,
   );
 export function keyboardScreen(): string {
-  return `<section class="page-heading reveal"><a class="back-link" href="#/hub">← Back to the hub</a><p class="eyebrow">CHECK YOUR TYPING KEYS</p><h1>Every key.<br/><span>A clear signal.</span></h1><p>Try every letter, both cases, numbers and symbols, then your editing and modifier keys.</p></section><section class="input-panel reveal"><div class="section-top"><h2>Keyboard check</h2><span class="pill">NO TIMER · NO SCORE</span></div><p id="sample-label" class="micro">TYPE THIS KEYBOARD SAMPLE</p><p id="sample" class="sample keyboard-sample">${escapeHtml(KEYBOARD_SAMPLE)}</p><label for="keyboard-input">Your text</label><textarea id="keyboard-input" rows="4" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" aria-describedby="input-help input-status" placeholder="Click here and start typing…"></textarea><div class="input-meta"><p id="input-status" role="status">Ready when you are.</p><button id="reset-input" class="text-button">Clear text</button><button id="reset-keys" class="text-button">Reset key check</button></div><p id="input-help" class="help">Typing and editing are unrestricted here. Paste can match the sample but does not test keys. Press editing/modifier keys with this text box focused; Tab moves focus normally. Browser or system shortcuts may be intercepted.</p><p id="key-coverage" role="status"></p><div class="keyboard-visual keyboard-check-keys">${KEY_ROWS.map((row, index) => `<ul aria-label="Keyboard row ${index + 1}">${row.map((key) => `<li data-code="${key.code}" data-key="${escapeHtml(key.chars)}" aria-label="${escapeHtml(key.label)}, not yet detected">${escapeHtml(key.label)}</li>`).join("")}</ul>`).join("")}</div><p class="help">Highlighted = next sample key. Green = a key press received on this visit. This is a browser input check; nothing is uploaded.</p><details class="diagnostics"><summary>Input diagnostics</summary><dl><div><dt>Last input</dt><dd id="event-type">None</dd></div><div><dt>Last physical key</dt><dd id="physical-key">None</dd></div><div><dt>Composition</dt><dd id="composition">Idle</dd></div><div><dt>Visible viewport</dt><dd id="viewport-size">Checking…</dd></div></dl></details></section>`;
+  return `<section class="page-heading reveal"><a class="back-link" href="#/hub">← Back to the hub</a><p class="eyebrow">CHECK YOUR TYPING KEYS</p><h1>Every key.<br/><span>A clear signal.</span></h1><p>Try every letter, both cases, numbers and symbols, then your editing and modifier keys.</p></section><section class="input-panel reveal"><div class="section-top"><h2>Keyboard check</h2><span class="pill">NO TIMER · NO SCORE</span></div><p id="sample-label" class="micro">TYPE THIS KEYBOARD SAMPLE</p><p id="sample" class="sample keyboard-sample">${Array.from(KEYBOARD_SAMPLE, (character) => `<span>${escapeHtml(character)}</span>`).join("")}</p><label for="keyboard-input">Your text</label><textarea id="keyboard-input" rows="4" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" aria-describedby="input-help input-status" placeholder="Click here and start typing…"></textarea><div class="input-meta"><p id="input-status" role="status">Ready when you are.</p><button id="reset-input" class="text-button">Clear text</button><button id="reset-keys" class="text-button">Reset key check</button></div><p id="input-help" class="help">Match the sample exactly, just like a race. A wrong character blocks progress until you remove it with Backspace. Paste and replacement edits are blocked. Press editing/modifier keys with this text box focused; Tab moves focus normally. Browser or system shortcuts may be intercepted.</p><p id="key-coverage" role="status"></p><div class="keyboard-visual keyboard-check-keys">${KEY_ROWS.map((row, index) => `<ul aria-label="Keyboard row ${index + 1}">${row.map((key) => `<li data-code="${key.code}" data-key="${escapeHtml(key.chars)}" aria-label="${escapeHtml(key.label)}, not yet detected">${escapeHtml(key.label)}</li>`).join("")}</ul>`).join("")}</div><p class="help">Highlighted = next sample key. Green = a key press received on this visit. This is a browser input check; nothing is uploaded.</p><details class="diagnostics"><summary>Input diagnostics</summary><dl><div><dt>Last input</dt><dd id="event-type">None</dd></div><div><dt>Last physical key</dt><dd id="physical-key">None</dd></div><div><dt>Composition</dt><dd id="composition">Idle</dd></div><div><dt>Visible viewport</dt><dd id="viewport-size">Checking…</dd></div></dl></details></section>`;
 }
 export function connectKeyboard(main: HTMLElement): () => void {
   const input = main.querySelector<HTMLTextAreaElement>("#keyboard-input")!;
   const controller = new AbortController(),
     options = { signal: controller.signal };
+  let engine: TypingEngine;
+  let raceInput: RaceInputController;
+  const characters = Array.from(
+    main.querySelectorAll<HTMLElement>("#sample span"),
+  );
   const seen = new Set<string>();
   const keys = Array.from(main.querySelectorAll<HTMLElement>("[data-code]"));
   function update() {
-    const value = input.value;
-    main.querySelector("#input-status")!.textContent = !value
-      ? "Ready when you are."
-      : value === KEYBOARD_SAMPLE
-        ? "Sample matches. Check the key indicators for actual key presses."
-        : KEYBOARD_SAMPLE.startsWith(value)
-          ? `${value.length} characters entered. Keep going.`
-          : "Your text differs from the sample. Edit it or try again.";
+    const snapshot = engine.snapshot();
+    const length = snapshot.validatedLength;
+    main.querySelector("#input-status")!.textContent =
+      snapshot.errorCharacter !== null
+        ? "Wrong character. Press Backspace to correct it before continuing."
+        : snapshot.state === "finished"
+          ? "Sample matches. Check the key indicators for actual key presses."
+          : !length
+            ? "Ready when you are."
+            : `${length} characters entered. Keep going.`;
+    characters.forEach((character, index) => {
+      character.classList.toggle("keyboard-character--correct", index < length);
+      character.classList.toggle(
+        "keyboard-character--current",
+        index === length,
+      );
+      character.classList.toggle(
+        "keyboard-character--error",
+        index === length && snapshot.errorCharacter !== null,
+      );
+    });
     keys.forEach((key) => {
       const tested = seen.has(key.dataset.code!);
       key.classList.toggle("key--tested", tested);
       key.classList.toggle(
         "key--next",
-        !!KEYBOARD_SAMPLE[value.length] &&
-          key.dataset.key!.includes(KEYBOARD_SAMPLE[value.length]),
+        !!KEYBOARD_SAMPLE[length] &&
+          key.dataset.key!.includes(KEYBOARD_SAMPLE[length]),
       );
       key.setAttribute(
         "aria-label",
@@ -140,7 +161,6 @@ export function connectKeyboard(main: HTMLElement): () => void {
     (event) => {
       main.querySelector("#event-type")!.textContent =
         (event as InputEvent).inputType || "input";
-      update();
     },
     options,
   );
@@ -162,8 +182,7 @@ export function connectKeyboard(main: HTMLElement): () => void {
   main.querySelector("#reset-input")!.addEventListener(
     "click",
     () => {
-      input.value = "";
-      update();
+      reset();
       input.focus();
     },
     options,
@@ -172,13 +191,26 @@ export function connectKeyboard(main: HTMLElement): () => void {
     "click",
     () => {
       seen.clear();
-      input.value = "";
       main.querySelector("#physical-key")!.textContent = "None";
-      update();
+      reset();
       input.focus();
     },
     options,
   );
+  function reset() {
+    raceInput?.dispose();
+    engine = new TypingEngine({
+      passage: KEYBOARD_SAMPLE,
+      now: () => performance.now(),
+      countdownMs: 0,
+    });
+    engine.start();
+    raceInput = connectRaceInput(input, engine, update, () => {});
+    main.querySelector("#event-type")!.textContent = "None";
+    main.querySelector("#composition")!.textContent = "Idle";
+    update();
+  }
+  reset();
   const viewport = () => {
     main.querySelector("#viewport-size")!.textContent =
       `${innerWidth} × ${innerHeight}`;
@@ -186,5 +218,8 @@ export function connectKeyboard(main: HTMLElement): () => void {
   window.addEventListener("resize", viewport, options);
   viewport();
   update();
-  return () => controller.abort();
+  return () => {
+    raceInput.dispose();
+    controller.abort();
+  };
 }

@@ -79,7 +79,7 @@ for (const width of [1024, 1920])
     expect(oldLine).toBeLessThan(12);
   });
 
-test("keyboard sample covers letters, cases, numbers and symbols while paste does not certify physical keys", async ({
+test("keyboard sample covers letters, cases, numbers and symbols and blocks bulk input without certifying physical keys", async ({
   page,
 }) => {
   await page.goto("./#/keyboard");
@@ -88,7 +88,9 @@ test("keyboard sample covers letters, cases, numbers and symbols while paste doe
   for (let code = 32; code <= 126; code++)
     expect(sample).toContain(String.fromCharCode(code));
   await input.fill(sample);
-  await expect(page.locator("#input-status")).toContainText("Sample matches");
+  await expect(input).toHaveValue("");
+  await input.dispatchEvent("paste");
+  await expect(input).toHaveValue("");
   await expect(page.locator(".key--tested")).toHaveCount(0);
   await page.locator("#reset-input").click();
   await input.pressSequentially("aA1!");
@@ -163,4 +165,30 @@ test("Quick Race clearly identifies its standalone role", async ({ page }) => {
   ).toBeVisible();
   await expect(page.locator(".race-deck-title")).toHaveText("Quick Race.");
   await expect(page.getByText(/A standalone race for warm-ups/)).toBeVisible();
+});
+
+test("keyboard mistakes block further typing until Backspace and cannot be replaced", async ({
+  page,
+}) => {
+  await page.goto("./#/keyboard");
+  const input = page.locator("#keyboard-input");
+  await input.pressSequentially("txhe");
+  await expect(input).toHaveValue("tx");
+  await expect(page.locator("#input-status")).toContainText("Press Backspace");
+  await expect(page.locator(".keyboard-character--error")).toHaveText("h");
+  await expect(page.locator('[data-code="KeyH"]')).toHaveClass(/key--next/);
+  await input.fill("the");
+  await expect(input).toHaveValue("tx");
+  await input.press("Backspace");
+  await input.pressSequentially("he");
+  await expect(input).toHaveValue("the");
+  await expect(page.locator(".keyboard-character--error")).toHaveCount(0);
+  await expect(page.locator(".keyboard-character--correct")).toHaveCount(3);
+  await input.press("Backspace");
+  await expect(input).toHaveValue("th");
+  await page.locator("#reset-input").click();
+  await expect(input).toHaveValue("");
+  await input.pressSequentially("the ");
+  await expect(input).toHaveValue("the ");
+  await expect(page.locator('[data-code="KeyX"]')).toHaveClass(/key--tested/);
 });

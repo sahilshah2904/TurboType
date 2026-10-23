@@ -4,7 +4,7 @@ Alpha.17: open the base LAN URL without a fragment for the entrance, or use Sett
 
 # Run TurboType locally
 
-The app includes Phase 4 Quick Race against four CPUs with real progress/standings/results, plus typing practice, the hub preview, free-editing keyboard check and local preferences. Alpha.5 integrates the accepted full-window kart race, Live WPM dial, native single typing surface and shared world revamp of all existing pages, with optional original synthesized audio. Progression/cloud accounts and cinematic onboarding are later tasks.
+The app includes Phase 4 Quick Race against four CPUs with real progress/standings/results, plus typing practice, the hub preview, strict-correction keyboard check and local preferences. Alpha.5 integrates the accepted full-window kart race, Live WPM dial, native single typing surface and shared world revamp of all existing pages, with optional original synthesized audio. Progression/cloud accounts and cinematic onboarding are later tasks.
 
 ## Reproducible prerequisites
 
@@ -37,7 +37,7 @@ npm run dev
 
 Open **http://127.0.0.1:5173/TurboType/**. The dev server watches source changes. Stop it with Ctrl+C. Ports are strict: if 5173 is occupied, stop the conflicting process or explicitly choose another port; Vite will not silently move the preview.
 
-Choose **Race** or open `#/race` for four-CPU racing; see QUICK_RACE.md for exact reproduction with seed 42 and PHASE4_RACE_TESTS.md for available-device checks. Choose **Practice** or open `#/practice` for the engine without opponents. **Keyboard check** remains the earlier free-editing diagnostic and intentionally behaves differently. Do not test word-completion blocking in the wrong screen. Practice sessions are in-memory, not saved; HMR/reload ends them. Physical retest instructions are in PHASE3_INPUT_TESTS.md.
+Choose **Race** or open `#/race` for four-CPU racing; see QUICK_RACE.md for exact reproduction with seed 42 and PHASE4_RACE_TESTS.md for available-device checks. Choose **Practice** or open `#/practice` for the engine without opponents. **Keyboard check** now shares strict race correction and blocks paste/replacement edits, with immediate untimed use and independent physical-key indicators. Practice sessions are in-memory, not saved; HMR/reload ends them. Physical retest instructions are in PHASE3_INPUT_TESTS.md.
 
 For the exact static production artifact:
 

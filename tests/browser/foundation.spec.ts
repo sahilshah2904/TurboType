@@ -28,14 +28,16 @@ test("keyboard check supports editing, composition diagnostics and reset", async
 }) => {
   await page.goto("./#/keyboard");
   const input = page.getByRole("textbox", { name: "Your text" });
-  await input.fill("the q");
+  await input.pressSequentially("the q");
   await expect(page.locator("#input-status")).toContainText("5 characters");
   await input.press("Backspace");
   await expect(input).toHaveValue("the ");
   await input.dispatchEvent("compositionstart");
   await expect(page.locator("#composition")).toHaveText("Composing");
   await input.dispatchEvent("compositionend");
-  await input.fill((await page.locator("#sample").textContent())!);
+  await expect(page.locator("#composition")).toHaveText("Committed");
+  await page.getByRole("button", { name: "Clear text" }).click();
+  await input.pressSequentially((await page.locator("#sample").textContent())!);
   await expect(page.locator("#input-status")).toContainText("Sample matches");
   await page.getByRole("button", { name: "Clear text" }).click();
   await expect(input).toHaveValue("");
@@ -81,9 +83,9 @@ test("unknown hash recovers and laptop window resize preserves text", async ({
     page.getByRole("heading", { name: "YOUR WORDS. FULL THROTTLE." }),
   ).toBeVisible();
   await page.getByRole("link", { name: "Keyboard check", exact: true }).click();
-  await page.getByRole("textbox").fill("Every");
+  await page.getByRole("textbox").pressSequentially("the");
   await page.setViewportSize({ width: 1024, height: 768 });
-  await expect(page.getByRole("textbox")).toHaveValue("Every");
+  await expect(page.getByRole("textbox")).toHaveValue("the");
   expect(
     await page.evaluate(
       () => document.documentElement.scrollWidth <= innerWidth,
