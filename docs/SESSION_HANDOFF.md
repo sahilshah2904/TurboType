@@ -1,5 +1,7 @@
 # TurboType session handoff
 
+Implementation source **aba056c6f5b5c0f3b1f4091a4d10ab4a83fff03f** is pushed in [open PR #8](https://github.com/sahilshah2904/TurboType/pull/8). The current documentation checkpoint has identical application/test code. Inspect the current PR head and completed check_run/job; source pushes are not user acceptance or deployment. The PR body records the latest exact-head hosted outcome after verification.
+
 ## Current task — 23 October 2026
 
 The user accepted alpha.23 Keyboard check, Phase 7 merged, and then requested updated GitHub README/handoff and completed Phase 8 with a manual checklist. Current implementation is on **codex/phase8-curriculum**, based on main **26a7f1d**. Inspect actual Git/PR/checks before reporting progress. No automatic merge, Phase 9 or deployment. Earlier continuity is archived in history/2026-10-23-before-phase8/; its branches/pending statements are historical.

@@ -1,5 +1,7 @@
 # TurboType project status
 
+Implementation source **aba056c6f5b5c0f3b1f4091a4d10ab4a83fff03f** is pushed in [open PR #8](https://github.com/sahilshah2904/TurboType/pull/8). The current documentation checkpoint has identical application/test code. Inspect the current PR head and completed check_run/job; source pushes are not user acceptance or deployment. The PR body records the latest exact-head hosted outcome after verification.
+
 ## Phase 8 — alpha.24, 23 October 2026
 
 The user requested completed Phase 8 and up-to-date GitHub README/handoff after accepting Phase 7. Current implementation is on **codex/phase8-curriculum**, based on main **26a7f1d**. Inspect actual Git/PR/exact-head checks; user acceptance/integration/deployment remain separate. No automatic Phase 9 or merge.

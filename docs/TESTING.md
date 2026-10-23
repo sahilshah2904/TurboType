@@ -2,7 +2,7 @@
 
 ## Phase 8 curriculum — alpha.24, 23 October 2026
 
-Branch codex/phase8-curriculum, based on main 26a7f1d. All 300 main definitions and 30 bonuses are authored/playable; source/limits/review instructions are in PHASE8_CURRICULUM.md. No user acceptance, merge or deployment is implied.
+Implementation aba056c6f5b5c0f3b1f4091a4d10ab4a83fff03f on codex/phase8-curriculum, based on main 26a7f1d; [open PR #8](https://github.com/sahilshah2904/TurboType/pull/8). The current documentation checkpoint has unchanged application/test code. Inspect the PR body/check_run/job for its latest exact-head full hosted outcome; do not infer it from local coverage or a canceled older head. All 300 main definitions and 30 bonuses are authored/playable; source/limits/review instructions are in PHASE8_CURRICULUM.md. No user acceptance, merge or deployment is implied.
 
 - Fresh formatting, content drift, TypeScript, 125 unit cases and production build pass on final application source. Log Reference_Images/analysis/phase8-focused-check.log (ignored). All 18 accepted passage values were also compared directly against main via an independent text extraction and match exactly. The source catalog has 312 distinct new entries; together with the 18 introductions it provides 330 distinct complete passages.
 - Unit coverage validates the full catalog, identity/prerequisite/reference/character/category constraints and gradual curves, completes all 300 main/30 bonus passages through the actual engine, constructs seeded CPU schedules, checks3000/3001 boundaries, chapter/finale reachability, bonus non-inflation/paused rejection, save migration/preservation and existing eligibility/star behavior. Rules remain3, content3 and map schema2.
