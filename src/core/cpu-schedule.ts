@@ -1,3 +1,5 @@
+import { MAX_PASSAGE_CHARACTERS } from "../config/typing";
+
 export const CPU_TIERS = {
   easy: { minWpm: 18, maxWpm: 30 },
   medium: { minWpm: 35, maxWpm: 50 },
@@ -25,7 +27,7 @@ export function createCpuSchedules(
   if (
     !Number.isInteger(length) ||
     length < 1 ||
-    length > 2000 ||
+    length > MAX_PASSAGE_CHARACTERS ||
     !Object.hasOwn(CPU_TIERS, tier) ||
     !Number.isInteger(seed) ||
     seed < 0 ||

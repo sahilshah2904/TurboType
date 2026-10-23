@@ -229,7 +229,7 @@ describe("timing and lifecycle", () => {
       new TypingEngine({ passage: "cat", now: () => NaN }).snapshot(),
     ).toThrow(RangeError);
   });
-  it.each(["", "hello\nworld", "café", "a".repeat(2001)])(
+  it.each(["", "hello\nworld", "café", "a".repeat(3001)])(
     "rejects unsupported passage content",
     (passage) => {
       expect(() => fixture(passage)).toThrow(RangeError);

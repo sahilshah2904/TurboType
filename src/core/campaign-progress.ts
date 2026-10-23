@@ -1,6 +1,7 @@
 import {
   CATEGORIES,
   campaignLevel,
+  CAMPAIGN_BONUSES,
   type CampaignLevel,
   type Category,
 } from "../content/campaign";
@@ -13,16 +14,18 @@ export interface LevelProgress {
   revision: 1;
 }
 export interface CampaignProgress {
-  schemaVersion: 1;
+  schemaVersion: 2;
   rulesVersion: 3;
   clears: Record<string, LevelProgress>;
+  bonuses: Record<string, LevelProgress>;
   positions: Record<Category, number | null>;
 }
 export function emptyCampaign(): CampaignProgress {
   return {
-    schemaVersion: 1,
+    schemaVersion: 2,
     rulesVersion: 3,
     clears: {},
+    bonuses: {},
     positions: { easy: null, medium: null, hard: null },
   };
 }
@@ -45,7 +48,9 @@ export function isUnlocked(
   progress: CampaignProgress,
   level: CampaignLevel,
 ): boolean {
-  return level.number <= currentLevel(progress, level.category);
+  return level.kind === "bonus"
+    ? !!level.prerequisite && !!progress.clears[level.prerequisite]
+    : level.number <= currentLevel(progress, level.category);
 }
 export function categorySummary(
   progress: CampaignProgress,
@@ -84,7 +89,8 @@ export function recordCampaignFinish(
     result.accuracyPercent > 100
   )
     return { accepted: false, newlyCleared: false, progress };
-  const previous = progress.clears[level.id];
+  const records = level.kind === "bonus" ? progress.bonuses : progress.clears;
+  const previous = records[level.id];
   const stars =
     1 |
     (result.accuracyPercent >= level.accuracyGoal ? 2 : 0) |
@@ -94,8 +100,8 @@ export function recordCampaignFinish(
     newlyCleared: !previous,
     progress: {
       ...progress,
-      clears: {
-        ...progress.clears,
+      [level.kind === "bonus" ? "bonuses" : "clears"]: {
+        ...records,
         [level.id]: {
           stars: (previous?.stars ?? 0) | stars,
           bestWpm: Math.max(previous?.bestWpm ?? 0, result.wpm),
@@ -113,11 +119,18 @@ export function recordCampaignFinish(
     },
   };
 }
-export function validateCampaign(value: unknown): CampaignProgress | null {
+export function validateCampaign(
+  value: unknown,
+  allowLegacy = false,
+): CampaignProgress | null {
   if (!value || typeof value !== "object") return null;
   const v = value as Partial<CampaignProgress>;
   if (
-    v.schemaVersion !== 1 ||
+    (v.schemaVersion !== 2 &&
+      !(
+        allowLegacy &&
+        (value as { schemaVersion?: unknown }).schemaVersion === 1
+      )) ||
     v.rulesVersion !== 3 ||
     !v.clears ||
     typeof v.clears !== "object" ||
@@ -175,5 +188,37 @@ export function validateCampaign(value: unknown): CampaignProgress | null {
   }
   if (Object.keys(v.clears).length !== Object.keys(result.clears).length)
     return null;
+  const bonuses = v.bonuses ?? {};
+  if (!bonuses || typeof bonuses !== "object" || Array.isArray(bonuses))
+    return null;
+  for (const [id, entry] of Object.entries(bonuses)) {
+    const level = CAMPAIGN_BONUSES.find((bonus) => bonus.id === id);
+    if (
+      !level ||
+      !isUnlocked(result, level) ||
+      !entry ||
+      typeof entry !== "object" ||
+      entry.revision !== 1 ||
+      !Number.isInteger(entry.stars) ||
+      entry.stars < 1 ||
+      entry.stars > 7 ||
+      !(entry.stars & 1) ||
+      !Number.isFinite(entry.bestWpm) ||
+      entry.bestWpm < 0 ||
+      !Number.isFinite(entry.bestAccuracy) ||
+      entry.bestAccuracy < 0 ||
+      entry.bestAccuracy > 100 ||
+      !Number.isFinite(entry.bestTimeMs) ||
+      entry.bestTimeMs <= 0
+    )
+      return null;
+    result.bonuses[id] = {
+      stars: entry.stars,
+      bestWpm: entry.bestWpm,
+      bestAccuracy: entry.bestAccuracy,
+      bestTimeMs: entry.bestTimeMs,
+      revision: 1,
+    };
+  }
   return result;
 }

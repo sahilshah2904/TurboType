@@ -1,6 +1,6 @@
 import { expect, test, type Page } from "@playwright/test";
 import { readFile } from "node:fs/promises";
-const KEY = "turbotype:campaign-map:v1";
+const KEY = "turbotype:campaign-map:v2";
 async function ready(page: Page) {
   await expect(page.locator("#race-track")).toHaveAttribute(
     "data-ready",
@@ -21,7 +21,7 @@ async function finish(page: Page) {
 }
 async function sampleProgress(page: Page) {
   await page.addInitScript(() => {
-    if (localStorage.getItem("turbotype:campaign-map:v1")) return;
+    if (localStorage.getItem("turbotype:campaign-map:v2")) return;
     const clears: Record<string, unknown> = {};
     for (let i = 1; i <= 5; i++)
       clears[`easy-${String(i).padStart(3, "0")}`] = {
@@ -32,9 +32,9 @@ async function sampleProgress(page: Page) {
         revision: 1,
       };
     localStorage.setItem(
-      "turbotype:campaign-map:v1",
+      "turbotype:campaign-map:v2",
       JSON.stringify({
-        schemaVersion: 1,
+        schemaVersion: 2,
         rulesVersion: 3,
         positions: { easy: null, medium: null, hard: null },
         clears,
@@ -67,7 +67,9 @@ test("three 100-stop maps, chapter navigation, semantic locks and accessible lis
   await page.keyboard.press("End");
   await expect(page.locator('#campaign-road [data-level="100"]')).toBeFocused();
   await page.keyboard.press("Enter");
-  await expect(page.locator("#level-briefing")).toContainText("Phase 8");
+  await expect(page.locator("#level-briefing")).toContainText(
+    "Clear Easy level 99",
+  );
   await page.keyboard.press("Escape");
   await page.locator("#map-jump-current").click();
   await expect(page.locator('#campaign-road [data-level="1"]')).toBeFocused();
@@ -205,7 +207,7 @@ test("malformed campaign data remains untouched and can be exported", async ({
   page,
 }) => {
   await page.addInitScript(() =>
-    localStorage.setItem("turbotype:campaign-map:v1", "{future-broken"),
+    localStorage.setItem("turbotype:campaign-map:v2", "{future-broken"),
   );
   await page.goto("./#/campaign/easy");
   await expect(page.locator("#campaign-storage-status")).toContainText(
@@ -347,9 +349,9 @@ test("a remote tab clear refreshes the map without creating an update loop", asy
   await other.goto("./#/campaign/medium");
   await other.evaluate(() =>
     localStorage.setItem(
-      "turbotype:campaign-map:v1",
+      "turbotype:campaign-map:v2",
       JSON.stringify({
-        schemaVersion: 1,
+        schemaVersion: 2,
         rulesVersion: 3,
         clears: {
           "easy-001": {

@@ -1,7 +1,7 @@
 {
   "name": "turbotype",
   "private": true,
-  "version": "0.1.0-alpha.23",
+  "version": "0.1.0-alpha.24",
   "type": "module",
   "engines": {
     "node": ">=24.13.0 <25",
@@ -16,7 +16,8 @@
     "test:browser": "playwright test",
     "format": "prettier --write src tests assets-source scripts index.html vite.config.ts playwright.config.ts tsconfig.json package.json .github/workflows/checks.yml",
     "format:check": "prettier --check src tests assets-source scripts index.html vite.config.ts playwright.config.ts tsconfig.json package.json .github/workflows/checks.yml",
-    "check": "npm run format:check && npm run typecheck && npm test && npm run build && npm run test:browser"
+    "content:check": "node scripts/author-curriculum.mjs --check",
+    "check": "npm run format:check && npm run content:check && npm run typecheck && npm test && npm run build && npm run test:browser"
   },
   "dependencies": {
     "@fontsource/barlow-condensed": "5.3.0",

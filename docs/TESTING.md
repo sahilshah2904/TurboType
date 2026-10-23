@@ -1,5 +1,20 @@
 # Verification evidence
 
+## Phase 8 curriculum — alpha.24, 23 October 2026
+
+Branch codex/phase8-curriculum, based on main 26a7f1d. All 300 main definitions and 30 bonuses are authored/playable; source/limits/review instructions are in PHASE8_CURRICULUM.md. No user acceptance, merge or deployment is implied.
+
+- Fresh formatting, content drift, TypeScript, 125 unit cases and production build pass on final application source. Log Reference_Images/analysis/phase8-focused-check.log (ignored). All 18 accepted passage values were also compared directly against main via an independent text extraction and match exactly. The source catalog has 312 distinct new entries; together with the 18 introductions it provides 330 distinct complete passages.
+- Unit coverage validates the full catalog, identity/prerequisite/reference/character/category constraints and gradual curves, completes all 300 main/30 bonus passages through the actual engine, constructs seeded CPU schedules, checks3000/3001 boundaries, chapter/finale reachability, bonus non-inflation/paused rejection, save migration/preservation and existing eligibility/star behavior. Rules remain3, content3 and map schema2.
+- Broad local run Reference_Images/analysis/phase8-final-check.log passed 114 of 115 browser cases (13.0 minutes). Every chapter's native typing case, all three finales and legacy 6→7 passed. One bonus setup failed because addInitScript did not run during fragment-only navigation, leaving its prerequisite fixture unapplied. This was a harness error; the gate correctly stayed locked. The corrected bonus setup passed, then locked/eligible cases were split to keep each independent and comfortably under the existing 30-second timeout.
+- Fresh final focused run Reference_Images/analysis/phase8-final-focused.log passed 3 cases: direct bonus lock, real bonus clear/replay/persistence/non-inflation, and unchanged v1 recovery copy plus6→7 continuation. Together with the 114 broad cases, every current unique browser case (116 total) has local coverage. Do not misdescribe these as a single complete 116-case local run. The next exact-head hosted run checks the entire final suite together.
+- Finale completion uses native input for a prefix and individual in-page beforeinput/input edits for the long tail, always through the actual DOM adapter/engine. Every introduced chapter focus receives real native typing separately. This avoids transport overhead, not typing rules, and is not hardware latency/performance certification.
+- Initial exploratory formatting failed on materialized JSON; the authoring script now uses pinned Prettier. A following exploratory browser run was stopped during transport refinement. Neither attempt is a pass. The normal browser timeout/retry policy remains unchanged; one headless SwiftShader worker, no concurrent suites/captures/profiling.
+- Six sequential captures from scripts/capture-curriculum.mjs have zero page errors and were inspected at 1024/1440: docs/images/alpha24. All clears are isolated fixtures, never user storage. Captured finale metrics come from automated input replay and are synthetic, not a player's performance. User Vite 5173 stayed intact; no visible Chrome windows.
+
+Hosted baseline: accepted Phase 7 b7d03f1 passed 39881571584/job120179897342 and merged 04eb38d. Docs-only main 26a7f1d run 39882420451/job120182773740 was last observed stalled in browser/system dependency installation before tests. It cannot certify new source. Phase 8 removes the Azure fallback from the existing official Ubuntu mirror list and bounds dependency installation to 10 minutes; no dependency/test/notification is disabled. Inspect each exact-head completed check_run/job and downloaded log before claiming new hosted success.
+
+
 ## Phase 7 complete and integrated — 23 October 2026
 
 The user accepted the final Keyboard check correction ("yes it is working"), completing review of alpha.23. Exact accepted source **b7d03f171b7900102f150c19bf1fbe862dad071a** passed hosted run **39881571584**, job **120179897342**, completed 01:07:30 UTC: **118 unit / 80 browser cases**. PR #7 merged into main as **04eb38db636bc9ca74713f28082820265ee7fe7a**. The local checkout returned to main. See docs/PHASE7_CLOSEOUT.md and docs/TESTING.md. This supersedes earlier pending-check/review/merge and feature-branch statements below, which are historical.
@@ -48,9 +63,9 @@ Initial isolated campaign run passed 11/12: the assertion targeted a disabled fi
 
 Captures via `node scripts/capture-campaign.mjs` run sequentially after suites using the preserved LAN server, headless Chromium/SwiftShader. No visible Chrome windows or user storage were used. `docs/images/alpha21` contains current Hub, Easy map, chapter 10, accessible list, Hard map at 1024, briefing1440/1024, actual typed first-clear result and unlock1024, and paragraph-race1440. Only `paragraph-race-fixture-1440.png` uses isolated seeded prior clears to open sample 4; it does not evidence three earned clears. Result/unlock captures come from a real per-character level 1 finish. Sample 6 caret checks use clearly seeded prerequisites; no user account/progress is altered.
 
-Main Phase6 documentation refresh `1ee0aba3c3e39a29adf66f2df727233c7f82782c` has a completed successful exact-head check in [run39804674809](https://github.com/sahilshah2904/TurboType/actions/runs/39804674809). This is separate from Phase7 validation. Phase6 source/merge evidence below remains historical baseline.
+Main Phase6 documentation refresh `1ee0aba3c3e39a29adf66f2df727233c7f82782c` has a completed successful exact-head check in [run 39804674809](https://github.com/sahilshah2904/TurboType/actions/runs/39804674809). This is separate from Phase 7 validation. Phase6 source/merge evidence below remains historical baseline.
 
-**Limits:**18 playable sample races, not300 authored passages. Bonus/7–100 content in Phase8; earned ownership/canonical guest saves/receipts/cloud in Phase9. Basic map progress is local only/best-effort cross-tab coordination. User review of paragraphs/maps/readability remains pending; TT608 atmosphere/opening polish stays deferred.
+**Limits:**18 playable sample races, not300 authored passages. Bonus/7–100 content in Phase 8; earned ownership/canonical guest saves/receipts/cloud in Phase9. Basic map progress is local only/best-effort cross-tab coordination. User review of paragraphs/maps/readability remains pending; TT608 atmosphere/opening polish stays deferred.
 
 
 ## Phase 6 accepted and integrated — 22 October 2026

@@ -1,7 +1,15 @@
 import { keyboardScreen, connectKeyboard } from "./keyboard-check";
-import { readCampaignRoute, campaignLevel } from "../content/campaign";
+import {
+  readCampaignRoute,
+  campaignLevel,
+  campaignBonus,
+  campaignLink,
+} from "../content/campaign";
 import { isUnlocked, starCount } from "../core/campaign-progress";
-import { LocalCampaignRepository } from "../storage/campaign";
+import {
+  LocalCampaignRepository,
+  CAMPAIGN_STORAGE_KEY,
+} from "../storage/campaign";
 import {
   campaignCards,
   campaignMapScreen,
@@ -117,7 +125,9 @@ export function mountApp(root: HTMLElement): () => void {
     const campaignRoute = readCampaignRoute(location.hash);
     if (route === "campaign" || route === "hub") campaign.reload();
     const selectedLevel = campaignRoute?.number
-      ? campaignLevel(campaignRoute.category, campaignRoute.number)
+      ? campaignRoute.bonus
+        ? campaignBonus(campaignRoute.category, campaignRoute.number)
+        : campaignLevel(campaignRoute.category, campaignRoute.number)
       : undefined;
     if (
       route === "level" &&
@@ -135,13 +145,17 @@ export function mountApp(root: HTMLElement): () => void {
           const previous = campaignResults.get(campaignSession!.race);
           if (previous) return previous;
           const result = campaign.finish(selectedLevel, snapshot);
-          if (result.newlyCleared && selectedLevel.number < 100)
+          if (
+            result.newlyCleared &&
+            selectedLevel.kind === "main" &&
+            selectedLevel.number < 100
+          )
             unlockedNode = {
               category: selectedLevel.category,
               number: selectedLevel.number + 1,
             };
           const recorded = result.accepted
-            ? `${starCount(result.progress.clears[selectedLevel.id].stars)} / 3 stars · ${result.newlyCleared ? "Level cleared." : "Replay complete."} ${result.saved ? "Map progress saved on this browser." : "Progress lasts for this visit only; browser storage is unavailable."}${selectedLevel.number === 6 ? " More passages arrive in Phase 8." : ""}`
+            ? `${starCount((selectedLevel.kind === "bonus" ? result.progress.bonuses : result.progress.clears)[selectedLevel.id].stars)} / 3 stars · ${result.newlyCleared ? (selectedLevel.kind === "bonus" ? "Bonus cleared." : "Level cleared.") : "Replay complete."} ${result.saved ? "Map progress saved on this browser." : "Progress lasts for this visit only; browser storage is unavailable."}${selectedLevel.kind === "main" && selectedLevel.number === 100 ? " Category complete! Replay any level or try another category." : ""}`
             : "Practice finish · no stars or unlock. Retry without pausing or assisted input for an eligible clear.";
           campaignResults.set(campaignSession!.race, recorded);
           return recorded;
@@ -186,7 +200,7 @@ export function mountApp(root: HTMLElement): () => void {
                         : undefined,
                     )
                   : route === "level" && !levelAllowed
-                    ? `<section class="page-heading campaign-unavailable"><h1>Road not open yet.</h1><p>${selectedLevel && !isUnlocked(campaign.read(), selectedLevel) ? `Clear ${selectedLevel.category} level ${selectedLevel.number - 1} first.` : "This passage arrives in Phase 8."}</p><a class="button button--primary" href="#/campaign/${campaignRoute?.category ?? "easy"}">Return to map</a></section>`
+                    ? `<section class="page-heading campaign-unavailable"><h1>Road not open yet.</h1><p>${selectedLevel && !isUnlocked(campaign.read(), selectedLevel) ? `Clear ${selectedLevel.category} level ${selectedLevel.kind === "bonus" ? selectedLevel.number : selectedLevel.number - 1} first.` : "Choose a valid campaign event."}</p><a class="button button--primary" href="#/campaign/${campaignRoute?.category ?? "easy"}">Return to map</a></section>`
                     : route === "race" || route === "level"
                       ? quickRaceScreen(
                           activeSession.race.snapshot().player.state === "ready"
@@ -330,7 +344,7 @@ export function mountApp(root: HTMLElement): () => void {
         },
         (level) => {
           forceCampaignStart = true;
-          location.hash = `#/level/${level.category}/${level.number}`;
+          location.hash = campaignLink(level);
         },
         unlockedNode?.category === campaignRoute.category
           ? unlockedNode.number
@@ -410,7 +424,7 @@ export function mountApp(root: HTMLElement): () => void {
   };
   const onCampaignStorage = (event: StorageEvent) => {
     if (
-      event.key === "turbotype:campaign-map:v1" &&
+      event.key === CAMPAIGN_STORAGE_KEY &&
       ["campaign", "hub"].includes(parseRoute(location.hash))
     )
       render();

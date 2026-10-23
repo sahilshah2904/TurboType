@@ -30,7 +30,7 @@ Actual effective WPM is generally lower because reaction, hesitation and correct
 
 ## Deterministic schedules
 
-`src/core/cpu-schedule.ts` takes printable passage length (1–2000), tier and an unsigned 32-bit integer seed. Each of four named, explicitly CPU opponents owns an independent PRNG state derived from seed XOR a lane-specific multiple of 0x9e3779b9. The PRNG uses 32-bit integer mixing (Mulberry32-style) and is scoped to this generator, without replacing global Math.random. The default seed comes from Math.random for variety; it is not a security token or persistent race ID.
+`src/core/cpu-schedule.ts` takes printable passage length (1–3000), tier and an unsigned 32-bit integer seed. Each of four named, explicitly CPU opponents owns an independent PRNG state derived from seed XOR a lane-specific multiple of 0x9e3779b9. The PRNG uses 32-bit integer mixing (Mulberry32-style) and is scoped to this generator, without replacing global Math.random. The default seed comes from Math.random for variety; it is not a security token or persistent race ID.
 
 For lane index i, target WPM is chosen from its quarter of the tier's band. Reaction is 300–1000 ms. Base character time is `60000 / (5 × targetWpm)` ms. Each character adds 0.82–1.18 times that base, has an 8% chance of 150–550 ms hesitation, and a 5% chance of a 1.2–2.4 base-character correction delay. Both may occur. Correction delays simulate time lost before validating the next character; no fake CPU accuracy is displayed.
 

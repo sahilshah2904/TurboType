@@ -2,7 +2,7 @@
 
 # TurboType
 
-Phase 7 is complete and integrated on main through PR #7 (alpha.23). All user review is accepted; 118 unit and 80 browser tests pass locally and on the exact accepted GitHub source. [Closeout](docs/PHASE7_CLOSEOUT.md).
+Phase 8 alpha.24 implements all 300 main races and 30 optional chapter challenges, with longer prose, explicit skills and gradual pacing. The feature branch is implemented and locally verified for review; Phase 7 remains accepted on main. [Curriculum and checks](docs/PHASE8_CURRICULUM.md).
 
 ### Your words. Full throttle.
 
@@ -16,7 +16,7 @@ An original browser typing racer: build physical-keyboard speed and accuracy whi
 
 ![Alpha.22 paragraph typing with three visible rows and the active line at the top](docs/images/alpha22/paragraph-third-line-top-fixture-1024.png)
 
-*Actual alpha.22 paragraph view, retained in accepted alpha.23 on main; isolated capture fixture opens sample6. No public game is deployed. Broader atmosphere polish remains deferred.*
+*Actual paragraph view retained in alpha.24; isolated capture fixture opens level 6. No public game is deployed. Broader atmosphere polish remains deferred.*
 
 ## Alpha.22 review refinements
 
@@ -28,19 +28,23 @@ The user accepted campaign unlock/save, replay counts and pause/retry eligibilit
 
 ![Readable title with a small flame underneath](docs/images/alpha22/clear-title-1440.png)
 
-## Phase 7 campaign maps — complete
+## Phase 8 — complete campaign content
 
-Three rightward journeys now have 100 numbered stops each, chapters/bonus branches, lock/current/completion states, independent stars, level briefings, saved map positions, keyboard/drag/chapter navigation and an accessible list. Finish a real race unpaused to open the next stop in that category. Starter cars/tracks work across categories and replays.
+**300 playable main races + 30 optional challenges.** Easy, Medium and Hard each have 100 sequential main levels across ten chapters. Only the first three races stay short. The accepted levels 4–6 remain unchanged; later passages grow toward **1,400 Easy / 2,200 Medium / 3,000 Hard characters**, with no mandatory time limit. Each chapter states its learning focus, from relaxed spacing to mixed prose and technical notation.
 
-**18 playable sample races, 300 map stops.** Each category begins with three short introductions, then longer original paragraphs at levels 4–6. Level 6 reaches **166 Easy / 179 Medium / 212 Hard words**. Levels 7–100 and optional challenge passages await Phase 8; they are clearly unavailable previews. Full curriculum authoring is not being counted as complete.
+The original chapter anthologies supply distinct curated excerpts, deliberately revisiting familiar prose as skills build. No AI service or text download runs during gameplay. Pace/accuracy stars and CPU placement are optional: exact unpaused completion opens the next same-category race. Level 100 celebrates category completion; every cleared race remains replayable, with no level 101.
 
-![Easy rightward campaign map](docs/images/alpha21/easy-map-1440.png)
+Optional side challenges unlock after chapter showcases **10/20/…/100**. Their saved checkmarks and stars remain separate from main clears/stars and cosmetic milestones. Read passage lets you inspect even a locked briefing without unlocking a race. The small map save migrates to v2 while retaining the original v1 copy; your prior clears and preferences should remain.
 
-![Level briefing at laptop width](docs/images/alpha21/level-briefing-1024.png)
+![Optional chapter challenge and car/track choices; isolated progress fixture](docs/images/alpha24/bonus-briefing-fixture-1440.png)
 
-![Longer paragraph in an actual race; isolated capture fixture opens level 4](docs/images/alpha21/paragraph-race-fixture-1440.png)
+![Substantial Medium showcase prose; isolated progress fixture](docs/images/alpha24/medium-paragraph-briefing-fixture-1440.png)
 
-[Implementation and laptop checklist](docs/PHASE7_CAMPAIGN_MAPS.md) · [Current verification](docs/TESTING.md). Phase 7 is accepted and integrated through [merged PR #7](https://github.com/sahilshah2904/TurboType/pull/7); the existing LAN preview serves main. Phase 8 content authoring is next when requested. No public game is deployed.
+![Hard finale typing and look-ahead; isolated progress fixture](docs/images/alpha24/hard-finale-typing-fixture-1440.png)
+
+![Category completion with compact metrics; automated fixture with synthetic speed](docs/images/alpha24/category-complete-fixture-1440.png)
+
+[Curriculum, content provenance and manual checklist](docs/PHASE8_CURRICULUM.md) · [Current verification](docs/TESTING.md) · [Accepted Phase 7 closeout](docs/PHASE7_CLOSEOUT.md). The current feature checkout is served at the existing LAN URL. Source pushes are not deployment; XP, credits, earned car/track ownership, canonical guest saves and optional cloud remain Phase 9.
 
 ## Phase 6 complete — alpha.20
 
@@ -101,7 +105,7 @@ These are real app captures, not concept artwork. [Current parts/laptop captures
 
 | Experience | Implemented behavior |
 | --- | --- |
-| Campaign maps | Three 100-stop journeys, 18 real sample races growing into paragraphs, local stars/clears/bests, briefings and keyboard/list/drag navigation |
+| Campaign maps | Three 100-level journeys, all 300 passages + 30 optional challenges, local stars/clears/bests, briefings and keyboard/list/drag navigation |
 | Quick Race | Four seeded CPUs, countdown, selectable passage/pace, live positions, completion or a 60-second trial, frozen results and same-seed retry |
 | Car choice | Five original starters, remembered in this browser and reflected in the hub. One chosen car stays locked from countdown through the whole race, including pauses; retry/new race reopens selection |
 | Typing Practice | Shared engine without opponents; WPM, accuracy, streaks, timing, correction, pause and results |
@@ -110,7 +114,7 @@ These are real app captures, not concept artwork. [Current parts/laptop captures
 | Settings | Saved display/text/motion preferences and all sound enable/mute/volume controls. Original Ignition browsing music, Overdrive racing music and separate countdown/FX |
 | Recovery | Graphics retry or text standings, optional audio, denied-storage notices and graceful fullscreen refusal |
 
-**Curriculum requirement:** only the first few races use short sentences. Subsequent races must grow into substantial, coherent paragraphs for sustained typing practice, with length, punctuation and pace introduced gradually. Quick Race keeps three short validation exercises and session-only results. Campaign samples now save eligible local clears, stars, bests and map positions. Full curricula, XP/credits/reward ownership, complete guest backups, accounts/cloud and multiplayer remain future work.
+**Curriculum requirement:** only the first few races use short sentences. Subsequent races must grow into substantial, coherent paragraphs for sustained typing practice, with length, punctuation and pace introduced gradually. Quick Race keeps three short validation exercises and session-only results. All campaign passages and optional challenges are authored; eligible clears, stars, bests and map positions save locally. XP/credits/reward ownership, complete guest backups, accounts/cloud and multiplayer remain future work.
 
 ## How to play
 
@@ -128,7 +132,7 @@ Open **Settings → Sound & music** to enable sound or change volumes. The hub h
 
 ## Development progress
 
-**Phases 1–6 are complete for their agreed scope.** Alpha.14 includes independent parts, automated/actual-GPU evidence, final physical laptop acceptance and PR integration. Broader browser/long-session release testing remains Phase 10. Phase 6 alpha.20 is integrated through PR #6. Further opening/atmosphere polish is deferred. Phase 7 maps are implemented for review; full passage authoring remains Phase 8.
+**Phases 1–7 are complete and integrated for their agreed scope.** Alpha.14 includes independent parts, automated/actual-GPU evidence, final physical laptop acceptance and PR integration. Broader browser/long-session release testing remains Phase 10. Phase 6 alpha.20 is integrated through PR #6. Further opening/atmosphere polish is deferred. Phase 8 curriculum and optional challenges are implemented on the feature branch; final verification/user review are tracked separately.
 
 | Phase | Delivery | Current status |
 | --- | --- | --- |
@@ -138,8 +142,8 @@ Open **Settings → Sound & music** to enable sound or change volumes. The hub h
 | 4 | Create one complete four-CPU race with countdown, placement, results and retry | Complete and merged into main |
 | 5 | Polish vehicles, wheels/suspension, scenery, exhaust/nitro, sound and celebration | Complete for agreed scope; accepted and merged into main |
 | 6 | Cinematic loading/welcome/rules, tutorial, calibration and final navigation | Complete for agreed scope; PR #6 merged, TT-608 polish deferred |
-| 7 | Easy/Medium/Hard rightward maps, 100 numbered nodes each, locks, chapters and saved position | Implemented and verified for review; 18 playable samples, full content in Phase 8 |
-| 8 | Author/validate all 300 passages, learning goals, difficulty/star curves and bonus challenges | Planned |
+| 7 | Easy/Medium/Hard rightward maps, 100 numbered nodes each, locks, chapters and saved position | Complete and accepted; PR #7 merged 04eb38d |
+| 8 | All 300 passages, learning goals, difficulty/star curves and 30 bonus challenges | Implemented; verification and user review tracked separately |
 | 9 | Rewards/rank/garage, records/charts/coaching/drills, robust guest saves and optional account-backed cloud progress | Planned |
 | 10 | Desktop browser/accessibility/performance/recovery/cloud testing, Pages and live release verification | Planned |
 | 11 | Friends backend/private rooms/invites, synchronized races, reconnect/rematches immediately after solo launch | Planned |
@@ -150,13 +154,13 @@ Phases vary greatly in size; phase numbers are not a completion percentage.
 
 - **Vehicle parts:** alpha.14 implements separate chassis/wheel sources, independent rotation, chassis-only suspension and compact shared previews while preserving the accepted silhouettes/colors. See [Phase 5 closeout](docs/PHASE5_CLOSEOUT.md).
 - **Physical acceptance:** the user accepted the final laptop checklist. The two-minute recorder captured 100 trusted racing keys and zero page errors; actual-GPU experiments cover High/Low/Reduced. Timing/resource limitations and broader release checks remain explicit.
-- **Integration:** PR #4 merged as de464ce after exact-head checks passed. Main now also includes alpha.20 Phase 6 through PR #6. Phase 7 maps are now a separate review branch; no deployment has occurred.
+- **Integration:** PR #4 merged as de464ce after exact-head checks passed. Main includes accepted alpha.23 Phase 7 through PR #7. Phase 8 is on codex/phase8-curriculum for review; no deployment has occurred.
 
 ### Future category reward cars
 
 Five starters are available now. Later, **each 100-level category (Easy, Medium, Hard) unlocks a distinct car every 15 eligible main-level clears**, at **15, 30, 45, 60, 75 and 90 within that category**. That is **18 reward cars plus five starters**. Category counters are independent; replay, bonus events, Quick Race and Practice do not inflate them. Cars remain cosmetic.
 
-Stable IDs, art briefs, locked garage UX, receipt-based ownership, save recovery and cloud merges are in the [garage progression plan](https://github.com/sahilshah2904/TurboType/blob/main/docs/GARAGE_PROGRESSION.md), tracked **TT-911**. These cars/unlocks are future Phase 8/9 work, not a Phase 5 prerequisite.
+Stable IDs, art briefs, locked garage UX, receipt-based ownership, save recovery and cloud merges are in the [garage progression plan](https://github.com/sahilshah2904/TurboType/blob/main/docs/GARAGE_PROGRESSION.md), tracked **TT-911**. These cars/unlocks are future Phase 9 work, not a Phase 5 prerequisite.
 
 ## Run the latest preview
 
@@ -170,7 +174,7 @@ npm ci
 npm run dev
 ```
 
-Main contains accepted Phase 6. To review Phase 7 after cloning, use `git switch codex/phase7-campaign-maps` before starting Vite.
+Main contains accepted Phase 7. To review Phase 8 after cloning, use `git switch codex/phase8-curriculum` before starting Vite.
 
 Open **[http://127.0.0.1:5173/TurboType/](http://127.0.0.1:5173/TurboType/)**. Vite updates the local preview when source changes. If reusing a checkout, inspect Git status and preserve local edits before switching branches or pulling.
 
@@ -183,7 +187,7 @@ The full check runs formatting, TypeScript, unit tests, build and browser scenar
 
 ## Verification and GitHub emails
 
-Current alpha.23 full local verification is **118 unit / 80 desktop browser cases**, including real campaign clears/replays, storage recovery, keyboard/list/drag navigation, four laptop widths and long-paragraph caret tracking. See [current evidence](docs/TESTING.md). User review and exact-head hosted validation remain distinct.
+Current alpha.24 verification covers **125 unit / 116 desktop browser cases** across the broad local run and corrected focused cases, including all chapter focuses, finales, bonus clear/replay/non-inflation, legacy storage migration, four laptop widths and long-paragraph caret tracking. Full exact-head hosted verification is recorded separately. See [current evidence](docs/TESTING.md). User review and exact-head hosted validation remain distinct.
 
 The accepted Phase 5 baseline alpha.14 passed **96 unit tests and 36 desktop Chromium browser cases**, actual-GPU High/Low/Reduced checks and final physical laptop acceptance. The two-minute recorder captured 100 trusted racing keys with zero page errors. Exact acceptance head 398d455 passed [hosted run 39727202033](https://github.com/sahilshah2904/TurboType/actions/runs/39727202033), then PR #4 merged as de464ce. Later documentation/main heads have their own check state; the badge tracks main.
 
@@ -191,12 +195,12 @@ Two older runs genuinely failed when the combined garage browser test exceeded i
 
 ## Project structure
 
-This describes the Phase 7 preview branch. Main retains accepted Phase 6 until feature review/integration.
+This describes the Phase 8 feature branch. Main retains accepted Phase 7 until feature review/integration.
 
 ```text
 src/
   core/       Pure typing, metrics, CPU schedules, standings and campaign progress
-  content/    Campaign metadata/sample paragraphs, exercises and cosmetic catalogs
+  content/    Full campaign catalog, original prose sources, exercises and cosmetic catalogs
   game/       Phaser race/preview, kart parts/anchors and visual feedback
   ui/         Routes, native input, screens, WPM gauge and fullscreen
   audio/      Optional music/effects ownership and lifecycle

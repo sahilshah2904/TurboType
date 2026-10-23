@@ -1,5 +1,12 @@
 # TurboType future work backlog
 
+## Phase 8 delivery — alpha.24, 23 October 2026
+
+The user requested full Phase 8 after accepting Phase 7. All 300 main passages and 30 optional chapter challenges, explicit objectives/curves/manifest metadata, 6→100 continuation/finales, 3,000-character typing/CPU support and legacy map migration are implemented on codex/phase8-curriculum. See docs/PHASE8_CURRICULUM.md for content/reproduction/manual checks. All TT-801–806 are delivered for implementation/automated verification; user acceptance, integration and deployment remain separate. Current code is app alpha.24/rules3/content3/global future guest schema1/map schema2. No Phase 9 economy/earned ownership or backend/Pages deployment.
+
+Fresh formatting/content drift/types/build and 125 unit tests pass. Local browser coverage consists of 114 passing broad cases plus the corrected/split bonus cases in a fresh three-case targeted pass; all 116 current unique cases are covered across those runs, not claimed as a single full local pass. Hosted exact-head full verification is separate and must be inspected. Six sequential current captures had zero page errors. Historical checkpoints below do not override this delivery.
+
+
 ## Phase 7 complete and integrated — 23 October 2026
 
 The user accepted the final Keyboard check correction ("yes it is working"), completing review of alpha.23. Exact accepted source **b7d03f171b7900102f150c19bf1fbe862dad071a** passed hosted run **39881571584**, job **120179897342**, completed 01:07:30 UTC: **118 unit / 80 browser cases**. PR #7 merged into main as **04eb38db636bc9ca74713f28082820265ee7fe7a**. The local checkout returned to main. See docs/PHASE7_CLOSEOUT.md and docs/TESTING.md. This supersedes earlier pending-check/review/merge and feature-branch statements below, which are historical.
@@ -23,7 +30,7 @@ The user accepted campaign unlock/refresh, replay deduplication and pause/practi
 Prior hosted head 1c94952 failed (run 39812462848): unit tests passed but browser contexts/timeouts failed across many unrelated screens. CI now uses one software-rendered browser worker with all cases/timeouts/retries intact; inspect the new exact-head result before claiming success. Fresh full local verification passes 117 unit/79 browser cases with one worker; evidence and captures are in docs/TESTING.md and docs/images/alpha22.
 
 
-- [x] TT-706: Top-align active wrapped typing lines with three full look-ahead rows, including Backspace across wraps, across race/practice/learning. User visual review pending.
+- [x] TT-706: Top-align active wrapped typing lines with three full look-ahead rows, including Backspace across wraps, across race/practice/learning. User accepted the alpha.22 look-ahead behavior.
 - [x] TT-307: Expand keyboard sample to all printable English characters and independently show received common physical typing/editing/modifier keys; preserve paste/editing/IME diagnostics and honest limits.
 - [x] TT-405: Clarify standalone Quick Race purpose and label without changing CPU/session/campaign rules.
 - [x] TT-609: Bound opening fire to the moving car with a following gap/fade and a smaller title-underlay accent; no fire ahead or full road ribbon across the name. Specific requested correction, not closure of deferred TT-608.
@@ -32,7 +39,7 @@ Prior hosted head 1c94952 failed (run 39812462848): unit tests passed but browse
 
 TT-701–704 and TT-705's map/briefing starter-inventory portion are implemented for review. Fresh full local check: **116 unit / 73 browser cases**; hosted exact-head state is recorded separately in docs/TESTING.md. Three 100-stop maps have eighteen real sample races (six/category), with substantial paragraphs at levels4–6. Levels7–100 and bonuses remain unavailable content previews until Phase8 authoring; never count them as playable. Review/integration are separate. Current specification/checklist: docs/PHASE7_CAMPAIGN_MAPS.md.
 
-Phase9 still owns earned inventory binding and canonical save migration/economy/receipts/import/recovery/cloud. Basic local map progress is implemented now, not the complete guest-save system. TT-608 remains deferred. Earlier status notes below are historical; the latest checkpoint takes precedence.
+Phase 9 still owns earned inventory binding and canonical save migration/economy/receipts/import/recovery/cloud. Basic local map progress is implemented now, not the complete guest-save system. TT-608 remains deferred. Earlier status notes below are historical; the latest checkpoint takes precedence.
 
 
 ## Phase 6 closed — 22 October 2026
@@ -222,18 +229,20 @@ Completion evidence for TT-525–527: src/ui/fullscreen.ts, app-owned control li
 
 ## Phase 8 — all 300 levels
 
-- [ ] TT-801: Extend the Phase 7 manifest into the full reviewed campaign/passage schemas, prerequisites, rewards and asset references; retain stable IDs/revisions and validate all 300 authored definitions. Raise/test the current 2,000-character engine/CPU cap before late Hard paragraphs up to 3,000 characters.
-- [ ] TT-802: Review the six original map samples and author/review the full Easy 001–100 across ten chapters with explicit learning objectives and gradual difficulty.
-- [ ] TT-803: Review the six original map samples and author/review the full Medium 001–100 across ten chapters with explicit learning objectives and gradual difficulty.
-- [ ] TT-804: Review the six original map samples and author/review the full Hard 001–100 across ten chapters with explicit learning objectives and gradual difficulty.
-- [ ] TT-805: Author chapter showcases, optional side challenges, milestones and finale content; no locked placeholder levels counted as complete.
-- [ ] TT-806: Validate all 300 definitions, duplicates/references/reachability, boundaries 9→10→11 and 99→100, and no level 101; playtest representative levels and every introduced skill.
+Alpha.24 implements all 300 main passages and 30 optional challenges, including accepted 18 samples, original curated source prose, explicit skills/curves/metadata, real bonus routing, 6→100 continuation, 3,000-character cap and v1→v2 map migration. See docs/PHASE8_CURRICULUM.md. Final source/checks/captures are in docs/TESTING.md; implementation is not user acceptance/integration/deployment. Phase 9 earned ownership/economy remains pending.
+
+- [x] TT-801: Extend the Phase 7 manifest into the full reviewed campaign/passage schemas, prerequisites, rewards and asset references; retain stable IDs/revisions and validate all 300 authored definitions. Typing/CPU cap raised and boundary-tested at 3,000/3,001 characters.
+- [x] TT-802: Review the six original map samples and author/review the full Easy 001–100 across ten chapters with explicit learning objectives and gradual difficulty.
+- [x] TT-803: Review the six original map samples and author/review the full Medium 001–100 across ten chapters with explicit learning objectives and gradual difficulty.
+- [x] TT-804: Review the six original map samples and author/review the full Hard 001–100 across ten chapters with explicit learning objectives and gradual difficulty.
+- [x] TT-805: Author chapter showcases, optional side challenges, milestones and finale content; no locked placeholder levels counted as complete.
+- [x] TT-806: Validate all 300 definitions, duplicates/references/reachability, boundaries 9→10→11 and 99→100, and no level 101; playtest representative levels and every introduced skill.
 
 ## Phase 9 — progression, learning and persistent data
 
 - [ ] TT-901: Integrate existing Phase 7 stars/first-clear unlocks into the canonical receipt model, then implement Driver Rank, exact reward formulas, pit stops, trophies, caches, perfect/recovery awards and one-time receipts.
 - [ ] TT-902: Build garage ownership/equipment/previews and fixed cosmetic rewards; verify no speed advantages and no duplicate claims.
-- [ ] TT-903: Migrate validated rules/revision-qualified Phase 7 map clears/stars/bests/positions from turbotype:campaign-map:v1; preserve malformed exports and define simultaneous-tab conflicts. Then build bounded local saves, migrations, backup export/import, malformed-save recovery, quota failure and multiple-tab protection.
+- [ ] TT-903: Migrate validated rules/revision-qualified Phase 7 map clears/stars/bests/positions from turbotype:campaign-map:v2 (including preserved v1 migration copy); preserve malformed exports and define simultaneous-tab conflicts. Then build bounded local saves, migrations, backup export/import, malformed-save recovery, quota failure and multiple-tab protection.
 - [ ] TT-904: Add comparable personal records, recent-history/pace charts, bounded learning aggregates and one evidence-based coaching suggestion.
 - [ ] TT-905: Implement correction/capitalization/punctuation/consistency drills and optional keyboard guidance; separate practice from competitive eligibility.
 - [ ] TT-906: Validate the free-only cloud provider before integration: preferred Supabase Free Auth/Postgres/private Realtime; check current quotas, OAuth/allowlist setup, region, recovery/export, authorization and static-site callbacks. Hard $0 budget; no paid dependencies or automatic upgrade. Gate final selection on measured validation, not a generic free-tier promise. See docs/MULTIPLAYER_ROOMS.md; depends on TT-205 and stable completed-run contracts.

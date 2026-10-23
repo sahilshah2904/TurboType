@@ -1,5 +1,7 @@
 # Phase 7 campaign maps — alpha.21
 
+Phase 8 alpha.24 supersedes the historical 18-sample limit and bonus previews below: all 300 main passages and 30 optional challenges are implemented in the feature branch. See [current curriculum and checks](PHASE8_CURRICULUM.md). This document retains the accepted Phase 7 scope/evidence.
+
 Completed for agreed scope and user-accepted in alpha.23. PR #7 merged into main as 04eb38d after exact-head hosted verification of b7d03f1 (118 unit/80 browser cases). See [closeout](PHASE7_CLOSEOUT.md). Earlier implementation evidence below remains historical; no public deployment or backend exists.
 
 ## Delivered scope

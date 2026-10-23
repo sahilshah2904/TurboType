@@ -14,7 +14,7 @@ Finishing means completing the exact passage without an unresolved error. Record
 
 ## Exact text and correction
 
-The current passages use printable English ASCII characters, 1–2000 characters, including exact case, spaces and punctuation. This is a bounded initial content contract, not multilingual/grapheme-aware support.
+The current passages use printable English ASCII characters, 1–3000 characters, including exact case, spaces and punctuation. This is a bounded initial content contract, not multilingual/grapheme-aware support.
 
 Input appends at the end. A wrong character is shown in the field, and the expected passage position is underlined/error-colored. Only one unresolved wrong character is retained. Further individual characters behind it count as incorrect attempts without moving progress. Use Backspace to remove the error; then enter the correct character.
 

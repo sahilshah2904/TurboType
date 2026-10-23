@@ -17,7 +17,8 @@ export type Route = (typeof ROUTES)[number];
 
 export function parseRoute(hash: string): Route {
   const campaign = readCampaignRoute(hash);
-  if (campaign) return hash.startsWith("#/level/") ? "level" : "campaign";
+  if (campaign)
+    return hash.startsWith("#/level/") || campaign.bonus ? "level" : "campaign";
   const route = hash.replace(/^#\/?/, "");
   return !["campaign", "level"].includes(route) &&
     ROUTES.includes(route as Route)

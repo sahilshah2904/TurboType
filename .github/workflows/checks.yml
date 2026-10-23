@@ -24,7 +24,6 @@ jobs:
           if [ -f /etc/apt/apt-mirrors.txt ]; then
             printf '%s\n' \
               'https://archive.ubuntu.com/ubuntu' \
-              'https://azure.archive.ubuntu.com/ubuntu' \
               | sudo tee /etc/apt/apt-mirrors.txt > /dev/null
           fi
           sudo tee /etc/apt/apt.conf.d/80-turbotype-network > /dev/null <<'APT'
@@ -32,5 +31,7 @@ jobs:
           Acquire::http::Timeout "30";
           Acquire::https::Timeout "30";
           APT
-      - run: npx playwright install --with-deps chromium
+      - name: Install Chromium and system dependencies
+        timeout-minutes: 10
+        run: npx playwright install --with-deps chromium
       - run: npm run check
