@@ -1,5 +1,12 @@
 # TurboType project status
 
+## Phase 7 complete and integrated — 23 October 2026
+
+The user accepted the final Keyboard check correction ("yes it is working"), completing review of alpha.23. Exact accepted source **b7d03f171b7900102f150c19bf1fbe862dad071a** passed hosted run **39881571584**, job **120179897342**, completed 01:07:30 UTC: **118 unit / 80 browser cases**. PR #7 merged into main as **04eb38db636bc9ca74713f28082820265ee7fe7a**. The local checkout returned to main. See docs/PHASE7_CLOSEOUT.md and docs/TESTING.md. This supersedes earlier pending-check/review/merge and feature-branch statements below, which are historical.
+
+Phases 1–7 are complete for agreed scope. Phase 8 is next when requested: review/extend the 18 samples into all 300 main passages, add bonus content and tune length/skill/pace curves. Levels 7–100 remain unavailable until authored. Rewards/earned ownership/robust guest saves/cloud remain Phase 9; deferred TT-608 polish stays separate. No Phase 8 implementation or Pages/backend/multiplayer deployment started. This documentation-only main checkpoint has its own hosted check; do not infer its result from the accepted implementation check.
+
+
 ## Keyboard correction follow-up — alpha.23, 23 October 2026
 
 The user reports all alpha.22 changes work well and requests race-style correction in Keyboard check. The check now shares TypingEngine and connectRaceInput with races: one incorrect character blocks further text until Backspace, exact case/symbols, append-only edits, paste/drop/replacement blocking and committed IME normalization. The sample highlights correct/current/error positions; the next physical-key hint stays on the expected character. Clear text starts a fresh sample while preserving detected keys; Reset key check clears both. Physical-key indicators still record received keys even when their text is rejected. No timer/score is displayed, nothing is saved or awarded. A validated countdownMs=0 option starts this diagnostic immediately; all races retain the default three-second countdown and existing rules/save/content versions.
@@ -19,14 +26,14 @@ Initial implementation source **b1f0d6cf740bfa3aea2e85f12d961814be4e9cee**, [ope
 
 ## Current checkpoint — 23 October 2026
 
-Alpha.22 Phase 7/review implementation is on `codex/phase7-campaign-maps`, based on main `1ee0aba`. The user requested refreshed README/Phase 6 continuity, longer paragraphs and completed maps. See [implementation/review](docs/PHASE7_CAMPAIGN_MAPS.md), [handoff](docs/SESSION_HANDOFF.md), [testing](docs/TESTING.md) and [backlog](BACKLOG.md). Inspect actual Git/CI; implementation, acceptance, integration and deployment remain separate.
+Alpha.23 Phase 7 is integrated on `main` as `04eb38d` after user acceptance and successful exact-head checks. The user requested refreshed README/Phase 6 continuity, longer paragraphs and completed maps. See [implementation/review](docs/PHASE7_CAMPAIGN_MAPS.md), [handoff](docs/SESSION_HANDOFF.md), [testing](docs/TESTING.md) and [backlog](BACKLOG.md). Inspect actual Git/CI; implementation, acceptance, integration and deployment remain separate.
 
 | Phase | State |
 | --- | --- |
 | 1–4 | Complete for agreed design/foundation/typing/four-CPU scope; integrated |
 | 5 | Complete for agreed scope and physical acceptance; PR #4 merged de464ce |
 | 6 | Complete for agreed scope; PR #6 merged cf741b6; TT-608 polish deferred |
-| 7 | Maps/navigation/progress implemented for review; 300 stops, 18 playable samples |
+| 7 | Complete for agreed map scope; user-accepted alpha.23 integrated through PR #7 |
 | 8 | All 300 reviewed passages, bonuses, curves and future art pending |
 | 9 | Rewards/ownership/learning, robust guest saves and optional cloud pending |
 | 10 | Broader release verification and Pages pending |
@@ -44,7 +51,7 @@ Eligible unpaused exact completion saves local clears/stars/bests and opens the 
 
 ## Saves and planned scope
 
-App alpha.22 / rules 3 / save 1 / content 2. Preferences remain compatible. `turbotype:campaign-map:v1` stores validated local map progress, preserves/exports malformed or future data, and falls back to this visit when storage is denied. Quick Race and unfinished races remain session-only. Phase 9 migrates map records into its canonical snapshot with receipts/import/recovery/conflicts. No account/backend/cloud/multiplayer/Pages deployed.
+App alpha.23 / rules 3 / save 1 / content 2. Preferences remain compatible. `turbotype:campaign-map:v1` stores validated local map progress, preserves/exports malformed or future data, and falls back to this visit when storage is denied. Quick Race and unfinished races remain session-only. Phase 9 migrates map records into its canonical snapshot with receipts/import/recovery/conflicts. No account/backend/cloud/multiplayer/Pages deployed.
 
 Cars at 15/30/45/60/75/90 per category = 23 total; independent tracks at 10/25/40/55/70/85/100 = 26 total. Preserve varied monster/hover/flying vehicle families and the private $0 ten-racer room plan. No extra phase.
 
@@ -54,4 +61,4 @@ PR #4 exact head 398d455 passed 39727202033, merged de464ce; physical acceptance
 
 ## Next
 
-Complete current verification and user review at the [LAN preview](http://192.168.0.31:5173/TurboType/); integrate through its PR after review. Then Phase 8 authors/reviews all 300 texts and bonuses with longer-paragraph progression. No automatic Phase 8 or deployment from handoff. Complete older chronology/checks/source paths remain in [history](docs/history/2026-10-22-before-phase7/SESSION_HANDOFF.md); current statements take precedence.
+Phase 7 is complete and the [LAN preview](http://192.168.0.31:5173/TurboType/) serves main. Phase 8 next authors/reviews all 300 texts and bonuses with longer-paragraph progression, when requested. No automatic Phase 8 or deployment from handoff. Complete older chronology/checks/source paths remain in [history](docs/history/2026-10-22-before-phase7/SESSION_HANDOFF.md); current statements take precedence.

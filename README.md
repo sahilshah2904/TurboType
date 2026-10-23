@@ -2,7 +2,7 @@
 
 # TurboType
 
-Alpha.23: Keyboard check now uses the same error blocking and Backspace correction as races, with no displayed timer or score. Other alpha.22 improvements are accepted.
+Phase 7 is complete and integrated on main through PR #7 (alpha.23). All user review is accepted; 118 unit and 80 browser tests pass locally and on the exact accepted GitHub source. [Closeout](docs/PHASE7_CLOSEOUT.md).
 
 ### Your words. Full throttle.
 
@@ -16,7 +16,7 @@ An original browser typing racer: build physical-keyboard speed and accuracy whi
 
 ![Alpha.22 paragraph typing with three visible rows and the active line at the top](docs/images/alpha22/paragraph-third-line-top-fixture-1024.png)
 
-*Actual **alpha.22 feature preview** in PR #7; isolated capture fixture opens sample6. Main retains accepted Phase6 until review/integration. No public game is deployed. Broader atmosphere polish remains deferred.*
+*Actual alpha.22 paragraph view, retained in accepted alpha.23 on main; isolated capture fixture opens sample6. No public game is deployed. Broader atmosphere polish remains deferred.*
 
 ## Alpha.22 review refinements
 
@@ -28,7 +28,7 @@ The user accepted campaign unlock/save, replay counts and pause/retry eligibilit
 
 ![Readable title with a small flame underneath](docs/images/alpha22/clear-title-1440.png)
 
-## Phase 7 campaign maps — alpha.21 preview
+## Phase 7 campaign maps — complete
 
 Three rightward journeys now have 100 numbered stops each, chapters/bonus branches, lock/current/completion states, independent stars, level briefings, saved map positions, keyboard/drag/chapter navigation and an accessible list. Finish a real race unpaused to open the next stop in that category. Starter cars/tracks work across categories and replays.
 
@@ -40,7 +40,7 @@ Three rightward journeys now have 100 numbered stops each, chapters/bonus branch
 
 ![Longer paragraph in an actual race; isolated capture fixture opens level 4](docs/images/alpha21/paragraph-race-fixture-1440.png)
 
-[Implementation and laptop checklist](docs/PHASE7_CAMPAIGN_MAPS.md) · [Current verification](docs/TESTING.md). Phase 7 is pushed in [open PR #7](https://github.com/sahilshah2904/TurboType/pull/7) pending review/integration; the existing LAN preview serves that checkout. The Phase 6 documentation refresh is already on main. No public game is deployed.
+[Implementation and laptop checklist](docs/PHASE7_CAMPAIGN_MAPS.md) · [Current verification](docs/TESTING.md). Phase 7 is accepted and integrated through [merged PR #7](https://github.com/sahilshah2904/TurboType/pull/7); the existing LAN preview serves main. Phase 8 content authoring is next when requested. No public game is deployed.
 
 ## Phase 6 complete — alpha.20
 

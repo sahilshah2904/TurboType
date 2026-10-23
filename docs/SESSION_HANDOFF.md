@@ -1,5 +1,12 @@
 # TurboType session handoff
 
+## Phase 7 complete and integrated — 23 October 2026
+
+The user accepted the final Keyboard check correction ("yes it is working"), completing review of alpha.23. Exact accepted source **b7d03f171b7900102f150c19bf1fbe862dad071a** passed hosted run **39881571584**, job **120179897342**, completed 01:07:30 UTC: **118 unit / 80 browser cases**. PR #7 merged into main as **04eb38db636bc9ca74713f28082820265ee7fe7a**. The local checkout returned to main. See docs/PHASE7_CLOSEOUT.md and docs/TESTING.md. This supersedes earlier pending-check/review/merge and feature-branch statements below, which are historical.
+
+Phases 1–7 are complete for agreed scope. Phase 8 is next when requested: review/extend the 18 samples into all 300 main passages, add bonus content and tune length/skill/pace curves. Levels 7–100 remain unavailable until authored. Rewards/earned ownership/robust guest saves/cloud remain Phase 9; deferred TT-608 polish stays separate. No Phase 8 implementation or Pages/backend/multiplayer deployment started. This documentation-only main checkpoint has its own hosted check; do not infer its result from the accepted implementation check.
+
+
 ## Keyboard correction follow-up — alpha.23, 23 October 2026
 
 The user reports all alpha.22 changes work well and requests race-style correction in Keyboard check. The check now shares TypingEngine and connectRaceInput with races: one incorrect character blocks further text until Backspace, exact case/symbols, append-only edits, paste/drop/replacement blocking and committed IME normalization. The sample highlights correct/current/error positions; the next physical-key hint stays on the expected character. Clear text starts a fresh sample while preserving detected keys; Reset key check clears both. Physical-key indicators still record received keys even when their text is rejected. No timer/score is displayed, nothing is saved or awarded. A validated countdownMs=0 option starts this diagnostic immediately; all races retain the default three-second countdown and existing rules/save/content versions.

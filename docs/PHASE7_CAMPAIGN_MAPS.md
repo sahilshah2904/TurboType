@@ -1,6 +1,6 @@
 # Phase 7 campaign maps — alpha.21
 
-Implemented on `codex/phase7-campaign-maps`, based on main `1ee0aba`; initial source `b1f0d6c` plus the current race-session isolation follow-up, [open PR #7](https://github.com/sahilshah2904/TurboType/pull/7). User review/integration remain separate. No public deployment or backend exists.
+Completed for agreed scope and user-accepted in alpha.23. PR #7 merged into main as 04eb38d after exact-head hosted verification of b7d03f1 (118 unit/80 browser cases). See [closeout](PHASE7_CLOSEOUT.md). Earlier implementation evidence below remains historical; no public deployment or backend exists.
 
 ## Delivered scope
 
