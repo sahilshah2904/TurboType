@@ -2,7 +2,7 @@ import { followPassageCaret } from "./passage-scroll";
 import type { CampaignLevel } from "../content/campaign";
 import type { TypingSnapshot } from "../core/typing-engine";
 import { trackChoices } from "./track-selector";
-import { isTrackId, type TrackId } from "../content/track-catalog";
+import { isTrackId, trackTheme, type TrackId } from "../content/track-catalog";
 import { speedometer, updateSpeedometer } from "./speedometer";
 import { animate } from "animejs";
 import { RaceFeedback } from "../game/race-view";
@@ -123,7 +123,7 @@ export function quickRaceScreen(
     </div>
     <p class="help race-setup">A standalone race for warm-ups and trying cars or tracks. Choose a passage and CPU pace; it does not change campaign progress. Results stay in this session.</p>
     <div class="race-setup">${trackChoices(selectedTrack, "race-track-select")}</div>
-    <fieldset id="kart-picker" class="kart-picker"><legend>Choose your car</legend><div class="kart-picker__grid">${STARTER_KARTS.map((kart) => `<label class="kart-choice"><input type="radio" name="player-kart" value="${kart.id}" ${kart.id === selectedKart ? "checked" : ""} /><img class="${kart.id === "volt-kart" ? "kart-art--starter" : ""}" src="${import.meta.env.BASE_URL}assets/karts/${kart.file}" alt="" width="200" height="100" /><strong>${kart.name}</strong><span>${kart.style}</span></label>`).join("")}</div><p id="kart-save-status" class="help" role="status">Choose before starting. Your car stays locked through pauses until retry. All cars have the same performance.</p></fieldset>
+    <p id="campaign-equipment" class="help" ${level ? "" : "hidden"}></p><fieldset id="kart-picker" class="kart-picker" ${level ? "hidden disabled" : ""}><legend>Choose your car</legend><div class="kart-picker__grid">${STARTER_KARTS.map((kart) => `<label class="kart-choice"><input type="radio" name="player-kart" value="${kart.id}" ${kart.id === selectedKart ? "checked" : ""} /><img class="${kart.id === "volt-kart" ? "kart-art--starter" : ""}" src="${import.meta.env.BASE_URL}assets/karts/${kart.file}" alt="" width="200" height="100" /><strong>${kart.name}</strong><span>${kart.style}</span></label>`).join("")}</div><p id="kart-save-status" class="help" role="status">Choose before starting. Your car stays locked through pauses until retry. All cars have the same performance.</p></fieldset>
     <div class="practice-actions"><button id="start-race" class="button button--primary" disabled>Start race →</button><button id="retry-race" class="text-button">Retry same race</button><button id="new-race" class="text-button" ${level ? "hidden" : ""}>New race</button>${level && level.kind === "main" && level.number < 100 ? `<a id="campaign-next" class="button button--secondary" href="#/level/${level.category}/${level.number + 1}" hidden>Next level →</a>` : ""}${level ? `<a class="campaign-race-back button button--secondary" href="#/campaign/${level.category}">← Return to map</a>` : ""}</div>
     <p id="race-controls-help" class="help">Esc or leaving this screen pauses everyone. Resume has a fresh countdown. Retry resets the run; refresh discards this unsaved session.</p>
     <div class="run-details"><span id="race-errors">0 errors · 0 corrected</span><span id="race-eligibility">Session only · not saved</span><span id="race-streak">0 clean streak</span></div>
@@ -209,7 +209,12 @@ export function connectQuickRace(
     find(".immersive-race").dataset.state = s.state;
     updateSpeedometer(main, s.recentWpm, s.state === "racing");
     const active = ["countdown", "racing", "paused"].includes(s.state);
-    kartPicker.disabled = s.state !== "ready";
+    kartPicker.disabled = !!session.campaign || s.state !== "ready";
+    if (session.campaign)
+      text(
+        "#campaign-equipment",
+        `${STARTER_KARTS.find((kart) => kart.id === session.kartId)!.name} · ${trackTheme(session.trackId).name}`,
+      );
     trackSelect.disabled = s.state !== "ready";
     main.classList.toggle("quick-race-active", active);
     input.readOnly = !["countdown", "racing"].includes(s.state);
@@ -562,6 +567,7 @@ export function connectQuickRace(
       if (
         !(target instanceof HTMLInputElement) ||
         !isKartId(target.value) ||
+        !!session.campaign ||
         session.race.snapshot().player.state !== "ready"
       )
         return;

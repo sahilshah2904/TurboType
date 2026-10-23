@@ -1,5 +1,10 @@
 # TurboType project status
 
+## Phase 8 review follow-up — alpha.25
+
+The user resumed and reports the rest of Phase 8 works well. Only two requested corrections remain for review: choose the campaign/bonus car and track once in the map briefing, then show a read-only setup summary instead of another car picker; remove the flame under the TurboType title while preserving the moving car's trail. Quick Race retains its chooser and each active session keeps its locked cosmetics. Implemented on the existing PR #8 branch; fresh format/types/build and 125 unit/43 focused browser cases pass. New exact-head hosted checks are separate. No merge, Phase 9 or deployment. This supersedes the older stop-and-save instruction and title-underlay decision below. Do not repeat the accepted curriculum/progress checks.
+
+
 ## Stop-and-save checkpoint — 23 October 2026
 
 The user explicitly asked to update README/handoff and continue later because of usage limits. **Stop after saving; do not implement, merge, deploy or start Phase 9 from this handoff.** Resume only when requested.

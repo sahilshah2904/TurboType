@@ -4,7 +4,7 @@
 
 Phase 8 alpha.24 implements all 300 main races and 30 optional chapter challenges, with longer prose, explicit skills and gradual pacing. The implementation passed **125 unit / 116 browser tests on GitHub** and is pushed in [PR #8](https://github.com/sahilshah2904/TurboType/pull/8) for review; Phase 7 remains accepted on main. [Curriculum and checks](docs/PHASE8_CURRICULUM.md).
 
-**Session saved for later.** Phase 8 is implemented and verified, with user curriculum review and [PR #8](https://github.com/sahilshah2904/TurboType/pull/8) integration pending. Latest pre-save head d96f23c passed its [exact-head check](https://github.com/sahilshah2904/TurboType/actions/runs/39889378905/job/120205188148). This documentation checkpoint has separate CI. Resume from [SESSION_HANDOFF](docs/SESSION_HANDOFF.md); do not automatically start Phase 9 or merge/deploy.
+Alpha.25 review correction: campaign/bonus cosmetics are chosen once in the map briefing; race setup shows the chosen car and track. The opening title has no flame underneath, while the car keeps its trail. The user reports the remaining Phase 8 behavior works well. Fresh alpha.25 checks pass 125 unit/43 focused browser cases; its full hosted check is separate. [PR #8](https://github.com/sahilshah2904/TurboType/pull/8) remains unmerged for these final corrections.
 
 ### Your words. Full throttle.
 
@@ -22,13 +22,13 @@ An original browser typing racer: build physical-keyboard speed and accuracy whi
 
 ## Alpha.22 review refinements
 
-The user accepted campaign unlock/save, replay counts and pause/retry eligibility. Larger typing text now top-aligns each new line with three full look-ahead rows. **Quick Race** is clearly labeled as standalone warm-up/car-track experimentation. Keyboard check covers lower/uppercase, digits/symbols and received physical keys. Opening flames follow behind the car and clear before the title; the title keeps a small flame underneath. [Focused review](docs/ALPHA22_REVIEW.md). Fresh local full check: **117 unit / 79 browser cases** with one worker; hosted exact-head state is separate.
+The user accepted campaign unlock/save, replay counts and pause/retry eligibility. Larger typing text now top-aligns each new line with three full look-ahead rows. **Quick Race** is clearly labeled as standalone warm-up/car-track experimentation. Keyboard check covers lower/uppercase, digits/symbols and received physical keys. Opening flames follow behind the car and clear before the title; the title now stays clean without an underlay flame. [Focused review](docs/ALPHA22_REVIEW.md). Fresh local full check: **117 unit / 79 browser cases** with one worker; hosted exact-head state is separate.
 
 ![Keyboard check with race-style correction and received physical-key indicators](docs/images/alpha23/keyboard-correction-1024.png)
 
 ![Opening launch with a bounded trailing flame](docs/images/alpha22/launch-trail-1440.png)
 
-![Readable title with a small flame underneath](docs/images/alpha22/clear-title-1440.png)
+![Clean opening title](docs/images/alpha25/clean-title-1440.png)
 
 ## Phase 8 — complete campaign content
 
@@ -56,7 +56,7 @@ The alpha.20 follow-up replaces rejected curved air paths with a researched laye
 
 ![Alpha.22 burnout: the arrival trail has faded while the purple car revs](docs/images/alpha22/burnout-clear-road-1440.png)
 
-![Current TurboType title with a restrained fire underlay](docs/images/alpha22/clear-title-1440.png)
+![Current clean TurboType title](docs/images/alpha25/clean-title-1440.png)
 
 ![Welcome and skip preference](docs/images/alpha17/welcome-1440.png)
 

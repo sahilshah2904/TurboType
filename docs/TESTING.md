@@ -1,5 +1,14 @@
 # Verification evidence
 
+## Alpha.25 review corrections
+
+Two sequential 1440 × 900 captures in docs/images/alpha25 were visually reviewed: the campaign setup retains Volt Electric/Frostline Pass without a repeated chooser, and the completed opening title has no flame underlay. Capture execution reported zero page errors; provenance is recorded beside the images.
+
+The user reports the remaining Phase 8 behavior works well; no repeated curriculum acceptance is requested. Campaign/bonus race setup now hides and disables its repeated car picker, displays a read-only car/track summary and uses the choices made in briefing. The normal Quick Race chooser, per-session locks and retry semantics remain tested. The opening title flame element and its unused animation/styles are removed; moving-car trail and motion/quality fallbacks remain.
+
+Fresh format/types/production build and **125 unit / 43 focused browser cases** passed (4.1 minutes for browsers), covering campaign choices/session switching, garage, onboarding and review polish. Log: Reference_Images/analysis/alpha25-check.log (ignored). Existing native tests assert the briefing Comet/Frostline selection reaches the race with no visible picker; opening tests assert no title flame while preserving car choreography/trail. Full hosted checks belong to the new PR #8 head; the baseline4a82ac3 was completed/success before edits and does not certify alpha.25. No merge/deployment/Phase 9.
+
+
 ## Stop-and-save checkpoint — 23 October 2026
 
 The user explicitly asked to update README/handoff and continue later because of usage limits. **Stop after saving; do not implement, merge, deploy or start Phase 9 from this handoff.** Resume only when requested.

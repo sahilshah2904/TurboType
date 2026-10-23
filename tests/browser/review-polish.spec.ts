@@ -155,7 +155,9 @@ for (const width of [1024, 1920])
     expect((await sample(2100)).opacity).toBe(0);
     expect((await sample(4500)).opacity).toBe(0);
     expect((await sample(5600)).title).toBe(1);
-    await expect(page.locator(".intro-logo-fire--crown")).toHaveCount(0);
+    await expect(
+      page.locator(".intro-logo-fire, #intro-logo-flames"),
+    ).toHaveCount(0);
   });
 
 test("Quick Race clearly identifies its standalone role", async ({ page }) => {

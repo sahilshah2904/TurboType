@@ -237,6 +237,10 @@ test("starter cars/tracks work across categories and stay locked through campaig
   await page.locator("#briefing-track").selectOption("frostline-pass");
   await page.locator("#briefing-start").click();
   await ready(page);
+  await expect(page.locator("#kart-picker")).toBeHidden();
+  await expect(page.locator("#campaign-equipment")).toHaveText(
+    "Comet · Frostline Pass",
+  );
   await expect(page.locator('input[name="player-kart"]:checked')).toHaveValue(
     "comet",
   );

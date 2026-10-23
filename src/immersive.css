@@ -1913,14 +1913,7 @@ html:is([data-route="race"], [data-route="level"]) .topbar {
 .entrance-copy h1 span:first-child {
   color: #f3f0e9;
 }
-.intro-logo-fire {
-  position: absolute;
-  inset: auto 12% -8px;
-  height: clamp(18px, 2.5vw, 34px);
-  pointer-events: none;
-  z-index: 0;
-  animation: intro-logo-ignite 5.6s ease both;
-}
+
 @keyframes intro-car-run {
   0% {
     transform: translateX(-90vw);
@@ -2092,16 +2085,7 @@ html:is([data-route="race"], [data-route="level"]) .topbar {
     opacity: 0;
   }
 }
-@keyframes intro-logo-ignite {
-  0%,
-  79% {
-    opacity: 0;
-  }
-  94%,
-  100% {
-    opacity: 0.55;
-  }
-}
+
 @keyframes intro-fire-flicker {
   from {
     transform: scaleY(0.82) skewX(-2deg);
@@ -2112,10 +2096,9 @@ html:is([data-route="race"], [data-route="level"]) .topbar {
     opacity: 1;
   }
 }
-:root[data-motion="reduced"] :is(.intro-driving-scene, .intro-logo-fire),
-:root[data-effects="low"] :is(.intro-driving-scene, .intro-logo-fire),
-.entrance-screen[data-cinema="still"]
-  :is(.intro-driving-scene, .intro-logo-fire) {
+:root[data-motion="reduced"] .intro-driving-scene,
+:root[data-effects="low"] .intro-driving-scene,
+.entrance-screen[data-cinema="still"] .intro-driving-scene {
   display: none;
 }
 
