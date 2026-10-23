@@ -28,15 +28,15 @@ test("keyboard check supports editing, composition diagnostics and reset", async
 }) => {
   await page.goto("./#/keyboard");
   const input = page.getByRole("textbox", { name: "Your text" });
-  await input.fill("Every");
+  await input.fill("the q");
   await expect(page.locator("#input-status")).toContainText("5 characters");
   await input.press("Backspace");
-  await expect(input).toHaveValue("Ever");
+  await expect(input).toHaveValue("the ");
   await input.dispatchEvent("compositionstart");
   await expect(page.locator("#composition")).toHaveText("Composing");
   await input.dispatchEvent("compositionend");
-  await input.fill("Every great run starts with a single keystroke.");
-  await expect(page.locator("#input-status")).toContainText("sentence matches");
+  await input.fill((await page.locator("#sample").textContent())!);
+  await expect(page.locator("#input-status")).toContainText("Sample matches");
   await page.getByRole("button", { name: "Clear text" }).click();
   await expect(input).toHaveValue("");
   await expect(input).toBeFocused();

@@ -1,5 +1,18 @@
 # Verification evidence
 
+## Alpha.22 follow-up — 23 October 2026
+
+Fresh full `npm run check` with one browser worker passed **117 unit / 79 browser cases**, formatting, TypeScript and production build. Evidence: ignored `Reference_Images/analysis/alpha22-single-worker-check.log`. Six new browser cases cover actual wrapped-line2/3 top alignment and backward wrap at 1024/1920, all printable keyboard sample characters with independent physical presses/reset, bounded car-following flame geometry/fade at 1024/1920 and standalone Quick Race copy. The keyboard unit test exhaustively checks ASCII 32–126 and unique physical-code slots. All existing campaign/IME/audio/garage/recovery/onboarding cases remain enabled.
+
+The user accepted prior manual campaign cases 1–3 (unlock/refresh, replay deduplication, pause/practice-only/eligible retry). Only the new readability/keyboard/trail behavior needs another manual look; do not reopen accepted progress/cars/music/palette checks. See ALPHA22_REVIEW.md.
+
+**Prior hosted failure:** run 39812462848 for exact head 1c94952 completed failure after 30.2 minutes of browser execution: 116 units passed and 42 browser cases passed, with broad timeouts and browser-context protocol errors across unrelated views, including failures during context setup before application loading. Full downloaded log is ignored at Reference_Images/analysis/phase7-ci-failed.log. A subsequent local two-worker run showed a long-paragraph automation timeout and was stopped; it is not a pass. Hosted and local checks now isolate Chromium/SwiftShader with one worker, preserving all cases, retry policy and 30-second timeout. The fresh local complete isolated pass is separate from the required new exact-head hosted result. Do not infer that new hosted result from the older successful 39810973647 run.
+
+Current captures are docs/images/alpha22, generated sequentially after the suite with scripts/capture-review-polish.mjs using isolated browser storage. They show the keyboard sample/detected-key panel, clarified Quick Race, third wrapped line at the top, and four sampled native opening frames. Only paragraph-third-line-top-fixture-1024.png uses seeded prerequisite clears. The capture script reloads after seeding to initialize the repository/preferences; its initial fragment-only attempt did not reload the fixture and was retried. Sampled native CSS animation times do not constitute physical-frame-rate certification. No visible Chrome windows/user storage/server shutdown.
+
+App alpha.22, rules3/save1/content2 unchanged. No dependency, campaign text, economy, ownership, cloud or deployment change. The older alpha19 opening road ribbon/crown and alpha21 centered wrapped-caret captures are superseded for the changed behavior. Broader TT-608 atmosphere polish remains deferred.
+
+
 Initial implementation source **b1f0d6cf740bfa3aea2e85f12d961814be4e9cee**, [open PR #7](https://github.com/sahilshah2904/TurboType/pull/7). Local full check passed **116 unit / 71 browser cases**; final compact-results adjustment passed fresh build/types and **23 focused browser cases**. Ten current sequential captures had zero page errors. This documentation checkpoint has its own hosted check; inspect its actual PR head/check_run/job before claiming success. User review/integration remains pending; branch is pushed and no game is deployed.
 
 

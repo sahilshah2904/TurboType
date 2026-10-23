@@ -1,5 +1,12 @@
 # TurboType session handoff
 
+## Alpha.22 review corrections — 23 October 2026
+
+The user accepted campaign unlock/refresh, replay deduplication and pause/practice-only/eligible retry. Remaining feedback: top-align each new wrapped line with three visible look-ahead lines, clarify standalone Quick Race, expand physical keyboard/sample coverage and keep opening fire trailing the car without crossing the name. Implemented for review on the existing PR #7 branch; see [alpha.22 behavior and focused checklist](ALPHA22_REVIEW.md). Broader atmosphere polish remains deferred. Do not merge/start Phase 8 solely from this note.
+
+Prior hosted head 1c94952 failed (run 39812462848): unit tests passed but browser contexts/timeouts failed across many unrelated screens. CI now uses one software-rendered browser worker with all cases/timeouts/retries intact; inspect the new exact-head result before claiming success. Fresh full local verification passes 117 unit/79 browser cases with one worker; evidence and current captures are in docs/TESTING.md and docs/images/alpha22.
+
+
 Initial implementation source **b1f0d6cf740bfa3aea2e85f12d961814be4e9cee**, [open PR #7](https://github.com/sahilshah2904/TurboType/pull/7). Local full check passed **116 unit / 73 browser cases**; final compact-results adjustment passed fresh build/types and **23 focused browser cases**. Ten current sequential captures had zero page errors. The final follow-up pins each race's car independently, with two regressions proving choices cannot alter the other paused session; retry applies the latest preference. Its fresh full check passed 116 unit/73 browser cases. The current PR head has its own hosted check; inspect its actual PR head/check_run/job before claiming success. User review/integration remains pending; branch is pushed and no game is deployed.
 
 
@@ -21,7 +28,7 @@ README shows current alpha.20 race/actions, alpha.19 cinematic, unchanged alpha.
 
 ## Phase 7 source and behavior
 
-App alpha.21 / rules 3 / save 1 / content 2. Full specification and user checklist: PHASE7_CAMPAIGN_MAPS.md.
+App alpha.22 / rules 3 / save 1 / content 2. Full specification and user checklist: PHASE7_CAMPAIGN_MAPS.md.
 
 - src/content/campaign.ts: 300 stable numbered stops, categories/chapters, eighteen original samples and safe route parsing. Six races/category; first three short, 4–6 longer paragraphs up to 815/1,001/1,233 characters. Remaining282 main passages and bonuses belong to Phase 8; unavailable previews never launch.
 - src/core/campaign-progress.ts: pure eligible finish/isolated sequential unlocks, independent star-bit union, best metrics and snapshot validation. No place/star gate for the next stop.
@@ -41,6 +48,6 @@ Phase 8 fills/reviews300 main passages and bonuses, gradual length/skill/CPU/sta
 
 ## Environment and checks
 
-Workspace S:/AI_Engineer_Journey/Projects/TurboType, remote sahilshah2904/TurboType, author Sahilshah. Preserve user Vite PID8124/5173: http://192.168.0.31:5173/TurboType/ serves active checkout. Headless 4173/SwiftShader/two workers; no concurrent browser suites/captures/profiling. No visible Chrome automation. Plain-English commits, no force-push/automatic watcher. Node 24.13/npm 11/pinned lockfile; npm run check is full suite.
+Workspace S:/AI_Engineer_Journey/Projects/TurboType, remote sahilshah2904/TurboType, author Sahilshah. Preserve user Vite PID8124/5173: http://192.168.0.31:5173/TurboType/ serves active checkout. Headless 4173/SwiftShader/one worker; no concurrent browser suites/captures/profiling. No visible Chrome automation. Plain-English commits, no force-push/automatic watcher. Node 24.13/npm 11/pinned lockfile; npm run check is full suite.
 
 TESTING.md records final totals, exact source/PR/hosted conclusion. Earlier Phase 6 passes do not certify new code. User checklist: PHASE7_CAMPAIGN_MAPS.md#user-review. Check navigation, first clear vs replay, pause/no award, category cosmetics and paragraph caret readability. No renewed approval of accepted music/cars/palette or physical performance requested.

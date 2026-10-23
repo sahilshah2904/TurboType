@@ -12,9 +12,19 @@ An original browser typing racer: build physical-keyboard speed and accuracy whi
 
 </div>
 
-![Current alpha.20 race with four CPUs, integrated typing and the fire Live WPM dial](docs/images/alpha20/neon-harbor-atmosphere-1440.png)
+![Alpha.22 paragraph typing with three visible rows and the active line at the top](docs/images/alpha22/paragraph-third-line-top-fixture-1024.png)
 
-*Actual **0.1.0-alpha.20** preview, integrated into **main** through [PR #6](https://github.com/sahilshah2904/TurboType/pull/6). No public game is deployed. Further opening/atmosphere polish is deferred as TT-608.*
+*Actual **alpha.22 feature preview** in PR #7; isolated capture fixture opens sample6. Main retains accepted Phase6 until review/integration. No public game is deployed. Broader atmosphere polish remains deferred.*
+
+## Alpha.22 review refinements
+
+The user accepted campaign unlock/save, replay counts and pause/retry eligibility. Larger typing text now top-aligns each new line with three full look-ahead rows. **Quick Race** is clearly labeled as standalone warm-up/car-track experimentation. Keyboard check covers lower/uppercase, digits/symbols and received physical keys. Opening flames follow behind the car and clear before the title; the title keeps a small flame underneath. [Focused review](docs/ALPHA22_REVIEW.md). Fresh local full check: **117 unit / 79 browser cases** with one worker; hosted exact-head state is separate.
+
+![Keyboard check with complete character sample and received physical-key indicators](docs/images/alpha22/keyboard-check-1024.png)
+
+![Opening launch with a bounded trailing flame](docs/images/alpha22/launch-trail-1440.png)
+
+![Readable title with a small flame underneath](docs/images/alpha22/clear-title-1440.png)
 
 ## Phase 7 campaign maps — alpha.21 preview
 
@@ -36,9 +46,9 @@ Three rightward journeys now have 100 numbered stops each, chapters/bonus branch
 
 The alpha.20 follow-up replaces rejected curved air paths with a researched layered atmosphere over sky/mountains/road, centres action links with buttons, retains the cleaner Hub/Settings, and plans varied future vehicle families. Latest captures/verification are in docs/TESTING.md. Alpha.17 opening panels are superseded.
 
-![Alpha.19 purple car burnout with blazing road trail](docs/images/alpha19/burnout-1440.png)
+![Alpha.22 burnout: the arrival trail has faded while the purple car revs](docs/images/alpha22/burnout-clear-road-1440.png)
 
-![Final flaming TurboType title](docs/images/alpha19/flaming-title-1440.png)
+![Current TurboType title with a restrained fire underlay](docs/images/alpha22/clear-title-1440.png)
 
 ![Welcome and skip preference](docs/images/alpha17/welcome-1440.png)
 

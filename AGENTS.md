@@ -4,9 +4,13 @@ Read PROJECT_STATUS.md, docs/SESSION_HANDOFF.md and BACKLOG.md before reporting 
 
 ## Current checkpoint — 23 October 2026
 
+Alpha.22 review follow-up: user accepted campaign unlock/refresh, replay deduplication and pause/practice-only/eligible retry. Do not repeat those approval requests. Current corrections top-align each wrapped line with three full look-ahead rows, clarify standalone Quick Race, add all-printable-character keyboard sample/independent physical-key detection, and keep opening fire behind the moving car and below the title. Fresh full local check passed 117 unit/79 browser cases with one worker; seven sequential captures had zero page errors. See docs/ALPHA22_REVIEW.md and newest docs/TESTING.md for evidence and actual hosted head/state. Broader TT-608 atmosphere polish remains deferred. No merge or Phase 8 start is authorized by this feedback.
+
+Prior hosted run39812462848 for1c94952 failed:116 unit cases passed, but broad browser timeouts/context protocol errors occurred across unrelated screens. This supersedes its earlier in-progress checkpoint below. Hosted and local checks now use one SwiftShader browser worker with all cases/retries/timeouts intact, after local two-worker pressure also caused a long-text timeout. Require a fresh successful exact-head check before integration. Never describe an earlier hosted pass as success for the new head.
+
 Initial Phase 7 source b1f0d6cf740bfa3aea2e85f12d961814be4e9cee is followed by a race-session isolation fix in open/unmerged PR #7: https://github.com/sahilshah2904/TurboType/pull/7. Each race now pins its own car, so campaign/Quick Race choices cannot alter another paused run; retry applies the latest preference. Final fresh full check passed 116 unit/73 browser cases. Ten refreshed captures have zero page errors. Inspect current PR head/check_run/job for its separate hosted result; never assume it passed. User review/integration remains pending.
 
-The user requested refreshed README/Phase 6 handoff, longer paragraphs and Phase 7 maps. Phase 6 PR #6 merged cf741b6; accepted 3f6125c passed run 39801084219; main docs 6554956 passed 39803134301. Documentation refresh 1ee0aba is on main. Current feature codex/phase7-campaign-maps, app alpha.21, rules 3/save 1/content 2. Inspect actual HEAD/PR/checks; never infer fresh success from older runs.
+The user requested refreshed README/Phase 6 handoff, longer paragraphs and Phase 7 maps. Phase 6 PR #6 merged cf741b6; accepted 3f6125c passed run 39801084219; main docs 6554956 passed 39803134301. Documentation refresh 1ee0aba is on main. Current feature codex/phase7-campaign-maps, app alpha.22, rules 3/save 1/content 2. Inspect actual HEAD/PR/checks; never infer fresh success from older runs.
 
 Phases 1–6 complete for agreed scope. Phase 7 maps implemented for review: three 100-stop maps, navigation/briefings/stars/local progress and 18 playable samples (six/category, substantial paragraphs at 4–6). Levels 7–100/bonuses await Phase 8 and cannot launch. Never count previews as completed passages. See docs/PHASE7_CAMPAIGN_MAPS.md and docs/TESTING.md for evidence/limits. TT-608 opening/atmosphere polish remains deferred by user.
 
@@ -31,7 +35,7 @@ Follow docs/ENGINEERING_CONVENTIONS.md/GITHUB_WORKFLOW.md. Product GAME_DESIGN_P
 
 Workspace S:/AI_Engineer_Journey/Projects/TurboType; account sahilshah2904/TurboType, author Sahilshah. Reuse checkout; codex/ branch prefix. Plain-English commits, no conventional prefixes/force-push/rewrite/invented identity/automatic watchers/credential output. GCM available, never print token. Material features use PR/user review before integration; attach every created PR. README-only main updates must not import unapproved code.
 
-Node 24.13/npm 11/pinned lockfile. npm run check=format/types/unit/build/browser. Headless 4173/SwiftShader/two workers. Never concurrent browser suites/captures/profiling on limited-memory workstation. Preserve user Vite PID 8124 on 5173; http://192.168.0.31:5173/TurboType/ serves active checkout. No visible Chrome test windows.
+Node 24.13/npm 11/pinned lockfile. npm run check=format/types/unit/build/browser. Headless 4173/SwiftShader/one worker. Never concurrent browser suites/captures/profiling on limited-memory workstation. Preserve user Vite PID 8124 on 5173; http://192.168.0.31:5173/TurboType/ serves active checkout. No visible Chrome test windows.
 
 Hosted PR updates/main push/manual cancel superseded runs; preserve notifications/timeouts. Exact-head completed check_run/job conclusions matter; headers have lagged. Ubuntu correction prefers archive.ubuntu.com after Azure stalls; no disabled dependencies/checks. Record every push separately.
 

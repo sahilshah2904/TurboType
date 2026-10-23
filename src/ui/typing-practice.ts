@@ -1,3 +1,4 @@
+import { followPassageCaret } from "./passage-scroll";
 import { speedometer, updateSpeedometer } from "./speedometer";
 import {
   TypingEngine,
@@ -190,16 +191,12 @@ export function connectTypingPractice(
     const caret = passageView.querySelector<HTMLElement>(
       ".character--current,.character--error",
     );
-    if (caret) {
-      passageView.scrollLeft =
-        document.documentElement.dataset.textSize === "large"
-          ? 0
-          : Math.max(0, caret.offsetLeft - passageView.clientWidth * 0.26);
-      passageView.scrollTop = Math.max(
-        0,
-        caret.offsetTop - passageView.clientHeight / 2,
-      );
-    }
+    followPassageCaret(
+      passageView,
+      caret,
+      document.documentElement.dataset.textSize === "large",
+      0.26,
+    );
     main.querySelector("#run-results")!.toggleAttribute("hidden", !ending);
     if (ending) showResult(s);
     adapter?.sync();

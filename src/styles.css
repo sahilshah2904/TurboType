@@ -1495,3 +1495,38 @@ textarea[aria-invalid="true"] {
 .campaign-race .campaign-race-back {
   margin-bottom: 0;
 }
+
+#sample.keyboard-sample {
+  font-size: clamp(20px, 2.1vw, 28px);
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+.keyboard-check-keys ul {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+}
+.keyboard-check-keys li {
+  min-width: 44px;
+  min-height: 42px;
+  padding: 9px 8px;
+  border: 1px solid #60717c;
+  border-bottom-width: 3px;
+  border-radius: 5px;
+  color: #cad9e3;
+  font: 14px monospace;
+  text-align: center;
+}
+.keyboard-check-keys .key--tested {
+  background: #123b31;
+  border-color: #6bdeb6;
+  color: #c7ffe9;
+}
+.keyboard-check-keys .key--next {
+  outline: 2px solid #ff5964;
+  outline-offset: 2px;
+}

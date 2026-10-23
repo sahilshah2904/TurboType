@@ -1,3 +1,4 @@
+import { followPassageCaret } from "./passage-scroll";
 import type { CampaignLevel } from "../content/campaign";
 import type { TypingSnapshot } from "../core/typing-engine";
 import { trackChoices } from "./track-selector";
@@ -100,7 +101,7 @@ export function quickRaceScreen(
     <label id="race-passage-label" class="sr-only">MATCH CASE, SPACES AND PUNCTUATION</label><div class="typing-surface"><p id="race-passage" class="race-passage" aria-labelledby="race-passage-label"></p>
     <label class="sr-only" for="race-input">Your typing</label><textarea id="race-input" rows="2" readonly autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" aria-describedby="race-passage race-notice race-controls-help" placeholder="Start the race, then type after GO…"></textarea></div>
     <p id="race-notice" class="help" role="status">One mistake stops progress. Backspace corrects it.</p>
-</div><section class="race-deck" aria-label="Race setup and controls"><h1 class="race-deck-title">${level ? `${level.category.toUpperCase()} · LEVEL ${level.number}` : "Your next <span>starting line.</span>"}</h1>${level ? `<p class="campaign-race-help help">Untimed · Finish unpaused to clear. Stars: completion / ${level.accuracyGoal}% accuracy / ${level.paceGoal} WPM. Pause or assisted input makes this practice-only.</p>` : ""}<div class="track-bottom"><span id="race-track-status" role="status">Loading race track…</span><button id="retry-race-track" class="text-button" hidden>Retry artwork</button><button id="text-race" class="text-button" hidden>Race with text standings</button></div>
+</div><section class="race-deck" aria-label="Race setup and controls"><h1 class="race-deck-title">${level ? `${level.category.toUpperCase()} · LEVEL ${level.number}` : "Quick <span>Race.</span>"}</h1>${level ? `<p class="campaign-race-help help">Untimed · Finish unpaused to clear. Stars: completion / ${level.accuracyGoal}% accuracy / ${level.paceGoal} WPM. Pause or assisted input makes this practice-only.</p>` : ""}<div class="track-bottom"><span id="race-track-status" role="status">Loading race track…</span><button id="retry-race-track" class="text-button" hidden>Retry artwork</button><button id="text-race" class="text-button" hidden>Race with text standings</button></div>
     <section id="race-results" class="run-results" aria-labelledby="race-result-title" hidden>
       <p id="race-result-label" class="eyebrow">${level ? "CAMPAIGN RESULT" : "SESSION RESULT · NOT SAVED"}</p>
       <div class="result-heading"><h2 id="race-result-title"></h2><strong id="race-result-place"></strong></div>
@@ -120,7 +121,7 @@ export function quickRaceScreen(
       <div><label for="race-mode">Mode</label><select id="race-mode"><option value="untimed">Complete the passage · untimed</option><option value="timed">Time trial · 60 active seconds</option></select></div>
       <details class="race-advanced"><summary>Advanced / Replay</summary><label for="race-seed">Race seed</label><input id="race-seed" type="number" min="0" max="4294967295" step="1" inputmode="numeric" required aria-describedby="setup-help" /><p id="setup-help" class="help">The same passage, pace and seed reproduce CPU schedules. Your own typing is always live. A seed is chosen automatically for normal play.</p></details>
     </div>
-    <p class="help race-setup">Choose your exercise and CPU pace, then your car and track. CPU targets include extra reaction and correction delays. Paused or assisted runs are practice-only. Results stay in this session.</p>
+    <p class="help race-setup">A standalone race for warm-ups and trying cars or tracks. Choose a passage and CPU pace; it does not change campaign progress. Results stay in this session.</p>
     <div class="race-setup">${trackChoices(selectedTrack, "race-track-select")}</div>
     <fieldset id="kart-picker" class="kart-picker"><legend>Choose your car</legend><div class="kart-picker__grid">${STARTER_KARTS.map((kart) => `<label class="kart-choice"><input type="radio" name="player-kart" value="${kart.id}" ${kart.id === selectedKart ? "checked" : ""} /><img class="${kart.id === "volt-kart" ? "kart-art--starter" : ""}" src="${import.meta.env.BASE_URL}assets/karts/${kart.file}" alt="" width="200" height="100" /><strong>${kart.name}</strong><span>${kart.style}</span></label>`).join("")}</div><p id="kart-save-status" class="help" role="status">Choose before starting. Your car stays locked through pauses until retry. All cars have the same performance.</p></fieldset>
     <div class="practice-actions"><button id="start-race" class="button button--primary" disabled>Start race →</button><button id="retry-race" class="text-button">Retry same race</button><button id="new-race" class="text-button" ${level ? "hidden" : ""}>New race</button>${level && level.number < 6 ? `<a id="campaign-next" class="button button--secondary" href="#/level/${level.category}/${level.number + 1}" hidden>Next level →</a>` : ""}${level ? `<a class="campaign-race-back button button--secondary" href="#/campaign/${level.category}">← Return to map</a>` : ""}</div>
@@ -292,24 +293,11 @@ export function connectQuickRace(
     }
     renderedLength = s.validatedLength;
     const passageView = find("#race-passage");
-    if (document.documentElement.dataset.textSize !== "large") {
-      const caret =
-        passageSpans[Math.min(s.validatedLength, passageSpans.length - 1)];
-      if (caret)
-        passageView.scrollLeft = Math.max(
-          0,
-          caret.offsetLeft - passageView.clientWidth * 0.3,
-        );
-    } else {
-      passageView.scrollLeft = 0;
-      const caret =
-        passageSpans[Math.min(s.validatedLength, passageSpans.length - 1)];
-      if (caret)
-        passageView.scrollTop = Math.max(
-          0,
-          caret.offsetTop - passageView.clientHeight / 2,
-        );
-    }
+    followPassageCaret(
+      passageView,
+      passageSpans[Math.min(s.validatedLength, passageSpans.length - 1)],
+      document.documentElement.dataset.textSize === "large",
+    );
     // Keep the five nodes alive; update only changed content/order at the HUD cadence.
     const standingsList = find("#race-standings");
     standings.forEach((row, index) => {

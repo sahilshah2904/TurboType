@@ -3,8 +3,9 @@ import { defineConfig, devices } from "@playwright/test";
 export default defineConfig({
   testDir: "./tests/browser",
   fullyParallel: false,
-  // Two software-rendered browser workers keep peak decode/GPU memory bounded.
-  workers: 2,
+  // Isolate SwiftShader contexts after hosted and local browser pressure.
+  // All cases, retry policy and timeouts stay intact.
+  workers: 1,
   retries: process.env.CI ? 1 : 0,
   reporter: "list",
   use: {

@@ -1,5 +1,17 @@
 # TurboType future work backlog
 
+## Alpha.22 review corrections — 23 October 2026
+
+The user accepted campaign unlock/refresh, replay deduplication and pause/practice-only/eligible retry. Remaining feedback: top-align each new wrapped line with three visible look-ahead lines, clarify standalone Quick Race, expand physical keyboard/sample coverage and keep opening fire trailing the car without crossing the name. Implemented for review on the existing PR #7 branch; see [alpha.22 behavior and focused checklist](docs/ALPHA22_REVIEW.md). Broader atmosphere polish remains deferred. Do not merge/start Phase 8 solely from this note.
+
+Prior hosted head 1c94952 failed (run 39812462848): unit tests passed but browser contexts/timeouts failed across many unrelated screens. CI now uses one software-rendered browser worker with all cases/timeouts/retries intact; inspect the new exact-head result before claiming success. Fresh full local verification passes 117 unit/79 browser cases with one worker; evidence and captures are in docs/TESTING.md and docs/images/alpha22.
+
+
+- [x] TT-706: Top-align active wrapped typing lines with three full look-ahead rows, including Backspace across wraps, across race/practice/learning. User visual review pending.
+- [x] TT-307: Expand keyboard sample to all printable English characters and independently show received common physical typing/editing/modifier keys; preserve paste/editing/IME diagnostics and honest limits.
+- [x] TT-405: Clarify standalone Quick Race purpose and label without changing CPU/session/campaign rules.
+- [x] TT-609: Bound opening fire to the moving car with a following gap/fade and a smaller title-underlay accent; no fire ahead or full road ribbon across the name. Specific requested correction, not closure of deferred TT-608.
+
 ## Phase 7 map delivery — alpha.21, 22 October 2026
 
 TT-701–704 and TT-705's map/briefing starter-inventory portion are implemented for review. Fresh full local check: **116 unit / 73 browser cases**; hosted exact-head state is recorded separately in docs/TESTING.md. Three 100-stop maps have eighteen real sample races (six/category), with substantial paragraphs at levels4–6. Levels7–100 and bonuses remain unavailable content previews until Phase8 authoring; never count them as playable. Review/integration are separate. Current specification/checklist: docs/PHASE7_CAMPAIGN_MAPS.md.

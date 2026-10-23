@@ -1,3 +1,4 @@
+import { followPassageCaret } from "./passage-scroll";
 import { TypingEngine, type TypingSnapshot } from "../core/typing-engine";
 import { calibrationPace } from "../core/calibration";
 import type { CpuTier } from "../core/cpu-schedule";
@@ -155,13 +156,12 @@ export function connectLearning(
       caret = target.querySelector<HTMLElement>(
         ".character--current,.character--error",
       );
-    if (caret) {
-      target.scrollLeft =
-        document.documentElement.dataset.textSize === "large"
-          ? 0
-          : Math.max(0, caret.offsetLeft - target.clientWidth * 0.26);
-      target.scrollTop = Math.max(0, caret.offsetTop - target.clientHeight / 2);
-    }
+    followPassageCaret(
+      target,
+      caret,
+      document.documentElement.dataset.textSize === "large",
+      0.26,
+    );
     if (s.errorCharacter !== null)
       status(
         "Mistake stops progress. Press Backspace, then type the expected character.",

@@ -82,7 +82,7 @@ test("car choice survives hub navigation and browser reload", async ({
     "src",
     /apex-nova-preview.webp$/,
   );
-  await page.getByRole("link", { name: "Race", exact: true }).click();
+  await page.getByRole("link", { name: "Quick Race", exact: true }).click();
   await expect(page.getByRole("radio", { name: /^Apex Nova/ })).toBeChecked();
 });
 
@@ -100,7 +100,7 @@ test("sound controls exist only in Settings and denied car storage stays playabl
       route === "settings" ? 1 : 0,
     );
   }
-  await page.getByRole("link", { name: "Race", exact: true }).click();
+  await page.getByRole("link", { name: "Quick Race", exact: true }).click();
   await expect(page.locator("#race-track")).toHaveAttribute(
     "data-ready",
     "true",

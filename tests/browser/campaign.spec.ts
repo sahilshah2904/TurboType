@@ -410,7 +410,7 @@ test("campaign choices cannot change the car pinned to a paused Quick Race", asy
     "data-player-kart",
     "comet",
   );
-  await page.getByRole("link", { name: "Race", exact: true }).click();
+  await page.getByRole("link", { name: "Quick Race", exact: true }).click();
   await ready(page);
   await expect(page.locator("#race-state")).toHaveText("Paused");
   await expect(page.locator("#race-track")).toHaveAttribute(
@@ -439,7 +439,7 @@ test("Quick Race choices cannot change the car pinned to a paused campaign", asy
   await ready(page);
   await start(page);
   await page.locator("#pause-race").click();
-  await page.getByRole("link", { name: "Race", exact: true }).click();
+  await page.getByRole("link", { name: "Quick Race", exact: true }).click();
   await ready(page);
   await page.locator('input[name="player-kart"][value="apex-nova"]').check();
   await page.evaluate(() => (location.hash = "#/level/easy/1"));
