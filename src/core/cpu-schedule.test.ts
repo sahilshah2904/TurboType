@@ -44,7 +44,7 @@ describe("seeded CPU schedules", () => {
       createCpuSchedules(100, "medium", 123)[0].finishTimeMs,
     );
   });
-  it.each([0, -1, 2001, 1.5])("rejects invalid passage length %s", (length) => {
+  it.each([0, -1, 3001, 1.5])("rejects invalid passage length %s", (length) => {
     expect(() => createCpuSchedules(length, "easy", 1)).toThrow(RangeError);
   });
   it.each([-1, NaN, Infinity, 1.5, 4294967296])(

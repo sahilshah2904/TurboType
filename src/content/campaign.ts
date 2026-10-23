@@ -1,4 +1,8 @@
 import type { CpuTier } from "../core/cpu-schedule";
+import { STARTER_TRACKS, type TrackId } from "./track-catalog";
+import { INTRO_PASSAGES } from "./curriculum/introductions";
+import { CHAPTER_SKILLS } from "./curriculum/authoring";
+import CATALOG from "./curriculum/catalog.json";
 
 export const CATEGORIES = ["easy", "medium", "hard"] as const;
 export type Category = (typeof CATEGORIES)[number];
@@ -26,7 +30,22 @@ export interface CampaignLevel {
   title: string;
   focus: string;
   revision: 1;
-  passage?: string;
+  passage: string;
+  kind: "main" | "bonus";
+  passageId: string;
+  prerequisite: string | null;
+  skills: readonly string[];
+  role: "lesson" | "pit-stop" | "showcase" | "finale" | "side-challenge";
+  environment: TrackId;
+  assets: { trackId: TrackId; kartId: "volt-kart" };
+  /** Authored data for Phase 9; no XP or credits are granted in Phase 8. */
+  plannedReward: { xp: number; credits: number };
+  milestones: readonly {
+    kind: "pit-stop" | "chapter" | "finale";
+    receiptId: string;
+    xp: number;
+    credits: number;
+  }[];
   paceGoal: number;
   accuracyGoal: 95;
   tier: CpuTier;
@@ -34,66 +53,132 @@ export interface CampaignLevel {
   seed: number;
 }
 
-// Original, playable map samples. Full reviewed 100-level curricula belong to Phase 8.
-const PASSAGES: Record<Category, readonly string[]> = {
-  easy: [
-    "the road is open and the sky is clear",
-    "a small car rolls past the quiet park as the sun rises over the trees",
-    "we take the long road by the lake and keep a steady pace as a cool breeze moves through the green grass and the tall reeds",
-    "the early light falls across the road as we leave the town behind us. a row of trees runs beside the river and birds rise from the reeds. we keep our hands calm and our eyes on the next word. there is no need to rush each turn. a smooth and steady rhythm will carry us all the way to the little bridge ahead.",
-    "a quiet road leads from the village to the coast. we pass a farm with a red gate and a field full of tall grass. near the next bend a small stream runs under a stone bridge. the air feels cool and the road is clear. we slow our thoughts and let each word arrive in its own time. a clean line matters more than a quick start. beyond the hill we can see the sea and a line of white boats near the shore. we follow the road until the trees open and the whole bay comes into view. it is a good place to pause and look back at how far we have come.",
-    "the old road winds through a wide valley where the fields meet the edge of a forest. we set out in the soft light of morning and listen to the low hum of the wheels. a small town rests behind us and the next bridge is still far ahead. we do not try to reach it all at once. we work through one clear word and then the next. when a mistake appears we stop and put it right before moving on. soon the road feels less strange and our hands find an even rhythm. near the river a flock of birds lifts into the air and turns toward the hills. we follow the river past a wooden gate and a quiet mill. the sun climbs higher as the last bend brings us to the bridge. the journey has taken time but our pace has stayed calm from the first mile to the last. we cross together and carry that steady feeling into the road ahead.",
-  ],
-  medium: [
-    "The morning road is quiet. Keep a steady rhythm, and let each word lead to the next.",
-    "Beyond the harbor, a narrow road follows the water. Small boats move through the mist, while the first lights of the town fade behind us.",
-    "We leave the busy streets and follow the coast toward a little cafe. The journey is unhurried, with time to notice the boats, the pale sky, and the trees beside the road. Every clean sentence helps us settle into a more consistent rhythm.",
-    "The road along the coast changes as the morning grows brighter. At first, the sea is hidden behind a line of low buildings. Then a bend opens onto a quiet bay, where fishing boats rock beside a wooden pier. We keep a comfortable pace and watch the next stretch of road. There's no prize for rushing past a word that needs attention. A brief correction brings us back into rhythm, and the journey continues with a little more confidence than before.",
-    "At the edge of town, we turn away from the traffic and follow a road through the hills. The air is cooler here, and the trees cast long shadows across the ground. A small sign points toward the old station, but we continue beside the river. We've chosen a longer route because it gives us room to settle into a steady rhythm. Some words feel familiar, while others need a little more care. When the rhythm breaks, we take a breath, correct the mistake, and begin again. By the time the road reaches the next village, the sun has climbed above the roofs. A baker opens a door, a cyclist waves, and the quiet street begins to wake. We pass slowly through the square before returning to the open road, ready for the next part of the journey.",
-    "A long journey begins with a simple decision: keep moving at a pace you can sustain. We leave the harbor after breakfast and head toward the green hills beyond the city. The first few turns are familiar, but the route soon carries us through places we haven't seen before. There are small farms, stone walls, and narrow bridges over clear streams. Each scene asks for a little attention, just as each sentence asks us to notice its shape. We don't need to race through every difficult word. Instead, we keep the rhythm comfortable and make careful corrections when they are needed. Near midday, the road opens onto a wide valley. We stop beside a field to look at the distant mountains, then return to the route with fresh focus. The final stretch follows the river into a village with bright windows and a quiet square. It feels good to arrive, but the real progress came from staying attentive through the whole journey. Tomorrow, we can bring the same patience to a new road and a new set of words.",
-  ],
-  hard: [
-    'At 7:30, the garage lights flickered on. "Ready for the coast?" Mira asked. We checked the route, closed the gate, and rolled into the quiet street.',
-    'The route covered 24 miles, including 3 narrow bridges and a steep climb. "Keep it smooth," the navigator said. A quick start would mean little if we lost our rhythm halfway through the journey.',
-    'At the first junction, we chose the longer route: 18 miles beside the river, followed by a climb through the forest. The schedule said 9:45, but the weather had other plans. "Stay patient; we have time," Mira reminded us. We adjusted our pace, watched the changing light, and carried on toward the next checkpoint.',
-    'The workshop clock showed 6:15 when the team arrived. Outside, a cool wind carried the smell of rain across the empty road. "We have 42 miles ahead of us," said the navigator, "so find a rhythm you can keep." The first section passed through familiar streets, but the route soon turned toward the hills. There were tight corners, short tunnels, and a long bridge above the valley. We checked each instruction carefully; a missed detail could send us the wrong way. By the second checkpoint, the clouds had begun to lift. The road was still demanding, yet our pace felt calmer because we had stopped treating every turn as an emergency.',
-    'Before sunrise, the garage was already busy. A map lay open on the bench, with 5 checkpoints marked in blue and a note beside the final climb: "Save your focus for the last section." We left at 6:40 and followed the river out of town. At first, the route seemed simple; then the road narrowed, the signs became harder to spot, and a sudden shower blurred the hills. Nobody gained anything by rushing. We read each instruction, corrected small mistakes, and kept our pace consistent. At checkpoint 3, the rain stopped. Sunlight broke through the clouds, revealing a line of stone houses above the valley. There were still 16 miles to go, including 2 steep bends near the summit. "One section at a time," the navigator said. We took that advice all the way to the ridge, where the final checkpoint waited beside an old weather station. The finish felt satisfying because our attention had lasted through the difficult middle of the journey.',
-    'The final route was longer than any we had attempted that week: 68 miles, 7 checkpoints, and a mountain pass that often disappeared into cloud. At 5:50, the team gathered around a map and agreed on a simple plan. "Read carefully, keep the pace sustainable, and correct a mistake before it grows," Mira said. We left the sleeping town behind and followed the river toward the first checkpoint. The opening miles felt easy, but the road soon demanded more attention. Small signs appeared beside sharp bends; narrow bridges led into dark tunnels; a temporary diversion added 4 miles to the climb. We adjusted without abandoning our rhythm. At the halfway point, a light rain began to fall. It would have been tempting to hurry, yet tired hands and hurried decisions rarely work well together. We stayed patient through the forest and reached the ridge just after 9:20. Beyond it, sunlight filled a broad valley. The final descent required the same care as the first climb, so we kept reading every instruction until the last checkpoint came into view. Only then did we look back at the route. The achievement was more than a quick opening or a dramatic finish; it was the steady attention we had carried through every mile between them.',
-  ],
-};
-export const CAMPAIGN_LEVELS: readonly CampaignLevel[] = CATEGORIES.flatMap(
-  (category, c) =>
-    Array.from({ length: 100 }, (_, i) => ({
-      id: `${category}-${String(i + 1).padStart(3, "0")}`,
-      category,
-      number: i + 1,
-      chapter: Math.floor(i / 10) + 1,
-      title:
-        i < 3
-          ? ["Find your rhythm", "Settle into the road", "Keep it flowing"][i]
-          : i < 6
-            ? ["The first paragraph", "The longer route", "Stay the distance"][
-                i - 3
+const catalog = new Map(CATALOG.map((entry) => [entry.id, entry]));
+function makeLevel(
+  category: Category,
+  number: number,
+  bonus = false,
+): CampaignLevel {
+  const c = CATEGORIES.indexOf(category);
+  const chapter = Math.floor((number - 1) / 10) + 1;
+  const id = bonus
+    ? `${category}-bonus-${String(chapter).padStart(2, "0")}`
+    : `${category}-${String(number).padStart(3, "0")}`;
+  const entry = catalog.get(id);
+  const progress = Math.max(0, number - 6) / 94;
+  const paceGoal = Math.round([15, 30, 50][c] + progress * [15, 25, 40][c]);
+  const track = STARTER_TRACKS[Math.floor((chapter - 1) / 2)];
+  const passage =
+    !bonus && number <= 6
+      ? INTRO_PASSAGES[category][number - 1]
+      : entry!.passage;
+  return {
+    id,
+    kind: bonus ? "bonus" : "main",
+    category,
+    number,
+    chapter,
+    title:
+      entry?.title ??
+      [
+        "Find your rhythm",
+        "Settle into the road",
+        "Keep it flowing",
+        "The first paragraph",
+        "The longer route",
+        "Stay the distance",
+      ][number - 1],
+    focus:
+      entry?.focus ??
+      `${CHAPTER_SKILLS[category][0][0]}: ${CHAPTER_SKILLS[category][0][1]}`,
+    skills: entry?.skills ?? [CHAPTER_SKILLS[category][0][0]],
+    revision: 1,
+    passageId: `${id}-passage-v1`,
+    passage,
+    prerequisite: bonus
+      ? `${category}-${String(number).padStart(3, "0")}`
+      : number > 1
+        ? `${category}-${String(number - 1).padStart(3, "0")}`
+        : null,
+    role: bonus
+      ? "side-challenge"
+      : number === 100
+        ? "finale"
+        : number % 10 === 0
+          ? "showcase"
+          : number % 10 === 5
+            ? "pit-stop"
+            : "lesson",
+    environment: track.id,
+    assets: { trackId: track.id, kartId: "volt-kart" },
+    plannedReward: bonus ? { xp: 50, credits: 10 } : { xp: 20, credits: 5 },
+    milestones: bonus
+      ? []
+      : [
+          ...(number % 10 === 5
+            ? [
+                {
+                  kind: "pit-stop" as const,
+                  receiptId: `${id}-pit-stop`,
+                  xp: 50,
+                  credits: 20,
+                },
               ]
-            : `Level ${i + 1}`,
-      focus:
-        c === 0
-          ? "Common words, spacing and steady lowercase prose"
-          : c === 1
-            ? "Capitals, commas, contractions and sustained prose"
-            : "Quotes, numerals, punctuation and sustained concentration",
-      revision: 1 as const,
-      passage: PASSAGES[category][i],
-      paceGoal: [15, 30, 50][c] + Math.floor(i / 10) * [2, 3, 4][c],
-      accuracyGoal: 95 as const,
-      tier: category,
-      cpuBand: {
-        minWpm: [10, 25, 45][c] + Math.floor(i / 10) * 3,
-        maxWpm: [18, 35, 60][c] + Math.floor(i / 10) * 3,
-      },
-      seed: (0x54540000 + c * 1000 + i + 1) >>> 0,
-    })),
+            : []),
+          ...(number % 10 === 0
+            ? [
+                {
+                  kind: "chapter" as const,
+                  receiptId: `${category}-chapter-${chapter}`,
+                  xp: 100,
+                  credits: 40,
+                },
+              ]
+            : []),
+          ...(number === 100
+            ? [
+                {
+                  kind: "finale" as const,
+                  receiptId: `${category}-finale`,
+                  xp: 500,
+                  credits: 100,
+                },
+              ]
+            : []),
+        ],
+    paceGoal,
+    accuracyGoal: 95,
+    tier: category,
+    cpuBand: {
+      minWpm: Math.round([10, 25, 45][c] + progress * [10, 15, 25][c]),
+      maxWpm: Math.round([18, 35, 60][c] + progress * [17, 25, 40][c]),
+    },
+    seed: (0x54540000 + c * 1000 + number + (bonus ? 500 : 0)) >>> 0,
+  };
+}
+export const CAMPAIGN_LEVELS: readonly CampaignLevel[] = CATEGORIES.flatMap(
+  (category) =>
+    Array.from({ length: 100 }, (_, i) => makeLevel(category, i + 1)),
 );
+export const CAMPAIGN_BONUSES: readonly CampaignLevel[] = CATEGORIES.flatMap(
+  (category) =>
+    Array.from({ length: 10 }, (_, i) =>
+      makeLevel(category, (i + 1) * 10, true),
+    ),
+);
+export function campaignBonus(
+  category: Category,
+  chapter: number,
+): CampaignLevel | undefined {
+  return CAMPAIGN_BONUSES.find(
+    (level) => level.category === category && level.chapter === chapter,
+  );
+}
+export function campaignLink(level: CampaignLevel): string {
+  return level.kind === "bonus"
+    ? `#/bonus/${level.category}/${level.chapter}`
+    : `#/level/${level.category}/${level.number}`;
+}
 export function campaignLevel(
   category: Category,
   number: number,
@@ -107,7 +192,10 @@ export function categoryLevels(category: Category): readonly CampaignLevel[] {
 }
 export function readCampaignRoute(
   hash: string,
-): { category: Category; number?: number } | undefined {
+): { category: Category; number?: number; bonus?: true } | undefined {
+  const bonus = /^#\/bonus\/(easy|medium|hard)\/([1-9]|10)$/.exec(hash);
+  if (bonus && isCategory(bonus[1]))
+    return { category: bonus[1], number: Number(bonus[2]), bonus: true };
   const match =
     /^#\/(campaign|level)\/(easy|medium|hard)(?:\/([1-9]\d?|100))?$/.exec(hash);
   if (!match || !isCategory(match[2]) || (match[1] === "level" && !match[3]))

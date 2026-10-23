@@ -60,9 +60,9 @@ try {
         revision: 1,
       };
     localStorage.setItem(
-      "turbotype:campaign-map:v1",
+      "turbotype:campaign-map:v2",
       JSON.stringify({
-        schemaVersion: 1,
+        schemaVersion: 2,
         rulesVersion: 3,
         positions: { easy: 0, medium: null, hard: null },
         clears,

@@ -1,5 +1,7 @@
 # Car selection and future campaign rewards
 
+Latest23 October alpha.26 equipment decision supersedes earlier selection instructions: dedicated **Cars/Tracks** tabs with a three-column collection, five selectable starters, enlarged starter previews and locked milestone-sorted reward silhouettes. Saved equipment applies globally to new races; any ongoing/paused session blocks changes. Campaign Race/Replay starts directly from the single level-details dialog after track loading. No equipment picker remains in Hub/race/briefing. Planned reward art/earned ownership remains Phase9. See [collection behavior and focused checks](COLLECTIONS.md).
+
 Product decision: 21 October 2026. The user accepted the distinct alpha.11 cars, requested player choice, ten later locked vehicles with increasingly varied showcase styling (the 22 October vehicle-family correction below supersedes sports-car-only briefs), and sound controls only in Settings. This extends Phases 5/8/9 without renumbering the eleven phases.
 
 ## Available now — alpha.13

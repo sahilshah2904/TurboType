@@ -6,7 +6,8 @@ import {
 } from "../core/campaign-progress";
 import type { CampaignLevel, Category } from "../content/campaign";
 import type { TypingSnapshot } from "../core/typing-engine";
-export const CAMPAIGN_STORAGE_KEY = "turbotype:campaign-map:v1";
+export const CAMPAIGN_STORAGE_KEY = "turbotype:campaign-map:v2";
+export const LEGACY_CAMPAIGN_STORAGE_KEY = "turbotype:campaign-map:v1";
 /** Small Phase 7 progress boundary. Phase 9 migrates it into the canonical guest snapshot. */
 export class LocalCampaignRepository {
   private value = emptyCampaign();
@@ -22,7 +23,14 @@ export class LocalCampaignRepository {
     try {
       const raw = this.storage().getItem(CAMPAIGN_STORAGE_KEY);
       if (raw === null) {
-        if (!this.blocked) this.value = emptyCampaign();
+        if (this.blocked) return;
+        const legacy = this.storage().getItem(LEGACY_CAMPAIGN_STORAGE_KEY);
+        if (legacy !== null) {
+          const migrated = validateCampaign(JSON.parse(legacy), true);
+          if (!migrated) throw new Error("invalid legacy progress");
+          this.value = migrated;
+          this.persist(); // Leave the original v1 value untouched as a recovery copy.
+        } else this.value = emptyCampaign();
         return;
       }
       const parsed = validateCampaign(JSON.parse(raw));
@@ -67,6 +75,7 @@ export class LocalCampaignRepository {
     try {
       return (
         this.storage().getItem(CAMPAIGN_STORAGE_KEY) ??
+        this.storage().getItem(LEGACY_CAMPAIGN_STORAGE_KEY) ??
         JSON.stringify(this.value)
       );
     } catch {

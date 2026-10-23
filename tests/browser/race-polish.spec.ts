@@ -49,11 +49,12 @@ test("loads modern artwork, keeps the active caret readable and fills the viewpo
     "comet",
     "volt-rival",
   ]) {
-    for (const part of ["body", "wheel", "preview"])
+    for (const part of ["body", "wheel"])
       expect(assets.some((u) => u.endsWith(`${model}-${part}.webp`))).toBe(
         true,
       );
   }
+  expect(assets.some((u) => u.endsWith("-preview.webp"))).toBe(false);
   await expect(page.locator("#race-track")).toHaveAttribute(
     "data-parts",
     "independent-body-wheels",
