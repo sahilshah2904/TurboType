@@ -6,6 +6,8 @@ Read PROJECT_STATUS.md, docs/SESSION_HANDOFF.md and BACKLOG.md before reporting 
 
 ## Current checkpoint — 23 October 2026
 
+Verified Phase 8 review source 13b464dd06bab566d6b672fb030fc36ae160ffed passed hosted run39888045399/job120200909330 at02:21:23UTC:125 unit/116 browser cases, no retries/flaky cases. Six captures have zero page errors. PR #8 remains open/unmerged for user review. The subsequent documentation-only checkpoint has unchanged application/test/workflow code and its own CI; inspect actual head/status. Current source remains on codex/phase8-curriculum, not main; no Phase9/deployment started.
+
 The user accepted Phase 7 and requested all Phase 8 implementation plus updated GitHub README/handoff and a focused checklist. Current branch **codex/phase8-curriculum**, based on main **26a7f1d**; app **0.1.0-alpha.24**, rules **3**, content **3**, global future guest schema **1**, map save schema **2**. Inspect actual HEAD/PR/results. Do not merge or begin Phase 9 merely from this handoff.
 
 Phase 8 implements **300 playable main passages and 30 optional chapter challenges**, original curated prose/objectives/curves, manifests/references/planned reward metadata, showcases/finales, continuation through 100, shared 3,000-character typing/CPU cap and v1→v2 map migration. Existing 18 accepted passage values/revisions remain unchanged. Distinct excerpts intentionally revisit chapter prose; no runtime AI or validated learning-gain claim. See docs/PHASE8_CURRICULUM.md and newest docs/TESTING.md for delivery/checks/captures/remaining review.
