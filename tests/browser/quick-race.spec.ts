@@ -80,7 +80,7 @@ test("pauses CPUs, preserves the race through navigation and resumes the same cl
   await page.clock.fastForward(20000);
   await expect(page.locator("#race-standings")).toHaveText(positions!);
   await page.getByRole("link", { name: "Settings", exact: true }).click();
-  await page.getByRole("link", { name: "Race", exact: true }).click();
+  await page.getByRole("link", { name: "Quick Race", exact: true }).click();
   await expect(page.locator("#race-track")).toHaveAttribute(
     "data-ready",
     "true",
@@ -177,7 +177,7 @@ for (const asset of [
     );
     await page.getByRole("link", { name: "Practice", exact: true }).click();
     await expect(page.locator("canvas")).toHaveCount(0);
-    await page.getByRole("link", { name: "Race", exact: true }).click();
+    await page.getByRole("link", { name: "Quick Race", exact: true }).click();
     await expect(page.locator("#race-track canvas")).toHaveCount(1);
     await expect(page.locator("#race-state")).toHaveText("Finished");
   });

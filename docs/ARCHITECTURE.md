@@ -33,7 +33,7 @@ Each route transition reverts the Anime.js scope, aborts input/viewport listener
 
 On a system reduced-motion change, the hub remounts with the new preference; other screens apply preferences without destroying active typing state. Explicit reduced motion disables the scene's particle emission, wheel/body motion, camera entrance and repeating tween. Text size and quality settings are stored locally. Phaser audio remains disabled; the app-owned RaceAudio service independently controls optional original menu/race synthesis.
 
-The keyboard screen is a **free-editing input spike**: it shows match/difference feedback, composition state, last input type and visible viewport dimensions. It accepts paste and normal editing so browser behavior can be examined. It does not implement correction-required race rules, accuracy, WPM, progress awards or anti-cheat policy. No input data is uploaded or saved.
+The keyboard screen shares TypingEngine and connectRaceInput with races: exact typing, one unresolved error, Backspace correction, append-only edits and paste/drop/replacement blocking. A validated countdownMs=0 starts this untimed diagnostic immediately; race defaults remain three seconds. It shows sample hints, independent common physical-key detection, composition/input/viewport diagnostics and reset. It does not display WPM/accuracy, award progress or save/upload input. Route/reset disposal cancels adapter listeners and queued composition commits.
 
 ## Failure boundaries
 

@@ -544,25 +544,25 @@ select {
   color: #c3c9ce;
 }
 /* Race owns the available visual viewport; world and sprites resize independently. */
-html[data-route="race"] .world-backdrop,
-html[data-route="race"] .footer {
+html:is([data-route="race"], [data-route="level"]) .world-backdrop,
+html:is([data-route="race"], [data-route="level"]) .footer {
   display: none;
 }
-html[data-route="race"] body {
+html:is([data-route="race"], [data-route="level"]) body {
   overflow: hidden;
 }
-html[data-route="race"] .app-shell {
+html:is([data-route="race"], [data-route="level"]) .app-shell {
   padding: 0;
   height: 100dvh;
   min-height: 0;
 }
-html[data-route="race"] #main {
+html:is([data-route="race"], [data-route="level"]) #main {
   position: fixed;
   inset: 0px 0 auto;
   height: 100dvh;
   min-height: 0;
 }
-html[data-route="race"] .topbar {
+html:is([data-route="race"], [data-route="level"]) .topbar {
   position: fixed;
   top: 0px;
   left: 0;
@@ -571,10 +571,10 @@ html[data-route="race"] .topbar {
   min-height: 68px;
   background: linear-gradient(#12181dcf, transparent);
 }
-html[data-route="race"] .topbar .wordmark {
+html:is([data-route="race"], [data-route="level"]) .topbar .wordmark {
   font-size: 22px;
 }
-html[data-route="race"] .topbar .guest {
+html:is([data-route="race"], [data-route="level"]) .topbar .guest {
   display: none;
 }
 .immersive-race.quick-race {
@@ -1014,7 +1014,7 @@ html[data-route="race"] .topbar .guest {
 .topbar {
   padding-right: 56px;
 }
-html[data-route="race"] .topbar {
+html:is([data-route="race"], [data-route="level"]) .topbar {
   padding-right: 80px;
 }
 .fullscreen-control {
@@ -1491,19 +1491,19 @@ html[data-route="race"] .topbar {
 }
 @keyframes title-name {
   0%,
-  58% {
+  74% {
     opacity: 0;
     clip-path: inset(0 100% 0 0);
     transform: scale(1.05);
   }
-  62% {
+  76% {
     opacity: 1;
     clip-path: inset(0 100% 0 0);
   }
-  88%,
+  94%,
   100% {
     opacity: 1;
-    clip-path: inset(0 0 0 0);
+    clip-path: inset(0);
     transform: scale(1);
   }
 }
@@ -1865,23 +1865,29 @@ html[data-route="race"] .topbar {
   );
   animation: intro-smoke 1s calc(1.4s + var(--smoke) * 0.13s) 3 both;
 }
-.intro-track-fire {
-  position: absolute;
-  left: 0;
-  top: calc(50% - 90px);
-  width: 100%;
-  height: 100px;
-  animation: intro-track-burn 5.6s linear both;
-}
+.intro-track-fire,
 .intro-track-glow {
   position: absolute;
-  top: calc(50% - 4px);
-  left: 0;
-  right: 0;
-  height: 16px;
-  background: linear-gradient(90deg, #ff6a1320, #ffb23888, #ff6a1320);
-  filter: blur(7px);
+  right: 104%;
+  bottom: 3%;
+  width: clamp(160px, 28vw, 420px);
+  height: clamp(28px, 5vw, 64px);
+  pointer-events: none;
   animation: intro-track-burn 5.6s linear both;
+}
+.intro-track-fire {
+  mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 35%,
+    #000 88%,
+    transparent
+  );
+}
+.intro-track-glow {
+  height: 9px;
+  background: linear-gradient(90deg, transparent, #ff791344, #ffbf5e88);
+  filter: blur(5px);
 }
 .intro-fire-svg {
   display: block;
@@ -1909,15 +1915,11 @@ html[data-route="race"] .topbar {
 }
 .intro-logo-fire {
   position: absolute;
-  inset: auto 12% -12px;
-  height: clamp(45px, 7vw, 90px);
+  inset: auto 12% -8px;
+  height: clamp(18px, 2.5vw, 34px);
   pointer-events: none;
   z-index: 0;
   animation: intro-logo-ignite 5.6s ease both;
-}
-.intro-logo-fire--crown {
-  inset: -18px 12% auto;
-  height: clamp(26px, 4vw, 54px);
 }
 @keyframes intro-car-run {
   0% {
@@ -2066,43 +2068,38 @@ html[data-route="race"] .topbar {
   }
 }
 @keyframes intro-track-burn {
-  0% {
-    clip-path: inset(0 100% 0 0);
+  0%,
+  3% {
     opacity: 0;
   }
-  8% {
-    clip-path: inset(0 86% 0 0);
-    opacity: 0.85;
+  7%,
+  22% {
+    opacity: 1;
   }
-  24%,
+  27% {
+    opacity: 0.25;
+  }
+  32%,
   57% {
-    clip-path: inset(0 46% 0 0);
-    opacity: 1;
+    opacity: 0;
   }
-  77% {
-    clip-path: inset(0 0 0 0);
-    opacity: 1;
+  60%,
+  67% {
+    opacity: 0.9;
   }
-  95%,
+  73%,
   100% {
-    clip-path: inset(0 0 0 0);
     opacity: 0;
   }
 }
 @keyframes intro-logo-ignite {
   0%,
-  61% {
-    clip-path: inset(0 100% 0 0);
+  79% {
     opacity: 0;
   }
-  65% {
-    clip-path: inset(0 90% 0 0);
-    opacity: 0.75;
-  }
-  89%,
+  94%,
   100% {
-    clip-path: inset(0 0 0 0);
-    opacity: 0.9;
+    opacity: 0.55;
   }
 }
 @keyframes intro-fire-flicker {
@@ -2120,4 +2117,31 @@ html[data-route="race"] .topbar {
 .entrance-screen[data-cinema="still"]
   :is(.intro-driving-scene, .intro-logo-fire) {
   display: none;
+}
+
+/* Three complete look-ahead lines, with space to top-align the final line too. */
+:root[data-text-size="large"] .typing-surface,
+:root[data-text-size="large"] .typing-surface #race-passage {
+  height: 134px;
+}
+:root[data-text-size="large"] .typing-surface #race-passage::after {
+  content: "";
+  display: block;
+  height: 84px;
+}
+:root[data-text-size="large"] .immersive-race .race-console {
+  min-height: 200px;
+}
+:root[data-text-size="large"] .immersive-race .race-visual {
+  bottom: 200px;
+}
+.intro-driving-scene {
+  z-index: 1;
+}
+.entrance-copy {
+  position: relative;
+  z-index: 2;
+}
+.intro-skip {
+  z-index: 4;
 }

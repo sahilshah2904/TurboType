@@ -27,3 +27,8 @@ Next is Phase 7's three 100-node campaign maps, states, briefing and navigation.
 Keep 18 reward vehicles at 15/30/45/60/75/90 clears per category (23 including starters), 21 reward tracks at 10/25/40/55/70/85/100 (26 including starters), cross-category use of owned cosmetics and no replay inflation. Future vehicles include monster trucks, hoverboards, flying cars and varied structures. These remain plans, not implemented ownership/content.
 
 Preferences/tutorial completion/optional calibration samples persist locally; races/results are session-only. There are still no campaign levels/unlocks, accounts, cloud saves, multiplayer service or live Pages game. See [implementation](PHASE6_ONBOARDING.md), [review reference](PHASE6_REVIEW.md), [backlog](../BACKLOG.md) and [session handoff](SESSION_HANDOFF.md).
+
+
+## Refreshed documentation before Phase 7
+
+Main docs 6554956 passed exact-head check 39803134301. README/continuity refresh 1ee0aba updated current screenshots and recorded the longer-paragraph requirement before Phase 7. Latest unchanged images: alpha19 purple burnout/flaming title, alpha20 race/actions, alpha18 Hub/Settings, alpha17 welcome/rules, alpha16 compact expanded standings. Superseded opening/wind art remains historical. The new Phase 7 Hub is captured in alpha21. Full prior chronology is archived in history/2026-10-22-before-phase7/; TT-608 remains deferred.

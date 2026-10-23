@@ -282,3 +282,22 @@ describe("streak, recent pace and eligibility", () => {
     });
   });
 });
+
+it("starts keyboard diagnostics immediately while retaining strict correction", () => {
+  const engine = new TypingEngine({
+    passage: "the",
+    now: () => 0,
+    countdownMs: 0,
+  });
+  engine.start();
+  expect(engine.snapshot().state).toBe("racing");
+  engine.insert("txhe");
+  expect(engine.snapshot().typedText).toBe("tx");
+  engine.backspace();
+  engine.insert("he");
+  expect(engine.snapshot().state).toBe("finished");
+  for (const countdownMs of [-1, NaN, Infinity])
+    expect(
+      () => new TypingEngine({ passage: "a", now: () => 0, countdownMs }),
+    ).toThrow(RangeError);
+});

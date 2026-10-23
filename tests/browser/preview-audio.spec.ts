@@ -85,7 +85,7 @@ test("distinct original scores follow menu, countdown and race without file cont
     await expect.poll(music).toEqual([15.5]);
   }
   await expect(page.locator('input[type="file"]')).toHaveCount(0);
-  await page.getByRole("link", { name: "Race", exact: true }).click();
+  await page.getByRole("link", { name: "Quick Race", exact: true }).click();
   await expect(page.locator(".audio-controls")).toHaveCount(0);
   await expect(page.locator("#race-track")).toHaveAttribute(
     "data-ready",

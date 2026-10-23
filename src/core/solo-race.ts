@@ -5,6 +5,7 @@ import { rankStandings } from "./standings";
 export interface SoloRaceOptions extends TypingOptions {
   tier: CpuTier;
   seed: number;
+  cpuBand?: { minWpm: number; maxWpm: number };
 }
 export interface RacerRow {
   id: string;
@@ -29,6 +30,7 @@ export class SoloRace {
       this.options.passage.length,
       this.options.tier,
       this.options.seed,
+      this.options.cpuBand,
     );
   }
   start(): void {

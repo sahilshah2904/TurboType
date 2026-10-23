@@ -1,7 +1,7 @@
 {
   "name": "turbotype",
   "private": true,
-  "version": "0.1.0-alpha.20",
+  "version": "0.1.0-alpha.23",
   "type": "module",
   "engines": {
     "node": ">=24.13.0 <25",

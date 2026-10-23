@@ -112,7 +112,7 @@ test("instrument flames respect racing, pause, low effects and reduced motion", 
   await page.clock.install();
   await page.goto("./#/settings");
   await page.getByLabel("Motion", { exact: true }).selectOption("full");
-  await page.getByRole("link", { name: "Race", exact: true }).click();
+  await page.getByRole("link", { name: "Quick Race", exact: true }).click();
   await expect(page.locator('#race-track[data-ready="true"]')).toBeVisible({
     timeout: 12000,
   });
@@ -133,7 +133,7 @@ test("instrument flames respect racing, pause, low effects and reduced motion", 
     await page
       .getByLabel("Motion", { exact: true })
       .selectOption(preset === "reduced" ? "reduced" : "full");
-    await page.getByRole("link", { name: "Race", exact: true }).click();
+    await page.getByRole("link", { name: "Quick Race", exact: true }).click();
     await expect(page.locator('#race-track[data-ready="true"]')).toBeVisible({
       timeout: 12000,
     });

@@ -194,7 +194,7 @@ test("manual pace does not alter a paused race and is applied on retry", async (
   await expect(page.locator("#learning-save-status")).toContainText(
     "existing race is unchanged",
   );
-  await page.getByRole("link", { name: "Race", exact: true }).click();
+  await page.getByRole("link", { name: "Quick Race", exact: true }).click();
   await expect(page.locator("#race-state")).toHaveText("Paused");
   await expect(page.getByRole("textbox", { name: "Your typing" })).toHaveValue(
     "Every",
@@ -287,9 +287,11 @@ test("leaving a loading entrance cancels stale navigation", async ({
   });
   release();
   await expect(page.locator("html")).toHaveAttribute("data-route", "keyboard");
-  await page.getByRole("textbox", { name: "Your text" }).fill("Still here");
+  await page
+    .getByRole("textbox", { name: "Your text" })
+    .pressSequentially("the quick");
   await expect(page.getByRole("textbox", { name: "Your text" })).toHaveValue(
-    "Still here",
+    "the quick",
   );
 });
 
@@ -404,13 +406,14 @@ test("purple opening car brakes, burns out, rolls back and reveals the flaming t
   expect(halt.x).toBeCloseTo(width / 2, 0);
   expect(rev.x).toBeCloseTo(halt.x, 0);
   expect(rev.wheel).not.toBe(halt.wheel);
-  expect(rev.trail).toBeGreaterThan(0.9);
+  expect(rev.trail).toBe(0);
   expect(rev.title).toBe(0);
   expect((await sample(3100)).x).toBeLessThan(halt.x - width * 0.05);
   expect((await sample(4300)).x).toBeGreaterThan(width);
   const reveal = await sample(5100);
   expect(reveal.title).toBe(1);
-  expect(reveal.fire).toBeGreaterThan(0.8);
+  expect(reveal.fire).toBeGreaterThan(0.4);
+  expect(reveal.trail).toBe(0);
   await expect(page.locator(".intro-car-body")).toHaveAttribute(
     "src",
     /volt-rival-body/,

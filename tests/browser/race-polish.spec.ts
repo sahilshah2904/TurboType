@@ -190,7 +190,7 @@ test("audio is opt-in, persists controls and reuses one context without race eff
     "data-state",
     "running",
   );
-  await page.getByRole("link", { name: "Race", exact: true }).click();
+  await page.getByRole("link", { name: "Quick Race", exact: true }).click();
   await expect(page.locator("#race-track")).toHaveAttribute(
     "data-ready",
     "true",
@@ -238,7 +238,7 @@ test("unsupported audio cannot prevent a complete race or retry", async ({
     "data-state",
     "unavailable",
   );
-  await page.getByRole("link", { name: "Race", exact: true }).click();
+  await page.getByRole("link", { name: "Quick Race", exact: true }).click();
   await expect(page.locator("#race-track")).toHaveAttribute(
     "data-ready",
     "true",
@@ -285,7 +285,7 @@ test("bounds high effects and disables particles in reduced/low mode without alt
   await page.getByLabel("Motion", { exact: true }).selectOption("reduced");
   await page.getByLabel("Track effects", { exact: true }).selectOption("low");
   await page.getByLabel("Larger typing text", { exact: true }).check();
-  await page.getByRole("link", { name: "Race", exact: true }).click();
+  await page.getByRole("link", { name: "Quick Race", exact: true }).click();
   await expect(page.locator("#race-track")).toHaveAttribute(
     "data-ready",
     "true",
@@ -339,7 +339,7 @@ test("layered atmosphere spans sky and road, follows typing pace and stops for p
   await expect(track).toHaveAttribute("data-wind", "0");
   await page.getByRole("link", { name: "Settings", exact: true }).click();
   await page.getByLabel("Track effects", { exact: true }).selectOption("low");
-  await page.getByRole("link", { name: "Race", exact: true }).click();
+  await page.getByRole("link", { name: "Quick Race", exact: true }).click();
   await expect(track).toHaveAttribute("data-ready", "true", { timeout: 12000 });
   await page.getByRole("button", { name: /^Resume race/ }).click();
   await page.clock.runFor(3200);
@@ -348,7 +348,7 @@ test("layered atmosphere spans sky and road, follows typing pace and stops for p
   await page.getByRole("link", { name: "Settings", exact: true }).click();
   await page.getByLabel("Track effects", { exact: true }).selectOption("high");
   await page.getByLabel("Motion", { exact: true }).selectOption("reduced");
-  await page.getByRole("link", { name: "Race", exact: true }).click();
+  await page.getByRole("link", { name: "Quick Race", exact: true }).click();
   await expect(track).toHaveAttribute("data-ready", "true", { timeout: 12000 });
   await page.getByRole("button", { name: /^Resume race/ }).click();
   await page.clock.runFor(3200);

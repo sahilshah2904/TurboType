@@ -51,7 +51,7 @@ test("five starter tracks share preview/race choice and keep a running race lock
   await expect(
     page.locator('#track-preview[data-ready="true"]'),
   ).toHaveAttribute("data-track", "coral-coast", { timeout: 12000 });
-  await page.getByRole("link", { name: "Race", exact: true }).click();
+  await page.getByRole("link", { name: "Quick Race", exact: true }).click();
   await ready(page);
   await expect(page.locator("#race-track")).toHaveAttribute(
     "data-track",
