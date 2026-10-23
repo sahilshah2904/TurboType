@@ -1,5 +1,12 @@
 # TurboType future work backlog
 
+## Verified Phase 8 review checkpoint — 23 October 2026
+
+Exact review source **13b464dd06bab566d6b672fb030fc36ae160ffed** (implementation aba056c) passed the full hosted [run 39888045399/job 120200909330](https://github.com/sahilshah2904/TurboType/actions/runs/39888045399/job/120200909330), completed **02:21:23 UTC**: formatting/content drift/types/build, **125 unit / 116 browser cases**, no retries/flaky cases (10.3 minutes for browsers). Downloaded log: Reference_Images/analysis/phase8-hosted-check.log (ignored). Six sequential current captures have zero page errors.
+
+[PR #8](https://github.com/sahilshah2904/TurboType/pull/8) remains open/unmerged for user review. This documentation-only checkpoint changes no application/test/workflow code and has its own CI; inspect that later exact head rather than assuming the earlier pass covers it. No Phase 9 or deployment started. The earlier Phase 7 docs-only main check remains observed in dependency installation; never describe all historical runs as passed.
+
+
 ## Phase 8 delivery — alpha.24, 23 October 2026
 
 The user requested full Phase 8 after accepting Phase 7. All 300 main passages and 30 optional chapter challenges, explicit objectives/curves/manifest metadata, 6→100 continuation/finales, 3,000-character typing/CPU support and legacy map migration are implemented on codex/phase8-curriculum. See docs/PHASE8_CURRICULUM.md for content/reproduction/manual checks. All TT-801–806 are delivered for implementation/automated verification; user acceptance, integration and deployment remain separate. Current code is app alpha.24/rules3/content3/global future guest schema1/map schema2. No Phase 9 economy/earned ownership or backend/Pages deployment.
