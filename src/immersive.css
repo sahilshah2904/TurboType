@@ -472,6 +472,19 @@ html[data-route] .app-shell {
   width: min(900px, 100%);
   margin-left: auto;
 }
+.driver-progress {
+  margin-left: 0;
+  padding-top: 0;
+}
+.driver-progress h2:not(:first-child) {
+  margin-top: 24px;
+}
+.driver-progress details {
+  margin: 12px 0;
+}
+.driver-progress meter {
+  width: min(240px, 48vw);
+}
 .setting-row {
   background: transparent;
   border-color: #c7cdd233;

@@ -29,7 +29,7 @@ begin
   begin
     perform public.turbotype_write_save(a, 0, candidate || '{"revision":2}');
     raise exception 'Stale write succeeded';
-  exception when serialization_failure then null;
+  exception when sqlstate 'PT409' then null;
   end;
   begin
     perform public.turbotype_write_save(b, 0, candidate);

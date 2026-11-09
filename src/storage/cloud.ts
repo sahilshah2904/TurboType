@@ -104,7 +104,7 @@ export function connectCloud(
         candidate: save,
       });
       if (active !== account || closed) return;
-      if (error?.code === "40001") {
+      if (error?.code === "PT409") {
         const remote = await getRemote(account.id);
         if (active !== account || closed) return;
         if (remote.error) display("Sync failed · Local copy kept. Try again.");
@@ -112,7 +112,7 @@ export function connectCloud(
           account.remote = remote.data;
           display("Conflict · Choose the local or cloud copy.");
         }
-      } else if (error?.code === "54000") {
+      } else if (error?.code === "PT429") {
         schedule();
       } else if (error || !Number.isSafeInteger(data)) {
         display(

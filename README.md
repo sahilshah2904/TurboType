@@ -11,9 +11,9 @@
 [Phase 9 setup and review checklist](docs/PHASE9_RESUME.md) · [Session handoff](docs/SESSION_HANDOFF.md) · [Current status](PROJECT_STATUS.md) · [Backlog](BACKLOG.md)
 
 
-![Cars collection with five available starters and milestone-sorted locked silhouettes](docs/images/alpha26/cars-1440.png)
+![Driver Progress with synthetic sample records and a recent pace chart](docs/images/alpha27/driver-progress-fixture-1440.png)
 
-![Enlarged starter car](docs/images/alpha26/car-detail-1440.png)
+[Reward vehicle and course previews](docs/images/alpha27/README.md)
 
 
 ### Your words. Full throttle.
