@@ -7,6 +7,7 @@ import {
   type RunSummary,
 } from "../core/progression";
 import type { LocalGuestRepository } from "../storage/guest";
+import type { CloudStatus } from "../storage/cloud";
 
 const AWARD_LABELS: Record<string, string> = {
   clear: "First clear",
@@ -77,28 +78,78 @@ export function progressScreen(
   const records = Object.values(save.records).sort((a, b) => b.at - a.at);
   const display = (run: RunSummary) =>
     `<tr><td>${run.event}</td><td>${run.wpm.toFixed(1)}</td><td>${accuracy(run).toFixed(1)}%</td><td>${(run.elapsedMs / 1000).toFixed(1)}s</td><td>${run.eligible ? "Eligible" : run.finished ? "Practice" : "DNF"}</td></tr>`;
+  const awardCount = stats.awards.length + Number(save.recoveryBadge);
   return `<section class="page-heading"><p class="eyebrow">YOUR DRIVER</p><h1>Driver <span>progress.</span></h1><p>Rank ${stats.rank} · ${stats.xp} XP · ${stats.credits} credits${save.recoveryBadge ? " · Recovery badge" : ""}</p></section>
-    <section class="settings-panel driver-progress"><h2>Cloud progress</h2><p id="cloud-status" role="status">${cloudReady ? "Checking sign-in…" : "Cloud sync is available when a Supabase project is configured on a secure address. Local play is available here."}</p>
-    <div id="cloud-actions" class="practice-actions" hidden><button type="button" data-cloud="signIn" class="button button--primary">Sign in with Google</button><button type="button" data-cloud="signOut" class="text-button" hidden>Sign out</button><button type="button" data-cloud="importGuest" class="text-button" hidden>Import guest progress</button><button type="button" data-cloud="retry" class="text-button" hidden>Check cloud sync</button><button type="button" data-cloud="useLocal" class="text-button" hidden>Keep this device’s copy</button><button type="button" data-cloud="useRemote" class="text-button" hidden>Use cloud copy</button><button type="button" data-cloud="removeSave" class="text-button" hidden>Delete cloud save</button></div>
-    <h2>Coaching</h2><p>${coaching}</p><a class="button button--secondary" href="#/practice">Open practice drills</a>
-    <details><summary>Milestone awards (${stats.awards.length + Number(save.recoveryBadge)})</summary>
+    <section class="settings-panel driver-progress" aria-label="Driver progress details">
+    <div class="progress-section"><h2>Save progress</h2><p id="cloud-status" role="status">${cloudReady ? "Checking sign-in…" : "Guest progress is saved in this browser."}</p>
+    <div id="cloud-actions" class="practice-actions" hidden><button type="button" data-cloud="signIn" class="button button--primary" hidden>Sign in with Google</button><button type="button" data-cloud="retry" data-primary-check class="button button--secondary" hidden>Check cloud access</button><button type="button" data-cloud="signOut" class="text-button" hidden>Sign out</button><button type="button" data-cloud="useLocal" class="button button--secondary" hidden>Keep this device’s copy</button><button type="button" data-cloud="useRemote" class="button button--secondary" hidden>Use cloud copy</button></div>
+    <p id="google-sign-in-note" class="help" hidden>Google shares your email and basic profile to identify your save. Guest play is always available.</p></div>
+    <div class="progress-section"><h2>Practice next</h2><p>${coaching}</p><a class="button button--secondary" href="#/practice">Open practice drills</a></div>
+    ${
+      recent.length || awardCount || records.length
+        ? `<details class="progress-section"><summary>Race stats and awards</summary>
+    ${
+      awardCount
+        ? `<details><summary>Milestone awards (${awardCount})</summary>
     <ul>${save.recoveryBadge ? "<li>Recovery badge · corrected an error and reached a 20-character streak</li>" : ""}${stats.awards
       .map(({ id, xp, credits }) => {
         const [kind, event, threshold] = id.split(":");
         return `<li>${AWARD_LABELS[kind]} · ${event}${threshold ? ` · ${threshold} stars` : ""} · ${xp} XP · ${credits} credits</li>`;
       })
-      .join("")}</ul></details>
-    <h2>Recent race pace</h2><p>Last ${recent.length} races, newest first. Different passages and modes can have different pace.</p>
+      .join("")}</ul></details>`
+        : ""
+    }
+    ${
+      recent.length
+        ? `<h3>Recent race pace</h3><p>Last ${recent.length} races, newest first. Pace varies by passage and mode.</p>
     <ol>${recent.map((run) => `<li><meter min="0" max="${peak}" value="${run.wpm}" aria-label="${run.wpm.toFixed(1)} words per minute"></meter> ${run.wpm.toFixed(1)} WPM</li>`).join("")}</ol>
     ${latest?.pace.length ? `<details><summary>Pace through latest finish</summary><p>WPM by equal passage segment, in order.</p><ol>${latest.pace.map((wpm) => `<li><meter min="0" max="${Math.max(1, ...latest.pace)}" value="${wpm}"></meter> ${wpm.toFixed(1)} WPM</li>`).join("")}</ol></details>` : ""}
-    <details><summary>Recent history (${recent.length})</summary><div class="race-table-wrap"><table><thead><tr><th>Event</th><th>WPM</th><th>Accuracy</th><th>Time</th><th>Result</th></tr></thead><tbody>${recent.map(display).join("")}</tbody></table></div></details>
-    <details><summary>Comparable bests (${records.length})</summary><p>Fastest eligible finish per passage and mode under this rules and content version.</p><div class="race-table-wrap"><table><thead><tr><th>Event</th><th>WPM</th><th>Accuracy</th><th>Time</th><th>Result</th></tr></thead><tbody>${records.map(display).join("")}</tbody></table></div></details>
-    <details><summary>Key accuracy and timing</summary><p>Based on eligible races. Keys with fewer than five attempts are hidden. Timing measures the interval between successful inputs.</p><ul>${characters.map(([key, sample]) => `<li>${keyLabel(key)} · ${sample.errors} errors in ${sample.attempts} attempts${sample.timingCount >= 5 ? ` · ${Math.round(sample.timingMs / sample.timingCount)} ms average` : ""}</li>`).join("")}</ul></details>
-    <h2>Local save and recovery</h2><p id="guest-status" role="status">${status}</p>
+    <details><summary>Recent history (${recent.length})</summary><div class="race-table-wrap"><table><thead><tr><th>Event</th><th>WPM</th><th>Accuracy</th><th>Time</th><th>Result</th></tr></thead><tbody>${recent.map(display).join("")}</tbody></table></div></details>`
+        : ""
+    }
+    ${records.length ? `<details><summary>Comparable bests (${records.length})</summary><p>Fastest eligible finish per passage and mode under this rules and content version.</p><div class="race-table-wrap"><table><thead><tr><th>Event</th><th>WPM</th><th>Accuracy</th><th>Time</th><th>Result</th></tr></thead><tbody>${records.map(display).join("")}</tbody></table></div></details>` : ""}
+    ${characters.length ? `<details><summary>Key accuracy and timing</summary><p>Based on eligible races. Keys with fewer than five attempts are hidden. Timing measures the interval between successful inputs.</p><ul>${characters.map(([key, sample]) => `<li>${keyLabel(key)} · ${sample.errors} errors in ${sample.attempts} attempts${sample.timingCount >= 5 ? ` · ${Math.round(sample.timingMs / sample.timingCount)} ms average` : ""}</li>`).join("")}</ul></details>` : ""}</details>`
+        : ""
+    }
+    <details id="progress-save-tools" class="progress-section"><summary>Save and backup tools</summary><p id="guest-status" role="status">${status}</p>
     <div class="practice-actions"><button id="guest-export" class="button button--secondary">Export current save</button><button id="guest-export-original" class="text-button">Export recovery data</button><button id="guest-retry" class="text-button">Retry save</button>${cloudReady ? "" : '<button id="guest-reset" class="text-button">Reset guest progress</button>'}</div>
     <p><label for="guest-import">Import a backup to replace this local save</label> <input id="guest-import" type="file" accept=".json,application/json"></p>
+    <div id="cloud-tools" class="practice-actions" hidden><button type="button" data-cloud="importGuest" class="text-button" hidden>Import guest progress</button><button type="button" data-cloud="retry" class="text-button" hidden>Check cloud sync</button><button type="button" data-cloud="removeSave" class="text-button" hidden>Delete cloud save</button></div>
+    </details>
     <dialog id="guest-confirm"><h2>Replace your local save?</h2><p id="guest-preview"></p><button id="guest-replace" class="button button--primary">Replace save</button><form method="dialog"><button class="text-button">Cancel</button></form></dialog>
     </section>`;
+}
+
+export function updateCloudProgress(main: HTMLElement, cloud: CloudStatus) {
+  const status = main.querySelector("#cloud-status");
+  if (!status) return;
+  status.textContent = cloud.message;
+  const { signedIn, approved, conflict, needsCheck } = cloud;
+  const note = main.querySelector<HTMLElement>("#google-sign-in-note")!;
+  note.hidden = signedIn;
+  for (const button of main.querySelectorAll<HTMLButtonElement>(
+    "[data-cloud]",
+  )) {
+    const action = button.dataset.cloud;
+    const visible =
+      action === "signIn"
+        ? !signedIn
+        : action === "signOut" || action === "removeSave"
+          ? signedIn
+          : action === "importGuest"
+            ? approved && !conflict
+            : action === "retry"
+              ? signedIn &&
+                (button.hasAttribute("data-primary-check")
+                  ? needsCheck
+                  : approved && !needsCheck)
+              : approved && conflict;
+    button.hidden = !visible;
+  }
+  for (const group of main.querySelectorAll<HTMLElement>(
+    "#cloud-actions, #cloud-tools",
+  ))
+    group.hidden = !group.querySelector("button:not([hidden])");
 }
 
 export function connectProgress(

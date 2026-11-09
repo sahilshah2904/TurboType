@@ -52,6 +52,9 @@ test("guest backup requires replacement confirmation and another tab cannot over
   context,
 }) => {
   await page.goto("./#/progress");
+  await expect(page.getByText("Race stats and awards")).toHaveCount(0);
+  await expect(page.locator("#guest-export")).toBeHidden();
+  await page.getByText("Save and backup tools", { exact: true }).click();
   await expect(page.locator("#guest-status")).toContainText("Progress saves");
   const save = guestFixture();
   save.raceXp = 225;
@@ -66,6 +69,7 @@ test("guest backup requires replacement confirmation and another tab cannot over
   await expect(page.locator(".page-heading")).toContainText("Rank 2");
   const other = await context.newPage();
   await other.goto("./#/progress");
+  await other.getByText("Save and backup tools", { exact: true }).click();
   await expect(other.locator("#guest-status")).toContainText("Another tab");
   await other.getByRole("button", { name: "Retry save" }).click();
   await expect(other.locator("#guest-status")).toContainText("visit only");

@@ -472,12 +472,22 @@ html[data-route] .app-shell {
   width: min(900px, 100%);
   margin-left: auto;
 }
+html[data-route="progress"] .page-heading {
+  padding-block: 16px 0;
+  margin-bottom: 16px;
+}
 .driver-progress {
   margin-left: 0;
   padding-top: 0;
 }
-.driver-progress h2:not(:first-child) {
-  margin-top: 24px;
+.driver-progress .progress-section {
+  border-top: 1px solid var(--line);
+  padding: 16px 0;
+  margin: 0;
+}
+.driver-progress .progress-section > summary {
+  cursor: pointer;
+  font-weight: 700;
 }
 .driver-progress details {
   margin: 12px 0;

@@ -11,13 +11,21 @@ type Account = {
   id: string;
   repository: LocalGuestRepository;
   checkpoint: Checkpoint;
+  approved: boolean;
   remote?: RemoteSave;
 };
+export interface CloudStatus {
+  message: string;
+  signedIn: boolean;
+  approved: boolean;
+  conflict: boolean;
+  needsCheck: boolean;
+}
 
 export function connectCloud(
   guest: LocalGuestRepository,
   switchRepository: (repo: LocalGuestRepository, signedIn: boolean) => void,
-  showStatus: (text: string, signedIn: boolean, conflict: boolean) => void,
+  showStatus: (status: CloudStatus) => void,
 ) {
   const client = createClient(PROJECT_URL!, PROJECT_KEY!, {
     auth: {
@@ -33,9 +41,19 @@ export function connectCloud(
   let busy: Account | undefined;
   let closed = false;
   let status = "Sign in to save progress across devices.";
-  const display = (message = status) => {
-    status = message;
-    showStatus(status, !!active, active?.remote !== undefined);
+  let needsCheck = false;
+  const display = (message?: string, retry = false) => {
+    if (message !== undefined) {
+      status = message;
+      needsCheck = retry;
+    }
+    showStatus({
+      message: status,
+      signedIn: !!active,
+      approved: active?.approved ?? false,
+      conflict: active?.remote !== undefined,
+      needsCheck,
+    });
   };
   const accountPrefix = (id: string) => `${GUEST_KEY}:account:${id}:`;
   const metaKey = (id: string) => `${accountPrefix(id)}checkpoint`;
@@ -82,7 +100,7 @@ export function connectCloud(
 
   function schedule() {
     window.clearTimeout(timer);
-    if (!active || active.remote !== undefined) return;
+    if (!active?.approved || active.remote !== undefined) return;
     if (active.repository.snapshot().revision === active.checkpoint.local)
       return;
     display(
@@ -93,7 +111,8 @@ export function connectCloud(
 
   async function sync() {
     const account = active;
-    if (!account || busy || account.remote !== undefined || closed) return;
+    if (!account?.approved || busy || account.remote !== undefined || closed)
+      return;
     const save = account.repository.snapshot();
     if (save.revision === account.checkpoint.local) return;
     busy = account;
@@ -107,7 +126,11 @@ export function connectCloud(
       if (error?.code === "PT409") {
         const remote = await getRemote(account.id);
         if (active !== account || closed) return;
-        if (remote.error) display("Sync failed · Local copy kept. Try again.");
+        if (remote.error)
+          display(
+            "Couldn’t check cloud progress. Your local copy is available.",
+            true,
+          );
         else {
           account.remote = remote.data;
           display("Conflict · Choose the local or cloud copy.");
@@ -115,19 +138,21 @@ export function connectCloud(
       } else if (error?.code === "PT429") {
         schedule();
       } else if (error || !Number.isSafeInteger(data)) {
+        if (error?.code === "42501") account.approved = false;
         display(
           error?.code === "42501"
-            ? "Cloud access requires an approved Google account. Local copy kept."
-            : "Sync failed · Local copy kept. Try again.",
+            ? "Signed in. Cloud saves are waiting for approval."
+            : "Couldn’t sync. Your local copy is available.",
+          true,
         );
       } else {
         saveCheckpoint(account, { remote: data, local: save.revision });
-        display("Synced · Account progress is saved in the cloud.");
+        display("Progress saved to your account.");
         schedule();
       }
     } catch {
       if (active === account)
-        display("Sync failed · Local copy kept. Try again.");
+        display("Couldn’t sync. Your local copy is available.", true);
     } finally {
       if (busy === account) busy = undefined;
       if (active && active !== account) schedule();
@@ -141,6 +166,7 @@ export function connectCloud(
     if (!parseGuestSave(raw) || !account.repository.replace(raw, false)) {
       display(
         "The cloud copy could not be restored. Export your local copy before retrying.",
+        true,
       );
       return;
     }
@@ -150,22 +176,29 @@ export function connectCloud(
       local: account.repository.snapshot().revision,
     });
     switchRepository(account.repository, true);
-    display("Synced · Cloud copy restored on this device.");
+    display("Cloud progress restored.");
   }
 
   async function refresh(account: Account) {
     const approval = await client.rpc("turbotype_account_approved");
     if (active !== account || closed) return;
-    if (!approval.error && approval.data !== true) {
+    account.approved = !approval.error && approval.data === true;
+    if (!account.approved) {
       display(
-        "Cloud access requires an approved Google account. This device’s copy stays local.",
+        approval.error
+          ? "Couldn’t check cloud access. Your local copy is available."
+          : "Signed in. Cloud saves are waiting for approval.",
+        true,
       );
       return;
     }
     const { data: remote, error } = await getRemote(account.id);
     if (active !== account || closed) return;
     if (error) {
-      display("Sync failed · Account cache kept on this device.");
+      display(
+        "Couldn’t check cloud progress. Your local copy is available.",
+        true,
+      );
       return;
     }
     const revision = remote?.revision ?? 0;
@@ -183,8 +216,8 @@ export function connectCloud(
     else
       display(
         remote
-          ? "Synced · Account progress is saved in the cloud."
-          : "Signed in · Start playing or import your guest progress.",
+          ? "Progress saved to your account."
+          : "Signed in. Cloud saves are on.",
       );
   }
 
@@ -211,11 +244,14 @@ export function connectCloud(
       }),
       schedule,
     );
-    active = { id, repository, checkpoint: checkpointFor(id) };
+    active = { id, repository, checkpoint: checkpointFor(id), approved: false };
     switchRepository(repository, true);
     display("Checking your cloud save…");
     void refresh(active).catch(() =>
-      display("Sync failed · Account cache kept on this device."),
+      display(
+        "Couldn’t check cloud progress. Your local copy is available.",
+        true,
+      ),
     );
   }
 
@@ -265,12 +301,15 @@ export function connectCloud(
     retry: () => {
       if (active)
         void refresh(active).catch(() =>
-          display("Sync failed · Local copy kept."),
+          display(
+            "Couldn’t check cloud progress. Your local copy is available.",
+            true,
+          ),
         );
     },
     importGuest: () => {
       const account = active;
-      if (!account || account.remote !== undefined) return;
+      if (!account?.approved || account.remote !== undefined) return;
       const count = Object.keys(guest.read().clears).length;
       if (
         window.confirm(
@@ -323,7 +362,10 @@ export function connectCloud(
         });
         if (account !== active || closed) return;
         if (error) {
-          display("Cloud deletion failed. The local copy was kept.");
+          display(
+            "Couldn’t delete cloud progress. Your local copy is available.",
+            true,
+          );
           return;
         }
         await restore(account, null);

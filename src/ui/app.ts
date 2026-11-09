@@ -7,7 +7,12 @@ import {
 } from "../content/campaign";
 import { isUnlocked, starCount } from "../core/campaign-progress";
 import { GUEST_KEY, LocalGuestRepository } from "../storage/guest";
-import { connectProgress, progressScreen, rewardMessage } from "./progress";
+import {
+  connectProgress,
+  progressScreen,
+  rewardMessage,
+  updateCloudProgress,
+} from "./progress";
 import type { connectCloud } from "../storage/cloud";
 import {
   campaignCards,
@@ -586,24 +591,7 @@ export function mountApp(root: HTMLElement): () => void {
               badge.textContent = signedIn ? "ACCOUNT DRIVER" : "GUEST DRIVER";
             render();
           },
-          (message, signedIn, conflict) => {
-            const status = main.querySelector("#cloud-status");
-            const actions = main.querySelector<HTMLElement>("#cloud-actions");
-            if (!status || !actions) return;
-            status.textContent = message;
-            actions.hidden = false;
-            actions
-              .querySelectorAll<HTMLButtonElement>("[data-cloud]")
-              .forEach((button) => {
-                const action = button.dataset.cloud;
-                button.hidden =
-                  action === "signIn"
-                    ? signedIn
-                    : action === "useLocal" || action === "useRemote"
-                      ? !conflict
-                      : !signedIn || (action === "importGuest" && conflict);
-              });
-          },
+          (status) => updateCloudProgress(main, status),
         );
         cloud.status();
       })

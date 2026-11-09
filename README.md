@@ -6,12 +6,12 @@
 
 **Play:** 300 main races and 30 optional challenges. Earn 18 original reward vehicles and 21 reward courses through eligible main clears, then equip them for new races across categories. Open **Progress** for XP, rank, history, coaching and local backup controls. [Collections](docs/COLLECTIONS.md) · [Curriculum](docs/PHASE8_CURRICULUM.md).
 
-**Account preview:** the Supabase Free project, save database, and Google provider are configured. To test from the secure local preview, open **Progress → Sign in with Google**. Player approval and live two-account checks are required before release. GitHub Pages hosting belongs to Phase 10.
+**Account preview:** two approved testers have signed in through Google. In the secure local preview, **Progress** shows save status and practice. Race stats and backup controls open on demand. Live cross-browser cloud-save checks are still pending. GitHub Pages hosting belongs to Phase 10.
 
 [Phase 9 setup and review checklist](docs/PHASE9_RESUME.md) · [Session handoff](docs/SESSION_HANDOFF.md) · [Current status](PROJECT_STATUS.md) · [Backlog](BACKLOG.md)
 
 
-![Driver Progress with synthetic sample records and a recent pace chart](docs/images/alpha27/driver-progress-fixture-1440.png)
+![Driver Progress with save status, practice, and collapsed stats and backup tools](docs/images/alpha27/driver-progress-fixture-1440.png)
 
 [Reward vehicle and course previews](docs/images/alpha27/README.md)
 
