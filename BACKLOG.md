@@ -1,8 +1,8 @@
 # TurboType future work backlog
 
-## Phase 9 accepted — 9 November 2026
+## Phase 10 release — 9 November 2026
 
-The owner accepted alpha.27 after seeing the same saved stats in Microsoft Edge. Both approved accounts saved distinct live campaign clears and XP. [PR #9](https://github.com/sahilshah2904/TurboType/pull/9) awaits integration. Production cloud and desktop verification carry into Phase 10. [Phase 9 handoff](docs/PHASE9_RESUME.md) · [Verification](docs/TESTING.md)
+The owner accepted Phase 9 after seeing the same saved stats in Microsoft Edge. Both approved accounts saved distinct live campaign clears and XP. [PR #9](https://github.com/sahilshah2904/TurboType/pull/9) merged at `615041c`. The [Phase 10 release guide](docs/PHASE10_RELEASE.md) tracks desktop, production cloud and deployment verification.
 
 ## Historical paused checkpoint — 23 October 2026
 

@@ -6,7 +6,7 @@ Read PROJECT_STATUS.md, docs/SESSION_HANDOFF.md and BACKLOG.md before reporting 
 
 ## Current checkpoint — 9 November 2026
 
-The user accepted Phase 9 alpha.27 after confirming saved stats in Microsoft Edge. Phase 8 is integrated at e3d0603. [PR #9](https://github.com/sahilshah2904/TurboType/pull/9) holds the accepted Phase 9 preview and documentation. Verify the current PR and exact-head checks before integration. The live Google sign-in and owner restore evidence are separate from database fixtures. Preserve Vite5173 and legacy saves. The next release work is Phase 10 desktop testing, production cloud checks and GitHub Pages, followed by Phase 11 multiplayer. [Phase 9 handoff](docs/PHASE9_RESUME.md)
+The user accepted Phase 9 after confirming saved stats in Microsoft Edge. [PR #9](https://github.com/sahilshah2904/TurboType/pull/9) merged at `615041c`. The user authorized starting and finishing the Phase 10 single-player release. Audit the release PR, exact-source checks and live Pages deployment. The live Google sign-in and owner restore evidence are separate from database fixtures. Preserve Vite5173 and legacy saves. Phase 11 remains separate. [Release guide](docs/PHASE10_RELEASE.md)
 
 ## Historical checkpoint — 23 October 2026
 

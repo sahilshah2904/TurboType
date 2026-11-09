@@ -2,7 +2,7 @@
 
 # TurboType
 
-**Current preview — alpha.27.** The Phase 9 branch adds unified guest progression, rewards, owned equipment, personal records, and practice drills. The accepted alpha.26 curriculum and collection flow is integrated on main through [PR #8](https://github.com/sahilshah2904/TurboType/pull/8).
+**Single-player release — v0.1.0.** Race with a physical keyboard on a laptop or desktop. [Open TurboType](https://sahilshah2904.github.io/TurboType/) · [Release and recovery guide](docs/PHASE10_RELEASE.md)
 
 **Play:** 300 main races and 30 optional challenges. Earn 18 original reward vehicles and 21 reward courses through eligible main clears, then equip them for new races across categories. Open **Progress** for XP, rank, history, coaching and local backup controls. [Collections](docs/COLLECTIONS.md) · [Curriculum](docs/PHASE8_CURRICULUM.md).
 
@@ -145,7 +145,7 @@ Open **Settings → Sound & music** to enable sound or change volumes. The hub h
 
 ## Development progress
 
-**Phases 1–8 are accepted and integrated.** Phase 9 alpha.27 is accepted and awaits integration through [PR #9](https://github.com/sahilshah2904/TurboType/pull/9). Phase 10 covers release testing and GitHub Pages. Further race-atmosphere polish is deferred.
+**Phases 1–9 are accepted and integrated.** Phase 9 merged through [PR #9](https://github.com/sahilshah2904/TurboType/pull/9). Phase 10 covers release testing and GitHub Pages. Further race-atmosphere polish is deferred.
 
 | Phase | Delivery | Current status |
 | --- | --- | --- |
@@ -157,8 +157,8 @@ Open **Settings → Sound & music** to enable sound or change volumes. The hub h
 | 6 | Cinematic loading/welcome/rules, tutorial, calibration and final navigation | Complete for agreed scope; PR #6 merged, TT-608 polish deferred |
 | 7 | Easy/Medium/Hard rightward maps, 100 numbered nodes each, locks, chapters and saved position | Complete and accepted; PR #7 merged 04eb38d |
 | 8 | All 300 passages, learning goals, difficulty/star curves and 30 bonus challenges | Accepted and merged through PR #8 |
-| 9 | Rewards/rank/garage, records/charts/coaching/drills, robust guest saves and optional account-backed cloud progress | Accepted after the Edge restore check. PR #9 awaits integration |
-| 10 | Desktop browser/accessibility/performance/recovery/cloud testing, Pages and live release verification | Next |
+| 9 | Rewards/rank/garage, records/charts/coaching/drills, robust guest saves and optional account-backed cloud progress | Accepted and merged through PR #9 |
+| 10 | Desktop browser/accessibility/performance/recovery/cloud testing, Pages and live release verification | [Release checklist](docs/PHASE10_RELEASE.md) |
 | 11 | Friends backend/private rooms/invites, synchronized races, reconnect/rematches immediately after solo launch | Planned |
 
 Phases vary greatly in size; phase numbers are not a completion percentage.
@@ -233,7 +233,7 @@ Phaser owns the canvas; native HTML owns input/navigation; Anime.js coordinates 
 
 Guest saves keep campaign, rewards, equipment and records on this browser. Export, import and recovery are in Progress. Account sync uses a separately scoped account save once configured and verified. [Phase 9 handoff](docs/PHASE9_RESUME.md)
 
-GitHub Pages hosting follows in Phase 10. Phase 11 will validate a free backend for private rooms, ready checks, synchronized races and reconnection.
+GitHub Pages serves the single-player build. Phase 11 will validate a free backend for private rooms, ready checks, synchronized races and reconnection.
 
 ## Continue in a new project chat
 
@@ -251,4 +251,4 @@ These links deliberately target the preview branch so the default-branch README 
 | Recreate the assets and app | [Fleet](https://github.com/sahilshah2904/TurboType/blob/main/docs/KART_FLEET.md) · [Audio](https://github.com/sahilshah2904/TurboType/blob/main/docs/AUDIO.md) · [Visual integration](https://github.com/sahilshah2904/TurboType/blob/main/docs/IMMERSIVE_APP.md) |
 | Testing and measured limits | [Verification](https://github.com/sahilshah2904/TurboType/blob/main/docs/TESTING.md) · [Full-app profile](https://github.com/sahilshah2904/TurboType/blob/main/docs/PERFORMANCE_ALPHA14.md) |
 
-Original assets/audio have tracked sources/prompts/provenance. Reel assets/music and franchise artwork are not shipped. This is a development preview, not a completed single-player release.
+Original assets and audio have tracked sources and provenance in [ASSETS.md](docs/ASSETS.md).

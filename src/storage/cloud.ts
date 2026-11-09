@@ -281,15 +281,19 @@ export function connectCloud(
   }).data.subscription;
   const redirect = new URL(location.href);
   const code = redirect.searchParams.get("code");
-  if (code || redirect.searchParams.has("error")) {
+  const callbackError =
+    redirect.searchParams.has("error") ||
+    new URLSearchParams(redirect.hash.slice(1)).has("error");
+  if (code || callbackError) {
     for (const key of ["code", "error", "error_code", "error_description"])
       redirect.searchParams.delete(key);
+    if (!redirect.hash.startsWith("#/")) redirect.hash = "";
     history.replaceState(history.state, "", redirect);
+    location.hash = "#/progress";
     if (code)
       void client.auth.exchangeCodeForSession(code).then(({ error }) => {
         if (closed) return;
         if (error) display("Google sign-in failed. Start again from Progress.");
-        else location.hash = "#/progress";
       });
     else display("Google sign-in was canceled or failed.");
   }

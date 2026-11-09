@@ -122,7 +122,7 @@ export function progressScreen(
     <section class="settings-panel driver-progress" aria-label="Driver progress details">
     <div class="progress-section"><h2>Save progress</h2><p id="cloud-status" role="status">${cloudReady ? "Checking sign-in…" : "Guest progress is saved in this browser."}</p>
     <div id="cloud-actions" class="practice-actions" hidden><button type="button" data-cloud="signIn" class="button button--primary" hidden>Sign in with Google</button><button type="button" data-cloud="retry" data-primary-check class="button button--secondary" hidden>Check cloud access</button><button type="button" data-cloud="signOut" class="text-button" hidden>Sign out</button><button type="button" data-cloud="useLocal" class="button button--secondary" hidden>Keep this device’s copy</button><button type="button" data-cloud="useRemote" class="button button--secondary" hidden>Use cloud copy</button></div>
-    <p id="google-sign-in-note" class="help" hidden>Google shares your email and basic profile to identify your save. Guest play is always available.</p></div>
+    <p id="google-sign-in-note" class="help" hidden>Google shares your email and basic profile to identify your save. Guest play is always available. <a href="${import.meta.env.BASE_URL}privacy.html">Privacy policy</a></p></div>
     <div class="progress-section"><h2>Practice next</h2><p>${coaching}</p><a class="button button--secondary" href="#/practice">Open practice drills</a></div>
     ${
       recent.length || awardCount || records.length

@@ -152,7 +152,7 @@ try {
       .click();
     await page.waitForFunction(() => window.audioProbe.decodes.length === 2);
     console.log(`Profile ${profile.name}: audio decoded`);
-    await page.getByRole("link", { name: "Race", exact: true }).click();
+    await page.getByRole("link", { name: "Quick Race", exact: true }).click();
     await page.locator('#race-track[data-ready="true"]').waitFor();
     await cdp.send("HeapProfiler.collectGarbage");
     const heapBefore = await cdp.send("Runtime.getHeapUsage");

@@ -1,6 +1,6 @@
 # TurboType GitHub workflow
 
-Phase 8 was reviewed, merged as e3d0603, and passed the [main push check](https://github.com/sahilshah2904/TurboType/actions/runs/42546049988). The owner accepted the Phase 9 preview after the Edge restore check. Its source and closeout documentation are in [draft PR #9](https://github.com/sahilshah2904/TurboType/pull/9) against main. Check the current exact-head CI before integrating. [Phase 9 handoff](PHASE9_RESUME.md)
+Phase 8 merged as `e3d0603`. Phase 9 merged as `615041c` after the owner accepted the Edge restore and the exact PR head passed CI. [Phase 9 PR](https://github.com/sahilshah2904/TurboType/pull/9)
 
 23 October stop-and-save checkpoint: accepted Phase8/alpha.26 source bd378c1 passes full hosted run39972392241/job120478169052(125 unit/121 browser). PR8 remains open/unmerged; main still contains accepted Phase7. Phase9 preparation branch codex/phase9-progression starts at bd378c1; no new app code yet, only this documentation checkpoint. Keep any Phase9 PR explicitly stacked against the Phase8 branch until reviewed integration is authorized; do not merge/deploy merely to save handoff. Inspect current PR/HEAD checks on resume; PHASE9_RESUME.md records exact next steps.
 
@@ -74,7 +74,7 @@ Phase 2 PR #1 and Phase 3 PR #2 were merged in order on 20 October 2026 after th
 
 ## Publishing and recovery
 
-The game will be deployed in a later milestone through a reviewed GitHub Actions Pages workflow. The intended project path is `/TurboType/`. Once that workflow exists, an eligible push/merge triggers installation, checks, build, and deployment; verify the workflow result and live game before reporting a release.
+The Pages workflow starts after a successful check on the current `main` commit. It rebuilds that source with the browser-safe Supabase variables, verifies the artifact and publishes only `dist/` at `/TurboType/`. The deployment environment permits `main`. Verify the deployment and live game before tagging a release. [Release and rollback steps](PHASE10_RELEASE.md)
 
 Phase 2 adds a checks-only GitHub Actions workflow. It verifies formatting, types, tests and a production build; it does not deploy the app. Pages, a live hosted game, branch protection and recurring sync remain unconfigured. Report actual CI run results separately from the existence of the workflow.
 
