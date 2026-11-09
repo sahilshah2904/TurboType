@@ -6,7 +6,7 @@ import { speedometer, updateSpeedometer } from "./speedometer";
 import { animate } from "animejs";
 import { RaceFeedback } from "../game/race-view";
 import type { RaceAudio } from "../audio/race-audio";
-import { STARTER_KARTS, type KartId } from "../content/kart-catalog";
+import { KARTS, type KartId } from "../content/kart-catalog";
 import { SoloRace } from "../core/solo-race";
 import { CPU_TIERS, type CpuTier } from "../core/cpu-schedule";
 import { PRACTICE_PASSAGES } from "../content/practice-passages";
@@ -23,7 +23,7 @@ export interface QuickRaceSession {
   timed: boolean;
   campaign?: {
     level: CampaignLevel;
-    finish: (result: TypingSnapshot) => string;
+    finish: (result: TypingSnapshot, place: number) => string;
   };
 }
 function buildRace(session: Omit<QuickRaceSession, "race">): SoloRace {
@@ -53,7 +53,7 @@ export function createQuickRaceSession(
 export function createCampaignRaceSession(
   level: CampaignLevel,
   trackId: TrackId,
-  finish: (result: TypingSnapshot) => string,
+  finish: (result: TypingSnapshot, place: number) => string,
 ): QuickRaceSession {
   if (!level.passage)
     throw new RangeError("Campaign passage is not authored yet.");
@@ -103,7 +103,7 @@ export function quickRaceScreen(
 </div><section class="race-deck" aria-label="Race setup and controls"><h1 class="race-deck-title">${level ? `${level.category.toUpperCase()} · ${level.kind === "bonus" ? `BONUS ${level.chapter}` : `LEVEL ${level.number}`}` : "Quick <span>Race.</span>"}</h1>${level ? `<p class="campaign-race-help help">Untimed · Finish unpaused to clear. ${level.kind === "bonus" ? "Optional bonus: no main-level or reward unlocks. " : ""}Stars: completion / ${level.accuracyGoal}% accuracy / ${level.paceGoal} WPM. Pause or assisted input makes this practice-only.</p>` : ""}<div class="track-bottom"><span id="race-track-status" role="status">Loading race track…</span><button id="retry-race-track" class="text-button" hidden>Retry artwork</button><button id="text-race" class="text-button" hidden>Race with text standings</button></div>
     <section id="race-results" class="run-results" aria-labelledby="race-result-title" hidden>
       <p id="race-result-label" class="eyebrow">${level ? "CAMPAIGN RESULT" : "SESSION RESULT · NOT SAVED"}</p>
-      <div class="result-heading"><h2 id="race-result-title"></h2><strong id="race-result-place"></strong></div>
+      <div class="result-heading"><h2 id="race-result-title"></h2><strong id="race-result-place"></strong></div><p id="race-rewards" class="help" hidden></p>
       <dl id="race-result-summary" class="result-metrics"><div><dt>Average WPM</dt><dd id="race-result-wpm"></dd></div><div><dt>Accuracy</dt><dd id="race-result-accuracy"></dd></div><div><dt>Time</dt><dd id="race-result-time"></dd></div></dl>
       <p id="campaign-result-status" role="status" ${level ? "" : "hidden"}></p><p id="race-result-progress" hidden></p>
       <details id="race-result-details" open><summary>Final standings</summary><div class="race-table-wrap"><table><caption>CPU opponents · later finishes are simulated.</caption><thead><tr><th scope="col">Place</th><th scope="col">Driver</th><th scope="col">Time</th><th scope="col">Status</th></tr></thead><tbody id="race-result-rows"></tbody></table></div></details>
@@ -121,7 +121,7 @@ export function quickRaceScreen(
       <details class="race-advanced"><summary>Advanced / Replay</summary><label for="race-seed">Race seed</label><input id="race-seed" type="number" min="0" max="4294967295" step="1" inputmode="numeric" required aria-describedby="setup-help" /><p id="setup-help" class="help">The same passage, pace and seed reproduce CPU schedules. Your own typing is always live. A seed is chosen automatically for normal play.</p></details>
     </div>
     <p class="help race-setup">A standalone race for warm-ups and trying cars or tracks. Choose a passage and CPU pace; it does not change campaign progress. Results stay in this session.</p>
-    <p id="campaign-equipment" class="help">${STARTER_KARTS.find((k) => k.id === selectedKart)!.name} · ${trackTheme(selectedTrack).name}</p><p class="help race-setup">Choose your equipment in <a href="#/cars">Cars</a> and <a href="#/tracks">Tracks</a>.</p>
+    <p id="campaign-equipment" class="help">${KARTS.find((k) => k.id === selectedKart)!.name} · ${trackTheme(selectedTrack).name}</p><p class="help race-setup">Choose your equipment in <a href="#/cars">Cars</a> and <a href="#/tracks">Tracks</a>.</p>
     <div class="practice-actions"><button id="start-race" class="button button--primary" disabled>Start race →</button><button id="retry-race" class="text-button">Retry same race</button><button id="new-race" class="text-button" ${level ? "hidden" : ""}>New race</button>${level && level.kind === "main" && level.number < 100 ? `<a id="campaign-next" class="button button--secondary" href="#/level/${level.category}/${level.number + 1}" hidden>Next level →</a>` : ""}${level ? `<a class="campaign-race-back button button--secondary" href="#/campaign/${level.category}">← Return to map</a>` : ""}</div>
     <p id="race-controls-help" class="help">Esc or leaving this screen pauses everyone. Resume has a fresh countdown. Retry resets the run; refresh discards this unsaved session.</p>
     <div class="run-details"><span id="race-errors">0 errors · 0 corrected</span><span id="race-eligibility">Session only · not saved</span><span id="race-streak">0 clean streak</span></div>
@@ -139,6 +139,7 @@ export function connectQuickRace(
   tracks: { read: () => TrackId },
   takePendingPace?: () => CpuTier | undefined,
   autoStart = false,
+  finishQuick?: (result: TypingSnapshot, place: number) => string,
 ): () => void {
   const abort = new AbortController();
   const eventOptions = { signal: abort.signal };
@@ -209,7 +210,7 @@ export function connectQuickRace(
     const active = ["countdown", "racing", "paused"].includes(s.state);
     text(
       "#campaign-equipment",
-      `${STARTER_KARTS.find((kart) => kart.id === session.kartId)!.name} · ${trackTheme(session.trackId).name}`,
+      `${KARTS.find((kart) => kart.id === session.kartId)!.name} · ${trackTheme(session.trackId).name}`,
     );
     main.classList.toggle("quick-race-active", active);
     input.readOnly = !["countdown", "racing"].includes(s.state);
@@ -316,11 +317,13 @@ export function connectQuickRace(
     });
     find("#race-results").hidden = results === null;
     if (results && s.state !== lastState) {
+      const place = results.find((row) => row.id === "player")!.place;
       if (session.campaign) {
+        const summary = session.campaign.finish(s, place);
         text(
           "#campaign-result-status",
           s.state === "finished"
-            ? session.campaign.finish(s)
+            ? summary
             : "Unfinished run. No campaign progress earned.",
         );
         const next = main.querySelector<HTMLElement>("#campaign-next");
@@ -330,7 +333,11 @@ export function connectQuickRace(
             !s.eligible ||
             s.practiceReasons.length > 0;
       }
-      const place = results.find((row) => row.id === "player")!.place;
+      if (!session.campaign && finishQuick) {
+        const reward = finishQuick(s, place);
+        text("#race-rewards", reward);
+        find("#race-rewards").hidden = !reward;
+      }
       text(
         "#race-result-title",
         s.state === "finished"

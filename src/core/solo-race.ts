@@ -20,6 +20,9 @@ export interface RacerRow {
 
 /** Composes the existing typing clock; bots never own a second running timer. */
 export class SoloRace {
+  readonly id = Array.from(crypto.getRandomValues(new Uint8Array(16)), (byte) =>
+    byte.toString(16).padStart(2, "0"),
+  ).join("");
   readonly typing: TypingEngine;
   readonly opponents;
   readonly options: Readonly<SoloRaceOptions>;

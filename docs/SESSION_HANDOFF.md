@@ -1,6 +1,14 @@
 # TurboType session handoff
 
-## Paused checkpoint — 23 October 2026
+## Phase 9 implementation — 9 November 2026
+
+Current branch `codex/phase9-progression`, preview alpha.27, rules 3, content 3, guest save 1. The user resumed Phase 9 and authorized a Free project in their Supabase organization. Phase 8 merged as e3d0603 and the main push check passed. Retain the existing LAN server on 5173 and the original browser save keys.
+
+Read [Phase 9 setup and review](PHASE9_RESUME.md) and [verification](TESTING.md) first. The branch includes a guest save, economy, 18 reward vehicles, 21 reward environments, Progress, drills, cloud client and server migrations. The hosted test transaction covered access isolation, removed users, duplicate retries, stale writes and owner deletion using synthetic identities and rolled back the fixtures. The owner must complete Google OAuth setup before live account and two-device checks. Do not treat this as Phase 9 acceptance or a Pages release.
+
+The sections below retain older checkpoints and their then-current status.
+
+## Historical paused checkpoint — 23 October 2026
 
 The user accepted alpha.26 ("all good"), requested Phase9 completion, then explicitly asked to **continue later and save README/all handoffs**. Stop after saving documentation. No further implementation, integration, deployment or backend provisioning is authorized during this pause; a later resume request is required.
 

@@ -2,13 +2,13 @@
 
 # TurboType
 
-**Session saved for later — 23 October 2026.** The user accepted the latest alpha.26 curriculum/collection flow. Exact accepted source [bd378c1](https://github.com/sahilshah2904/TurboType/commit/bd378c12711c7b54aa24b284cf182ae5fc052825) passed **125 unit tests and all 121 browser tests** in [GitHub checks](https://github.com/sahilshah2904/TurboType/actions/runs/39972392241/job/120478169052). [PR8](https://github.com/sahilshah2904/TurboType/pull/8) remains unmerged; main still contains the accepted Phase 7 baseline. No game/backend/cloud deployment exists.
+**Current preview — alpha.27.** The Phase 9 branch adds unified guest progression, rewards, owned equipment, personal records, and practice drills. The accepted alpha.26 curriculum and collection flow is integrated on main through [PR #8](https://github.com/sahilshah2904/TurboType/pull/8).
 
-**Implemented:** 300 main races and 30 optional challenges, sustained paragraphs, saved local campaign progress, and separate three-column **Cars/Tracks** collections with starter selection/enlarged previews. Equipment applies globally to new races and stays locked during ongoing/paused runs. One level-details dialog leads directly to countdown. Locked reward silhouettes remain previews; 18 reward vehicles and 21 environments still need finished content. [Collections](docs/COLLECTIONS.md) · [Curriculum](docs/PHASE8_CURRICULUM.md).
+**Play:** 300 main races and 30 optional challenges. Earn 18 original reward vehicles and 21 reward courses through eligible main clears, then equip them for new races across categories. Open **Progress** for XP, rank, history, coaching and local backup controls. [Collections](docs/COLLECTIONS.md) · [Curriculum](docs/PHASE8_CURRICULUM.md).
 
-**Phase 9 is preparation only.** The user requested it, then paused before implementation. The new codex/phase9-progression branch initially contained the unchanged accepted app; this save checkpoint adds documentation only. Canonical guest saves/backup recovery, XP/credits/rank/receipts, real ownership/unlocks, learning history/drills and optional account/cloud sync are all still pending. Supabase Free was researched and explained; no account/project was provided or provisioned. User-owned free backend/sign-in setup will be needed before live cloud verification. Never supply passwords or service-role keys.
+**Account preview:** the Supabase Free project and save database are provisioned. Account sync requires Google sign-in configuration and a live two-account check before release. Guest play works locally. GitHub Pages hosting belongs to Phase 10.
 
-[Complete resume checklist and future steps](docs/PHASE9_RESUME.md) · [Session handoff](docs/SESSION_HANDOFF.md) · [Current status](PROJECT_STATUS.md) · [Backlog](BACKLOG.md). **Stop after saving; resume only when requested.** Documentation checkpoint CI is separate from the accepted implementation result.
+[Phase 9 setup and review checklist](docs/PHASE9_RESUME.md) · [Session handoff](docs/SESSION_HANDOFF.md) · [Current status](PROJECT_STATUS.md) · [Backlog](BACKLOG.md)
 
 
 ![Cars collection with five available starters and milestone-sorted locked silhouettes](docs/images/alpha26/cars-1440.png)
@@ -56,7 +56,7 @@ Optional side challenges unlock after chapter showcases **10/20/…/100**. Their
 
 ![Category completion with compact metrics; automated fixture with synthetic speed](docs/images/alpha24/category-complete-fixture-1440.png)
 
-[Curriculum, content provenance and manual checklist](docs/PHASE8_CURRICULUM.md) · [Current verification](docs/TESTING.md) · [Accepted Phase 7 closeout](docs/PHASE7_CLOSEOUT.md). The current feature checkout is served at the existing LAN URL. Source pushes are not deployment; XP, credits, earned car/track ownership, canonical guest saves and optional cloud remain Phase 9.
+[Curriculum, content provenance and manual checklist](docs/PHASE8_CURRICULUM.md) · [Current verification](docs/TESTING.md) · [Accepted Phase 7 closeout](docs/PHASE7_CLOSEOUT.md).
 
 ## Phase 6 complete — alpha.20
 
@@ -88,7 +88,7 @@ TurboType turns typing practice into a side-view motor race. Correct characters 
 
 The current target is **laptop/desktop browsers with a physical keyboard**. Phone/tablet support was explicitly removed. Layouts adapt to laptop windows from 960 CSS pixels, with automated checks at representative 1024–1920 widths.
 
-Single-player comes first. Three 100-level maps with sample races are available in the feature preview; full curricula, learning tools and optional cloud progress are planned before public launch, followed by friends multiplayer. **There is no public GitHub Pages game, account service or database yet.** You can run the latest preview locally.
+Single-player comes first. The three 100-level maps have playable passages throughout. The Phase 9 branch adds learning tools, and the optional cloud account path is in testing. GitHub Pages and friends multiplayer follow in Phases 10 and 11.
 
 ## How the current game looks
 
@@ -119,8 +119,9 @@ These are real app captures, not concept artwork. [Current parts/laptop captures
 | --- | --- |
 | Campaign maps | Three 100-level journeys, all 300 passages + 30 optional challenges, local stars/clears/bests, briefings and keyboard/list/drag navigation |
 | Quick Race | Four seeded CPUs, countdown, selectable passage/pace, live positions, completion or a 60-second trial, frozen results and same-seed retry |
-| Car choice | Five original starters, remembered in this browser and reflected in the hub. One chosen car stays locked from countdown through the whole race, including pauses; retry/new race reopens selection |
-| Typing Practice | Shared engine without opponents; WPM, accuracy, streaks, timing, correction, pause and results |
+| Equipment | Five starter cars and tracks plus campaign unlocks, selected in Cars and Tracks. Active or paused sessions lock selection |
+| Typing Practice | Shared engine without opponents, plus correction, capitalization, punctuation and consistency drills with optional next-key guidance |
+| Driver Progress | Rank, XP and credits, eligible best times, pace, key aggregates, coaching and local recovery |
 | Keyboard check | Race-style exact typing/Backspace correction, full character sample, physical-key indicators and reset |
 | Racing presentation | Parallax city, exhaust flames, nitro/overtake feedback, bounded finish effects, Live WPM dial and High/Low/Reduced modes |
 | Settings | Saved display/text/motion preferences and all sound enable/mute/volume controls. Original Ignition browsing music, Overdrive racing music and separate countdown/FX |
@@ -144,7 +145,7 @@ Open **Settings → Sound & music** to enable sound or change volumes. The hub h
 
 ## Development progress
 
-**Phases 1–7 are complete and integrated for their agreed scope.** Alpha.14 includes independent parts, automated/actual-GPU evidence, final physical laptop acceptance and PR integration. Broader browser/long-session release testing remains Phase 10. Phase 6 alpha.20 is integrated through PR #6. Further opening/atmosphere polish is deferred. Phase 8 curriculum and optional challenges are implemented on the feature branch; final verification/user review are tracked separately.
+**Phases 1–8 are accepted and integrated.** Phase 9 is on the alpha.27 feature branch. Broader browser and long-session release testing remains Phase 10. Further race-atmosphere polish is deferred.
 
 | Phase | Delivery | Current status |
 | --- | --- | --- |
@@ -155,8 +156,8 @@ Open **Settings → Sound & music** to enable sound or change volumes. The hub h
 | 5 | Polish vehicles, wheels/suspension, scenery, exhaust/nitro, sound and celebration | Complete for agreed scope; accepted and merged into main |
 | 6 | Cinematic loading/welcome/rules, tutorial, calibration and final navigation | Complete for agreed scope; PR #6 merged, TT-608 polish deferred |
 | 7 | Easy/Medium/Hard rightward maps, 100 numbered nodes each, locks, chapters and saved position | Complete and accepted; PR #7 merged 04eb38d |
-| 8 | All 300 passages, learning goals, difficulty/star curves and 30 bonus challenges | Implemented; verification and user review tracked separately |
-| 9 | Rewards/rank/garage, records/charts/coaching/drills, robust guest saves and optional account-backed cloud progress | Planned |
+| 8 | All 300 passages, learning goals, difficulty/star curves and 30 bonus challenges | Accepted and merged through PR #8 |
+| 9 | Rewards/rank/garage, records/charts/coaching/drills, robust guest saves and optional account-backed cloud progress | Local preview and backend ready for review. Live sign-in and sync verification pending |
 | 10 | Desktop browser/accessibility/performance/recovery/cloud testing, Pages and live release verification | Planned |
 | 11 | Friends backend/private rooms/invites, synchronized races, reconnect/rematches immediately after solo launch | Planned |
 
@@ -166,13 +167,13 @@ Phases vary greatly in size; phase numbers are not a completion percentage.
 
 - **Vehicle parts:** alpha.14 implements separate chassis/wheel sources, independent rotation, chassis-only suspension and compact shared previews while preserving the accepted silhouettes/colors. See [Phase 5 closeout](docs/PHASE5_CLOSEOUT.md).
 - **Physical acceptance:** the user accepted the final laptop checklist. The two-minute recorder captured 100 trusted racing keys and zero page errors; actual-GPU experiments cover High/Low/Reduced. Timing/resource limitations and broader release checks remain explicit.
-- **Integration:** PR #4 merged as de464ce after exact-head checks passed. Main includes accepted alpha.23 Phase 7 through PR #7. Phase 8 is on codex/phase8-curriculum for review; no deployment has occurred.
+- **Integration:** PR #4 merged as de464ce after exact-head checks passed. Main includes the accepted campaign and collection updates from PR #8.
 
-### Future category reward cars
+### Category rewards
 
-Five starters are available now. Later, **each 100-level category (Easy, Medium, Hard) unlocks a distinct car every 15 eligible main-level clears**, at **15, 30, 45, 60, 75 and 90 within that category**. That is **18 reward cars plus five starters**. Category counters are independent; replay, bonus events, Quick Race and Practice do not inflate them. Cars remain cosmetic.
+Each category unlocks cars at **15, 30, 45, 60, 75 and 90** eligible unique main clears, and tracks at **10, 25, 40, 55, 70, 85 and 100**. Category counters are independent. Replays, bonus events, Quick Race and Practice leave the milestone counters unchanged. Once earned, equipment works across categories and remains cosmetic.
 
-Stable IDs, art briefs, locked garage UX, receipt-based ownership, save recovery and cloud merges are in the [garage progression plan](https://github.com/sahilshah2904/TurboType/blob/main/docs/GARAGE_PROGRESSION.md), tracked **TT-911**. These cars/unlocks are future Phase 9 work, not a Phase 5 prerequisite.
+[Car progression](docs/GARAGE_PROGRESSION.md) · [Track progression](docs/TRACK_PROGRESSION.md) · [Current collection behavior](docs/COLLECTIONS.md)
 
 ## Run the latest preview
 
@@ -186,7 +187,7 @@ npm ci
 npm run dev
 ```
 
-Main contains accepted Phase 7. To review Phase 8 after cloning, use `git switch codex/phase8-curriculum` before starting Vite.
+Main contains the accepted Phase 8 build. To review Phase 9 after cloning, use `git switch codex/phase9-progression` before starting Vite.
 
 Open **[http://127.0.0.1:5173/TurboType/](http://127.0.0.1:5173/TurboType/)**. Vite updates the local preview when source changes. If reusing a checkout, inspect Git status and preserve local edits before switching branches or pulling.
 
@@ -230,13 +231,13 @@ Phaser owns the canvas; native HTML owns input/navigation; Anime.js coordinates 
 
 ## Saves, hosting and future multiplayer
 
-Only display/audio/car preferences persist locally today. A future guest save model will store campaign clears, rewards and ownership with migration/recovery; optional account-backed cloud progress comes before public solo launch. A selected-car preference will not be trusted as ownership.
+Guest saves keep campaign, rewards, equipment and records on this browser. Export, import and recovery are in Progress. Account sync uses a separately scoped account save once configured and verified. [Phase 9 handoff](docs/PHASE9_RESUME.md)
 
-GitHub Pages will host the frontend. Friends rooms need external auth/data/realtime services for invites, ready checks, synchronized races and reconnection. Sharing a static URL alone does not create multiplayer. Provider choice and infrastructure are pending.
+GitHub Pages hosting follows in Phase 10. Phase 11 will validate a free backend for private rooms, ready checks, synchronized races and reconnection.
 
 ## Continue in a new project chat
 
-Start with [AGENTS.md](https://github.com/sahilshah2904/TurboType/blob/main/AGENTS.md), the [detailed session handoff](https://github.com/sahilshah2904/TurboType/blob/main/docs/SESSION_HANDOFF.md), [project status](https://github.com/sahilshah2904/TurboType/blob/main/PROJECT_STATUS.md) and [stable backlog](https://github.com/sahilshah2904/TurboType/blob/main/BACKLOG.md). They record accepted decisions, current code/CI, completed work, pending tasks and the next steps. The previous chat is not required.
+Start with [AGENTS.md](AGENTS.md), the [session handoff](docs/SESSION_HANDOFF.md), [project status](PROJECT_STATUS.md), and [backlog](BACKLOG.md).
 
 ## Documentation
 

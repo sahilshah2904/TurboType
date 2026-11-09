@@ -1,5 +1,6 @@
 import type Phaser from "phaser";
 import type { TrackTheme } from "../content/track-catalog";
+import { drawRewardScenery } from "./reward-scenery";
 
 /** Original bounded geometric scenery shared by the hub and real race. No rules/RNG. */
 export function drawTrackScenery(
@@ -14,6 +15,13 @@ export function drawTrackScenery(
     .fillStyle(theme.glow, 0.65)
     .fillCircle(width * 0.81, horizon * 0.26, Math.min(width * 0.045, 55));
   scenery.clear();
+  if (theme.motif) {
+    drawRewardScenery(scenery, width, horizon, {
+      ...theme,
+      motif: theme.motif,
+    });
+    return;
+  }
   const extent = width * 2;
   if (theme.id === "neon-harbor") {
     sky

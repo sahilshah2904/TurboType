@@ -1,5 +1,6 @@
 import { expect, test, type Page } from "@playwright/test";
 const KEY = "turbotype:campaign-map:v2";
+const SAVE = "turbotype:guest:v1";
 async function fixture(
   page: Page,
   category: string,
@@ -75,8 +76,9 @@ for (const category of ["easy", "medium", "hard"]) {
       expect(
         await page.evaluate(
           (key) =>
-            Object.keys(JSON.parse(localStorage.getItem(key)!).clears).length,
-          KEY,
+            Object.keys(JSON.parse(localStorage.getItem(key)!).campaign.clears)
+              .length,
+          SAVE,
         ),
       ).toBe(number - 1);
     });
@@ -171,8 +173,8 @@ test("chapter bonuses save separately, replay and never open main levels", async
     "Replay complete.",
   );
   const saved = await page.evaluate(
-    (key) => JSON.parse(localStorage.getItem(key)!),
-    KEY,
+    (key) => JSON.parse(localStorage.getItem(key)!).campaign,
+    SAVE,
   );
   expect(Object.keys(saved.clears)).toHaveLength(10);
   expect(Object.keys(saved.bonuses)).toEqual(["easy-bonus-01"]);
@@ -209,8 +211,9 @@ test("existing Phase 7 saves migrate intact and level 6 continues into the full 
   expect(
     await page.evaluate(
       (key) =>
-        Object.keys(JSON.parse(localStorage.getItem(key)!).clears).length,
-      KEY,
+        Object.keys(JSON.parse(localStorage.getItem(key)!).campaign.clears)
+          .length,
+      SAVE,
     ),
   ).toBe(6);
 });

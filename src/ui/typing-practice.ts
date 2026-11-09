@@ -8,6 +8,26 @@ import {
 import { PRACTICE_PASSAGES } from "../content/practice-passages";
 import { connectRaceInput, type RaceInputController } from "./race-input";
 
+const EXERCISES = [
+  ...PRACTICE_PASSAGES,
+  {
+    name: "Drill · Correction",
+    text: "Type each word with care. If a letter is wrong, pause your hands, press Backspace, and find the correct key. Build a clean rhythm before adding speed.",
+  },
+  {
+    name: "Drill · Capitalization",
+    text: "Ada met Mina at North Gate. On Friday, they drove to Lake Cedar. Hold Shift for each capital, then release it as you return to lowercase.",
+  },
+  {
+    name: "Drill · Punctuation",
+    text: 'The board read: "Gate 3 opens at 8:30." Is the pass ready? Check the map (front pocket), take a breath, and turn left.',
+  },
+  {
+    name: "Drill · Consistency",
+    text: "Follow the river past the quiet bridge. Keep an even pace as the road rises. Keep that pace as the path bends toward the meadow.",
+  },
+];
+
 export interface PracticeSession {
   engine: TypingEngine;
   passageIndex: number;
@@ -18,7 +38,7 @@ function buildEngine(
   session: Pick<PracticeSession, "mode" | "passageIndex">,
 ): TypingEngine {
   return new TypingEngine({
-    passage: PRACTICE_PASSAGES[session.passageIndex].text,
+    passage: EXERCISES[session.passageIndex].text,
     now: () => performance.now(),
     ...(session.mode === "time-trial" ? { timeLimitMs: 60000 } : {}),
   });
@@ -33,7 +53,7 @@ export function practiceScreen(): string {
   return `<section class="page-heading reveal"><a class="back-link" href="#/hub">← Back to the hub</a><p class="eyebrow">PRECISION BEFORE HORSEPOWER</p><h1>Find your <span>rhythm.</span></h1><p>Practice the rules. Build clean speed. The race starts with you.</p></section>
   <section class="practice-panel input-panel reveal" aria-label="Typing practice">
     <div class="section-top"><h2>Typing sprint</h2><span class="pill">SOLO PRACTICE · NO REWARDS</span></div>
-    <div class="practice-options"><div><label for="practice-passage">Passage</label><select id="practice-passage">${PRACTICE_PASSAGES.map((passage, index) => `<option value="${index}">${passage.name}</option>`).join("")}</select></div><div><label for="practice-mode">Mode</label><select id="practice-mode"><option value="sprint">Finish the passage · untimed</option><option value="time-trial">Time trial · 60 second limit</option></select></div></div>
+    <div class="practice-options"><div><label for="practice-passage">Passage</label><select id="practice-passage">${EXERCISES.map((passage, index) => `<option value="${index}">${passage.name}</option>`).join("")}</select></div><div><label for="practice-mode">Mode</label><select id="practice-mode"><option value="sprint">Finish the passage · untimed</option><option value="time-trial">Time trial · 60 second limit</option></select></div><div><label><input id="practice-key-guide" type="checkbox"> Show next key</label><p id="practice-key-hint" class="help" hidden></p></div></div>
     <div class="run-banner"><div><p id="run-state" class="eyebrow" role="status" aria-live="polite">Ready</p><p id="run-instruction">Select Start run. The timer begins after 3–2–1.</p></div><span id="countdown" class="countdown" aria-hidden="true">—</span></div>
     <div class="metrics-grid" aria-label="Current run metrics">${[
       ["wpm", "WPM"],
@@ -76,6 +96,8 @@ export function connectTypingPractice(
   const passageSelect =
     main.querySelector<HTMLSelectElement>("#practice-passage")!;
   const modeSelect = main.querySelector<HTMLSelectElement>("#practice-mode")!;
+  const guide = main.querySelector<HTMLInputElement>("#practice-key-guide")!;
+  const hint = main.querySelector<HTMLElement>("#practice-key-hint")!;
   let adapter: RaceInputController | undefined;
   let lastState = "";
 
@@ -98,6 +120,11 @@ export function connectTypingPractice(
 
   function update(): void {
     const s = session.engine.snapshot();
+    hint.hidden = !guide.checked;
+    const next = s.passage[s.validatedLength];
+    const key =
+      s.errorCharacter !== null ? "Backspace" : next === " " ? "Space" : next;
+    text("#practice-key-hint", key ? `Next key · ${key}` : "Passage complete.");
     const ending = ["finished", "timed-out", "abandoned"].includes(s.state);
     main.classList.toggle(
       "practice-active",
@@ -260,6 +287,7 @@ export function connectTypingPractice(
 
   passageSelect.value = String(session.passageIndex);
   modeSelect.value = session.mode;
+  guide.addEventListener("change", update, options);
   passageSelect.addEventListener(
     "change",
     () => {

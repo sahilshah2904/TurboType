@@ -12,6 +12,7 @@ export const ROUTES = [
   "calibration",
   "race",
   "practice",
+  "progress",
   "keyboard",
   "settings",
 ] as const;

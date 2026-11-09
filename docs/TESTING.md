@@ -1,5 +1,11 @@
 # Verification evidence
 
+## Phase 9 alpha.27 preview — 9 November 2026
+
+- The Phase 8 merge passed its own [main check](https://github.com/sahilshah2904/TurboType/actions/runs/42546049988). A clean alpha.27 production build passed 29 focused browser cases covering campaign, car and track collections, and an earned reward pair equipped across categories. An earlier run used stale alpha.26 build output and was discarded after diagnosis. Use `npm run check` to rebuild before running browser checks.
+- Hosted Supabase Free database checks passed for owner access, cross-account denial, anonymous denial, revoked access, stale revision rejection, duplicate snapshot retry and deletion. The [rollback fixture](../supabase/tests/player_save_isolation.sql) uses synthetic identities. Direct anonymous HTTP calls returned 401. Security advisor reported one informational notice for the private approval table’s deliberate absence of client policies. Performance advisor reported no findings.
+- The Google provider was disabled at the latest Auth settings check. A real OAuth sign-in and cross-browser account verification still require [owner setup](PHASE9_RESUME.md#configure-and-test-google-sign-in). The account client’s presence and successful database tests do not establish live sign-in.
+
 ## Accepted alpha.26 hosted verification and pause
 
 Accepted implementation bd378c12711c7b54aa24b284cf182ae5fc052825 passed [run39972392241/job120478169052](https://github.com/sahilshah2904/TurboType/actions/runs/39972392241/job/120478169052), completed2026-10-23 14:55:35UTC. Fresh audit confirms completed/success; downloaded job log independently confirms **125 unit/121 browser cases** (8.8minutes for browsers). Log: Reference_Images/analysis/alpha26-hosted-check.log(ignored). This resolves the earlier pending hosted status and two corrected local harness failures below; historical failed runs remain real. The user accepted the collection flow("all good").

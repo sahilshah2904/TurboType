@@ -4,7 +4,11 @@
 
 Read PROJECT_STATUS.md, docs/SESSION_HANDOFF.md and BACKLOG.md before reporting progress or work. Inspect actual Git status/branch/log/remotes, current PR and exact-source checks. Preserve intervening edits. The previous chat is unnecessary; full earlier checkpoints are archived under docs/history/2026-10-23-before-phase8/.
 
-## Current checkpoint — 23 October 2026
+## Current checkpoint — 9 November 2026
+
+The user resumed Phase 9 and authorized the $0 Supabase TurboType project in their organization. Phase 8 is accepted, merged as e3d0603 and verified on main. The Phase 9 alpha.27 branch includes guest save, economy, cosmetic entitlements and art, learning, and the optional cloud path. Follow the newest [Phase 9 implementation and review notes](docs/PHASE9_RESUME.md). The live Google OAuth and real account tests remain separate from hosted database fixtures. Keep changes in the Phase 9 PR for user review. Preserve Vite5173 and the legacy save keys. Phases 10 and 11 have their own release scope.
+
+## Historical checkpoint — 23 October 2026
 
 STOP-AND-SAVE (latest user request): user accepted alpha.26, requested Phase9, then explicitly asked to continue later and save README/all handoffs. Save/push documentation and stop. No implementation, merge, deployment or provisioning until explicitly resumed. Phase9 is preparation only: branch codex/phase9-progression created from accepted bd378c1; scope/source review, Supabase official free/auth research and explanation, no application/assets/tests/database/auth/cloud changes. No project/configuration supplied; user-owned free backend/sign-in setup is still owed. Never request secret/service-role credentials. Full scope, unresolved setup and ordered future work: docs/PHASE9_RESUME.md.
 

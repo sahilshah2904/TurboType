@@ -61,11 +61,11 @@ export async function mountRaceTrack(
     private selectedKart: KartId = "volt-kart";
     private selectedTrack: TrackId = "neon-harbor";
     preload(): void {
-      preloadFleet(this);
+      preloadFleet(this, this.requiredFleet());
       this.load.on("loaderror", options.onError);
     }
     create(): void {
-      if (!fleetReady(this)) return;
+      if (!fleetReady(this, this.requiredFleet())) return;
       bakePlayerPalette(this);
       this.backdrop = this.add.graphics();
       this.city = this.add.graphics();
@@ -114,10 +114,16 @@ export async function mountRaceTrack(
       this.layout();
       this.scale.on("resize", this.layout, this);
       parent.dataset.ready = "true";
-      parent.dataset.fleet = KART_FLEET.map((kart) => kart.id).join(",");
+      parent.dataset.fleet = this.requiredFleet()
+        .map((index) => KART_FLEET[index].id)
+        .join(",");
       parent.dataset.parts = "independent-body-wheels";
       this.syncModels();
       options.onReady();
+    }
+    private requiredFleet(): number[] {
+      const [selected] = kartLineup(options.playerKart?.() ?? "volt-kart");
+      return [...new Set([0, 1, 2, 3, 4, selected])];
     }
     private syncModels(): void {
       const selected = options.playerKart?.() ?? "volt-kart";

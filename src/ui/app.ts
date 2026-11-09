@@ -6,10 +6,9 @@ import {
   campaignLink,
 } from "../content/campaign";
 import { isUnlocked, starCount } from "../core/campaign-progress";
-import {
-  LocalCampaignRepository,
-  CAMPAIGN_STORAGE_KEY,
-} from "../storage/campaign";
+import { GUEST_KEY, LocalGuestRepository } from "../storage/guest";
+import { connectProgress, progressScreen, rewardMessage } from "./progress";
+import type { connectCloud } from "../storage/cloud";
 import {
   campaignCards,
   campaignMapScreen,
@@ -29,14 +28,19 @@ import {
 } from "./entrance";
 import { learningScreen, connectLearning } from "./driving-lessons";
 import { collectionScreen, connectCollection } from "./collection";
-import { trackTheme, type TrackId } from "../content/track-catalog";
+import {
+  STARTER_TRACKS,
+  trackTheme,
+  type TrackId,
+} from "../content/track-catalog";
 import { LocalTrackRepository } from "../storage/tracks";
 import { animate, createScope } from "animejs";
 import { RaceAudio } from "../audio/race-audio";
 import { audioControls, connectAudioControls } from "./audio-controls";
 import { APP_VERSION } from "../config/versions";
 import { connectFullscreen, fullscreenControl } from "./fullscreen";
-import { STARTER_KARTS, type KartId } from "../content/kart-catalog";
+import { KARTS, STARTER_KARTS, type KartId } from "../content/kart-catalog";
+import { ownedEquipment } from "../core/progression";
 import { LocalGarageRepository } from "../storage/garage";
 import {
   LocalSettingsRepository,
@@ -66,7 +70,27 @@ export function mountApp(root: HTMLElement): () => void {
   const tracks = new LocalTrackRepository(() => localStorage);
   let selectedTrack = tracks.load();
   const audio = new RaceAudio();
-  const campaign = new LocalCampaignRepository(() => localStorage);
+  const guest = new LocalGuestRepository(
+    () => localStorage,
+    undefined,
+    GUEST_KEY,
+    () => {
+      if (campaign !== guest) return;
+      const status = root.querySelector(
+        "#guest-status, #campaign-storage-status",
+      );
+      if (status) status.textContent = guest.status;
+    },
+  );
+  let campaign = guest;
+  selectedKart = guest.snapshot().kart ?? selectedKart;
+  selectedTrack = guest.snapshot().track ?? selectedTrack;
+  let cloud: ReturnType<typeof connectCloud> | undefined;
+  let mounted = true;
+  const cloudConfigured =
+    globalThis.isSecureContext &&
+    !!import.meta.env.VITE_SUPABASE_URL &&
+    !!import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
   let campaignSession: QuickRaceSession | undefined;
   let forceCampaignStart = false;
   let launchCampaign = false;
@@ -92,7 +116,7 @@ export function mountApp(root: HTMLElement): () => void {
     learning = { ...learning, ...patch };
     return onboarding.save(learning);
   };
-  const quickRaceSession = createQuickRaceSession(learning.preferredPace);
+  let quickRaceSession = createQuickRaceSession(learning.preferredPace);
   let pendingPace: CpuTier | undefined;
   if (["", "#", "#/"].includes(location.hash))
     history.replaceState(null, "", learning.skipIntro ? "#/hub" : "#/intro");
@@ -104,7 +128,7 @@ export function mountApp(root: HTMLElement): () => void {
     <div class="world-backdrop" aria-hidden="true"><div class="world-moon"></div><div class="world-mountains"></div><div class="world-city"></div><div class="world-grid"></div></div>${fullscreenControl()}<div class="app-shell">
       <header class="topbar">
         <a class="wordmark" href="#/hub" aria-label="TurboType home"><img src="${import.meta.env.BASE_URL}assets/brand-mark.svg" width="34" height="34" alt="" />TURBO<span>TYPE</span></a>
-        <nav aria-label="Main navigation"><a href="#/hub" data-route="hub">The hub</a><a href="#/race" data-route="race">Quick Race</a><a href="#/cars" data-route="cars">Cars</a><a href="#/tracks" data-route="tracks">Tracks</a><a href="#/practice" data-route="practice">Practice</a><a href="#/keyboard" data-route="keyboard">Keyboard check</a><a href="#/settings" data-route="settings">Settings</a></nav>
+        <nav aria-label="Main navigation"><a href="#/hub" data-route="hub">The hub</a><a href="#/race" data-route="race">Quick Race</a><a href="#/cars" data-route="cars">Cars</a><a href="#/tracks" data-route="tracks">Tracks</a><a href="#/practice" data-route="practice">Practice</a><a href="#/progress" data-route="progress">Progress</a><a href="#/keyboard" data-route="keyboard">Keyboard check</a><a href="#/settings" data-route="settings">Settings</a></nav>
         <span class="guest"><span class="status-dot"></span> GUEST DRIVER</span>
       </header>
       <main id="main" tabindex="-1"></main>
@@ -132,8 +156,15 @@ export function mountApp(root: HTMLElement): () => void {
     unmountPreview = undefined;
     const route = parseRoute(location.hash);
     const campaignRoute = readCampaignRoute(location.hash);
-    if (["campaign", "hub", "cars", "tracks"].includes(route))
+    if (["campaign", "hub", "cars", "tracks", "progress"].includes(route))
       campaign.reload();
+    const owned = ownedEquipment(campaign.read());
+    const canEquip = (id: string) =>
+      owned.has(id) ||
+      STARTER_KARTS.some((item) => item.id === id) ||
+      STARTER_TRACKS.some((item) => item.id === id);
+    if (!canEquip(selectedKart)) selectedKart = "volt-kart";
+    if (!canEquip(selectedTrack)) selectedTrack = "neon-harbor";
     const selectedLevel = campaignRoute?.number
       ? campaignRoute.bonus
         ? campaignBonus(campaignRoute.category, campaignRoute.number)
@@ -151,10 +182,21 @@ export function mountApp(root: HTMLElement): () => void {
       campaignSession = createCampaignRaceSession(
         selectedLevel,
         selectedTrack,
-        (snapshot) => {
+        (snapshot, place) => {
           const previous = campaignResults.get(campaignSession!.race);
           if (previous) return previous;
-          const result = campaign.finish(selectedLevel, snapshot);
+          const race = campaignSession!.race;
+          const { pace, recovered, characters } = race.typing.learningSummary();
+          const result = campaign.finish(
+            race.id,
+            selectedLevel.id,
+            snapshot,
+            place,
+            pace,
+            recovered,
+            characters,
+            selectedLevel,
+          );
           if (
             result.newlyCleared &&
             selectedLevel.kind === "main" &&
@@ -167,8 +209,9 @@ export function mountApp(root: HTMLElement): () => void {
           const recorded = result.accepted
             ? `${starCount((selectedLevel.kind === "bonus" ? result.progress.bonuses : result.progress.clears)[selectedLevel.id].stars)} / 3 stars · ${result.newlyCleared ? (selectedLevel.kind === "bonus" ? "Bonus cleared." : "Level cleared.") : "Replay complete."} ${result.saved ? "Map progress saved on this browser." : "Progress lasts for this visit only; browser storage is unavailable."}${selectedLevel.kind === "main" && selectedLevel.number === 100 ? " Category complete! Replay any level or try another category." : ""}`
             : "Practice finish · no stars or unlock. Retry without pausing or assisted input for an eligible clear.";
-          campaignResults.set(campaignSession!.race, recorded);
-          return recorded;
+          const message = `${recorded} ${rewardMessage(result)}`.trim();
+          campaignResults.set(race, message);
+          return message;
         },
       );
     }
@@ -189,7 +232,7 @@ export function mountApp(root: HTMLElement): () => void {
         link.setAttribute("aria-current", "page");
       else link.removeAttribute("aria-current");
     });
-    document.title = `TurboType — ${{ hub: "Your words. Full throttle.", cars: "Your cars", tracks: "Your tracks", intro: "Enter TurboType", welcome: "Welcome", rules: "How to play", tutorial: "Guided tutorial", calibration: "Find your starting pace", race: "Quick Race", practice: "Typing practice", keyboard: "Keyboard check", settings: "Settings", campaign: "Campaign map", level: "Campaign race" }[route]}`;
+    document.title = `TurboType — ${{ hub: "Your words. Full throttle.", cars: "Your cars", tracks: "Your tracks", intro: "Enter TurboType", welcome: "Welcome", rules: "How to play", tutorial: "Guided tutorial", calibration: "Find your starting pace", race: "Quick Race", practice: "Typing practice", progress: "Driver progress", keyboard: "Keyboard check", settings: "Settings", campaign: "Campaign map", level: "Campaign race" }[route]}`;
     main.innerHTML =
       route === "intro"
         ? entranceScreen(selectedKart)
@@ -207,6 +250,7 @@ export function mountApp(root: HTMLElement): () => void {
                       selectedKart,
                       selectedTrack,
                       equipmentLocked(),
+                      owned,
                     )
                   : route === "campaign" && campaignRoute
                     ? campaignMapScreen(
@@ -234,7 +278,13 @@ export function mountApp(root: HTMLElement): () => void {
                           ? practiceScreen()
                           : route === "keyboard"
                             ? keyboardScreen()
-                            : settingsScreen(settings, learning);
+                            : route === "progress"
+                              ? progressScreen(
+                                  campaign.snapshot(),
+                                  campaign.status,
+                                  cloudConfigured,
+                                )
+                              : settingsScreen(settings, learning);
     scope = createScope({ root: main }).add(() => {
       if (!reducedMotion())
         animate(".reveal", {
@@ -358,15 +408,16 @@ export function mountApp(root: HTMLElement): () => void {
         kart: () => selectedKart,
         track: () => selectedTrack,
         locked: equipmentLocked,
+        owned: canEquip,
         equipKart: (id) => {
-          if (equipmentLocked()) return false;
+          if (equipmentLocked() || !canEquip(id)) return false;
           selectedKart = id;
-          return garage.save(id);
+          return campaign.equip({ kart: id });
         },
         equipTrack: (id) => {
-          if (equipmentLocked()) return false;
+          if (equipmentLocked() || !canEquip(id)) return false;
           selectedTrack = id;
-          return tracks.save(id);
+          return campaign.equip({ track: id });
         },
         endRaces: () => {
           for (const session of [quickRaceSession, campaignSession])
@@ -383,6 +434,10 @@ export function mountApp(root: HTMLElement): () => void {
         effects: () => settings.effects,
       });
     if (route === "keyboard") clearScreen = connectKeyboard(main);
+    if (route === "progress") {
+      clearScreen = connectProgress(main, campaign, render);
+      cloud?.status();
+    }
     if (route === "practice")
       clearScreen = connectTypingPractice(main, practiceSession);
     if (route === "race" || (route === "level" && levelAllowed))
@@ -404,6 +459,24 @@ export function mountApp(root: HTMLElement): () => void {
           return pace;
         },
         route === "level" && launchCampaign,
+        (snapshot, place) => {
+          const race = activeSession.race;
+          const previous = campaignResults.get(race);
+          if (previous !== undefined) return previous;
+          const { pace, recovered, characters } = race.typing.learningSummary();
+          const result = campaign.finish(
+            race.id,
+            `quick-${activeSession.passageIndex}-${activeSession.tier}-${activeSession.timed ? "timed" : "untimed"}`,
+            snapshot,
+            place,
+            pace,
+            recovered,
+            characters,
+          );
+          const message = rewardMessage(result);
+          campaignResults.set(race, message);
+          return message;
+        },
       );
     launchCampaign = false;
     if (route === "settings") {
@@ -448,12 +521,98 @@ export function mountApp(root: HTMLElement): () => void {
   };
   const onCampaignStorage = (event: StorageEvent) => {
     if (
-      event.key === CAMPAIGN_STORAGE_KEY &&
-      ["campaign", "hub"].includes(parseRoute(location.hash))
+      (event.key === GUEST_KEY ||
+        event.key?.startsWith(`${GUEST_KEY}:account:`)) &&
+      ["campaign", "hub", "cars", "tracks", "progress"].includes(
+        parseRoute(location.hash),
+      )
     )
       render();
   };
   window.addEventListener("storage", onCampaignStorage);
+  const cloudClick = (event: MouseEvent) => {
+    const action = (event.target as HTMLElement).closest<HTMLButtonElement>(
+      "[data-cloud]",
+    )?.dataset.cloud;
+    if (
+      !cloud ||
+      !action ||
+      ![
+        "signIn",
+        "signOut",
+        "importGuest",
+        "retry",
+        "useLocal",
+        "useRemote",
+        "removeSave",
+      ].includes(action)
+    )
+      return;
+    const method = action as
+      | "signIn"
+      | "signOut"
+      | "importGuest"
+      | "retry"
+      | "useLocal"
+      | "useRemote"
+      | "removeSave";
+    void Promise.resolve(cloud[method]()).catch(() => {
+      const status = main.querySelector("#cloud-status");
+      if (status)
+        status.textContent =
+          "The request could not finish. Your local save is available.";
+    });
+  };
+  main.addEventListener("click", cloudClick);
+  if (cloudConfigured)
+    void import("../storage/cloud")
+      .then(({ connectCloud: connect }) => {
+        if (!mounted) return;
+        cloud = connect(
+          guest,
+          (repository, signedIn) => {
+            campaign = repository;
+            const saved = campaign.snapshot();
+            selectedKart =
+              saved.kart ?? (signedIn ? "volt-kart" : garage.load());
+            selectedTrack =
+              saved.track ?? (signedIn ? "neon-harbor" : tracks.load());
+            quickRaceSession.race.abandon();
+            campaignSession?.race.abandon();
+            campaignSession = undefined;
+            quickRaceSession = createQuickRaceSession(learning.preferredPace);
+            const badge = root.querySelector(".guest");
+            if (badge)
+              badge.textContent = signedIn ? "ACCOUNT DRIVER" : "GUEST DRIVER";
+            render();
+          },
+          (message, signedIn, conflict) => {
+            const status = main.querySelector("#cloud-status");
+            const actions = main.querySelector<HTMLElement>("#cloud-actions");
+            if (!status || !actions) return;
+            status.textContent = message;
+            actions.hidden = false;
+            actions
+              .querySelectorAll<HTMLButtonElement>("[data-cloud]")
+              .forEach((button) => {
+                const action = button.dataset.cloud;
+                button.hidden =
+                  action === "signIn"
+                    ? signedIn
+                    : action === "useLocal" || action === "useRemote"
+                      ? !conflict
+                      : !signedIn || (action === "importGuest" && conflict);
+              });
+          },
+        );
+        cloud.status();
+      })
+      .catch(() => {
+        const status = main.querySelector("#cloud-status");
+        if (status)
+          status.textContent =
+            "Cloud setup is unavailable. Local play is available.";
+      });
   window.addEventListener("hashchange", onNavigate);
   const audioBlur = () => audio.setVisible(false);
   const audioFocus = () => audio.setVisible(!document.hidden);
@@ -483,6 +642,10 @@ export function mountApp(root: HTMLElement): () => void {
     document.removeEventListener("visibilitychange", audioVisibility);
     window.removeEventListener("hashchange", onNavigate);
     window.removeEventListener("storage", onCampaignStorage);
+    mounted = false;
+    cloud?.dispose();
+    guest.close();
+    main.removeEventListener("click", cloudClick);
     systemMotion.removeEventListener("change", onMotion);
     skipLink?.removeEventListener("click", skip);
     root.replaceChildren();
@@ -494,7 +657,7 @@ function hubScreen(
   selectedTrack: TrackId,
   progress: import("../core/campaign-progress").CampaignProgress,
 ): string {
-  const kart = STARTER_KARTS.find((kart) => kart.id === selectedKart)!;
+  const kart = KARTS.find((kart) => kart.id === selectedKart)!;
   return `
     <section class="hero reveal" aria-labelledby="hero-title">
       <div><p class="eyebrow"><span class="status-dot"></span> FIND YOUR RHYTHM. OWN THE ROAD.</p><h1 id="hero-title">YOUR WORDS.<br /><span>FULL THROTTLE.</span></h1><p class="hero-copy">Turn every keystroke into momentum.<br />Take on four CPUs. Build clean speed.</p><a class="button button--primary" href="#/race">Start a race ${ARROW}</a><div class="onboarding-links"><a href="#/rules">How to play</a><a href="#/tutorial">Guided tutorial</a><a href="#/calibration">Find my pace</a></div></div>
@@ -508,7 +671,7 @@ function hubScreen(
     <section class="campaign-section reveal" aria-labelledby="campaign-heading"><div class="section-heading"><div><p class="eyebrow">THREE GEARS. ONE JOURNEY.</p><h2 id="campaign-heading">Find your starting line.</h2></div><span class="pill">CHOOSE YOUR JOURNEY</span></div><div class="campaign-grid">
       ${campaignCards(progress)}
     </div></section>
-    <div class="development-note reveal"><span class="note-icon" aria-hidden="true">↳</span><p><strong>A strong start, built one lap at a time.</strong> Explore 100 levels and 10 optional challenges in each category, from short starts to sustained paragraphs. Rewards and cloud saves are still being built.</p><a href="#/keyboard">Try the input check →</a></div>`;
+    <div class="development-note reveal"><span class="note-icon" aria-hidden="true">↳</span><p><strong>A strong start, built one lap at a time.</strong> Explore 100 levels and 10 optional challenges in each category, from short starts to sustained paragraphs. Open Driver Progress for rewards, records and save tools.</p><a href="#/keyboard">Try the input check →</a></div>`;
 }
 
 function settingsScreen(
@@ -526,5 +689,5 @@ function settingsScreen(
     )
     .join(
       "",
-    )}</select></div><div class="setting-row"><div><label for="effects">Track effects</label><p>Use fewer particles for a lighter ride.</p></div><select name="effects" id="effects"><option value="high" ${settings.effects === "high" ? "selected" : ""}>High</option><option value="low" ${settings.effects === "low" ? "selected" : ""}>Low</option></select></div><div class="setting-row"><div><label for="large-text">Larger typing text</label><p>Make passages and typing easier to read.</p></div><input type="checkbox" name="largeText" id="large-text" ${settings.largeText ? "checked" : ""} /></div></form><p id="save-status" class="help" role="status">Preferences are stored on this browser. Cloud saves are not available in this preview.</p>${audioControls()}<section class="opening-settings" aria-labelledby="opening-settings-title"><h2 id="opening-settings-title">Opening & learning</h2><label class="guide-check"><input type="checkbox" id="skip-opening" ${learning.skipIntro ? "checked" : ""}/>Skip opening next time</label><p id="opening-save-status" class="help" role="status">${learning.tutorialComplete ? "Tutorial completed. Replay anytime." : "Tutorial is optional and can be replayed anytime."}</p><div class="setting-row"><div><span class="setting-label">Replay opening</span><p>Watch the TurboType title sequence again.</p></div><a class="button button--secondary" href="#/intro">Replay opening</a></div><div class="setting-row"><div><span class="setting-label">Welcome</span><p>Return to your starting line.</p></div><a class="button button--secondary" href="#/welcome">Welcome</a></div><div class="setting-row"><div><span class="setting-label">How to play</span><p>Read the racing rules and controls.</p></div><a class="button button--secondary" href="#/rules">How to play</a></div><div class="setting-row"><div><span class="setting-label">Replay tutorial</span><p>Practice matching, correcting and building a clean streak.</p></div><a class="button button--secondary" href="#/tutorial">Replay tutorial</a></div><div class="setting-row"><div><span class="setting-label">Recalibrate pace</span><p>Try a thirty-second sample or choose CPU pace manually.</p></div><a class="button button--secondary" href="#/calibration">Recalibrate pace</a></div></section></section>`;
+    )}</select></div><div class="setting-row"><div><label for="effects">Track effects</label><p>Use fewer particles for a lighter ride.</p></div><select name="effects" id="effects"><option value="high" ${settings.effects === "high" ? "selected" : ""}>High</option><option value="low" ${settings.effects === "low" ? "selected" : ""}>Low</option></select></div><div class="setting-row"><div><label for="large-text">Larger typing text</label><p>Make passages and typing easier to read.</p></div><input type="checkbox" name="largeText" id="large-text" ${settings.largeText ? "checked" : ""} /></div></form><p id="save-status" class="help" role="status">Display preferences are stored on this browser. Visit Driver Progress for save and account controls.</p>${audioControls()}<section class="opening-settings" aria-labelledby="opening-settings-title"><h2 id="opening-settings-title">Opening & learning</h2><label class="guide-check"><input type="checkbox" id="skip-opening" ${learning.skipIntro ? "checked" : ""}/>Skip opening next time</label><p id="opening-save-status" class="help" role="status">${learning.tutorialComplete ? "Tutorial completed. Replay anytime." : "Tutorial is optional and can be replayed anytime."}</p><div class="setting-row"><div><span class="setting-label">Replay opening</span><p>Watch the TurboType title sequence again.</p></div><a class="button button--secondary" href="#/intro">Replay opening</a></div><div class="setting-row"><div><span class="setting-label">Welcome</span><p>Return to your starting line.</p></div><a class="button button--secondary" href="#/welcome">Welcome</a></div><div class="setting-row"><div><span class="setting-label">How to play</span><p>Read the racing rules and controls.</p></div><a class="button button--secondary" href="#/rules">How to play</a></div><div class="setting-row"><div><span class="setting-label">Replay tutorial</span><p>Practice matching, correcting and building a clean streak.</p></div><a class="button button--secondary" href="#/tutorial">Replay tutorial</a></div><div class="setting-row"><div><span class="setting-label">Recalibrate pace</span><p>Try a thirty-second sample or choose CPU pace manually.</p></div><a class="button button--secondary" href="#/calibration">Recalibrate pace</a></div></section></section>`;
 }

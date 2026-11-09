@@ -30,7 +30,9 @@
         const status = document.getElementById("boot-status");
         if (!status) return;
         status.textContent = message;
-        document.getElementById("boot-retry").hidden = false;
+        const retry = document.getElementById("boot-retry");
+        retry.hidden = false;
+        retry.onclick = () => location.reload();
       }
       window.addEventListener(
         "error",
@@ -61,9 +63,7 @@
       <main class="boot">
         <strong>TURBO<span>TYPE</span></strong>
         <p id="boot-status" role="status">Starting the engine…</p>
-        <button id="boot-retry" hidden onclick="location.reload()">
-          Reload TurboType
-        </button>
+        <button id="boot-retry" hidden>Reload TurboType</button>
       </main>
     </div>
     <noscript

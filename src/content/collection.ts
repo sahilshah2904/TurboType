@@ -1,6 +1,6 @@
-import { CATEGORIES } from "./campaign";
+import { CATEGORIES } from "../core/contracts";
 
-/** Stable planned IDs; these designs are not selectable assets or ownership receipts. */
+/** Stable category-qualified reward milestones. */
 const CAR_ROWS = [
   ["Streetline RS", "Trailbreaker XR", "Aero Board"],
   ["Vector GT", "Apex Sprint", "Sky Phantom"],
