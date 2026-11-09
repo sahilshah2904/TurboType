@@ -1,12 +1,10 @@
 import { createClient, type Session } from "@supabase/supabase-js";
 import { newGuestSave, parseGuestSave } from "../core/progression";
-import { GUEST_KEY, LocalGuestRepository } from "./guest";
+import { GUEST_KEY, RECOVERY_KEY, LocalGuestRepository } from "./guest";
 
 const PROJECT_URL = import.meta.env.VITE_SUPABASE_URL as string | undefined;
 const PROJECT_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as
   string | undefined;
-export const cloudAvailable =
-  !!PROJECT_URL && !!PROJECT_KEY && globalThis.isSecureContext;
 type RemoteSave = { revision: number; save: unknown } | null;
 type Checkpoint = { remote: number; local: number };
 type Account = {
@@ -39,11 +37,21 @@ export function connectCloud(
     status = message;
     showStatus(status, !!active, active?.remote !== undefined);
   };
-  const metaKey = (id: string) => `${GUEST_KEY}:account:${id}:checkpoint`;
+  const accountPrefix = (id: string) => `${GUEST_KEY}:account:${id}:`;
+  const metaKey = (id: string) => `${accountPrefix(id)}checkpoint`;
+  const clearAccountCache = (id: string) => {
+    try {
+      sessionStorage.removeItem(accountPrefix(id) + GUEST_KEY);
+      sessionStorage.removeItem(accountPrefix(id) + RECOVERY_KEY);
+      sessionStorage.removeItem(metaKey(id));
+    } catch {
+      /* Storage restrictions can prevent the cleanup. */
+    }
+  };
   const saveCheckpoint = (account: Account, checkpoint: Checkpoint) => {
     account.checkpoint = checkpoint;
     try {
-      localStorage.setItem(metaKey(account.id), JSON.stringify(checkpoint));
+      sessionStorage.setItem(metaKey(account.id), JSON.stringify(checkpoint));
     } catch {
       /* Sync is still usable for this visit. */
     }
@@ -51,7 +59,7 @@ export function connectCloud(
   const checkpointFor = (id: string): Checkpoint => {
     try {
       const v = JSON.parse(
-        localStorage.getItem(metaKey(id)) ?? "{}",
+        sessionStorage.getItem(metaKey(id)) ?? "{}",
       ) as Partial<Checkpoint>;
       if (
         Number.isSafeInteger(v.remote) &&
@@ -77,7 +85,9 @@ export function connectCloud(
     if (!active || active.remote !== undefined) return;
     if (active.repository.snapshot().revision === active.checkpoint.local)
       return;
-    display("Pending · Changes saved locally. Waiting for cloud sync.");
+    display(
+      "Pending · Account changes are kept in this tab. Sync or export before closing it.",
+    );
     timer = window.setTimeout(() => void sync(), 2500);
   }
 
@@ -181,7 +191,10 @@ export function connectCloud(
   function changeSession(session: Session | null) {
     if (closed || active?.id === session?.user.id) return;
     window.clearTimeout(timer);
-    active?.repository.close();
+    if (active) {
+      active.repository.close();
+      clearAccountCache(active.id);
+    }
     if (!session) {
       active = undefined;
       switchRepository(guest, false);
@@ -190,14 +203,13 @@ export function connectCloud(
     }
     const id = session.user.id;
     if (!/^[a-f0-9-]{36}$/i.test(id)) return;
-    const prefix = `${GUEST_KEY}:account:${id}:`;
+    const prefix = accountPrefix(id);
     const repository = new LocalGuestRepository(
       () => ({
-        getItem: (key) => localStorage.getItem(prefix + key),
-        setItem: (key, value) => localStorage.setItem(prefix + key, value),
+        getItem: (key) => sessionStorage.getItem(prefix + key),
+        setItem: (key, value) => sessionStorage.setItem(prefix + key, value),
       }),
       schedule,
-      prefix,
     );
     active = { id, repository, checkpoint: checkpointFor(id) };
     switchRepository(repository, true);
@@ -239,6 +251,14 @@ export function connectCloud(
       if (error) display("Google sign-in could not start.");
     },
     signOut: async () => {
+      if (
+        active &&
+        active.repository.snapshot().revision !== active.checkpoint.local &&
+        !window.confirm(
+          "This device has unsynced account progress. You can export it from Progress before you leave. Sign out and clear this device’s account cache?",
+        )
+      )
+        return;
       const { error } = await client.auth.signOut({ scope: "local" });
       if (error) display("Sign-out failed. Try again.");
     },

@@ -8,6 +8,17 @@ import {
 } from "../core/progression";
 import type { LocalGuestRepository } from "../storage/guest";
 
+const AWARD_LABELS: Record<string, string> = {
+  clear: "First clear",
+  pit: "Pit stop",
+  chapter: "Chapter trophy",
+  cache: "Star cache",
+  perfect: "Perfect lap",
+  bonus: "Bonus challenge",
+  finale: "Category finale",
+  recovery: "Recovery badge",
+};
+
 export function rewardMessage(
   result: ReturnType<LocalGuestRepository["finish"]>,
 ) {
@@ -21,17 +32,7 @@ export function rewardMessage(
   const names = [...CAR_REWARDS, ...TRACK_REWARDS]
     .filter(({ id }) => result.unlocks.includes(id))
     .map(({ name }) => name);
-  const labels: Record<string, string> = {
-    clear: "First clear",
-    pit: "Pit stop",
-    chapter: "Chapter trophy",
-    cache: "Star cache",
-    perfect: "Perfect lap",
-    bonus: "Bonus challenge",
-    finale: "Category finale",
-    recovery: "Recovery badge",
-  };
-  const awards = result.awards.map((id) => labels[id.split(":")[0]]);
+  const awards = result.awards.map((id) => AWARD_LABELS[id.split(":")[0]]);
   const changes = [
     `+${result.xp} XP · +${result.credits} credits`,
     ...awards,
@@ -80,6 +81,13 @@ export function progressScreen(
     <section class="settings-panel"><h2>Cloud progress</h2><p id="cloud-status" role="status">${cloudReady ? "Checking sign-in…" : "Cloud sync is available when a Supabase project is configured on a secure address. Local play is available here."}</p>
     <div id="cloud-actions" class="practice-actions" hidden><button type="button" data-cloud="signIn" class="button button--primary">Sign in with Google</button><button type="button" data-cloud="signOut" class="text-button" hidden>Sign out</button><button type="button" data-cloud="importGuest" class="text-button" hidden>Import guest progress</button><button type="button" data-cloud="retry" class="text-button" hidden>Check cloud sync</button><button type="button" data-cloud="useLocal" class="text-button" hidden>Keep this device’s copy</button><button type="button" data-cloud="useRemote" class="text-button" hidden>Use cloud copy</button><button type="button" data-cloud="removeSave" class="text-button" hidden>Delete cloud save</button></div>
     <h2>Coaching</h2><p>${coaching}</p><a class="button button--secondary" href="#/practice">Open practice drills</a>
+    <details><summary>Milestone awards (${stats.awards.length + Number(save.recoveryBadge)})</summary>
+    <ul>${save.recoveryBadge ? "<li>Recovery badge · corrected an error and reached a 20-character streak</li>" : ""}${stats.awards
+      .map(({ id, xp, credits }) => {
+        const [kind, event, threshold] = id.split(":");
+        return `<li>${AWARD_LABELS[kind]} · ${event}${threshold ? ` · ${threshold} stars` : ""} · ${xp} XP · ${credits} credits</li>`;
+      })
+      .join("")}</ul></details>
     <h2>Recent race pace</h2><p>Last ${recent.length} races, newest first. Different passages and modes can have different pace.</p>
     <ol>${recent.map((run) => `<li><meter min="0" max="${peak}" value="${run.wpm}" aria-label="${run.wpm.toFixed(1)} words per minute"></meter> ${run.wpm.toFixed(1)} WPM</li>`).join("")}</ol>
     ${latest?.pace.length ? `<details><summary>Pace through latest finish</summary><p>WPM by equal passage segment, in order.</p><ol>${latest.pace.map((wpm) => `<li><meter min="0" max="${Math.max(1, ...latest.pace)}" value="${wpm}"></meter> ${wpm.toFixed(1)} WPM</li>`).join("")}</ol></details>` : ""}

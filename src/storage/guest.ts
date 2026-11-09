@@ -17,7 +17,7 @@ import type { CharacterSample, TypingSnapshot } from "../core/typing-engine";
 import { CAMPAIGN_STORAGE_KEY, LEGACY_CAMPAIGN_STORAGE_KEY } from "./campaign";
 
 export const GUEST_KEY = "turbotype:guest:v1";
-const RECOVERY_KEY = "turbotype:guest:recovery";
+export const RECOVERY_KEY = "turbotype:guest:recovery";
 type StorageAccess = Pick<Storage, "getItem" | "setItem">;
 
 export class LocalGuestRepository {
