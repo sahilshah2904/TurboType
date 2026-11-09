@@ -4,7 +4,7 @@
 
 Current branch `codex/phase9-progression`, preview alpha.27, rules 3, content 3, guest save 1. The user resumed Phase 9 and authorized a Free project in their Supabase organization. Phase 8 merged as e3d0603 and the main push check passed. Retain the existing LAN server on 5173 and the original browser save keys.
 
-Read [Phase 9 setup and review](PHASE9_RESUME.md) and [verification](TESTING.md) first. The branch includes a guest save, economy, 18 reward vehicles, 21 reward environments, Progress, drills, cloud client and server migrations. Hosted isolation tests used synthetic identities and removed the fixtures. The owner confirmed the retired credential was disabled and authorized the approval of both verified Google test accounts. The new Progress layout keeps advanced controls closed by default. Next, verify a real cloud save and cross-browser restoration.
+Read [Phase 9 setup and review](PHASE9_RESUME.md) and [verification](TESTING.md) first. The owner tested both Google accounts. The hosted aggregate check confirmed two distinct saves, one with Easy Level 1 and the other with Medium Level 1, each with XP. The signed-in header displays the profile name and initials, and expanded stats lead with the latest race. Next, verify a fresh browser restores the saved account progress and complete the remaining sync review.
 
 The sections below retain older checkpoints and their then-current status.
 

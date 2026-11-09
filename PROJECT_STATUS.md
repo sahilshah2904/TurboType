@@ -6,7 +6,7 @@ The user authorized full Phase 9. Phase 8 is integrated through [PR #8](https://
 
 The preview uses a versioned guest save and preserves the v1 and v2 campaign keys as recovery copies. It adds reward calculations, Driver Rank, all 18 reward vehicle designs and 21 course designs, earned equipment, a Progress screen and four practice drills. Local recovery and cloud behavior are described in [the Phase 9 handoff](docs/PHASE9_RESUME.md). Review scope, checks and remaining gates are recorded there and in [TESTING.md](docs/TESTING.md).
 
-TurboType was provisioned in the confirmed Supabase Free organization in Singapore. The database migrations and synthetic hosted isolation tests passed. Both owner test accounts completed Google sign-in and were approved for cloud testing. Phase 9 remains open for live cloud writes, cross-browser recovery, and the remaining review. GitHub Pages and multiplayer remain later phases.
+TurboType was provisioned in the confirmed Supabase Free organization in Singapore. Both owner test accounts signed in, were approved, and played separate first-level campaign races. A hosted aggregate check confirmed separate Easy and Medium clears and XP in both saves. Phase 9 remains open for fresh-browser recovery and the remaining review. GitHub Pages and multiplayer remain later phases.
 
 ## Historical paused checkpoint — 23 October 2026
 

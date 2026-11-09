@@ -134,7 +134,7 @@ export function mountApp(root: HTMLElement): () => void {
       <header class="topbar">
         <a class="wordmark" href="#/hub" aria-label="TurboType home"><img src="${import.meta.env.BASE_URL}assets/brand-mark.svg" width="34" height="34" alt="" />TURBO<span>TYPE</span></a>
         <nav aria-label="Main navigation"><a href="#/hub" data-route="hub">The hub</a><a href="#/race" data-route="race">Quick Race</a><a href="#/cars" data-route="cars">Cars</a><a href="#/tracks" data-route="tracks">Tracks</a><a href="#/practice" data-route="practice">Practice</a><a href="#/progress" data-route="progress">Progress</a><a href="#/keyboard" data-route="keyboard">Keyboard check</a><a href="#/settings" data-route="settings">Settings</a></nav>
-        <span class="guest"><span class="status-dot"></span> GUEST DRIVER</span>
+        <a class="guest driver-profile" href="#/progress"><span class="status-dot" aria-hidden="true"></span><span class="driver-initials" aria-hidden="true" hidden></span><span class="driver-name" dir="auto">Guest Driver</span></a>
       </header>
       <main id="main" tabindex="-1"></main>
       <footer class="footer"><span><b>TURBOTYPE</b> / BUILT FOR THE LONG RUN</span><span>Single-player race preview · ${APP_VERSION}</span><a href="https://github.com/sahilshah2904/TurboType" target="_blank" rel="noopener noreferrer">Follow development ${ARROW}</a></footer>
@@ -575,7 +575,8 @@ export function mountApp(root: HTMLElement): () => void {
         if (!mounted) return;
         cloud = connect(
           guest,
-          (repository, signedIn) => {
+          (repository, accountName) => {
+            const signedIn = accountName !== null;
             campaign = repository;
             const saved = campaign.snapshot();
             selectedKart =
@@ -586,9 +587,23 @@ export function mountApp(root: HTMLElement): () => void {
             campaignSession?.race.abandon();
             campaignSession = undefined;
             quickRaceSession = createQuickRaceSession(learning.preferredPace);
-            const badge = root.querySelector(".guest");
-            if (badge)
-              badge.textContent = signedIn ? "ACCOUNT DRIVER" : "GUEST DRIVER";
+            const badge = root.querySelector<HTMLElement>(".driver-profile")!;
+            badge.toggleAttribute("data-signed-in", signedIn);
+            const name = badge.querySelector<HTMLElement>(".driver-name")!;
+            const initials =
+              badge.querySelector<HTMLElement>(".driver-initials")!;
+            name.textContent = accountName ?? "Guest Driver";
+            badge.title = accountName ?? "Driver Progress";
+            badge.querySelector<HTMLElement>(".status-dot")!.hidden = signedIn;
+            initials.hidden = !signedIn;
+            initials.textContent = accountName
+              ? accountName
+                  .split(" ")
+                  .slice(0, 2)
+                  .map((word) => word.match(/[\p{L}\p{N}]/u)?.[0] ?? "")
+                  .join("")
+                  .toLocaleUpperCase() || "•"
+              : "";
             render();
           },
           (status) => updateCloudProgress(main, status),

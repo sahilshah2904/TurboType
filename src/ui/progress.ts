@@ -1,4 +1,5 @@
 import { CAR_REWARDS, TRACK_REWARDS } from "../content/collection";
+import { CATEGORY_NAMES, isCategory } from "../content/campaign";
 import {
   economy,
   SAVE_LIMIT,
@@ -46,6 +47,47 @@ function accuracy(run: RunSummary) {
   return run.attempts ? (run.correct / run.attempts) * 100 : 0;
 }
 
+function eventLabel(event: string): string {
+  const [category, number, detail, mode] = event.split("-");
+  if (isCategory(category))
+    return `${CATEGORY_NAMES[category]} · ${number === "bonus" ? `Chapter ${Number(detail)} bonus` : `Level ${Number(number)}`}`;
+  if (category === "quick" && isCategory(detail))
+    return `Quick Race · ${CATEGORY_NAMES[detail]}${mode === "timed" ? " · Timed" : ""}`;
+  return "Race";
+}
+
+function raceTime(elapsedMs: number): string {
+  if (elapsedMs < 60_000) return `${(elapsedMs / 1000).toFixed(1)} s`;
+  const seconds = Math.round(elapsedMs / 1000);
+  return `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, "0")}`;
+}
+
+function outcome(run: RunSummary): string {
+  const label = run.eligible ? "Eligible" : run.finished ? "Practice" : "DNF";
+  return `<span class="progress-race-status" data-outcome="${label}">${label}</span>`;
+}
+
+function renderRaceTable(runs: RunSummary[]): string {
+  return `<div class="race-table-wrap progress-race-table"><table><thead><tr><th scope="col">Event</th><th scope="col">WPM</th><th scope="col">Accuracy</th><th scope="col">Time</th><th scope="col">Result</th></tr></thead><tbody>${runs.map((run) => `<tr><th scope="row">${eventLabel(run.event)}</th><td>${run.wpm.toFixed(1)}</td><td>${accuracy(run).toFixed(1)}%</td><td>${raceTime(run.elapsedMs)}</td><td>${outcome(run)}</td></tr>`).join("")}</tbody></table></div>`;
+}
+
+function paceRows(entries: { label: string; wpm: number }[]): string {
+  const peak = Math.max(1, ...entries.map(({ wpm }) => wpm));
+  return `<ol class="progress-pace" role="list">${entries.map(({ label, wpm }) => `<li><span>${label}</span><meter min="0" max="${peak}" value="${wpm}" aria-label="${label}, ${wpm.toFixed(1)} words per minute"></meter><strong>${wpm.toFixed(1)} <span>WPM</span></strong></li>`).join("")}</ol>`;
+}
+
+function latestRace(run: RunSummary): string {
+  const metrics = [
+    ["Speed", `${run.wpm.toFixed(1)} WPM`],
+    ["Accuracy", `${accuracy(run).toFixed(1)}%`],
+    ["Time", raceTime(run.elapsedMs)],
+  ];
+  return `<section class="progress-latest-race" aria-labelledby="progress-latest-title">
+    <div class="progress-latest-heading"><div><p class="eyebrow">Latest race</p><h3 id="progress-latest-title">${eventLabel(run.event)}</h3></div>${outcome(run)}</div>
+    <dl class="progress-metrics">${metrics.map(([label, value]) => `<div><dt>${label}</dt><dd>${value}</dd></div>`).join("")}</dl>
+    </section>`;
+}
+
 export function progressScreen(
   save: GuestSave,
   status: string,
@@ -62,7 +104,6 @@ export function progressScreen(
           95
         ? "Recent accuracy averaged below 95%. Try the correction drill and slow down after an error."
         : "Recent accuracy averaged at least 95%. Try the consistency drill and aim for an even pace.";
-  const peak = Math.max(1, ...recent.map(({ wpm }) => wpm));
   const latest = completed[0];
   const characters = Object.entries(save.characters)
     .filter(([, sample]) => sample.attempts >= 5)
@@ -76,8 +117,6 @@ export function progressScreen(
           (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" })[char]!,
         );
   const records = Object.values(save.records).sort((a, b) => b.at - a.at);
-  const display = (run: RunSummary) =>
-    `<tr><td>${run.event}</td><td>${run.wpm.toFixed(1)}</td><td>${accuracy(run).toFixed(1)}%</td><td>${(run.elapsedMs / 1000).toFixed(1)}s</td><td>${run.eligible ? "Eligible" : run.finished ? "Practice" : "DNF"}</td></tr>`;
   const awardCount = stats.awards.length + Number(save.recoveryBadge);
   return `<section class="page-heading"><p class="eyebrow">YOUR DRIVER</p><h1>Driver <span>progress.</span></h1><p>Rank ${stats.rank} · ${stats.xp} XP · ${stats.credits} credits${save.recoveryBadge ? " · Recovery badge" : ""}</p></section>
     <section class="settings-panel driver-progress" aria-label="Driver progress details">
@@ -88,26 +127,25 @@ export function progressScreen(
     ${
       recent.length || awardCount || records.length
         ? `<details class="progress-section"><summary>Race stats and awards</summary>
+    ${recent.length ? latestRace(recent[0]) : ""}
+    ${recent.length > 1 ? `<h3>Recent race pace</h3><p class="help">Newest first. Pace varies by passage and mode.</p>${paceRows(recent.slice(0, 5).map((run) => ({ label: eventLabel(run.event), wpm: run.wpm })))}` : ""}
+    ${recent.length ? `<details><summary>Recent history (${recent.length})</summary>${renderRaceTable(recent)}</details>` : ""}
+    ${records.length ? `<details><summary>Comparable bests (${records.length})</summary><p class="help">Fastest eligible finish per passage and mode under this rules and content version.</p>${renderRaceTable(records)}</details>` : ""}
+    ${latest?.pace.length ? `<details><summary>Pace through latest finish</summary><p class="help">WPM by passage segment, in order.</p>${paceRows(latest.pace.map((wpm, index) => ({ label: `Segment ${index + 1}`, wpm })))}</details>` : ""}
     ${
       awardCount
         ? `<details><summary>Milestone awards (${awardCount})</summary>
     <ul>${save.recoveryBadge ? "<li>Recovery badge · corrected an error and reached a 20-character streak</li>" : ""}${stats.awards
       .map(({ id, xp, credits }) => {
         const [kind, event, threshold] = id.split(":");
-        return `<li>${AWARD_LABELS[kind]} · ${event}${threshold ? ` · ${threshold} stars` : ""} · ${xp} XP · ${credits} credits</li>`;
+        const label = isCategory(event)
+          ? CATEGORY_NAMES[event]
+          : eventLabel(event);
+        return `<li>${AWARD_LABELS[kind]} · ${label}${threshold ? ` · ${threshold} stars` : ""} · ${xp} XP · ${credits} credits</li>`;
       })
       .join("")}</ul></details>`
         : ""
     }
-    ${
-      recent.length
-        ? `<h3>Recent race pace</h3><p>Last ${recent.length} races, newest first. Pace varies by passage and mode.</p>
-    <ol>${recent.map((run) => `<li><meter min="0" max="${peak}" value="${run.wpm}" aria-label="${run.wpm.toFixed(1)} words per minute"></meter> ${run.wpm.toFixed(1)} WPM</li>`).join("")}</ol>
-    ${latest?.pace.length ? `<details><summary>Pace through latest finish</summary><p>WPM by equal passage segment, in order.</p><ol>${latest.pace.map((wpm) => `<li><meter min="0" max="${Math.max(1, ...latest.pace)}" value="${wpm}"></meter> ${wpm.toFixed(1)} WPM</li>`).join("")}</ol></details>` : ""}
-    <details><summary>Recent history (${recent.length})</summary><div class="race-table-wrap"><table><thead><tr><th>Event</th><th>WPM</th><th>Accuracy</th><th>Time</th><th>Result</th></tr></thead><tbody>${recent.map(display).join("")}</tbody></table></div></details>`
-        : ""
-    }
-    ${records.length ? `<details><summary>Comparable bests (${records.length})</summary><p>Fastest eligible finish per passage and mode under this rules and content version.</p><div class="race-table-wrap"><table><thead><tr><th>Event</th><th>WPM</th><th>Accuracy</th><th>Time</th><th>Result</th></tr></thead><tbody>${records.map(display).join("")}</tbody></table></div></details>` : ""}
     ${characters.length ? `<details><summary>Key accuracy and timing</summary><p>Based on eligible races. Keys with fewer than five attempts are hidden. Timing measures the interval between successful inputs.</p><ul>${characters.map(([key, sample]) => `<li>${keyLabel(key)} · ${sample.errors} errors in ${sample.attempts} attempts${sample.timingCount >= 5 ? ` · ${Math.round(sample.timingMs / sample.timingCount)} ms average` : ""}</li>`).join("")}</ul></details>` : ""}</details>`
         : ""
     }

@@ -9,11 +9,21 @@ type RemoteSave = { revision: number; save: unknown } | null;
 type Checkpoint = { remote: number; local: number };
 type Account = {
   id: string;
+  name: string;
   repository: LocalGuestRepository;
   checkpoint: Checkpoint;
   approved: boolean;
   remote?: RemoteSave;
 };
+function driverName(metadata: Session["user"]["user_metadata"]): string {
+  for (const field of ["full_name", "name", "given_name"]) {
+    const value: unknown = metadata[field];
+    if (typeof value !== "string") continue;
+    const name = value.replace(/\s+/gu, " ").trim();
+    if (name) return [...name].slice(0, 64).join("");
+  }
+  return "Signed in";
+}
 export interface CloudStatus {
   message: string;
   signedIn: boolean;
@@ -24,7 +34,10 @@ export interface CloudStatus {
 
 export function connectCloud(
   guest: LocalGuestRepository,
-  switchRepository: (repo: LocalGuestRepository, signedIn: boolean) => void,
+  switchRepository: (
+    repo: LocalGuestRepository,
+    accountName: string | null,
+  ) => void,
   showStatus: (status: CloudStatus) => void,
 ) {
   const client = createClient(PROJECT_URL!, PROJECT_KEY!, {
@@ -175,7 +188,7 @@ export function connectCloud(
       remote: remote?.revision ?? 0,
       local: account.repository.snapshot().revision,
     });
-    switchRepository(account.repository, true);
+    switchRepository(account.repository, account.name);
     display("Cloud progress restored.");
   }
 
@@ -230,7 +243,7 @@ export function connectCloud(
     }
     if (!session) {
       active = undefined;
-      switchRepository(guest, false);
+      switchRepository(guest, null);
       display("Sign in to save progress across devices.");
       return;
     }
@@ -244,8 +257,15 @@ export function connectCloud(
       }),
       schedule,
     );
-    active = { id, repository, checkpoint: checkpointFor(id), approved: false };
-    switchRepository(repository, true);
+    const name = driverName(session.user.user_metadata);
+    active = {
+      id,
+      name,
+      repository,
+      checkpoint: checkpointFor(id),
+      approved: false,
+    };
+    switchRepository(repository, name);
     display("Checking your cloud save…");
     void refresh(active).catch(() =>
       display(
@@ -317,7 +337,7 @@ export function connectCloud(
         ) &&
         account.repository.replace(guest.exportCurrent())
       )
-        switchRepository(account.repository, true);
+        switchRepository(account.repository, account.name);
     },
     useLocal: () => {
       const account = active;

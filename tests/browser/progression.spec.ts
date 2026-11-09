@@ -77,3 +77,53 @@ test("guest backup requires replacement confirmation and another tab cannot over
   await page.reload();
   await expect(page.locator(".page-heading")).toContainText("225 XP");
 });
+
+test("race stats lead with readable event names and a compact latest race summary", async ({
+  page,
+}) => {
+  const latest = {
+    id: "a".repeat(32),
+    event: "medium-001",
+    at: 2,
+    elapsedMs: 62_000,
+    wpm: 36.4,
+    attempts: 100,
+    correct: 98,
+    eligible: true,
+    finished: true,
+    pace: [34, 38],
+  };
+  const previous = {
+    ...latest,
+    id: "b".repeat(32),
+    event: "easy-001",
+    at: 1,
+    wpm: 28,
+  };
+  const fixture = {
+    ...guestFixture(),
+    history: [latest, previous],
+    records: { [latest.event]: latest },
+  };
+  await page.addInitScript(
+    (raw) => localStorage.setItem("turbotype:guest:v1", raw),
+    JSON.stringify(fixture),
+  );
+  await page.goto("./#/progress");
+  await expect(
+    page.getByRole("heading", { name: "Medium · Level 1" }),
+  ).toBeHidden();
+  await page.getByText("Race stats and awards", { exact: true }).click();
+  const summary = page.locator(".progress-latest-race");
+  await expect(
+    summary.getByRole("heading", { name: "Medium · Level 1" }),
+  ).toBeVisible();
+  await expect(summary).toContainText("36.4 WPM");
+  await expect(summary).toContainText("98.0%");
+  await expect(summary).toContainText("1:02");
+  await expect(page.locator(".progress-pace meter")).toHaveCount(4);
+  await page.getByText("Recent history (2)", { exact: true }).click();
+  await expect(
+    page.getByRole("rowheader", { name: "Easy · Level 1" }),
+  ).toBeVisible();
+});

@@ -6,7 +6,7 @@
 
 **Play:** 300 main races and 30 optional challenges. Earn 18 original reward vehicles and 21 reward courses through eligible main clears, then equip them for new races across categories. Open **Progress** for XP, rank, history, coaching and local backup controls. [Collections](docs/COLLECTIONS.md) · [Curriculum](docs/PHASE8_CURRICULUM.md).
 
-**Account preview:** two approved testers have signed in through Google. In the secure local preview, **Progress** shows save status and practice. Race stats and backup controls open on demand. Live cross-browser cloud-save checks are still pending. GitHub Pages hosting belongs to Phase 10.
+**Account preview:** two approved Google accounts saved separate campaign progress and XP. The header uses the signed-in driver's profile name. In **Progress**, race stats open to a latest-race summary, pace bars and readable event names. Fresh-browser cloud recovery is still pending. GitHub Pages hosting belongs to Phase 10.
 
 [Phase 9 setup and review checklist](docs/PHASE9_RESUME.md) · [Session handoff](docs/SESSION_HANDOFF.md) · [Current status](PROJECT_STATUS.md) · [Backlog](BACKLOG.md)
 
