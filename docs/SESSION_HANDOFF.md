@@ -4,7 +4,7 @@
 
 Current branch `codex/phase9-progression`, preview alpha.27, rules 3, content 3, guest save 1. The user resumed Phase 9 and authorized a Free project in their Supabase organization. Phase 8 merged as e3d0603 and the main push check passed. Retain the existing LAN server on 5173 and the original browser save keys.
 
-Read [Phase 9 setup and review](PHASE9_RESUME.md) and [verification](TESTING.md) first. The branch includes a guest save, economy, 18 reward vehicles, 21 reward environments, Progress, drills, cloud client and server migrations. The hosted test transaction covered access isolation, removed users, duplicate retries, stale writes and owner deletion using synthetic identities and rolled back the fixtures. The owner must complete Google OAuth setup before live account and two-device checks. Do not treat this as Phase 9 acceptance or a Pages release.
+Read [Phase 9 setup and review](PHASE9_RESUME.md) and [verification](TESTING.md) first. The branch includes a guest save, economy, 18 reward vehicles, 21 reward environments, Progress, drills, cloud client and server migrations. The hosted test transaction covered access isolation, removed users, duplicate retries, stale writes and owner deletion using synthetic identities and rolled back the fixtures. The Google provider is enabled and the browser can start OAuth from the local Progress screen. The owner must finish credential verification and account approval before completing live account and two-device checks.
 
 The sections below retain older checkpoints and their then-current status.
 

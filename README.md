@@ -6,7 +6,7 @@
 
 **Play:** 300 main races and 30 optional challenges. Earn 18 original reward vehicles and 21 reward courses through eligible main clears, then equip them for new races across categories. Open **Progress** for XP, rank, history, coaching and local backup controls. [Collections](docs/COLLECTIONS.md) · [Curriculum](docs/PHASE8_CURRICULUM.md).
 
-**Account preview:** the Supabase Free project and save database are provisioned. Account sync requires Google sign-in configuration and a live two-account check before release. Guest play works locally. GitHub Pages hosting belongs to Phase 10.
+**Account preview:** the Supabase Free project, save database, and Google provider are configured. To test from the secure local preview, open **Progress → Sign in with Google**. Player approval and live two-account checks are required before release. GitHub Pages hosting belongs to Phase 10.
 
 [Phase 9 setup and review checklist](docs/PHASE9_RESUME.md) · [Session handoff](docs/SESSION_HANDOFF.md) · [Current status](PROJECT_STATUS.md) · [Backlog](BACKLOG.md)
 

@@ -2,7 +2,7 @@
 
 ## Phase 9 active — 9 November 2026
 
-Phase 8 is merged. The alpha.27 branch implements the guest, reward collection and learning features and a Supabase sync path. The Phase 9 tasks below remain the closure checklist, with implementation and live verification distinguished in [PHASE9_RESUME.md](docs/PHASE9_RESUME.md) and [TESTING.md](docs/TESTING.md). Owner Google OAuth setup and real account checks are still required for cloud closure. The prior pause sections are historical.
+Phase 8 is merged. The alpha.27 branch implements the guest, reward collection and learning features and a Supabase sync path. The Phase 9 tasks below remain the closure checklist, with implementation and live verification distinguished in [PHASE9_RESUME.md](docs/PHASE9_RESUME.md) and [TESTING.md](docs/TESTING.md). Google OAuth is enabled. Owner credential verification, test-account approval, and real account checks remain open. The prior pause sections are historical.
 
 ## Historical paused checkpoint — 23 October 2026
 

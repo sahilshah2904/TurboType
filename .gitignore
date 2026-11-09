@@ -11,6 +11,8 @@ test-results/
 .env
 .env.*
 !.env.example
+client_secret.json
+client_secret_*.json
 *.log
 
 # Editor/OS state

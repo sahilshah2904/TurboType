@@ -1,6 +1,10 @@
 import { defineConfig } from "vitest/config";
 import { loadEnv } from "vite";
 import { createHash } from "node:crypto";
+import { readdirSync } from "node:fs";
+
+const isOAuthDownload = (path: string) =>
+  /(?:^|[\\/])client_secret(?:_[^\\/]+)?\.json$/i.test(path);
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd());
@@ -31,6 +35,37 @@ export default defineConfig(({ mode }) => {
     preview: { port: 4173, strictPort: true },
     build: { target: "es2022" },
     plugins: [
+      {
+        name: "turbotype-block-oauth-downloads",
+        configureServer(server) {
+          server.middlewares.use((request, response, next) => {
+            let path: string;
+            try {
+              path = decodeURIComponent(
+                new URL(request.url ?? "/", "http://localhost").pathname,
+              );
+            } catch {
+              return next();
+            }
+            if (!isOAuthDownload(path)) return next();
+            response.statusCode = 403;
+            response.end("OAuth credential files are private.");
+          });
+        },
+        buildStart() {
+          if (
+            readdirSync("public", {
+              recursive: true,
+              withFileTypes: true,
+            }).some(
+              (entry) => !entry.isDirectory() && isOAuthDownload(entry.name),
+            )
+          )
+            this.error(
+              "Remove Google OAuth credential downloads from public/ before building.",
+            );
+        },
+      },
       {
         name: "turbotype-content-policy",
         apply: "build",
