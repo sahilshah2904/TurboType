@@ -1,7 +1,8 @@
 import type Phaser from "phaser";
+import { rewardVehicleArt } from "../content/reward-vehicle-art";
 
 /** Local units in the 200×100 sprite frame; same manifest in race and preview. */
-export const KART_FLEET = [
+const STARTER_FLEET = [
   {
     id: "volt-kart",
     file: "volt-kart.png",
@@ -53,6 +54,7 @@ export const KART_FLEET = [
     exhaust: [-91, 3],
   },
 ] as const;
+export const KART_FLEET = [...STARTER_FLEET, ...rewardVehicleArt];
 
 export function preloadFleet(
   scene: Phaser.Scene,
@@ -60,14 +62,12 @@ export function preloadFleet(
 ): void {
   for (const index of indices) {
     const kart = KART_FLEET[index];
-    scene.load.image(
-      kart.id,
-      `${import.meta.env.BASE_URL}assets/karts/parts/${kart.id}-body.webp`,
-    );
-    scene.load.image(
-      `${kart.id}-wheel`,
-      `${import.meta.env.BASE_URL}assets/karts/parts/${kart.id}-wheel.webp`,
-    );
+    const rewards = index >= STARTER_FLEET.length;
+    const path = `${import.meta.env.BASE_URL}assets/karts/${rewards ? "rewards" : "parts"}/${kart.id}`;
+    const extension = rewards ? "svg" : "webp";
+    scene.load.image(kart.id, `${path}-body.${extension}`);
+    if (kart.wheels.length)
+      scene.load.image(`${kart.id}-wheel`, `${path}-wheel.${extension}`);
   }
 }
 
@@ -78,7 +78,8 @@ export function fleetReady(
   return indices.every(
     (index) =>
       scene.textures.exists(KART_FLEET[index].id) &&
-      scene.textures.exists(`${KART_FLEET[index].id}-wheel`),
+      (!KART_FLEET[index].wheels.length ||
+        scene.textures.exists(`${KART_FLEET[index].id}-wheel`)),
   );
 }
 
@@ -109,9 +110,9 @@ export function addKart(scene: Phaser.Scene, index: number) {
   chassis.add([flame, body]);
   root.add([shadow, chassis]);
   // Elliptical carriers stay fixed while circular tire/rim images rotate inside.
-  const wheels = kart.wheels.map(() => {
+  const wheels = Array.from({ length: 3 }, () => {
     const carrier = scene.add.container(0, 0).setScale(0.93, 1);
-    const image = scene.add.image(0, 0, `${kart.id}-wheel`);
+    const image = scene.add.image(0, 0, "volt-kart-wheel");
     carrier.add(image);
     root.add(carrier);
     return { carrier, image, angle: 0 };
@@ -136,8 +137,11 @@ export function setKartModel(
     .setTexture(key)
     .setPosition(0, kart.bodyY)
     .setDisplaySize(200, 100);
-  kart.wheels.forEach(([x, y, radius], i) => {
-    const wheel = assembly.wheels[i];
+  assembly.wheels.forEach((wheel, i) => {
+    const anchor = kart.wheels[i];
+    wheel.carrier.setVisible(!!anchor);
+    if (!anchor) return;
+    const [x, y, radius] = anchor;
     wheel.carrier.setPosition(x, y);
     wheel.image
       .setTexture(`${kart.id}-wheel`)

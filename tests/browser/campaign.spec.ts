@@ -1,6 +1,8 @@
 import { expect, test, type Page } from "@playwright/test";
 import { readFile } from "node:fs/promises";
+import { guestFixture } from "./guest-fixture";
 const KEY = "turbotype:campaign-map:v2";
+const SAVE = "turbotype:guest:v1";
 async function ready(page: Page) {
   await expect(page.locator("#race-track")).toHaveAttribute(
     "data-ready",
@@ -145,8 +147,9 @@ test("a real eligible finish saves stars, unlocks only its category and replays 
   expect(
     await page.evaluate(
       (key) =>
-        Object.keys(JSON.parse(localStorage.getItem(key)!).clears).length,
-      KEY,
+        Object.keys(JSON.parse(localStorage.getItem(key)!).campaign.clears)
+          .length,
+      SAVE,
     ),
   ).toBe(1);
   await page.goto("./#/campaign/hard");
@@ -362,25 +365,18 @@ test("a remote tab clear refreshes the map without creating an update loop", asy
   await page.goto("./#/campaign/easy");
   const other = await context.newPage();
   await other.goto("./#/campaign/medium");
-  await other.evaluate(() =>
-    localStorage.setItem(
-      "turbotype:campaign-map:v2",
-      JSON.stringify({
-        schemaVersion: 2,
-        rulesVersion: 3,
-        clears: {
-          "easy-001": {
-            stars: 3,
-            bestWpm: 10,
-            bestAccuracy: 100,
-            bestTimeMs: 60000,
-            revision: 1,
-          },
-        },
-        positions: { easy: 0, medium: 0, hard: 0 },
-      }),
-    ),
-  );
+  const save = guestFixture();
+  save.campaign.clears["easy-001"] = {
+    stars: 3,
+    bestWpm: 10,
+    bestAccuracy: 100,
+    bestTimeMs: 60000,
+    revision: 1,
+  };
+  await other.evaluate(({ key, raw }) => localStorage.setItem(key, raw), {
+    key: SAVE,
+    raw: JSON.stringify(save),
+  });
   await expect(page.locator(".map-node--current")).toHaveAttribute(
     "data-level",
     "2",

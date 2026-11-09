@@ -4,6 +4,8 @@ Alpha.17: open the base LAN URL without a fragment for the entrance, or use Sett
 
 # Run TurboType locally
 
+Alpha.27 guest play requires the usual local install. For optional account development on secure loopback, see the [Phase 9 project and Google setup](PHASE9_RESUME.md#configure-and-test-google-sign-in).
+
 The app includes Phase 4 Quick Race against four CPUs with real progress/standings/results, plus typing practice, the hub preview, strict-correction keyboard check and local preferences. Alpha.5 integrates the accepted full-window kart race, Live WPM dial, native single typing surface and shared world revamp of all existing pages, with optional original synthesized audio. Progression/cloud accounts and cinematic onboarding are later tasks.
 
 ## Reproducible prerequisites

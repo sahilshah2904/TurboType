@@ -5,11 +5,14 @@ coverage/
 playwright-report/
 test-results/
 .vite/
+/supabase/.temp/
 
 # Local configuration and credentials; commit sanitized examples explicitly
 .env
 .env.*
 !.env.example
+client_secret.json
+client_secret_*.json
 *.log
 
 # Editor/OS state

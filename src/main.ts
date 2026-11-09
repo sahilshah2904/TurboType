@@ -8,6 +8,9 @@ try {
   dispose = mountApp(root);
 } catch {
   root.innerHTML =
-    '<main class="boot"><strong>Let’s try that again.</strong><p>TurboType could not start. Reload the page to retry.</p><button onclick="location.reload()">Reload TurboType</button></main>';
+    '<main class="boot"><strong>Let’s try that again.</strong><p>TurboType could not start. Reload the page to retry.</p><button>Reload TurboType</button></main>';
+  root
+    .querySelector("button")
+    ?.addEventListener("click", () => location.reload());
 }
 if (import.meta.hot) import.meta.hot.dispose(() => dispose?.());

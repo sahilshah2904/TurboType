@@ -1,5 +1,24 @@
 # TurboType future work backlog
 
+## Phase 9 accepted — 9 November 2026
+
+The owner accepted alpha.27 after seeing the same saved stats in Microsoft Edge. Both approved accounts saved distinct live campaign clears and XP. [PR #9](https://github.com/sahilshah2904/TurboType/pull/9) awaits integration. Production cloud and desktop verification carry into Phase 10. [Phase 9 handoff](docs/PHASE9_RESUME.md) · [Verification](docs/TESTING.md)
+
+## Historical paused checkpoint — 23 October 2026
+
+The user accepted alpha.26 ("all good"), requested Phase9 completion, then explicitly asked to **continue later and save README/all handoffs**. Stop after saving documentation. No further implementation, integration, deployment or backend provisioning is authorized during this pause; a later resume request is required.
+
+Accepted implementation **bd378c12711c7b54aa24b284cf182ae5fc052825** passed exact-source hosted [run39972392241/job120478169052](https://github.com/sahilshah2904/TurboType/actions/runs/39972392241/job/120478169052), completed2026-10-23 14:55:35UTC: **125 unit /121 browser cases**, verified from both job conclusion and downloaded log (Reference_Images/analysis/alpha26-hosted-check.log, ignored). Earlier117/119 local failures were corrected harness assumptions; the final full hosted suite passes. Application0.1.0-alpha.26/rules3/content3/map schema2; canonical guest schema1 remains designed only. Six current collection/briefing/title screenshots are in docs/images/alpha26.
+
+PR8 remains **open/unmerged** at the accepted implementation. Phases1–7 are integrated; Phase8 curriculum/collection behavior is implemented, tested and user accepted, while integration and finished reward artwork/environments remain outstanding. No Pages/backend/accounts/cloud/multiplayer deployment exists. Do not describe main as containing Phase8.
+
+Current checkout **codex/phase9-progression** was created from bd378c1 for the user's Phase9 request. **Preparation only:** read progression/storage/fleet/learning contracts and task scope, researched Supabase's official free-plan/auth documentation, and explained cloud storage to the user. No Phase9 application code, reward models/tracks, ownership, canonical saves, account provider, database or cloud integration was written or provisioned. This checkpoint adds documentation only. Its own hosted check must be inspected independently; the accepted source pass does not certify a later commit.
+
+Cloud setup is unresolved: the user asked what Supabase is/how it works and whether they must do anything. Explanation given: GitHub hosts static game files; an external free backend stores optional signed-in cross-device progress. The user will need a free account/project and sign-in configuration; exact instructions are still owed when resumed. No project URL/public key, account access or provider provisioning was supplied. Never request passwords, database passwords or service-role keys. Supabase remains a researched candidate, not measured/provisioned/validated infrastructure. Stay strictly$0; no paid upgrades, SMTP/SMS or hidden billing. Local guest play must remain fully usable if cloud is absent, paused or unavailable.
+
+**Resume from docs/PHASE9_RESUME.md:** audit actual Git/PR/checks first; preserve Vite5173 and user saves; decide reviewed integration versus a documented stack; implement canonical guest migration/recovery and atomic reward receipts before ownership/economy, complete18 vehicle/21 track art, learning/drills, then provider/auth/sync/security verification when user-owned backend setup is available. Cloud is optional for players but still a pre-release capability requirement. Do not call Phase9 complete while cloud/security gates or required reward content remain missing. Previously accepted curriculum/cars/music/typing/opening checks need not be repeated for approval.
+
+
 ## Collection selection follow-up — alpha.26
 
 Verification:125 unit tests/format/content/types/build pass; broad browser117/119 exposed two stale harness assumptions, then corrected final-source34/34 focused cases passed, including the two new loading-interruption guards. Six sequential current captures have zero page errors. See docs/TESTING.md for exact scope/logs; this is not a claimed single full121-case local pass. New exact-head hosted checks are separate. Previously accepted alpha.25 head90e9742 passed run39967016807/job120459414784 before these edits.
@@ -279,22 +298,22 @@ Alpha.24 implements all 300 main passages and 30 optional challenges, including 
 
 ## Phase 9 — progression, learning and persistent data
 
-- [ ] TT-901: Integrate existing Phase 7 stars/first-clear unlocks into the canonical receipt model, then implement Driver Rank, exact reward formulas, pit stops, trophies, caches, perfect/recovery awards and one-time receipts.
-- [ ] TT-902: Build garage ownership/equipment/previews and fixed cosmetic rewards; verify no speed advantages and no duplicate claims.
-- [ ] TT-903: Migrate validated rules/revision-qualified Phase 7 map clears/stars/bests/positions from turbotype:campaign-map:v2 (including preserved v1 migration copy); preserve malformed exports and define simultaneous-tab conflicts. Then build bounded local saves, migrations, backup export/import, malformed-save recovery, quota failure and multiple-tab protection.
-- [ ] TT-904: Add comparable personal records, recent-history/pace charts, bounded learning aggregates and one evidence-based coaching suggestion.
-- [ ] TT-905: Implement correction/capitalization/punctuation/consistency drills and optional keyboard guidance; separate practice from competitive eligibility.
-- [ ] TT-906: Validate the free-only cloud provider before integration: preferred Supabase Free Auth/Postgres/private Realtime; check current quotas, OAuth/allowlist setup, region, recovery/export, authorization and static-site callbacks. Hard $0 budget; no paid dependencies or automatic upgrade. Gate final selection on measured validation, not a generic free-tier promise. See docs/MULTIPLAYER_ROOMS.md; depends on TT-205 and stable completed-run contracts.
-- [ ] TT-907: Provision/configure the selected service when authorized/accessible; commit database migrations, test fixtures, access policies and reproducible setup docs without secrets.
-- [ ] TT-908: Add optional permanent sign-in, guest-to-account import preview, account switching isolation and cross-device profile/progress.
-- [ ] TT-909: Implement pending/synced/failed states, idempotent submissions, server-applied reward transactions, conflict handling, bounded queues and local fallback.
-- [ ] TT-910: Test separate-account access isolation, duplicate/offline retries, cross-device conflicts, untrusted imported/solo records, export/deletion and backup/recovery; document actual guarantees.
+- [x] TT-901: Implement Driver Rank and one-time campaign, pit stop, chapter, finale, cache, perfect and recovery awards from the canonical save.
+- [x] TT-902: Implement earned cosmetic ownership, previews and equipment with shared performance rules and one entitlement per reward.
+- [x] TT-903: Migrate validated map progress into the bounded guest save, preserve legacy and malformed data for recovery, and implement backup export/import and second-tab write protection.
+- [x] TT-904: Add comparable personal records, recent-history/pace charts, bounded learning aggregates and one evidence-based coaching suggestion.
+- [x] TT-905: Implement correction, capitalization, punctuation and consistency drills with separate practice eligibility.
+- [x] TT-906: Select and validate Supabase Free Auth/Postgres for the solo preview. Production callback and outage coverage carry into TT-1005. Private Realtime and room capacity remain Phase 11 work.
+- [x] TT-907: Provision the approved $0 project and commit database migrations, access policies, test fixtures and reproducible setup docs.
+- [x] TT-908: Add optional Google sign-in, confirmed guest import, separate account caches and cloud restore. Two owner accounts saved distinct progress, and the owner confirmed restore in Edge.
+- [x] TT-909: Implement revisioned cloud saves, idempotent retries, server-derived milestone totals, conflict choices and a bounded local snapshot fallback.
+- [ ] TT-910: Complete release verification under TT-1005. Hosted checks covered account isolation, duplicate submissions, stale revisions and deletion. Verify offline reconnect, two-session conflict recovery, shared-device cleanup and export/restore on the release configuration.
 
-TT-906/907 may start earlier once contracts stabilize; cloud progress remains a single-player launch requirement, not work postponed until multiplayer.
+Cloud progress remains a single-player launch requirement. Production verification is tracked in TT-1005.
 
-- [ ] TT-911: Required future category-specific reward collection: one distinct car every 15 unique eligible main-level clears within Easy, Medium and Hard (100 levels each), at 15/30/45/60/75/90 per category. Eighteen rewards plus five starters; counters never combine categories. Include monster trucks, hoverboards, flying cars and other original vehicle families rather than only sports-car chassis; support optional wheels/lift anchors within equal gameplay performance. This 22 October correction supersedes the ten-car/global-clear plan. Replays/bonus/Quick Race/Practice do not inflate counts; no extra car at 100 is implied. Author/export/anchor parts, persist idempotent category-qualified ownership from campaign receipts, migrate/recover guest saves and merge cloud clears/ownership safely; multiplayer validates entitlement. Cosmetic only. See docs/GARAGE_PROGRESSION.md for IDs, art briefs and boundary tests. Depends on campaign clear rules and Phase 9 save/cloud work; not implemented by the starter selector.
+- [x] TT-911: Ship 18 original reward cars plus five starters. Each category independently unlocks cars at 15/30/45/60/75/90 eligible unique main clears. Ownership derives from saved clears and works across unlocked categories. Multiplayer entitlement validation remains Phase 11. [Garage progression](docs/GARAGE_PROGRESSION.md)
 
-- [ ] TT-913: Adopt the private-audience $0 policy in identity/storage delivery: up to 100 approved profiles, optional solo sign-in but approved persistent identity online, preferred verified social OAuth instead of paid SMTP/SMS, bounded history, manual export/restore and free-provider pause/quota fallback. Supabase remains proposed until TT-906/1101 gates pass. See docs/MULTIPLAYER_ROOMS.md.
+- [ ] TT-913: Verify the $0 private-audience policy for release. The solo preview uses approved Google accounts, bounded saves and manual export/restore. Verify provider pause/quota fallback under TT-1005 and the audience target of up to 100 approved profiles under Phase 11. [Multiplayer room plan](docs/MULTIPLAYER_ROOMS.md)
 
 ## Phase 10 — single-player release
 
@@ -361,7 +380,7 @@ The user accepts the alpha.15 compact score/metrics presentation and requests st
 
 - [x] TT-531: Five distinct original starter track environments shared by Hub and Quick Race, remembered optional preference, ready-only race selection and active-race lock. Implemented and locally tested (98 unit / 40 browser cases); User accepted all five starter tracks on 22 October 2026; PR #5 merged as 1b832ce after exact-head hosted run 39771450182 passed. Evidence: docs/TESTING.md.
 - [x] TT-705 (Phase 7 portion): Implement starter car/track selection in level briefing and replay across categories, with a shared inventory boundary and no lock bypass. Future earned inventory/entitlement binding remains TT-902/911/912 in Phase 9; it is not claimed complete here.
-- [ ] TT-807: Author/review twenty-one original reward track environments/previews, independent category/threshold IDs and campaign default scenery. Seven per category at 10/25/40/55/70/85/100; 26 tracks total including five starters. Validate references and lazy loading; no placeholder assets count as finished.
-- [ ] TT-912: Unlock independent track rewards at 10/25/40/55/70/85/100 eligible unique main clears in each category: 21 rewards plus five starters, 26 tracks total. Supersedes paired car/track awards; cars stay at 15/30/45/60/75/90, 23 cars total. Derive separate idempotent entitlements from validated category-qualified clear receipts, recover interrupted writes and merge guest/cloud data safely. Globally usable on already-unlocked levels across categories and replays; no replay inflation or locked-level bypass. Verify 100 gives a track but no car. See docs/TRACK_PROGRESSION.md; depends on TT-801/807/901–911.
+- [x] TT-807: Ship 21 original reward track environments and previews with independent category/threshold IDs. Five starters bring the collection to 26 tracks. [Verification](docs/TESTING.md)
+- [x] TT-912: Unlock tracks independently at 10/25/40/55/70/85/100 eligible unique main clears in each category. The track at 100 is awarded independently of car milestones. Owned tracks work across unlocked categories and replays. [Track progression](docs/TRACK_PROGRESSION.md)
 
 TT-1203 now applies only to optional tracks/weather/vehicles beyond the required 26-track/23-car collection. Existing baseline phases remain complete for their agreed scope; new presentation acceptance and future campaign work are tracked separately.

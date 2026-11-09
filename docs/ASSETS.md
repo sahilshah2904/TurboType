@@ -6,6 +6,10 @@ Alpha.26 collection thumbnails and locked structural concept silhouettes are ori
 
 # Asset register — alpha.9
 
+## Alpha.27 reward collection
+
+The 18 original vector reward vehicles are authored in `src/content/reward-vehicle-art.ts`. Reproduce the previews, bodies and wheels with `node scripts/export-reward-vehicles.mjs`. Their axle anchors and no-wheel lift variants are shared by the preview and race. The 21 course palettes and individually authored landscape motifs live in `src/content/track-catalog.ts` and `src/game/reward-scenery.ts`. Collection thumbnails and game scenery share the course geometry. The reward art uses no downloaded images or third-party vehicle or track assets.
+
 ## Alpha.14 current parts pipeline
 
 Five wheel-free PNG chassis were edited from the accepted original art with built-in image_gen, preserving framing/colors/silhouettes and genuine transparency. Sources and exact prompts: `assets-source/karts/parts/PROMPTS.md`. Five original editable SVG wheel designs are reproduced by `scripts/export-kart-parts.mjs`, which also exports body/wheel/assembled-preview WebPs into `public/assets/karts/parts/`. Both Race and Hub use independent wheels and chassis-only suspension. Earlier composite files remain historical originals; the current catalog loads compact assembled previews. No third-party branded art or new audio is used.

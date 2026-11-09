@@ -1,5 +1,11 @@
 # Cars and Tracks collections
 
+## Phase 9 preview — alpha.27
+
+The five starters in each collection are available immediately. Eligible unique main clears unlock 18 additional vehicles and 21 additional courses by category. Earned cards open a full vehicle preview or the live course scene, and equipment can be used across categories on unlocked races. The active-session lock remains. Locked cards describe the milestone, and bonuses, replays, Practice and Quick Race leave the category counters unchanged. See [Phase 9 review](PHASE9_RESUME.md) for the unlock and migration checks. The original alpha.26 delivery notes below are historical.
+
+Accepted by the user on23 October2026("all good"). Source bd378c1 passed125 unit/121 browser cases on GitHub run39972392241/job120478169052. PR8 is unmerged. Phase9 was requested, then paused during preparation before code/assets/backend changes. See PHASE9_RESUME.md; save and stop until explicitly resumed.
+
 Latest explicit decision: 23 October 2026, alpha.26. Equipment selection belongs in dedicated tabs, separate from starting a race. This supersedes all earlier Hub dropdown, race radio and level-briefing picker instructions. Five accepted starters in each collection remain usable. The original car models, colors, rules, passages and tracks are unchanged.
 
 ## Selection and race lifecycle

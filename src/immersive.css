@@ -262,6 +262,39 @@ html[data-route] .app-shell {
   border: 0;
   font-size: 16px;
 }
+.topbar .driver-profile {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  min-width: 0;
+  max-width: 200px;
+  padding: 4px 0;
+  color: var(--muted);
+}
+.driver-profile [hidden] {
+  display: none;
+}
+.driver-profile .status-dot {
+  flex: 0 0 6px;
+  margin: 0;
+}
+.driver-initials {
+  display: grid;
+  flex: 0 0 34px;
+  height: 34px;
+  place-items: center;
+  border: 1px solid #65e7ef68;
+  border-radius: 50%;
+  background: #16303d;
+  color: #b6f5f5;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+.driver-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .footer {
   border-color: #bfc5ca22;
   background: transparent;
@@ -471,6 +504,121 @@ html[data-route] .app-shell {
   max-width: none;
   width: min(900px, 100%);
   margin-left: auto;
+}
+html[data-route="progress"] .page-heading {
+  padding-block: 16px 0;
+  margin-bottom: 16px;
+}
+.driver-progress {
+  margin-left: 0;
+  padding-top: 0;
+}
+.driver-progress .progress-section {
+  border-top: 1px solid var(--line);
+  padding: 16px 0;
+  margin: 0;
+}
+.driver-progress .progress-section > summary {
+  cursor: pointer;
+  font-weight: 700;
+}
+.driver-progress details {
+  margin: 12px 0;
+}
+.progress-latest-race {
+  margin: 16px 0;
+  padding: 16px 20px;
+  border: 1px solid #65e7ef42;
+  border-radius: 8px;
+  background: linear-gradient(110deg, #13232ee8, #0f181fdc);
+}
+.progress-latest-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.progress-latest-heading h3,
+.progress-latest-heading p {
+  margin: 0;
+}
+.progress-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin: 16px 0 0;
+  border-top: 1px solid var(--line);
+  padding-top: 12px;
+}
+.progress-metrics dt {
+  color: var(--muted);
+  font-size: 14px;
+}
+.progress-metrics dd {
+  margin: 2px 0 0;
+  font:
+    700 clamp(20px, 3vw, 32px) / 1.15 "Barlow Condensed",
+    sans-serif;
+  font-variant-numeric: tabular-nums;
+}
+.progress-race-status {
+  display: inline-block;
+  padding: 3px 8px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 600;
+}
+.progress-race-status[data-outcome="Eligible"] {
+  border-color: #65e7ef68;
+  color: #b6f5f5;
+}
+.progress-pace {
+  display: grid;
+  gap: 9px;
+  padding: 0;
+  list-style: none;
+}
+.progress-pace li {
+  display: grid;
+  grid-template-columns: minmax(125px, 1fr) minmax(60px, 2fr) 84px;
+  align-items: center;
+  gap: 12px;
+  font-variant-numeric: tabular-nums;
+}
+.progress-pace meter {
+  width: 100%;
+  height: 12px;
+}
+.progress-pace meter::-webkit-meter-bar {
+  background: #172732;
+  border: 0;
+}
+.progress-pace meter::-webkit-meter-optimum-value {
+  background: var(--energy);
+}
+.progress-pace meter::-moz-meter-bar {
+  background: var(--energy);
+}
+.progress-pace strong {
+  text-align: right;
+}
+.progress-pace strong span {
+  color: var(--muted);
+  font-size: 14px;
+}
+.progress-race-table table {
+  margin-top: 10px;
+  font-variant-numeric: tabular-nums;
+}
+.progress-race-table thead th {
+  color: var(--muted);
+  font-size: 14px;
+}
+.progress-race-table th:not(:first-child),
+.progress-race-table td {
+  text-align: right;
 }
 .setting-row {
   background: transparent;
@@ -1194,11 +1342,24 @@ html:is([data-route="race"], [data-route="level"]) .topbar {
   display: none;
 }
 @media (max-width: 1200px) {
-  .topbar .guest {
+  .topbar .guest:not([data-signed-in]) {
     display: none;
   }
   .topbar nav {
     gap: 18px;
+  }
+  html:not(:is([data-route="race"], [data-route="level"]))
+    .topbar:has(.driver-profile[data-signed-in]) {
+    flex-wrap: wrap;
+    row-gap: 0;
+  }
+  html:not(:is([data-route="race"], [data-route="level"]))
+    .topbar:has(.driver-profile[data-signed-in])
+    nav {
+    order: 1;
+    flex: 1 0 100%;
+    flex-wrap: wrap;
+    min-height: 44px;
   }
 }
 

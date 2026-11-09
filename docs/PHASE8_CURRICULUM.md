@@ -1,5 +1,7 @@
 # Phase 8 curriculum — alpha.24
 
+Latest checkpoint23 October2026: curriculum and alpha.26 collection flow accepted; exact bd378c1 hosted check passes125 unit/121 browser cases. PR8 remains unmerged. Finished18 reward vehicles/21 track environments and Phase9 ownership/saves/cloud remain pending; silhouette slots are not finished content. Phase9 preparation began, then user requested save-and-stop. See PHASE9_RESUME.md for full continuity.
+
 Implementation on codex/phase8-curriculum; acceptance/integration remain separate. The user requested all Phase 8 work, updated GitHub documentation and a focused test list. No Phase 9, merge or deployment begins automatically.
 
 ## Content and objectives

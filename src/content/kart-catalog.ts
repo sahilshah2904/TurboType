@@ -1,4 +1,7 @@
-/** Starter cosmetics only. Campaign reward vehicles are planned in docs/GARAGE_PROGRESSION.md. */
+import { CAR_REWARDS } from "./collection";
+import type { Category } from "../core/contracts";
+
+/** The five original starter vehicles also supply the four CPU models. */
 export const STARTER_KARTS = [
   {
     id: "volt-kart",
@@ -31,12 +34,30 @@ export const STARTER_KARTS = [
     style: "Violet electric concept",
   },
 ] as const;
-export type KartId = (typeof STARTER_KARTS)[number]["id"];
+type RewardKartId = `reward-${Category}-${string}`;
+export type KartId = (typeof STARTER_KARTS)[number]["id"] | RewardKartId;
+export const KARTS = [
+  ...STARTER_KARTS,
+  ...CAR_REWARDS.map((item) => ({
+    id: item.id as RewardKartId,
+    name: item.name,
+    file: `rewards/${item.id}-preview.svg`,
+    style: `${item.family[0].toUpperCase()}${item.family.slice(1)} · campaign reward`,
+  })),
+];
 export function isKartId(value: unknown): value is KartId {
-  return STARTER_KARTS.some((kart) => kart.id === value);
+  return KARTS.some((kart) => kart.id === value);
 }
 /** Driver IDs never change. Only model assignment rotates to avoid duplicate silhouettes. */
 export function kartLineup(selected: KartId): number[] {
-  const index = STARTER_KARTS.findIndex((kart) => kart.id === selected);
-  return [index, ...STARTER_KARTS.map((_, i) => i).filter((i) => i !== index)];
+  const index = Math.max(
+    0,
+    KARTS.findIndex((kart) => kart.id === selected),
+  );
+  return [
+    index,
+    ...STARTER_KARTS.map((_, i) => i)
+      .filter((i) => i !== index)
+      .slice(0, 4),
+  ];
 }

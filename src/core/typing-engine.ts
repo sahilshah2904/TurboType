@@ -10,6 +10,12 @@ export type TypingState =
   | "abandoned";
 export type PracticeReason =
   "paused" | "blocked-assistance" | "composed-input" | "uncertain-input";
+export interface CharacterSample {
+  attempts: number;
+  errors: number;
+  timingCount: number;
+  timingMs: number;
+}
 
 export interface TypingOptions {
   passage: string;
@@ -63,6 +69,12 @@ export class TypingEngine {
   private reasons = new Set<PracticeReason>();
   private recentCorrectMs: number[] = [];
   private lastClockMs = -Infinity;
+  private recoveredLap = false;
+  private recovering = false;
+  private paceSamples: number[] = [];
+  private lastSampleMs = 0;
+  private lastCorrectAt: number | undefined;
+  private characterSamples: Record<string, CharacterSample> = {};
 
   constructor(private readonly options: TypingOptions) {
     if (
@@ -157,22 +169,49 @@ export class TypingEngine {
     for (const character of text) {
       if (this.state !== "racing") break;
       this.totalAttempts++;
+      const expected = this.options.passage[this.validatedLength];
+      const samples = (this.characterSamples[expected] ??= {
+        attempts: 0,
+        errors: 0,
+        timingCount: 0,
+        timingMs: 0,
+      });
+      samples.attempts++;
       if (
         this.errorCharacter !== null ||
         character !== this.options.passage[this.validatedLength]
       ) {
         if (this.errorCharacter === null) this.errorCharacter = character;
+        samples.errors++;
+        this.lastCorrectAt = undefined;
         this.cleanStreak = 0;
         continue;
       }
       this.correctAttempts++;
       this.validatedLength++;
       const activeMs = this.elapsed(now);
+      if (this.lastCorrectAt !== undefined) {
+        const delay = activeMs - this.lastCorrectAt;
+        if (delay > 0 && delay <= 5000) {
+          samples.timingCount++;
+          samples.timingMs += Math.round(delay);
+        }
+      }
+      this.lastCorrectAt = activeMs;
       this.recentCorrectMs.push(activeMs);
       if (this.validatedLength > this.furthestLength) {
         this.furthestLength = this.validatedLength;
         this.cleanStreak++;
         this.longestStreak = Math.max(this.longestStreak, this.cleanStreak);
+        if (this.recovering && this.cleanStreak >= 20) this.recoveredLap = true;
+        const interval = Math.ceil(this.options.passage.length / 20);
+        if (this.validatedLength % interval === 0) {
+          const duration = activeMs - this.lastSampleMs;
+          this.paceSamples.push(
+            duration > 0 ? Math.min(1000, (interval * 12000) / duration) : 0,
+          );
+          this.lastSampleMs = activeMs;
+        }
         if (
           this.cleanStreak % 20 === 0 &&
           activeMs - this.lastNitroMs >= 2000
@@ -194,9 +233,18 @@ export class TypingEngine {
     if (this.errorCharacter !== null) {
       this.errorCharacter = null;
       this.correctedErrors++;
+      this.recovering = true;
     } else if (this.validatedLength > 0) {
       this.validatedLength--;
     }
+  }
+
+  learningSummary() {
+    return {
+      pace: [...this.paceSamples],
+      recovered: this.recoveredLap,
+      characters: structuredClone(this.characterSamples),
+    };
   }
 
   snapshot(): TypingSnapshot {

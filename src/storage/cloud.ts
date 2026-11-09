@@ -1,0 +1,407 @@
+import { createClient, type Session } from "@supabase/supabase-js";
+import { newGuestSave, parseGuestSave } from "../core/progression";
+import { GUEST_KEY, RECOVERY_KEY, LocalGuestRepository } from "./guest";
+
+const PROJECT_URL = import.meta.env.VITE_SUPABASE_URL as string | undefined;
+const PROJECT_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as
+  string | undefined;
+type RemoteSave = { revision: number; save: unknown } | null;
+type Checkpoint = { remote: number; local: number };
+type Account = {
+  id: string;
+  name: string;
+  repository: LocalGuestRepository;
+  checkpoint: Checkpoint;
+  approved: boolean;
+  remote?: RemoteSave;
+};
+function driverName(metadata: Session["user"]["user_metadata"]): string {
+  for (const field of ["full_name", "name", "given_name"]) {
+    const value: unknown = metadata[field];
+    if (typeof value !== "string") continue;
+    const name = value.replace(/\s+/gu, " ").trim();
+    if (name) return [...name].slice(0, 64).join("");
+  }
+  return "Signed in";
+}
+export interface CloudStatus {
+  message: string;
+  signedIn: boolean;
+  approved: boolean;
+  conflict: boolean;
+  needsCheck: boolean;
+}
+
+export function connectCloud(
+  guest: LocalGuestRepository,
+  switchRepository: (
+    repo: LocalGuestRepository,
+    accountName: string | null,
+  ) => void,
+  showStatus: (status: CloudStatus) => void,
+) {
+  const client = createClient(PROJECT_URL!, PROJECT_KEY!, {
+    auth: {
+      flowType: "pkce",
+      detectSessionInUrl: false,
+      persistSession: true,
+      storage: sessionStorage,
+      storageKey: "turbotype-auth",
+    },
+  });
+  let active: Account | undefined;
+  let timer: number | undefined;
+  let busy: Account | undefined;
+  let closed = false;
+  let status = "Sign in to save progress across devices.";
+  let needsCheck = false;
+  const display = (message?: string, retry = false) => {
+    if (message !== undefined) {
+      status = message;
+      needsCheck = retry;
+    }
+    showStatus({
+      message: status,
+      signedIn: !!active,
+      approved: active?.approved ?? false,
+      conflict: active?.remote !== undefined,
+      needsCheck,
+    });
+  };
+  const accountPrefix = (id: string) => `${GUEST_KEY}:account:${id}:`;
+  const metaKey = (id: string) => `${accountPrefix(id)}checkpoint`;
+  const clearAccountCache = (id: string) => {
+    try {
+      sessionStorage.removeItem(accountPrefix(id) + GUEST_KEY);
+      sessionStorage.removeItem(accountPrefix(id) + RECOVERY_KEY);
+      sessionStorage.removeItem(metaKey(id));
+    } catch {
+      /* Storage restrictions can prevent the cleanup. */
+    }
+  };
+  const saveCheckpoint = (account: Account, checkpoint: Checkpoint) => {
+    account.checkpoint = checkpoint;
+    try {
+      sessionStorage.setItem(metaKey(account.id), JSON.stringify(checkpoint));
+    } catch {
+      /* Sync is still usable for this visit. */
+    }
+  };
+  const checkpointFor = (id: string): Checkpoint => {
+    try {
+      const v = JSON.parse(
+        sessionStorage.getItem(metaKey(id)) ?? "{}",
+      ) as Partial<Checkpoint>;
+      if (
+        Number.isSafeInteger(v.remote) &&
+        Number.isSafeInteger(v.local) &&
+        v.remote! >= 0 &&
+        v.local! >= 0
+      )
+        return { remote: v.remote!, local: v.local! };
+    } catch {
+      /* An unreadable checkpoint requires an explicit conflict choice. */
+    }
+    return { remote: 0, local: 0 };
+  };
+  const getRemote = async (id: string) =>
+    client
+      .from("turbotype_saves")
+      .select("revision, save")
+      .eq("owner", id)
+      .maybeSingle<NonNullable<RemoteSave>>();
+
+  function schedule() {
+    window.clearTimeout(timer);
+    if (!active?.approved || active.remote !== undefined) return;
+    if (active.repository.snapshot().revision === active.checkpoint.local)
+      return;
+    display(
+      "Pending · Account changes are kept in this tab. Sync or export before closing it.",
+    );
+    timer = window.setTimeout(() => void sync(), 2500);
+  }
+
+  async function sync() {
+    const account = active;
+    if (!account?.approved || busy || account.remote !== undefined || closed)
+      return;
+    const save = account.repository.snapshot();
+    if (save.revision === account.checkpoint.local) return;
+    busy = account;
+    try {
+      const { data, error } = await client.rpc("turbotype_write_save", {
+        account_id: account.id,
+        expected: account.checkpoint.remote,
+        candidate: save,
+      });
+      if (active !== account || closed) return;
+      if (error?.code === "PT409") {
+        const remote = await getRemote(account.id);
+        if (active !== account || closed) return;
+        if (remote.error)
+          display(
+            "Couldn’t check cloud progress. Your local copy is available.",
+            true,
+          );
+        else {
+          account.remote = remote.data;
+          display("Conflict · Choose the local or cloud copy.");
+        }
+      } else if (error?.code === "PT429") {
+        schedule();
+      } else if (error || !Number.isSafeInteger(data)) {
+        if (error?.code === "42501") account.approved = false;
+        display(
+          error?.code === "42501"
+            ? "Signed in. Cloud saves are waiting for approval."
+            : "Couldn’t sync. Your local copy is available.",
+          true,
+        );
+      } else {
+        saveCheckpoint(account, { remote: data, local: save.revision });
+        display("Progress saved to your account.");
+        schedule();
+      }
+    } catch {
+      if (active === account)
+        display("Couldn’t sync. Your local copy is available.", true);
+    } finally {
+      if (busy === account) busy = undefined;
+      if (active && active !== account) schedule();
+    }
+  }
+
+  async function restore(account: Account, remote: RemoteSave) {
+    const raw = remote
+      ? JSON.stringify(remote.save)
+      : JSON.stringify(newGuestSave());
+    if (!parseGuestSave(raw) || !account.repository.replace(raw, false)) {
+      display(
+        "The cloud copy could not be restored. Export your local copy before retrying.",
+        true,
+      );
+      return;
+    }
+    account.remote = undefined;
+    saveCheckpoint(account, {
+      remote: remote?.revision ?? 0,
+      local: account.repository.snapshot().revision,
+    });
+    switchRepository(account.repository, account.name);
+    display("Cloud progress restored.");
+  }
+
+  async function refresh(account: Account) {
+    const approval = await client.rpc("turbotype_account_approved");
+    if (active !== account || closed) return;
+    account.approved = !approval.error && approval.data === true;
+    if (!account.approved) {
+      display(
+        approval.error
+          ? "Couldn’t check cloud access. Your local copy is available."
+          : "Signed in. Cloud saves are waiting for approval.",
+        true,
+      );
+      return;
+    }
+    const { data: remote, error } = await getRemote(account.id);
+    if (active !== account || closed) return;
+    if (error) {
+      display(
+        "Couldn’t check cloud progress. Your local copy is available.",
+        true,
+      );
+      return;
+    }
+    const revision = remote?.revision ?? 0;
+    const localRevision = account.repository.snapshot().revision;
+    if (account.checkpoint.remote !== revision) {
+      if (localRevision === account.checkpoint.local)
+        await restore(account, remote);
+      else {
+        account.remote = remote;
+        display("Conflict · Choose the local or cloud copy.");
+      }
+      return;
+    }
+    if (localRevision !== account.checkpoint.local) schedule();
+    else
+      display(
+        remote
+          ? "Progress saved to your account."
+          : "Signed in. Cloud saves are on.",
+      );
+  }
+
+  function changeSession(session: Session | null) {
+    if (closed || active?.id === session?.user.id) return;
+    window.clearTimeout(timer);
+    if (active) {
+      active.repository.close();
+      clearAccountCache(active.id);
+    }
+    if (!session) {
+      active = undefined;
+      switchRepository(guest, null);
+      display("Sign in to save progress across devices.");
+      return;
+    }
+    const id = session.user.id;
+    if (!/^[a-f0-9-]{36}$/i.test(id)) return;
+    const prefix = accountPrefix(id);
+    const repository = new LocalGuestRepository(
+      () => ({
+        getItem: (key) => sessionStorage.getItem(prefix + key),
+        setItem: (key, value) => sessionStorage.setItem(prefix + key, value),
+      }),
+      schedule,
+    );
+    const name = driverName(session.user.user_metadata);
+    active = {
+      id,
+      name,
+      repository,
+      checkpoint: checkpointFor(id),
+      approved: false,
+    };
+    switchRepository(repository, name);
+    display("Checking your cloud save…");
+    void refresh(active).catch(() =>
+      display(
+        "Couldn’t check cloud progress. Your local copy is available.",
+        true,
+      ),
+    );
+  }
+
+  const subscription = client.auth.onAuthStateChange((_event, session) => {
+    // Avoid invoking the SDK while its auth state lock is held.
+    setTimeout(() => changeSession(session), 0);
+  }).data.subscription;
+  const redirect = new URL(location.href);
+  const code = redirect.searchParams.get("code");
+  if (code || redirect.searchParams.has("error")) {
+    for (const key of ["code", "error", "error_code", "error_description"])
+      redirect.searchParams.delete(key);
+    history.replaceState(history.state, "", redirect);
+    if (code)
+      void client.auth.exchangeCodeForSession(code).then(({ error }) => {
+        if (closed) return;
+        if (error) display("Google sign-in failed. Start again from Progress.");
+        else location.hash = "#/progress";
+      });
+    else display("Google sign-in was canceled or failed.");
+  }
+  window.addEventListener("online", schedule);
+
+  return {
+    status: () => display(),
+    signIn: async () => {
+      const redirectTo = new URL(import.meta.env.BASE_URL, location.origin)
+        .href;
+      const { error } = await client.auth.signInWithOAuth({
+        provider: "google",
+        options: { redirectTo },
+      });
+      if (error) display("Google sign-in could not start.");
+    },
+    signOut: async () => {
+      if (
+        active &&
+        active.repository.snapshot().revision !== active.checkpoint.local &&
+        !window.confirm(
+          "This device has unsynced account progress. You can export it from Progress before you leave. Sign out and clear this device’s account cache?",
+        )
+      )
+        return;
+      const { error } = await client.auth.signOut({ scope: "local" });
+      if (error) display("Sign-out failed. Try again.");
+    },
+    retry: () => {
+      if (active)
+        void refresh(active).catch(() =>
+          display(
+            "Couldn’t check cloud progress. Your local copy is available.",
+            true,
+          ),
+        );
+    },
+    importGuest: () => {
+      const account = active;
+      if (!account?.approved || account.remote !== undefined) return;
+      const count = Object.keys(guest.read().clears).length;
+      if (
+        window.confirm(
+          `Import ${count} guest main clears and the guest records into this account? This replaces the account's current progress. The guest copy is kept.`,
+        ) &&
+        account.repository.replace(guest.exportCurrent())
+      )
+        switchRepository(account.repository, account.name);
+    },
+    useLocal: () => {
+      const account = active;
+      if (
+        !account ||
+        account.remote === undefined ||
+        !window.confirm(
+          "Replace the cloud save with this device’s account progress?",
+        )
+      )
+        return;
+      saveCheckpoint(account, {
+        remote: account.remote?.revision ?? 0,
+        local: -1,
+      });
+      account.remote = undefined;
+      schedule();
+    },
+    useRemote: () => {
+      const account = active;
+      if (
+        account?.remote !== undefined &&
+        window.confirm("Replace the local account copy with the cloud save?")
+      )
+        void restore(account, account.remote);
+    },
+    removeSave: async () => {
+      const account = active;
+      if (
+        !account ||
+        busy ||
+        !window.confirm(
+          "Delete the cloud game save and reset the local account copy? Export a backup first if you want to keep it.",
+        )
+      )
+        return;
+      window.clearTimeout(timer);
+      busy = account;
+      try {
+        const { error } = await client.rpc("turbotype_delete_save", {
+          account_id: account.id,
+        });
+        if (account !== active || closed) return;
+        if (error) {
+          display(
+            "Couldn’t delete cloud progress. Your local copy is available.",
+            true,
+          );
+          return;
+        }
+        await restore(account, null);
+        display(
+          "Cloud game save deleted. Your Google sign-in remains available.",
+        );
+      } finally {
+        busy = undefined;
+      }
+    },
+    dispose: () => {
+      closed = true;
+      window.clearTimeout(timer);
+      window.removeEventListener("online", schedule);
+      subscription.unsubscribe();
+      active?.repository.close();
+    },
+  };
+}

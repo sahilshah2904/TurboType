@@ -1,6 +1,13 @@
-import { STARTER_KARTS, isKartId, type KartId } from "../content/kart-catalog";
+import {
+  KARTS,
+  STARTER_KARTS,
+  isKartId,
+  type KartId,
+} from "../content/kart-catalog";
 import {
   STARTER_TRACKS,
+  TRACKS,
+  trackTheme,
   isTrackId,
   type TrackId,
   type TrackTheme,
@@ -8,14 +15,23 @@ import {
 import { CAR_REWARDS, TRACK_REWARDS } from "../content/collection";
 import { CATEGORY_NAMES } from "../content/campaign";
 import { mountTrackPreview } from "../game/track-preview";
+import { sceneryPolygons } from "../game/reward-scenery";
 
 export type CollectionKind = "cars" | "tracks";
 const color = (n: number) => `#${n.toString(16).padStart(6, "0")}`;
 
 /** Lightweight original geometric thumbnails; enlarged tracks use the actual game scene. */
 function trackThumbnail(track: TrackTheme): string {
-  const silhouettes =
-    track.id === "neon-harbor"
+  const silhouettes = track.motif
+    ? `<g transform="translate(0 17) scale(2.5 1.5)">${sceneryPolygons(
+        track.motif,
+      )
+        .map(
+          (shape, index) =>
+            `<polygon points="${shape.join(" ")}" fill="${color(index % 3 === 1 ? track.detail : track.land)}"/>`,
+        )
+        .join("")}</g>`
+    : track.id === "neon-harbor"
       ? Array.from(
           { length: 12 },
           (_, i) =>
@@ -51,16 +67,17 @@ export function collectionScreen(
   kart: KartId,
   track: TrackId,
   locked: boolean,
+  owned: ReadonlySet<string>,
 ): string {
   const cars = kind === "cars";
-  const starters = cars
-    ? STARTER_KARTS.map((k) => ({
+  const items = cars
+    ? KARTS.map((k) => ({
         id: k.id,
         name: k.name,
         description: k.style,
         art: `<img class="collection-art" src="${import.meta.env.BASE_URL}assets/karts/${k.file}" alt="${k.style}" loading="lazy"/>`,
       }))
-    : STARTER_TRACKS.map((t) => ({
+    : TRACKS.map((t) => ({
         id: t.id,
         name: t.name,
         description: t.setting,
@@ -68,11 +85,17 @@ export function collectionScreen(
       }));
   const selected = cars ? kart : track;
   const rewards = cars ? CAR_REWARDS : TRACK_REWARDS;
+  const starterCount = cars ? STARTER_KARTS.length : STARTER_TRACKS.length;
+  const card = (item: (typeof items)[number], reward?: string) =>
+    `<article class="collection-card" data-item="${item.id}" ${reward ? `data-reward="${reward}"` : ""} data-selected="${item.id === selected}"><button class="collection-preview" data-preview="${item.id}" aria-label="Enlarge ${item.name}">${item.art}<span class="collection-enlarge" aria-hidden="true">⛶</span></button><div class="collection-card-copy"><h3>${item.name}</h3><p>${item.description}</p><button class="button ${item.id === selected ? "button--primary" : "button--secondary"}" data-equip="${item.id}" aria-pressed="${item.id === selected}" ${locked ? "disabled" : ""}>${item.id === selected ? "Selected" : "Select"}</button></div></article>`;
   return `<section class="collection-page"><div class="collection-heading"><div><p class="eyebrow">YOUR COLLECTION</p><h1>${cars ? "Choose your" : "Find your"} <span>${cars ? "ride." : "circuit."}</span></h1><p>${cars ? "Every style. The same performance." : "A new setting for every stretch of road."} Your choice follows you into every race.</p></div><nav aria-label="Collections"><a href="#/cars" ${cars ? 'aria-current="page"' : ""}>Cars · 23</a><a href="#/tracks" ${!cars ? 'aria-current="page"' : ""}>Tracks · 26</a></nav></div>
   <div class="collection-lock" ${locked ? "" : "hidden"}><p>A race is in progress. You can preview, but cannot change your car or track until it ends.</p><button id="collection-end-race" class="button button--secondary">End current races to change selection</button></div>
   <p id="collection-status" role="status">${locked ? "Selection locked during the race, including pauses." : "Select once. Saved on this browser for all your races."}</p>
-  <h2>Ready to ${cars ? "drive" : "race"} <span class="help">5 starters</span></h2><div class="collection-grid">${starters.map((item) => `<article class="collection-card" data-item="${item.id}" data-selected="${item.id === selected}"><button class="collection-preview" data-preview="${item.id}" aria-label="Enlarge ${item.name}">${item.art}<span class="collection-enlarge" aria-hidden="true">⛶</span></button><div class="collection-card-copy"><h3>${item.name}</h3><p>${item.description}</p><button class="button ${item.id === selected ? "button--primary" : "button--secondary"}" data-equip="${item.id}" aria-pressed="${item.id === selected}" ${locked ? "disabled" : ""}>${item.id === selected ? "Selected" : "Select"}</button></div></article>`).join("")}</div>
-  <div class="collection-reward-heading"><h2>On the horizon</h2><p>Locked design previews. Earned rewards and final artwork are coming. Only unique eligible main levels count; bonus challenges and replays do not.</p></div><div class="collection-grid collection-grid--rewards">${rewards.map((item) => `<article class="collection-card collection-card--locked" data-reward="${item.id}" aria-label="${item.name}, locked, ${CATEGORY_NAMES[item.category]} level ${item.level}">${cars ? vehicleShadow((item as (typeof CAR_REWARDS)[number]).family) : `<svg class="collection-shadow" viewBox="0 0 340 205" aria-hidden="true"><path d="M0 170L55 90 95 140 155 55 220 125 275 80 340 160V205H0Z" fill="#05090e" stroke="#45535f"/><path d="M0 185Q100 140 180 180T340 173" fill="none" stroke="#45535f" stroke-width="10"/></svg>`}<div class="collection-card-copy"><p class="eyebrow">LOCKED · ${CATEGORY_NAMES[item.category]}</p><h3>${item.name}</h3><p>Unlock at ${CATEGORY_NAMES[item.category]} level <strong>${item.level}</strong></p></div></article>`).join("")}</div>
+  <h2>Ready to ${cars ? "drive" : "race"} <span class="help">5 starters</span></h2><div class="collection-grid">${items
+    .slice(0, starterCount)
+    .map((item) => card(item))
+    .join("")}</div>
+  <div class="collection-reward-heading"><h2>Campaign rewards</h2><p>Clear unique eligible main levels in each category to unlock these rewards.</p></div><div class="collection-grid collection-grid--rewards">${rewards.map((item, index) => (owned.has(item.id) ? card(items[starterCount + index], item.id) : `<article class="collection-card collection-card--locked" data-reward="${item.id}" aria-label="${item.name}, locked, ${CATEGORY_NAMES[item.category]} level ${item.level}">${cars ? vehicleShadow((item as (typeof CAR_REWARDS)[number]).family) : trackThumbnail(trackTheme(item.id as TrackId))}<div class="collection-card-copy"><p class="eyebrow">LOCKED · ${CATEGORY_NAMES[item.category]}</p><h3>${item.name}</h3><p>Unlock at ${CATEGORY_NAMES[item.category]} level <strong>${item.level}</strong></p></div></article>`)).join("")}</div>
   <dialog id="collection-detail" class="collection-detail" aria-labelledby="collection-detail-title"><button id="collection-close" class="text-button">Close ×</button><div id="collection-detail-content"></div></dialog></section>`;
 }
 export function connectCollection(
@@ -82,6 +105,7 @@ export function connectCollection(
     kart: () => KartId;
     track: () => TrackId;
     locked: () => boolean;
+    owned: (id: string) => boolean;
     equipKart: (id: KartId) => boolean;
     equipTrack: (id: TrackId) => boolean;
     endRaces: () => void;
@@ -117,9 +141,9 @@ export function connectCollection(
       const id = target.dataset.equip ?? target.dataset.preview;
       const item =
         kind === "cars"
-          ? STARTER_KARTS.find((k) => k.id === id)
-          : STARTER_TRACKS.find((t) => t.id === id);
-      if (!item) return; // Unknown/reward IDs cannot select or open detailed artwork.
+          ? KARTS.find((k) => k.id === id)
+          : TRACKS.find((t) => t.id === id);
+      if (!item || !options.owned(item.id)) return;
       if (target.dataset.equip) {
         if (options.locked()) {
           status.textContent = "Selection locked until the current races end.";
