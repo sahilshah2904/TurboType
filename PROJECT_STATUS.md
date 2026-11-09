@@ -2,7 +2,7 @@
 
 ## Phase 10 single-player release — 9 November 2026
 
-Phase 9 is accepted and integrated at `615041c`. Phase 10 prepares v0.1.0, the GitHub Pages workflow, a public privacy notice and release checks. [Release and recovery guide](docs/PHASE10_RELEASE.md)
+Phase 10 is complete. PR #10 merged as `b1efe87`. The same commit passed CI, went live on GitHub Pages and was tagged v0.1.0. The owner confirmed public Google sign-in and passed the physical keyboard, Backspace, finish, retry and refresh checks. Supabase recorded successful save reads from the public site. Friends multiplayer remains planned for Phase 11. [Play TurboType](https://sahilshah2904.github.io/TurboType/) · [v0.1.0 release](https://github.com/sahilshah2904/TurboType/releases/tag/v0.1.0) · [Release and recovery guide](docs/PHASE10_RELEASE.md)
 
 ## Phase 9 acceptance — 9 November 2026
 

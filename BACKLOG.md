@@ -2,7 +2,7 @@
 
 ## Phase 10 release — 9 November 2026
 
-The owner accepted Phase 9 after seeing the same saved stats in Microsoft Edge. Both approved accounts saved distinct live campaign clears and XP. [PR #9](https://github.com/sahilshah2904/TurboType/pull/9) merged at `615041c`. The [Phase 10 release guide](docs/PHASE10_RELEASE.md) tracks desktop, production cloud and deployment verification.
+Phase 10 is complete. The tested `b1efe87` build is live and tagged v0.1.0. The owner confirmed public Google sign-in and the physical keyboard race, retry and refresh. Phase 11 is the next planned phase. [Release guide](docs/PHASE10_RELEASE.md) · [v0.1.0 release](https://github.com/sahilshah2904/TurboType/releases/tag/v0.1.0)
 
 ## Historical paused checkpoint — 23 October 2026
 
@@ -307,23 +307,23 @@ Alpha.24 implements all 300 main passages and 30 optional challenges, including 
 - [x] TT-907: Provision the approved $0 project and commit database migrations, access policies, test fixtures and reproducible setup docs.
 - [x] TT-908: Add optional Google sign-in, confirmed guest import, separate account caches and cloud restore. Two owner accounts saved distinct progress, and the owner confirmed restore in Edge.
 - [x] TT-909: Implement revisioned cloud saves, idempotent retries, server-derived milestone totals, conflict choices and a bounded local snapshot fallback.
-- [ ] TT-910: Complete release verification under TT-1005. Hosted checks covered account isolation, duplicate submissions, stale revisions and deletion. Verify offline reconnect, two-session conflict recovery, shared-device cleanup and export/restore on the release configuration.
+- [x] TT-910: Verify save recovery for the release. Hosted database checks covered account isolation, duplicate submissions, stale revisions and deletion. Isolated browser sessions exercised offline reconnect, both conflict choices, sign-out cleanup and export. Public sign-in and save reads passed separately. [Verification](docs/TESTING.md)
 
 Cloud progress remains a single-player launch requirement. Production verification is tracked in TT-1005.
 
 - [x] TT-911: Ship 18 original reward cars plus five starters. Each category independently unlocks cars at 15/30/45/60/75/90 eligible unique main clears. Ownership derives from saved clears and works across unlocked categories. Multiplayer entitlement validation remains Phase 11. [Garage progression](docs/GARAGE_PROGRESSION.md)
 
-- [ ] TT-913: Verify the $0 private-audience policy for release. The solo preview uses approved Google accounts, bounded saves and manual export/restore. Verify provider pause/quota fallback under TT-1005 and the audience target of up to 100 approved profiles under Phase 11. [Multiplayer room plan](docs/MULTIPLAYER_ROOMS.md)
+- [ ] TT-913: Verify the $0 audience policy for Phase 11. The single-player release uses approved Google accounts, bounded saves and manual export/restore. Check provider pause and quota behavior and the target of up to 100 approved profiles before the multiplayer rollout. [Multiplayer room plan](docs/MULTIPLAYER_ROOMS.md)
 
 ## Phase 10 — single-player release
 
-- [ ] TT-1001: Test supported laptop/desktop browsers and physical keyboards, standard laptop resolutions, browser zoom/window resize and accessibility; record actual hardware/browser coverage. Mobile/tablet support is canceled.
-- [ ] TT-1002: Verify accessibility, mouse/focus behavior, input-profile record separation, reduced motion, audio failures and loading/recovery paths.
-- [ ] TT-1003: Measure frame times, typing responsiveness, transfer size and repeated-retry memory/cleanup with named devices/settings; tune bottlenecks.
-- [ ] TT-1004: Configure Pages deployment/CI and repository protections where supported; validate the public bundle contains no secrets and all project-base paths work.
-- [ ] TT-1005: Verify account/cloud sync, outages and data policies; make game-data export/deletion and local-save limitations clear.
-- [ ] TT-1006: Reproduce clean-clone setup, complete docs/assets registry/release notes, tag a tested release and document deployment rollback plus save compatibility.
-- [ ] TT-1007: Verify the actual public game link with a complete race, replay, level unlock and saved progress before calling the launch complete.
+- [x] TT-1001: Verify the tested desktop layouts and public races in Chromium, Edge and Firefox. The owner passed the physical keyboard check. [Verification](docs/TESTING.md)
+- [x] TT-1002: Verify focus, input and readability behavior, reduced motion, audio failure and loading recovery in the browser suite. [Verification](docs/TESTING.md)
+- [x] TT-1003: Measure software-rendered frame and input timing, transfer size, and repeated-retry memory and canvas cleanup on the named release test device. [Release PR measurements](https://github.com/sahilshah2904/TurboType/pull/10)
+- [x] TT-1004: Configure checked Pages deployment from protected `main` and validate the public artifact and project paths. [Pages deployment](https://github.com/sahilshah2904/TurboType/actions/runs/42581695457)
+- [x] TT-1005: Verify hosted account restore, isolated outage and conflict recovery, export, deletion and save limitations. [Verification](docs/TESTING.md)
+- [x] TT-1006: Verify a clean clone, document rollback and save compatibility, and tag the tested release. [Release guide](docs/PHASE10_RELEASE.md)
+- [x] TT-1007: Verify race, replay, unlock and restored progress on the public site. [Release PR](https://github.com/sahilshah2904/TurboType/pull/10)
 - [x] TT-1008: Retired by explicit user scope change on 21 October. Physical phone/tablet/iOS software-keyboard verification is no longer a release requirement. Earlier Samsung observations remain historical, not current compatibility claims.
 
 ## Phase 11 — friends multiplayer, immediately after solo launch

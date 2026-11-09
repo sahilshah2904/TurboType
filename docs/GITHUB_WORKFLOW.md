@@ -1,5 +1,7 @@
 # TurboType GitHub workflow
 
+PR #10 merged at `b1efe87`. That commit passed its main check, deployed to Pages and became the v0.1.0 tag. Share the Pages homepage for the game opening. [Release PR](https://github.com/sahilshah2904/TurboType/pull/10) · [GitHub release](https://github.com/sahilshah2904/TurboType/releases/tag/v0.1.0) · [Public game](https://sahilshah2904.github.io/TurboType/)
+
 Phase 8 merged as `e3d0603`. Phase 9 merged as `615041c` after the owner accepted the Edge restore and the exact PR head passed CI. [Phase 9 PR](https://github.com/sahilshah2904/TurboType/pull/9)
 
 23 October stop-and-save checkpoint: accepted Phase8/alpha.26 source bd378c1 passes full hosted run39972392241/job120478169052(125 unit/121 browser). PR8 remains open/unmerged; main still contains accepted Phase7. Phase9 preparation branch codex/phase9-progression starts at bd378c1; no new app code yet, only this documentation checkpoint. Keep any Phase9 PR explicitly stacked against the Phase8 branch until reviewed integration is authorized; do not merge/deploy merely to save handoff. Inspect current PR/HEAD checks on resume; PHASE9_RESUME.md records exact next steps.

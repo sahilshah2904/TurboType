@@ -6,7 +6,7 @@ Read PROJECT_STATUS.md, docs/SESSION_HANDOFF.md and BACKLOG.md before reporting 
 
 ## Current checkpoint — 9 November 2026
 
-The user accepted Phase 9 after confirming saved stats in Microsoft Edge. [PR #9](https://github.com/sahilshah2904/TurboType/pull/9) merged at `615041c`. The user authorized starting and finishing the Phase 10 single-player release. Audit the release PR, exact-source checks and live Pages deployment. The live Google sign-in and owner restore evidence are separate from database fixtures. Preserve Vite5173 and legacy saves. Phase 11 remains separate. [Release guide](docs/PHASE10_RELEASE.md)
+Phase 10 is complete. PR #10 merged at `b1efe87`, passed CI, deployed to GitHub Pages and was tagged v0.1.0. The owner confirmed public Google sign-in and physical keyboard play. Both OAuth return addresses passed probes, and Supabase recorded public save reads. Preserve the user's Vite servers and saves. Phase 11 friends multiplayer remains planned under the $0 budget. [Release guide](docs/PHASE10_RELEASE.md) · [v0.1.0 release](https://github.com/sahilshah2904/TurboType/releases/tag/v0.1.0)
 
 ## Historical checkpoint — 23 October 2026
 

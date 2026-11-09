@@ -2,11 +2,11 @@
 
 # TurboType
 
-**Single-player release — v0.1.0.** Race with a physical keyboard on a laptop or desktop. [Open TurboType](https://sahilshah2904.github.io/TurboType/) · [Release and recovery guide](docs/PHASE10_RELEASE.md)
+**Single-player release — v0.1.0.** Race with a physical keyboard on a laptop or desktop. Share the public homepage to start at the game's opening. [Play TurboType](https://sahilshah2904.github.io/TurboType/) · [Release notes](https://github.com/sahilshah2904/TurboType/releases/tag/v0.1.0) · [Release and recovery guide](docs/PHASE10_RELEASE.md)
 
 **Play:** 300 main races and 30 optional challenges. Earn 18 original reward vehicles and 21 reward courses through eligible main clears, then equip them for new races across categories. Open **Progress** for XP, rank, history, coaching and local backup controls. [Collections](docs/COLLECTIONS.md) · [Curriculum](docs/PHASE8_CURRICULUM.md).
 
-**Account preview:** two approved Google accounts saved separate campaign progress and XP. The owner confirmed the same saved stats loaded in Microsoft Edge and accepted Phase 9. The header shows the signed-in driver's name, and **Progress** shows the latest race and recent pace.
+**Saves.** Guest progress stays in the current browser. Approved Google accounts can restore their own cloud saves on the public site. For a shortcut to stats and sign-in, open the Progress bookmark. To see the title sequence again, use **Settings → Replay opening**. [Open Progress](https://sahilshah2904.github.io/TurboType/#/progress)
 
 [Phase 9 setup and review checklist](docs/PHASE9_RESUME.md) · [Session handoff](docs/SESSION_HANDOFF.md) · [Current status](PROJECT_STATUS.md) · [Backlog](BACKLOG.md)
 
@@ -145,7 +145,7 @@ Open **Settings → Sound & music** to enable sound or change volumes. The hub h
 
 ## Development progress
 
-**Phases 1–9 are accepted and integrated.** Phase 9 merged through [PR #9](https://github.com/sahilshah2904/TurboType/pull/9). Phase 10 covers release testing and GitHub Pages. Further race-atmosphere polish is deferred.
+**Phases 1–10 are complete.** The single-player build is live on GitHub Pages and tagged v0.1.0. Phase 11 friends multiplayer remains planned. [Release PR](https://github.com/sahilshah2904/TurboType/pull/10)
 
 | Phase | Delivery | Current status |
 | --- | --- | --- |
@@ -158,7 +158,7 @@ Open **Settings → Sound & music** to enable sound or change volumes. The hub h
 | 7 | Easy/Medium/Hard rightward maps, 100 numbered nodes each, locks, chapters and saved position | Complete and accepted; PR #7 merged 04eb38d |
 | 8 | All 300 passages, learning goals, difficulty/star curves and 30 bonus challenges | Accepted and merged through PR #8 |
 | 9 | Rewards/rank/garage, records/charts/coaching/drills, robust guest saves and optional account-backed cloud progress | Accepted and merged through PR #9 |
-| 10 | Desktop browser/accessibility/performance/recovery/cloud testing, Pages and live release verification | [Release checklist](docs/PHASE10_RELEASE.md) |
+| 10 | Desktop browser/accessibility/performance/recovery/cloud testing, Pages and live release verification | [Released as v0.1.0](https://github.com/sahilshah2904/TurboType/releases/tag/v0.1.0) |
 | 11 | Friends backend/private rooms/invites, synchronized races, reconnect/rematches immediately after solo launch | Planned |
 
 Phases vary greatly in size; phase numbers are not a completion percentage.
