@@ -1,5 +1,12 @@
 # Verification evidence
 
+## Phase 10 single-player release candidate — 9 November 2026
+
+- A clean Windows clone of `c6e1da8` installed with Node 24.13 and npm 11. Formatting, curriculum drift, 128 unit tests, types, the build and the Pages artifact audit passed. npm reported zero dependency vulnerabilities in that install.
+- The account-enabled production build passed 32 focused campaign, progression, readability and typing browser tests, including 1024/1366/1440/1920 CSS px layouts. Independent headless smoke tests in Chromium 156, Edge 157 and Firefox 157 completed a rendered race, replay and persisted level unlock. They verified keyboard focus, the sign-in control and the privacy page.
+- Two isolated browser sessions with mocked cloud responses passed offline edit retention after reload, conflict handling in both directions, export without session credentials, deletion and sign-out cache cleanup. The actual Supabase rollback fixture separately passed owner and cross-account checks, anonymous denial, revocation, stale revision rejection, idempotent retry and deletion. Actual anonymous Data API requests returned 401.
+- The Supabase project supports Google sign-in for the approved testers. The production allowlist, live OAuth and hosted game checks are recorded separately from the local browser and database evidence. [Release guide](PHASE10_RELEASE.md)
+
 ## Phase 9 alpha.27 preview — 9 November 2026
 
 - The Phase 8 merge passed its own [main check](https://github.com/sahilshah2904/TurboType/actions/runs/42546049988). The alpha.27 implementation at 9507df5 passed formatting, curriculum drift, types, **128 unit tests**, production build and **123 browser cases** in one local check. The browser checks include earned equipment across categories, backup confirmation, and second-tab save protection. An earlier focused run used stale alpha.26 output and was discarded after diagnosis. Use `npm run check` to rebuild before browser checks. Subsequent cloud and documentation changes receive separate CI.
