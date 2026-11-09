@@ -1,254 +1,124 @@
-<div align="center">
-
 # TurboType
 
-**Single-player release — v0.1.0.** Race with a physical keyboard on a laptop or desktop. Share the public homepage to start at the game's opening. [Play TurboType](https://sahilshah2904.github.io/TurboType/) · [Release notes](https://github.com/sahilshah2904/TurboType/releases/tag/v0.1.0) · [Release and recovery guide](docs/PHASE10_RELEASE.md)
+TurboType is a free single-player typing racer for laptop and desktop browsers. Your car advances as you type, and four computer opponents keep the pressure on. Race through 300 campaign levels, unlock cars and tracks, and see how your speed and accuracy improve.
 
-**Play:** 300 main races and 30 optional challenges. Earn 18 original reward vehicles and 21 reward courses through eligible main clears, then equip them for new races across categories. Open **Progress** for XP, rank, history, coaching and local backup controls. [Collections](docs/COLLECTIONS.md) · [Curriculum](docs/PHASE8_CURRICULUM.md).
+**[Play TurboType](https://sahilshah2904.github.io/TurboType/)** · [v0.1.0 release](https://github.com/sahilshah2904/TurboType/releases/tag/v0.1.0) · [Privacy policy](https://sahilshah2904.github.io/TurboType/privacy.html)
 
-**Saves.** Guest progress stays in the current browser. Approved Google accounts can restore their own cloud saves on the public site. For a shortcut to stats and sign-in, open the Progress bookmark. To see the title sequence again, use **Settings → Replay opening**. [Open Progress](https://sahilshah2904.github.io/TurboType/#/progress)
+[How to play](#how-to-play) · [Game features](#game-features) · [Screenshots](#screenshots) · [How it was built](#how-it-was-built) · [Run locally](#run-locally)
 
-[Phase 9 setup and review checklist](docs/PHASE9_RESUME.md) · [Session handoff](docs/SESSION_HANDOFF.md) · [Current status](PROJECT_STATUS.md) · [Backlog](BACKLOG.md)
-
-
-![Driver Progress with save status, practice, and collapsed stats and backup tools](docs/images/alpha27/driver-progress-fixture-1440.png)
-
-[Reward vehicle and course previews](docs/images/alpha27/README.md)
-
-
-### Your words. Full throttle.
-
-An original browser typing racer: build physical-keyboard speed and accuracy while racing four computer opponents.
-
-[![Preview checks](https://github.com/sahilshah2904/TurboType/actions/workflows/checks.yml/badge.svg?branch=main&event=push)](https://github.com/sahilshah2904/TurboType/actions/workflows/checks.yml)
-
-[Run locally](#run-the-latest-preview) · [How to play](#how-to-play) · [Progress](#development-progress) · [Structure](#project-structure) · [Documentation](#documentation)
-
-</div>
-
-![Alpha.22 paragraph typing with three visible rows and the active line at the top](docs/images/alpha22/paragraph-third-line-top-fixture-1024.png)
-
-*Actual paragraph view retained in alpha.24; isolated capture fixture opens level 6. No public game is deployed. Broader atmosphere polish remains deferred.*
-
-## Alpha.22 review refinements
-
-The user accepted campaign unlock/save, replay counts and pause/retry eligibility. Larger typing text now top-aligns each new line with three full look-ahead rows. **Quick Race** is clearly labeled as standalone warm-up/car-track experimentation. Keyboard check covers lower/uppercase, digits/symbols and received physical keys. Opening flames follow behind the car and clear before the title; the title now stays clean without an underlay flame. [Focused review](docs/ALPHA22_REVIEW.md). Fresh local full check: **117 unit / 79 browser cases** with one worker; hosted exact-head state is separate.
-
-![Keyboard check with race-style correction and received physical-key indicators](docs/images/alpha23/keyboard-correction-1024.png)
-
-![Opening launch with a bounded trailing flame](docs/images/alpha22/launch-trail-1440.png)
-
-![Clean opening title](docs/images/alpha25/clean-title-1440.png)
-
-## Phase 8 — complete campaign content
-
-**300 playable main races + 30 optional challenges.** Easy, Medium and Hard each have 100 sequential main levels across ten chapters. Only the first three races stay short. The accepted levels 4–6 remain unchanged; later passages grow toward **1,400 Easy / 2,200 Medium / 3,000 Hard characters**, with no mandatory time limit. Each chapter states its learning focus, from relaxed spacing to mixed prose and technical notation.
-
-The original chapter anthologies supply distinct curated excerpts, deliberately revisiting familiar prose as skills build. No AI service or text download runs during gameplay. Pace/accuracy stars and CPU placement are optional: exact unpaused completion opens the next same-category race. Level 100 celebrates category completion; every cleared race remains replayable, with no level 101.
-
-Optional side challenges unlock after chapter showcases **10/20/…/100**. Their saved checkmarks and stars remain separate from main clears/stars and cosmetic milestones. Read passage lets you inspect even a locked briefing without unlocking a race. The small map save migrates to v2 while retaining the original v1 copy; your prior clears and preferences should remain.
-
-![Optional chapter challenge and car/track choices; isolated progress fixture](docs/images/alpha24/bonus-briefing-fixture-1440.png)
-
-![Substantial Medium showcase prose; isolated progress fixture](docs/images/alpha24/medium-paragraph-briefing-fixture-1440.png)
-
-![Hard finale typing and look-ahead; isolated progress fixture](docs/images/alpha24/hard-finale-typing-fixture-1440.png)
-
-![Category completion with compact metrics; automated fixture with synthetic speed](docs/images/alpha24/category-complete-fixture-1440.png)
-
-[Curriculum, content provenance and manual checklist](docs/PHASE8_CURRICULUM.md) · [Current verification](docs/TESTING.md) · [Accepted Phase 7 closeout](docs/PHASE7_CLOSEOUT.md).
-
-## Phase 6 complete — alpha.20
-
-[PR #6](https://github.com/sahilshah2904/TurboType/pull/6) implements a 5.6-second fullscreen purple-car burnout and flaming-title opening, real loading/recovery, welcome/rules, guided tutorial, optional pace calibration and returning-visitor controls. Local checks pass 102 unit / 56 browser cases. PR #6 is merged after exact-head hosted checks and the user requested completion; visual polish remains deferred as TT-608. See [Phase 6 closeout](docs/PHASE6_CLOSEOUT.md). The five starter tracks and presentation follow-up are accepted and integrated through PR #5. The alpha.14 captures below are historical race evidence.
-
-The alpha.20 follow-up replaces rejected curved air paths with a researched layered atmosphere over sky/mountains/road, centres action links with buttons, retains the cleaner Hub/Settings, and plans varied future vehicle families. Latest captures/verification are in docs/TESTING.md. Alpha.17 opening panels are superseded.
-
-![Alpha.22 burnout: the arrival trail has faded while the purple car revs](docs/images/alpha22/burnout-clear-road-1440.png)
-
-![Current clean TurboType title](docs/images/alpha25/clean-title-1440.png)
-
-![Welcome and skip preference](docs/images/alpha17/welcome-1440.png)
-
-![How to play](docs/images/alpha17/rules-1440.png)
-
-![Current tutorial with aligned actions at laptop width](docs/images/alpha20/tutorial-actions-1024.png)
-
-![Optional pace calibration](docs/images/alpha20/calibration-actions-1024.png)
-
-![Compact results with standings open](docs/images/alpha16/results-open-1440.png)
-
-These captures show the current Phase 6 behavior; folder numbers record when each unchanged view was captured. Alpha.17 opening panels and alpha.18 wind paths are superseded. The atmosphere is retained for now, with visibility/quality improvements deferred.
-
-[Implementation and recreation](docs/PHASE6_ONBOARDING.md) · [Laptop review checklist](docs/PHASE6_REVIEW.md) · [Current verification](docs/TESTING.md)
-
-## What is TurboType?
-
-TurboType turns typing practice into a side-view motor race. Correct characters move your car; mistakes require correction while four seeded computer opponents continue. It makes practice enjoyable while showing honest speed, accuracy and consistency metrics.
-
-The current target is **laptop/desktop browsers with a physical keyboard**. Phone/tablet support was explicitly removed. Layouts adapt to laptop windows from 960 CSS pixels, with automated checks at representative 1024–1920 widths.
-
-Single-player comes first. The three 100-level maps have playable passages throughout. The Phase 9 branch adds learning tools, and the optional cloud account path is in testing. GitHub Pages and friends multiplayer follow in Phases 10 and 11.
-
-## How the current game looks
-
-The preview uses a full-window city circuit, detailed original karts, graphite/crimson/cyan lighting and one integrated typing surface. A shared fullscreen/restore icon sits at the upper-right of every page. Important prose/controls use 16px or larger text, with 14px compact labels.
-
-<details>
-<summary>View the current hub, car selector and Settings</summary>
-
-### Current hub with your chosen car and campaign links
-
-![Current hub with selected starter, circuit and campaign links](docs/images/alpha21/hub-1440.png)
-
-### Five starter cars before each race
-
-![Alpha.14 race setup and illustrated starter selector](docs/images/alpha14/race-setup-1440.png)
-
-### All audio controls in Settings
-
-![Settings with motion, track effects, sound and matching learning action rows](docs/images/alpha18/settings-1440.png)
-
-</details>
-
-These are real app captures, not concept artwork. [Current parts/laptop captures](https://github.com/sahilshah2904/TurboType/tree/main/docs/images/alpha14) include all five starter models and 1024–1920px race layouts. Earlier screenshots remain historical evidence.
-
-## What you can play now
-
-| Experience | Implemented behavior |
-| --- | --- |
-| Campaign maps | Three 100-level journeys, all 300 passages + 30 optional challenges, local stars/clears/bests, briefings and keyboard/list/drag navigation |
-| Quick Race | Four seeded CPUs, countdown, selectable passage/pace, live positions, completion or a 60-second trial, frozen results and same-seed retry |
-| Equipment | Five starter cars and tracks plus campaign unlocks, selected in Cars and Tracks. Active or paused sessions lock selection |
-| Typing Practice | Shared engine without opponents, plus correction, capitalization, punctuation and consistency drills with optional next-key guidance |
-| Driver Progress | Rank, XP and credits, eligible best times, pace, key aggregates, coaching and local recovery |
-| Keyboard check | Race-style exact typing/Backspace correction, full character sample, physical-key indicators and reset |
-| Racing presentation | Parallax city, exhaust flames, nitro/overtake feedback, bounded finish effects, Live WPM dial and High/Low/Reduced modes |
-| Settings | Saved display/text/motion preferences and all sound enable/mute/volume controls. Original Ignition browsing music, Overdrive racing music and separate countdown/FX |
-| Recovery | Graphics retry or text standings, optional audio, denied-storage notices and graceful fullscreen refusal |
-
-**Curriculum requirement:** only the first few races use short sentences. Subsequent races must grow into substantial, coherent paragraphs for sustained typing practice, with length, punctuation and pace introduced gradually. Quick Race keeps three short validation exercises and session-only results. All campaign passages and optional challenges are authored; eligible clears, stars, bests and map positions save locally. XP/credits/reward ownership, complete guest backups, accounts/cloud and multiplayer remain future work.
+![A TurboType campaign race with five cars, live timing, and the active typing passage](docs/images/v0.1.0/race.jpg)
 
 ## How to play
 
-1. On **The hub**, choose **Continue Easy/Medium/Hard** for a campaign briefing, or **Race** for a standalone exercise. Choose a starter car/track before starting.
-2. Press **Start race**, wait for 3–2–1/GO, then match the exact case, spaces and punctuation in the integrated strip.
-3. A mistake stops your progress while CPUs continue. Use **Backspace** to correct it; accuracy retains previous attempts.
-4. Use **Pause** or Escape when needed. Everyone freezes; resume has a fresh countdown. Your car cannot change mid-race. Paused runs are practice-only and cannot clear campaign levels or earn stars.
-5. Finish the passage or reach the selected time limit. Results freeze; later CPU outcomes are labeled simulated. Retry resets the run and permits another car choice.
+Use a physical keyboard in a desktop browser. The game is designed for windows at least 960 CSS pixels wide.
 
-The HUD shows average WPM; the **Live WPM** dial shows recent correct typing over up to three active seconds. Nitro is a visual streak reward and never adds speed/progress. All cars have identical gameplay performance.
+1. **Open the game.** Watch the opening, then enter **The hub**. The guided tutorial and pace calibration are optional.
+2. **Pick a race.** Choose **Easy**, **Medium**, or **Hard** on the hub for campaign play. Choose **Quick Race** for a standalone warm-up. Visit **Cars** or **Tracks** to change equipment before the countdown.
+3. **Type after GO.** Match the passage exactly, including case, spaces, and punctuation. A mistake stops your car's progress while the opponents continue. Press **Backspace** to correct it.
+4. **Finish the passage.** An exact, eligible campaign finish unlocks the next level in that category, regardless of where you place. Accuracy and pace can earn extra stars. Press **Escape** or use **Pause** when you need a break. A race paused after GO counts as practice.
+5. **Review your result.** Check placement, words per minute, accuracy, and time. Retry the race or continue to the next level. Open **Progress** for your race history, records, and coaching.
 
-Open **Settings → Sound & music** to enable sound or change volumes. The hub has no audio widgets. The corner icon enters/restores fullscreen when permitted. Refresh retains preferences and saved campaign clears, but discards the current race.
+Share the public homepage so new players start at the opening. The Progress shortcut goes straight to stats and sign-in. To watch the title sequence again, choose **Settings → Replay opening**. [Public homepage](https://sahilshah2904.github.io/TurboType/) · [Progress shortcut](https://sahilshah2904.github.io/TurboType/#/progress)
 
-[Implemented rules](https://github.com/sahilshah2904/TurboType/blob/main/docs/GAME_RULES.md) · [Race/CPU semantics](https://github.com/sahilshah2904/TurboType/blob/main/docs/QUICK_RACE.md)
+## Game features
 
-## Development progress
+| Feature | What you can do |
+| --- | --- |
+| **Campaign** | Play 100 main levels in each of Easy, Medium, and Hard. Work from short warm-ups to longer original passages. Each category has 10 chapters and 10 optional bonus challenges. |
+| **Quick Race** | Pick a passage and opponent pace, race four computer drivers, and replay the same matchup. Choose a standard finish or a 60-second time trial. |
+| **Cars and tracks** | Start with five cars and five tracks. Unlock 18 more cars and 21 more tracks through campaign milestones. Owned equipment works across categories, and every car follows the same racing rules. |
+| **Practice and keyboard check** | Drill correction, capitalization, punctuation, or consistency without race pressure. Use the keyboard check to see which physical keys the game receives. |
+| **Driver Progress** | Earn XP, rank, credits, and milestone awards. Review recent pace, comparable personal bests, accuracy, and practice suggestions. |
+| **Display and audio** | Adjust motion, track effects, typing text size, and sound in Settings. Use fullscreen for more room and text standings if track artwork fails to load. |
 
-**Phases 1–10 are complete.** The single-player build is live on GitHub Pages and tagged v0.1.0. Phase 11 friends multiplayer remains planned. [Release PR](https://github.com/sahilshah2904/TurboType/pull/10)
+Guest progress is saved in the current browser. **Progress → Save and backup tools** lets you export or import a JSON save. Approved Google accounts can sign in to restore their own cloud progress on another browser or device. [Save and recovery guide](docs/PHASE10_RELEASE.md#data-and-recovery)
 
-| Phase | Delivery | Current status |
+## Screenshots
+
+### From the opening to the finish
+
+| Opening | The hub |
+| --- | --- |
+| ![TurboType opening title with the purple car sequence complete](docs/images/v0.1.0/opening.jpg) | ![The hub with the selected car and animated circuit preview](docs/images/v0.1.0/hub.jpg) |
+
+| Campaign map | Race briefing |
+| --- | --- |
+| ![Easy campaign map showing numbered levels and chapter navigation](docs/images/v0.1.0/campaign.jpg) | ![Easy Level 1 briefing with the passage and race button](docs/images/v0.1.0/briefing.jpg) |
+
+| Results | Driver Progress |
+| --- | --- |
+| ![Campaign race results with placement, WPM, accuracy, time, and next-level controls](docs/images/v0.1.0/results.jpg) | [![Driver Progress with rank, practice, and race statistics](docs/images/v0.1.0/progress.jpg)](docs/images/v0.1.0/progress.jpg) |
+
+<details>
+<summary>See Cars, Tracks, Practice, Keyboard check, and Settings</summary>
+
+| Cars | Tracks |
+| --- | --- |
+| ![Cars collection with starter karts and campaign unlocks](docs/images/v0.1.0/cars.jpg) | ![Tracks collection with starter circuits and campaign unlocks](docs/images/v0.1.0/tracks.jpg) |
+
+| Practice | Keyboard check |
+| --- | --- |
+| ![Typing Practice with drill and passage controls](docs/images/v0.1.0/practice.jpg) | ![Keyboard check with sample text and physical-key indicators](docs/images/v0.1.0/keyboard.jpg) |
+
+![Settings with motion, track effects, larger text, and sound controls](docs/images/v0.1.0/settings.jpg)
+
+</details>
+
+These screenshots come from the hosted v0.1.0 build. Race, results, and progress metrics use scripted typing in an isolated guest profile. [Reward car and track close-ups](docs/images/alpha27/README.md) · [Full screenshot archive](docs/images/)
+
+## How it was built
+
+| Area | Technology or system | What it does |
 | --- | --- | --- |
-| 1 | Finalize design: flow, rules, rewards, visual direction and storage/online boundaries | Baseline complete; production tuning/content remain separate |
-| 2 | Set up TypeScript/Vite, Phaser/Anime.js, structure, configuration and checks | Foundation complete |
-| 3 | Build validation/correction, WPM/accuracy, streaks, timing, pause and finishing | Complete for agreed engine/input scope |
-| 4 | Create one complete four-CPU race with countdown, placement, results and retry | Complete and merged into main |
-| 5 | Polish vehicles, wheels/suspension, scenery, exhaust/nitro, sound and celebration | Complete for agreed scope; accepted and merged into main |
-| 6 | Cinematic loading/welcome/rules, tutorial, calibration and final navigation | Complete for agreed scope; PR #6 merged, TT-608 polish deferred |
-| 7 | Easy/Medium/Hard rightward maps, 100 numbered nodes each, locks, chapters and saved position | Complete and accepted; PR #7 merged 04eb38d |
-| 8 | All 300 passages, learning goals, difficulty/star curves and 30 bonus challenges | Accepted and merged through PR #8 |
-| 9 | Rewards/rank/garage, records/charts/coaching/drills, robust guest saves and optional account-backed cloud progress | Accepted and merged through PR #9 |
-| 10 | Desktop browser/accessibility/performance/recovery/cloud testing, Pages and live release verification | [Released as v0.1.0](https://github.com/sahilshah2904/TurboType/releases/tag/v0.1.0) |
-| 11 | Friends backend/private rooms/invites, synchronized races, reconnect/rematches immediately after solo launch | Planned |
+| Game rules | TypeScript in [`src/core`](src/core/) | Validates typing, calculates WPM and accuracy, schedules seeded opponents, and awards campaign progress independently of graphics. |
+| Browser interface | Native HTML, CSS, TypeScript, and Fontsource | Runs navigation, typing input, menus, accessible controls, and the race HUD with locally served fonts. [UI source](src/ui/) |
+| Race graphics | Phaser in [`src/game`](src/game/) | Renders tracks, car sprites, camera motion, scenery layers, and racing effects. |
+| Interface animation | Anime.js | Handles screen transitions and interface motion. |
+| Music and effects | Web Audio API in [`src/audio`](src/audio/) | Plays the original soundtrack and countdown, race, and finish cues with optional sound controls. |
+| Campaign and artwork | Authored catalogs, SVG and WebP assets | Supplies original passages, difficulty curves, vehicle parts, and course art. [Content source](src/content/) · [Asset provenance](docs/ASSETS.md) |
+| Local saves | Web Storage and versioned JSON in [`src/storage`](src/storage/) | Keeps guest progress and preferences in the browser, with migration and backup tools. |
+| Sign-in and cloud saves | Supabase Auth, Google OAuth, PostgreSQL, and row-level security | Signs in approved players and isolates each account's revisioned cloud save. [Database source](supabase/) |
+| Build and checks | Vite, TypeScript, Prettier, Vitest, and Playwright | Builds the static app, checks types and formatting, and tests rules and browser flows. |
+| Hosting and delivery | GitHub Actions and GitHub Pages | Checks source and deploys the verified static build. [Workflows](.github/workflows/) |
 
-Phases vary greatly in size; phase numbers are not a completion percentage.
+## Run locally
 
-### Accepted baseline through Phase 6
+Install **Node.js 24.13 or later in the 24.x line**, **npm 11**, and Git.
 
-- **Vehicle parts:** alpha.14 implements separate chassis/wheel sources, independent rotation, chassis-only suspension and compact shared previews while preserving the accepted silhouettes/colors. See [Phase 5 closeout](docs/PHASE5_CLOSEOUT.md).
-- **Physical acceptance:** the user accepted the final laptop checklist. The two-minute recorder captured 100 trusted racing keys and zero page errors; actual-GPU experiments cover High/Low/Reduced. Timing/resource limitations and broader release checks remain explicit.
-- **Integration:** PR #4 merged as de464ce after exact-head checks passed. Main includes the accepted campaign and collection updates from PR #8.
-
-### Category rewards
-
-Each category unlocks cars at **15, 30, 45, 60, 75 and 90** eligible unique main clears, and tracks at **10, 25, 40, 55, 70, 85 and 100**. Category counters are independent. Replays, bonus events, Quick Race and Practice leave the milestone counters unchanged. Once earned, equipment works across categories and remains cosmetic.
-
-[Car progression](docs/GARAGE_PROGRESSION.md) · [Track progression](docs/TRACK_PROGRESSION.md) · [Current collection behavior](docs/COLLECTIONS.md)
-
-## Run the latest preview
-
-Use **Node.js 24.13.0**, **npm 11** and Git. Dependencies are pinned. Local solo preview needs no API key, account, database or .env file.
-
-```powershell
+```sh
 git clone https://github.com/sahilshah2904/TurboType.git
 cd TurboType
-git switch main
 npm ci
 npm run dev
 ```
 
-Main contains the accepted Phase 8 build. To review Phase 9 after cloning, use `git switch codex/phase9-progression` before starting Vite.
+Open [the local game](http://127.0.0.1:5173/TurboType/). Guest play works with the default setup. [Local setup and troubleshooting](docs/SETUP.md) · [Cloud configuration](docs/PHASE10_RELEASE.md#build-and-deploy)
 
-Open **[http://127.0.0.1:5173/TurboType/](http://127.0.0.1:5173/TurboType/)**. Vite updates the local preview when source changes. If reusing a checkout, inspect Git status and preserve local edits before switching branches or pulling.
-
-```powershell
+```sh
 npx playwright install chromium
 npm run check
 ```
 
-The full check runs formatting, TypeScript, unit tests, build and browser scenarios. **npm run build** creates the static artifact; **npm run preview** previews it locally. Follow the [setup guide](https://github.com/sahilshah2904/TurboType/blob/main/docs/SETUP.md) for commands/troubleshooting.
+The full check covers formatting, campaign content, types, unit tests, the production build, and browser scenarios. Use `npm run build` to create the static site in `dist/` and `npm run preview` to serve it locally. [Verification evidence](docs/TESTING.md)
 
-## Verification and GitHub emails
+## Development phases
 
-Current alpha.24 verification covers **125 unit / 116 desktop browser cases** across the broad local run and corrected focused cases, including all chapter focuses, finales, bonus clear/replay/non-inflation, legacy storage migration, four laptop widths and long-paragraph caret tracking. The full exact-head [hosted implementation check](https://github.com/sahilshah2904/TurboType/actions/runs/39888045399/job/120200909330) passed on 13b464d with all 125/116 cases and no retries. The documentation-only checkpoint has separate CI. See [current evidence](docs/TESTING.md). User review and exact-head hosted validation remain distinct.
+| Phase | What we built | Status |
+| --- | --- | --- |
+| 1 | Defined the game loop, controls, visual direction, and progression. | Complete |
+| 2 | Set up the TypeScript project, browser rendering, and automated checks. | Complete |
+| 3 | Built the typing engine, error correction, and speed and accuracy metrics. | Complete |
+| 4 | Added the first playable race with computer opponents, standings, and retry. | Complete |
+| 5 | Added car and track art, racing effects, sound, and presentation polish. | Complete |
+| 6 | Built the opening, welcome screen, tutorial, calibration, and hub. | Complete |
+| 7 | Built the three campaign maps, level locks, and saved progress. | Complete |
+| 8 | Authored 300 main passages and 30 bonus challenges with graduated difficulty. | Complete |
+| 9 | Added cosmetic rewards, rank, stats, coaching, practice drills, and guest and cloud saves. | Complete |
+| 10 | Verified the desktop game and public sign-in, deployed to GitHub Pages, and tagged v0.1.0. | [Released](https://github.com/sahilshah2904/TurboType/releases/tag/v0.1.0) |
+| 11 | Private rooms, invites, synchronized races, and reconnects for friends. | [Planned](docs/MULTIPLAYER_ROOMS.md) |
 
-The accepted Phase 5 baseline alpha.14 passed **96 unit tests and 36 desktop Chromium browser cases**, actual-GPU High/Low/Reduced checks and final physical laptop acceptance. The two-minute recorder captured 100 trusted racing keys with zero page errors. Exact acceptance head 398d455 passed [hosted run 39727202033](https://github.com/sahilshah2904/TurboType/actions/runs/39727202033), then PR #4 merged as de464ce. Later documentation/main heads have their own check state; the badge tracks main.
+## Project documentation
 
-Two older runs genuinely failed when the combined garage browser test exceeded its 30-second budget while duplicate counterparts passed. The scenario is now split into focused cases without raising the timeout. Feature validation runs once per PR update, main on push, with manual dispatch and cancellation of superseded runs. Notification settings remain unchanged. [Detailed evidence/limits](https://github.com/sahilshah2904/TurboType/blob/main/docs/TESTING.md).
-
-## Project structure
-
-This describes the Phase 8 feature branch. Main retains accepted Phase 7 until feature review/integration.
-
-```text
-src/
-  core/       Pure typing, metrics, CPU schedules, standings and campaign progress
-  content/    Full campaign catalog, original prose sources, exercises and cosmetic catalogs
-  game/       Phaser race/preview, kart parts/anchors and visual feedback
-  ui/         Routes, native input, screens, WPM gauge and fullscreen
-  audio/      Optional music/effects ownership and lifecycle
-  storage/    Validated preferences/onboarding and basic local campaign progress
-  config/     App, rules, save and content versions
-public/assets/ Authored game art, audio and provenance-backed assets
-assets-source/ Raster masters/prompts and reproducible authoring scripts
-scripts/       Kart exports and isolated/full-app profiling tools
-tests/browser/ End-to-end input, race, settings, graphics and recovery
-docs/          Design, architecture, recreation, screenshots and handoff
-Reference_Images/ Ignored user recordings/screenshots/analysis tools
-```
-
-Phaser owns the canvas; native HTML owns input/navigation; Anime.js coordinates brief interface motion. Pure rules do not depend on frame rate, sound or selected car. GitHub Actions validates source; **it does not deploy the game**.
-
-## Saves, hosting and future multiplayer
-
-Guest saves keep campaign, rewards, equipment and records on this browser. Export, import and recovery are in Progress. Account sync uses a separately scoped account save once configured and verified. [Phase 9 handoff](docs/PHASE9_RESUME.md)
-
-GitHub Pages serves the single-player build. Phase 11 will validate a free backend for private rooms, ready checks, synchronized races and reconnection.
-
-## Continue in a new project chat
-
-Start with [AGENTS.md](AGENTS.md), the [session handoff](docs/SESSION_HANDOFF.md), [project status](PROJECT_STATUS.md), and [backlog](BACKLOG.md).
-
-## Documentation
-
-These links deliberately target the preview branch so the default-branch README points to current evidence.
-
-| Purpose | Guide |
-| --- | --- |
-| Product and designed rule/reward/storage defaults | [Game plan](https://github.com/sahilshah2904/TurboType/blob/main/GAME_DESIGN_PLAN.md) · [Baseline](https://github.com/sahilshah2904/TurboType/blob/main/docs/RULES_AND_STORAGE_BASELINE.md) |
-| Implemented behavior | [Rules](https://github.com/sahilshah2904/TurboType/blob/main/docs/GAME_RULES.md) · [Quick Race](https://github.com/sahilshah2904/TurboType/blob/main/docs/QUICK_RACE.md) |
-| Architecture and conventions | [Architecture](https://github.com/sahilshah2904/TurboType/blob/main/docs/ARCHITECTURE.md) · [Engineering](https://github.com/sahilshah2904/TurboType/blob/main/docs/ENGINEERING_CONVENTIONS.md) · [GitHub workflow](https://github.com/sahilshah2904/TurboType/blob/main/docs/GITHUB_WORKFLOW.md) |
-| Recreate the assets and app | [Fleet](https://github.com/sahilshah2904/TurboType/blob/main/docs/KART_FLEET.md) · [Audio](https://github.com/sahilshah2904/TurboType/blob/main/docs/AUDIO.md) · [Visual integration](https://github.com/sahilshah2904/TurboType/blob/main/docs/IMMERSIVE_APP.md) |
-| Testing and measured limits | [Verification](https://github.com/sahilshah2904/TurboType/blob/main/docs/TESTING.md) · [Full-app profile](https://github.com/sahilshah2904/TurboType/blob/main/docs/PERFORMANCE_ALPHA14.md) |
-
-Original assets and audio have tracked sources and provenance in [ASSETS.md](docs/ASSETS.md).
+- [Game rules](docs/GAME_RULES.md) · [Campaign and bonus challenges](docs/PHASE8_CURRICULUM.md) · [Cars and tracks](docs/COLLECTIONS.md)
+- [Architecture](docs/ARCHITECTURE.md) · [Release and rollback](docs/PHASE10_RELEASE.md) · [Verification](docs/TESTING.md)
+- [Project status](PROJECT_STATUS.md) · [Backlog](BACKLOG.md) · [Session handoff](docs/SESSION_HANDOFF.md)
