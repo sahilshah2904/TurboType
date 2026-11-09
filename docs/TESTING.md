@@ -1,6 +1,12 @@
 # Verification evidence
 
-## Phase 10 single-player release candidate — 9 November 2026
+## Phase 10 single-player release — 9 November 2026
+
+- The final PR source `c1d6c33` passed 128 unit and 124 browser tests. The merged commit `b1efe87` passed its own CI and deployed to Pages. The published v0.1.0 tag points to that commit. [PR checks](https://github.com/sahilshah2904/TurboType/actions/runs/42579104008/job/129033473942) · [Main checks](https://github.com/sahilshah2904/TurboType/actions/runs/42580303703/job/129037164122) · [Pages deployment](https://github.com/sahilshah2904/TurboType/actions/runs/42581695457)
+- Chromium 156, Edge 157 and Firefox 157 each completed a race and replay on the public site and restored the Level 2 unlock after reload. A fresh homepage visit opened the intro, the Progress bookmark opened Progress directly, and Settings replayed the opening. The owner confirmed physical keyboard correction, finish, retry and refresh. [Release PR and measurements](https://github.com/sahilshah2904/TurboType/pull/10)
+- After the owner added the Pages redirect, separate OAuth probes returned to the exact Pages and loopback addresses. The owner confirmed a successful Google sign-in on Pages, and Supabase logged successful save reads from that origin. [Published release](https://github.com/sahilshah2904/TurboType/releases/tag/v0.1.0)
+
+### Release candidate checks
 
 - A clean Windows clone of `c6e1da8` installed with Node 24.13 and npm 11. Formatting, curriculum drift, 128 unit tests, types, the build and the Pages artifact audit passed. npm reported zero dependency vulnerabilities in that install.
 - The account-enabled production build passed 32 focused campaign, progression, readability and typing browser tests, including 1024/1366/1440/1920 CSS px layouts. Independent headless smoke tests in Chromium 156, Edge 157 and Firefox 157 completed a rendered race, replay and persisted level unlock. They verified keyboard focus, the sign-in control and the privacy page.

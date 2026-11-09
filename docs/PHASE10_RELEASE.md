@@ -1,6 +1,10 @@
 # Phase 10 single-player release
 
-TurboType v0.1.0 uses rules version 3, content version 3 and guest save version 1. The release retains the Phase 9 save format. [Hosted game](https://sahilshah2904.github.io/TurboType/) · [Privacy policy](https://sahilshah2904.github.io/TurboType/privacy.html)
+TurboType v0.1.0 was published on 9 November 2026 from `b1efe87`, the tested Pages deployment. It uses rules version 3, content version 3 and guest save version 1. [GitHub release](https://github.com/sahilshah2904/TurboType/releases/tag/v0.1.0) · [Pages deployment](https://github.com/sahilshah2904/TurboType/actions/runs/42581695457) · [Privacy policy](https://sahilshah2904.github.io/TurboType/privacy.html)
+
+- Share the public homepage for the opening. Returning players can replay it from **Settings → Replay opening**. [Public homepage](https://sahilshah2904.github.io/TurboType/)
+- Use the Progress bookmark for direct access to stats and sign-in. [Public Progress](https://sahilshah2904.github.io/TurboType/#/progress)
+- Use `http://127.0.0.1:5174/TurboType/` for local development. Supabase returned the public homepage and the loopback address to their respective OAuth callers.
 
 ## Build and deploy
 
@@ -16,6 +20,6 @@ TurboType v0.1.0 uses rules version 3, content version 3 and guest save version 
 - Other Pages projects on the same hostname share the browser origin. Keep that origin limited to projects you trust. Use an isolated hostname if that changes.
 - If a release must be rolled back, restore the known-good game source on `main` through a revert PR while retaining the Pages workflow. A successful main check redeploys it. Confirm the version and race/save behavior at the public URL. Preserve guest and cloud data. Any future save-schema change needs its own compatibility plan before rollback.
 
-## Owner check
+## Owner verification
 
-On the live link, sign in with an approved Google account and confirm the name, XP and saved level. Sign out and confirm the account badge and cloud data disappear. Sign in to the second account to confirm its separate save. Play one race using your physical keyboard and check Backspace, finish, retry and the next-level unlock at your normal browser zoom.
+The owner confirmed Google sign-in from the public Progress bookmark and completed a race with physical keyboard correction, finish, retry and refresh. Supabase logged successful save reads from the public origin. Account isolation, conflict recovery and sign-out cleanup have separate database and browser evidence. [Verification](TESTING.md)

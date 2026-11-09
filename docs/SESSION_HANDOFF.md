@@ -2,7 +2,11 @@
 
 ## Phase 10 release — 9 November 2026
 
-[PR #9](https://github.com/sahilshah2904/TurboType/pull/9) merged the accepted Phase 9 preview at `615041c`. The Phase 10 checkout is `codex/phase10-release`. Start with the [release and recovery guide](PHASE10_RELEASE.md). Check the exact release PR and main checks, the Pages deployment and the live guest and Google restore paths separately. Preserve the user's Vite servers and save keys. Keep the project at $0.
+Phase 10 closed on 9 November. PR #10 merged at `b1efe87`, which passed CI, deployed to Pages and was tagged v0.1.0. The owner confirmed public Google sign-in and completed the physical keyboard, retry and refresh checks. OAuth probes returned to the requested public and local addresses. Supabase recorded successful save reads from the Pages origin. [Release PR](https://github.com/sahilshah2904/TurboType/pull/10) · [v0.1.0 release](https://github.com/sahilshah2904/TurboType/releases/tag/v0.1.0)
+
+Share the public homepage for the opening. The `#/progress` bookmark goes straight to Progress, and **Settings → Replay opening** plays the title sequence again. Keep both verified OAuth return URLs in the Supabase allowlist. Preserve the user's Vite servers and save keys. [Play TurboType](https://sahilshah2904.github.io/TurboType/) · [Release and recovery guide](PHASE10_RELEASE.md)
+
+For future work, begin with the current `main` and the [Phase 11 multiplayer plan](MULTIPLAYER_ROOMS.md). Phase 11 is planned with a $0 budget.
 
 ## Phase 9 acceptance — 9 November 2026
 

@@ -1,6 +1,6 @@
 # Friends multiplayer rooms — free-only plan
 
-Status: designed 22 October 2026 at the user's request; **not implemented, provisioned or deployed**. This is Phase 11 after the solo launch, using Phase 9 identity/save foundations. It supersedes unspecified room limits, email-OTP-first sign-in and paid-server assumptions in older notes. Existing solo gameplay is unchanged.
+Phase 11 is planned. Its starting point is the published v0.1.0 single-player build and the approved Google account and save system from Phase 9. This plan sets the room limits and free-service budget for future implementation. [Single-player release](https://github.com/sahilshah2904/TurboType/releases/tag/v0.1.0)
 
 ## Scope and budget
 
