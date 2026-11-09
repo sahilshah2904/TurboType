@@ -1,5 +1,58 @@
 # Verification evidence
 
+## Alpha.26 collection selection
+
+The previous alpha.25 source90e9742 passed hosted run39967016807/job120459414784 (completed/success), verified before publication of this follow-up. That pass does not certify alpha.26. Current implementation adds dedicated collections/global starter preferences, rejects selection while either session is countdown/racing/paused, preserves session equipment on return, supports explicit abandon-to-change, and starts a campaign directly from its single map briefing after track readiness. Starter detail/locked milestone ordering and laptop layout are covered by updated native browser tests. Reward artwork/earned entitlements remain unimplemented and labeled planned.
+
+Local broad log Reference_Images/analysis/alpha26-check.log (ignored): formatting/content drift/types/**125 unit tests**/production build passed. The119-case browser run passed117 in18.6minutes; two stale harness expectations failed: the start helper skipped Resume, and the artwork test still required removed race-picker thumbnails. These were corrected without changing test timeouts/retries or disabling tests. Race assets still require every original body/wheel; the test now also verifies unnecessary thumbnail requests are absent.
+
+The final source additionally cancels pending automatic start when Escape/blur/visibility interrupts initial artwork loading, restoring explicit controls; new Escape/blur cases cover it. After those changes, fresh formatting/types/build and **all34 focused campaign/garage/tracks/race-polish cases passed in1.5minutes** (Reference_Images/analysis/alpha26-final-check.log). This includes both previously failing cases and the two new interruption cases, all target laptop widths, global synthetic-event guards, cross-session pinning, preference retention/denial, locked reward order and one-at-a-time preview cleanup. Do not describe this as a single complete121-case final-source local pass. The new exact-head hosted check runs all121 cases.
+
+Six sequential1440×900 captures in docs/images/alpha26 were visually reviewed with zero page errors. They use isolated starter preferences, no campaign unlock fixtures or user save edits; the level1 briefing is genuine. Track detail settles the shared scene's250ms camera fade before capture. The capture script also confirms direct briefing-to-countdown and no title flame. Capture log Reference_Images/analysis/alpha26-captures.log is ignored. Provenance sits beside the images. Browser suites/captures remain sequential with one SwiftShader worker; the user-owned Vite5173 remains intact. No merge/deployment/Phase9 start.
+
+
+## Alpha.25 review corrections
+
+Two sequential 1440 × 900 captures in docs/images/alpha25 were visually reviewed: the campaign setup retains Volt Electric/Frostline Pass without a repeated chooser, and the completed opening title has no flame underlay. Capture execution reported zero page errors; provenance is recorded beside the images.
+
+The user reports the remaining Phase 8 behavior works well; no repeated curriculum acceptance is requested. Campaign/bonus race setup now hides and disables its repeated car picker, displays a read-only car/track summary and uses the choices made in briefing. The normal Quick Race chooser, per-session locks and retry semantics remain tested. The opening title flame element and its unused animation/styles are removed; moving-car trail and motion/quality fallbacks remain.
+
+Fresh format/types/production build and **125 unit / 43 focused browser cases** passed (4.1 minutes for browsers), covering campaign choices/session switching, garage, onboarding and review polish. Log: Reference_Images/analysis/alpha25-check.log (ignored). Existing native tests assert the briefing Comet/Frostline selection reaches the race with no visible picker; opening tests assert no title flame while preserving car choreography/trail. Full hosted checks belong to the new PR #8 head; the baseline4a82ac3 was completed/success before edits and does not certify alpha.25. No merge/deployment/Phase 9.
+
+
+## Stop-and-save checkpoint — 23 October 2026
+
+The user explicitly asked to update README/handoff and continue later because of usage limits. **Stop after saving; do not implement, merge, deploy or start Phase 9 from this handoff.** Resume only when requested.
+
+Current checkout: codex/phase8-curriculum; PR #8 is open/unmerged. Latest verified pre-save head **d96f23cd21d2eedc4b41490324eb56a635a09b65** passed exact-head hosted **run39889378905/job120205188148**, observed completed/success during this audit. Implementation review source13b464d previously passed the full125 unit/116 browser suite in run39888045399/job120200909330; application/test/workflow code is unchanged since that source. Six current captures remain in docs/images/alpha24. This stop-and-save documentation commit receives its own CI; inspect its actual head/check later rather than inferring success.
+
+Phase 8 implementation/automated verification is delivered; **human curriculum acceptance and PR integration remain pending**. Next session: read AGENTS/PROJECT_STATUS/SESSION_HANDOFF/BACKLOG, audit actual Git/PR/checks, then review the checklist in docs/PHASE8_CURRICULUM.md. Keep existing progress: refresh retention; 6→7 continuation and long-text look-ahead; locked50/100 passage preview without launch; bonus after chapter10 clear/replay/refresh without increasing main counts. Do not ask for repeated approval of accepted Phase7/cars/music/palette/opening/Keyboard check. Phase9 rewards/earned ownership/learning/guest/cloud remains future work.
+
+No Pages/backend/account/cloud/multiplayer deployment. Preserve the user Vite server on5173; http://192.168.0.31:5173/TurboType/ serves this feature checkout. No tests/captures/profiling are running locally. Prior detailed source/decisions/limits remain below and in the archived checkpoints; the previous chat is not needed.
+
+
+## Verified Phase 8 review checkpoint — 23 October 2026
+
+Exact review source **13b464dd06bab566d6b672fb030fc36ae160ffed** (implementation aba056c) passed the full hosted [run 39888045399/job 120200909330](https://github.com/sahilshah2904/TurboType/actions/runs/39888045399/job/120200909330), completed **02:21:23 UTC**: formatting/content drift/types/build, **125 unit / 116 browser cases**, no retries/flaky cases (10.3 minutes for browsers). Downloaded log: Reference_Images/analysis/phase8-hosted-check.log (ignored). Six sequential current captures have zero page errors.
+
+[PR #8](https://github.com/sahilshah2904/TurboType/pull/8) remains open/unmerged for user review. This documentation-only checkpoint changes no application/test/workflow code and has its own CI; inspect that later exact head rather than assuming the earlier pass covers it. No Phase 9 or deployment started. The earlier Phase 7 docs-only main check remains observed in dependency installation; never describe all historical runs as passed.
+
+
+## Phase 8 curriculum — alpha.24, 23 October 2026
+
+Implementation aba056c6f5b5c0f3b1f4091a4d10ab4a83fff03f on codex/phase8-curriculum, based on main 26a7f1d; [open PR #8](https://github.com/sahilshah2904/TurboType/pull/8). The current documentation checkpoint has unchanged application/test code. Inspect the PR body/check_run/job for its latest exact-head full hosted outcome; do not infer it from local coverage or a canceled older head. All 300 main definitions and 30 bonuses are authored/playable; source/limits/review instructions are in PHASE8_CURRICULUM.md. No user acceptance, merge or deployment is implied.
+
+- Fresh formatting, content drift, TypeScript, 125 unit cases and production build pass on final application source. Log Reference_Images/analysis/phase8-focused-check.log (ignored). All 18 accepted passage values were also compared directly against main via an independent text extraction and match exactly. The source catalog has 312 distinct new entries; together with the 18 introductions it provides 330 distinct complete passages.
+- Unit coverage validates the full catalog, identity/prerequisite/reference/character/category constraints and gradual curves, completes all 300 main/30 bonus passages through the actual engine, constructs seeded CPU schedules, checks3000/3001 boundaries, chapter/finale reachability, bonus non-inflation/paused rejection, save migration/preservation and existing eligibility/star behavior. Rules remain3, content3 and map schema2.
+- Broad local run Reference_Images/analysis/phase8-final-check.log passed 114 of 115 browser cases (13.0 minutes). Every chapter's native typing case, all three finales and legacy 6→7 passed. One bonus setup failed because addInitScript did not run during fragment-only navigation, leaving its prerequisite fixture unapplied. This was a harness error; the gate correctly stayed locked. The corrected bonus setup passed, then locked/eligible cases were split to keep each independent and comfortably under the existing 30-second timeout.
+- Fresh final focused run Reference_Images/analysis/phase8-final-focused.log passed 3 cases: direct bonus lock, real bonus clear/replay/persistence/non-inflation, and unchanged v1 recovery copy plus6→7 continuation. Together with the 114 broad cases, every current unique browser case (116 total) has local coverage. Do not misdescribe these as a single complete 116-case local run. The next exact-head hosted run checks the entire final suite together.
+- Finale completion uses native input for a prefix and individual in-page beforeinput/input edits for the long tail, always through the actual DOM adapter/engine. Every introduced chapter focus receives real native typing separately. This avoids transport overhead, not typing rules, and is not hardware latency/performance certification.
+- Initial exploratory formatting failed on materialized JSON; the authoring script now uses pinned Prettier. A following exploratory browser run was stopped during transport refinement. Neither attempt is a pass. The normal browser timeout/retry policy remains unchanged; one headless SwiftShader worker, no concurrent suites/captures/profiling.
+- Six sequential captures from scripts/capture-curriculum.mjs have zero page errors and were inspected at 1024/1440: docs/images/alpha24. All clears are isolated fixtures, never user storage. Captured finale metrics come from automated input replay and are synthetic, not a player's performance. User Vite 5173 stayed intact; no visible Chrome windows.
+
+Hosted baseline: accepted Phase 7 b7d03f1 passed 39881571584/job120179897342 and merged 04eb38d. Docs-only main 26a7f1d run 39882420451/job120182773740 was last observed stalled in browser/system dependency installation before tests. It cannot certify new source. Phase 8 removes the Azure fallback from the existing official Ubuntu mirror list and bounds dependency installation to 10 minutes; no dependency/test/notification is disabled. Inspect each exact-head completed check_run/job and downloaded log before claiming new hosted success.
+
+
 ## Phase 7 complete and integrated — 23 October 2026
 
 The user accepted the final Keyboard check correction ("yes it is working"), completing review of alpha.23. Exact accepted source **b7d03f171b7900102f150c19bf1fbe862dad071a** passed hosted run **39881571584**, job **120179897342**, completed 01:07:30 UTC: **118 unit / 80 browser cases**. PR #7 merged into main as **04eb38db636bc9ca74713f28082820265ee7fe7a**. The local checkout returned to main. See docs/PHASE7_CLOSEOUT.md and docs/TESTING.md. This supersedes earlier pending-check/review/merge and feature-branch statements below, which are historical.
@@ -48,9 +101,9 @@ Initial isolated campaign run passed 11/12: the assertion targeted a disabled fi
 
 Captures via `node scripts/capture-campaign.mjs` run sequentially after suites using the preserved LAN server, headless Chromium/SwiftShader. No visible Chrome windows or user storage were used. `docs/images/alpha21` contains current Hub, Easy map, chapter 10, accessible list, Hard map at 1024, briefing1440/1024, actual typed first-clear result and unlock1024, and paragraph-race1440. Only `paragraph-race-fixture-1440.png` uses isolated seeded prior clears to open sample 4; it does not evidence three earned clears. Result/unlock captures come from a real per-character level 1 finish. Sample 6 caret checks use clearly seeded prerequisites; no user account/progress is altered.
 
-Main Phase6 documentation refresh `1ee0aba3c3e39a29adf66f2df727233c7f82782c` has a completed successful exact-head check in [run39804674809](https://github.com/sahilshah2904/TurboType/actions/runs/39804674809). This is separate from Phase7 validation. Phase6 source/merge evidence below remains historical baseline.
+Main Phase6 documentation refresh `1ee0aba3c3e39a29adf66f2df727233c7f82782c` has a completed successful exact-head check in [run 39804674809](https://github.com/sahilshah2904/TurboType/actions/runs/39804674809). This is separate from Phase 7 validation. Phase6 source/merge evidence below remains historical baseline.
 
-**Limits:**18 playable sample races, not300 authored passages. Bonus/7–100 content in Phase8; earned ownership/canonical guest saves/receipts/cloud in Phase9. Basic map progress is local only/best-effort cross-tab coordination. User review of paragraphs/maps/readability remains pending; TT608 atmosphere/opening polish stays deferred.
+**Limits:**18 playable sample races, not300 authored passages. Bonus/7–100 content in Phase 8; earned ownership/canonical guest saves/receipts/cloud in Phase9. Basic map progress is local only/best-effort cross-tab coordination. User review of paragraphs/maps/readability remains pending; TT608 atmosphere/opening polish stays deferred.
 
 
 ## Phase 6 accepted and integrated — 22 October 2026

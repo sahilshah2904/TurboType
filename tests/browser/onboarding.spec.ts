@@ -370,7 +370,7 @@ test("opening plays a full-window 5.6-second title reveal and reduced motion ski
   expect(animations).toBe(0);
 });
 
-test("purple opening car brakes, burns out, rolls back and reveals the flaming title on launch", async ({
+test("purple opening car brakes, burns out, rolls back and reveals the clean title on launch", async ({
   page,
 }) => {
   await page.goto("./#/intro");
@@ -394,9 +394,9 @@ test("purple opening car brakes, burns out, rolls back and reveals the flaming t
         trail: Number(
           getComputedStyle(screen.querySelector(".intro-track-fire")!).opacity,
         ),
-        fire: Number(
-          getComputedStyle(screen.querySelector(".intro-logo-fire")!).opacity,
-        ),
+        titleFlames: screen.querySelectorAll(
+          ".intro-logo-fire, #intro-logo-flames",
+        ).length,
       };
     }, ms);
   const width = page.viewportSize()!.width;
@@ -412,7 +412,7 @@ test("purple opening car brakes, burns out, rolls back and reveals the flaming t
   expect((await sample(4300)).x).toBeGreaterThan(width);
   const reveal = await sample(5100);
   expect(reveal.title).toBe(1);
-  expect(reveal.fire).toBeGreaterThan(0.4);
+  expect(reveal.titleFlames).toBe(0);
   expect(reveal.trail).toBe(0);
   await expect(page.locator(".intro-car-body")).toHaveAttribute(
     "src",

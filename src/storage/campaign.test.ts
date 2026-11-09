@@ -2,6 +2,8 @@ import { expect, it } from "vitest";
 import { LocalCampaignRepository, CAMPAIGN_STORAGE_KEY } from "./campaign";
 import { campaignLevel } from "../content/campaign";
 import { TypingEngine } from "../core/typing-engine";
+import { emptyCampaign } from "../core/campaign-progress";
+import { LEGACY_CAMPAIGN_STORAGE_KEY } from "./campaign";
 function result() {
   let time = 0;
   const engine = new TypingEngine({
@@ -61,4 +63,62 @@ it("keeps progress for the visit when reads or writes are denied", () => {
   repo.reload();
   expect(repo.read().clears["easy-001"]).toBeDefined();
   expect(repo.status).toContain("visit only");
+});
+
+it("migrates v1 clears and map positions without replacing the original recovery copy", () => {
+  const legacy = {
+    ...emptyCampaign(),
+    schemaVersion: 1,
+    clears: {
+      "easy-001": {
+        stars: 7,
+        bestWpm: 25,
+        bestAccuracy: 100,
+        bestTimeMs: 18000,
+        revision: 1,
+      },
+    },
+    positions: { easy: 1200, medium: null, hard: 8000 },
+  };
+  const original = JSON.stringify(legacy);
+  const data = new Map([[LEGACY_CAMPAIGN_STORAGE_KEY, original]]);
+  const store = {
+    getItem: (key: string) => data.get(key) ?? null,
+    setItem: (key: string, value: string) => {
+      data.set(key, value);
+    },
+  };
+  const repo = new LocalCampaignRepository(() => store);
+  expect(repo.read()).toMatchObject({
+    schemaVersion: 2,
+    clears: legacy.clears,
+    positions: legacy.positions,
+    bonuses: {},
+  });
+  expect(data.get(LEGACY_CAMPAIGN_STORAGE_KEY)).toBe(original);
+  expect(JSON.parse(data.get(CAMPAIGN_STORAGE_KEY)!)).toEqual(repo.read());
+  const current = repo.read();
+  current.positions.easy = 5000;
+  data.set(CAMPAIGN_STORAGE_KEY, JSON.stringify(current));
+  expect(new LocalCampaignRepository(() => store).read().positions.easy).toBe(
+    5000,
+  );
+});
+
+it("preserves and exports malformed legacy data and tolerates denied migration writes", () => {
+  for (const raw of [
+    "{broken",
+    JSON.stringify({ ...emptyCampaign(), schemaVersion: 1 }),
+  ]) {
+    const data = new Map([[LEGACY_CAMPAIGN_STORAGE_KEY, raw]]);
+    const repo = new LocalCampaignRepository(() => ({
+      getItem: (key: string) => data.get(key) ?? null,
+      setItem: () => {
+        throw Error("denied");
+      },
+    }));
+    expect(repo.exportRaw()).toBe(raw);
+    expect(data.has(CAMPAIGN_STORAGE_KEY)).toBe(false);
+    expect(repo.status).toContain("visit only");
+  }
 });

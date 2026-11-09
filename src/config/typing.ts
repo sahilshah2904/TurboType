@@ -1,0 +1,1 @@
+export const MAX_PASSAGE_CHARACTERS = 3000;

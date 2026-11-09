@@ -6,85 +6,94 @@ const tracks = [
   "emerald-trail",
   "frostline-pass",
 ];
-async function ready(page: import("@playwright/test").Page) {
-  await expect(page.locator('#race-track[data-ready="true"]')).toBeVisible({
-    timeout: 12000,
-  });
-}
-test("five starter tracks share preview/race choice and keep a running race locked", async ({
+test("starter tracks preview individually, persist globally and remain locked during a paused race", async ({
   page,
 }) => {
   await page.clock.install();
-  await page.goto("./#/race");
-  await ready(page);
-  const canvas = await page.locator("#race-track canvas").elementHandle();
-  await page.getByText("Advanced / Replay", { exact: true }).click();
-  await page.getByLabel("Race seed", { exact: true }).fill("42");
-  await page.getByLabel("Race seed", { exact: true }).press("Tab");
+  await page.goto("./#/tracks");
+  await expect(page.locator("[data-equip]")).toHaveCount(5);
+  await expect(page.locator("[data-reward]")).toHaveCount(21);
+  await expect(page.locator('[data-reward="track-easy-010"]')).toContainText(
+    "Easy level 10",
+  );
+  expect(
+    await page
+      .locator("[data-reward]")
+      .evaluateAll((cards) =>
+        cards.slice(0, 6).map((card) => (card as HTMLElement).dataset.reward),
+      ),
+  ).toEqual([
+    "track-easy-010",
+    "track-medium-010",
+    "track-hard-010",
+    "track-easy-025",
+    "track-medium-025",
+    "track-hard-025",
+  ]);
+  await expect(page.locator("canvas")).toHaveCount(0);
   for (const id of tracks) {
-    await page.getByLabel("Track", { exact: true }).selectOption(id);
-    await expect(page.locator("#race-track")).toHaveAttribute("data-track", id);
-    await expect(page.locator("#race-seed")).toHaveValue("42");
-    expect(await canvas!.evaluate((el) => el.isConnected)).toBe(true);
+    await page.locator(`[data-preview="${id}"]`).click();
+    await expect(
+      page.locator('#collection-track-preview[data-ready="true"]'),
+    ).toHaveAttribute("data-track", id, { timeout: 12000 });
+    await expect(page.locator("canvas")).toHaveCount(1);
+    await page.keyboard.press("Escape");
+    await expect(page.locator("canvas")).toHaveCount(0);
+    await page.locator(`[data-equip="${id}"]`).click();
   }
-  await page.getByRole("button", { name: /^Start race/ }).click();
-  await page.clock.fastForward(4000);
-  await expect(page.locator("#race-track-select")).toBeDisabled();
-  await page.getByRole("button", { name: "Pause", exact: true }).click();
-  await page.locator("#race-track-select").evaluate((el) => {
-    (el as HTMLSelectElement).value = "coral-coast";
-    el.dispatchEvent(new Event("change", { bubbles: true }));
-  });
-  await expect(page.locator("#race-track")).toHaveAttribute(
-    "data-track",
-    "frostline-pass",
-  );
-  await page.getByRole("link", { name: "The hub", exact: true }).click();
-  await expect(page.locator('#track-preview[data-ready="true"]')).toBeVisible({
-    timeout: 12000,
-  });
-  await expect(page.locator("#track-preview")).toHaveAttribute(
-    "data-track",
-    "frostline-pass",
-  );
-  await page.getByLabel("Track", { exact: true }).selectOption("coral-coast");
+  await page.goto("./#/hub");
   await expect(
     page.locator('#track-preview[data-ready="true"]'),
-  ).toHaveAttribute("data-track", "coral-coast", { timeout: 12000 });
-  await page.getByRole("link", { name: "Quick Race", exact: true }).click();
-  await ready(page);
-  await expect(page.locator("#race-track")).toHaveAttribute(
+  ).toHaveAttribute("data-track", "frostline-pass", { timeout: 12000 });
+  await page.goto("./#/race");
+  await expect(page.locator('#race-track[data-ready="true"]')).toHaveAttribute(
     "data-track",
     "frostline-pass",
+    { timeout: 12000 },
   );
-  await page.getByRole("button", { name: "Retry same race" }).click();
-  await expect(page.locator("#race-track")).toHaveAttribute(
+  await page.locator("#start-race").click();
+  await page.clock.fastForward(4000);
+  await page.goto("./#/tracks");
+  await expect(page.locator('[data-equip="coral-coast"]')).toBeDisabled();
+  await page.locator('[data-equip="coral-coast"]').dispatchEvent("click");
+  await page.goto("./#/race");
+  await expect(page.locator('#race-track[data-ready="true"]')).toHaveAttribute(
+    "data-track",
+    "frostline-pass",
+    { timeout: 12000 },
+  );
+  await page.locator("#retry-race").click();
+  await page.goto("./#/tracks");
+  await page.locator('[data-equip="coral-coast"]').click();
+  await page.reload();
+  await expect(page.locator('[data-equip="coral-coast"]')).toHaveAttribute(
+    "aria-pressed",
+    "true",
+  );
+  await page.goto("./#/race");
+  await expect(page.locator('#race-track[data-ready="true"]')).toHaveAttribute(
     "data-track",
     "coral-coast",
+    { timeout: 12000 },
   );
-  await page.reload();
-  await ready(page);
-  await expect(page.getByLabel("Track", { exact: true })).toHaveValue(
-    "coral-coast",
-  );
-  expect(await page.locator("canvas").count()).toBe(1);
 });
-test("blocked track storage applies an in-memory choice with clear feedback", async ({
+test("blocked track storage applies an in-memory collection choice with clear feedback", async ({
   page,
 }) => {
   await page.addInitScript(() => {
     Storage.prototype.setItem = () => {
-      throw new Error("blocked");
+      throw Error("blocked");
     };
   });
+  await page.goto("./#/tracks");
+  await page.locator('[data-equip="emerald-trail"]').click();
+  await expect(page.locator("#collection-status")).toContainText(
+    "storage is unavailable",
+  );
   await page.goto("./#/race");
-  await ready(page);
-  await page.getByLabel("Track", { exact: true }).selectOption("emerald-trail");
-  await expect(page.locator("#race-track")).toHaveAttribute(
+  await expect(page.locator('#race-track[data-ready="true"]')).toHaveAttribute(
     "data-track",
     "emerald-trail",
-  );
-  await expect(page.locator("#track-choice-status")).toContainText(
-    "storage is unavailable",
+    { timeout: 12000 },
   );
 });

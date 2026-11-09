@@ -1,3 +1,5 @@
+import { MAX_PASSAGE_CHARACTERS } from "../config/typing";
+
 export type TypingState =
   | "ready"
   | "countdown"
@@ -63,9 +65,12 @@ export class TypingEngine {
   private lastClockMs = -Infinity;
 
   constructor(private readonly options: TypingOptions) {
-    if (!/^[\x20-\x7e]{1,2000}$/.test(options.passage))
+    if (
+      !/^[\x20-\x7e]+$/.test(options.passage) ||
+      options.passage.length > MAX_PASSAGE_CHARACTERS
+    )
       throw new RangeError(
-        "Use a nonempty printable English passage of at most 2000 characters.",
+        `Use a nonempty printable English passage of at most ${MAX_PASSAGE_CHARACTERS} characters.`,
       );
     if (
       options.timeLimitMs !== undefined &&

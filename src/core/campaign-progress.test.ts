@@ -37,7 +37,7 @@ function finish(
   return engine.snapshot();
 }
 describe("campaign maps and eligible clears", () => {
-  (it("has exactly 100 stable stops per category and six original progressively longer samples", () => {
+  (it("has exactly 100 stable stops per category and 100 original curriculum passages", () => {
     expect(CAMPAIGN_LEVELS).toHaveLength(300);
     expect(new Set(CAMPAIGN_LEVELS.map((l) => l.id)).size).toBe(300);
     for (const category of CATEGORIES) {
@@ -45,7 +45,7 @@ describe("campaign maps and eligible clears", () => {
       expect(levels.map((l) => l.number)).toEqual(
         Array.from({ length: 100 }, (_, i) => i + 1),
       );
-      expect(levels.filter((l) => l.passage)).toHaveLength(6);
+      expect(levels.filter((l) => l.passage)).toHaveLength(100);
       let length = 0;
       for (const level of levels.slice(0, 6)) {
         expect(level.passage!.length).toBeGreaterThan(length);

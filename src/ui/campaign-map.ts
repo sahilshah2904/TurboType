@@ -4,6 +4,7 @@ import {
   DISTRICTS,
   categoryLevels,
   campaignLevel,
+  campaignBonus,
   type Category,
   type CampaignLevel,
 } from "../content/campaign";
@@ -15,13 +16,14 @@ import {
   type CampaignProgress,
 } from "../core/campaign-progress";
 import type { LocalCampaignRepository } from "../storage/campaign";
-import { STARTER_KARTS, isKartId, type KartId } from "../content/kart-catalog";
-import {
-  STARTER_TRACKS,
-  isTrackId,
-  type TrackId,
-} from "../content/track-catalog";
+import { STARTER_KARTS, type KartId } from "../content/kart-catalog";
+import { trackTheme, type TrackId } from "../content/track-catalog";
 
+const escapePassage = (text: string) =>
+  text.replace(
+    /[&<>]/g,
+    (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" })[char]!,
+  );
 const SPACING = 156;
 const WIDTH = 15900;
 function point(number: number) {
@@ -77,7 +79,7 @@ export function campaignMapScreen(
   const p = point(unlocked ?? 1),
     prev = point(Math.max(1, (unlocked ?? 1) - 1));
   const unlockPath = `M ${prev.x} ${prev.y} C ${prev.x + SPACING / 2} ${prev.y}, ${p.x - SPACING / 2} ${p.y}, ${p.x} ${p.y}`;
-  return `<section class="campaign-page"><a class="back-link" href="#/hub">← All campaigns</a><div class="campaign-heading"><div><p class="eyebrow">YOUR NEXT STRETCH OF ROAD</p><h1>${CATEGORY_NAMES[category]} <span>journey.</span></h1><p>${summary.cleared}/100 cleared · ${summary.stars}/300 stars · Current level ${currentLevel(progress, category)}</p></div><nav aria-label="Campaign categories">${CATEGORIES.map((c) => `<a href="#/campaign/${c}" ${category === c ? 'aria-current="page"' : ""}>${CATEGORY_NAMES[c]}</a>`).join("")}</nav></div><progress max="100" value="${summary.cleared}" aria-label="${CATEGORY_NAMES[category]} levels cleared"></progress><p class="help">Six playable sample races, from short starts to longer paragraphs. The remaining route and optional challenges get their authored content in Phase 8.</p>
+  return `<section class="campaign-page"><a class="back-link" href="#/hub">← All campaigns</a><div class="campaign-heading"><div><p class="eyebrow">YOUR NEXT STRETCH OF ROAD</p><h1>${CATEGORY_NAMES[category]} <span>journey.</span></h1><p>${summary.cleared}/100 cleared · ${summary.stars}/300 stars · Current level ${currentLevel(progress, category)}</p></div><nav aria-label="Campaign categories">${CATEGORIES.map((c) => `<a href="#/campaign/${c}" ${category === c ? 'aria-current="page"' : ""}>${CATEGORY_NAMES[c]}</a>`).join("")}</nav></div><progress max="100" value="${summary.cleared}" aria-label="${CATEGORY_NAMES[category]} levels cleared"></progress><p class="help">100 playable levels and 10 optional chapter challenges. Only the first few races are short; later routes build sustained paragraph practice.</p>
   <div class="map-toolbar"><button id="map-current" class="button button--primary">Continue · level ${currentLevel(progress, category)}</button><button id="map-jump-current" class="button button--secondary">Jump to current</button><label>Chapter <select id="map-chapter">${DISTRICTS.map((name, i) => `<option value="${i + 1}">${i + 1} · ${name}</option>`).join("")}</select></label><button id="map-previous" class="text-button" aria-label="Previous chapter">←</button><button id="map-next" class="text-button" aria-label="Next chapter">→</button><label>Level <input id="map-number" type="number" min="1" max="100" value="1" /></label><button id="map-go" class="text-button">Go</button><button id="map-view" class="button button--secondary" aria-pressed="false">List view</button></div>
   <p class="help" id="map-help">Drag the road or use the scrollbar. On a level: arrow keys move, Home/End jump, Enter opens its briefing. Locks cannot be skipped.</p><p id="map-feedback" role="status">${unlocked ? `Level ${unlocked} unlocked. Keep your rhythm.` : "Choose a numbered stop to see its briefing."}</p>
   <div id="campaign-road" class="campaign-road" tabindex="0" role="region" aria-label="${CATEGORY_NAMES[category]} rightward campaign map" aria-describedby="map-help"><div class="campaign-world" style="width:${WIDTH}px"><div class="map-districts" aria-hidden="true">${DISTRICTS.map((name, i) => `<div class="map-district" data-chapter="${i + 1}" style="left:${i * SPACING * 10}px;width:${SPACING * 10}px"><span>${String(i + 1).padStart(2, "0")} / ${name}</span></div>`).join("")}</div><svg class="map-road-art" width="${WIDTH}" height="330" aria-hidden="true"><path d="${path}" class="map-road-edge"/><path d="${path}" class="map-road-line"/><path d="${reachedPath}" class="map-road-reached"/>${unlocked ? `<path d="${unlockPath}" pathLength="1" class="map-road-unlock"/>` : ""}</svg>
@@ -85,23 +87,21 @@ export function campaignMapScreen(
     .map((level) => {
       const p = point(level.number);
       const status = nodeStatus(progress, level);
-      return `<button class="map-node map-node--${status.toLowerCase()} ${unlocked === level.number ? "map-node--unlock" : ""}" data-level="${level.number}" style="left:${p.x}px;top:${p.y}px" aria-label="${CATEGORY_NAMES[category]} level ${level.number}, ${status}, ${starCount(progress.clears[level.id]?.stars ?? 0)} stars${status === "Locked" ? `, clear level ${level.number - 1} to unlock` : ""}${!level.passage ? ", content coming in Phase 8" : ""}" ${status === "Current" ? 'aria-current="step"' : ""}><span class="map-node-state" aria-hidden="true">${status === "Completed" ? "✓" : status === "Locked" ? '<svg width="16" height="18" viewBox="0 0 16 18" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="8" width="10" height="8" rx="2"/><path d="M5 8V5a3 3 0 0 1 6 0v3"/></svg>' : status === "Current" ? "▼" : "○"}</span><strong>${level.number}</strong><span class="map-node-stars" aria-hidden="true">${stars(progress.clears[level.id]?.stars)}</span></button>`;
+      return `<button class="map-node map-node--${status.toLowerCase()} ${unlocked === level.number ? "map-node--unlock" : ""}" data-level="${level.number}" style="left:${p.x}px;top:${p.y}px" aria-label="${CATEGORY_NAMES[category]} level ${level.number}, ${status}, ${starCount(progress.clears[level.id]?.stars ?? 0)} stars${status === "Locked" ? `, clear level ${level.number - 1} to unlock` : ""}" ${status === "Current" ? 'aria-current="step"' : ""}><span class="map-node-state" aria-hidden="true">${status === "Completed" ? "✓" : status === "Locked" ? '<svg width="16" height="18" viewBox="0 0 16 18" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="8" width="10" height="8" rx="2"/><path d="M5 8V5a3 3 0 0 1 6 0v3"/></svg>' : status === "Current" ? "▼" : "○"}</span><strong>${level.number}</strong><span class="map-node-stars" aria-hidden="true">${stars(progress.clears[level.id]?.stars)}</span></button>`;
     })
     .join("")}
   ${DISTRICTS.map((_, i) => {
-    const p = point(i * 10 + 5);
-    return `<div class="map-bonus-branch" style="left:${p.x}px;top:${p.y + 52}px"><i></i><button class="map-bonus" data-bonus="${i + 1}" aria-label="Chapter ${i + 1} optional bonus, clear level ${i * 10 + 5}, content coming in Phase 8">◇ Bonus ${i + 1}</button></div>`;
+    const p = point(i * 10 + 10);
+    return `<div class="map-bonus-branch" style="left:${p.x}px;top:${p.y + 52}px"><i></i><button class="map-bonus" data-bonus="${i + 1}" aria-label="Chapter ${i + 1} optional bonus, clear level ${i * 10 + 10}${progress.bonuses[campaignBonus(category, i + 1)!.id] ? ", completed" : ""}">${progress.bonuses[campaignBonus(category, i + 1)!.id] ? "✓" : "◇"} Bonus ${i + 1}</button></div>`;
   }).join("")}
   </div></div>
-  <div id="campaign-list" class="campaign-list" hidden>${levels.map((level) => `<button class="button button--secondary" data-level="${level.number}">Level ${level.number} · ${nodeStatus(progress, level)} · ${stars(progress.clears[level.id]?.stars)}${!level.passage ? " · Content coming" : ""}</button>`).join("")}</div>
+  <div id="campaign-list" class="campaign-list" hidden>${levels.map((level) => `<button class="button button--secondary" data-level="${level.number}">Level ${level.number} · ${nodeStatus(progress, level)} · ${stars(progress.clears[level.id]?.stars)}</button>`).join("")}</div>
   <p id="campaign-storage-status" class="help" role="status"></p><button id="campaign-export" class="text-button">Export map progress</button><p class="help">Local map progress only. Rewards, ownership, complete backups and cloud saves arrive in Phase 9.</p>
   <dialog id="level-briefing" class="level-briefing" aria-labelledby="briefing-title"><button id="briefing-close" class="text-button" aria-label="Close level briefing">Close ×</button><div id="briefing-content"></div></dialog></section>`;
 }
 export interface CampaignChoices {
   kart: () => KartId;
   track: () => TrackId;
-  chooseKart: (id: KartId) => void;
-  chooseTrack: (id: TrackId) => void;
 }
 export function connectCampaignMap(
   main: HTMLElement,
@@ -141,25 +141,20 @@ export function connectCampaignMap(
         .querySelector<HTMLElement>(`[data-level="${number}"]`)
         ?.focus({ preventScroll: true });
   }
-  function open(number: number) {
-    const level = campaignLevel(category, number);
+  function open(number: number, bonus = false) {
+    const level = bonus
+      ? campaignBonus(category, number)
+      : campaignLevel(category, number);
     if (!level) return;
     const unlocked = isUnlocked(progress, level);
-    const record = progress.clears[level.id];
+    const record = (bonus ? progress.bonuses : progress.clears)[level.id];
     const allowed = unlocked && !!level.passage;
-    content.innerHTML = `<p class="eyebrow">${CATEGORY_NAMES[category]} · CHAPTER ${level.chapter} · LEVEL ${number}</p><h2 id="briefing-title">${level.title}</h2><p>${level.focus}</p>${!unlocked ? `<p class="briefing-lock">Locked · Clear ${CATEGORY_NAMES[category]} level ${number - 1} first.</p>` : ""}${!level.passage ? "<p>Passage coming in Phase 8. This map stop is a preview, not a playable placeholder.</p>" : `<p>${level.passage.length} characters · ${level.passage.split(" ").length} words · Untimed</p>`}<div class="briefing-targets"><span>★ Finish unpaused</span><span>★ ${level.accuracyGoal}% accuracy</span><span>★ ${level.paceGoal} WPM</span></div><p class="help">Finish unpaused to open the next level; extra stars are optional and accumulate across replays. Paused or assisted runs are practice-only.</p><p>Four fixed CPUs · ${level.cpuBand.minWpm}–${level.cpuBand.maxWpm} target WPM</p><p>${record ? `Personal best: ${record.bestWpm.toFixed(1)} WPM · ${record.bestAccuracy.toFixed(1)}% accuracy · ${(record.bestTimeMs / 1000).toFixed(1)}s · ${stars(record.stars)} (bests may come from different runs).` : "First visit · set your best."}</p>${allowed ? `<div class="briefing-choices"><label>Your car<select id="briefing-car">${STARTER_KARTS.map((k) => `<option value="${k.id}" ${k.id === choices.kart() ? "selected" : ""}>${k.name}</option>`).join("")}</select></label><label>Your track<select id="briefing-track">${STARTER_TRACKS.map((t) => `<option value="${t.id}" ${t.id === choices.track() ? "selected" : ""}>${t.name}</option>`).join("")}</select></label></div><p class="help">Your cosmetics work across categories and replays. All have equal performance.</p><button id="briefing-start" class="button button--primary">${record ? "Replay" : "Race"} level ${number} →</button>` : ""}`;
+    content.innerHTML = `<p class="eyebrow">${CATEGORY_NAMES[category]} · CHAPTER ${level.chapter} · ${bonus ? `BONUS ${number}` : `LEVEL ${number}`}</p><h2 id="briefing-title">${level.title}</h2><p>${level.focus}</p><p class="help">${bonus ? "Optional chapter challenge. Completing it never opens a main level or counts toward car/track milestones." : level.role === "finale" ? "Category finale. Complete the journey; every level remains replayable." : level.role === "showcase" ? "Chapter showcase. Combine the skills from this district." : level.role === "pit-stop" ? "Milestone practice. Keep the same calm correction rules." : "Main route lesson."}</p>${!unlocked ? `<p class="briefing-lock">Locked · Clear ${CATEGORY_NAMES[category]} level ${bonus ? level.number : number - 1} first.</p>` : ""}<p>${level.passage.length} characters · ${level.passage.split(" ").length} words · Untimed</p><div class="briefing-targets"><span>★ Finish unpaused</span><span>★ ${level.accuracyGoal}% accuracy</span><span>★ ${level.paceGoal} WPM</span></div><p class="help">${bonus ? "Finish unpaused to record this optional challenge;" : "Finish unpaused to open the next level;"} extra stars are optional and accumulate across replays. Paused or assisted runs are practice-only.</p><p>Four fixed CPUs · ${level.cpuBand.minWpm}–${level.cpuBand.maxWpm} target WPM</p><p>${record ? `Personal best: ${record.bestWpm.toFixed(1)} WPM · ${record.bestAccuracy.toFixed(1)}% accuracy · ${(record.bestTimeMs / 1000).toFixed(1)}s · ${stars(record.stars)} (bests may come from different runs).` : "First visit · set your best."}</p><details class="passage-preview"><summary>Read passage</summary><p>${escapePassage(level.passage)}</p></details><p class="briefing-equipment">${STARTER_KARTS.find((k) => k.id === choices.kart())!.name} · ${trackTheme(choices.track()).name}</p>${allowed ? `<button id="briefing-start" class="button button--primary">${record ? "Replay" : "Race"} ${bonus ? "bonus" : "level"} ${number} →</button>` : ""}`;
     content.querySelector("#briefing-start")?.addEventListener(
       "click",
       () => {
         // Recheck the actual progress boundary; a link or preview never bypasses locks.
         if (!isUnlocked(repository.read(), level)) return;
-        const car =
-          content.querySelector<HTMLSelectElement>("#briefing-car")!.value;
-        const track =
-          content.querySelector<HTMLSelectElement>("#briefing-track")!.value;
-        if (!isKartId(car) || !isTrackId(track)) return;
-        choices.chooseKart(car);
-        choices.chooseTrack(track);
         dialog.close();
         launch(level);
       },
@@ -180,11 +175,7 @@ export function connectCampaignMap(
       );
       if (!button) return;
       if (button.dataset.level) open(Number(button.dataset.level));
-      else {
-        const n = Number(button.dataset.bonus) * 10 - 5;
-        content.innerHTML = `<p class="eyebrow">OPTIONAL SIDE ROAD</p><h2 id="briefing-title">Chapter ${button.dataset.bonus} bonus</h2><p>${progress.clears[campaignLevel(category, n)!.id] ? "Route requirement met." : `Clear ${CATEGORY_NAMES[category]} level ${n} to open this branch.`}</p><p>Challenge content arrives in Phase 8. Bonuses never block the main road or count toward car/track milestones.</p>`;
-        dialog.showModal();
-      }
+      else open(Number(button.dataset.bonus), true);
     },
     options,
   );
