@@ -1,12 +1,12 @@
 # TurboType project status
 
-## Phase 9 implementation — 9 November 2026
+## Phase 9 acceptance — 9 November 2026
 
 The user authorized full Phase 9. Phase 8 is integrated through [PR #8](https://github.com/sahilshah2904/TurboType/pull/8) at e3d0603, and its [main check](https://github.com/sahilshah2904/TurboType/actions/runs/42546049988) passed. The Phase 9 feature checkout carries alpha.27 on top of that merge.
 
-The preview uses a versioned guest save and preserves the v1 and v2 campaign keys as recovery copies. It adds reward calculations, Driver Rank, all 18 reward vehicle designs and 21 course designs, earned equipment, a Progress screen and four practice drills. Local recovery and cloud behavior are described in [the Phase 9 handoff](docs/PHASE9_RESUME.md). Review scope, checks and remaining gates are recorded there and in [TESTING.md](docs/TESTING.md).
+The preview uses a versioned guest save and preserves the v1 and v2 campaign keys as recovery copies. It adds reward calculations, Driver Rank, all 18 reward vehicle designs and 21 course designs, earned equipment, a Progress screen and four practice drills. Local recovery and cloud behavior are described in [the Phase 9 handoff](docs/PHASE9_RESUME.md). Verification is recorded in [TESTING.md](docs/TESTING.md).
 
-TurboType was provisioned in the confirmed Supabase Free organization in Singapore. Both owner test accounts signed in, were approved, and played separate first-level campaign races. A hosted aggregate check confirmed separate Easy and Medium clears and XP in both saves. Phase 9 remains open for fresh-browser recovery and the remaining review. GitHub Pages and multiplayer remain later phases.
+TurboType uses Supabase Free in Singapore. The two approved owner accounts saved separate Easy and Medium Level 1 clears and XP. The owner reported the same saved stats in Microsoft Edge and accepted Phase 9. The accepted preview is in [PR #9](https://github.com/sahilshah2904/TurboType/pull/9), awaiting integration. Phase 10 covers the release checks, including outage recovery and hosted sign-in, then GitHub Pages. Friends multiplayer remains Phase 11.
 
 ## Historical paused checkpoint — 23 October 2026
 

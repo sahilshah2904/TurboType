@@ -6,7 +6,7 @@ Read PROJECT_STATUS.md, docs/SESSION_HANDOFF.md and BACKLOG.md before reporting 
 
 ## Current checkpoint — 9 November 2026
 
-The user resumed Phase 9 and authorized the $0 Supabase TurboType project in their organization. Phase 8 is accepted, merged as e3d0603 and verified on main. The Phase 9 alpha.27 branch includes guest save, economy, cosmetic entitlements and art, learning, and the optional cloud path. Follow the newest [Phase 9 implementation and review notes](docs/PHASE9_RESUME.md). The live Google OAuth and real account tests remain separate from hosted database fixtures. Keep changes in the Phase 9 PR for user review. Preserve Vite5173 and the legacy save keys. Phases 10 and 11 have their own release scope.
+The user accepted Phase 9 alpha.27 after confirming saved stats in Microsoft Edge. Phase 8 is integrated at e3d0603. [PR #9](https://github.com/sahilshah2904/TurboType/pull/9) holds the accepted Phase 9 preview and documentation. Verify the current PR and exact-head checks before integration. The live Google sign-in and owner restore evidence are separate from database fixtures. Preserve Vite5173 and legacy saves. The next release work is Phase 10 desktop testing, production cloud checks and GitHub Pages, followed by Phase 11 multiplayer. [Phase 9 handoff](docs/PHASE9_RESUME.md)
 
 ## Historical checkpoint — 23 October 2026
 

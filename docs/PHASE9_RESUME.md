@@ -1,6 +1,6 @@
 # Phase 9 resume checkpoint
 
-## Current implementation — 9 November 2026
+## Accepted preview — 9 November 2026
 
 Phase 9 was resumed after the user authorized a $0 Supabase project. The alpha.27 preview includes the versioned guest save, legacy migration, rewards, cosmetic entitlements, 18 vehicle and 21 track designs, learning summaries, drills, and the optional account client. Phase 8 remains the accepted and integrated main baseline. [Phase 8 merge CI](https://github.com/sahilshah2904/TurboType/actions/runs/42546049988)
 
@@ -8,7 +8,8 @@ Phase 9 was resumed after the user authorized a $0 Supabase project. The alpha.2
 - Eligible unique main clears derive equipment entitlements. The independently authored reward scenes and vehicles are loaded on demand and stay cosmetic. Race results commit clears and rewards in the same local snapshot. Practice drills grant no race awards. Cloud milestone totals are derived in the database from the submitted campaign shape. A solo result and any guest import remain player-controlled data.
 - The Free project `TurboType` is in Singapore. Migrations live in `supabase/migrations`. A single cloud revision tracks an account’s compact save. The account client keeps a separate cache scoped to the account and browser tab, clears it on sign-out or account switch, prompts before importing guest progress, and asks the player to resolve conflicts. Pending changes survive refresh in the same tab. Sync or export before closing the tab. Duplicate submission of an identical snapshot returns the existing revision. The app provides cloud save deletion and JSON export.
 - Hosted database verification used two synthetic Google identities, authenticated roles, and an anonymous role in a rollback transaction. See `supabase/tests/player_save_isolation.sql`. Direct unauthenticated REST reads and RPC calls returned 401. The approval table has RLS and deliberately grants no direct player access. The advisor reports this deny-by-default configuration as informational.
-- Both approved owner test accounts completed Google sign-in and saved real races. Supabase confirmed Easy Level 1 and Medium Level 1 in separate accounts with XP in both. The live Google redirect requests `email profile` and no offline access. Fresh-browser restoration, shared-device session cleanup and outage checks remain release gates. Public launch needs a clear consent screen with the TurboType name, support contact, and a privacy policy. [Google branding verification](https://developers.google.com/identity/verification/authentication-verification)
+- Both approved owner test accounts completed Google sign-in and saved real races. Supabase confirmed Easy Level 1 and Medium Level 1 in separate accounts with XP in both. The owner opened the game in Microsoft Edge, saw the same saved stats and accepted Phase 9. The live Google redirect requests `email profile` and no offline access.
+- The accepted preview is in [PR #9](https://github.com/sahilshah2904/TurboType/pull/9). Verify its current exact-head check before integration. Phase 10 retains the release checks for shared-device session cleanup, offline recovery, two-session conflict handling and the live HTTPS callback. Prepare the consent screen with the TurboType name, support contact and a privacy policy. [Google branding verification](https://developers.google.com/identity/verification/authentication-verification)
 
 ## Configure and test Google sign-in
 

@@ -1,6 +1,6 @@
 # TurboType GitHub workflow
 
-Phase 8 was reviewed, merged as e3d0603, and passed the [main push check](https://github.com/sahilshah2904/TurboType/actions/runs/42546049988). Phase 9 development and its documentation are in [draft PR #9](https://github.com/sahilshah2904/TurboType/pull/9) against main. Use the [Phase 9 handoff](PHASE9_RESUME.md) for the current review gates. The older checkpoint below records the historical stack.
+Phase 8 was reviewed, merged as e3d0603, and passed the [main push check](https://github.com/sahilshah2904/TurboType/actions/runs/42546049988). The owner accepted the Phase 9 preview after the Edge restore check. Its source and closeout documentation are in [draft PR #9](https://github.com/sahilshah2904/TurboType/pull/9) against main. Check the current exact-head CI before integrating. [Phase 9 handoff](PHASE9_RESUME.md)
 
 23 October stop-and-save checkpoint: accepted Phase8/alpha.26 source bd378c1 passes full hosted run39972392241/job120478169052(125 unit/121 browser). PR8 remains open/unmerged; main still contains accepted Phase7. Phase9 preparation branch codex/phase9-progression starts at bd378c1; no new app code yet, only this documentation checkpoint. Keep any Phase9 PR explicitly stacked against the Phase8 branch until reviewed integration is authorized; do not merge/deploy merely to save handoff. Inspect current PR/HEAD checks on resume; PHASE9_RESUME.md records exact next steps.
 

@@ -1,10 +1,12 @@
 # TurboType session handoff
 
-## Phase 9 implementation — 9 November 2026
+## Phase 9 acceptance — 9 November 2026
 
 Current branch `codex/phase9-progression`, preview alpha.27, rules 3, content 3, guest save 1. The user resumed Phase 9 and authorized a Free project in their Supabase organization. Phase 8 merged as e3d0603 and the main push check passed. Retain the existing LAN server on 5173 and the original browser save keys.
 
-Read [Phase 9 setup and review](PHASE9_RESUME.md) and [verification](TESTING.md) first. The owner tested both Google accounts. The hosted aggregate check confirmed two distinct saves, one with Easy Level 1 and the other with Medium Level 1, each with XP. The signed-in header displays the profile name and initials, and expanded stats lead with the latest race. Next, verify a fresh browser restores the saved account progress and complete the remaining sync review.
+Read [Phase 9 setup and review](PHASE9_RESUME.md) and [verification](TESTING.md) first. The two approved Google accounts saved separate Easy and Medium Level 1 clears and XP. The owner reported that Microsoft Edge restored the same saved stats and accepted Phase 9. The signed-in header displays the profile name and initials, and expanded stats lead with the latest race.
+
+The next integration step is to verify the current exact-head check on [PR #9](https://github.com/sahilshah2904/TurboType/pull/9) and merge when authorized. Start Phase 10 from the integrated source. Test supported desktop browsers and physical keyboards, accessibility and repeated races. Verify offline recovery, two-session conflicts, shared-device sign-out and data controls. Configure GitHub Pages and the exact production sign-in redirect, then verify race, replay, unlock and account restore at the live URL. Record the release and rollback steps.
 
 The sections below retain older checkpoints and their then-current status.
 

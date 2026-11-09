@@ -6,7 +6,7 @@
 
 **Play:** 300 main races and 30 optional challenges. Earn 18 original reward vehicles and 21 reward courses through eligible main clears, then equip them for new races across categories. Open **Progress** for XP, rank, history, coaching and local backup controls. [Collections](docs/COLLECTIONS.md) · [Curriculum](docs/PHASE8_CURRICULUM.md).
 
-**Account preview:** two approved Google accounts saved separate campaign progress and XP. The header uses the signed-in driver's profile name. In **Progress**, race stats open to a latest-race summary, pace bars and readable event names. Fresh-browser cloud recovery is still pending. GitHub Pages hosting belongs to Phase 10.
+**Account preview:** two approved Google accounts saved separate campaign progress and XP. The owner confirmed the same saved stats loaded in Microsoft Edge and accepted Phase 9. The header shows the signed-in driver's name, and **Progress** shows the latest race and recent pace.
 
 [Phase 9 setup and review checklist](docs/PHASE9_RESUME.md) · [Session handoff](docs/SESSION_HANDOFF.md) · [Current status](PROJECT_STATUS.md) · [Backlog](BACKLOG.md)
 
@@ -145,7 +145,7 @@ Open **Settings → Sound & music** to enable sound or change volumes. The hub h
 
 ## Development progress
 
-**Phases 1–8 are accepted and integrated.** Phase 9 is on the alpha.27 feature branch. Broader browser and long-session release testing remains Phase 10. Further race-atmosphere polish is deferred.
+**Phases 1–8 are accepted and integrated.** Phase 9 alpha.27 is accepted and awaits integration through [PR #9](https://github.com/sahilshah2904/TurboType/pull/9). Phase 10 covers release testing and GitHub Pages. Further race-atmosphere polish is deferred.
 
 | Phase | Delivery | Current status |
 | --- | --- | --- |
@@ -157,8 +157,8 @@ Open **Settings → Sound & music** to enable sound or change volumes. The hub h
 | 6 | Cinematic loading/welcome/rules, tutorial, calibration and final navigation | Complete for agreed scope; PR #6 merged, TT-608 polish deferred |
 | 7 | Easy/Medium/Hard rightward maps, 100 numbered nodes each, locks, chapters and saved position | Complete and accepted; PR #7 merged 04eb38d |
 | 8 | All 300 passages, learning goals, difficulty/star curves and 30 bonus challenges | Accepted and merged through PR #8 |
-| 9 | Rewards/rank/garage, records/charts/coaching/drills, robust guest saves and optional account-backed cloud progress | Local preview and backend ready for review. Live sign-in and sync verification pending |
-| 10 | Desktop browser/accessibility/performance/recovery/cloud testing, Pages and live release verification | Planned |
+| 9 | Rewards/rank/garage, records/charts/coaching/drills, robust guest saves and optional account-backed cloud progress | Accepted after the Edge restore check. PR #9 awaits integration |
+| 10 | Desktop browser/accessibility/performance/recovery/cloud testing, Pages and live release verification | Next |
 | 11 | Friends backend/private rooms/invites, synchronized races, reconnect/rematches immediately after solo launch | Planned |
 
 Phases vary greatly in size; phase numbers are not a completion percentage.
