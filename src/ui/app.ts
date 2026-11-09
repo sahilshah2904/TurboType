@@ -137,7 +137,7 @@ export function mountApp(root: HTMLElement): () => void {
         <a class="guest driver-profile" href="#/progress"><span class="status-dot" aria-hidden="true"></span><span class="driver-initials" aria-hidden="true" hidden></span><span class="driver-name" dir="auto">Guest Driver</span></a>
       </header>
       <main id="main" tabindex="-1"></main>
-      <footer class="footer"><span><b>TURBOTYPE</b> / BUILT FOR THE LONG RUN</span><span>Single-player race preview · ${APP_VERSION}</span><a href="https://github.com/sahilshah2904/TurboType" target="_blank" rel="noopener noreferrer">Follow development ${ARROW}</a></footer>
+      <footer class="footer"><span><b>TURBOTYPE</b> / BUILT FOR THE LONG RUN</span><span>Single-player · ${APP_VERSION}</span><a href="${import.meta.env.BASE_URL}privacy.html">Privacy</a><a href="https://github.com/sahilshah2904/TurboType" target="_blank" rel="noopener noreferrer">Follow development ${ARROW}</a></footer>
     </div>`;
   const main = root.querySelector<HTMLElement>("main")!;
   const clearFullscreen = connectFullscreen(root);
